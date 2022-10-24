@@ -3,80 +3,108 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    <base href="/" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
           <li class="breadcrumb-item">
-            <a href="./angular/index.html">Angular</a>
+            <a href="index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Templates
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Templates</li>
         </ol>
       </nav>
       <h1>Templates</h1>
       <section class="navlinks">
         <ul>
           <li>
-            <a href="./angular/templates.html#basics">Basics</a>
+            <a href="templates.html#basics">Basics</a>
           </li>
           <li>
-            <a href="./angular/templates.html#bindings">Bindings</a>
+            <a href="templates.html#bindings">Bindings</a>
           </li>
           <li>
-            <a href="./angular/templates.html#propertyBinding">Property Binding</a>
+            <a href="templates.html#propertyBinding"
+              >Property Binding</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#oneTimeInit">One Time String Initialization</a>
+            <a href="templates.html#oneTimeInit"
+              >One Time String Initialization</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#attributeBinding">Attribute Binding</a>
+            <a href="templates.html#attributeBinding"
+              >Attribute Binding</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#classNgClass">Class / NgClass</a>
+            <a href="templates.html#classNgClass">Class / NgClass</a>
           </li>
           <li>
-            <a href="./angular/templates.html#eventBinding">Event Bindings</a>
+            <a href="templates.html#eventBinding">Event Bindings</a>
           </li>
           <li>
-            <a href="./angular/templates.html#mechanics">Mechanics</a>
+            <a href="templates.html#mechanics">Mechanics</a>
           </li>
           <li>
-            <a href="./angular/templates.html#styleNgStyle">Style / NgStyle</a>
+            <a href="templates.html#styleNgStyle">Style / NgStyle</a>
           </li>
           <li>
-            <a href="./angular/templates.html#twoWayBinding">Two-Way Bindings / NgModel</a>
+            <a href="templates.html#twoWayBinding"
+              >Two-Way Bindings / NgModel</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#showHideEle">Showing / Hiding Elements</a>
+            <a href="templates.html#showHideEle"
+              >Showing / Hiding Elements</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#tempalteExpn">Template Expressions</a>
+            <a href="templates.html#tempalteExpn"
+              >Template Expressions</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#expressionvsstatement">Template Expressions vs Template Statements</a>
+            <a href="templates.html#expressionvsstatement"
+              >Template Expressions vs Template Statements</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#operators">Template Expressions – Operators</a>
+            <a href="templates.html#operators"
+              >Template Expressions – Operators</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#templateFunc">Template Functions</a>
+            <a href="templates.html#templateFunc"
+              >Template Functions</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#inputVariables">Template Input Variables</a>
+            <a href="templates.html#inputVariables"
+              >Template Input Variables</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#templateRefVariables">Template Reference Variables</a>
+            <a href="templates.html#templateRefVariables"
+              >Template Reference Variables</a
+            >
           </li>
           <li>
-            <a href="./angular/templates.html#inputParams">Templates as Input Parameters</a>
+            <a href="templates.html#inputParams"
+              >Templates as Input Parameters</a
+            >
           </li>
         </ul>
       </section>
@@ -275,9 +303,11 @@
               <li>Binding to a string literal</li>
               <li>Define an Input on the child component of type string</li>
               <li>
-                <div class="card"><div class="card-body"><code>
-                  &#91;value&#93;=&quot;myString&quot;
-                </code></div></div>
+                <div class="card">
+                  <div class="card-body">
+                    <code> &#91;value&#93;=&quot;myString&quot; </code>
+                  </div>
+                </div>
               </li>
             </ul>
           </li>
@@ -325,12 +355,14 @@
                 truthy and removed when falsy
               </li>
             </ul>
-            <p>
+            <div>
               To bind a class name to a property named isExample
-              <div class="card"><div class="card-body"><code>
-                &#91;class.example&#93;=&quot;isExample&quot;
-              </code></div></div>
-            </p>
+              <div class="card">
+                <div class="card-body">
+                  <code> &#91;class.example&#93;=&quot;isExample&quot; </code>
+                </div>
+              </div>
+            </div>
           </li>
           <li>
             Style binding
@@ -340,15 +372,22 @@
                 To bind the background color to a property, use the following
                 syntax. Based on truthiness of canSave, either cyan or gray will
                 be assigned as the background color.
-                <div class="card"><div class="card-body"><code>
-                  &#91;style.background-color&#93;=&quot;canSave ? 'cyan' : 'gray'&quot;
-                </code></div></div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &#91;style.background-color&#93;=&quot;canSave ? 'cyan' :
+                      'gray'&quot;
+                    </code>
+                  </div>
+                </div>
               </li>
               <li>
                 To add a measurement, use the following syntax
-                <div class="card"><div class="card-body"><code>
-                  &#91;style.font-size.em&#93; ...
-                </code></div></div>
+                <div class="card">
+                  <div class="card-body">
+                    <code> &#91;style.font-size.em&#93; ... </code>
+                  </div>
+                </div>
               </li>
             </ul>
           </li>
@@ -360,8 +399,9 @@
         <p>Set the property to the value of the template expression</p>
         <div class="card">
           <div class="card-body">
-            <code> 
-              &#91;disabled&#93;='isUnchanged'</code></div></div>
+            <code> &#91;disabled&#93;='isUnchanged'</code>
+          </div>
+        </div>
         <ul>
           <li>
             This is a one-way binding since data only flows from the components
@@ -474,9 +514,13 @@
           </li>
           <li>These will not be updated is the bound property value changes</li>
         </ul>
-        <div class="card"><div class="card-body"><code>
-          &lt;img alt="item" &#91;src&#93;=&quot;itemImageUrl&quot;&gt;
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;img alt="item" &#91;src&#93;=&quot;itemImageUrl&quot;&gt;
+            </code>
+          </div>
+        </div>
         <ul>
           <li>
             Alt property is set as a static string literal (item will be the
@@ -530,21 +574,31 @@
           Binding to colspan (otherwise, you would need to bind to colSpan, not
           colspan)
         </p>
-        <div class="card"><div class="card-body"><code>
-          code='&lt;td &#91;attr.colspan&#93;="1 + 1"&gt;&lt;/td&gt;'
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              code='&lt;td &#91;attr.colspan&#93;="1 + 1"&gt;&lt;/td&gt;'
+            </code>
+          </div>
+        </div>
         <p>Binding to the for attribute of a label</p>
         <p>This works</p>
-        <div class="card"><div class="card-body"><code>
-          code='&lt;label &#91;for&#93;="someId"&gt;'
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code> code='&lt;label &#91;for&#93;="someId"&gt;' </code>
+          </div>
+        </div>
 
         <p>This does not work</p>
-        <div class="card"><div class="card-body"><code>
-          &lt;label attr.for=&quot;{+{someId}}&quot;&gt;<br/>
-          &lt;label &#91;attr.for&#93;=&quot;someId&quot;&gt;<br/>
-          &lt;label &#91;htmlFor&#93;=&quot;someId&quot;&gt;
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;label attr.for=&quot;{+{someId}}&quot;&gt;<br />
+              &lt;label &#91;attr.for&#93;=&quot;someId&quot;&gt;<br />
+              &lt;label &#91;htmlFor&#93;=&quot;someId&quot;&gt;
+            </code>
+          </div>
+        </div>
       </section>
 
       <h2 id="classNgClass">Class / NgClass</h2>
@@ -572,9 +626,14 @@
             This will add the “green” class to the div if the event property has
             a property called time that contains a value of "8:00 am"
           </p>
-          <div class="card"><div class="card-body"><code>
-            &lt;div &#91;class.green&#93;=&quot;event.time === '8:00 am'&quot;&gt; ...
-          </code></div></div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div &#91;class.green&#93;=&quot;event.time === '8:00
+                am'&quot;&gt; ...
+              </code>
+            </div>
+          </div>
         </div>
         <div>
           ngClass is better for multiple classes
@@ -589,33 +648,49 @@
               a value of “8:00 am”
             </li>
           </ul>
-          <div class="card"><div class="card-body"><code>
-            &lt;div &#91;ngClass&#93;=&quot;{green: time === '8:00 am', Bold: time === '8:00 am'}&quot;&gt;&lt;/div&gt;"
-          </code></div></div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div &#91;ngClass&#93;=&quot;{green: time === '8:00 am',
+                Bold: time === '8:00 am'}&quot;&gt;&lt;/div&gt;"
+              </code>
+            </div>
+          </div>
         </div>
         <div>
           <p>ngClass can also be used with a function call</p>
-          <div class="card"><div class="card-body"><code>
-            &lt;div ngClass=&quot;getStartTimeClass()&quot;&gt;&lt;/div&gt;
-          </code></div></div>
-          <p>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div ngClass=&quot;getStartTimeClass()&quot;&gt;&lt;/div&gt;
+              </code>
+            </div>
+          </div>
+          <div>
             getStartTimeClass function can return an object with a property for
             each class and a Boolean value for each if they should be added
-            <div class="card"><div class="card-body"><code>
-              {green: true, Bold: true}
-            </code></div></div>
-          </p>
-          <p>
+            <div class="card">
+              <div class="card-body">
+                <code> {green: true, Bold: true} </code>
+              </div>
+            </div>
+          </div>
+          <div>
             getStartTimeClass Function can instead return a space separated
             string containing all the classes that should be added
-            <div class="card"><div class="card-body"><code>&quot;green Bold&quot;</code></div></div>
-          </p>
-          <p>
+            <div class="card">
+              <div class="card-body"><code>&quot;green Bold&quot;</code></div>
+            </div>
+          </div>
+          <div>
             getStartTimeClass Function can instead return an array of strings
             containing all the classes that should be added
-            <div class="card"><div class="card-body">
-              <code>&#91;&quot;green&quot;, &quot;Bold&quot;&#93;&quot;</code></div></div>
-          </p>
+            <div class="card">
+              <div class="card-body">
+                <code>&#91;&quot;green&quot;, &quot;Bold&quot;&#93;&quot;</code>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -643,10 +718,14 @@
           </li>
         </ul>
         <p>Use the event syntax binding to do this (one of two formats)</p>
-        <div class="card"><div class="card-body"><code>
-          ... (click)=&quot;onSelect(hero)&quot; ...<br/>
-          ... on-click=&quot;onSave($event)&quot; ...
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              ... (click)=&quot;onSelect(hero)&quot; ...<br />
+              ... on-click=&quot;onSave($event)&quot; ...
+            </code>
+          </div>
+        </div>
         <p>
           Make sure you are aware of the execution context of the template
           statement – identifiers in a template statement belong to a specific
@@ -877,9 +956,14 @@
           </li>
         </ul>
         <p>Example</p>
-        <div class="card"><div class="card-body"><code>
-          &lt;button &#91;style.background-color&#93;=&quot;canSave ? 'cyan' : 'gray'&quot;&gt; 
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;button &#91;style.background-color&#93;=&quot;canSave ? 'cyan'
+              : 'gray'&quot;&gt;
+            </code>
+          </div>
+        </div>
 
         <ul>
           <li>
@@ -897,15 +981,21 @@
             returns an object with all rules
           </li>
         </ul>
-        <p></p>
-        <div class="card"><div class="card-body"><code>
-          &lt;div &#91;ngStyle=&quot;getStartTimeStyle()&quot;&#93;&gt;...&lt;/div&gt;
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;div
+              &#91;ngStyle=&quot;getStartTimeStyle()&quot;&#93;&gt;...&lt;/div&gt;
+            </code>
+          </div>
+        </div>
 
         <p>In getStartTimeStyle method, return something like</p>
-        <div class="card"><div class="card-body"><code>
-          { color: '#003300', 'font-weight': 'bold' }
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code> { color: '#003300', 'font-weight': 'bold' } </code>
+          </div>
+        </div>
       </section>
 
       <h2 id="twoWayBinding">Two-Way Bindings / NgModel</h2>
@@ -935,17 +1025,21 @@
           Need an input property that you will use on the right side of the
           equals sign on the parent component
         </p>
-        <div class="card"><div class="card-body"><code>
-          @Input() size: number;
-        </code></div></div>
+        <div class="card">
+          <div class="card-body"><code> @Input() size: number; </code></div>
+        </div>
 
         <p>
           Need an output method triggers an EventEmitter. Should be named the
           same as the input property with Change appended to the end
         </p>
-        <div class="card"><div class="card-body"><code>
-          @Output() sizeChagne = new EventEmitter&lt;number&gt;()
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @Output() sizeChagne = new EventEmitter&lt;number&gt;()
+            </code>
+          </div>
+        </div>
 
         <ul>
           <li>
@@ -1033,9 +1127,14 @@
           </ul>
         </li>
         <p>Examples</p>
-        <div class="card"><div class="card-body"><code>
-          &lt;div *ngIf=&quot;somePropertyValue&quot; ... <br/>&lt;div &#91;hidden&#93;=&quot;someBooleanValue&quot;
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;div *ngIf=&quot;somePropertyValue&quot; ... <br />&lt;div
+              &#91;hidden&#93;=&quot;someBooleanValue&quot;
+            </code>
+          </div>
+        </div>
       </section>
 
       <h2 id="tempalteExpn">Template Expressions</h2>
@@ -1136,9 +1235,9 @@
           </li>
         </ul>
         <p>Example of safe navigation operator</p>
-        <div class="card"><div class="card-body"><code>
-          {+{ currentHero?.name }}
-        </code></div></div>
+        <div class="card">
+          <div class="card-body"><code> {+{ currentHero?.name }} </code></div>
+        </div>
       </section>
 
       <h3 id="templateStatements">Template Statements</h3>
@@ -1221,9 +1320,14 @@
           The template statement appears in quotes to the right of the equals
           sign (call to deleteHero method)
         </p>
-        <div class="card"><div class="card-body"><code>
-          &lt;button type=&quot;button&quot; (click)=&quot;deleteHero()&quot;&gt;Delete&lt;/button&gt;
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;button type=&quot;button&quot;
+              (click)=&quot;deleteHero()&quot;&gt;Delete&lt;/button&gt;
+            </code>
+          </div>
+        </div>
       </section>
 
       <h3 id="expressionvsstatement">
@@ -1361,9 +1465,11 @@
           You can create a template input variable on a ngFor to capture a zero
           based index of the item in each iteration
         </p>
-        <div class="card"><div class="card-body"><code>
-          *ngForm=&quot;let hero of heros; let i=index&quot;
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code> *ngForm=&quot;let hero of heros; let i=index&quot; </code>
+          </div>
+        </div>
       </section>
 
       <h3 id="templateRefVariables">Template Reference Variables</h3>
@@ -1429,15 +1535,20 @@
           Declare using the hash symbol - can alternatively be defined using the
           ref- prefix
         </p>
-        <div class="card"><div class="card-body"><code>
-          &lt;input #phone type=&quot;text&quot; /&gt;
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code> &lt;input #phone type=&quot;text&quot; /&gt; </code>
+          </div>
+        </div>
         <p>
           You can then pass its value to an event handler on an entirely
           different element as such
         </p>
-        <div class="card"><div class="card-body"><code> 
-          (click)=&quot;callphone(phone.value)&quot;</code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code> (click)=&quot;callphone(phone.value)&quot;</code>
+          </div>
+        </div>
       </section>
 
       <h2 id="inputParams">Templates as Input Parameters</h2>
@@ -1446,8 +1557,10 @@
           Start by defining the custom template for the buttons in the parent
           component
         </p>
-        <div class="card"><div class="card-body"><code>
-          <pre>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
 @Component({
   selector: &apos;app-root&apos;,&#10; 
   template: `
@@ -1463,15 +1576,20 @@
     &lt;/ng-template&gt;
     &lt;tab-container &#91;headerTemplate&#93;=&quot;customTabButtons&quot;&gt;&lt;/tab-container&gt;
     `})
-    export class AppComponent {}</pre>
-        </code></div></div>
+    export class AppComponent {}</pre
+              >
+            </code>
+          </div>
+        </div>
         <p>
           On the tab container component, define an input property which is also
           a template named headerTemplate. If an input is provided, display that
           template. Otherwise, display the defaultTabButtons template.
         </p>
-        <div class="card"><div class="card-body"><code>
-          <pre>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
 @Component({
   selector: &apos;tab-container&apos;,
   template: `
@@ -1487,14 +1605,17 @@
   `})
   export class TabContainerComponent {
     @Input() headerTemplate: TemplateRef&lt;any&gt;
-  }</pre>
-        </code></div></div>
+  }</pre
+              >
+            </code>
+          </div>
+        </div>
         <p>
           Can expand on this, create multiple inputs in the presentation
           component, and toggle between them based on some condition.
         </p>
       </section>
     </div>
-    <script src="./assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>
