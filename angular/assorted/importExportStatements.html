@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Import / Export Statements
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Import / Export Statements</h1>
+
+      <section id="ieStatements">
+        <p>
+          You can alias imports as follows (within your script, you would
+          reference this as TOASTR_TOKEN2)
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              import&nbsp;{&nbsp;TOASTR_TOKEN&nbsp;as&nbsp;TOASTR_TOKEN2&nbsp;}&nbsp;from&nbsp;'./common/toastr2.service'
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>Simplifying</h3>
+      <section>
+        <p>
+          You can shorten the import declarations you need to reference items in
+          feature modules by re-exporting the components in your feature module
+          (AKA creating barrels)
+        </p>
+        To implement:
+        <ul>
+          <li>
+            Put in index.ts file in the root of your feature module (this is the
+            convention used in the Pluralsight course)
+          </li>
+          <li>Re-export all the components in the module in this file</li>
+        </ul>
+
+        <div class="card">
+          <div class="card-body">
+            <code>
+              export&nbsp;*&nbsp;from&nbsp;'./create-event.component';<br />
+              export&nbsp;*&nbsp;from&nbsp;'./event-thumbnail.component';<br />
+              export&nbsp;*&nbsp;from&nbsp;'./events-list-resolver.component';
+            </code>
+          </div>
+        </div>
+
+        <p>
+          Create a new index.ts in the tier above this and export all from the
+          child index.ts files in this one file. Reference this outermost
+          index.ts to perform all inputs
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              import&nbsp;{&#10;&nbsp;EventsListComponent,&#10;&nbsp;EventListResolver,&#10;&nbsp;EventThumbnailComponent&#10;}&nbsp;from&nbsp;'./events/index'
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

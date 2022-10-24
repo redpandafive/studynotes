@@ -3,11 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="../favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/styles/site.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -18,28 +21,16 @@
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
           <li class="breadcrumb-item">
-            <a href="index.html">Angular</a>
+            <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Angular CLI
+            Angular CLI Commands
           </li>
         </ol>
       </nav>
-      <h1>Angular CLI</h1>
-      <section>
-        <ul>
-          <li>
-            <a href="angularcli.html#commands">Commands</a>
-          </li>
-          <li>
-            <a href="angularcli.html#gotchas">Gotchas</a>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="commands">Commands</h2>
+      <h1>Angular CLI Commands</h1>
       <section>
         <kbd>npm install -g @angular/cli</kbd>
         <ul>
@@ -116,53 +107,7 @@
           <li>Adding the --fix parameter will fix all fixable items</li>
         </ul>
       </section>
-
-      <h2 id="gotchas">Gotchas</h2>
-      <section>
-        <ul>
-          <li>
-            Synlinks on Windows will cause weird problems when building and
-            serving
-            <ul>
-              <li>
-                In this case, I was in the C:\Users\Colin\My
-                Documents\AngularStudySandbox\StudySandbox directory
-              </li>
-              <li>
-                Switching to the following cleared the error
-                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox
-              </li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                ../../../Documents/AngularStudySandbox/StudySandbox/src/main.ts<br />
-                - Error: Module build failed (from<br />
-                ../../../Documents/AngularStudySandbox/StudySandbox/node_modules/@ngtools/webpack/src/ivy/index.js):<br />
-                Error:<br />
-                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox\src\main.ts<br />
-                is missing from the TypeScript compilation. Please make sure<br />
-                it is in your tsconfig via the 'files' or 'include' property.<br />
-                at<br />
-                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox\node_modules\@ngtools\webpack\src\ivy\loader.js:64:26<br />
-                at processTicksAndRejections<br />
-                (node:internal/process/task_queues:96:5)<br />
-                ../../../Documents/AngularStudySandbox/StudySandbox/src/polyfills.ts<br />
-                - Error: Module build failed (from<br />
-                ../../../Documents/AngularStudySandbox/StudySandbox/node_modules/@ngtools/webpack/src/ivy/index.js):<br />
-                Error:<br />
-                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox\src\polyfills.ts<br />
-                is missing from the TypeScript compilation. Please make sure<br />
-                it is in your tsconfig via the 'files' or 'include' property.<br />
-                at<br />
-                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox\node_modules\@ngtools\webpack\src\ivy\loader.js:64:26<br />
-                at processTicksAndRejections<br />
-                (node:internal/process/task_queues:96:5)<br />
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
     </div>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>

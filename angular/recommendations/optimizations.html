@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Compilation and Runtime Optimizations
+          </li>
+        </ol>
+      </nav>
+      <h1>Compilation and Runtime Optimizations</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#compilation">Ahead-of-Time Compilation</a>
+          </li>
+          <li>
+            <a href="#runtime">Runtime Optimizations</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="compilation">Ahead-of-Time Compilation</h2>
+      <section>
+        <ul>
+          <li>
+            AOT generated code will remove white spaces by default
+            <ul>
+              <li>
+                Removing white spaces from templates reduces payload sizes
+              </li>
+              <li>there are ways to influence this behavior</li>
+              <li>
+                https://angular.io/api/core/Component#preserving-whitespace
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="runtime">Runtime Optimizations</h2>
+      <section>
+        <ul>
+          <li>
+            use enableProcMode
+            <ul>
+              <li>
+                in development mode Angular performs some extra checks in order
+                to verify that performing change detection does not result in
+                any additional changes to any of the bindings to ensure that
+                unidirectional data flow is followed
+              </li>
+              <li>this should be disabled for production</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

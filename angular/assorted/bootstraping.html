@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Bootstrapping</li>
+        </ol>
+      </nav>
+      <h1>Bootstrapping</h1>
+      <section id="bootstrap">
+        <ul>
+          <li>
+            Loads main.ts file
+            <ul>
+              <li>
+                This is referenced by the main property of angular.json to
+                identify the startup
+              </li>
+              <li>Enables Prod mode if that is enabled</li>
+              <li>
+                Bootstraps AppModule with a call to
+                platformBrowserDynamic().boostrapModule(AppModule)
+              </li>
+            </ul>
+          </li>
+          <li>
+            AppModule bootstraps AppComponent
+            <ul>
+              <li>
+                This is defined as a property on the NgModule decorator under
+                the boostrap configuration property
+              </li>
+              <li>
+                Foundation component for an Angular project, so all applications
+                require one and only one
+              </li>
+            </ul>
+          </li>
+          <li>
+            App component
+            <ul>
+              <li>
+                When you bootstrap with the AppComponent class (in main.ts),
+                Angular looks for a app-root in the index.html, instantiates an
+                instance of AppComponent, and renders it inside the app-root tag
+              </li>
+              <li>
+                The app-root tag will be in the Index.html file included in the
+                root of the Src folder
+              </li>
+            </ul>
+          </li>
+          <li>
+            Index.html
+            <ul>
+              <li>Loaded by the browser when the application starts</li>
+              <li>Contains the app-root tag from Angular</li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

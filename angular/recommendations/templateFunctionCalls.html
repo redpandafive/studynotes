@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>   
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Avoid Function Calls in Templates
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Avoid Function Calls in Templates</h1>
+       <section>
+        <ul>
+          <li>
+            Function calls within templates are convenient and technically
+            valid, but they can lead to performance problems
+          </li>
+          <li>
+            The function will be executed each time an Angular change detection
+            cycle runs
+          </li>
+          <ul>
+            <li>
+              Angular must execute the function on each change detection cycle
+              to determine whether the value returned has changed
+            </li>
+            <li>
+              Angular cannot predict if the return value has changed, so the
+              function must be executed on each change detection cycle
+            </li>
+            <li>This is done even if the value never changes</li>
+            <li>Getters are also vulnerable to this</li>
+          </ul>
+          <li>
+            Setting the change detection strategy to OnPush doesn’t help this
+          </li>
+          <li>
+            Alternatives
+            <ul>
+              <li>
+                Use ngOnInit and call the function once to assign the computed
+                value to a property
+              </li>
+              <li>
+                Use ngOnChanges to call the function each time an input value
+                changes and assing the computed value to a property
+              </li>
+              <li>
+                Use pure pipes
+                <ul>
+                  <li>
+                    Angular knows that a pure pipe’s return value does not
+                    change if the pipe’s input does not change
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Modules</li>
+        </ol>
+      </nav>
+      <h1>Modules</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#types">Module Types</a>
+          </li>
+          <li>
+            <a href="#naming">Naming</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="types">Module Types</h2>
+      <section>
+        <ul>
+          <li>
+            Routing module
+            <ul>
+              <li>Give filename a routing.module.ts suffix</li>
+              <li>Class should have a RoutingModule suffix</li>
+              <li>Example is HerosRoutingModule</li>
+            </ul>
+          </li>
+          <li>
+            App root module
+            <ul>
+              <li>Need least one root NgModule</li>
+              <li>Can be in src/app</li>
+              <li>Name it app.module.ts</li>
+            </ul>
+          </li>
+          <li>
+            Feature modules
+            <ul>
+              <li>Place in a folder named the same as the feature area</li>
+              <li>App/heroes/heroes.module.ts</li>
+            </ul>
+          </li>
+          <li>
+            Shared module
+            <ul>
+              <li>
+                Create a shared folder with a SharedModule
+                <ul>
+                  <li>App/shared/shared.module.ts</li>
+                </ul>
+              </li>
+              <li>
+                This should contain items that are used in multiple modules
+              </li>
+              <li>
+                Import modules required such as CommonModule and FormsModule
+              </li>
+              <li>Export all items that other modules need to use</li>
+              <li>
+                Consider if services should be placed here
+                <ul>
+                  <li>
+                    You dont want each module to have its own separate instance
+                    of singleton services
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="naming">Naming</h2>
+      <section>
+        <ul>
+          <li>Name the module after the feature and folder it resides in</li>
+          <li>Give filename a module.ts extension</li>
+          <li>Give the module class name a suffix of Module</li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

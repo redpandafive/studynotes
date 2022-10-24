@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Project Structure</li>
+        </ol>
+      </nav>
+
+
+      <h1>Project Structure</h1>
+      <section id="projStruct">
+        <ul>
+          <li>
+            Angular loads as a collection of JS modules (think of them as
+            library modules)
+          </li>
+          <li>
+            Each library begins with the @angular prefix
+            <ul>
+              <li>Use NPM to install these</li>
+            </ul>
+          </li>
+          <li>
+            Import parts of them with JS import statements
+            <ul>
+              <li>This can be done to import components as well as modules</li>
+            </ul>
+          </li>
+          <li>
+            Workspace
+            <ul>
+              <li>Contains the files for one or more projects</li>
+              <li>Created by the new command in CLI</li>
+              <li>
+                Commands that create or operate on apps and libraries must be
+                executed from within a workspace folder
+              </li>
+              <li>
+                All apps in a workspace can use libraries in the same workspace
+              </li>
+            </ul>
+          </li>
+          <li>
+            Project
+            <ul>
+              <li>
+                Set of files that comprise an app, a library, or end to end
+                tests
+              </li>
+            </ul>
+          </li>
+          <li>Use Angular CLI to create a new project skeleton from scratch</li>
+          <ul>
+            <li>E2e folder</li>
+            <ul>
+              <li>Testing folder</li>
+            </ul>
+            <li>
+              Node_modules folder
+              <ul>
+                <li>Packages from NPM</li>
+              </ul>
+            </li>
+            <li>
+              Src folder
+              <ul>
+                <li>
+                  Contains source code
+                  <ul>
+                    <li>App folder - where you will do most of your coding</li>
+                  </ul>
+                </li>
+                <li>
+                  Assets folder
+                  <ul>
+                    <li>
+                      Site wide static assets, such as images and site wide CSS
+                    </li>
+                    <li>Can separate these into separate sub folders</li>
+
+                    <li>Reference these as “/assets/mypic.png”</li>
+
+                    <li>
+                      Assets folder path is referenced in the angular.json
+
+                      <ul>
+                        <li>Take arrays in assets, styles, and scripts keys</li>
+                        <li>
+                          Use these to tell webpack to include these files
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Angular.json
+              <ul>
+                <li>
+                  Various settings that the cli will use for various operations,
+                  like Web Pack fill
+                </li>
+                <li>
+                  Global stylesheets can be registered in the style section
+                  (includes styles.css by default)
+                </li>
+              </ul>
+            </li>
+            <li>
+              Package.json - NPM packages that should be downloaded with this
+              project as well as defined scripts
+            </li>
+            <li>Package-lock.json</li>
+          </ul>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

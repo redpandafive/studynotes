@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Design Patterns
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Design Patterns</h1>
+      <section>
+        <ul>
+          <li>
+            Observable Data Service
+            <ul>
+              <li>
+                A simple and intuitive pattern
+                <ul>
+                  <li>
+                    Useful when you have several components that need to
+                    reference the same data
+                  </li>
+                </ul>
+              </li>
+              <li>Create a new service for the data store</li>
+              <li>
+                In the constructor,
+                <ul>
+                  <li>
+                    Inject the service that fetches the data from the server
+                  </li>
+                  <li>
+                    Call the method on the injected service to fetch the data
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Add a private property to capture a BehaviorSubject
+                <ul>
+                  <li>
+                    This also provides an empty starting value
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          private&nbsp;_todos:&nbsp;BehviorSubject&lt;List&lt;Todo&gt;&gt;&nbsp;=&nbsp;new&nbsp;BehaviorSubject(List([]))
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>In the constructor, call the service to hydrate the data</li>
+              <li>
+                Don't expose the BehaviorSubject directly to clients
+                <ul>
+                  <li>
+                    Expose an Observable instead
+                    <ul>
+                      <li>
+                        Prevents service clients from emitting store values
+                        directly and bypassing the store
+                      </li>
+                      <li>
+                        Prevents event chaining in components that can be hard
+                        to understand
+                      </li>
+                      <li>
+                        Exposes too much of the internal structures of the
+                        service needlessly
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

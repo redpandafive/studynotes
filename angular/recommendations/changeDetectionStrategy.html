@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>   
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Change Detection Strategy
+          </li>
+        </ol>
+      </nav>
+      
+      <h1>Change Detection Strategy</h1>
+      <section>
+        <ul>
+          <li>
+            Do not perform heavy computations in templates
+            <ul>
+              <li>
+                Expressions in templates are re-evaluated every time change
+                detection gets triggered
+              </li>
+              <li>
+                It does this after an event, re-evaluates all the expressions in
+                the templates and compares them with their previous values. If
+                there is a change, it will update the DOM
+              </li>
+            </ul>
+          </li>
+          <li>
+            Use OnPush custom change detection strategy for a component when you
+            are sure the values will only change when the input values change
+            <ul>
+              <li>
+                This will use an equality check to see if the inputs changed.
+                <ul>
+                  <li>
+                    So, if you have an array as in input and push a new item
+                    from the parent component, it will not update since the
+                    array is compared by reference.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Will trigger a change detection cycle when we pass a new value
+                to any of its inputs or when an event inside the component
+                happens
+                <ul>
+                  <li>
+                    It can also help to decompose a component when using this
+                    strategy so that change events within a component do not
+                    trigger unnecessary re-execution of template expressions
+                  </li>
+                </ul>
+              </li>
+              <li>
+                You can force a change using arrayName.slice() to create a copy
+                of the array
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @Computer({ changeDetection:
+              ChangeDetectionStrategy.OnPush })
+            </code>
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

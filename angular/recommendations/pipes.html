@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Pipes</li>
+        </ol>
+      </nav>
+
+      <h1>Pipes</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#naming">Naming</a>
+          </li>
+          <li>
+            <a href="#pure">Pure Pipes</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="naming">Naming</h2>
+
+      <section>
+        <ul>
+          <li>Class name should use UpperCamelCase to name</li>
+          <li>Name property should use lowerCamelCase</li>
+          <li>Cannot use hyphens</li>
+        </ul>
+      </section>
+
+      <h2 id="pure">Pure Pipes</h2>
+      <section>
+        <ul>
+          <li>Favor pure pipes</li>
+          <li>
+            Use built in and custom pipes in templates to transform data instead
+            of component method calls
+            <ul>
+              <li>Function calls are evaluated with every change detection</li>
+              <li>Pipes are only called when the input value changes</li>
+            </ul>
+          </li>
+          <li>
+            There are two types of pipes
+            <ul>
+              <li>
+                pure
+                <ul>
+                  <li>
+                    Produce the same output when invoked with the same set of
+                    arguments
+                  </li>
+                  <li>Examples include DecimalPipe and DatePipe</li>
+                  <li>
+                    Angular will only evaluate a given pure pipe call only if it
+                    has received different arguments compared to its previous
+                    invocation
+                  </li>
+                  <li>
+                    All pipes in Angular are pure by default; you can add a
+                    pure: true attribute to the @Pipe declaration, but this is
+                    redundant
+                  </li>
+                </ul>
+              </li>
+              <li>
+                impure
+                <ul>
+                  <li>
+                    Can hold state and can produce different output for the same
+                    set of arguments
+                  </li>
+                  <li>Example is AsyncPipe</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can use a pure pipe instead of a expression in the template to
+            boost performance; added benefit of caching since it will not
+            evaluate the function if the inputs are not different
+          </li>
+          <li>
+            If there are multiple pipe expressions that are the same in
+            different places in the component tree, they will be evaluated
+            independently
+            <ul>
+              <li>
+                It doesn't cache in this for all instances of the pipe. It just
+                caches for each instance of the pipe independently.
+              </li>
+              <li>
+                You can use memoization in this case to get a slight boost if
+                there are values that are repeated in the different pipes
+              </li>
+              <li>
+                Memoization only works when dealing with primitives
+                <ul>
+                  <li>
+                    Often two instances of data structures which have different
+                    references can hold the same data, but this is not
+                    guaranteed
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

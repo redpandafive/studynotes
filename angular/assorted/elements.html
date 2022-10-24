@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Angular Elements
+          </li>
+        </ol>
+      </nav>
+
+      <h2>Angular Elements</h2>
+      <section id="elements">
+        <ul>
+          <li>
+            Angular components packaged as custom elements, a web standard for
+            defining new HTML elements in a framework agnostic way
+          </li>
+          <li>
+            Extends HTML by allowing you to define a tag whose content is
+            created and controlled by JavaScript code
+          </li>
+          <li>
+            The browser maintains a CustomElementRegistry of defined custom
+            elements which map an instantiable JavaScript class to an HTML tag
+          </li>
+          <li>
+            Currently supported by Chrome, Firefox, Opera, and Safari
+            <ul>
+              <li>Polyfills available through other browsers</li>
+            </ul>
+          </li>
+          <li>
+            Transforming a component to a custom element makes all of the
+            required Angular infrastructure available to the browser
+            <ul>
+              <li>
+                a small, self contained version of the Angular framework will be
+                injected as a service to support the component's change
+                detection and data-binding functionality
+              </li>
+            </ul>
+          </li>
+          <li>
+            Custom elements
+            <ul>
+              <li>
+                Bootstrap themselves automatically when they are added to the
+                DOM
+              </li>
+              <li>automatically destroyed when removed from the DOM</li>
+              <li>looks and behaves like any other HTML element</li>
+              <li>
+                does not require any special knowledge of Angular terms or usage
+                conventions
+              </li>
+            </ul>
+          </li>
+          <li>
+            How it works
+            <ul>
+              <li>
+                Use the createCustomElement function to convert a component into
+                a class that can be registered with the browser as a custom
+                element
+                <ul>
+                  <li>
+                    once registered, it can be used just like a built in HTML
+                    element int content that you add directly into the DOM
+                  </li>
+                  <li>
+                    this function collects the component's observable
+                    properties, along with the Angular functionality the browser
+                    needs to create and destroy the instances, as well as to
+                    detect and respond to changes
+                  </li>
+                </ul>
+              </li>
+              <li>
+                When the custom element is placed on a pace, the browser creates
+                and instance of the registered class and adds it to the DOM
+                <ul>
+                  <li>
+                    content is provided by the component template, which uses
+                    Angular template syntax
+                  </li>
+                  <li>
+                    input properties in the component correspond to input
+                    attributes for the element
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
