@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Debugging and Exception Handling</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Debugging</h2>
+      <section>
+        <ul>
+          <li>
+            Run to click
+            <ul>
+              <li>
+                If you are stopped at a breakpoint, you can hover of just to the
+                left of any line of code
+              </li>
+              <li>Pressing the green arrow will run to that point</li>
+            </ul>
+          </li>
+          <li>
+            Run to cursor
+            <ul>
+              <li>Right click to execute to the cursor position</li>
+            </ul>
+          </li>
+          <li>
+            Null reference analysis
+            <ul>
+              <li>
+                Popup for NullReferenceExceptions will display the variable name
+                that caused the exception
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Exceptions</h2>
+      <section>
+        <ul>
+          <li>Are thrown at different times depending on the method type</li>
+          <li>
+            Async
+            <ul>
+              <li>These are observed when the task has completed</li>
+            </ul>
+          </li>
+          <li>
+            Method iterators
+            <ul>
+              <li>
+                Exceptions are surfaced only when the return sequence is
+                enumerated
+              </li>
+              <li>
+                This can be alleviated by putting iterator logic into a local
+                function
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

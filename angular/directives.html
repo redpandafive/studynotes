@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Directives</li>
+        </ol>
+      </nav>
+      <h1>Directives</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/directives.html#basics">Basics</a></li>
+          <li>
+            <a href="./angular/directives.html#custom"
+              >Custom Attribute Directives</a
+            >
+          </li>
+          <li>
+            <a href="./angular/directives.html#builtin"
+              >Built In Attribute Directives</a
+            >
+          </li>
+          <li>
+            <a href="./angular/directives.html#structural"
+              >Structural Directives</a
+            >
+          </li>
+          <li><a href="./angular/directives.html#ngforof">NgForOf</a></li>
+          <li>
+            <a href="./angular/directives.html#trackby">NgForOf - TrackB</a>
+          </li>
+          <li><a href="./angular/directives.html#ngid">NgIf</a></li>
+          <li><a href="./angular/directives.html#ngswitch">NgSwitch</a></li>
+          <li><a href="./angular/directives.html#ngcontent">NgContent</a></li>
+          <li>
+            <a href="./angular/directives.html#ngcontainer">NgContainer</a>
+          </li>
+          <li><a href="./angular/directives.html#ngtemplate">NgTemplate</a></li>
+          <li>
+            <a href="./angular/directives.html#ngtemplateoutlet"
+              >NgTemplateOutlet</a
+            >
+          </li>
+          <li>
+            <a href="./angular/directives.html#usecase1"
+              >NgTemplateOutlet - Use Case #1</a
+            >
+          </li>
+          <li>
+            <a href="./angular/directives.html#usecase2"
+              >NgTemplateOutlet - Use Case #2</a
+            >
+          </li>
+          <li>
+            <a href="./angular/directives.html#ngtemplateoutletcontext"
+              >NgTemplateOutletContext</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>
+            Changes the appearance or behavior of an element, component, or
+            another directive
+          </li>
+          <li>Can use as attributes of elements</li>
+          <li>
+            You can add many attribute directives to the same host element
+          </li>
+          <li>
+            Main difference between a Directive and a Component is a Directive
+            does not have a template
+          </li>
+          <li>
+            A class with the @Directive decorator
+            <ul>
+              <li>
+                A component is technically a directive, only it includes an
+                associated view
+              </li>
+            </ul>
+          </li>
+          <li>
+            When these are rendered, Angular transforms the DOM according to the
+            instructions given by the directives
+          </li>
+          <li>
+            There are two types
+            <ul>
+              <li>
+                Structural
+                <ul>
+                  <li>
+                    Alter layout by adding, removing, and replacing elements in
+                    DOM
+                  </li>
+                  <li>Examples include *ngFor, *ngIf</li>
+                </ul>
+              </li>
+              <li>
+                Attribute
+                <ul>
+                  <li>
+                    Alter the appearance or behavior of the existing element
+                  </li>
+                  <li>Look like regular HTML attributes, hence the name</li>
+                  <li>Example includes ngModel</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="custom">Custom Attribute Directives</h2>
+      <section>
+        <ul>
+          <li>
+            As a minimum, you need
+            <ul>
+              <li>@Directive decorator function containing the metadata</li>
+              <li>
+                A class for the directive - add Directive as a postfix to the
+                class name (such as ChangeBgColorDirective)
+              </li>
+              <li>
+                Import the directive into the declarations array of the app
+                module
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Define a selector in the Directive metadata to identify the HTML in
+            the template that is associated with the directive
+            <ul>
+              <li>This is the only configuration property</li>
+              <li>Selector: '[myHightlight]'</li>
+              <li>the brackets make it an attribute selector</li>
+              <li>
+                This will find all elements with that name in the attributes
+              </li>
+            </ul>
+          </li>
+          <li>
+            Inject ElementRef service
+            <ul>
+              <li>Inject this into the constructor of the directive</li>
+              <li>
+                This gives you a reference to the DOM element itself through the
+                nativeElement property
+              </li>
+              <li>This reference will be of type HTMLElement</li>
+            </ul>
+          </li>
+          <li>
+            Inject Renderer service
+            <ul>
+              <li>Private renderer: Renderer</li>
+            </ul>
+          </li>
+          <li>
+            Example
+            <div>
+              To set the color of the text in the targeted ElementRef object
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.renderer.setElementSyle(this.el.nativeElement,
+                  &quot;color&quot;, colorVariable)
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can import the HostListener service to respond to DOM element
+            events that hosts an attribute directive
+            <ul>
+              <li>Import HostListener from core</li>
+              <li>
+                Add event handlers decorated with the HostListener decorator
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      @HostListner(&quot;mouseenter&quot;) onMouseEneter() {...}
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                This allows you to trap events without talking directly to the
+                DOM API
+              </li>
+            </ul>
+          </li>
+          <li>
+            @Inputs can be added to pass values into the directive
+            <ul>
+              <li>
+                You can specify this as an attribute binding or add an input
+                with the same name as the directive so you can specify the
+                directive and pass the value in one attribute
+              </li>
+              <li>
+                Example
+                <div>
+                  This uses an input name highlightColor on a directive called
+                  appHighLight
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;p appHighlight
+                      &#91;highlightColor&#93;=&quot;color&quot;&gt;...
+                    </code>
+                  </div>
+                </div>
+                <div>
+                  By changing the name of the input property to the same name as
+                  the directive, you can combine the two
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code=&quot;&lt;p
+                      &#91;appHighlight&#93;='color'...&quot;</code
+                    >
+                  </div>
+                </div>
+                <div>
+                  Aliasing the input to an appropriate may be needed for code
+                  clarity
+                </div>
+              </li>
+              <li>
+                You can add as many inputs as needed on your directive to get
+                the job done
+                <ul>
+                  <li>
+                    It will mean one more attribute on the element for each
+                    additional input defined on the directive
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="builtin">Built In Attribute Directives</h2>
+      <section>
+        <ul>
+          <li>
+            Listen to and modify the behavior of other HTML elements,
+            attributes, properties, and components
+          </li>
+          <li>Usually applied to elements as if they were HTML attributes</li>
+          <li>
+            ngClass
+            <ul>
+              <li>Use to add or remove several classes simultaneously</li>
+              <li>For single classes, use a class binding</li>
+              <li>
+                Try binding it to a key:value control object
+                <ul>
+                  <li>Each key of the object is a CSS class name</li>
+                  <li>
+                    If its value is true, the class is added. If false, the
+                    class is removed
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div>
+                  CurrentClasses would be a property on the controller that
+                  contains an object with all class names
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code=&quot;&#91;ngClass&#93;='currentClasses'&quot;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            ngStyle
+            <ul>
+              <li>For single style binding, use a style binding</li>
+              <li>For many inline styles, you can use ngStyle</li>
+              <li>Bind to a key:value control object</li>
+              <li>
+                Each key is a style name – use strings as keys to contain the
+                property names
+              </li>
+            </ul>
+          </li>
+          <li>
+            ngModel
+            <ul>
+              <li>Two way data binding syntax</li>
+              <li>Use with FormsModule to bind to form elements</li>
+              <li>Must import this module for it to work</li>
+              <li>
+                This is syntax sugar, it actually creates
+                <ul>
+                  <li>
+                    NgModel input property to set the elements value property
+                  </li>
+                  <li>
+                    NgModelChange output event biding to listen for changes to
+                    the element's value
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            RouterLink
+            <ul>
+              <li>Directive that turns user clicks into router navigations</li>
+              <li>This is a public directive in the RouterModule</li>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code=&quot;&lt;a routerLink='/heroes'&gt;Heroes&lt;/a&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="structural">Structural Directives</h3>
+      <section>
+        <ul>
+          <li>
+            Responsible for HTML layout by shaping the DOM's structure,
+            typically by adding, removing, or manipulating elements
+          </li>
+          <li>
+            Creates an embedded view from the Angular generated ng-template and
+            inserts that view in a view container adjacent to the directive's
+            original host element
+          </li>
+          <li>
+            These are limited to a single structural directive per host element
+            <ul>
+              <li>This is due to precedence and their complexity</li>
+              <li>
+                For instance, cannot have *ngFor and *ngIf on the same host
+                element
+              </li>
+              <li>
+                use ng-containers so you don't introduce extra levels of HTML
+              </li>
+            </ul>
+          </li>
+          <li>
+            Apply to a host element - directive then does what it is supposed to
+            do with that host element and its descendants
+          </li>
+          <li>
+            An * precedes the directive attribute name to identify it as a
+            structural directive
+            <ul>
+              <li>No brackets or parentheses are needed</li>
+              <li>
+                This is a convenience notation and the string that follows is a
+                microsyntax rather than the usual template expression
+              </li>
+              <li>
+                This is desugared into a marked-up ng-template that surrounds
+                the host element and its descendants
+              </li>
+            </ul>
+          </li>
+          <li>
+            Built in directives – see specific section for each
+            <ul>
+              <li>ngIf</li>
+              <li>ngFor</li>
+              <li>ngSwitch</li>
+            </ul>
+          </li>
+          <li>
+            Microsyntax
+            <ul>
+              <li>
+                Lets you configure a directive in a compact, friendly string
+              </li>
+              <li>See specific structural directives for specifics</li>
+            </ul>
+          </li>
+          <li>
+            To create a custom structural directive
+            <ul>
+              <li>
+                Import the Directive decorator
+                <ul>
+                  <li>Apply this to the directive class</li>
+                  <li>
+                    Set the CSS attribute selector that identifies the directive
+                    when applied to an element in a template
+                  </li>
+                  <li>
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          @Directive({ selector: &quot;&#91;appUnless&#93;&quot;
+                          })
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Import the following since they are needed in any structural
+                directive
+                <ul>
+                  <li>Input</li>
+                  <li>
+                    TemplateRef
+                    <ul>
+                      <li>
+                        Gives access to the contents of the generated
+                        ng-template element
+                      </li>
+                      <li>Inject this into the constructor</li>
+                    </ul>
+                  </li>
+                  <li>
+                    ViewContainerRef
+                    <ul>
+                      <li>Gives access to the view container</li>
+                      <li>Inject this into the constructor</li>
+                      <li>
+                        <div>Creates the embedded view from the template</div>
+                        <div class="card">
+                          <div class="card-body">
+                            <code>
+                              this.viewContainer.createdEmbeddedView(this.templateRef)
+                            </code>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div>Removes the ng-template contents</div>
+                        <div class="card">
+                          <div class="card-body">
+                            <code> this.viewContainer.clear()</code>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="ngforof">NgForOf</h2>
+      <section>
+        <ul>
+          <li>
+            Built in structural directive that acts as Angular's repeater
+            directive
+          </li>
+          <li>Should go on the element that you wish to repeat</li>
+          <li>
+            * indicates that it is a structural directive since it alters the
+            structure of the DOM
+          </li>
+          <li>
+            Used for rendering a collection
+            <ul>
+              <li>
+                It instantiates a template once per item from the collection
+              </li>
+              <li>
+                As it loops over a collection, it sets and resets properties of
+                its own context object (including index, odd, and a special
+                property called $implicit)
+              </li>
+            </ul>
+          </li>
+          <li>
+            With large rendered lists that you are adding, removing, or
+            reordering items, trackBy can give you a solid performance boost
+          </li>
+          <li>
+            When <code>let hero of heroes</code> is assigned to NgForOf, it is
+            not a template expression. It is a micro syntax then means:
+            <ul>
+              <li>
+                Take each hero in the heroes array, store it in the local hero
+                looping element, and make it available to the template HTML for
+                each iteration
+              </li>
+              <li>
+                This is translated into a ng-template, then uses that template
+                to create a new set of elements and bindings
+              </li>
+              <li>This is desugared to use template input variables</li>
+              <li>
+                Variables you can reference within a single instance of the
+                template
+              </li>
+              <li>
+                Not the same thing as template reference variables, which can be
+                accessed anywhere in the entire template and are prefixed with a
+                #
+              </li>
+            </ul>
+          </li>
+          <li>
+            In <code>*ngFor=&quot;let hero of heroes&quot;</code>
+            <ul>
+              <li>
+                Hero is a template input variable. It allows you to access the
+                properties of the current hero object on each iteration.
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can capture the current index of the iteration using the index
+            property of the NgForOf directive
+            <div>this is desugared into an attribute called let-i</div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ... *ngFor=&quot;let hero of heroes; let i=index&quot; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can determine if the current iteration is an odd or event number
+            using the odd property of the NgForOf directive
+            <ul>
+              <li>Useful for doing color coding on rows</li>
+              <li>This is desugared into the let-odd attribute</li>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      ... *ngFor=&quot;let hero of heroes; let i=index; let
+                      odd=odd&quot; ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            The microsyntax used on the right side of the equal sign is
+            translated by the parser
+            <ul>
+              <li>
+                This is parsed into attributes on a surrounding ng-template
+              </li>
+              <li>
+                <code>Let</code> declares a template input variable that you
+                reference within the template
+                <ul>
+                  <li>
+                    <code>hero</code>, <code>i</code>, and <code>odd</code> are
+                    all template input variables prefixed with
+                    <code>let-</code> (<code>let-hero</code>,
+                    <code>let-i</code>, and <code>let-odd</code>)
+                  </li>
+                  <li>
+                    <code>of</code> and <code>trackBy</code> are transformed by
+                    the parser - title cased and prefixed by
+                    <code>ngFor</code> to give two input properties,
+                    <code>ngForOf</code> and
+                    <code>ngForTrackBy</code>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="trackby">NgForOf - TrackBy</h3>
+      <section>
+        <ul>
+          <li>Object uniqueness is determined by reference by default</li>
+          <li>
+            This can cause a problem with you change the data in the collection
+            (by replacing them with different objects)
+          </li>
+          <li>
+            Angular needs to remove all the DOM elements associated with the
+            data and create them again = lots of DOM manipulations when a big
+            collection is involved
+          </li>
+          <li>
+            This is a problem in a big list where you refresh the items, but you
+            know they have not changed
+          </li>
+          <li>
+            trackBy
+            <ul>
+              <li>
+                Use can provide a hint to Angular about how to identify object
+                uniqueness using a custom tracking function
+              </li>
+              <li>
+                this is a function that takes the index and the current item as
+                arguments and needs to return the unique identifier for the item
+                (usually a primary key)
+              </li>
+              <li>
+                When using it, Angular can track which items have been added or
+                removed according to the unique identifier and create or destroy
+                only the things that changed
+              </li>
+              <li>
+                <div>In template, define as</div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      @ngForm=&quot;let item of collection; trackBy:
+                      trackByFn&quot;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div>In component</div>
+                <div class="card">
+                  <div class="card-body">
+                    <code> trackByFn(index, item) { return index; } </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="ngid">NgIf</h2>
+      <section>
+        <ul>
+          <li>Built in structural directive</li>
+          <li>
+            Adds and removes elements based on a truthy/falsy condition from the
+            specified microsyntax
+          </li>
+          <li>
+            This adds or removes elements from the DOM, not just showing or
+            hiding them
+            <ul>
+              <li>
+                This improves performance since it potentially eliminates
+                unnecessary binding that are not needed at that moment
+                (including detaching from DOM events and detaching from Angular
+                change detection)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Since it removes and adds elements from the DOM (as opposed to
+            showing and hiding them), you get better performance, and it is
+            useful as a guard against null
+            <ul>
+              <li>
+                This will destroy a component and all subcomponents, potentially
+                freeing up resources
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            May want to use show / hide instead with the [hidden] attribute
+            instead when
+            <ul>
+              <li>It will be faster to show the element again</li>
+              <li>
+                You need to preserve state since the component is not
+                reinitialized
+              </li>
+              <li>
+                Initialization is very expensive and repeated initialization may
+                cause performance degradation
+              </li>
+            </ul>
+          </li>
+          <li>
+            The asterisk syntax is syntax sugar
+            <ul>
+              <li>
+                Translated into a ng-template element wrapped around the host
+                element
+              </li>
+              <li>
+                The ngIf directive is moved to the ng-template element where it
+                becomes a property binding [ngIf]
+              </li>
+              <li>
+                When rendering, the ng-template is replaced with a diagnostic
+                comment - this is also done when the condition is false
+              </li>
+              <li>An else condition can be added using a template</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Here is the code that you write...</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;div *ngIf=&quot;lessons else loading&quot;&gt;&#10; ... <br />
+              &#10;&lt;/div&gt;&#10;&#10;&lt;ng-template #loading&gt;&#10;<br />
+              &lt;div&gt;Loading...&lt;/div&gt;&#10;&lt;/ng-template&gt;&#10;
+            </code>
+          </div>
+        </div>
+        <p>Here is the desugared version of the above code...</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;ng-template [ngIf]=&quot;lessons&quot;
+              [ngIfElse]=&quot;loading&quot;><br />
+              &lt;div><br />
+              ...<br />
+              &lt;/div><br />
+              &lt;/ng-template><br />
+              &lt;ng-template #loading><br />
+              &lt;div>Loading...&lt;/div><br />
+              &lt;/ng-template>
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="ngswitch">NgSwitch</h2>
+      <section>
+        <ul>
+          <li>Like a JavaScript switch statements</li>
+          <li>
+            It can display one element from among several possible elements,
+            based on a switch condition
+            <ul>
+              <li>Only the selected element is put into the DOM</li>
+            </ul>
+          </li>
+          <li>
+            Composed of a set of three cooperating directives, NgSwitch,
+            NgSwitchCase, NgSwitchDefault
+          </li>
+
+          <li>
+            NgSwitch
+            <ul>
+              <li>
+                The controller directive – bind it to an expression that return
+                the switch value
+              </li>
+              <li>
+                An attribute directive – it changes the behavior of its
+                companion directives without touching the DOM directly
+                <ul>
+                  <li>This is why it is never written with a *</li>
+                </ul>
+              </li>
+              <li>
+                Can work with strings, but can also take other data types as
+                well
+              </li>
+            </ul>
+          </li>
+          <li>
+            NgSwitchCase
+            <ul>
+              <li>
+                Structural directive because they add or remove elements from
+                the DOM
+              </li>
+              <li>
+                This is desugared into a ng-template with a ngSwitchCase
+                directive
+              </li>
+              <li>Every view that matches is rendered</li>
+            </ul>
+          </li>
+          <li>
+            NgSwitchDefault
+            <ul>
+              <li>Added if there is no match</li>
+              <li>
+                Structural directive because they add or remove elements from
+                the DOM
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;div &#91;ngSwtich&#93;=&quot;currentHeroName&quot;&gt;&#10;<br />
+              &lt;div
+              *ngSwitchCase=&quot;&apos;colin&apos;&quot;&gt;Colin&lt;/div&gt;&#10;<br />
+              &lt;div
+              *ngSwitchCase=&quot;&apos;lx&apos;&quot;&gt;LX&lt;/div&gt;&#10;<br />
+              &lt;div *ngSwitchDefault&gt;Nubbins&lt;/div&gt;&#10;<br />
+              &lt;/div&gt;
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="ngcontent">NgContent</h2>
+      <section>
+        <ul>
+          <li>
+            Used to create configurable components that can be modified
+            depending on the needs of its user
+            <ul>
+              <li>
+                Components that are used in published libraries make sue of this
+                to make themselves configurable
+              </li>
+            </ul>
+          </li>
+          <li>This is a logic construct to group other DOM elements</li>
+          <li>It is not rendered in the DOM tree</li>
+          <li>
+            Known as Content Projection
+            <ul>
+              <li>
+                Add the ng-content tag into the component where you will be
+                projecting
+              </li>
+              <li>
+                Wrap the content in the parent component that should be
+                projected between the opening and closing tags of the component
+              </li>
+            </ul>
+          </li>
+          <li>Any custom attributes applied to this tag are ignored</li>
+          <li>
+            NgContent content is always initialized, even is the child component
+            does not defined a ngContent element of if it is inside an ngIf
+            element
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code> &lt;ng-content&gt;&lt;/ng-content&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="ngcontainer">NgContainer</h2>
+      <section>
+        <ul>
+          <li>
+            A grouping element that doesn't interfere with styles or layout
+            because Angular doesn't put it in the DOM
+          </li>
+          <li>Cuts down on HTML elements inserted and need styling</li>
+          <li>
+            Example uses
+            <ul>
+              <li>
+                An iteration that may insert empty HTML elements if a condition
+                is not met. Think comment Knockout directives
+              </li>
+              <li>
+                A workaround when you need to apply two structural directives to
+                the same element
+              </li>
+              <li>
+                Placeholder for injecting a template (uses the ngTemplateOutlet
+                directive with a template reference as a parameter)
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code> &lt;ng-container&gt;&lt;/ng-container&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="ngtemplate">NgTemplate</h2>
+      <section>
+        <ul>
+          <li>
+            Angular element for rendering HTML but is never rendered itself.
+            <ul>
+              <li>Its contents are replaced with a comment on rendering</li>
+              <li>
+                Usually apply a structural directive to the ng-template element,
+                otherwise it doesn’t do anything
+              </li>
+            </ul>
+          </li>
+          <li>
+            These only work in the presence of structural directives
+            <ul>
+              <li>
+                Template element that Angular uses with structural directives
+                (*ngIf, *ngFor, [ngSwitch])
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>
+              To reference it, add a name to the type using the # identifier
+            </p>
+            <p>This can be referenced in code – it is of type TemplateRef</p>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-template #myTemplate&gt;...&lt;/ng-template&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            The * can be used to shorthand a structural directive into a
+            ngTemplate element that surrounds the host element and its
+            descendants
+            <ul>
+              <li>This is just syntax sugar</li>
+              <li>
+                <p>This</p>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;div *ngIf="hero"
+                      class=&quot;name&quot;&gt;{+{hero.name}}&lt;/div&gt;
+                    </code>
+                  </div>
+                </div>
+                <p>Is desugared to</p>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;ng-template &#91;ngIf&#93;=&quot;hero&quot;&gt;&#10;
+                      &lt;div
+                      class="name"&gt;{+{hero.name}}&lt;/div&gt;&#10;&lt;/ng-template&gt;
+                    </code>
+                  </div>
+                </div>
+                <p>Angular actually renders</p>
+                <div class="card">
+                  <div class="card-body">
+                    <code> &lt;div _ngcontent-co&gt;Mr Nice&lt;/div&gt;</code>
+                  </div>
+                </div>
+              </li>
+              <li>*ngIf and *ngFor follow this same convention</li>
+            </ul>
+          </li>
+
+          <li>
+            This is also useful if you wish to reuse a block of HTML throughout
+            the template
+            <ul>
+              <li>Define a ngTemplate block with a template variable</li>
+              <li>
+                Use ngContainer at each point you want to duplicate the contents
+                of the template
+              </li>
+              <li>
+                Use a ngTemplateOutlet attribute that contains the template
+                variable
+              </li>
+            </ul>
+          </li>
+          <li>
+            Each template can define its own set of input variables
+            <ul>
+              <li>
+                Use the let-*** syntax as an attribute on a template to pass a
+                value to it
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Define the template (there could be more than one input variables)
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;ng-template #estimateTemplate
+              let-lessonsCounter=&quot;estimate&quot;&gt;...
+            </code>
+          </div>
+        </div>
+
+        <div>Pass the context when referring to the template</div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;ng-container
+              *ngTemplateOutlet=&quot;estimateTemplate;context:ctx&quot;&gt;...
+            </code>
+          </div>
+        </div>
+
+        <div>Define an object as a component property</div>
+        <div class="card">
+          <div class="card-body">
+            <code>ctx: { estimate: this.totalEstimate }</code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="ngtemplateoutlet">NgTemplateOutlet</h2>
+      <section>
+        <ul>
+          <li>
+            Structural directive to dynamically insert a template in various
+            sections of our DOM
+          </li>
+          <li>Provides more flexibilty than the ng-content</li>
+          <li>
+            NgTemplates do not render themselves - this is what this directive
+            does
+          </li>
+          <li>
+            Simple example
+            <ul>
+              <li>
+                Template is rendered in both the div and ngContainer tagged with
+                the NgTemplateOutlet directive
+              </li>
+              <li>The text within the NgContainer is not displayed</li>
+              <li>The div tag is not rendered</li>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;ng-template #template1&gt; &#10; This is a sample
+                    template&#10;&lt;/ng-template&gt;&#10; &#10;<br />
+                    &lt;ng-container
+                    *ngTemplateOutlet=&quot;template1&quot;&gt;This text is not
+                    displayed&lt;/ng-container&gt;<br />
+                    &lt;div *ngTemplateOutlet=&quot;template1&quot;&gt;<br />
+                    &lt;/div&gt;
+                  </code>
+                </div>
+              </div>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="usecase1">NgTemplateOutlet - Use Case #1</h3>
+      <section>
+        Useful when you have a block of code that you want to repeatedly display
+        <ul>
+          <li>
+            Define a ng-template containing the code that you want to replicate
+          </li>
+          <li>Assign a template reference variable to this template</li>
+          <li>
+            Add ng-containers to all points where the code needs to display
+          </li>
+          <li>
+            Tag the ng-containers with the *ngTemplateOutput attribute. This
+            should have the template reference variable on the right side of the
+            equals sign
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="usecase2">NgTemplateOutlet - Use Case #2</h3>
+      <section>
+        You can create a component that accepts outside templates as input
+        properties.
+        <ul>
+          <li>
+            Use template reference variables in the parent component to pass
+            templates as inputs
+          </li>
+          <li>
+            Example of a parent template passing a template to a child component
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-template #parentTemplate&gt; <br />
+                  &lt;p&gt;This template is defined in Parent, but passed to the
+                  child component.&lt;/p&gt;<br />
+                  &#10;&lt;/ng-template&gt;&#10;<br />
+                  &lt;child-component
+                  &#91;customTemplate&#93;=&quot;parentTemplate&quot;&gt;&lt;/child-component&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Child component that will receive the template
+            <ul>
+              <li>
+                Assign this as a property on your component of type TemplateRef
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  @Component({&#10; selector: 'child-component', template:<br />
+                  `&lt;h2&gt;Child Component&lt;/h2&gt;<br />
+                  &lt;ng-container
+                  *ngTemplateOutlet=&quot;customTemplate&quot;&gt;<br />
+                  &lt;/ng-container&gt; &#10; `<br />
+                  })<br />
+                  export class<br />
+                  ChildComponent {&#10; @Input() customTemplate:
+                  TemplateRef&lt;HTMLElement&gt;;&#10;}
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can define a default template (if one is not supplied)to use
+            using the following syntax. If a match for optionTemplate cannot be
+            found, defaultTemplate is used.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ... &#91;ngTemplateOutlet&#93;=&quot;optionTemplate ||
+                  defaultTemplate&quot; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use ViewChild to get access to the template from within the parent
+            component
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export class ParentComponent implements OnInit, AfterViewInit
+                  <br />
+                  {<br />
+                  @ViewChild('parentTemplate',null)myTemplate:TemplateRef&lt;HTMLElement&gt;<br />
+                  ngAfterViewInit() { ... }<br />
+                  }
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="ngtemplateoutletcontext">NgTemplateOutletContext</h2>
+      <section>
+        <ul>
+          <li>
+            Attaches a context object
+            <ul>
+              <li>Should be an object</li>
+              <li>
+                Object keys will be available for binding by the local template
+                let declarations
+              </li>
+              <li>
+                Using the key $implicit in the context object to set a default
+                value for any let parameters that do not have a match in the
+                context object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can be used to pass data to a template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container
+                  &#91;ngTemplateOutlet&#93;=&quot;optionTemplate&quot;
+                  &#91;ngTemplateOutletContext=&quot;{ prop1: val1, prop2:
+                  val2}&quot;&gt; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can pass individual values or an object if you need to pass
+            several
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-template let-person=&quot;person&quot; #template4&gt;
+                  <br />
+                  &lt;p&gt;{+{person.name}}, {+{person.message}}&lt;/p&gt;<br />
+                  &#10;&lt;/ng-template&gt;&#10; <br />
+                  &lt;ng-container <br />
+                  &#91;ngTemplateOutlet&#93;="templates" &#10; <br />
+                  &#91;ngTemplateOutletContext&#93; =&quot;{<br />
+                  person:{name:&apos;Guest&apos;,message:&apos;Welcome&apos;}<br />
+                  }&quot;&gt;&#10;&lt;/ng-container&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This can be shorthanded as
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container *ngTemplateOutlet=&quot;optionTemplate;
+                  context: { prop1 val1, prop2:
+                  val2}&quot;&gt;&lt;/ng-container&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Context can be accessed in the template using the let-*syntax to
+            defined template input variables
+            <ul>
+              <li>
+                The let-* syntax creates a local variable in the template with
+                the name *
+              </li>
+              <li>
+                The string on the right side of the assignment is the name you
+                would pass in on your object
+              </li>
+              <li></li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ng-template #optionTemplate let-prop1
+                  let-prop3=&quot;prop2&quot;&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Access the values using prop1 and prop3 syntax
+            <div class="card">
+              <div class="card-body">
+                <code> {+{ prop1 }} {+{ prop3 }}</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Passing the context allows you to use templates outside of the
+            selector component
+            <ul>
+              <li>
+                Allows you to combine state from where you define the template
+                with the context provided to you where the template is
+                instantiated
+              </li>
+              <li>
+                Can put the template anywhere, such as the very bottom of the
+                page outside of the other HTML
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://indepth.dev/posts/1405/ngtemplateoutlet"
+              target="_blank"
+            >
+              https://indepth.dev/posts/1405/ngtemplateoutlet
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

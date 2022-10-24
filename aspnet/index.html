@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>ASP.NET Core</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <ul>
+        <li><a href="./controllers/index.html">Controllers</a></li>
+        <li><a href="./razorpages/index.html">Razor Pages</a></li>
+        <li><a href="./routing/index.html">Routing</a></li>
+        <li><a href="./webapi/index.html">Web API</a></li>
+      </ul>
+
+      <section>
+        <ul>
+          <li>Redesign of ASP.NET 4.x</li>
+          <li>Leaner, more modular framework</li>
+          <li>Unifies Web UI and Web APIs</li>
+          <li>
+            Features
+            <ul>
+              <li>Runs on Windows, MacOS, and Linux</li>
+              <li>Open sourced</li>
+              <li>Built in dependency injection</li>
+              <li>
+                Applications are standalone programs and not dependent on IIS
+              </li>
+            </ul>
+          </li>
+          <li>
+            Drops support for
+            <ul>
+              <li>WCF</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Starting up with Command Line</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>dotnet new webapp -o aspnetcoreapp</kbd>
+            <ul>
+              <li>Creates a new web application</li>
+              <li>
+                The -o creates a directory named aspnetcoreapp with the source
+                files for the app
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>dotnet dev-certs https --trust</kbd>
+            <ul>
+              <li>Trusts the development SSL certificate</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>dotnet watch run</kbd>
+            <ul>
+              <li>
+                When run from the project directory, this the web application
+              </li>
+              <li>
+                You can then browse to https://localhost:(port) (where port is
+                the random port used)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Configuration - Application Settings</h2>
+      <section>
+        <ul>
+          <li>
+            ASP.NET MVC
+            <ul>
+              <li>
+                Uses web.config in the application folder and a machine.config
+                on the server
+              </li>
+              <li>
+                Most apps store settings in the appSettings or connectionStrings
+                elements
+              </li>
+              <li>
+                System.Configuration.ConfigurationManager is used to access
+                configuration elements
+              </li>
+            </ul>
+          </li>
+          <li>
+            ASP.NET Core
+            <ul>
+              <li>
+                appsettings
+                <ul>
+                  <li>
+                    Application configuration file that is automatically created
+                    in the root of the project
+                  </li>
+                  <li>
+                    Contents are JSON formatted, so values are stored in
+                    key-value pairs
+                  </li>
+                  <li>
+                    Custom keys can be added to this to add application scope
+                    global variables
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Environment specific overrides can be applied using a file like
+                appsettings.Develpment.json
+              </li>
+              <li>
+                To access values in this configuration you can inject a
+                IConfiguration into your class Constructor
+                <ul>
+                  <li>
+                    Access a value using configuration["MyKey"] syntax to get
+                    the value associated with the key "MyKey"
+                  </li>
+                </ul>
+              </li>
+              <li>
+                The default implementation will include entries for:
+                <ul>
+                  <li>
+                    ConnectionStrings
+                    <ul>
+                      <li>
+                        This contain multiple connnection strings, each with its
+                        own unique key
+                      </li>
+                    </ul>
+                  </li>
+                  <li>Logging</li>
+                  <li>AllowedHosts</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Configuration - Startup</h2>
+      <section>
+        <ul>
+          <li>
+            ASP.NET MVC
+            <ul>
+              <li>
+                Relies on IIS to instantiate certain objects and call certain
+                methods when a request arrives
+              </li>
+              <li>
+                Creates an instance of Global.asax
+                <ul>
+                  <li>
+                    Calls Application_Start on the first request before the
+                    request is handled
+                  </li>
+                  <li>This handles any application startup tasks</li>
+                  <li>
+                    App_Start folder also turns either immediately before or
+                    just after Application_Start
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            ASP.NET Core
+            <ul>
+              <li>
+                Applications are standalone programs
+                <ul>
+                  <li>These are executable apps</li>
+                  <li>
+                    You can run from the command line using
+                    <kbd>dotnet run</kbd> command
+                  </li>
+                </ul>
+              </li>
+              <li>
+                For ASP.NET 6 and above, Program.cs is the entry point for the
+                application
+                <ul>
+                  <li>
+                    This file consists of top level statements that exist
+                    outside of an explicit class and methods (these are not
+                    explicitly defined)
+                  </li>
+                  <li>
+                    Creates a request pipeline that handles how every request to
+                    the app is handled
+                  </li>
+                  <li>Adds services to the container</li>
+                  <li>
+                    Steps to start the program in the files
+                    <ul>
+                      <li>Creates an instance of WebApplicationBuilder</li>
+                      <li>
+                        Adds services to the WebApplicationBuilder instances
+                      </li>
+                      <li>
+                        Calls Build method to create an instance of
+                        WebApplication
+                      </li>
+                      <li>Configures HTTP request pipeline components</li>
+                      <li>Executes the WebApplication to start running</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                In ASP.NET 5 and below
+                <ul>
+                  <li>
+                    This is a Startup class with two methods
+                    <ul>
+                      <li>ConfigureServices</li>
+                      <li>Configure</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Best Practices
+            <ul>
+              <li>
+                Use extension methods that take a IServiceCollection to handle
+                detailed configuration instead of loading up the Program class
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Configuration - Dependency Injection</h2>
+      <section>
+        <ul>
+          <li>
+            ASP.NET MVC
+            <ul>
+              <li>
+                DI is not built in so it must be added in by including an IOC
+                container (such as Ninject or Unity)
+              </li>
+            </ul>
+          </li>
+          <li>
+            ASP.NET Core
+            <ul>
+              <li>
+                Not just built into the framework, but is assumed you will use
+                it
+              </li>
+              <li>
+                Required to bring support for framework features into your
+                ASP.NET Core apps
+              </li>
+              <li>Types are registered in the ConfigureServices method</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Configuration - Dependency Injection – Best Practices</h2>
+      <section>
+        <ul>
+          <li>
+            A class that takes too many dependencies in its constructor is a
+            code smell
+          </li>
+          <li>
+            Constructor injection makes Single Responsibility Principle
+            violations glaringly obvious
+          </li>
+          <li>
+            If you hit 3-4 dependencies, time to consider if that class is doing
+            too much
+          </li>
+          <li>
+            Can cut down dependencies on a class by using Facade Service class
+            <ul>
+              <li>Aggregates dependencies behind a new abstraction</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Filters</h2>
+      <section>
+        <ul>
+          <li>
+            ASP.NET Core allow code to run before or after specific states in
+            the request processing pipeline
+          </li>
+          <li>
+            Built in filters include
+            <ul>
+              <li>Authorization</li>
+              <li>Response caching</li>
+            </ul>
+          </li>
+          <li>
+            Use custom filters to handle cross cutting concerns to avoid
+            duplicating code, such as
+            <ul>
+              <li>Error handling</li>
+              <li>Caching</li>
+              <li>Configuration</li>
+              <li>Logging</li>
+              <li>Authorization</li>
+            </ul>
+          </li>
+          <li>
+            These are executed in the filter pipeline section of the ASP.NET
+            Core action invocation pipeline
+          </li>
+          <li>
+            There is a specific order these are executed
+            <ul>
+              <li>
+                Authorization filters
+                <ul>
+                  <li>Determine if the user is authorized for the request</li>
+                  <li>
+                    Short circuit the pipeline if the request is not authorized
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Resource filters
+                <ul>
+                  <li>
+                    OnResouceExecuting runs code before the reset of the filter
+                    pipeline
+                  </li>
+                  <li>
+                    OnResourceExecuted runs code after the rest of the pipeline
+                    has completed
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Action filters
+                <ul>
+                  <li>
+                    Run immediately before and after an action method is called
+                  </li>
+                  <li>Can change the arguments passed into an action</li>
+                  <li>Can change the result returned from the action</li>
+                  <li>Not supported in Razor pages</li>
+                </ul>
+              </li>
+              <li>
+                Exception filters
+                <ul>
+                  <li>
+                    Apply global policies to unhandled exceptions that occur
+                    before the response body has been written
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Result filters
+                <ul>
+                  <li>
+                    Run immediately before and after the execution of action
+                    results
+                  </li>
+                  <li>Run only when the action method executes successfully</li>
+                  <li>
+                    Are useful for logic that must surround view or formatter
+                    execution
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>ASP.NET - HttpContext vs HttpContextBase</h2>
+      <section>
+        <ul>
+          <li>
+            HttpContext
+            <ul>
+              <li>Vintage ASP.NET context</li>
+              <li>
+                No base class and is not virtual, so no way to mock it for
+                testing
+              </li>
+              <li>Not recommended to pass it around as function arguments</li>
+              <li>Use instances of HttpContextBase instead</li>
+            </ul>
+          </li>
+          <li>
+            HttpContextBase
+            <ul>
+              <li>C# 3.5 replacement for HttpContext</li>
+              <li>Abstract, so it is mockable</li>
+              <li>
+                Functions that are passed a context should expect one of these
+              </li>
+              <li>Can use an IOC framework to inject the HttpCOntextBase</li>
+            </ul>
+          </li>
+          <li>
+            HttpContextWrapper
+            <ul>
+              <li>Concrete implementation to HttpContextBase</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Logging</h2>
+      <section>
+        <ul>
+          <li>
+            ASP.NET MVC
+            <ul>
+              <li>Not built-in logging solution</li>
+            </ul>
+          </li>
+          <li>
+            ASP.NET Core
+            <ul>
+              <li>
+                Built in that can be configured and extended when the app starts
+                up
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Middleware</h2>
+      <section>
+        <ul>
+          <li>
+            By default, ASP.NET Core does not support service static files
+            <ul>
+              <li>
+                This must be configured by hooking into the appropriate
+                middleware
+              </li>
+              <li>When configured, only files stored in wwwroot are shared</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Request Pipeline</h2>
+      <section>
+        <ul>
+          <li>
+            ASP.NET used HTTP modules and HTTP handlers
+            <ul>
+              <li>Each request is handled by multiple HTTP modules</li>
+              <li>Each request is also processed by a single HTTP Handler</li>
+            </ul>
+          </li>
+          <li>
+            ASP.NET Core
+            <ul>
+              <li>Defines a request pipeline in the Configure method</li>
+              <li>This defines how requests are handled</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Stash</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <section>
+        <ul>
+          <li>
+            Stash allows you to save the state of your working directory and
+            staging
+          </li>
+          <li>This is not a commit, so it is not recorded as one</li>
+          <li>
+            After completing, the working directory and staging are restored to
+            align with the last commit
+          </li>
+          <li>You can restore from the stash at a later point to resume</li>
+          <li>
+            This will stash files that are in the working directory but are not
+            tracked by Git
+          </li>
+        </ul>
+      </section>
+
+      <h2>Commands</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>git stash</kbd> = puts the working directory and staging state
+            into stash
+          </li>
+          <li>
+            <kbd>git stash list</kbd> = lists WIP progress changes that have
+            stashed, including the branch and commit informaiton
+          </li>
+          <li>
+            <kbd>git stash show</kbd> = shows details of changes that are
+            recorded in the stash entry
+          </li>
+          <li>
+            <kbd>git stash pop</kbd>
+            <ul>
+              <li>Restores changes that are stashed</li>
+              <li>
+                Staged changes appear to revert back to working directory when
+                this is done
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

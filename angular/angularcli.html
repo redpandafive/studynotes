@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Angular CLI
+          </li>
+        </ol>
+      </nav>
+      <h1>Angular CLI</h1>
+      <section>
+        <ul>
+          <li>
+            <a href="./angular/angularcli.html#commands">Commands</a>
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#gotchas">Gotchas</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="commands">Commands</h2>
+      <section>
+        <kbd>npm install -g @angular/cli</kbd>
+        <ul>
+          <li>Installs Angular CLI globally from npm</li>
+        </ul>
+
+        <kbd>ng new my-app</kbd>
+        <ul>
+          <li>
+            Creates a workspace and initial application in a folder titled
+            my-app
+          </li>
+          <li>Creates initial skeleton application in src folder</li>
+        </ul>
+        <kbd>ng serve –open</kbd>
+        <ul>
+          <li>
+            Runs the application using a local server (assuming you are in a
+            project folder)
+          </li>
+          <li>
+            Launches server, watches files, and rebuilds the app as you make
+            changes to files
+          </li>
+          <li>
+            The <kbd>–open</kbd> option automatically opens the browser to
+            http://localhost:4200
+          </li>
+        </ul>
+        <kbd>ng generate component heroes/hero-list</kbd>
+        <ul>
+          <li>
+            Creates a new component named heroes, including the HTML, CSS,
+            component Typescript file, and a Typescript spec file to use for
+            testing
+          </li>
+          <li>Adds the component to the module heroes automatically</li>
+        </ul>
+        <kbd>ng generate service hero</kbd>
+        <ul>
+          <li>This will register this new provider with the root injector</li>
+        </ul>
+        <kbd>ng generate module orders –routing</kbd>
+        <ul>
+          <li>
+            Makes a new folder called orders containing an OrdersModule and an
+            OrdersRoutingModule
+          </li>
+        </ul>
+        <kbd>ng generate module app-routing --flat --module=app</kbd>
+        <ul>
+          <li>
+            The –flat switch puts the file in the src/app instead of its own
+            folder
+          </li>
+          <li>
+            The –module=app tells the CLI to register it in the imports array of
+            the AppModule
+          </li>
+        </ul>
+        <kbd>ng generate pipe</kbd>
+        <ul>
+          <li>
+            Creates a custom pipe class and registers the pipe in the
+            declarations section of NgModules automatically
+          </li>
+        </ul>
+        <kbd>ng lint</kbd>
+        <ul>
+          <li>
+            The first time this is run, all necessary packages will be installed
+          </li>
+          <li>After installation, running this will lint the entire project</li>
+          <li>Adding the --fix parameter will fix all fixable items</li>
+        </ul>
+      </section>
+
+      <h2 id="gotchas">Gotchas</h2>
+      <section>
+        <ul>
+          <li>
+            Synlinks on Windows will cause weird problems when building and
+            serving
+            <ul>
+              <li>
+                In this case, I was in the C:\Users\Colin\My
+                Documents\AngularStudySandbox\StudySandbox directory
+              </li>
+              <li>
+                Switching to the following cleared the error
+                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                ../../../Documents/AngularStudySandbox/StudySandbox/src/main.ts<br />
+                - Error: Module build failed (from<br />
+                ../../../Documents/AngularStudySandbox/StudySandbox/node_modules/@ngtools/webpack/src/ivy/index.js):<br />
+                Error:<br />
+                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox\src\main.ts<br />
+                is missing from the TypeScript compilation. Please make sure<br />
+                it is in your tsconfig via the 'files' or 'include' property.<br />
+                at<br />
+                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox\node_modules\@ngtools\webpack\src\ivy\loader.js:64:26<br />
+                at processTicksAndRejections<br />
+                (node:internal/process/task_queues:96:5)<br />
+                ../../../Documents/AngularStudySandbox/StudySandbox/src/polyfills.ts<br />
+                - Error: Module build failed (from<br />
+                ../../../Documents/AngularStudySandbox/StudySandbox/node_modules/@ngtools/webpack/src/ivy/index.js):<br />
+                Error:<br />
+                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox\src\polyfills.ts<br />
+                is missing from the TypeScript compilation. Please make sure<br />
+                it is in your tsconfig via the 'files' or 'include' property.<br />
+                at<br />
+                C:\Users\Colin\Documents\AngularStudySandbox\StudySandbox\node_modules\@ngtools\webpack\src\ivy\loader.js:64:26<br />
+                at processTicksAndRejections<br />
+                (node:internal/process/task_queues:96:5)<br />
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

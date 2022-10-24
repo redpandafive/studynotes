@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Support Pages</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        Files with leading underscore are not intended to be browsable - these
+        could be
+        <ul>
+          <li>Layout pages - _Layout.cshtml</li>
+          <li>_ViewImports.cshtml</li>
+          <li>_ViewStart.cshtml</li>
+          <li>Partial pages</li>
+        </ul>
+      </section>
+
+      <h2>Layout Pages</h2>
+      <section>
+        <ul>
+          <li>Function like previous version of ASP.NET MVC</li>
+          <li>
+            Layout files should be placed in Pages/Shared folder
+            <ul>
+              <li>Do not put in View/Shared – that is MVC</li>
+              <li>
+                Razor Pages are meant to rely on folder hierarchy, not path
+                conventions
+              </li>
+            </ul>
+          </li>
+          <li>
+            Setting a layout page
+            <div class="card"><div class="card-body"><code>
+              code='@ {&#10; Layout = "_Layout"&#10;}'
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>ViewImports Pages</h2>
+      <section>
+        These pages are named _ViewImports.cshtml
+        <ul>
+          <li>
+            Centralizes directives that apply to Razor pages so you do not have
+            to add them to pages individually
+          </li>
+          <li>
+            Supports the following directives
+            <ul>
+              <li>
+                Tag helper management
+                <ul>
+                  <li>
+                    @addTagHelper
+                    <ul>
+                      <li>
+                        Default file includes reference to
+                        Microsoft.AspNetCore.Mvc.TagHelpers
+                      </li>
+                    </ul>
+                  </li>
+                  <li>@removeTagHelper</li>
+                  <li>@tagHelperPrefix</li>
+                </ul>
+              </li>
+              <li>@inherits</li>
+              <li>
+                @namespace
+                <ul>
+                  <li>
+                    Specifies the namespace of the pages affected by the
+                    ViewImports file
+                  </li>
+                  <li>
+                    Default file includes reference to ApplicationName.Pages
+                  </li>
+                  <li>There can be only one per _ViewImports file</li>
+                </ul>
+              </li>
+              <li>
+                @inject
+                <ul>
+                  <li>Supports dependency injection</li>
+                </ul>
+              </li>
+              <li>
+                @model
+                <ul>
+                  <li>
+                    Use to specify the Model, but this is usually done on a
+                    page-by-page basis
+                  </li>
+                </ul>
+              </li>
+              <li>
+                @using
+                <ul>
+                  <li>
+                    Makes other namespaces available without having to provide
+                    their fully qualified names when working with their types
+                  </li>
+                  <li>
+                    Default file includes reference to the default namespace of
+                    your application
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            One is created at the root of the Pages folder by default
+            <ul>
+              <li>
+                Settings applied here will affect all Razor pages in the folder
+                hierarchy
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can have multiples of these in your Pages folder at different
+            levels in the hierarchy
+            <ul>
+              <li>
+                This allows you add to the top level _ViewImports file
+                directives or override its settings
+              </li>
+              <li>
+                The @addTagHelper, @removeTagHelper, @inject and @using
+                directives are additive
+              </li>
+              <li>
+                Other directives override each other the closer you get to the
+                page
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>ViewStart Pages</h2>
+      <section>
+        These pages are named _ViewStart.cshtml
+        <ul>
+          <li>
+            Code that is executed at the start of each Razor page execution
+            <ul>
+              <li>
+                Common use case is to set the layout page for each Razor page
+              </li>
+            </ul>
+          </li>
+          <li>
+            Affects all Razor pages in the same folder or any of its subfolders
+          </li>
+          <li>
+            These are hierarchical, so you can have them at different levels in
+            the folder strucutre
+          </li>
+          <li>
+            Those located in subfolders will be executed after those located
+            higher up the file system hierarchy
+          </li>
+        </ul>
+      </section>
+
+      <h2>Partial Pages</h2>
+      <section>
+        <ul>
+          <li>
+            Contain snippets of HTML and server side code to be included in any
+            number of pages or layouts
+          </li>
+          <li>Use to break up complex pages into smaller units</li>
+          <li>
+            Automatically inherits the ViewData associated with the calling
+            view, so it may behave differently on differnt Razor pages
+          </li>
+          <li>
+            View Components give a more powerful alternative to these in .NET 6
+          </li>
+        </ul>
+      </section>
+
+      <h2>View Components</h2>
+      <section>
+        <ul>
+          <li>
+            Replace ChildActions from ASP.NET MVC and give a more powerful
+            alternative to Partial Pages
+          </li>
+          <li>
+            They do everything partials do and behave more consistently across
+            Razor views
+          </li>
+          <li>
+            Do not inherit ViewData or model binding from the calling page
+          </li>
+          <li>They depend on data passed when calling the view component</li>
+          <li>
+            Drive from ViewComponent and typically have an associated Razor file
+            for markup
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

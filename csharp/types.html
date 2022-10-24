@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Types</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <!-- linkMappings: AnchorLinkMapping[] = [
+{ id: "anonymous", label: "Anonymous Types" },
+{ id: "implicitlyTyped", label: "Implicit Typed Local Variables" },
+{ id: "numbers", label: "Numbers" },
+{ id: "boxing", label: "Boxing" },
+{ id: "nullRefTypes", label: "Nullable Reference Types" },
+{ id: "constants", label: "Constants" },
+{ id: "binaryLiterals", label: "Binary Literals" },
+{ id: "numericLiterals", label: "Numeric Literals" },
+{ id: "strings", label: "Strings" },
+{ id: "disposable", label: "Disposable Types" },
+{ id: "guid", label: "Guid" },
+{ id: "range", label: "Range" },
+{ id: "refVval", label: "Reference vs. Value Types" },
+{ id: "span", label: "Span" },
+{ id: "typeMatching", label: "Type Matching" },
+]; -->
+
+      <h2 id="anonymous">Anonymous Types</h2>
+      <section>
+        <ul>
+          <li>
+            Easy way to encapsulate a set of public, read only properties into a
+            single object without having to explicitly define a type first
+          </li>
+          <li>
+            These derive directly from object and cannot be cast to any type
+            except object
+          </li>
+          <li>
+            Without specifying member names, the same name is used where the
+            value was copied from
+          </li>
+          <li>
+            Two anonymous objects are equal only if all their properties are
+            equal
+          </li>
+          <li>Requires using the var keyword</li>
+          <li>
+            Limitations
+            <ul>
+              <li>Cannot contain other items such as methods or events</li>
+              <li>
+                Since they are read only, use with expressions if you need to
+                make mutations
+              </li>
+              <li>
+                If you need to pass an anonymous object, it can only be passed
+                as type object
+                <ul>
+                  <li>Defeats the point of strong typing</li>
+                  <li>
+                    If you must pass an anonymous object outside the boundaries
+                    of a method, use a class or struct instead
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Example
+          <div class="card"><div class="card-body"><code>
+            code='var v = new { Amount = 108, Message = "Hello" };'
+          </code></div></div>
+        </div>
+      </section>
+
+      <h2 id="implicitlyTyped">Implicit Typed Local Variables</h2>
+      <section>
+        <ul>
+          <li>Uses the var keyword to declare a variable</li>
+          <li>
+            Instructs the compiler to infer the type of the variable from the
+            expression on the right side of the initialization statement
+          </li>
+          <li>
+            Can be
+            <ul>
+              <li>Built in type</li>
+              <li>Anonymous type</li>
+              <li>User defined type</li>
+              <li>Type defined in the .NET class library</li>
+            </ul>
+          </li>
+          <li>
+            Useful for
+            <ul>
+              <li>For initialization statements</li>
+              <li>Foreach initialization statements</li>
+              <li>Using statements</li>
+            </ul>
+          </li>
+          <li>
+            Limitations
+            <ul>
+              <li>Cannot be null</li>
+              <li>
+                Must be used when a local variable is declared and initialized
+                in the same statement
+              </li>
+              <li>
+                Can only be used in method scope; cannot be used on fields at
+                class scope
+              </li>
+            </ul>
+          </li>
+          <li>
+            Should be restricted to cases where it is required or when It makes
+            the code easier to read
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="numbers">Numbers</h2>
+      <section>
+        <ul>
+          <li>
+            Favor decimal over fload unless you absolutely need the performance
+            boost
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="boxing">Boxing and Unboxing</h2>
+      <section>
+        <ul>
+          <li>
+            Process of converting a value type to the type object
+            <ul>
+              <li>
+                The value types are wrapped inside a System.Object and stored on
+                the managed heap
+              </li>
+              <li>Unboxing the value extracts the value type from the box</li>
+            </ul>
+          </li>
+          <li>
+            Boxing
+            <ul>
+              <li>Done implicitly</li>
+              <li>Example</li>
+              <li>int i = 123;</li>
+              <li>object o = i;</li>
+            </ul>
+          </li>
+          <li>
+            Unboxing
+            <ul>
+              <li>Done explicitly</li>
+              <li>Example</li>
+              <li>i = (int)o;</li>
+            </ul>
+          </li>
+          <li>
+            This applies to value types in C#
+            <ul>
+              <li>
+                Value types are boxed when cast to a reference type or one of
+                the interfaces they implement
+              </li>
+              <li>Value types are unboxed when cast back to the value type</li>
+            </ul>
+          </li>
+          <li>
+            Boxes are allocated on the heap
+            <ul>
+              <li>
+                Too much boxing and unboxing can have a negative impact on the
+                heap, the garbage collector, and the application
+              </li>
+              <li>
+                Can be costly since objects must be allocated on the heap and
+                have the value copied to it
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="nullRefTypes">Nullable Reference Types</h2>
+      <section>
+        <ul>
+          <li>
+            Historically, reference types could contain null
+            <ul>
+              <li>
+                Leads to the risk of System.NullReferenceExceptions when you
+                attempt to derefrence a variable that contains null
+              </li>
+            </ul>
+          </li>
+          <li>
+            Nullable reference types are a set of features added that help
+            minimize these exceptions
+            <ul>
+              <li>
+                Goal is to help identify potential null reference errors at
+                compile time instead of runtime
+              </li>
+              <li>
+                These are compiler improvements so it will generate a warning
+                when a potential nullable reference type is used
+              </li>
+            </ul>
+          </li>
+          <li>
+            Warnings are issued when you attempt to dereference a variable that
+            may contain null. This includes
+            <ul>
+              <li>Variables that have not been assigned a value</li>
+              <li>
+                Variables that have not been checked against null or have been
+                modified since the last check
+              </li>
+            </ul>
+          </li>
+          <li>
+            Use one of the following approaches to fix a warning
+            <ul>
+              <li>Assign a default value</li>
+              <li>Use a property initializer</li>
+              <li>
+                Make the property a nullable type
+                <ul>
+                  <li>Tells the compiler this might be null.</li>
+                  <li>
+                    Compiler will warn you if attempt to dereference this
+                    without checking for null first
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Use Null-Forgiving operator (!) to supress the warning
+                <ul>
+                  <li>
+                    <code>FooBar foobar = null!;</code>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Starting with .NET 6, this feature is enabled by default in all new
+            projects
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="constants">Constants</h2>
+      <section>
+        <ul>
+          <li>A field whose value can never be changed</li>
+          <li>Defined at compile time</li>
+          <li>Cannot be modified at runtime</li>
+          <li>Prefix with the const keyword</li>
+        </ul>
+      </section>
+
+      <h2 id="binaryLiterals">Binary Literals</h2>
+      <section>
+        <ul>
+          <li>Can prefix binary numbers with sequence “0b”</li>
+          <li>Can contain an underscore character for readability</li>
+          <li>
+            Examples
+            <ul>
+              <li>0b100</li>
+              <li>0b1000_0010</li>
+            </ul>
+          </li>
+          <li>This could be assigned to properties of an Enum</li>
+        </ul>
+      </section>
+
+      <h2 id="numericLiterals">Numeric Literals</h2>
+      <section>
+        <ul>
+          <li>
+            Numeric literals can add underscore separators for readability
+            <ul>
+              <li>Does not impact the value at all</li>
+              <li>ex. 170_000_000</li>
+            </ul>
+          </li>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2 id="strings">Strings</h2>
+      <section>
+        <ul>
+          <li>
+            Breaking a quotes string will automatically format it with quotes
+            and a plus sign (C#7)
+          </li>
+          <li></li>
+        </ul>
+      </section>
+
+      <h3>String Interpolation</h3>
+      <section>
+        <ul>
+          <li>
+            <ul>
+              <li>
+                Replaces String.Format since the syntax is cleaner and not
+                dependent on correctly listing the parameters in order
+              </li>
+              <li>
+                Example
+                <div class="card"><div class="card-body"><code>
+                  code='var s = $"{p.Name} is {p.Age} years old";'
+                </code></div></div>
+              </li>
+              <li>
+                VS2017 can automatically convert this using Ctrl .
+                <ul>
+                  <li>This opens a refactoring menu</li>
+                </ul>
+              </li>
+              <li>This is just syntax sugar</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="disposable">Disposable Types</h2>
+      <section>
+        <ul>
+          <li>
+            Adding a Dispose method is primarily for releasing unmanaged
+            resources, such as
+            <ul>
+              <li>File and pipe handles</li>
+              <li>Registry handles</li>
+              <li>Pointers to blocks of unmanaged memory</li>
+            </ul>
+          </li>
+          <li>
+            Called the Dispose pattern
+            <ul>
+              <li>
+                Classes that follow this pattern should implement the IDispose
+                interface
+              </li>
+            </ul>
+          </li>
+          <li>
+            Should be idempotent
+            <ul>
+              <li>
+                Should be able to call multiple times without throwing an
+                exception
+              </li>
+            </ul>
+          </li>
+          <li>
+            To implement a custom Dispose method, see this
+            https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose
+          </li>
+          <li>Client code usually must explicitly call the Dispose method</li>
+        </ul>
+      </section>
+
+      <h2 id="guid">GUID</h2>
+      <section>
+        <ul>
+          <li>
+            When reading a GUID (such as from a database query), you need to
+            cast it to type it in C#
+            <ul>
+              <li>There are parse and tryparse methods on the Guid class</li>
+              <li>
+                Alternatively, you can just cast if you are certain the value
+                will be there
+                <div class="card"><div class="card-body"><code>
+                  code='Guid guid = (Guid)reader&#91;"FormId"&#93;;'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Range</h2>
+      <section>
+        <ul>
+          <li>Simpler syntax than Span</li>
+          <li>Can be extracted from the Span datatype and arrays as well</li>
+          <li>
+            Indexing with this assumes
+            <ul>
+              <li>The first number is inclusive</li>
+              <li>The last number is exclusive</li>
+              <li>
+                This means you can use ^0 to represent the last index of the
+                sequence since it is exclusive
+              </li>
+              <li>
+                Not specifying an end index means you want all to the end of the
+                sequence
+              </li>
+            </ul>
+          </li>
+          <li>
+            Example - slice will contain 3 and 4
+            <div class="card"><div class="card-body"><code>
+              var numbers = new &#91;&#93; { 1, 2, 3, 4, 5 };&#10;var slice = numbers&#91;2..4&#93;;&#10;"
+            </code></div></div>
+          </li>
+          <li>
+            Example with typed Range object - slice will not contain 3 and 4
+            <div class="card"><div class="card-body"><code>
+              var numbers = new &#91;&#93; { 1, 2, 3, 4, 5 };&#10;Range range = 2..4;&#10;var slice = numbers&#91;range&#93;;&#10;"
+            </code></div></div>
+          </li>
+          <li>
+            Can create an enumerable using Python-eque syntax - yields an array
+            of 1 through 9
+            <div class="card"><div class="card-body"><code>
+              var numbers = Enumerable.Range(1, 10).toArray()"
+            </code></div></div>
+          </li>
+          <li>
+            To get all items but the first
+            <div class="card"><div class="card-body"><code> numbers&#91;1..&#93;"</code></div></div>
+          </li>
+          <li>
+            To get the last item as a range
+            <div class="card"><div class="card-body"><code> numbers&#91;^1..&#93;"</code></div></div>
+          </li>
+          <li>
+            To get the last item
+            <div class="card"><div class="card-body"><code> numbers&#91;^1&#93;"</code></div></div>
+          </li>
+          <li>
+            To get the last three items
+            <div class="card"><div class="card-body"><code> numbers&#91;^3..&#93;"</code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="refVval">Reference vs. Value Types</h2>
+      <section>
+        <ul>
+          <li>
+            Value
+            <ul>
+              <li>
+                Deallocated when the stack unwinds or when their containing type
+                gets deallocated
+              </li>
+              <li>Cheaper to allocate and deallocate than reference types</li>
+            </ul>
+          </li>
+          <li>
+            Memory location
+            <ul>
+              <li>
+                Reference types are allocated on the heap and garbage collected
+              </li>
+              <li>
+                Value types are allocated on the stack or inline in containing
+                types
+              </li>
+            </ul>
+          </li>
+          <li>
+            Arrays
+            <ul>
+              <li>
+                Arrays of reference types are allocated out-of-line
+                <ul>
+                  <li>
+                    The array elements are just references to instances of
+                    reference type residing on the heap
+                  </li>
+                  <li>Arrays are much cheaper to allocate and deallocate</li>
+                </ul>
+              </li>
+              <li>
+                Arrays are allocated inline
+                <ul>
+                  <li>Array elements are actual instances of the value type</li>
+                  <li>Arrays are more expensive to allocate and deallocate</li>
+                </ul>
+              </li>
+              <li>
+                Copying
+                <ul>
+                  <li>
+                    Value types are more expensive since the entire value is
+                    copied
+                  </li>
+                  <li>
+                    Reference types are cheaper since only the reference is
+                    copied
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Boxing and Unboxing
+                <ul>
+                  <li>
+                    Value types are boxed and unboxed, which can cause
+                    performance problems
+                  </li>
+                  <li>Reference types are not boxed or unboxed</li>
+                </ul>
+              </li>
+              <li>
+                Assignments
+                <ul>
+                  <li>Reference type assignments copy the reference</li>
+                  <li>Value type assignments copy the entire value</li>
+                  <li>
+                    Assignment of large reference types are cheaper than
+                    assignments of large value types
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Span</h2>
+      <section>
+        <ul>
+          <li>
+            Value type that enables us to work and manage any type that
+            represents a contiguous chunk of memory
+          </li>
+          <li>
+            It is a window onto an existing chunk of memory
+            <ul>
+              <li>Pointer to existing memory</li>
+              <li>Does not have own memory</li>
+              <li>Struct, so no heap allocation</li>
+            </ul>
+          </li>
+          <li>
+            Works with
+            <ul>
+              <li>Arrays</li>
+              <li>Strings</li>
+              <li>Stack allocation</li>
+              <li>Native buffers</li>
+            </ul>
+          </li>
+          <li>
+            Useful since you can slice an existing chunk of memory and manage it
+            <ul>
+              <li>Does not require copying it and allocating new memory</li>
+            </ul>
+            <div class="card"><div class="card-body"><code>
+              var slice = numbersAsArray.AsSpan().Slice(2,2);"
+            </code></div></div>
+          </li>
+          <li>
+            Type safety
+            <div class="card"><div class="card-body"><code>
+              Span&lt;int&gt; span = arr.AsSpan();"
+            </code></div></div>
+          </li>
+          <li>Not IEnumerable, so cannot use LINQ against it</li>
+        </ul>
+      </section>
+
+      <h2>Type Matching</h2>
+      <section>
+        <ul>
+          <li>
+            You can now have variable types in a switch statement and add an
+            extra conditional
+          </li>
+          <li>
+            Does require you to be careful with order of case students in switch
+          </li>
+          <li>Multiple conditionals can be joined using && and || operators</li>
+          <li>
+            Default is always evaluated last no matter where it is positioned
+          </li>
+        </ul>
+        <div class="card"><div class="card-body"><code>
+          switch(person) &#10;{&#10; case Student honorStudent when honorsStudent.GPA &gt; 3.2:&#10; ...&#10; case Student nonHonorStudent:&#10; ...&#10; case Instructor instructor:&#10; ...&#10; case null:&#10; case default:&#10;}"
+        </code></div></div>
+        <ul>
+          <li>
+            Switch statement pattern matching
+            <ul>
+              <li>The switch statement has been generalized now</li>
+              <li>You can switch on any type, not just primitive types</li>
+              <li>
+                Patterns can be used in case clauses
+                <ul>
+                  <li>
+                    Before, limited types were supported and that must have been
+                    a compile time constant
+                  </li>
+                  <li>
+                    Now, you can do the following for parameter x which is typed
+                    as dynamic
+                  </li>
+                </ul>
+                <div class="card"><div class="card-body"><code>
+                  // reference variable c for properties of the Customer object&#10;case Customer c ... &#10;&#10;// reference variable p for properties of Product object&#10;case Product p ... &#10;"
+                </code></div></div>
+              </li>
+              <li>
+                Case clauses can have additional conditions on them
+                <ul>
+                  <li>
+                    Switch cases also now support a when clause for better
+                    pattern matching
+                  </li>
+                </ul>
+                <div class="card"><div class="card-body"><code>
+                  case Triangle t when t.sideA == t.sideB && t.sideB == t.sideC: ..."
+                </code></div></div>
+              </li>
+              <li>
+                Order now matters for case clauses
+                <ul>
+                  <li>
+                    Since multiple conditions may match, the first match is the
+                    on that will be used
+                  </li>
+                  <li>
+                    Default cases are always evaluated last, even if they are
+                    not listed last
+                  </li>
+                </ul>
+              </li>
+              <li>
+                This can be a problem if you reference the variable within the
+                statement and you stack cases so multiple cases will trigger the
+                same statement
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

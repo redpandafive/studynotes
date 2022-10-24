@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Forms</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Filling Out Forms</h2>
+      <section>
+        <ul>
+          <li>
+            HTML Text Inputs
+            <ul>
+              <li>
+                Use a selector to get the IWebElement for the control
+                <div class="card"><div class="card-body"><code>
+                  code='IWebElement textField = driver.FindElement(By.Id("Firstname"));'
+                </code></div></div>
+              </li>
+              <li>
+                You cannot write to the Text property of the IWebElement - it is
+                read only
+              </li>
+              <li>
+                Use the SendKeys to simulate a user typing into the text box
+                <div class="card"><div class="card-body"><code>
+                  code='textField.SendKeys("Colin");'
+                </code></div></div>
+              </li>
+              <li>
+                This can be simplified to
+                <div class="card"><div class="card-body"><code>
+                  code='driver.FindElement(By.Id("Firstname")).SendKeys("Colin");'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            HTML Radio Buttons
+            <ul>
+              <li>Use Developer Tools to locate the target radio button</li>
+              <li>Use the FindElement method to locate the IWebElement</li>
+              <li>
+                Call the click method on the IWebElement
+                <div class="card"><div class="card-body"><code>
+                  code='driver.FindElement(By.Id("Single")).Click();'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            HTML Select Options
+            <ul>
+              <li>Locate the select options list using Developer Tools</li>
+              <li>
+                Get an IWebElement reference to the Select control
+                <div class="card"><div class="card-body"><code>
+                  code='IWebElement selectElement = driver.FindElement(By.Id("BusinessDropDown"));'
+                </code></div></div>
+              </li>
+              <li>
+                Define an instance of a SelectElement object passing the
+                IWebElement instance as a constructor parameter
+                <div class="card"><div class="card-body"><code>
+                  SelectElement mySelect = new SelectElement(selectElement);"
+                </code></div></div>
+              </li>
+              <li>
+                The SelectElement has several methods and properties you can
+                reference in your tests, including
+                <ul>
+                  <li>
+                    Options - list of IWebElements representing all the options
+                    in the select. You can iterate over this to work with each
+                    option object.
+                  </li>
+                  <li>
+                    SelectedOption - IWebElement for the selected option. You
+                    can then reference the Text property to see option text
+                  </li>
+                  <li>
+                    SelectByIndex(idx) - uses a zero based index to specify an
+                    Option object
+                  </li>
+                  <li>
+                    SelectByText("text_to_get") - selects the Option with the
+                    specified text (value displayed on the screen)
+                  </li>
+                  <li>
+                    SelectByValue("value_to_get") - selects the Option with the
+                    specified value
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            HTML Checkbox
+            <ul>
+              <li>
+                <div class="card"><div class="card-body"><code>
+                  code='driver.FindElement(By.Id("my_checkbox")).Click();'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Submitting a Form
+            <ul>
+              <li>
+                First way is to call click on the submit button for the form
+                <div class="card"><div class="card-body"><code>
+                  code='driver.FindElement(By.Id("submit_button")).Click();'
+                </code></div></div>
+              </li>
+              <li>
+                Another way is to select one of the controls from the form and
+                call the Submit Method on the IWebElement
+                <div class="card"><div class="card-body"><code>
+                  code='driver.FindElement(By.Id("my_checkbox")).Submit();'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Verifying Form Submission</h2>
+      <section>
+        <ul>
+          <li>
+            Things to check in assert statements for test
+            <ul>
+              <li>
+                Verify title is the correct page (submit confirmation page)
+              </li>
+              <li>
+                Grab elements from the confirmation screen and compare them to
+                the inputted values
+              </li>
+              <li>
+                Verify auto-generated values that are system generated are
+                present - can't really check accuracy of these
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Testing Form Validation</h2>
+      <section>
+        <ul>
+          <li>
+            You can define tests that verify validation is working as expected
+          </li>
+          <li>
+            Create tests that deliberately add invalid values into the form and
+            try submitting it
+          </li>
+          <li>
+            Grab the validation block HTML and check the number of errors and
+            the text of the errors to see if they match the expected result
+          </li>
+          <li>
+            Fix the invalid values to valid values and try submitting again
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

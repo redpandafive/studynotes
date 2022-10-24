@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Rebasing</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <section>
+        <ul>
+          <li>
+            Effectively a way to rewrite the history of your project
+            <ul>
+              <li>
+                Not a common feature among VCS and Git is by far the most
+                popular that supports it
+              </li>
+            </ul>
+          </li>
+          <li>
+            Reapplies commits on top of another base tip, leaving a single,
+            linear history
+          </li>
+          <li>
+            Provides an alternative to merging to consolidate the history of two
+            branches
+          </li>
+          <li>
+            Scenarios where it is useful
+            <ul>
+              <li>
+                Used as an alternative to merges
+                <ul>
+                  <li>
+                    Merge commits are created automatically by Git to cram in
+                    all the differing changes. They can be a messy spot in an
+                    otherwise meticulously maintained history.
+                  </li>
+                  <li>
+                    Rebasing allows you to take changes that were committed on
+                    one branch and replay them on another branch
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Cleaning up your local history before sharing a branch
+                <ul>
+                  <li>
+                    Multiple commits can be squashed into a single commit to
+                    keep the history focused and clear
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Allows you to pull changes from a branch into your branch
+                without performing a merge
+                <ul>
+                  <li>
+                    Useful if you want to maintain a linear project history
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            As a general rule, NEVER rebase shared or public branches
+            <ul>
+              <li>
+                You can perform them on changes that have not been shared yet
+              </li>
+              <li>You should never rebase on a public branch</li>
+            </ul>
+          </li>
+          <li>
+            Teams may decide to never rebase, so check your team guidelines
+          </li>
+          <li>
+            Important to remember that rebase actually creates copies of the
+            commits so it can repoint the parent references
+            <ul>
+              <li>
+                Previous commit objects will be orphaned and eventually be
+                garbage collected
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Rebasing Modes</h2>
+      <section>
+        <ul>
+          <li>
+            There are two rebase modes
+            <ul>
+              <li>
+                Standard
+                <ul>
+                  <li>
+                    Automatically grabs the commits present in your current
+                    working branch and immediately appplies them to the head of
+                    the passed branch
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Interactive
+                <ul>
+                  <li>
+                    Lets you change different commits in the process instead of
+                    just grabbing everything and tossing it into the passed
+                    branch
+                  </li>
+                  <li>
+                    Gives you a chance to remove, split, or alter existing
+                    comments and clean up history
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Merging Review</h2>
+      <section>
+        <ul>
+          <li>
+            Start with two seperated branches
+            <p>
+              <img src="../../../assets/rebasing-0.png" />
+            </p>
+          </li>
+          <li>
+            A merge will combine the changes from both branches into a single
+            commit
+            <ul>
+              <li>
+                The new commit's parents will be the former heads of the main
+                and spaghetti branches
+              </li>
+            </ul>
+          </li>
+          <li>
+            If the merge is issued on the spaghetti <kbd>git merge main</kbd>
+            <ul>
+              <li>The spaghetti head will point to the new commit</li>
+              <li>
+                The main head will not move and will remain at the commit it was
+                on at the time of the commit
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p><img src="../../../assets/rebasing-1.png" /></p>
+      </section>
+
+      <h2>Merging vs Rebasing</h2>
+      <section>
+        <p>These two approaches have different trade-offs</p>
+        <ul>
+          <li>
+            Merges
+            <ul>
+              <li>
+                Preserves history exactly as it happened (merges never lie)
+              </li>
+              <li>
+                Becomes difficult to follow when there is lots of branching and
+                merging
+              </li>
+              <li>
+                <kbd>git log</kbd> output can become misleading since it
+                flattens seperate timelines into a single linear output
+              </li>
+              <li>
+                This should be the default unless you really know what you are
+                doing
+              </li>
+            </ul>
+          </li>
+          <li>
+            Rebases
+            <ul>
+              <li>
+                Timeline is simpler since all commits are arranged in a single
+                line
+              </li>
+              <li>Allows streamlining history so it looks cleaner</li>
+              <li>
+                <kbd>git log</kbd> is more compatible with this since it doesn't
+                have to represent seperate timelines
+              </li>
+              <li>
+                However, rebases refactor history
+                <ul>
+                  <li>
+                    Is not an accurate representation of the true history of the
+                    project
+                  </li>
+                  <li>
+                    Commits may not end up in the order they were actually
+                    submitted to the repository
+                  </li>
+                  <li>This can interfere with some advanced Git commands</li>
+                </ul>
+              </li>
+              <li>
+                It is also a destrucive process and may leave behind orphaned
+                commits that are inaccessable and will be garbage collected
+              </li>
+              <li>
+                Recommended to use merges as a default unless you know what you
+                are doing and understand the consequences of a rebase
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p><img src="../../../assets/rebasing-7.png" /></p>
+      </section>
+
+      <h2>Simple Branch Rebasing</h2>
+      <section>
+        <ul>
+          <li>
+            This will rearrange the branches so they look like a single branch
+          </li>
+          <li>
+            Git looks for the first commit that is in both main and spaghetti
+            branches
+            <p><img src="../../../assets/rebasing-2.png" /></p>
+          </li>
+          <li>
+            Git "detaches" the entire spaghetti branch from this commit
+            <ul>
+              <li>
+                This is not technically correct since objects are immutable -
+                see Rebasing Details
+              </li>
+            </ul>
+            <p><img src="../../../assets/rebasing-3.png" /></p>
+          </li>
+          <li>
+            <p>
+              Next, it "moves" the entire spaghetti branch to attach to the head
+              of main
+            </p>
+            <p><img src="../../../assets/rebasing-4.png" /></p>
+          </li>
+          <li>
+            This changes the base of this branch; the first blue dot's parent
+            will point to the last red dot
+            <ul>
+              <li>
+                The spaghetti branch now contains all the commits of the main
+                branch and the spaghetti branch
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            If you rebase spaghetti into main after this (<kbd
+              >git rebase spaghetti</kbd
+            >),
+            <ul>
+              <li>
+                Git will figure out it just needs to fast-forward the branch
+              </li>
+              <li>
+                The main head will point to the same commit as the spaghetti
+                head
+              </li>
+            </ul>
+          </li>
+          <li>
+            If you did a merge operation instead, the exact same action would be
+            done
+            <ul>
+              <li>
+                Result would be all commits made on main and spaghetti in the
+                same history
+              </li>
+            </ul>
+            <p><img src="../../../assets/rebasing-5.png" /></p>
+          </li>
+          <li>
+            Remember that rebasing is an opertion that creates one or more new
+            commits
+          </li>
+          <li>
+            Objects in the Git database are immutable, so the process outlined
+            above is not technically correct
+            <ul>
+              <li>
+                To perform a rebase, Git must make copies of the a_branch nodes
+                with different parent pointers
+              </li>
+              <li>
+                Since the contents of the commit objects have changed (with
+                different parent references), they will be new files with new
+                hashes
+              </li>
+              <li>The a_branch head be moved</li>
+            </ul>
+            <figure><img src="../../../assets/rebasing-6.png" /></figure>
+          </li>
+          <li>
+            As a consequence, the two blue nodes from the original a_branch
+            remain in the object database
+            <ul>
+              <li>
+                However, no head pointers reference them anymore and the CLI
+                will not display them in any output.
+              </li>
+              <li>
+                Unless you remember their hashes, you cannot view them anymore
+                (unless you dig into the actual files in the database)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Git will periodically garbase collect unreachable objects
+            <ul>
+              <li>These unreachable commits will eventually be deleted</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Syncing with Main using Rebase</h2>
+      <section>
+        <ul>
+          <li>
+            Suppose you are working on a branch called solution and you want to
+            update the solution branch with any changes that have gone into main
+            since you branched off it.
+            <figure>
+              <img src="../../../assets/rebasing-sync-1.png" />
+              <figcaption></figcaption>
+            </figure>
+          </li>
+          <li>
+            Rebasing can pull over the changes from main, then replay the
+            commits that are in the solution branch on top of the changes from
+            main
+            <figure>
+              <img src="../../../assets/rebasing-sync-2.png" />
+              <figcaption></figcaption>
+            </figure>
+          </li>
+          <li>
+            Looking a the log, commits for the solution branch now appear after
+            the new commits in main
+            <figure>
+              <img src="../../../assets/rebasing-sync-3.png" />
+              <figcaption></figcaption>
+            </figure>
+          </li>
+          <li>
+            This helps sequence your changes with main and make a more linear
+            history when you merge back into main
+          </li>
+          <li>
+            Remember, this creates copies of your commits so it can change the
+            parents (objects are immutable)
+          </li>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2>Squashing Commits</h2>
+      <section>
+        <ul>
+          <li>
+            If you have multiple commits in your local history, you can squash
+            them down before merging with a public branch to make the history
+            cleaner
+            <figure>
+              <img src="../../../assets/squash-commits-1.png" />
+              <figcaption></figcaption>
+            </figure>
+          </li>
+          <li>
+            What Git actually does is create a new commit and combines all
+            comments from each commit. This will appear as one commit in your
+            history.
+            <figure>
+              <img src="../../../assets/squash-commits-2.png" />
+              <figcaption>Blue circle is the new rebase commit</figcaption>
+            </figure>
+          </li>
+          <li>
+            To complete:
+            <ul>
+              <li>
+                Run the rebase command and specify the commit you want to squash
+                back to
+              </li>
+              <li>
+                Git will open the default text editor listing the commits to be
+                includes in a format like this:
+                <figure>
+                  <img src="../../../assets/squash-commits-3.png" />
+                </figure>
+              </li>
+              <li>
+                Edit the text file with each action to take on each commit:
+                <ul>
+                  <li>p, pick - pic this commit to keep</li>
+                  <li>s, squash - squash this commit into a previous commit</li>
+                </ul>
+                <figure>
+                  <img src="../../../assets/squash-commits-4.png" />
+                </figure>
+              </li>
+              <li>Save and close the editor</li>
+              <li>
+                Git will open the editor that contains all commit messages for
+                all commits. You can edit these or add something entirely new.
+              </li>
+              <li>
+                Save and close the editor - this results in a new single commit
+                that includes the changes of the two previous commits
+              </li>
+              <li>
+                # lines are comments and are not included, so you don't have to
+                deal with them
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Editing History</h2>
+      <section>
+        <ul>
+          <li>
+            Using interactive mode, you can edit the history of a set of commits
+            by using the following commands
+            <ul>
+              <li>p, pick - pic this commit to keep</li>
+              <li>e, edit - edit this commit to amend the commit message</li>
+              <li>r, reword - use this commit, but also edit it</li>
+              <li>s, squash - squash this commit into a previous commit</li>
+              <li>d, drop - delete this commit</li>
+            </ul>
+          </li>
+
+          <li>
+            You can reorder commit order using the text editor that is opened
+            when you issue the rebase command
+            <figure>
+              <img src="../../../assets/rebasing-editing-1.png" />
+            </figure>
+          </li>
+          <li>
+            Use the drop command to remove a commit
+            <figure>
+              <img src="../../../assets/rebasing-editing-2.png" />
+            </figure>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Commands</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>git merge-base xxxx yyyy</kbd>
+            <ul>
+              <li>
+                Prints the commit SHA of the original base of the xxxx branch
+                created from yyyy
+              </li>
+              <li>This is useful to identify a merge or rebase</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git rebase</kbd>
+            <ul>
+              <li>Performes a standard rebase using branch xxxx as a base</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git rebase --interactive</kbd> and git rebase -i
+            <ul>
+              <li>
+                Performs an interactive rebase using branch xxxx as a base
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git rebase --interactive HEAD~2</kbd>
+            <ul>
+              <li>Can be used to squash commits</li>
+              <li>Runs the rebase command in interactive mode</li>
+              <li>Squashes two commits from your current position</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git reflog</kbd>
+            <ul>
+              <li>Use this to see actions that were taken after a rebase</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Related Topics</h2>
+      <section>
+        <ul>
+          <li><a [routerLink]="['../merging']">Merging</a></li>
+          <li><a [routerLink]="['../merging']">Cherry Picking</a></li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

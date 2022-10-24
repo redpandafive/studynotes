@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Controllers</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <section>
+        <ul>
+          <li>
+            Changes from MVC and Web API to ASP.Net Core
+            <ul>
+              <li>
+                ChildActionOnly attribute is not supported - use View components
+                instead
+              </li>
+              <li>
+                Content negotiation is now supported
+                <ul>
+                  <li>
+                    Headers from client are used to determine the format of the
+                    content returned by a request
+                  </li>
+                  <li>This was previously only supported in Web API</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Controller base type
+            <ul>
+              <li>Use this for MVC controllers that need View support</li>
+              <li>These should inherit from Controller</li>
+            </ul>
+          </li>
+          <li>
+            API Controllers
+            <ul>
+              <li>
+                Use this for Web API controllers that do not need View support
+              </li>
+              <li>
+                Controller class should
+                <ul>
+                  <li>Inherit from ControllerBase</li>
+                  <li>Add the [ApiController] attribute</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Best practices
+            <ul>
+              <li>Keep all business logic out of controllers</li>
+              <li>
+                Action methods should be clean and simple – should handle the
+                following
+                <ul>
+                  <li>Handling HTTP requests</li>
+                  <li>Validating models</li>
+                  <li>Catching errors</li>
+                  <li>Returning responses</li>
+                  <li>Action methods should return a IActionResult</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Controllers – Routes</h2>
+      <section>
+        <ul>
+          <li>
+            In ASP.NET Core you can either use conventional routing or attribute
+            routing
+            <ul>
+              <li>This was also true in ASP.NET MVC</li>
+            </ul>
+          </li>
+          <li>
+            Must be configured to use routing middleware
+            <ul>
+              <li>App.UseRouting()</li>
+            </ul>
+          </li>
+          <li>
+            Attribute routing is the preferred approach
+            <ul>
+              <li>This is required when using the [ApiController] attribute</li>
+              <li>
+                Attribute routes can be defined at the controller level as well
+                as at the action level
+              </li>
+            </ul>
+          </li>
+          <li>
+            To configure
+            <ul>
+              <li>
+                Use the [Route] attribute
+                <div class="card"><div class="card-body"><code>
+                  code='&#91;Route("api/products/{id}")&#93;'
+                </code></div></div>
+              </li>
+              <li>
+                Supply a parameter to the HTTP method attribute
+                <div class="card"><div class="card-body"><code>
+                  code='&#91;HttpGet("api/products/{id}")&#93;'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Additionally, you must configure your project to use the routing
+            middleware
+            <ul>
+              <li>
+                This matches the URLs of incoming requests to actions or other
+                endpoints
+              </li>
+              <li>This is done in the Program.cs file</li>
+              <li>App.UseRouting();</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Controllers - Design</h2>
+      <section>
+        <ul>
+          <li>
+            There are few good reasons to use a base Controller class in MVC
+            <ul>
+              <li>
+                Dont take the tightest form of coupling (inheritance) unless
+                there is a significant productivity reason, and you dont violate
+                Liskov
+              </li>
+            </ul>
+          </li>
+          <li>
+            Keep controllers lean - signs a controller is doing too much:
+            <ul>
+              <li>
+                There are a lot of "helper" methods that contain business logic
+                that are shared between actions
+              </li>
+              <li>
+                Action methods are doing more than simple HTTP request/response
+                stuff.
+              </li>
+              <li>
+                An action method should generally do nothing but call services
+                that process input and/or produce output and return views and
+                response codes
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

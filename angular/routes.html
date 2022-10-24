@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Routing Modules and Routes
+          </li>
+        </ol>
+      </nav>
+      <h1>Routing Modules and Routes</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/routes.html#modules">Routing Modules</a></li>
+          <li><a href="./angular/routes.html#routes">Routes</a></li>
+          <li><a href="./angular/routes.html#childRoutes">Child Routes</a></li>
+          <li><a href="./angular/routes.html#auxiliary">Auxiliary Routes</a></li>
+          <li><a href="./angular/routes.html#guards">Route Guards</a></li>
+
+        </ul>
+      </section>
+
+      <h2 id="modules">Routing Modules</h2>
+      <section>
+        <ul>
+          <li>
+            Since routing configurations can be substantial, it may be
+            appropriate to refactor it out into an external module
+          </li>
+          <li>
+            Should contain the word routing and be named as a sibling to the
+            module
+            <ul>
+              <li>
+                Ex app.module.ts should have a app-routing.module.ts file paired
+                with it
+              </li>
+              <li>
+                feature.module.ts should have a feature-routing.module.ts file
+                paired with it
+              </li>
+            </ul>
+          </li>
+          <li>Module must import RouterModule (@angular/router)</li>
+          <li>
+            Import the RouterModule and configure it to include routes
+            definition
+            <ul>
+              <li>
+                For AppRoutingModule, use RouterModule.forRoot(routesObject)
+              </li>
+              <li>
+                For feature routing modules, use
+                RouterModule.forChild(routesObject)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Routes can be defined as an array of type Route and sit outside the
+            module class definition (but inside the file)
+          </li>
+          <li>
+            General steps to setup
+            <ul>
+              <li>Import the required routing services</li>
+              <li>Define the routes in a variable</li>
+              <li>Import this routing module into the associated module</li>
+
+              <li>
+                Call the forRoot (or forChild) on the imports section of the
+                associated module (and include the route definitions)
+              </li>
+              <li>
+                Add RouterLink and RouterOutlet to list of exports in the
+                associated module so that the components in the companion module
+                have access to Router declarations
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const routes: Routes = &#91;<br/> 
+                  { path: '', component: IndexComponent, pathMatch: 'full' },<br/> 
+                  { path: 'sanitize', component: CodeBoxEncoderComponent },<br/> 
+                  { path: '**', component: RouteNotFoundComponent }<br/>
+                  &#93;<br/>
+                  @NgModule({<br/> 
+                    imports: &#91;RouterModule.forRoot(routes)&#93;,<br/> 
+                    exports: &#91;RouterModule&#93;,<br/>
+                  })<br/>
+                  export class AppRoutingModule {}
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Make sure AppRoutingModule is the last item in the imports array of
+            AppModule (particularly if you define a wildcard route here). This
+            ensures the wildcard will be the last. It will be hit before other
+            routes in feature modules if you dont do this
+          </li>
+          <li>
+            Angular CLI syntax to generate this is:
+            <ul>
+              <li>
+                <kdb>ng generate module app-routing --flat --module=app</kdb>
+              </li>
+              <li>
+                The –flat switch puts the file in the src/app instead of its own
+                folder
+              </li>
+              <li>
+                The –module=app tells the CLI to register it in the imports
+                array of the AppModule
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="routes">Routes</h2>
+      <section>
+        <ul>
+          <li>
+            A route object provides a mapping between a URL fragment and a
+            component
+            <ul>
+              <li>
+                This is a generic object that represents one possible URL the
+                user can navigate to
+              </li>
+            </ul>
+          </li>
+          <li>
+            An array of route objects represents all possible URLs the user can
+            navigate to
+            <ul>
+              <li>
+                This array is typed as Routes (@angular/router)
+                <ul>
+                  <li>Type this so you get Intellisense</li>
+                </ul>
+              </li>
+              <li>
+                Order matters in route object array definitions
+                <ul>
+                  <li>uses a first match wins strategy when matching routes</li>
+                  <li>
+                    specific routes should be placed above less specific route
+                  </li>
+                  <li>
+                    Put specific routes above parameterized routes so they do
+                    not unintentionally match
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Route object parameters
+            <ul>
+              <li>
+                Path (required)
+                <ul>
+                  <li>
+                    string that matches the URL in the browser address bar
+                  </li>
+                  <li>this should not contain a leading slash</li>
+                </ul>
+              </li>
+              <li>
+                component (required)
+                <ul>
+                  <li>
+                    the component that the router should create when navigating
+                    to this route
+                  </li>
+                </ul>
+              </li>
+              <li>
+                data (optional)
+                <ul>
+                  <li>
+                    use to store arbitrary data associated with a specific route
+                  </li>
+                  <li>
+                    takes an object that contains any properties that you need
+                  </li>
+                  <li>
+                    can store things like page titles, breadcrumb text, and
+                    other read only static data
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Parameterized routes
+            <ul>
+              <li>
+                contains a placeholder for a value that the URL will contain,
+                such as an Id
+              </li>
+              <li>{ path: 'detail/:id', component: HeroDetailComponent }</li>
+              <li>This would allow a URL such as detail/10</li>
+              <li>
+                Be careful with route order with these – this would match
+                detail/new as well
+              </li>
+              <li>See Activated Route object section on how to access</li>
+            </ul>
+          </li>
+          <li>
+            RedirectTo, PathMatch, and Empty Routes
+            <ul>
+              <li>
+                Matches to the specified route will redirect the browser to the
+                URL provided
+              </li>
+              <li>
+                This will redirect the browser to './dashboard' when matched
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                The pathMatch parameter takes two options
+                <ul>
+                  <li>Full – redirect if the URL matches the specified path</li>
+                  <li>
+                    Prefix – redirect if the URL starts with the specified path
+                  </li>
+                </ul>
+              </li>
+              <li>
+                This is useful for empty routes
+                <ul>
+                  <li>
+                    This is selected when an empty route is in the address bar,
+                    usually at the start of navigation to the application
+                  </li>
+                  <li>This redirects an empty route to the dashboard route</li>
+                </ul>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Wildcard routes
+            <ul>
+              <li>This should be the last entry in the route definitions</li>
+              <li>
+                Handles "route not found" situations
+                <ul>
+                  <li>
+                    This route is selected if the requested URL does not match
+                    any paths for routes defined earlier in the configuration
+                  </li>
+                  <li>
+                    Will match all routes – add this to prevent a crash if URLs
+                    are not matched
+                  </li>
+                </ul>
+              </li>
+              <li>Useful for displaying 404 pages</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  { path: '**', component: PageNotFoundComponent }
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Debugging
+            <ul>
+              <li>Route definitions do not begin with slashes</li>
+              <li>
+                You can output each router event that takes place during each
+                navigation lifecycle to the browser console
+              </li>
+              <li>
+                Set the enableTracing: true option in an object as pass it as
+                the second argument to the RouterModule.forRoot method
+              </li>
+              <li>
+                You can use both relative and absolute paths when navigating
+                between application views
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="childRoutes">Child Routes</h2>
+      <section>
+        <ul>
+          <li>
+            Allow you to create nested routes to build up a hierarchy in your
+            routing table
+            <ul>
+              <li>One use case is with a Master – Detail UI pattern</li>
+            </ul>
+          </li>
+          <li>
+            Restrictions
+            <ul>
+              <li>
+                When a route has multiple child routes, only one of those routes
+                can be active at a time
+              </li>
+            </ul>
+          </li>
+          <li>Allows multiple router outlets the component tree</li>
+          <li>
+            Example
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  { <br/>
+                    path: 'courses', component CoursesComponent, <br/> 
+                    {
+                  children: &#91; <br/> 
+                  { path: 'new', component: NewCourseCardsComponent },<br/> 
+                  { path: '', component: CourseCardsComponent },<br/>
+                  &#93;}}
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This will display the CoursesComponent in the topmost router outlet
+            when the URL starts with courses
+            <ul>
+              <li>
+                An additional router outlet component should be on the
+                CoursesComponent template
+              </li>
+            </ul>
+          </li>
+          <li>
+            If the URL starts with courses/new, the NewCourseCardsComponent will
+            be loaded into the router outlet on the CourseCardsComponent
+          </li>
+          <li>
+            If the URL starts with courses/, the CourseCardsComponent will be
+            loaded into the router outlet on the CourseCardsComponent
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="auxiliary">Auxiliary Routes</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to have multiple router outlets on the same component
+            <ul>
+              <li>
+                Name attributes are added to each router outlet except for the
+                primary one
+              </li>
+              <li>
+                Routes are defined with an outlet attribute to distinguish which
+                router outlet component they should be loaded into
+              </li>
+            </ul>
+          </li>
+          <li>
+            Used when multiple portions of the screen depend on the value of the
+            URL
+            <ul>
+              <li>
+                There will be primary router outlet component defined with no
+                name attribute
+              </li>
+              <li>
+                There will be one or more auxiliary router outlet components
+                defined, each with a name attribute
+              </li>
+            </ul>
+          </li>
+          <li>Each auxiliary route has its own distinct URL</li>
+          <li>
+            Uses a special syntax for the URL
+            <ul>
+              <li>
+                Given routes with
+                <ul>
+                  <li>AllLessons component mapped to "lessons"</li>
+                  <li>
+                    PlayList component mapped to "playlist" that has a name of
+                    "aside"
+                  </li>
+                </ul>
+              </li>
+              <li>
+                /lessons(aside:playlist)
+                <ul>
+                  <li>
+                    /lessons would load AllLessons component into the primary
+                    route outlet
+                  </li>
+                  <li>
+                    (aside:playlist) would load the PlayList component in the
+                    router outlet named aside
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Multiple auxiliary routes can be loaded, each separated by a //
+                <ul>
+                  <li>/lessons(aside:playlist//leftmenu:/some/path)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Use cases
+            <ul>
+              <li>
+                Allows you to divide the browser window into multiple mini
+                browser windows
+              </li>
+            </ul>
+          </li>
+          <li>
+            Example
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  { <br/>
+                    path: 'courses, component: CoursesComponent,<br/>
+                  children: &#91;<br/> 
+                  { path: '', component: CourseCardsComponent},<br/> 
+                  { path: '':id', component: CoursesCategoryComponent },<br/> 
+                  { path: '', outlet: 'sidemenu', component: SideMenuComponent }<br/> 
+                  &#93;<br/>
+                }
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This will load
+            <ul>
+              <li>
+                CoursesComponent into the top router outlet when the URL starts
+                with courses
+              </li>
+              <li>
+                SideMenuComponent into the router outlet named sidemenu on the
+                CoursesComponent
+              </li>
+              <li>
+                CoursesCategoryComponent into the primary outlet on the
+                CoursesComponent when there is an id in the URL
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="guards">Route Guards</h2>
+      <section>
+        <ul>
+          <li>
+            These can
+            <ul>
+              <li>Prevent a user from navigating to a page</li>
+              <li>Prevent a user from navigating away from a page</li>
+            </ul>
+          </li>
+
+          <li>
+            There are two properties on the Route object to do this
+            <ul>
+              <li>
+                canActivate
+                <ul>
+                  <li>Can the user go to a route?</li>
+                </ul>
+              </li>
+              <li>
+                canDeactivate
+                <ul>
+                  <li>Can the user leave the route?</li>
+                  <li>
+                    Useful if you want to want a user to save their data before
+                    leaving the page
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            CanActivate as a Service (can be a function or service)
+            <ul>
+              <li>
+                Create a service that implements CanActivate (@angular/route)
+              </li>
+              <li>
+                This method will take a ActivatedRouteSnapshot (@angular/route)
+                object as a parameter
+              </li>
+              <li>
+                Define how you will determine if the route should be activated
+                or not
+                <ul>
+                  <li>
+                    For example, you could use a different service to check if a
+                    parameter id represents a valid data object
+                  </li>
+                </ul>
+              </li>
+              <li>
+                If you are not going to activate the route, you can add a
+                redirect using the router.navigate method
+              </li>
+              <li>Return true/false if the route should be activated or not</li>
+              <li>
+                For the target route, add a CanActivate parameter and a
+                reference to the service
+              </li>
+            </ul>
+          </li>
+          <li>
+            CanDeactivate as a Function (can be a function or service)
+            <ul>
+              <li>
+                Add a canDeactivate option to the route
+                <ul>
+                  <li>Its value should be an array with a string</li>
+                  <li>... canDeactivate: ['canDeactivateEvent']</li>
+                </ul>
+              </li>
+              <li>
+                You can register a function as a provider in a module
+                <ul>
+                  <li>
+                    Use the longhand version of registering a provider
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          { provide: 'canDeactivateEvent', useValue: checkDirtyState}
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Define the function checkDirtyState somewhere and import it into
+                the module
+                <ul>
+                  <li>
+                    This function will have a parameter passed to it which is
+                    the component specified in the route
+                  </li>
+                </ul>
+              </li>
+              <li>
+                You can add a property to the component to be flagged when a
+                save is done
+                <ul>
+                  <li>
+                    Check this parameter in the checkDirtyState function since
+                    it receives the component as a parameter
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

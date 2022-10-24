@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Routing</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <section>
+        <ul>
+          <li>
+            Matches incoming HTTP requests to the application's executable
+            endpoints
+            <ul>
+              <li>
+                Endpoints are the applications units of executable request
+                handling code
+              </li>
+              <li>
+                Extracts values from the requests URL and uses those in
+                processing
+              </li>
+            </ul>
+          </li>
+          <li>
+            This can be done to controllers either as
+            <ul>
+              <li>Conventional routing</li>
+              <li>Attributes</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Routing - Conventional Routing</h2>
+      <section>
+        <ul>
+          <li>
+            Relies on convention
+            <ul>
+              <li>
+                Keeping your route definitions consistent reduces the amount of
+                routing work you have to define
+              </li>
+            </ul>
+          </li>
+          <li>Typically done with controllers and views</li>
+          <li>
+            For most UI based applications, the default is usually all that is
+            needed
+          </li>
+          <li>
+            Default route is generated in template projects in the Program.cs
+            file
+            <ul>
+              <li>
+                This can also be replaced with the equivalent convenience method
+                (app.MapDefaultControllerRoute())
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="card"><div class="card-body"><code>
+              code='p.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}}") '
+            </code></div></div>
+            <ul>
+              <li>Matches a path like "/Products/Details/5"</li>
+              <li>
+                This would match a Products controller with a Details method
+                defined that takes an id parameter
+              </li>
+              <li>
+                ? designates an optional parameter, so "/Products/Details/"
+                would match
+              </li>
+              <li>
+                If a controller or action is missing, it will use the default
+                value defined on the route ("Home" and/or "Index")
+                <ul>
+                  <li>Would match on "/Home/Index", "/Home", and "/"</li>
+                </ul>
+              </li>
+              <li>
+                Names give the route a logical name to use in link generation
+              </li>
+              <li>
+                More specific routes can be added
+                <ul>
+                  <li>These can be dedicated conventional route</li>
+                  <li>
+                    Uses conventional routing and is dedicated to a specific
+                    action
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="card"><div class="card-body"><code>
+              code='p.MapControllerRoute(name: "blog", pattern: "blog/{*article}", defaults: new { controller="Blog", action="article})'
+            </code></div></div>
+            <ul>
+              <li>This will always map to the action BlogController.Article</li>
+              <li>
+                This can match on
+                <ul>
+                  <li>/Blog</li>
+                  <li>/Blog/Article</li>
+                  <li>/Blog/{any-string}</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Routing – Attribute Routing</h2>
+      <section>
+        <ul>
+          <li>
+            Should be used on REST APIs
+            <ul>
+              <li>
+                Should be used to model the applications functionality as a set
+                of resources are operations represented by HTTP verbs
+              </li>
+              <li>
+                Controller and action method names play no part in which action
+                is matched
+                <ul>
+                  <li>Exception is if a token replacement is used</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Requires more input to specify a route, but allows and requires more
+            precise control of which route templates apply to each action
+          </li>
+          <li>To enable in Program.cs, add call to App.MapControllers()</li>
+          <li>
+            The following set of attributes on a controller method will mimic
+            conventional routing pattern of
+            "{controller=Home}/{action=Index}/{id?}}")
+            <ul>
+              <li>[Route("")]</li>
+              <li>[Route("Home")]</li>
+              <li>[Route("Home/Index")]</li>
+              <li>[Route("Home/Index/{id?}")]</li>
+            </ul>
+          </li>
+          <li>
+            This would run the attached method for the following routes
+            <ul>
+              <li>/</li>
+              <li>/Home</li>
+              <li>/Home/Index</li>
+              <li>/Home/Index/3</li>
+            </ul>
+          </li>
+          <li>
+            Token replacement replaces a token with values of the action name,
+            area name, and controller where the action method is defined
+            <ul>
+              <li>
+                Possible values
+                <ul>
+                  <li>[action]</li>
+                  <li>[area]</li>
+                  <li>[controller]</li>
+                </ul>
+              </li>
+              <li>Can be defined on the Controller to apply to all methods</li>
+              <li>
+                Example
+                <ul>
+                  <li>[Route("[controller]/[action]")] on a controller</li>
+                  <li>
+                    This would match "/Products0/List" to the Products0
+                    controller, List action method
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Token replacement can be combined with inheritance
+            <ul>
+              <li>
+                Example
+                <ul>
+                  <li>
+                    [Route("api/[controller]/[action]")] on a controller called
+                    Products11Controller
+                  </li>
+                  <li>
+                    [HttpGet({id})] on an action method called Edit
+                    with a parameter of id
+                  </li>
+                  <li>Matches "/api/products11/edit/3"</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Multiple route attributes on a controller means that each one
+            combines with each of the route attributes on the action methods
+          </li>
+        </ul>
+      </section>
+
+      <h2>Routing – HTTP Methods</h2>
+      <section>
+        <ul>
+          <li>
+            Attributes can be added to a method to designate what HTTP method
+            should be used to call ti
+            <ul>
+              <li>This can help resolve ambiguity in some routes</li>
+            </ul>
+          </li>
+          <li>
+            Common case is to use the same action name when they are part of a
+            show form, submit form workflow
+          </li>
+          <li>
+            Routes can be defined in attribute routing by supplying the route as
+            a parameter to these methods
+            <ul>
+              <li>[HttpPost("Checkout")]</li>
+            </ul>
+          </li>
+          <li>[HttpGet]</li>
+          <li>[HttpPost]</li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

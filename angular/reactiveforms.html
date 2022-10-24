@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Reactive Forms
+          </li>
+        </ol>
+      </nav>
+      <h1>Reactive Forms</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/reactiveforms.html#basics">Basics</a></li>
+          <li>
+            <a href="./angular/reactiveforms.html#formGroups">FormGroups</a>
+          </li>
+          <li>
+            <a href="./angular/reactiveforms.html#validation">Validation</a>
+          </li>
+          <li><a href="./angular/reactiveforms.html#saving">Saving Data</a></li>
+          <li>
+            <a href="./angular/reactiveforms.html#formbuilder">FormBuilder</a>
+          </li>
+          <li><a href="./angular/reactiveforms.html#arrays">Form Arrays</a></li>
+          <li>
+            <a href="./angular/reactiveforms.html#customValidators"
+              >Custom Validators</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>
+            Benefits
+            <ul>
+              <li>Requires more code, but allows more dynamic forms</li>
+              <li>Makes validation logic unit testable</li>
+              <li>
+                Testing
+                <ul>
+                  <li>
+                    Testing is easier since status and data are queried and
+                    manipulated through the control without interacting with the
+                    change detection cycle
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Mutability
+                <ul>
+                  <li>
+                    Keeps the data model pure by providing it as an immutable
+                    data structure
+                  </li>
+                  <li>
+                    Each time a change is triggered, the FormControl instance
+                    returns a new data model rather than updating the existing
+                    data model
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            In Reactive forms, the form model is the source of trust (provides
+            the value and status of the form element at a given point in time)
+          </li>
+          <li>
+            Built around observable streams, where form inputs and values are
+            provided as streams of input values which can be accessed
+            synchronously
+          </li>
+          <li>
+            Data flow
+            <ul>
+              <li>
+                each form element is directly linked to a form model in the
+                component class (FormControl instance)
+              </li>
+              <li>
+                updates from the view to the model and from the model to the
+                view are synchronous and are not dependent on the UI rendered
+              </li>
+              <li>
+                From view to model
+                <ul>
+                  <li>input element receives a new value</li>
+                  <li>
+                    for input element fires an input event with the latest value
+                  </li>
+                  <li>
+                    the control value accessor listening for events on the form
+                    input element immediately relays the new value to the
+                    FormControl instance
+                  </li>
+                  <li>
+                    The FormControl instance emits the new value through the
+                    valueChanges observable
+                  </li>
+                  <li>
+                    Any subscribers to the valueChanges observable receive the
+                    new value
+                  </li>
+                </ul>
+              </li>
+              <li>
+                From model to view
+                <ul>
+                  <li>
+                    User calls the setValue method on the FormControl instance,
+                    which updates the FormControl value
+                  </li>
+                  <li>
+                    The FormControl instance emits the new value through the
+                    valueChanges observable
+                  </li>
+                  <li>
+                    Any subscribers to the valueChanges observable receive the
+                    new value
+                  </li>
+                  <li>
+                    The control value accessor on the form input element updates
+                    the element with the new value
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Basic setup
+            <ul>
+              <li>Must import ReactiveFormsModule from @angular/forms</li>
+              <li>
+                FormControl
+                <ul>
+                  <li>
+                    This is the basic building block class that represents a
+                    single control on the form
+                  </li>
+                  <li>
+                    You will define one instance for each of your form elements
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                FormGroup
+                <ul>
+                  <li>
+                    Create a new instance of this class and set it as a property
+                    on the component
+                  </li>
+                  <li>This takes an object for each of your FormControls</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Basic example (given a FormGroup property named profileForm)
+            <ul>
+              <li>
+                In component
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      let firstName = new FormControl();<br/>
+                      let lastName = new FormControl();<br/>
+                      this.profileForm = new FormGroup({<br/>
+                      firstName: firstName,<br/> 
+                      lastName: lastName<br/>
+                      });
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                In template
+                <ul>
+                  <li>
+                    Add [formGroup]=”profileForm” to bind to the form element
+                  </li>
+                  <li>
+                    For each element, specify the input each FormControl should
+                    correspond to
+                    <ul>
+                      <li>
+                        This adds a FormControlDirective to the element
+                        <div class="card">
+                          <div class="card-body">
+                            <code>
+                              &lt;input formControlName=&quot;lastName&quot; ...
+                            </code>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                To save values
+                <ul>
+                  <li>
+                    Add a ngSubmit event handler on the form element in the
+                    template
+                  </li>
+                  <li>
+                    Define a saveProfile function on the component to handle the
+                    submit
+                  </li>
+                </ul>
+              </li>
+              <li>
+                If you would like for the inputs to have an initial value, you
+                can provide that when you create the FormControls
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      let lastName = new FormControl(currentUser.lastName) ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Advanced FormControl
+            <ul>
+              <li>
+                You can access the value of a FormControl object using the
+                following
+                <ul>
+                  <li>
+                    The value property - gives a snapshot of the current value
+                  </li>
+                  <li>
+                    Using the valueChanges observable
+                    <ul>
+                      <li>
+                        can listen for changes in the:
+                        <ul>
+                          <li>template using the AsyncPipe</li>
+                          <li>component using the subscribe method</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Example just uses interpolation to display the value, which
+                    is updated on each change, so not really sure there the
+                    above come from
+                  </li>
+                </ul>
+              </li>
+              <li>
+                SetValue method
+                <ul>
+                  <li>
+                    call this to replace the old value of the control entirely
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Advanced FormGroup
+            <ul>
+              <li>
+                Access specific form controls using the get method
+                <div class="card">
+                  <div class="card-body">
+                    <code>this.profileForm.get('aliases') as FormArray</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="formGroups">FormGroups</h2>
+      <section>
+        <ul>
+          <li>Use the FormGroup class to group FormControl together</li>
+          <li>
+            This tracks the form state of a group of form control instances
+            <ul>
+              <li>This becomes the source of truth for the model value</li>
+            </ul>
+          </li>
+          <li>Each control is tracked by name when creating the form group</li>
+          <li>
+            To create
+            <ul>
+              <li>
+                Create a new FormGroup and provide the constructor with an
+                object of named keys mapped to their FormControl
+              </li>
+              <li>
+                This group has the name properties an methods as a form control
+                instance
+              </li>
+              <li>
+                This tracks the status and changes for each of its controls, so
+                it one control changes, the parent control also emits a new
+                status or value change
+              </li>
+            </ul>
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                Add [formGroup]=&quot;formGroupPropertyName&quot; to the form element
+                containing controls
+              </li>
+              <li>
+                Add formControlName=&quot;formControlName&quot; to each control
+                <ul>
+                  <li>Node square brackets are only on the formGroup</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Nested Form Groups
+            <ul>
+              <li>
+                FormGroup objects can contain nested FormGroup objects (which
+                may contain additional FormControls and FormGroups) for
+                organization
+              </li>
+              <li>
+                Changes in status and value from the nested form groups
+                propagate to the parent form group
+              </li>
+              <li>
+                In the template, need to add some grouping element around all
+                inputs in the subgroup, such as the following:
+                <div class="card">
+                  <div class="card-body">
+                    <code>&lt;div formGroupName=&quot;formGroupName&quot; ...</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="validation">Validation</h2>
+      <section>
+        <ul>
+          <li>
+            Reactive forms have the benefit of allowing you to define validation
+            in the component where it is unit testable
+          </li>
+          <li>
+            There are a set of built-in validators that can be imported and used
+            to check user input on forms
+            <ul>
+              <li>Need to import Validators from @angular/forms</li>
+            </ul>
+          </li>
+          <li>
+            Add the validator as a second parameter when declaring a FormControl
+            <ul>
+              <li>
+                The validators field can also take an array of validators if you
+                need more than one on an array
+              </li>
+              <li>
+                These are just functions – see custom validators section for
+                more details
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      let firstName = new FormControl(initial_value, Validators.required)
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            To test if the entire for is valid, check the valid property on the
+            FormGroup
+            <div class="card">
+              <div class="card-body">
+                <code>if(this.profileForm.valid) ...</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            There are several properties available on the FormControl and
+            FormGroup classes to give you an idea about the current state of the
+            form
+            <ul>
+              <li>
+                Given a FormGroup named loginForm
+                <ul>
+                  <li>loginForm.valid</li>
+                  <li>loginForm.invalid</li>
+                  <li>loginForm.dirty</li>
+                  <li>loginForm.pristine</li>
+                  <li>loginForm.submitted</li>
+                  <li>loginForm.touched</li>
+                  <li>loginForm.untouched</li>
+                </ul>
+              </li>
+              <li>
+                You can check the states of its individual FormControl elements
+                through it. Given a FormControl username assigned to FormGroup
+                loginForm
+                <ul>
+                  <li>loginForm.controls.userName.valid</li>
+                  <li>loginForm.controls.userName.invalid</li>
+                  <li>loginForm.controls.userName.dirty</li>
+                  <li>loginForm.controls.userName.pristine</li>
+                  <li>loginForm.controls.userName.submitted</li>
+                  <li>loginForm.controls.userName.touched</li>
+                  <li>loginForm.controls.userName.untouched</li>
+                </ul>
+              </li>
+              <li>
+                You can use these to do things like
+                <ul>
+                  <li>Disable a Submit button for invalid forms</li>
+                  <li>
+                    Highlight inputs that have not been touched and are invalid
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Combine these with CSS to style inputs to give feedback to the user
+            about invalid values
+          </li>
+          <li>
+            In the template, you can define multiple error message to give
+            feedback to the use
+            <ul>
+              <li>Use a ngIf directive to show or hide them as appropriate</li>
+              <li>
+                Examples (given FormGroup profileForm with a FormControl of
+                firstName)
+                <ul>
+                  <li>
+                    To show/hide a message telling the user the field is
+                    required and missing a value
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          ...<br/>
+                          *ngIf=&quot;profileForm.controls.firstName.errors.required&quot;<br/>
+                          ...
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    To show/hide a message telling the user the value does not
+                    match the required pattern
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          ...<br/>
+                          *ngIf=&quot;profileForm.controls.firstName.errors.pattern&quot;<br/>
+                          ...
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Built in validators
+            <ul>
+              <li>
+                These are static methods added to the second parameter of the
+                FormsControl constructor
+              </li>
+              <li>
+                Required fields
+                <ul>
+                  <li>Add the HTML 5 required attribute to the form element</li>
+                  <li>firstName: ['', Validators.required]</li>
+                </ul>
+              </li>
+              <li>
+                Min and max for numbers
+                <ul>
+                  <li>Validators.min(x) - Number must be at least x</li>
+                  <li>Validators.max(x) - Number cannot be larger than x</li>
+                  <li>
+                    MinLength and maxLength for strings
+                    <ul>
+                      <li>
+                        Validators.maxLength(x) - String cannot contain more
+                        than x characters
+                      </li>
+                      <li>
+                        Validators.minLength(x) - String must contain x
+                        characters
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Pattern matching
+                <ul>
+                  <li>Use for regular expression pattern matching</li>
+                  <li>Validators.pattern('[a-zA-Z.*]')</li>
+                  <li>
+                    Does this exist as an HTML 5 attribute????? Demo seems to
+                    suggest so
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Check the documentation for more built-in validators (search for
+                validators in docs)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Custom validators
+            <ul>
+              <li>
+                When there are no built-in validators to match your needs, you
+                can define your own
+              </li>
+              <li>
+                It is essentially just a function
+                <ul>
+                  <li>Returns null if the value is valid</li>
+                  <li>Error object if the value is invalid</li>
+                </ul>
+              </li>
+              <li>
+                Signature
+                <ul>
+                  <li>Takes a FormConrol object as a parameter</li>
+                  <li>
+                    Returns {[key: string]: any}
+                    <ul>
+                      <li>Returns an object</li>
+                      <li>Key is typically the name of the validator</li>
+                      <li>Value can be whatever you want</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Example
+                <ul>
+                  <li>
+                    Check if the control contains the word foo
+                    <ul>
+                      <li>
+                        Define a validator function in the component
+                        <div class="card">
+                          <div class="card-body">
+                            <code>
+                              private restrictedWords(control: formControl): {&#91;key: string&#93;: any} {<br/>
+                                return control.value.includes('foo') ? {'restrictedWords': 'foo'} : null; <br/>
+                              }
+                            </code>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        Add this to the validator array for the target
+                        FormControl
+                        <div class="card">
+                          <div class="card-body">
+                            <code>
+                              ... <br/>
+                              new FormControl('', &#91;Validators.required, this.restrictedWords&#93;) <br/>
+                              ...
+                            </code>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        You can reference the errors in the returned object
+                        using
+                        <ul>
+                          <li>This assumes a control named abstract</li>
+                          <li>
+                            You can use this in your error messages that you
+                            report back to the user
+                            <div class="card">
+                              <div class="card-body">
+                                <code>
+                                  ...<br/>
+                                  { abstract.errors.restrictedWords }<br/>
+                                  ...
+                                </code>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    You can take this one step further and specify an array of
+                    words to check for on the FormControl
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          ... <br/>
+                          new FormControl('', &#91;Validators.required, this.restrictedWords('foo', 'bar')&#93;)<br/>
+                          ...
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    The validator function should now be a function that returns
+                    a function
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+<pre>
+private restrictedWords(words)
+{
+   return (control: formControl): ): {[key: string]: any} => {
+      if(!words) {
+        return null;
+      }
+      var invalidWords = words.map(w => control.value.includes(w) ? w: null)
+         .filter(w => w != null);
+      return invalidWords && invalidWords.length > 0 ? {'restrictedWords': invalidWords.join(',')} : null
+}}
+</pre>
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    To make this reusable, put this function into a file (such
+                    as restricted-words.validator.ts) and export it
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="saving">Saving Data</h2>
+      <section>
+        <ul>
+          <li>
+            Saving data
+            <ul>
+              <li>
+                The FormGroup element listens for the submit event emitted by
+                the form element and emits an ngSubmit event that you bind to a
+                callback functional
+              </li>
+              <li>
+                On the form element, add
+                <div class="card">
+                  <div class="card-body">
+                    <code>(ngSubmit)=&quot;onSubmit()&quot;</code>
+                  </div>
+                </div>
+                <ul>
+                  <li>Need to define this method on the component</li>
+                  <li>
+                    Access the current value using
+                    this.formGroupPropertyName.value
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Need to also have an HTML button of type submit to trigger this
+              </li>
+            </ul>
+          </li>
+          <li>
+            Partial Model Updates
+            <ul>
+              <li>
+                There are two methods to update the model value
+                <ul>
+                  <li>
+                    setValue()
+                    <ul>
+                      <li>set a new value for an individual control</li>
+                      <li>replaces the entire value for the control</li>
+                    </ul>
+                  </li>
+                  <li>
+                    patchValue()
+                    <ul>
+                      <li>
+                        replace any properties defined in the object that have
+                        changed in the form model
+                      </li>
+                      <li>
+                        With this, you pass in a new object that matches up with
+                        the object returned by value
+                      </li>
+                      <li>
+                        only include the properties you wish to replace, the
+                        others are left alone
+                      </li>
+                      <li>
+                        will not add properties to the object, only update ones
+                        that already exist
+                      </li>
+                      <li>
+                        Like Object.assign method in JS (excluding not adding
+                        new ones)?
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="formbuilder">FormBuilder</h2>
+      <section>
+        <ul>
+          <li>
+            Service that provides convenience methods for generating FormGroup
+            and FormControls
+          </li>
+          <li>this is a service, so you must inject it into the component</li>
+          <li>
+            call the group() method to generate a FormGroup object
+            <ul>
+              <li>pass an object to define the properties in the model</li>
+              <li>
+                the value of each control name is an array containing the
+                initial value as the first item in the array
+                <ul>
+                  <li>
+                    second and third values in the array will be synchronous and
+                    asynchronous validators
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Example:
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      this.formBuilder.group({ firstName: &#91;&quot;&quot;&#93;, lastName: &#91;&quot;&quot;&#93; })
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="arrays">Form Arrays</h2>
+      <section>
+        <ul>
+          <li>
+            An alternative to FormGroup for managing any number of unnamed
+            controls
+          </li>
+          <li>
+            You can dynamically add or remove controls from form array instance
+          </li>
+          <li>
+            Don't need to define a key for each control by name, so it is a good
+            option if you don't know the number of child values in advance
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                use the FormBuilder.array() method to create a new FormArray
+                when using FormBuilder
+              </li>
+              <li>
+                use FormBuilder.control('') to push a new control to the array
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="customValidators">Custom Validators</h2>
+      <section>
+        <ul>
+          <li>
+            Custom validators can be implemented as classes
+            <ul>
+              <li>
+                Use the Directive decorator on this class
+                <ul>
+                  <li>This should contain a selector</li>
+                </ul>
+              </li>
+              <li>The class name should end in a Validator suffix</li>
+              <li>The class should implement Validator class</li>
+              <li>
+                Contains a single method, validate
+                <ul>
+                  <li>Takes a FormGroup object as a parameter</li>
+                  <li>Returns { [key: string]: any }</li>
+                </ul>
+              </li>
+              <li>
+                To access a control named address in the FormGroup
+                <ul>
+                  <li>formGroup.controls['address']</li>
+                </ul>
+              </li>
+              <li>
+                You can navigate up the FormGroup hierarchy by accessing
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      (&lt;FormGroup&gt;formGroup.root).controls&#91;'controlInParentFormGroup'&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>Returning null means validation is passed</li>
+            </ul>
+          </li>
+
+          <li>
+            Custom validator classes must be added to Angular's validator
+            'service'
+            <ul>
+              <li>
+                Import NG_VALIDATORS from @angular/forms - this is essentially a
+                service
+              </li>
+              <li>
+                In the directive config object add
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      Providers: &#91;{provide: NG_VALIDATORS, useExisting:
+                      LocationValidator, multi: true }&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Without the multi: true parameter, this would break built in
+            validators since LocationValidatior is being configured to be
+            injected
+          </li>
+          <li>
+            The 3rd parameter adds the new validator to the collection of
+            services provided by NG_VALIDATORS that are built in by Angular
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

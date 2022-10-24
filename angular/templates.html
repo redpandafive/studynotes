@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Templates
+          </li>
+        </ol>
+      </nav>
+      <h1>Templates</h1>
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="./angular/templates.html#basics">Basics</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#bindings">Bindings</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#propertyBinding">Property Binding</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#oneTimeInit">One Time String Initialization</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#attributeBinding">Attribute Binding</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#classNgClass">Class / NgClass</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#eventBinding">Event Bindings</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#mechanics">Mechanics</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#styleNgStyle">Style / NgStyle</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#twoWayBinding">Two-Way Bindings / NgModel</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#showHideEle">Showing / Hiding Elements</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#tempalteExpn">Template Expressions</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#expressionvsstatement">Template Expressions vs Template Statements</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#operators">Template Expressions – Operators</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#templateFunc">Template Functions</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#inputVariables">Template Input Variables</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#templateRefVariables">Template Reference Variables</a>
+          </li>
+          <li>
+            <a href="./angular/templates.html#inputParams">Templates as Input Parameters</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="oneTimeInit">One Time String Initialization</h2>
+      <section>
+        <ul>
+          <li>Used to define a component view</li>
+          <li>Template + component = view</li>
+          <li>
+            Combines HTML with Angular markup that can modify HTML elements
+            before they are displayed
+            <ul>
+              <li>This tells Angular how to render a component</li>
+            </ul>
+          </li>
+          <li>
+            Templates resemble regular HTML, but also contain
+            <ul>
+              <li>Data binding to coordinate the application and DOM data</li>
+              <li>Pipes to transform data before it is displayed</li>
+              <li>
+                Directives to apply application logic to what get displayed
+              </li>
+            </ul>
+          </li>
+          <li>
+            Almost all HTML syntax is valid template syntax
+            <ul>
+              <li>
+                Script tags are forbidden to eliminate the risk of script
+                injection attacks
+              </li>
+              <li>
+                Some tags such as html, body, and base have no useful role
+              </li>
+            </ul>
+          </li>
+          <li>
+            These contain
+            <ul>
+              <li>
+                Directives - provide program logic to determine what is
+                displayed
+              </li>
+              <li>
+                Binding Markup (Bindings)
+                <ul>
+                  <li>
+                    Eliminates the need to write code to push and pull data from
+                    controls and bindings
+                  </li>
+                  <li>Connects application data and the DOM</li>
+                </ul>
+              </li>
+              <li>Pipes - used to transform data before it is displayed</li>
+            </ul>
+          </li>
+          <li>
+            Types of bindings
+            <ul>
+              <li>
+                Event bindings - respond to user input by updating application
+                data
+              </li>
+              <li>
+                Property bindings - interpolate values that are computed from
+                your application data into the HTML
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="bindings">Bindings</h2>
+      <section>
+        <ul>
+          <li>
+            Connects application data to the DOM
+            <ul>
+              <li>Template directives provide program logic</li>
+              <li>Binding markup connects your application data and the DOM</li>
+            </ul>
+          </li>
+          <li>
+            Binding types other than interpolation have a target name to the
+            left of the equals sign
+            <ul>
+              <li>
+                either surrounded by punctuation ([], ()) or preceded by a
+                prefix (bind-, on-, bindon-)
+              </li>
+              <li>
+                the target name is the name of a property. It may look like the
+                name of an attribute, but it never is
+              </li>
+            </ul>
+          </li>
+          <li>
+            Once you start data binding with Angular, you are no longer working
+            with HTML attributes
+            <ul>
+              <li>
+                You are setting the properties of DOM elements, components, and
+                directives
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are two types
+            <ul>
+              <li>
+                Event binding
+                <ul>
+                  <li>
+                    Allows your application to respond to user input in the
+                    target environment by updating the application data
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Property binding
+                <ul>
+                  <li>
+                    Allows you to interpolate values that are computed from the
+                    application data
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            {{ "{{ }}" }}
+            <ul>
+              <li>
+                interpolation, a type of one-way data binding from component to
+                DOM
+              </li>
+              <li>use when you want to display the value</li>
+              <li>
+                value between the curly braces is called a template expression
+                <ul>
+                  <li>evaluates all expressions</li>
+                  <li>converts the expression results to strings</li>
+                  <li>links them with neighboring literal strings</li>
+                  <li>
+                    assigns this composite interpolated result to an element or
+                    directive property
+                  </li>
+                </ul>
+              </li>
+              <li>
+                this can be used to weave calculated strings into the text
+                between HTML element tags and within attribute assignments
+              </li>
+              <li>
+                You can use this between HTML tags or as a property on a HTML
+                tag
+              </li>
+            </ul>
+          </li>
+          <li>
+            ()
+            <ul>
+              <li>Event binding</li>
+              <li>One way binding from DOM to component</li>
+              <li>Used to bind an event from view target to data source</li>
+              <li>
+                Alternative syntax removes the () and uses a on- prefix (such as
+                on-target=”statement”)
+              </li>
+            </ul>
+          </li>
+          <li>
+            []
+            <ul>
+              <li>Property binding</li>
+              <li>One way binding from component to DOM</li>
+              <li>Use when you want to bind to a property on a DOM element</li>
+              <li>
+                Use for input property binding or any valid property in HTML
+                <ul>
+                  <li>This removed over 40 directives from Angular JS</li>
+                </ul>
+              </li>
+              <li>Makes it the target of a property binding expression</li>
+              <li>
+                You can also use an alternative syntax that does not use braces,
+                but prefixes the property (such as bind-class=”property”)
+              </li>
+            </ul>
+          </li>
+          <li>
+            ['']
+            <ul>
+              <li>Binding to a string literal</li>
+              <li>Define an Input on the child component of type string</li>
+              <li>
+                <div class="card"><div class="card-body"><code>
+                  &#91;value&#93;=&quot;myString&quot;
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            [()]
+            <ul>
+              <li>
+                Combination of event and property biding. This is just syntax
+                sugar for a property binding and event binding
+              </li>
+              <li>Two-way binding between DOM and component</li>
+              <li>
+                Alternative syntax is to use a bindon prefix (such as
+                Bindon-target="expression")
+              </li>
+              <li>
+                You can use this on DOM elements since this is desugared into
+                separate property and event bindings (propertyChange)
+              </li>
+              <li>Must use ngModel for form elements</li>
+            </ul>
+          </li>
+          <li>
+            [attri.attributeName]
+            <ul>
+              <li>Attribute binding expression</li>
+              <li>
+                Only use when you need to bind to an attribute that does not
+                have a corresponding property
+              </li>
+              <li>
+                Usually table elements (such as colspan ), ARIA, and SVG
+                attributes
+              </li>
+            </ul>
+          </li>
+          <li>
+            Class binding
+            <ul>
+              <li>Used to add and remove CSS class names</li>
+              <li>Use this to add or remove a single class</li>
+              <li>Resembles property binding</li>
+              <li>
+                This will be added when the template expression evaluates to
+                truthy and removed when falsy
+              </li>
+            </ul>
+            <p>
+              To bind a class name to a property named isExample
+              <div class="card"><div class="card-body"><code>
+                &#91;class.example&#93;=&quot;isExample&quot;
+              </code></div></div>
+            </p>
+          </li>
+          <li>
+            Style binding
+            <ul>
+              <li>Resembles property binding</li>
+              <li>
+                To bind the background color to a property, use the following
+                syntax. Based on truthiness of canSave, either cyan or gray will
+                be assigned as the background color.
+                <div class="card"><div class="card-body"><code>
+                  &#91;style.background-color&#93;=&quot;canSave ? 'cyan' : 'gray'&quot;
+                </code></div></div>
+              </li>
+              <li>
+                To add a measurement, use the following syntax
+                <div class="card"><div class="card-body"><code>
+                  &#91;style.font-size.em&#93; ...
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="propertyBinding">Property Binding</h2>
+      <section>
+        <p>Set the property to the value of the template expression</p>
+        <div class="card">
+          <div class="card-body">
+            <code> 
+              &#91;disabled&#93;='isUnchanged'</code></div></div>
+        <ul>
+          <li>
+            This is a one-way binding since data only flows from the components
+            data property into a target element property
+          </li>
+          <li>Cannot be used to read the property</li>
+          <li>
+            The binding target is the left side of the equals sign
+            <ul>
+              <li>
+                Angular first looks to see if the name is a property of a known
+                directive
+              </li>
+              <li>Otherwise, it set the property</li>
+            </ul>
+          </li>
+          <li>
+            The brackets indicate Angular should evaluate the right side and a
+            template expression
+          </li>
+          <li>
+            Use interpolation when rendering data values as string; when setting
+            an element property to a non-string data value, you must use
+            property binding
+          </li>
+          <li>
+            Angular automatically sanitizes values before displaying them
+            <ul>
+              <li>
+                It will not allow HTML with script tags to leak into the
+                browser, neither with interpolation no property binding
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are special cases when you should use template syntax for one
+            way binding
+            <ul>
+              <li>
+                This is the only exception to the rule that a binding sets a
+                target property. This is the only biding that creates and sets
+                an attribute
+              </li>
+            </ul>
+          </li>
+          <li>
+            Interpolation vs property binding
+            <ul>
+              <li>
+                If setting a string, you can use either depending on the coding
+                style
+              </li>
+              <li>If setting a non-string, you must use property binding</li>
+            </ul>
+          </li>
+          <li>
+            Recommendations
+            <ul>
+              <li>
+                Avoid side effects; such if the expression invokes a property or
+                method that has size effects
+              </li>
+              <li>
+                Return the proper type - the template expression should evaluate
+                to the type of value expected by the target property
+              </li>
+              <li>
+                Remember brackets
+                <ul>
+                  <li>
+                    If you omit brackets, Angular treats the string as a
+                    constant and initializes the target property with that
+                    string. It does not evaluate the string
+                  </li>
+                </ul>
+              </li>
+              <li>
+                One time string initialization - eliminate the brackets when all
+                the following are true
+                <ul>
+                  <li>The target property accepts a string value</li>
+                  <li>
+                    The string is a fixed value that you can bake into the
+                    template
+                  </li>
+                  <li>This initial value never changes</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="oneTimeInit">One Time String Initialization</h2>
+      <section>
+        <ul>
+          <li>
+            Without square brackets, Angular treats the right hand side as a
+            string literal and sets the property to that static value
+          </li>
+          <li>
+            Eliminate the brackets when the following are true
+            <ul>
+              <li>The target property accepts a string</li>
+              <li>
+                The string is a fixed value that you can bake into the template
+              </li>
+              <li>The initial value never changed</li>
+            </ul>
+          </li>
+          <li>These will not be updated is the bound property value changes</li>
+        </ul>
+        <div class="card"><div class="card-body"><code>
+          &lt;img alt="item" &#91;src&#93;=&quot;itemImageUrl&quot;&gt;
+        </code></div></div>
+        <ul>
+          <li>
+            Alt property is set as a static string literal (item will be the
+            value of alt, not the value of a property named item)
+          </li>
+          <li>Src property is updated whenever itemImageUrl is changed</li>
+        </ul>
+      </section>
+
+      <h2 id="attributeBinding">Attribute Binding</h2>
+      <section>
+        <ul>
+          <li>
+            Sometimes properties and attributes aren't always 1 to 1
+            <ul>
+              <li>Remember, you are working with the DOM, not HTML</li>
+              <li>This is done for performance reasons</li>
+              <li>
+                Binding to an attribute is expensive because attributes are
+                reflected in the DOM
+                <ul>
+                  <li>
+                    A change in the DOM causes reevaluation of CS styles that
+                    might match after the change
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Properties are just a value in a JavaScript object that changed
+              </li>
+            </ul>
+          </li>
+          <li>
+            You must use attribute binding when there is no element property to
+            bind to
+          </li>
+          <li>
+            For example, ARIA, AVG, and table span attributes are pure
+            attributes, do not correspond to element properties, and do not set
+            element properties
+          </li>
+          <li>
+            The syntax is to start with prefix attr, followed by a dot, then the
+            name if the attribute. Surround this with square brackets
+            <ul>
+              <li>This opts into the expensive behavior</li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          Binding to colspan (otherwise, you would need to bind to colSpan, not
+          colspan)
+        </p>
+        <div class="card"><div class="card-body"><code>
+          code='&lt;td &#91;attr.colspan&#93;="1 + 1"&gt;&lt;/td&gt;'
+        </code></div></div>
+        <p>Binding to the for attribute of a label</p>
+        <p>This works</p>
+        <div class="card"><div class="card-body"><code>
+          code='&lt;label &#91;for&#93;="someId"&gt;'
+        </code></div></div>
+
+        <p>This does not work</p>
+        <div class="card"><div class="card-body"><code>
+          &lt;label attr.for=&quot;{+{someId}}&quot;&gt;<br/>
+          &lt;label &#91;attr.for&#93;=&quot;someId&quot;&gt;<br/>
+          &lt;label &#91;htmlFor&#93;=&quot;someId&quot;&gt;
+        </code></div></div>
+      </section>
+
+      <h2 id="classNgClass">Class / NgClass</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to add and remove CSS class names form an elements class
+            attribute
+          </li>
+        </ul>
+        <div>
+          Class bindings are better for single classes
+          <ul>
+            <li>Resembles property binding</li>
+            <li>Start with prefix class</li>
+            <li>Follow with a dot</li>
+            <li>Follow with the name of a class</li>
+            <li>Enclose in brackets</li>
+            <li>
+              Supply a Boolean expression; if it is evaluated to true, the class
+              is added
+            </li>
+          </ul>
+          <p>
+            This will add the “green” class to the div if the event property has
+            a property called time that contains a value of "8:00 am"
+          </p>
+          <div class="card"><div class="card-body"><code>
+            &lt;div &#91;class.green&#93;=&quot;event.time === '8:00 am'&quot;&gt; ...
+          </code></div></div>
+        </div>
+        <div>
+          ngClass is better for multiple classes
+          <ul>
+            <li>Each key of the object is a CSS class name</li>
+            <li>
+              Each value should be true (class is added) or false (class is
+              removed)
+            </li>
+            <li>
+              Adds the “green” and “bold” classes if the time property contains
+              a value of “8:00 am”
+            </li>
+          </ul>
+          <div class="card"><div class="card-body"><code>
+            &lt;div &#91;ngClass&#93;=&quot;{green: time === '8:00 am', Bold: time === '8:00 am'}&quot;&gt;&lt;/div&gt;"
+          </code></div></div>
+        </div>
+        <div>
+          <p>ngClass can also be used with a function call</p>
+          <div class="card"><div class="card-body"><code>
+            &lt;div ngClass=&quot;getStartTimeClass()&quot;&gt;&lt;/div&gt;
+          </code></div></div>
+          <p>
+            getStartTimeClass function can return an object with a property for
+            each class and a Boolean value for each if they should be added
+            <div class="card"><div class="card-body"><code>
+              {green: true, Bold: true}
+            </code></div></div>
+          </p>
+          <p>
+            getStartTimeClass Function can instead return a space separated
+            string containing all the classes that should be added
+            <div class="card"><div class="card-body"><code>&quot;green Bold&quot;</code></div></div>
+          </p>
+          <p>
+            getStartTimeClass Function can instead return an array of strings
+            containing all the classes that should be added
+            <div class="card"><div class="card-body">
+              <code>&#91;&quot;green&quot;, &quot;Bold&quot;&#93;&quot;</code></div></div>
+          </p>
+        </div>
+      </section>
+
+      <h3 id="eventBinding">Event Bindings</h3>
+      <section>
+        <ul>
+          <li>
+            Angular binds an event handler to a DOM event
+            <ul>
+              <li>
+                When the event is raised, the handler executes the template
+                statement
+              </li>
+            </ul>
+          </li>
+          <li>
+            Consists of
+            <ul>
+              <li>
+                Target event name within parentheses on the left of an equal
+                sign
+              </li>
+              <li>quoted template statement on the right of an equals sign</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Use the event syntax binding to do this (one of two formats)</p>
+        <div class="card"><div class="card-body"><code>
+          ... (click)=&quot;onSelect(hero)&quot; ...<br/>
+          ... on-click=&quot;onSave($event)&quot; ...
+        </code></div></div>
+        <p>
+          Make sure you are aware of the execution context of the template
+          statement – identifiers in a template statement belong to a specific
+          context object, usually the Angular component controlling the template
+        </p>
+        <ul>
+          <li>
+            The binding conveys information about the event, including data
+            values, through an event object named $event (event payload)
+            <ul>
+              <li>
+                The shape of the event object is determined by the target event
+              </li>
+              <li>
+                If it is a native DOM element event, then $event is a DOM event
+                object
+              </li>
+              <li>
+                All standard DOM event objects have a target property
+                <ul>
+                  <li>Refers to the element that raised the event</li>
+                  <li>
+                    Target.value is usually the value currently in the target
+                    element
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            In called component method, you can type the event parameter that
+            you pass
+            <ul>
+              <li>
+                You can type it as any for simplicity, but you lose code
+                completion assistance
+              </li>
+              <li>
+                Alternatively, you could be specific in the typing, such as
+                KeyboardEvent
+              </li>
+            </ul>
+          </li>
+          <li>
+            Passing the entire event object can cause a separation of concerns
+            problem
+            <ul>
+              <li>
+                That gives the method far more knowledge of the template details
+                than it needs to do its job
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can use a template reference variable if you only need direct
+            access to an element from within a template
+            <ul>
+              <li>
+                Component does nothing with this and no bindings are needed
+              </li>
+            </ul>
+          </li>
+          <li>
+            Key event filtering with Key.Enter
+            <ul>
+              <li>
+                When you only want to trigger a keyup event when the enter key
+                is pressed
+              </li>
+              <li>Bind to the (keyup.enter) event</li>
+            </ul>
+          </li>
+          <li>
+            Directives typically raise custom events with an Angular
+            EventEmitter
+            <ul>
+              <li>Creates an EventEmitter and exposes it as a property</li>
+              <li>
+                The directive calls EventEmitter.emit(payload) to fire an event,
+                passing in a message payload(could be anything)
+              </li>
+              <li>
+                Parent directives listen for the event by binding to this
+                property and accessing the payload through the $event object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Built in events
+            <ul>
+              <li>(blur) - Event triggered when leaving the element</li>
+              <li>(mouseenter) - Mouse is over the element</li>
+              <li>(mouseleave) - Mouse is leaving the element</li>
+              <li>
+                (ngSubmit) - Event on the forms element that triggers when the
+                form is submitted
+              </li>
+            </ul>
+          </li>
+          <li>
+            Recommendations
+            <ul>
+              <li>Use template variables to refer to elements</li>
+              <li>Pass values, not elements</li>
+              <li>Keep template statements simple</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="mechanics">Mechanics</h3>
+      <section>
+        <ul>
+          <li>
+            Provides communication between
+            <ul>
+              <li>A template and its component</li>
+              <li>Parent and child components</li>
+            </ul>
+          </li>
+          <li>
+            Angular processes all data bindings once for each JavaScript event
+            cycle
+            <ul>
+              <li>
+                Starts from the root of the application component tree through
+                all child components
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can create an Angular binding, you technically aren’t working
+            with HTML attributes anymore, even though it appears you are
+            <ul>
+              <li>
+                You are setting properties on DOM elements, components, and
+                directives
+              </li>
+              <li>
+                Template binding only works with events and properties, not
+                attributes
+              </li>
+            </ul>
+          </li>
+          <li>
+            HTML attribute vs DOM property
+            <ul>
+              <li>Some attributes have corresponding properties</li>
+              <li>Some are found in one, but not the other</li>
+              <li>Others appear to map, but not in the way you think</li>
+              <li>
+                Attributes initialize DOM properties and then they are done -
+                this is the initial value
+              </li>
+            </ul>
+          </li>
+          <li>
+            Property values can change, but attribute values cannot change -
+            this is a the current value
+          </li>
+          <li>
+            For example, if you initialize an input to Bob, then change the
+            value to Sally, the attribute value will remain unchanged
+          </li>
+          <li>
+            Another example is the disabled attribute
+            <ul>
+              <li>
+                When initialized with a disabled attribute, it set the initial
+                value of the disabled property to true
+              </li>
+              <li>Otherwise, it sets it to false</li>
+              <li>
+                In other words, this does not set the button to enabled
+                (disabled=”false”)
+              </li>
+            </ul>
+          </li>
+          <li>Targets of data binding is something in the DOM</li>
+          <li>
+            Data binding target vs data binding source
+            <ul>
+              <li>
+                Target is
+                <ul>
+                  <li>To the left of the =</li>
+                  <li>Property or event inside the binding punctuation</li>
+                  <li>
+                    These are limited to properties that are explicitly
+                    identified as inputs and outputs
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Source is
+            <ul>
+              <li>To the right of the =</li>
+              <li>Either inside quotes or within an interpolation</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="styleNgStyle">Style / NgStyle</h3>
+      <section>
+        <ul>
+          <li>Allows you to set inline styles</li>
+          <li>
+            You can add a plain style attribute to the HTML element that will
+            always be displayed
+            <ul>
+              <li>Any Angular bindings would be additive to this</li>
+            </ul>
+          </li>
+          <li>
+            Like property binding
+            <ul>
+              <li>prefix with style</li>
+              <li>follow with a dot</li>
+              <li>
+                follow with the name of a CSS style property - this can be
+                either dash case or camel case
+              </li>
+              <li>Use a ternary template expression</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example</p>
+        <div class="card"><div class="card-body"><code>
+          &lt;button &#91;style.background-color&#93;=&quot;canSave ? 'cyan' : 'gray'&quot;&gt; 
+        </code></div></div>
+
+        <ul>
+          <li>
+            To change several inline styles at the same time, use the NgStyle
+            directive
+          </li>
+          <li>Bind ngStyle to a key: value control object in the class</li>
+          <li>Each key of the control object is a style name</li>
+          <li>
+            Each value should be the appropriate value for that style (including
+            measurement if needed)
+          </li>
+          <li>
+            Like the ngClass directive, this can be bound to a function that
+            returns an object with all rules
+          </li>
+        </ul>
+        <p></p>
+        <div class="card"><div class="card-body"><code>
+          &lt;div &#91;ngStyle=&quot;getStartTimeStyle()&quot;&#93;&gt;...&lt;/div&gt;
+        </code></div></div>
+
+        <p>In getStartTimeStyle method, return something like</p>
+        <div class="card"><div class="card-body"><code>
+          { color: '#003300', 'font-weight': 'bold' }
+        </code></div></div>
+      </section>
+
+      <h2 id="twoWayBinding">Two-Way Bindings / NgModel</h2>
+      <section>
+        <ul>
+          <li>Bi-directional binding from DOM to component</li>
+          <li>
+            Use when you want to display a data property in the DOM and update
+            that property when the user makes changes on the interface
+          </li>
+          <li>
+            “Banana in a box” syntax
+            <ul>
+              <li>
+                Combines the brackets of property binding [x] with the
+                parentheses of event binding (x)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Really just syntax sugar for a property binding and an event binding
+          </li>
+          <li>Useful for custom components</li>
+        </ul>
+
+        <p>
+          Need an input property that you will use on the right side of the
+          equals sign on the parent component
+        </p>
+        <div class="card"><div class="card-body"><code>
+          @Input() size: number;
+        </code></div></div>
+
+        <p>
+          Need an output method triggers an EventEmitter. Should be named the
+          same as the input property with Change appended to the end
+        </p>
+        <div class="card"><div class="card-body"><code>
+          @Output() sizeChagne = new EventEmitter&lt;number&gt;()
+        </code></div></div>
+
+        <ul>
+          <li>
+            Native HTML elements do not follow the x value and xChange event
+            pattern, so this cannot be used on them (without a custom directive,
+            such as ngModel)
+          </li>
+          <li>
+            Built in directive to use this form forms is NgModel
+            <ul>
+              <li>
+                Use to establish a two-way data binding between a form element
+                and a data property
+              </li>
+              <li>
+                Allows you to set the value in the class and the user to update
+                it in the view
+              </li>
+              <li>
+                This is a shorthand method – you can do the same thing without
+                the NgModel directive, it is just more verbose
+              </li>
+              <li>
+                Requirements
+                <ul>
+                  <li>Must import FormsModule from@angular/forms</li>
+                  <li>
+                    Element must support ControlValueAccessor – Angular provides
+                    value accessors for all the basic HTML form elements
+                  </li>
+                  <li>
+                    Cannot apply NgModel to a non form native element or 3rd
+                    part custom component until you write a suitable value
+                    accessor
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="showHideEle">Showing / Hiding Elements</h2>
+      <section>
+        <ul>
+          <li>Can use truthy and false values with these</li>
+          <li>
+            Using NgIf to hide elements
+            <ul>
+              <li>Physically remove them from the DOM</li>
+              <li>
+                Since it removes and adds elements from the DOM (as opposed to
+                showing and hiding them), you get better performance, and it is
+                useful as a guard against null
+              </li>
+              <li>
+                Prevent elements from being initialized (such as subcomponents)
+                when some condition is false
+              </li>
+              <li>
+                This will destroy a component and all subcomponents, potentially
+                freeing up resources
+              </li>
+              <li>
+                This improves performance since it potentially eliminates
+                unnecessary binding that are not needed at that moment
+                (including detaching from DOM events and detaching from Angular
+                change detection)
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <li>
+          Using [hidden] attribute binding to hide an element
+          <ul>
+            <li>It will be faster to show the element again</li>
+            <li>
+              You need to preserve state since the component is not
+              reinitialized
+            </li>
+            <li>
+              Initialization is very expensive and repeated initialization may
+              cause performance degradation
+            </li>
+          </ul>
+        </li>
+        <p>Examples</p>
+        <div class="card"><div class="card-body"><code>
+          &lt;div *ngIf=&quot;somePropertyValue&quot; ... <br/>&lt;div &#91;hidden&#93;=&quot;someBooleanValue&quot;
+        </code></div></div>
+      </section>
+
+      <h2 id="tempalteExpn">Template Expressions</h2>
+      <section>
+        <ul>
+          <li>
+            This produces a value, which Angular creates when it executes the
+            expression and assigns it to a property of the binding target
+            <ul>
+              <li>Could be an HTML element, component, or directive</li>
+            </ul>
+          </li>
+          <li>
+            Syntax differs depending on the binding syntax
+            <ul>
+              <li>{{ 1 + 1 }} is used in interpolation</li>
+              <li>
+                [property]=”expression” - this will evaluate the expression part
+              </li>
+            </ul>
+          </li>
+          <li>
+            Recommendations when using
+            <ul>
+              <li>Should not perform operations with side effects</li>
+              <li>Should be simple and fast; put complex logic in component</li>
+              <li>Should be idempotent</li>
+            </ul>
+          </li>
+          <li>
+            There are parts of JS that cannot be used
+            <ul>
+              <li>Cannot use assignment operators</li>
+              <li>
+                Cannot chain multiple expressions using semicolon or comma
+              </li>
+              <li>Cannot refer to window or document or global namespace</li>
+              <li>Cannot call console.log()</li>
+            </ul>
+          </li>
+          <li>
+            There are a few operators that are not found in JavaScript
+            <ul>
+              <li>Pipe operator = |</li>
+              <li>
+                Safe navigation operator = ?.
+                <ul>
+                  <li>
+                    Useful to guard against null and undefined values in
+                    property paths
+                  </li>
+                  <li>
+                    This will short circuit evaluation when a null is
+                    encountered
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Expression context
+            <ul>
+              <li>Part of the application to which the expression belongs</li>
+              <li>
+                Typically, the component instance, so variables in the
+                expression will reference the properties of the associated
+                component
+              </li>
+              <li>
+                You can change the context using a template input variable or a
+                template reference variable
+              </li>
+              <li>
+                Ex *ngFor creates a template variable-you would use this to
+                reference the current item within the for loop
+              </li>
+            </ul>
+          </li>
+          <li>
+            Recommendations for guidelines
+            <ul>
+              <li>
+                Should not change any application state other than the value of
+                the target property
+              </li>
+              <li>No visible side effects</li>
+              <li>
+                Write for quick execution since these are evaluation after every
+                change detection cycle.
+              </li>
+              <li>Cache expensive values</li>
+              <li>Keep them simple; otherwise move logic into the component</li>
+              <li>
+                Idempotence = always returns the exact same thing given the same
+                inputs and no side effects
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example of safe navigation operator</p>
+        <div class="card"><div class="card-body"><code>
+          {+{ currentHero?.name }}
+        </code></div></div>
+      </section>
+
+      <h3 id="templateStatements">Template Statements</h3>
+      <section>
+        <ul>
+          <li>
+            Methods or properties that you can use in your HTML to respond to
+            user events
+            <ul>
+              <li>
+                Send to respond to an event raised by an a binding target such
+                as an element, component, or directive
+              </li>
+            </ul>
+          </li>
+          <li>
+            These appear on the right side of the equals sign on an event
+            binding
+          </li>
+          <li>
+            Allows basic assignment and chaining expressions, unlike template
+            expressions
+            <ul>
+              <li>Does allow you to chain expressions together with ;</li>
+            </ul>
+          </li>
+
+          <li>
+            Has a context much like expressions
+            <ul>
+              <li>Statement context is typically the component instance</li>
+              <li>
+                It may also refer to properties on the template own context,
+                such as template input variables, $event object
+              </li>
+
+              <li>
+                Useful within a for loop to pass the object to the event handler
+                function
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Guidelines
+            <ul>
+              <li>
+                Should be kept short and simple; a method call or simple
+                property assignment should be the norm
+              </li>
+              <li>
+                Can technically chain statements with semicolons, but this is
+                discouraged
+              </li>
+              <li>Do not need to be idempotent</li>
+              <li>These can have side effects</li>
+              <li>Can use the assignment operator within a statement (=)</li>
+            </ul>
+          </li>
+          <li>
+            Restrictions
+            <ul>
+              <li>No assignment operators within the statement (except =)</li>
+              <li>No new keyword</li>
+              <li>No chaining statements with semicolon</li>
+              <li>No access to global namespace</li>
+            </ul>
+          </li>
+          <li>Best practices</li>
+          <li>
+            Use method calls or basic property assignments to keep template
+            statements minimal
+          </li>
+          <li>
+            Cannot refer to anything in the global namespace, such as window or
+            document
+          </li>
+        </ul>
+        <p>
+          The template statement appears in quotes to the right of the equals
+          sign (call to deleteHero method)
+        </p>
+        <div class="card"><div class="card-body"><code>
+          &lt;button type=&quot;button&quot; (click)=&quot;deleteHero()&quot;&gt;Delete&lt;/button&gt;
+        </code></div></div>
+      </section>
+
+      <h3 id="expressionvsstatement">
+        Template Expressions vs Template Statements
+      </h3>
+      <section>
+        <ul>
+          <li>
+            Template expressions
+            <ul>
+              <li>
+                You should never worry that reading a component value might
+                change some other display value. The view should be stable
+                throughout a single rendering pass
+              </li>
+              <li>
+                Idempotent expressions are ideal since they are free of side
+                effects and improve Angular's change detention performance
+              </li>
+            </ul>
+          </li>
+          <li>
+            Template Statements
+            <ul>
+              <li>
+                responds to an event raised by a binding target such as an
+                element, component, or directive.
+              </li>
+              <li>
+                usually have side effects; it’s usually the point of an event
+              </li>
+              <li>
+                Unidirectional data flow – you are free to change anything,
+                anywhere, during this turn of the event loop
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="operators">Template Expressions – Operators</h3>
+      <section>
+        <ul>
+          <li>
+            Pipe operators
+            <ul>
+              <li>Transform data for presentation</li>
+              <li>
+                The display value will be blank, but the app will not crash with
+                a null reference
+              </li>
+              <li>
+                May be more appropriate to use a *ngIf conditional instead,
+                especially if you are waiting on data to return
+              </li>
+            </ul>
+          </li>
+          <li>
+            Safe navigation operator
+            <ul>
+              <li>
+                Guards against null and undefined values in property paths
+              </li>
+            </ul>
+          </li>
+          <li>
+            Non-null assertion operator
+            <ul>
+              <li>
+                With TypeScript 2, you can enforce strict null checking to
+                ensure that no variable is unintentionally null or undefined
+              </li>
+              <li>Does not guard against null or undefined</li>
+              <li>
+                Tells the TypeScript type checker to suspend strict null checks
+                for a specific property expression
+              </li>
+              <li>
+                For example, you could use this within a conditional that will
+                not add an element if a property is null. You have guaranteed
+                that the element will not cause a null exception, so TypeScript
+                doesn't have to enforce this
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="templateFunc">Template Functions</h3>
+      <section>
+        <ul>
+          <li>Casts a template expression to the any type</li>
+          <li>
+            Use this to silence an error that triggers during compilation when
+            it is not possible or difficult to fully specify the type
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="inputVariables">Template Input Variables</h3>
+      <section>
+        <ul>
+          <li>
+            These are variables where the scale is limited to a single instance
+            of a repeated template
+            <ul>
+              <li>For instance, a single turn of NgForOf</li>
+              <li>
+                Not the same thing as a template reference variable, neither
+                semantically nor semantically
+              </li>
+            </ul>
+          </li>
+          <li>
+            Declare using the let keyword
+            <ul>
+              <li>
+                Scope is limited to a single instance of the repeated template,
+                so you can reuse the same name again in the definition of other
+                structural directives
+              </li>
+            </ul>
+          </li>
+          <li>
+            Example is a NgForOf loop
+            <ul>
+              <li>
+                Let hero identifies hero as the template input variable, which
+                holds the current hero item for each iteration
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          You can create a template input variable on a ngFor to capture a zero
+          based index of the item in each iteration
+        </p>
+        <div class="card"><div class="card-body"><code>
+          *ngForm=&quot;let hero of heros; let i=index&quot;
+        </code></div></div>
+      </section>
+
+      <h3 id="templateRefVariables">Template Reference Variables</h3>
+      <section>
+        <ul>
+          <li>
+            A way of capturing a reference to a specific element, component, or
+            directive so it can be used elsewhere in the same template
+            <ul>
+              <li>
+                Scope is the entire template, so don't re-declare a template
+                reference variable name
+              </li>
+              <li>
+                Scope exception is when ng-template, *ngIf, *ngFor creates a new
+                template scope and reference variables declared inside will not
+                be available for use outside
+              </li>
+            </ul>
+          </li>
+          <li>
+            In most cases, Angular sets the reference variables value to the
+            element on which it was declared
+            <ul>
+              <li>Directives can take over and change the value.</li>
+              <li>
+                For example, ngForm.
+                <ul>
+                  <li>
+                    This takes over the default reference of HTMLFormElement.
+                  </li>
+                  <li>
+                    This allows you to track the value and validity of every
+                    control in the form
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Template reference variables will resolve in this order
+            <ul>
+              <li>
+                A directive or component specifically referenced by its exportAs
+                property
+              </li>
+              <li>
+                When the expoirtAs property is applied to it metdata to allow
+                that directive to be specifically targeted by a template
+                reference variable
+              </li>
+              <li>The component attached to the element, if present</li>
+              <li>The HTML element, if no component is present</li>
+            </ul>
+          </li>
+          <li>
+            Can be useful if you want a parent component to bind to a property
+            on the child component
+          </li>
+        </ul>
+        <p>
+          Declare using the hash symbol - can alternatively be defined using the
+          ref- prefix
+        </p>
+        <div class="card"><div class="card-body"><code>
+          &lt;input #phone type=&quot;text&quot; /&gt;
+        </code></div></div>
+        <p>
+          You can then pass its value to an event handler on an entirely
+          different element as such
+        </p>
+        <div class="card"><div class="card-body"><code> 
+          (click)=&quot;callphone(phone.value)&quot;</code></div></div>
+      </section>
+
+      <h2 id="inputParams">Templates as Input Parameters</h2>
+      <section>
+        <p>
+          Start by defining the custom template for the buttons in the parent
+          component
+        </p>
+        <div class="card"><div class="card-body"><code>
+          <pre>
+@Component({
+  selector: &apos;app-root&apos;,&#10; 
+  template: `
+    &lt;ng-template #customTabButtons&gt;
+      &lt;div class=&quot;custom-class&quot;&gt;
+        &lt;button class=&quot;tab-button&quot; (click)=&quot;login()&quot;&gt;
+          {+{loginText}}
+        &lt;/button&gt;
+        &lt;button class="tab-button" (click)="signUp()"&gt;
+          {+{signUpText}}
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/ng-template&gt;
+    &lt;tab-container &#91;headerTemplate&#93;=&quot;customTabButtons&quot;&gt;&lt;/tab-container&gt;
+    `})
+    export class AppComponent {}</pre>
+        </code></div></div>
+        <p>
+          On the tab container component, define an input property which is also
+          a template named headerTemplate. If an input is provided, display that
+          template. Otherwise, display the defaultTabButtons template.
+        </p>
+        <div class="card"><div class="card-body"><code>
+          <pre>
+@Component({
+  selector: &apos;tab-container&apos;,
+  template: `
+    &lt;ng-template #defaultTabButtons&gt;
+      &lt;div class="default-tab-buttons"&gt;
+      ...  
+      &lt;/div&gt;
+    &lt;/ng-template&gt;
+    &lt;ng-container
+      *ngTemplateOutlet=&quot;headerTemplate ? headerTemplate: defaultTabButtons&quot;&gt;
+    &lt;/ng-container&gt;
+    ... rest of tab container component ...
+  `})
+  export class TabContainerComponent {
+    @Input() headerTemplate: TemplateRef&lt;any&gt;
+  }</pre>
+        </code></div></div>
+        <p>
+          Can expand on this, create multiple inputs in the presentation
+          component, and toggle between them based on some condition.
+        </p>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

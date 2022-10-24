@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">HTTP</li>
+        </ol>
+      </nav>
+      <h1>HTTP</h1>
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="./angular/http.html#importing">Importing the Module</a>
+          </li>
+          <li>
+            <a href="./angular/http.html#headers">Headers</a>
+          </li>
+          <li>
+            <a href="./angular/http.html#gettingData">Getting Data</a>
+          </li>
+          <li>
+            <a href="./angular/http.html#creatingData">Creating Data</a>
+          </li>
+          <li>
+            <a href="./angular/http.html#updatingData">Updating Data</a>
+          </li>
+          <li>
+            <a href="./angular/http.html#deletingData">Deleting Data</a>
+          </li>
+          <li>
+            <a href="./angular/http.html#errorHandling">Error Handling</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="importing">Importing the Module</h2>
+      <section>
+        <ul>
+          <li>HTTP is handled by the HttpClientModule module</li>
+          <li>
+            This must be imported from @angular/common/http, usually in the root
+            AppModule
+          </li>
+          <li>The class that you will inject is HttpClient</li>
+          <li>
+            Browsers support two different APIs for making HTTP requests
+            <ul>
+              <li>XMLHttpRequest interface</li>
+              <li>fetch() API</li>
+            </ul>
+          </li>
+          <li>HttpClient uses the XMLHttpRequest method</li>
+          <li>
+            HttpClient methods return an RxJS Observable of something
+            <ul>
+              <li>
+                It always emits a single value, then completes, never to emit
+                again
+              </li>
+              <li>
+                Must actually subscribe on an observable for anything to happen
+              </li>
+              <li>
+                all observables returned by HttpClient method are cold by design
+              </li>
+              <li>Execution of the HTTP request is deferred</li>
+              <li>
+                Each subscribe initiates a separate, independent execution of an
+                observable
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="headers">Headers</h2>
+      <section>
+        <ul>
+          <li>
+            Headers can be set on the client side using a HttpHeaders object
+          </li>
+          <li>
+            There are several ways to configure them, but one way is to pass an
+            object literal
+          </li>
+          <li>
+            Useful when
+            <ul>
+              <li>
+                You need to tell the server what data format the return data
+                should be
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          This includes a data format header to tell the server to return JSON
+          data
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let getHeaders: HttpHeaders = new HttpHeaders({&#10; 'Accept':
+              'application/json'&#10;});<br />
+              this.http.get&lt;Book&gt;('/api/books', {&#10; headers:
+              getHeaders&#10;});
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="gettingData">Getting Data</h2>
+      <section>
+        <ul>
+          <li>Uses the HttpClient.get method</li>
+          <li>
+            The HTTPClient get method is a generic method that requiress a type
+            - this is the type that will be returned
+            <ul>
+              <li>Expects JSON data from the server</li>
+              <li>
+                This method returns an Observable typed to the supplied type
+              </li>
+              <li>
+                The returned data will automatically be deserialized to the
+                specified type
+              </li>
+            </ul>
+          </li>
+          <li>
+            Adding a type parameter allows type checking of the response
+            <ul>
+              <li>This will return an Observable typed to MyType</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.http.get&lt;MyType&gt;(targetUrl, { responseType:
+                  'json'});
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Parameters
+            <ul>
+              <li>
+                Parameter #1 is the URL string where the request should be sent
+              </li>
+              <li>
+                Second parameter is an options object
+                <ul>
+                  <li>
+                    Can include a repose type to specify json (optional if
+                    server defaults to JSON return type)
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          this.http.get(targetUrl, {responseType: 'json'});
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    Can be a HttpParams object to represent a search parameter
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          { params: new HttpParams().set('name', value )}
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Parameters can also just be concatenated onto the URL string
+              </li>
+            </ul>
+          </li>
+          <li>
+            You must subscribe to this return value to actually start the query
+            to the server
+          </li>
+          <li>
+            One method is to call subscribe on the Observable. This takes
+            callback functions as parameters. It can take up to three optional
+            callbacks
+            <ul>
+              <li>#1 - How to handle data if the call was successful</li>
+              <li>#2 - Handles errors -</li>
+              <li>
+                #3 - Completion handler
+                <ul>
+                  <li>
+                    This fires when the observable has returned all of its data
+                  </li>
+                  <li>
+                    Allows you to perform any wrap up work that should be done
+                    after the call
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          For HttpClient injected as http, this calls retrieves all the book
+          resources and returns an array of Book objects
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              getAllBooks(): Observable&lt;Book&#91;&#93;&gt; {<br />
+              return this.http.get&lt;Book&#91;&#93;&gt;('./api/books');<br />
+              }
+            </code>
+          </div>
+        </div>
+        <p>
+          This example uses a service class method getAllBooks that returns an
+          Observable and subscribes to it. subscribes to it. A successful method
+          assigns the returned data to the allBooks property on the component. A
+          failing method call logs the error to console. The finalizer method
+          prints a message to the console.log.
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              this.dataService.getAllBooks().subscribe(<br />
+              (data: Book&#91;&#93;) =&gt; this.allBooks = data,<br />
+              (err: any) =&gt; console.log(err),<br />
+              () =&gt; console.log('All done getting books';)<br />
+              );
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="creatingData">Creating Data</h2>
+      <section>
+        <ul>
+          <li>Uses the HttpClient.post method</li>
+          <li>
+            POST calls will return the newly created object in the Observer
+          </li>
+          <li>This is not an idempotent operation</li>
+          <li>
+            The post method requires a type of the object that will be sent in
+            the body of the response
+          </li>
+          <li>
+            There are several overloads to call it, but generally takes three
+            parameters
+            <ul>
+              <li>The target URL</li>
+              <li>JSON string of the data payload</li>
+              <li>Configuration object</li>
+            </ul>
+          </li>
+          <li>
+            There is a type option that tells Angular to strongly type the
+            result
+            <ul>
+              <li>
+                <code>this.http.post&lt;Book></code> tells Angular to expect a
+                type of Book
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          The following example:
+          <ul>
+            <li>
+              Sends a Book object named newBook to the server using the POST
+              verb
+            </li>
+            <li>
+              Includes a content-type header to tell the server to expect a JSON
+              object as data (this can be moved to a variable before the call
+              for readability)
+            </li>
+            <li>
+              Since POST returns the newly created object, the return type is
+              set to an observable of type Book
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              addBook(newBook: Book): Observable&lt;Book&gt; {<br />
+              return this.http.post&lt;Book&gt;('/api/books', newBook, {<br />
+              headers: new HttpHeaders({<br />
+              'Content-Type': 'application/json'<br />
+              })<br />
+              });<br />
+              }
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="updatingData">Updating Data</h2>
+      <section>
+        <ul>
+          <li>Uses the HttpClient.put method</li>
+          <li>Use this to update an existing resource on the server</li>
+          <li>This should be an idempotent operation</li>
+          <li>
+            By convention, nothing is returned in the body of the response from
+            the server
+          </li>
+          <li>
+            Since there is noting returned in the both of the response, void can
+            be specified as the type in the generic and returned Observable
+          </li>
+          <li>
+            There is a type option that tells Angular to strongly type the
+            result
+            <ul>
+              <li>
+                <code>this.http.put&gt;Book&lt;></code> tells Angular to expect
+                a type of Book
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              updateBook(updatedBook: Book): Observable&lt;void&gt; {<br />
+              return
+              this.http.put&lt;void&gt;('/api/books/${updatedBook.bookId}',
+              updatedBook, {<br />
+              headers: new HttpHeaders({<br />
+              'Content-Type': 'application/json'<br />
+              })<br />
+              });<br />
+              }
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="deletingData">Deleting Data</h2>
+      <section>
+        <ul>
+          <li>Uses the HttpClient.delete method</li>
+          <li>Use to remove a resource on the server</li>
+          <li>
+            By convention, nothing is returned in the body of the response from
+            the server
+          </li>
+          <li>
+            Since there is noting returned in the both of the response, void can
+            be specified as the type in the generic and returned Observable
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              deleteBook(bookId: number): Observable&lt;void&gt; {<br />
+              return this.http.delete&lt;void&gt;('/api/books/${bookId}');<br />
+              }
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3 id="errorHandling">Error Handling</h3>
+      <section>
+        <ul>
+          <li>
+            HttpErrorResponse objects are returned by HttpClient when an error
+            occurs
+            <ul>
+              <li>This class contains lots of HTTP specific information</li>
+            </ul>
+          </li>
+          <li>
+            Best practice to encapsulate HTTP errors within a service and return
+            custom errors to components instead
+            <ul>
+              <li>
+                Should not expose implementation details to the component - this
+                includes HTTP specific errors
+              </li>
+              <li>
+                Use the RxJS catchError operation to react to errors within the
+                service
+              </li>
+            </ul>
+          </li>
+          <li>
+            One approach is to catch the HttpErrorResponse object and convert it
+            to a custom error you define for your application
+          </li>
+          <li>
+            The RxJS retry operator can be used to reissue a HTTP request that
+            may be the result of a network interuption
+          </li>
+        </ul>
+        <div>
+          <p>
+            Example of a function that uses catchError operator to convert a
+            HttpErrorResponse to a custom BookTrackerError
+          </p>
+          <p>
+            Since it could return an error or data object, getAllBooks must have
+            a signature that allows either type to be returned
+          </p>
+          <p>
+            When you subscribe to this, type the error object passed into the
+            second callback to be BookTrackerError to get intellisense suppport
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              getAllBooks(): Observable&lt;Book&#91;&#93; | BookTrackerError&gt;
+              {<br />
+              return this.http.get&lt;Book&#91;&#93;&gt;('/api/errors/500')<br />
+              .pipe(<br />
+              catchError(err =&gt; this.handleHttpError(err))<br />
+              );<br />
+              }<br />
+              private handleHttpError(error: HttpErrorResponse):
+              Observable&lt;BookTrackerError&gt; {<br />
+              let dataError = new BookTrackerError();<br />
+              dataError.errorNumber = 100;<br />
+              dataError.message = error.statusText;<br />
+              dataError.friendlyMessage = 'An error occured retrieving data.'<br />
+              return throwError(dataError);<br />
+              }
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

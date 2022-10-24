@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>LINQ</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        <ul>
+          <li>
+            LINQ expressions are assumed not to have side effects
+            <ul>
+              <li>This violates functional programming principles</li>
+              <li>
+                Should use a foreach when you have an IEnumerable and you want
+                to cause side effects
+              </li>
+            </ul>
+          </li>
+          <li>
+            Methods that look like LINQ, but are not
+            <ul>
+              <li>
+                ForEach
+                <ul>
+                  <li>This is a list extension method</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Methods</h2>
+      <section>
+        <div>
+          Concat
+          <ul>
+            <li>Gets elements in both lists</li>
+            <li>Includes duplicated items</li>
+            <li>See Union if you want to exclude duplicates</li>
+          </ul>
+        </div>
+        <div>
+          Contains
+          <ul>
+            <li>Find all items in the list that match the specified value</li>
+            <li>Like a WHERE IN in SQL</li>
+          </ul>
+        </div>
+        <div>
+          Distinct
+          <ul>
+            <li>Operates on a single IEnumerable</li>
+            <li>Returns the distinct elements from the collection</li>
+          </ul>
+        </div>
+        <div>
+          Except
+          <ul>
+            <li>
+              Find all items that are in one IEnumerable but not another other
+            </li>
+            <li>Similar to a “WHERE X NOT IN” in SQL</li>
+            <li>
+              Works with
+              <ul>
+                <li>Lists</li>
+                <li>Dictionaries – matches if both key and value match</li>
+              </ul>
+            </li>
+            <li>
+              <code>var missing = listA.Except(listB)</code>
+            </li>
+          </ul>
+        </div>
+        <div>
+          GroupBy – see GroupBy section
+          <div>Intersect</div>
+          <ul>
+            <li>
+              Gets elements that are in both IEnumerable A and IEnumerable B
+            </li>
+            <li>
+              Performs an implicit DISTINCT, so will not include duplicates
+            </li>
+          </ul>
+        </div>
+        <div>
+          OrderByDescending
+          <ul>
+            <li>Sorts the collection in descending order</li>
+            <li>This returns a new IEnumerable</li>
+          </ul>
+        </div>
+        <div>
+          Reverse
+          <ul>
+            <li>Reverses the order of items in an IEnumerable</li>
+            <li>Keep this in mind case someone want to reverse a string</li>
+          </ul>
+        </div>
+        <div>
+          Union
+          <ul>
+            <li>
+              Gets elements that are in either IEnumerable A or IEnumerable B
+            </li>
+            <li>This performs an implicit DISTINCT on the result</li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>GroupBy</h2>
+      <section>
+        <ul>
+          <li>
+            Use to group a set of results by a certain attribute
+            <ul>
+              <li>Like a GROUP BY in SQL, but behaves a bit differently</li>
+              <li>
+                Useful if you want to perform some aggregation on the resulting
+                groups
+              </li>
+            </ul>
+          </li>
+          <li>
+            IGrouping
+            <ul>
+              <li>Defined as IGrouping&gt;TKey, TElement&lt;</li>
+              <li>
+                Think of it like an IEnumerable, but with an additional Key
+                property
+              </li>
+            </ul>
+          </li>
+          <li>
+            Method call divides an IEnumerable into smaller IEnumerable objects
+            containing IGroupings and labels each of these with the key that
+            they all share
+          </li>
+          <li>
+            To implement
+            <ul>
+              <li>
+                Call GroupBy method an specify the attribute that should be used
+                to build groups
+                <div class="card"><div class="card-body"><code>
+                  var groupings = scores.GroupBy(x =&gt; x.Name);"
+                </code></div></div>
+                <ul>
+                  <li>This groups by the values in the name attribute</li>
+                </ul>
+              </li>
+              <li>
+                Iterate over the results
+                <div class="card"><div class="card-body"><code>
+                  foreach(var grouping in groupings) ..."
+                </code></div></div>
+                <ul>
+                  <li>Each item in the iteration is a IGrouping object</li>
+                  <li>Can see the key by accessing the Key property</li>
+                </ul>
+              </li>
+
+              <li>
+                Iterate again over each item returned previously
+                <div class="card"><div class="card-body"><code>
+                  foreach(var item in grouping) ..."
+                </code></div></div>
+                <ul>
+                  <li>This is the individual item</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can call aggregation methods after the first iteration to see
+            stats about each group, including:
+            <ul>
+              <li>Sum</li>
+              <li>Average</li>
+              <li>Min</li>
+              <li>Max</li>
+              <li>Contains</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

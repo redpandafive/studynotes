@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Components
+          </li>
+        </ol>
+      </nav>
+      <h1>Components</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/angularcli.html#basics">Basics</a></li>
+          <li>
+            <a href="./angular/angularcli.html#configuration">Configuration</a>
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#projection"
+              >Content Projection</a
+            >
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#properties"
+              >Input / Output Properties</a
+            >
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#input">Input Properties</a>
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#output">Output Properties</a>
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#aliases"
+              >Import / Export Aliases</a
+            >
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#setters">Property Setters</a>
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#contentChild">ContentChild</a>
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#localVars"
+              >Parent / Child Communication Through Local Variables</a
+            >
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#service"
+              >Parent/Child Communication Through Service</a
+            >
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#viewChild">ViewChild</a>
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#styles">Styles</a>
+          </li>
+          <li>
+            <a href="./angular/angularcli.html#viewLayer"
+              >View Layer Architecture</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>Fundamental building blocks of Angular applications</li>
+          <li>
+            Consists of
+            <ul>
+              <li>Class that contains application data and logic</li>
+              <li>
+                An associated HTML template that defines a view to be displayed
+              </li>
+              <li>An optional CSS file for styles used in the component</li>
+            </ul>
+          </li>
+
+          <li>
+            Define views
+            <ul>
+              <li>
+                Sets of screen elements that Angular can choose among and modify
+                according to your program logic and data
+              </li>
+              <li>
+                Allows construction of a view hierarchy, which allows you to
+                define arbitrary complex areas of the screen that can be
+                created, modified, and destroyed as a unit
+              </li>
+            </ul>
+          </li>
+          <li>
+            Use services
+            <ul>
+              <li>
+                Provide specific functionality not directly related to views
+              </li>
+              <li>These are injected into components as dependencies</li>
+            </ul>
+          </li>
+          <li>
+            Every Angular application has at least one root component
+            <ul>
+              <li>
+                Foundation component for an Angular project, so all applications
+                require one and only one
+              </li>
+              <li>Called app-root</li>
+              <li>
+                When you bootstrap with the AppComponent class (in main.ts),
+                Angular looks for a app-root in the index.html, instantiates an
+                instance of AppComponent, and renders it inside the app-root tag
+              </li>
+              <li>Connects a component hierarchy with the page DOM</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="configuration">Configuration</h2>
+      <section>
+        <ul>
+          <li>
+            Uses a @Component decorator
+            <ul>
+              <li>This must be imported from @angular/core</li>
+              <li>Identifies the class immediate below is as a component</li>
+            </ul>
+          </li>
+          <li>
+            Take a metadata object with the following properties
+            <ul>
+              <li>
+                selector – CSS selector that tells Angular to create an insert
+                an instance of this component wherever it finds the
+                corresponding tag in the template HTML
+              </li>
+              <li>
+                templateUrl - module-relative address of this component's HTML
+                template
+              </li>
+              <li>
+                template – alternative to the templateUrl that gives the HTML
+                template inline
+              </li>
+              <li>use backticks to surround it if it spans multiple lines</li>
+              <li>
+                styles – takes an array of strings that contain CSS rule
+                declarations
+              </li>
+              <li>
+                styleUrls – takes an array of CSS stylesheets that should be
+                added
+              </li>
+              <li>
+                providers – an array of providers for services that the
+                component requires
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="projection">Content Projection</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to insert content into a child component from the parent
+            component
+          </li>
+          <li>
+            Uses the ng-content directive as a placeholder in the child
+            component
+          </li>
+          <li>
+            Does not create a real DOM element, so custom attributes applied to
+            it are ignored
+          </li>
+          <li>
+            Single slot content projection
+            <ul>
+              <li>Component accepts content from a single source</li>
+              <li>
+                Place a ng-content tag in the child component where external
+                content should be placed
+              </li>
+              <li>
+                Put context between the opening and closing tags of the child
+                component (in the parent component)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Multi slot content projection
+            <ul>
+              <li>Component accepts content from multiple sources</li>
+              <li>
+                Each slot uses a selector to determine which content goes into
+                that slot -this could be a
+                <ul>
+                  <li>CSS selector (not recommended)</li>
+                  <li>Attribute selector (recommended)</li>
+                </ul>
+              </li>
+              <li>
+                To implement
+                <ul>
+                  <li>
+                    Place a ng-content tag in the child component for each slot
+                  </li>
+                  <li>
+                    Tag each slot with a select attribute to indicate the
+                    selector
+                  </li>
+                  <li>The square brackets make this an attribute selector</li>
+                  <li>
+                    Add the selector as an attribute on the parent component
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Conditional content projection
+            <ul>
+              <li>Will render content only when specific conditions are met</li>
+              <li>
+                See documentation at
+                <a
+                  href="https://angular.io/guide/content-projection#conditional-content-projection"
+                  target="_blank"
+                  >https://angular.io/guide/content-projection#conditional-content-projection</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="properties">Input / Output Properties</h2>
+      <section>
+        <ul>
+          <li>
+            When binding to a template to its own component class, you have no
+            need of these.
+          </li>
+          <li>
+            These are used when binding to a property of a different component
+            <ul>
+              <li>
+                TypeScript access modifiers can’t be used to shape a component's
+                public binding API
+              </li>
+            </ul>
+          </li>
+          <li>
+            Directive properties that must be declared as inputs or outputs
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="input">Input Properties</h3>
+      <section>
+        <ul>
+          <li>
+            Settable properties; receive data values from parent components
+          </li>
+          <li>
+            Values flow into the property when it is data bound with a property
+            binding
+          </li>
+          <li>
+            Declare using Input decorator in the child class and bind the
+            property in the parent component template
+          </li>
+          <li>
+            Use ngOnChanges to detect when input property values change
+            <ul>
+              <li>This method receives a SimpleChange object</li>
+              <li>This will give you the old and new values of the inputs</li>
+            </ul>
+          </li>
+          <li>
+            Performance considerations
+            <ul>
+              <li>
+                If you are passing a static value from a parent to a child,
+                consider using the @Attribute decorator over @Input
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="output">Output Properties</h3>
+      <section>
+        <ul>
+          <li>
+            Values flow out of the component as events bound with an event
+            binding
+          </li>
+          <li>This allows a child to send data to a parent component</li>
+          <li>Observable property = means you can subscribe to it</li>
+          <li>Annotated with @Output decorator</li>
+          <li>
+            Events through outputs behave differently in Angular than they do in
+            JS
+            <ul>
+              <li>
+                Events do not bubble up to higher components like they do in JS
+              </li>
+
+              <li>
+                An event dispatched from a child component can only be heard by
+                its parent component, not any higher
+              </li>
+              <li>This was a design decision done to streamline concepts</li>
+              <li>
+                A service bus design or store solution might be alternatives if
+                this is needed (Can implement in plain JS, but this should be
+                avoided)
+              </li>
+            </ul>
+          </li>
+          <li>Almost always returns an Angular EventEmitter object</li>
+        </ul>
+
+        <p>
+          In the child component, declare an EventEmitter property with the
+          Output decorator
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @Output() DeleteRequest= new EventEmitter&lt;Hero&gt;()
+            </code>
+          </div>
+        </div>
+        <p>
+          To dispatch the event in the child, raise it with the emit method
+          call. Hero is the data you wish to pass back to the parent
+        </p>
+
+        <div class="card">
+          <div class="card-body">
+            <code> this.DeleteRequest.emit(hero)</code>
+          </div>
+        </div>
+        <p>
+          To configure the parent, add a method in the component to handle the
+          data and bind that method to the child component template. The $event
+          object contains the data dispatched by the event
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;app-item-output (deleteRequest)=&quot;addItem($event)&quot;
+              ...&gt;
+            </code>
+          </div>
+        </div>
+
+        <p>
+          Binding to an output property in a parent component. This calls a
+          method onVoted on the parent component. The parameter for this method
+          will be the payload sent by the child
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;my-component
+              (onvoted)=&quot;onVoted($event)&quot;&gt;&lt;/my-component&gt;
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3 id="aliases">Import / Export Aliases</h3>
+      <section>
+        <ul>
+          <li>
+            These are useful when you want to expose one name for a property,
+            such name it something different internally
+          </li>
+          <li>This can be done on both Inputs and Outputs</li>
+          <li>Style guide recommends this should be avoided when possible</li>
+        </ul>
+        <p>Example of export alias</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @Output('myClick') clicks = new EventEmitter&lt;string&gt;()&#10;
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="setters">Property Setters</h2>
+      <section>
+        <li>Intercept input property changes can be done with a setter –</li>
+        <li>
+          This is useful if you need to do some sort of validation or
+          standardization on inputs
+        </li>
+        <li>
+          Angular Fundamentals class uses this to create a derived value from an
+          input property
+          <ul>
+            <li>
+              Uses this to set the color of a voting icon to set or not set
+            </li>
+            <li>
+              The setting on an input property toggles the color of the icon
+            </li>
+            <li>Eliminates the need for a conditional on the icon</li>
+          </ul>
+        </li>
+        <li>
+          Parent components can bind to output event properties on children and
+          react to those events
+        </li>
+        <p>
+          Example of an input setter. This can then be used to reference an
+          internal variable _name
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @Input()&#10;set name(name: string) {...}&#10;get name(name:
+              string) { ... }
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="contentChild">
+        ContentChild <span class="devnote">Expand</span>
+      </h2>
+      <section>
+        <ul>
+          <li>
+            @ContentChild
+            <ul>
+              <li>
+                Returns a reference to the first matching component or directive
+                within the content of your component
+              </li>
+            </ul>
+          </li>
+          <li>
+            @ContentChildren
+            <ul>
+              <li>
+                Returns a reference to all matching components or directives
+                within the content of your component
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="localVars">
+        Parent / Child Communication Through Local Variables
+      </h2>
+      <section>
+        <ul>
+          <li>
+            Allows a parent component to interact with child properties and
+            invoke child methods
+            <ul>
+              <li>
+                This cannot be done with data binding since it cannot read child
+                properties or invoke child methods
+              </li>
+            </ul>
+          </li>
+          <li>
+            Add a local variable on the child component
+            <ul>
+              <li>
+                This gives you a reference to the child component and the
+                ability to access any of its properties or methods from within
+                the parent template
+              </li>
+            </ul>
+          </li>
+          <li>
+            All wiring must be done entirely within the parent template
+            <ul>
+              <li>The parent component itself has no access to the child</li>
+              <li>
+                This cannot be used if an instance of the parent component class
+                must read or write child component values or must call child
+                component methods
+              </li>
+            </ul>
+          </li>
+          <li>
+            To implement
+            <ul>
+              <li>Add a template reference variable to the child component</li>
+              <li>
+                The parent template can now reference the public methods and
+                properties on the child
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code> &lt;countdown-timer #timer&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="service">Parent/Child Communication Through Service</h2>
+      <section>
+        <ul>
+          <li>
+            Parents and children can communicate via a shared service whose
+            interface enables bi-directional communication within the family
+          </li>
+          <li>
+            Useful to define a Subject within this service
+            <ul>
+              <li>
+                Have components subscribe to an Observable from this subject
+              </li>
+              <li>
+                Use the next() method to send a message to all subscribed
+                components
+              </li>
+              <li>
+                Make sure to remove all subscriptions in the ngOnDestroy hook
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="viewChild">ViewChild</h2>
+      <section>
+        <ul>
+          <li>
+            @ViewChild and @ViewChildren are used to get a reference to
+            components that you define in the view template of your component
+          </li>
+          <li>
+            Use this when the parent component class must refer to the child
+            component class
+          </li>
+          <li>
+            Allows you to inject the child component into the parent as a
+            ViewChild
+            <ul>
+              <li>
+                Import references to the ViewChild decorator and the
+                AfterViewInit lifecycle hook
+              </li>
+              <li>Inject using the @ViewChild decorator</li>
+              <li>
+                You can now reference the child component through this variable,
+                but it is not available until after Angular displays the parent
+                view
+              </li>
+              <li>
+                Need to use the ngAfterViewInit hook to work with it. The child
+                component is not available until after Angular displays the
+                parent view
+              </li>
+              <li>
+                This can also be done with templates by referencing a template
+                reference
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @ViewChild(CountdownTimerComponent)&#10;private timerComponent:
+              CountdownTimerComponent
+            </code>
+          </div>
+        </div>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+@Component({
+   selector: &quot;app-root&quot;,                 
+   template: `                   
+      &lt;ng-template #defaultTabButtons>                                  
+         &lt;button class=&quot;tab-button&quot; (click)=&quot;login()&quot;>                  
+            {{loginText}}                  
+          &lt;/button>                  
+          &lt;button class=&quot;tab-button&quot; (click)=&quot;signUp()&quot;>                  
+            {{sig-nUpText}}                  
+          &lt;/button>                  
+      &lt;/ng-template>`})                              
+              </pre>
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="styles">Styles</h2>
+      <section>
+        <ul>
+          <li>
+            Use to isolate CSS rules to within the component template
+            <ul>
+              <li>
+                Will not be inherited by any components nested within the
+                template nor by any content projected into the components
+              </li>
+              <li>
+                By default, component CSS styles are encapsulated into the
+                components view and don’t affect the rest of the application
+              </li>
+            </ul>
+          </li>
+          <li>
+            Best practices
+            <ul>
+              <li>
+                Do not override the styles of a component – consider then
+                private implementation details for that component
+              </li>
+              <li>
+                If you are authoring a component that others will use, you can
+                accept customization from consumers in a number of ways (see
+                https://angular.io/guide/component-styles#authoring-a-component-to-support-customization)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Special selectors from the world of shadow DOM style scoping
+            <ul>
+              <li>
+                :host
+                <ul>
+                  <li>
+                    Host element – element that matches the components selector
+                    into which the template is rendered
+                  </li>
+                  <li>This selector targets that host element</li>
+                  <li>
+                    Rules will affect the host element and all its descendants
+                  </li>
+                  <li>
+                    You can add selectors after the host selector to target
+                    elements within the component
+                  </li>
+                </ul>
+              </li>
+              <li>
+                :host(.active)
+                <ul>
+                  <li>Function form of the host selector</li>
+                  <li>Applies host styles conditionally</li>
+                  <li>
+                    Includes another selector inside parentheses after :host
+                  </li>
+                  <li>
+                    Example above targets the host element but only when it also
+                    has the active CSS class applied to it
+                  </li>
+                </ul>
+              </li>
+              <li>
+                :host-context
+                <ul>
+                  <li>
+                    Use to apply styles based on some condition outside of a
+                    component’s view
+                  </li>
+                  <li>
+                    :host-context(.theme-light) h2 would apply rules to all h2
+                    elements inside the component only if some ancestor element
+                    has the CSS class theme-light
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Ways to add styles for a component
+            <ul>
+              <li>
+                By setting styles or styleUrls properties of the Component
+                decorator
+                <ul>
+                  <li>These are arrays or strings</li>
+                  <li>
+                    If you are using the CLI to build, you can add sass, less,
+                    or stylus files into the styleUrls metadata with the
+                    appropriate extensions
+                  </li>
+                  <li>
+                    Angular CLI build process runs the pertinent CSS
+                    preprocessor
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Inline in the template HTML
+                <ul>
+                  <li>
+                    Embed a style tag into the template or a link tag to
+                    reference an external stylesheet
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            With CSS imports
+            <ul>
+              <li>use to import CSS sheets into other CSS sheets</li>
+              <li>
+                the URL is relative to the CSS file into which you are importing
+              </li>
+            </ul>
+          </li>
+          <li>
+            To control how CSS encapsulation works on a component level, you can
+            set the view encapsulation mode in the component metadata
+            (encapsulation tag)
+            <ul>
+              <li>
+                ViewEncapsulation.ShadowDom
+                <ul>
+                  <li>
+                    Uses browser's native shadow DOM implementation. The
+                    component styles are included within the shadow DOM
+                  </li>
+                  <li>
+                    Only works on browsers that have native support for shadow
+                    DOM, which is limited
+                  </li>
+                </ul>
+              </li>
+              <li>
+                ViewEncapsulation.Emulated
+                <ul>
+                  <li>Default</li>
+                  <li>
+                    Emulated the behavior of shadow DOM by preprocessing the CSS
+                    code to effective scope the CSS to the component's view
+                  </li>
+                </ul>
+              </li>
+              <li>
+                ViewEncapsulation.None
+                <ul>
+                  <li>
+                    no view encapsulation. This behaves the same as pasting the
+                    component's styles into the HTML
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            If you need to apply styles across the entire page, add the rules to
+            the site.CSS file
+          </li>
+        </ul>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code> @import './hero-details-box.css'" </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="viewLayer">View Layer Architecture</h2>
+      <section>
+        <ul>
+          <li>
+            Components can be separated by function
+            <ul>
+              <li>Keeps components small, simple and promotes reuse</li>
+            </ul>
+          </li>
+          <li>
+            Smart components
+            <ul>
+              <li>Aka application-level components, container components</li>
+              <li>Usually tied to an application since reuse is difficult</li>
+              <li>
+                Has too many application-specific features, such as services
+                injected into the constructor
+              </li>
+              <li>
+                Can be seen as a top-level component composed of one or more
+                presentation components
+                <ul>
+                  <li>
+                    Top level component of a route is usually a smart component
+                  </li>
+                  <li>This component handles getting data from services</li>
+                  <li>
+                    Data can be passed into a child presentation component for
+                    display
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Presentation components
+            <ul>
+              <li>Aka Pure components, dumb components</li>
+              <li>
+                Handles issues like formatting data into a table on the screen
+              </li>
+              <li>Take data using inputs and emit events to</li>
+              <li>
+                Try to make as application agnostic as possible
+                <ul>
+                  <li>
+                    Avoid service injection that ties it to a specific
+                    application
+                  </li>
+                  <li>Use inputs and outputs to get data into them</li>
+                </ul>
+              </li>
+              <li>
+                This is something that would be a good candidate for use in
+                another application or in multiple places within the same
+                application
+              </li>
+            </ul>
+          </li>
+          <li>
+            One complication is event handling
+            <ul>
+              <li>
+                Child components can only dispatch events to their parent
+                component
+              </li>
+              <li>Events do not bubble like they do in JS</li>
+              <li>A store-like service can be a solution if this is needed</li>
+            </ul>
+          </li>
+          <li>
+            These categories are guidelines or starting points
+            <ul>
+              <li>
+                Smart components do not have to be top level component only
+              </li>
+              <li>
+                You may find yourself forced to make a presentation component
+                into a smart component when need a service in it
+              </li>
+              <li>
+                It may not be worth trying to keep a component a presentation;
+                you may sacrifice simple design for the sake of reusability
+              </li>
+              <li>Design wins over reusability in this case</li>
+              <li>
+                Start with a single top level smart component and split it into
+                smaller presentation components as it gets bigger
+              </li>
+              <li>
+                With event handling, you could end up having to chain event
+                listeners all the way down the component tree to stick with this
+                paradigm
+              </li>
+              <li>
+                Probably better to make a leaf node a smart component in this
+                case as it simplifies design
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

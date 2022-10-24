@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Page Object Models</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        <ul>
+          <li>
+            Provide test code with a logical view of the user interface while
+            abstracting away the low level details of the user interface
+            implementation
+            <ul>
+              <li>These sit between the test code and the IWebDriver API</li>
+              <li>Represents a HTML page - encapulstes a single HTML page</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Benefits</h2>
+      <section>
+        <ul>
+          <li>
+            Gives you one central place to update if a change is made to the UI,
+            such as an Id of en element changes
+          </li>
+          <li>Reduces duplication accross test code methods</li>
+          <li>
+            Reduces the clutter of HTML implementation details by abstracting it
+            away
+          </li>
+          <li>Return and accept funcamental types such as strings</li>
+          <li>Abstracts away IWebDriver methods</li>
+        </ul>
+      </section>
+
+      <h2>Implementation</h2>
+      <section>
+        <ul>
+          <li>Create a class to represent the page</li>
+          <li>
+            Add a IWebDriver parameter to the constructor of this class and save
+            it to a private variable
+            <ul>
+              <li>This object is expensive to create</li>
+              <li>
+                Passing it will allow you to reuse the IWebDriver instance
+                between tests
+              </li>
+              <li>
+                Can lead to strange errors, so stick with creating a new one on
+                each test if you encounter that
+              </li>
+              <li>
+                Recommended approach is to create a new one with each test
+              </li>
+            </ul>
+          </li>
+          <li>
+            For each element that you are going to add, add a property to the
+            POM
+            <ul>
+              <li>
+                Getters should use the IWebDriver.FindElement and
+                IWebDriver.FindElements methods to return the value(s)
+              </li>
+              <li>
+                Getters should return .NET framework types, not instances of the
+                IWebElement class
+              </li>
+            </ul>
+            <div class="card"><div class="card-body"><code>
+              code='public ReadOnlyCollection&lt;string name&gt; Products&#10;get &#10;{&#10; var results = new List&lt;string&gt;();&#10; foreach(var productCell in Driver.FindElements(By.TagName("td")))&#10; {&#10; results.Add(productCell.Text);&#10; }&#10; return results.AsReadOnly();&#10;}'
+            </code></div></div>
+          </li>
+          <li>
+            Add a void NavigateTo method
+            <ul>
+              <li>
+                The POM will embed the URL as a private variable within itself
+              </li>
+              <li>
+                POM will handle the call to the IWebDriver to perform the
+                navigation
+              </li>
+              <li>
+                Test methods just need to call this method with no parameters
+                since all details are enclosed in the POM
+              </li>
+            </ul>
+          </li>
+          <li>
+            Since the navigation details are embedded in the POM, you can add a
+            method to it that verifies the page URL matches the configured one
+          </li>
+          <li>
+            Add methods to encapsulate things like link clicks
+            <ul>
+              <li>
+                If a test navigates from one page to another, you can configure
+                a POM method to encapsulate the navigation call and return a new
+                POM for the target
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Guidelines / Optimization</h2>
+      <section>
+        <ul>
+          <li>
+            Should only add items as they are needed by test code
+            <ul>
+              <li>Do not have to put every HTML element into the POM</li>
+            </ul>
+          </li>
+          <li>
+            Inheriting from a common Page base class can help eliminate
+            duplicated code
+          </li>
+          <li>
+            Expression body members can be used to shorten property code in a
+            POM
+            <ul>
+              <li>
+                For getters
+                <div class="card"><div class="card-body"><code>
+                  code='public string GenerationToken =&gt; Driver.FindElement(By.Id("GenerationToken")).Text;&#10;'
+                </code></div></div>
+              </li>
+              <li>
+                For setters
+                <div class="card"><div class="card-body"><code>
+                  code='public void ClickLearnAboutUsLink() =&gt; Driver.FindElement(By.Id("LearnAboutUs")).Click();&#10;'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            If POM classes become too large, you can split them into into
+            multiple classes - creates "Page Component Object Model"
+          </li>
+          <li>
+            Avoid the following in your POM classes
+            <ul>
+              <li>Asserts</li>
+              <li>Thread.Sleep</li>
+            </ul>
+          </li>
+          <li>
+            Selenium.Support package on NuGet includes additional code to
+            support the creation of POM classes. Verify this repository is still
+            active before using.
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Terminology</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        <ul>
+          <li>
+            Repository
+            <ul>
+              <li>Also called Repo for short</li>
+              <li>This is the virutal store for your project</li>
+              <li>Contains snapshots of your code</li>
+              <li>
+                Local repository
+                <ul>
+                  <li>The repository located on your workstation</li>
+                </ul>
+              </li>
+              <li>
+                Remote repository
+                <ul>
+                  <li>A repository that sits on a server that you push too</li>
+                  <li>Can be a service, like GitHub</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Commit
+            <ul>
+              <li>Creates a commit object in the repository object database</li>
+              <li>Moves the head pointer to point to this commit</li>
+              <li>HEAD remains pointed at this head pointer</li>
+            </ul>
+          </li>
+          <li>
+            Snapshot
+            <ul>
+              <li>Capture of the source code project at a moment in time</li>
+              <li>
+                Must use the <kbd>add</kbd> command, then <kbd>commit</kbd>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Index
+            <ul>
+              <li></li>
+            </ul>
+          </li>
+          <li>
+            Branch
+            <ul>
+              <li>Lightweight, movable pointer at a specific point in time</li>
+              <li>Master branch is the default one created</li>
+              <li>Changes are made to a specific branch</li>
+            </ul>
+          </li>
+          <li>
+            Merge
+            <ul>
+              <li>
+                Can be difficult since two branches may change the same line of
+                code in different ways = conflict
+              </li>
+            </ul>
+          </li>
+          <li>
+            Conflict
+            <ul>
+              <li>
+                Occurs when two branches are trying to change the same line of
+                code in different ways and you are attempting to merge them
+              </li>
+              <li></li>
+            </ul>
+          </li>
+          <li>
+            Integration Phase
+            <ul>
+              <li>
+                Combining code from multiple developers into a single code base
+              </li>
+              <li>
+                Without version control, this is very difficult since all
+                differences/compatibilty issues must be resolved
+              </li>
+              <li>
+                Should do as frequently as possible since conflicts are more
+                likely to be smaller and easier to fix
+              </li>
+            </ul>
+          </li>
+          <li>
+            Porcelin commands
+            <ul>
+              <li>These are commands that are most commonly used</li>
+            </ul>
+          </li>
+          <li>
+            Plumbing commands
+            <ul>
+              <li>Low level commands</li>
+              <li>Typically are not intended for regular use from the CLI</li>
+              <li>Meant to be used in scripts or tools</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

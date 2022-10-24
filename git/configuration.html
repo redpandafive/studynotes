@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Configuring Git from CLI</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        <ul>
+          <li>
+            To configure your instance of Git, use the
+            <kbd>git config</kbd> command
+            <ul>
+              <li>This information is sent with your commits</li>
+              <li>
+                The global flag sets this for all repositories on the
+                workstation
+              </li>
+              <li>
+                You can overwrite these settings for a single project by running
+                the same commands again from the project folder without the
+                global option. This only impacts that project.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git config --global user.name "Colin Speight"</kbd>
+            <ul>
+              <li>Configures the usename</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git config --global user.email "cspeight@gmail.com"</kbd>
+            <ul>
+              <li>Configures your email</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git config</kbd>
+            <ul>
+              <li>Displays all configured information</li>
+            </ul>
+          </li>
+          <li>
+            <kbd
+              >git config --global core.editor "'C:/Program
+              Files/Notepad++/notepad++.exe'"</kbd
+            >
+            <ul>
+              <li>
+                Use this to configure Windows Git Bash to use Notepad++ as the
+                editor
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

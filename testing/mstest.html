@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>MS Test</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Attributes</h2>
+      <section>
+        <ul>
+          <li>
+            Identify test classes and methods - all required
+            <ul>
+              <li>[TestClass] - a class that contains MSTest unit tests.</li>
+              <li>[TestMethod] - mark that this is a unit test method.</li>
+            </ul>
+          </li>
+          <li>
+            Establish a calling order - all optional
+            <ul>
+              <li>[AssemblyInitialize] - executes once before the test run.</li>
+              <li>[ClassInitialize] - executes once for the test class.</li>
+              <li>[TestInitialize] - runs before each test.</li>
+              <li>[AssemblyCleanup] - executes once after the test run.</li>
+              <li>
+                [ClassCleanup] - runs once after all tests in this class are
+                executed. (Not guaranteed that it executes instantly after all
+                tests from the class)
+              </li>
+              <li>[TestCleanup] - runs after each test.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Assertions</h2>
+      <section>
+        <ul>
+          <li>
+            Assert.AreEqual(28, _actualFuel) - tests whether the specified
+            values are equal.
+          </li>
+          <li>
+            Assert.AreNotEqual(28, _actualFuel) - tests whether the specified
+            values are unequal. Same as AreEqual for numeric values.
+          </li>
+          <li>
+            Assert.AreSame(_expectedRocket, _actualRocket) - tests whether the
+            specified objects both refer to the same object
+          </li>
+          <li>
+            Assert.AreNotSame(_expectedRocket, _actualRocket) - tests whether
+            the specified objects refer to different objects
+          </li>
+          <li>
+            Assert.IsTrue(_isThereEnoughFuel) - tests whether the specified
+            condition is true
+          </li>
+          <li>
+            Assert.IsFalse(_isThereEnoughFuel) - tests whether the specified
+            condition is false
+          </li>
+          <li>
+            Assert.IsNull(_actualRocket) - tests whether the specified object is
+            null
+          </li>
+          <li>
+            Assert.IsNotNull(_actualRocket) - tests whether the specified object
+            is non-null
+          </li>
+          <li>
+            Assert.IsInstanceOfType(_actualRocket, typeof(Falcon9Rocket)) -
+            tests whether the specified object is an instance of the expected
+            type
+          </li>
+          <li>
+            Assert.IsNotInstanceOfType(_actualRocket, typeof(Falcon9Rocket)) -
+            tests whether the specified object is not an instance of type
+          </li>
+          <li>
+            StringAssert.Contains(_expectedBellatrixTitle, "Bellatrix") - tests
+            whether the specified string contains the specified substring
+          </li>
+          <li>
+            StringAssert.StartsWith(_expectedBellatrixTitle, "Bellatrix") -
+            tests whether the specified string begins with the specified
+            substring
+          </li>
+          <li>
+            StringAssert.Matches("(281)388-0388",
+            @&quot;(?d{3})?-? *d{3}-? *-?d{4}&quot;)
+            - tests whether the specified string matches a regular expression
+          </li>
+          <li>
+            StringAssert.DoesNotMatch("281)388-0388",
+            @&quot;(?d{3})?-? *d{3}-? *-?d{4}&quot;)-
+            tests whether the specified string does not match a regular
+            expression
+          </li>
+          <li>
+            CollectionAssert.AreEqual(_expectedRockets, _actualRockets) - tests
+            whether the specified collections have the same elements in the same
+            order and quantity.
+          </li>
+          <li>
+            CollectionAssert.AreNotEqual(_expectedRockets, _actualRockets) -
+            tests whether the specified collections does not have the same
+            elements or the elements are in a different order and quantity.
+          </li>
+          <li>
+            CollectionAssert.AreEquivalent(_expectedRockets, _actualRockets) -
+            tests whether two collections contain the same elements.
+          </li>
+          <li>
+            CollectionAssert.AreNotEquivalent(_expectedRockets, _actualRockets)
+            - tests whether two collections contain different elements.
+          </li>
+          <li>
+            CollectionAssert.AllItemsAreInstancesOfType(_expectedRockets,
+            _actualRockets) - tests whether all elements in the specified
+            collection are instances of the expected type
+          </li>
+          <li>
+            CollectionAssert.AllItemsAreNotNull(_expectedRockets) - tests
+            whether all items in the specified collection are non-null
+          </li>
+          <li>
+            CollectionAssert.AllItemsAreUnique(_expectedRockets) - tests whether
+            all items in the specified collection are unique
+          </li>
+          <li>
+            CollectionAssert.Contains(_actualRockets, falcon9) - tests whether
+            the specified collection contains the specified element
+          </li>
+          <li>
+            CollectionAssert.DoesNotContain(_actualRockets, falcon9) - tests
+            whether the specified collection does not contain the specified
+            element
+          </li>
+          <li>
+            CollectionAssert.IsSubsetOf(_expectedRockets, _actualRockets) -
+            tests whether one collection is a subset of another collection
+          </li>
+          <li>
+            CollectionAssert.IsNotSubsetOf(_expectedRockets, _actualRockets) -
+            tests whether one collection is not a subset of another collection
+          </li>
+          <li>
+            Assert.ThrowsException&lt;ArgumentNullException&gt;(() => new
+            Regex(null)) - tests whether the code specified by delegate throws
+            exact given exception of type T
+          </li>
+        </ul>
+      </section>
+
+      <h2>Links</h2>
+      <section>
+        <ul>
+          <li>https://www.automatetheplanet.com/mstest-cheat-sheet/</li>
+          <li>
+            https://docs.microsoft.com/en-us/visualstudio/test/using-microsoft-visualstudio-testtools-unittesting-members-in-unit-tests?view=vs-2022
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Change Detection
+          </li>
+        </ol>
+      </nav>
+      <h1>Change Detection</h1>
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="./angular/changedetection.html#uniflow">Uniflow of Data</a>
+          </li>
+          <li>
+            <a href="./angular/changedetection.html#mechanism"
+              >Angular Change Detection Mechanism</a
+            >
+          </li>
+          <li>
+            <a href="./angular/changedetection.html#onpush">OnPush Mode</a>
+          </li>
+          <li>
+            <a href="./angular/changedetection.html#pipes">Pipes</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="uniflow">Uniflow of Data</h2>
+      <section>
+        <ul>
+          <li>
+            Uniflow of data in Angular is view model data that gets passed to
+            the View to be rendered on the screen
+          </li>
+          <li>
+            Templates are generated to the browser by Angular
+            <ul>
+              <li>
+                Angular does not generate HTML as a string when interpreting a
+                template
+              </li>
+              <li>
+                Angular directly generates DOM data structures from the data via
+                a component renderer
+              </li>
+              <li>
+                This renderer is a function that builds the DOM data structures
+              </li>
+            </ul>
+          </li>
+          <li>
+            The Angular compiler generates the renderer function at different
+            times depending on which mode it is running in
+            <ul>
+              <li>
+                JIT mode
+                <ul>
+                  <li>
+                    These functions are generated at the application startup in
+                    the browser
+                  </li>
+                  <li>Compiler must be shipped to the browser</li>
+                  <li>
+                    Must wait for this compilation to finish before being able
+                    to display data on the screen
+                  </li>
+                </ul>
+              </li>
+              <li>
+                AOT mode
+                <ul>
+                  <li>
+                    Renderer function for a component is generated at build
+                    time, not application startup time
+                  </li>
+                  <li>
+                    This is more efficient since
+                    <ul>
+                      <li>Don't need to ship the compiler to the browser</li>
+                      <li>
+                        Faster since compilation is done at build time, not at
+                        runtime
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Unidirectional data flow is the flow of application data going from
+            the component classes into the output DOM data structures generated
+            by the rendering process (during the rendering process)
+            <ul>
+              <li>
+                What we want to avoid is further modification of data during the
+                view generation process
+              </li>
+              <li>
+                Generating DOM data structures should not itself cause further
+                modifications of data
+                <ul>
+                  <li>
+                    If this occurred, you could be left with a situation where
+                    you must
+                    <ul>
+                      <li>
+                        Repeat this process multiple times until the data
+                        stabilizes
+                        <ul>
+                          <li>This leads to performance problems</li>
+                          <li>AngularJS ran into this with digest cycles</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Leave the data and the view in an inconsistent state
+                        where the view after rendering does not reflect the
+                        actual state of the data
+                        <ul>
+                          <li>Leads to difficult to use application</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="mechanism">Angular Change Detection Mechanism</h2>
+      <section>
+        <ul>
+          <li>
+            This is a built in framework feature that ensures automatic
+            synchronization between the data of a component and the HTML of its
+            template
+          </li>
+          <li>
+            On startup, Angular will patch several low-level browser APIs with
+            its own versions
+            <ul>
+              <li>This is done by a library called Zone.js</li>
+              <li>
+                Zones are just execution context that services multiple
+                JavaScript VM execution turns
+              </li>
+              <li>
+                Generic mechanism to add extra functionality to the browser
+              </li>
+              <li>
+                These modifications give Angular a chance to run change
+                detection and update the UI
+              </li>
+              <li>
+                Any API not supported by Zone.js will not trigger a change
+                detection cycle
+              </li>
+            </ul>
+          </li>
+          <li>
+            Examples of browser events that are wired to trigger a change
+            detection cycle include
+            <ul>
+              <li>
+                All browser events (like addEventListener)
+                <ul>
+                  <li>
+                    This handles the registration of the callback (as normally
+                    done by JS)
+                  </li>
+                </ul>
+              </li>
+              <li>setTImeout and setInterval</li>
+              <li>Ajax HTTP requests</li>
+            </ul>
+          </li>
+          <li>
+            On each change detection trigger
+            <ul>
+              <li>
+                Angular goes through the whole component tree starting at the
+                root component of the application
+              </li>
+              <li>
+                For each component, Angular runs the change detection mechanism
+                that is associated with that component and determines if the
+                component needs to be re-rendered
+              </li>
+              <li>
+                To decide this, it compares the current value of each expression
+                used in the template to its previous value
+              </li>
+              <li>
+                When a change is detected, the component needs to be
+                re-rendered.
+                <ul>
+                  <li>
+                    Angular runs the DOM generating function for the component –
+                    this produces a new DOM data structure
+                  </li>
+                  <li>
+                    During this, template expressions are evaluated, and
+                    lifecycle hooks are called
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Template expressions bound to a complex object will only be
+                considered changed if the bound properties of the object have
+                changed
+                <ul>
+                  <li>
+                    If a property changes on the object that is not bound to an
+                    expression, the change is not considered
+                    <ul>
+                      <li>
+                        Does not do deep object comparison to detect changes
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    It is not limited to only checking reference comparisons -
+                    this allows bound property changes to trigger updates
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                This process is repeated for all components, from the root until
+                leaf components
+              </li>
+              <li>
+                For each component, several lifecycle methods are called (such
+                as ngAfterViewChecked)
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <li>
+          Situations where this can break
+          <ul>
+            <li>
+              Calling a getter from the template that gets its value from
+              something like a random number generator
+            </li>
+            <li>
+              Use a random number generator to set a property value during the
+              ngAfterViewChecked lifecycle event
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          Development mode checks for these types of problems automatically
+          <ul>
+            <li>
+              It runs template rendering twice in a row – if they are different
+              an error is thrown
+            </li>
+            <li>
+              Production mode will only run change detection once
+              <ul>
+                <li>These errors will not be detected</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          Change detection can be disabled or delayed
+          <ul>
+            <li>Think of getting a large data payload via a websocket</li>
+            <li>
+              In your component,
+              <ul>
+                <li>inject a ChangeDetectorRef token into the constructor</li>
+                <li>
+                  ChangeDetectorRef.detach()
+                  <ul>
+                    <li>Disables change detection</li>
+                  </ul>
+                </li>
+                <li>
+                  ChagneDetector.detectChanges()
+                  <ul>
+                    <li>Enables change detection</li>
+                  </ul>
+                </li>
+                <li>
+                  You can delay change detection by
+                  <ul>
+                    <li>Detaching the change detection</li>
+                    <li>Set a timeout function for the desired interval</li>
+                    <li>Enable change detection on the timeout</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          See Angular university blogs for source of this section
+        </li>
+      </section>
+
+      <h2 id="onpush">OnPush Mode</h2>
+      <section>
+        <ul>
+          <li>
+            You may be able to optimize change detection using the
+            ChangeDetection property of a component's configuration so it will
+            be in OnPush change detection mode
+          </li>
+
+          <li>
+            This disables the change detection mechanism for subtrees of the
+            component tree.
+          </li>
+          <li>
+            This mode will make the change detection perform only when the
+            component has received different inputs
+            <ul>
+              <li>It does this by comparing the inputs by references</li>
+            </ul>
+          </li>
+          <li>
+            For example, a component that has a large list that only changes
+            when the list is pushed into the component
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  @Component({ ...changeDetection:
+                  ChangeDetectionStrategy.OnPush... })
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Now, the change detection cycle will only run when a new list is
+            created
+            <ul>
+              <li>
+                Will not fire when a property on an object in the current list
+                is changed
+              </li>
+            </ul>
+          </li>
+          <li>
+            With OnPush mode, a change will be detected when:
+            <ul>
+              <li>input properties change</li>
+              <li>when the component fires an event</li>
+              <li>
+                when an Observable fires an event, such as emitting a new object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Gives better performance, but can be a problem if used with mutable
+            objects
+            <ul>
+              <li>
+                Since the memory address of a mutable object does not change
+                when modifying a property, OnPush will perform change detection
+                <ul>
+                  <li>
+                    Angular normally monitors for changes to properties that are
+                    referenced
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Inputs passed as observables will not trigger change detection
+                since the address of the observable object does not change when
+                it emits on object
+              </li>
+              <li>Avoid using with mutable objects</li>
+            </ul>
+          </li>
+          <li>
+            Can also combine Immutable.js objects and use OnPush change
+            detection strategy
+            <ul>
+              <li>
+                Combining with immutable data structures can bring great
+                performance implications for such pure components
+              </li>
+              <li>New immutable objects will trigger OnPush</li>
+              <li>
+                Will not introduce a bug since the only way to modify data is to
+                create new objects
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Pipes</h2>
+      <section>
+        <ul>
+          <li>
+            Pipes use a different change detection algorithm
+            <ul>
+              <li>
+                When a pipe involved with a collection (such as an array),
+                Angular will only trigger a change detection cycle with the
+                referenced array is set to a different object, not if elements
+                are added or removed
+                <ul>
+                  <li>Reference to the object must change</li>
+                  <li>Will not respond to object mutations</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

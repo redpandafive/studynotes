@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>CLI Commands</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Help Commands</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>man git</kbd>
+            <ul>
+              <li>Displys the full help menu</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git help</kbd>
+            <ul>
+              <li>Shorter list of commonly used commands</li>
+              <li>This displays the Porcelin commands</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git --version</kbd>
+            <ul>
+              <li>Displays the version of git you are running</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Starting a Working Area</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>git init</kbd>
+            <ul>
+              <li>Creates a Git Repository on your computer</li>
+              <li>Adds the .git subdirectory in the targetted folder</li>
+              <li>Contains all the metadata for the project</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git clone</kbd>
+            <ul>
+              <li>Clone a repository into a new directiory</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Work on the Current Change Area</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd><a [routerLink]="['../commits']">git add</a></kbd>
+          </li>
+          <li>
+            <kbd>git mv</kbd>
+            <ul>
+              <li>Move or rename a file, a directory, or a symlink</li>
+              <li>First parameter is the file to move or rename</li>
+              <li>2nd parameter is the new filename</li>
+              <li>
+                The file will show up with a status of renamed under
+                <kbd>git status</kbd>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd><a [routerLink]="['../commits']">git reset</a></kbd>
+          </li>
+          <li>
+            <kbd>git restore</kbd>
+            <ul>
+              <li>use to discard changes in working directory</li>
+              <li>
+                <kbd>git restore myFileName --staged</kbd> will remove a file
+                named myFileName from staging
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git rm</kbd>
+            <ul>
+              <li>Remove a file from the working tree and from the index</li>
+              <li>This stages the deletion and Git will stop tracking it</li>
+              <li>The file will be removed from the working directory</li>
+              <li>
+                <kbd>git rm --cached target-filename</kbd>
+                <ul>
+                  <li>
+                    Git will stop tracking this file and remove it from the
+                    index
+                  </li>
+                  <li>
+                    This option WILL NOT delete the file from the working
+                    directory. It will show up as untracked under
+                    <kbd>git status</kbd>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Examine the History and State</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>git show 100644</kbd>
+            <ul>
+              <li>
+                Shows the contents of the object with the hash identifer that
+                starts with 100644
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git log</kbd>
+            <ul>
+              <li>Shows the commit history for the repository</li>
+              <li>Displays the identifier, author, and date of the commit</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git status</kbd>
+            <ul>
+              <li>First line is the current branch</li>
+              <li>
+                Next lines will display if there are changes to be aware of,
+                including
+                <ul>
+                  <li>Files in the project area that are untracked</li>
+                  <li>Files that have been modified since the last commit</li>
+                  <li>
+                    Files that are staged for the next commit - this will flag
+                    the file as a new file or a change to an existing file
+                  </li>
+                  <li>
+                    If no files are staged or have outstanding changes, this
+                    will be empty
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git status -s</kbd> or <kbd>git status --short</kbd>
+            <ul>
+              <li>
+                Shorter, more compact and concise version of
+                <kbd>git status</kbd>
+              </li>
+              <li>
+                Three columns are displayed for each file
+                <ul>
+                  <li>
+                    First column indicates the staging status of the file (green
+                    text)
+                  </li>
+                  <li>
+                    Second column indicates the file has been modified, but
+                    remains in the working directory (red text)
+                  </li>
+                  <li>Third column is the filename</li>
+                </ul>
+              </li>
+              <li>
+                Letters are used to indicate status
+                <ul>
+                  <li>M = modified</li>
+                  <li>A = new file added to staging area</li>
+                  <li>?? = new file untracked by Git</li>
+                </ul>
+              </li>
+              <li>
+                Examples
+                <ul>
+                  <li>
+                    File has been staged as a modified change, file has changes
+                    that were made after it was staged
+                    <div class="card"><div class="card-body"><code>
+                      $ git status --short&#10;M M File2"
+                    </code></div></div>
+                  </li>
+                  <li>
+                    Testfile9 is modified but not staged. Testfile22 is in the
+                    project, but not tracked. Testfile100 is a new file that has
+                    been staged. All others are modified and staged
+                    <div class="card"><div class="card-body"><code>
+                      code='$ git status --short&#10; M "Test Folder/testfile10.txt"&#10; M "Test Folder/testfile6.txt"&#10; M "Test Folder/testfile9.txt"&#10; M testfile1.txt&#10;A testfile100.txt&#10;M testfile9.txt&#10;?? testfile22.txt&#10;'
+                    </code></div></div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Grow, Mark, and Tweak Your Common History</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd><a [routerLink]="['../commits']">git commit</a></kbd>
+          </li>
+          <li>
+            <kbd>git diff</kbd>
+            <ul>
+              <li>
+                Displays the differences between two snapshots
+                <ul>
+                  <li>
+                    Dont need to include the entire hex code, just the first few
+                    characters
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git log</kbd>
+            <ul>
+              <li>Shows history of commits</li>
+              <li>These are displayed with most recent entries at the top</li>
+              <li>This command has lots of options that can be used</li>
+              <li>
+                For each commit, it shows
+                <ul>
+                  <li>Full SHA1 checksum identifier for the commit</li>
+                  <li>Author</li>
+                  <li>Commit datestamp</li>
+                  <li>Commit message</li>
+                </ul>
+              </li>
+              <li>
+                <kbd>git log -10</kbd>
+                <ul>
+                  <li>Only shows the 10 newest commits</li>
+                </ul>
+              </li>
+              <li>
+                <kbd>git log --oneline</kbd>
+                <ul>
+                  <li>Gives a shortened summary of each commit</li>
+                  <li>
+                    Each line represents a commit with a few digits of the SHA1
+                    has identifier and the commit message
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <kbd>git log --stat</kbd>
+                <ul>
+                  <li>Gives a detailed view for each commit</li>
+                  <li>Includes all the information from <kbd>git log</kbd></li>
+                  <li>
+                    Also includes the individual files that changed in the
+                    commit
+                  </li>
+                  <li>Press q to quit</li>
+                </ul>
+              </li>
+              <li>
+                <kbd>git log --patch</kbd>
+                <ul>
+                  <li>Displayes the full diff for each commit</li>
+                  <li>Press q to quit</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd><a [routerLink]="['../branching']">git checkout</a></kbd>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

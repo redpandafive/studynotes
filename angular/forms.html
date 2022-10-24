@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Forms</li>
+        </ol>
+      </nav>
+      <h1>Forms</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/forms.html#basics">Basics</a></li>
+          <li><a href="./angular/forms.html#select">Select Controls</a></li>
+          <li>
+            <a href="./angular/forms.html#validation"
+              >Validation - Custom Validators</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>
+            There are two methods of building forms in Angular:
+            <ul>
+              <li>
+                Reactive forms
+                <ul>
+                  <li>more robust, scalable, reusable, and testable</li>
+                  <li>model driven approach to handing form inputs</li>
+                </ul>
+              </li>
+              <li>
+                Template driven forms
+                <ul>
+                  <li>useful for adding a simple form to an app</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Both approaches use the same underlying building blocks
+            <ul>
+              <li>
+                FormControl
+                <ul>
+                  <li>
+                    Tracks the value and validation status of an individual form
+                    control
+                  </li>
+                </ul>
+              </li>
+              <li>
+                FormGroup
+                <ul>
+                  <li>
+                    Tracks the same values and status for a collection of form
+                    controls
+                  </li>
+                </ul>
+              </li>
+              <li>
+                FormArray
+                <ul>
+                  <li>
+                    Tracks the same values and status for an array of form
+                    controls
+                  </li>
+                </ul>
+              </li>
+              <li>
+                ControlValueAccessor
+                <ul>
+                  <li>
+                    Creates a bridge between Angular FormControl instances and
+                    native DOM elements
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Both approaches use a form model to track value changes between
+            Angular forms and form input elements
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="select">Select Controls</h2>
+      <section>
+        <ul>
+          <li>Three ways to get the current value of a select control</li>
+          <li>
+            Method #1: Use the change event on the select control
+            <ul>
+              <li>
+                Add a template variable to the select control
+                <div class="card">
+                  <div class="card-body">
+                    <code> &lt;select #teams&gt;</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Bind the change event on the control to a method
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;select #teams
+                      (change)=&quot;onSelected(teams.value)&quot;&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Assign the value into a component property
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      export class TeamWithChangeEventComponent {<br />
+                      selectedTeam = '';<br />
+                      onSelected(value:string): void { <br />
+                      this.selectedTeam = value;<br />
+                      }<br />}
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Method #2: Use ViewChild and a template reference variable
+            <ul>
+              <li>
+                Add a template variable to the select control
+                <div class="card">
+                  <div class="card-body">
+                    <code> &lt;select #teams&gt;</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Bind the change event on the control to a method, but do not
+                pass any parameters
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;select #teams (change)=&quot;onSelected()&quot;&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Use a ViewChild decorator to reference the tempalte variable to
+                access the current value
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      export class TeamUsingViewChildComponent {<br />
+                      @ViewChild('teams') teams!: ElementRef;<br />
+                      selectedTeam = '';<br />
+                      onSelected():void {<br />
+                      this.selectedTeam = this.teams.nativeElement.value;<br />
+                      }<br />
+                      }
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Method #3: Use NgModel and 2 way data binding
+            <ul>
+              <li>
+                Use the NgModel directive in your Template
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;select &#91;(ngModel)&#93;="selectedTeam"&gt;&#10;
+                      <br />
+                      &lt;option default&gt;Pick a team&lt;/option&gt;<br />
+                      &lt;option&gt;Lakers&lt;/option&gt;<br />
+                      &lt;option&gt;Miami&lt;/option&gt;<br />
+                      &lt;option&gt;Cleveland&lt;/option&gt;<br />
+                      &lt;/select&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                This will bind to a property named selectedTeam on your
+                component
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="validation">Validation - Custom Validators</h2>
+      <section>
+        <ul>
+          <li>
+            Custom validators can be implemented as classes
+            <ul>
+              <li>
+                Use the Directive decorator on this class
+                <ul>
+                  <li>This should contain a selector</li>
+                </ul>
+              </li>
+              <li>The class name should end in a Validator suffix</li>
+              <li>The class should implement Validator class</li>
+              <li>
+                Contains a single method, validate
+                <ul>
+                  <li>Takes a FormGroup object as a parameter</li>
+                  <li>Returns { [key: string]: any }</li>
+                </ul>
+              </li>
+              <li>
+                To access a control named address in the FormGroup
+                <ul>
+                  <li>formGroup.controls['address']</li>
+                </ul>
+              </li>
+              <li>
+                You can navigate up the FormGroup hierarchy by accessing
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      (&lt;FormGroup&gt;formGroup.root).controls&#91;&quot;controlInParentFormGroup&quot;&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>Returning null means validation is passed</li>
+            </ul>
+          </li>
+
+          <li>
+            Custom validator classes must be added to Angular's validator
+            'service'
+            <ul>
+              <li>
+                Import NG_VALIDATORS from @angular/forms - this is essentially a
+                service
+              </li>
+              <li>
+                In the directive config object add
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      Providers: &#91;{provide: NG_VALIDATORS, useExisting:
+                      LocationValidator, multi: true }&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Without the multi: true parameter, this would break built in
+            validators since LocationValidatior is being configured to be
+            injected
+          </li>
+          <li>
+            The 3rd parameter adds the new validator to the collection of
+            services provided by NG_VALIDATORS that are built in by Angular
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

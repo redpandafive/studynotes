@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Statements</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Iteration Statements</h2>
+
+      <h3>For Loops</h3>
+      <section>
+        <ul>
+          <li>
+            Example of transversing a tree of nodes to the root without using
+            recursion
+            <div class="card"><div class="card-body"><code>
+              void FindRoot(Node node, Action&lt;Node&gt; processNode)&#10;{&#10; for (var current = node; current != null; current = current.Parent)&#10; {&#10; processNode(current);&#10; }&#10;}"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Switch Expressions</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to write switches as an expression that return a value
+          </li>
+          <li>
+            Important to remember that these should return a value, so either
+            <ul>
+              <li>Have a variable to the left of an assignment operator</li>
+              <li>
+                Define a function that returns a value and uses => syntax with
+                the switch
+              </li>
+            </ul>
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                Put the variable name to switch on, then the switch keyword
+              </li>
+              <li>
+                Do not need
+                <ul>
+                  <li>Case keywords</li>
+                  <li>Break keywords - no fall through</li>
+                </ul>
+              </li>
+              <li>
+                Use
+                <ul>
+                  <li>
+                    Underscore character to indicate a discard value or default
+                    - this will match anything, including nulls
+                  </li>
+                  <li>Use a lambda to return a value</li>
+                  <li>Null</li>
+                </ul>
+              </li>
+              <li>
+                Can optionally use
+                <ul>
+                  <li>Type keyword on the left to switch on the type</li>
+                  <li>Property pattern match to match on a property value</li>
+                </ul>
+              </li>
+              <div class="card"><div class="card-body"><code>
+                ICollection&lt;char&gt; { Count: &gt;= 5 } =&gt; ..."
+              </code></div></div>
+            </ul>
+          </li>
+        </ul>
+
+        <div>
+          <img src="../../../assets/switch-expression-1.png" />
+          <ul>
+            <li>
+              Cases take other switch expressions as well as property matching
+              statements
+            </li>
+            <li>Can combine with Tuple patterns</li>
+          </ul>
+        </div>
+        <div>
+          <img src="../../../assets/switch-expression-2.png" />
+          <ul>
+            <li>
+              The above is a snipped from a method that takes two parameters, C1
+              and C2
+            </li>
+            <li>switch on a Tuple containing C1 and C2</li>
+            <li>Can add a conditional</li>
+          </ul>
+        </div>
+      </section>
+
+      <h3>Switch Expressions – Case Guard</h3>
+      <section>
+        <ul>
+          <li>
+            An additional conditional that must be satisfied together with a
+            matched pattern
+          </li>
+          <li>Must be a Boolean expressions</li>
+          <li>
+            Example
+            <div class="card"><div class="card-body"><code>
+              switch((a, b))&#10; case (&gt;0, ) 0) when a == b"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Top Level Statements (Console Application)</h2>
+      <section>
+        <ul>
+          <li>
+            Eliminates the need for the boilerplate code on a console
+            application Main file
+            <ul>
+              <li>No static Main method</li>
+              <li>No program class</li>
+            </ul>
+          </li>
+          <li>Added in C# 9</li>
+          <li>The eliminate code is put back in the generated IL</li>
+          <li>There can be only one Main method in .NET programs</li>
+          <li>
+            This code that is added in Program.cs without the explicit class,
+            method, etc. code are called Top level statements
+            <ul>
+              <li>
+                Top level statements can only be used in the Program.cs file
+              </li>
+            </ul>
+          </li>
+          <li>
+            Namespaces and type declarations must be after all top-level
+            statements
+            <ul>
+              <li>These are compiled to IL as if they were separate files</li>
+            </ul>
+          </li>
+          <li>
+            The .NET 6 SDK adds a set of implicit global using directives
+            <ul>
+              <li>
+                These include the most common namespaces for the project type
+              </li>
+              <li>
+                Means you do not have to add a using statement to access Console
+                object
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can still access the args parameter in the top level without
+            doing anything special
+            <ul>
+              <li>Just access it like it has already been declared</li>
+              <li>This is a string parameter</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

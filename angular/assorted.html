@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Assorted Concepts</li>
+        </ol>
+      </nav>
+
+      <h1>Assorted Concepts</h1>
+      <section>
+        <ul>
+          <li>
+            <a href="./angular/assorted.html#vsAngular1"
+              >Angular .vs Angular JS</a
+            >
+          </li>
+          <li>
+            <a href="./angular/assorted.html#projStruct">Project Structure</a>
+          </li>
+          <li>
+            <a href="./angular/assorted.html#bootstrap">Bootstrapping</a>
+          </li>
+          <li>
+            <a href="./angular/assorted.html#ieStatements"
+              >Import / Export Statements</a
+            >
+          </li>
+          <li>
+            <a href="./angular/assorted.html#views">Views</a>
+          </li>
+          <li>
+            <a href="./angular/assorted.html#devtools">Angular DevTools</a>
+          </li>
+          <li>
+            <a href="./angular/assorted.html#designPatterns">Design Patterns</a>
+          </li>
+          <li>
+            <a href="./angular/assorted.html#elements">Angular Elements</a>
+          </li>
+          <li>
+            <a href="./angular/assorted.html#scrolling">Scrolling</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="vsAngular1">Angular .vs Angular JS</h2>
+      <section>
+        <ul>
+          <li>
+            Can bind to the DOM properties, which eliminates 40+ directives from
+            Angular 1
+          </li>
+          <li>Components identify their template that they will use</li>
+          <li>
+            In Angular 1 you would usually associate a controller with a
+            template in the router
+          </li>
+        </ul>
+      </section>
+      <h2>Ahead-of-Time Compilation</h2>
+      <section>
+        <ul>
+          <li>
+            The HTML-like templates of Angular components are a challenge for
+            external tools to analyze
+            <ul>
+              <li>
+                Makes tree shaking less efficient since they cannot examine
+                templates to see if some imports should be excluded
+              </li>
+              <li>
+                AoT compiler transpiles the Angular HTML-like templates to
+                Javascript or Typescript with ES2015 module imports
+                <ul>
+                  <li>
+                    This allows tree shaking to function correctly for imports
+                    used in templates
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="projStruct">Project Structure</h2>
+      <section>
+        <ul>
+          <li>
+            Angular loads as a collection of JS modules (think of them as
+            library modules)
+          </li>
+          <li>
+            Each library begins with the @angular prefix
+            <ul>
+              <li>Use NPM to install these</li>
+            </ul>
+          </li>
+          <li>
+            Import parts of them with JS import statements
+            <ul>
+              <li>This can be done to import components as well as modules</li>
+            </ul>
+          </li>
+          <li>
+            Workspace
+            <ul>
+              <li>Contains the files for one or more projects</li>
+              <li>Created by the new command in CLI</li>
+              <li>
+                Commands that create or operate on apps and libraries must be
+                executed from within a workspace folder
+              </li>
+              <li>
+                All apps in a workspace can use libraries in the same workspace
+              </li>
+            </ul>
+          </li>
+          <li>
+            Project
+            <ul>
+              <li>
+                Set of files that comprise an app, a library, or end to end
+                tests
+              </li>
+            </ul>
+          </li>
+          <li>Use Angular CLI to create a new project skeleton from scratch</li>
+          <ul>
+            <li>E2e folder</li>
+            <ul>
+              <li>Testing folder</li>
+            </ul>
+            <li>
+              Node_modules folder
+              <ul>
+                <li>Packages from NPM</li>
+              </ul>
+            </li>
+            <li>
+              Src folder
+              <ul>
+                <li>
+                  Contains source code
+                  <ul>
+                    <li>App folder - where you will do most of your coding</li>
+                  </ul>
+                </li>
+                <li>
+                  Assets folder
+                  <ul>
+                    <li>
+                      Site wide static assets, such as images and site wide CSS
+                    </li>
+                    <li>Can separate these into separate sub folders</li>
+
+                    <li>Reference these as “/assets/mypic.png”</li>
+
+                    <li>
+                      Assets folder path is referenced in the angular.json
+
+                      <ul>
+                        <li>Take arrays in assets, styles, and scripts keys</li>
+                        <li>
+                          Use these to tell webpack to include these files
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Angular.json
+              <ul>
+                <li>
+                  Various settings that the cli will use for various operations,
+                  like Web Pack fill
+                </li>
+                <li>
+                  Global stylesheets can be registered in the style section
+                  (includes styles.css by default)
+                </li>
+              </ul>
+            </li>
+            <li>
+              Package.json - NPM packages that should be downloaded with this
+              project as well as defined scripts
+            </li>
+            <li>Package-lock.json</li>
+          </ul>
+        </ul>
+      </section>
+
+      <h2 id="bootstrap">Bootstrapping</h2>
+      <section>
+        <ul>
+          <li>
+            Loads main.ts file
+            <ul>
+              <li>
+                This is referenced by the main property of angular.json to
+                identify the startup
+              </li>
+              <li>Enables Prod mode if that is enabled</li>
+              <li>
+                Bootstraps AppModule with a call to
+                platformBrowserDynamic().boostrapModule(AppModule)
+              </li>
+            </ul>
+          </li>
+          <li>
+            AppModule bootstraps AppComponent
+            <ul>
+              <li>
+                This is defined as a property on the NgModule decorator under
+                the boostrap configuration property
+              </li>
+              <li>
+                Foundation component for an Angular project, so all applications
+                require one and only one
+              </li>
+            </ul>
+          </li>
+          <li>
+            App component
+            <ul>
+              <li>
+                When you bootstrap with the AppComponent class (in main.ts),
+                Angular looks for a app-root in the index.html, instantiates an
+                instance of AppComponent, and renders it inside the app-root tag
+              </li>
+              <li>
+                The app-root tag will be in the Index.html file included in the
+                root of the Src folder
+              </li>
+            </ul>
+          </li>
+          <li>
+            Index.html
+            <ul>
+              <li>Loaded by the browser when the application starts</li>
+              <li>Contains the app-root tag from Angular</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2 id="ieStatements">Import / Export Statements</h2>
+
+        <p>
+          You can alias imports as follows (within your script, you would
+          reference this as TOASTR_TOKEN2)
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              import&nbsp;{&nbsp;TOASTR_TOKEN&nbsp;as&nbsp;TOASTR_TOKEN2&nbsp;}&nbsp;from&nbsp;'./common/toastr2.service'
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>Import/Export Statements – Simplifying</h3>
+      <section>
+        <p>
+          You can shorten the import declarations you need to reference items in
+          feature modules by re-exporting the components in your feature module
+          (AKA creating barrels)
+        </p>
+        To implement:
+        <ul>
+          <li>
+            Put in index.ts file in the root of your feature module (this is the
+            convention used in the Pluralsight course)
+          </li>
+          <li>Re-export all the components in the module in this file</li>
+        </ul>
+
+        <div class="card">
+          <div class="card-body">
+            <code>
+              export&nbsp;*&nbsp;from&nbsp;'./create-event.component';<br/>
+              export&nbsp;*&nbsp;from&nbsp;'./event-thumbnail.component';<br/>
+              export&nbsp;*&nbsp;from&nbsp;'./events-list-resolver.component';
+            </code>
+          </div>
+        </div>
+
+        <p>
+          Create a new index.ts in the tier above this and export all from the
+          child index.ts files in this one file. Reference this outermost
+          index.ts to perform all inputs
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              import&nbsp;{&#10;&nbsp;EventsListComponent,&#10;&nbsp;EventListResolver,&#10;&nbsp;EventThumbnailComponent&#10;}&nbsp;from&nbsp;'./events/index'
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="views">Views</h2>
+      <section>
+        <ul>
+          <li>
+            Combination of a component and its template
+            <ul>
+              <li>Component controls the patch of screen called a view</li>
+            </ul>
+          </li>
+          <li>
+            Host view
+            <ul>
+              <li>Template immediately associated with a component</li>
+              <li>This can be part of a view hierarchy</li>
+            </ul>
+          </li>
+          <li>
+            Embedded views
+            <ul>
+              <li>
+                Hosted views from other components that may be used to build up
+                a component view
+              </li>
+            </ul>
+          </li>
+          <li>
+            View Hierarchy
+            <ul>
+              <li>
+                Composition of views that define arbitrarily complex areas of
+                the screen that can be created, modified, and destroyed as a
+                unit
+              </li>
+              <li>
+                This can mix views defined in components that belong to
+                different Modules. This is especially true with UI libraries
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="devtools">Angular DevTools</h3>
+      <section>
+        <ul>
+          <li>Plugin for Chrome</li>
+          <li>Application must be running in dev mode</li>
+          <li>
+            Components subsection gives you
+            <ul>
+              <li>The component tree</li>
+              <li>Properties for each component are listed on the right</li>
+              <li>Properties can be modifed in read time</li>
+            </ul>
+          </li>
+          <li>
+            Profiler
+            <ul>
+              <li>
+                When the profier is recording, you can see change detection
+                cycles as you interact with the page
+              </li>
+              <li>
+                This also which components are involved and which triggered the
+                change detection cycle
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="designPatterns">Design Patterns</h2>
+      <section>
+        <ul>
+          <li>
+            Observable Data Service
+            <ul>
+              <li>
+                A simple and intuitive pattern
+                <ul>
+                  <li>
+                    Useful when you have several components that need to
+                    reference the same data
+                  </li>
+                </ul>
+              </li>
+              <li>Create a new service for the data store</li>
+              <li>
+                In the constructor,
+                <ul>
+                  <li>
+                    Inject the service that fetches the data from the server
+                  </li>
+                  <li>
+                    Call the method on the injected service to fetch the data
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Add a private property to capture a BehaviorSubject
+                <ul>
+                  <li>
+                    This also provides an empty starting value
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          private&nbsp;_todos:&nbsp;BehviorSubject&lt;List&lt;Todo&gt;&gt;&nbsp;=&nbsp;new&nbsp;BehaviorSubject(List([]))
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>In the constructor, call the service to hydrate the data</li>
+              <li>
+                Don't expose the BehaviorSubject directly to clients
+                <ul>
+                  <li>
+                    Expose an Observable instead
+                    <ul>
+                      <li>
+                        Prevents service clients from emitting store values
+                        directly and bypassing the store
+                      </li>
+                      <li>
+                        Prevents event chaining in components that can be hard
+                        to understand
+                      </li>
+                      <li>
+                        Exposes too much of the internal structures of the
+                        service needlessly
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="elements">Angular Elements</h2>
+      <section>
+        <ul>
+          <li>
+            Angular components packaged as custom elements, a web standard for
+            defining new HTML elements in a framework agnostic way
+          </li>
+          <li>
+            Extends HTML by allowing you to define a tag whose content is
+            created and controlled by JavaScript code
+          </li>
+          <li>
+            The browser maintains a CustomElementRegistry of defined custom
+            elements which map an instantiable JavaScript class to an HTML tag
+          </li>
+          <li>
+            Currently supported by Chrome, Firefox, Opera, and Safari
+            <ul>
+              <li>Polyfills available through other browsers</li>
+            </ul>
+          </li>
+          <li>
+            Transforming a component to a custom element makes all of the
+            required Angular infrastructure available to the browser
+            <ul>
+              <li>
+                a small, self contained version of the Angular framework will be
+                injected as a service to support the component's change
+                detection and data-binding functionality
+              </li>
+            </ul>
+          </li>
+          <li>
+            Custom elements
+            <ul>
+              <li>
+                Bootstrap themselves automatically when they are added to the
+                DOM
+              </li>
+              <li>automatically destroyed when removed from the DOM</li>
+              <li>looks and behaves like any other HTML element</li>
+              <li>
+                does not require any special knowledge of Angular terms or usage
+                conventions
+              </li>
+            </ul>
+          </li>
+          <li>
+            How it works
+            <ul>
+              <li>
+                Use the createCustomElement function to convert a component into
+                a class that can be registered with the browser as a custom
+                element
+                <ul>
+                  <li>
+                    once registered, it can be used just like a built in HTML
+                    element int content that you add directly into the DOM
+                  </li>
+                  <li>
+                    this function collects the component's observable
+                    properties, along with the Angular functionality the browser
+                    needs to create and destroy the instances, as well as to
+                    detect and respond to changes
+                  </li>
+                </ul>
+              </li>
+              <li>
+                When the custom element is placed on a pace, the browser creates
+                and instance of the registered class and adds it to the DOM
+                <ul>
+                  <li>
+                    content is provided by the component template, which uses
+                    Angular template syntax
+                  </li>
+                  <li>
+                    input properties in the component correspond to input
+                    attributes for the element
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="scrolling">Scrolling</h2>
+      <section>
+        <ul>
+          <li>Use the built in Angular service ViewportScroller</li>
+          <li>
+            There are several methods on this service to scrolling
+            <ul>
+              <li>
+                scrollToAnchor(idAsString)
+                <ul>
+                  <li>Scrolls to the specified element with id idAsString</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

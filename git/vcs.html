@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>General Version Control Information</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        <ul>
+          <li>
+            Software designed to manage changes made to files over time - gives
+            long running history of a software project
+          </li>
+          <li>
+            Gives you infinite undo/redo functionality
+            <ul>
+              <li>
+                Files / sets of files can be reverted to any previous versions
+              </li>
+            </ul>
+          </li>
+          <li>
+            Not a backup system - you must backup and secure the repository
+          </li>
+          <li>
+            Allows you to juggle multiple versions of the same app at the same
+            time
+            <ul>
+              <li>Example is a free and premium version of an app</li>
+              <li>You could have multiple branches of the same app</li>
+            </ul>
+          </li>
+          <li>
+            Makes sharing code among a team of multiple developers easier
+            <ul>
+              <li>
+                Developers can share the same repo so painful integration phases
+                lessened
+              </li>
+            </ul>
+          </li>
+          <li>
+            Coorinating teamwork
+            <ul>
+              <li>
+                The repository can be the source of truth for all users,
+                including developers, project managers, and administrators
+              </li>
+              <li>
+                This includes bug tracking software, which can link to the bug
+                in the repository
+              </li>
+              <li>
+                Project management tools can also link to the repository (Jira)
+              </li>
+              <li>
+                Build machines can also link to the repository (Jenkins). It can
+                monitor for changes, compile the code, run metrics and automated
+                tests, and package
+              </li>
+            </ul>
+          </li>
+          <li>
+            Git
+            <ul>
+              <li>Open source distributed version control system (VCS)</li>
+              <li>Can be used for any text documents as well</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Client / Server vs Distributed Version Control</h2>
+      <section>
+        <ul>
+          <li>
+            Client / Server
+            <ul>
+              <li>Examples include Subversion and TFS</li>
+              <li>
+                Repository is housed on a central server
+                <ul>
+                  <li>
+                    Clients connect to this central server to get files and
+                    commit
+                  </li>
+                </ul>
+              </li>
+              <li>Conflicts must be resolved before commits are allowed</li>
+            </ul>
+          </li>
+          <li>
+            Distributed
+            <ul>
+              <li>
+                Clients clone an entire repository to thier workstation,
+                including all files, history, etc
+                <ul>
+                  <li>
+                    Git stores the repository in a hidden folder named .git
+                  </li>
+                  <li>A link is maintained to the server</li>
+                </ul>
+              </li>
+              <li>
+                In a peer-to-peer system, all repositories are copies of each
+                other (although there is one version that is designated as
+                central shared)
+              </li>
+              <li>
+                Advantages
+                <ul>
+                  <li>
+                    You can keep working with version control (making commits,
+                    branches, fetching history, etc) offline
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Downsides
+                <ul>
+                  <li>Cannot lock files (this isn't necessarily a downside)</li>
+                  <li>
+                    Great for text files, but not good for binary files (lots of
+                    version control systems have problems with these)
+                  </li>
+                  <li>
+                    Not user friendly - hard to learn, but easy to use once you
+                    understand it
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Lambda Expressions</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        <ul>
+          <li>
+            A concise way of writing inline code blocks
+            <ul>
+              <li>
+                Functions with a different syntax that enables them to be used
+                in an expression context instead of the usual OO way
+              </li>
+            </ul>
+          </li>
+          <li>
+            These are syntax sugar for making anonymous method definition easier
+          </li>
+          <li>
+            Projection
+            <ul>
+              <li>A lambda expression that translates one type into another</li>
+            </ul>
+          </li>
+          <li>
+            Two characteristics
+            <ul>
+              <li>Parameter lists may have explicit or implicit types</li>
+              <li>Bodies may be expressions or statement blocks</li>
+            </ul>
+          </li>
+          <li>
+            Two forms
+            <ul>
+              <li>
+                Expression lambda
+                <ul>
+                  <li>Has an expression as its body</li>
+                  <li>Does not use curly braces around the body</li>
+                  <li>
+                    This would be assigned to a type of Func&gt;T, TResult&lt;
+                    where
+                  </li>
+                  <li>T for each parameter type</li>
+                  <li>Last item (TResult) is the result type</li>
+                </ul>
+              </li>
+              <li>
+                Statement lambda
+                <ul>
+                  <li>Has a statement block as its body</li>
+                  <li>Uses curly braces around the body</li>
+                  <li>Can consist of any number of statements</li>
+                  <li>
+                    This would be assigned to a type of Action&gt;T&lt; where T
+                    is the parameter type
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Input parameters
+            <ul>
+              <li>Specify zero parameters with empty parentheses</li>
+              <li>
+                If there is only one input parameter, parentheses are optional
+              </li>
+              <li>
+                Two or more are separated by commas and surrounded by
+                parentheses
+              </li>
+              <li>
+                You can explicitly specify the types of parameters – otherwise
+                they are implicitly typed
+                <div class="card"><div class="card-body"><code>
+                  (int x, string x) =&gt; ..."
+                </code></div></div>
+              </li>
+              <li>
+                Use underscores to represent discards
+                <ul>
+                  <li>These aren’t used in the expression</li>
+                  <li>Added in C# 9</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Outer variables = Closures
+            <ul>
+              <li>
+                Inside the code of a lambda expression, you can touch variables
+                outside of the scope of that method
+              </li>
+              <li>This “captures” the outer variable</li>
+              <li>
+                This extends the lifetime of the outer variable to coincide with
+                the lifetime of the underlying delegate instance that represents
+                the lambda expression
+              </li>
+              <li>
+                You should be careful about that you touch inside the lambda
+                because of this
+              </li>
+            </ul>
+          </li>
+
+          <li>Tuple support added in C# 7</li>
+          <li>
+            Example with named components
+            <div class="card"><div class="card-body"><code>
+              Func&lt;(int n1, int n2, int n3), (int, int, int)&gt; doubleThem = ns =&gt; (2 * ns.n1, 2 * ns.n2, 2 * ns.n3);&#10;var numbers = (2, 3, 4);&#10;var doubledNumbers = doubleThem(numbers);"
+            </code></div></div>
+          </li>
+          <li>
+            Example without named components
+            <div class="card"><div class="card-body"><code>
+              Func&lt;(int, int, int), (int, int, int)&gt; doubleThem = ns =&gt; (2 * ns.Item1, 2 * ns.Item2, 2 * ns.Item3);&#10;var numbers = (2, 3, 4);&#10;var doubledNumbers = doubleThem(numbers);"
+            </code></div></div>
+          </li>
+          <li>
+            C#10 Changes
+            <ul>
+              <li>
+                While not technically a “type”, lamba expressions do have a
+                “natural type”
+                <ul>
+                  <li>
+                    The compile will attempt to predict this so you can assign
+                    to var
+                  </li>
+                  <li>
+                    There may be situations where the compiler cannot infer a
+                    type – you must explicitly define it in this case
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Return types are typically inferred, but you can explicitly
+                define one if needed
+                <ul>
+                  <li>
+                    Must explicitly type and parenthesize the input parameters
+                    when you do this
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Example
+            <ul>
+              <li>
+                “using j as the parameter to the function, j goes to the result
+                of j * 42”
+                <div class="card"><div class="card-body"><code>
+                  j =&gt; j * 42"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            This can be captured and invoked from a delegate instance
+            <div class="card"><div class="card-body"><code>
+              MyDelegate del = j =&gt; j * 42;&#10;del();"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

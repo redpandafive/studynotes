@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Services</li>
+        </ol>
+      </nav>
+      <h1>Services</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/services.html#basics">Basics</a></li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+      <ul>
+        <li>
+          These provide specific functionality not directly related to views
+          <ul>
+            <li>This is logic that can be shared across components</li>
+          </ul>
+        </li>
+        <li>
+          Injected into components as dependencies to provide separation of
+          logic
+          <ul>
+            <li>Modularity – keeps components lean and efficient</li>
+            <li>
+              Services can depend on other services, so you keep them focused
+              and specialized
+            </li>
+          </ul>
+        </li>
+        <li>
+          Can be anything, but typically is a class with a narrow well-defined
+          purpose
+          <ul>
+            <li>
+              Could be any value, function, or feature that your application
+              needs
+            </li>
+          </ul>
+        </li>
+        <li>
+          Identified by the @Injectable() decorator
+          <ul>
+            <li>
+              Technically only required when you inject a service that has
+              dependency services of its own
+            </li>
+            <li>Best practice to just add it</li>
+          </ul>
+        </li>
+        <li>
+          Services are singletons – there are two ways to make a singleton
+          service in Angular
+          <ul>
+            <li>
+              Declare root for the value of the @Injectable providedIn property
+            </li>
+            <li>
+              Include the service in the AppModule or in a module that is only
+              imported by the AppModule
+            </li>
+          </ul>
+        </li>
+        <li>
+          Beginning with Angular 6, setting the providedIn to root is the
+          preferred way since it makes them tree shakable
+          <ul>
+            <li>
+              Pre-Angular 6, the preferred way is to register them in the
+              providers array of modules
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

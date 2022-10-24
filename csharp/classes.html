@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Classes</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <!-- linkMappings: AnchorLinkMapping[] = [
+{ id: "nested", label: "Nested" },
+{ id: "partial", label: "Partial" },
+{ id: "privateConstructors", label: "Private Constructors" },
+{ id: "staticConstructors", label: "Static Constructors" },
+{ id: "deconstructors", label: "Deconstructors" },
+{ id: "finalizers", label: "Finalizers" },
+{ id: "newModifier", label: "New Modifier" },
+{ id: "versioning", label: "Versioning" },
+{ id: "nameof", label: "NameOf Expressions" },
+{ id: "objInit", label: "Object Initializers" },
+{ id: "static", label: "Static" },
+];
+} -->
+
+      <h2>Struct vs Class</h2>
+      <section>
+        <ul>
+          <li>
+            Struct
+            <ul>
+              <li>A value type</li>
+            </ul>
+          </li>
+          <li>
+            Class
+            <ul>
+              <li>A reference type</li>
+            </ul>
+          </li>
+          <li>
+            Guidelines
+            <ul>
+              <li>
+                Most of the time, classes are the appropriate choice to make
+              </li>
+              <li>
+                Structs can be used if instances of the type are small and
+                commonly short lived or embedded in other objects
+              </li>
+              <li>
+                Avoid structs unless the type has the following
+                <ul>
+                  <li>
+                    Logically represents a single value, like primitive types
+                    (int, double, etc)
+                  </li>
+                  <li>Has an instance size under 16 bytes</li>
+                  <li>Is immutable</li>
+                  <li>Will not have to be boxed frequently</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="nested">Nested</h2>
+      <section>
+        <ul>
+          <li>You can nest a class within another class in C#</li>
+          <li>
+            This nested class will have access to the private methods/properties
+            of the containing class
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="partial">Partial</h2>
+      <section>
+        <ul>
+          <li>
+            Can split the definition of a class, struct, interface, or method
+            over two or more source files
+          </li>
+          <li>
+            Each source file contains a section of the type or method
+            definition, and all parts are combined when the application is
+            compiled
+          </li>
+          <li>
+            Useful when multiple programmers need to work in a class at the same
+            time
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>Add the partial keyword modifier to a class</li>
+              <li>All partials should have the same class name</li>
+            </ul>
+          </li>
+          <li>
+            If one part is abstract, then all partials will be abstract
+            <ul>
+              <li>Same goes for sealed, base types, attributes</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Constructors</h2>
+
+      <h3 id="privateConstructors">Private Constructors</h3>
+      <section>
+        <ul>
+          <li>Generally used in classes that contain static members only</li>
+          <li>Usually there are no instance fields or methods</li>
+          <li>
+            Classes with only a private constructor and no public constructor,
+            other classes cannot create instances of this class
+          </li>
+          <li>Consider making such classes static classes as well</li>
+        </ul>
+      </section>
+
+      <h3 id="staticConstructors">Static Constructors</h3>
+      <section>
+        <ul>
+          <li>
+            Used to initialize any static data or perform any action that needs
+            to only be done once
+          </li>
+          <li>
+            Called automatically before the first instance is created or any
+            static members are referenced
+          </li>
+          <li>Can only be called by the CLR</li>
+          <li>
+            Restrictions
+            <ul>
+              <li>Cannot access modifiers or have parameters</li>
+              <li>Class can only have one</li>
+              <li>Cannot be inherited or overloaded</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="deconstructors">Deconstructors</h2>
+      <section>
+        <div>
+          C# offers built in support for deconstructing
+          <ul>
+            <li>Tuples</li>
+            <li>Record</li>
+            <li>DictionaryEntries</li>
+          </ul>
+        </div>
+        <div>
+          However, you can implement deconstructions on a class, struct, or
+          interface
+          <ul>
+            <li>
+              Add a method to a class to specify how a class should be
+              deconstructed when called by the appropriate operator
+            </li>
+            <li>
+              Can have overload the method if multiple versions are needed
+            </li>
+            <li>Must be different number of parameters on each</li>
+          </ul>
+        </div>
+        <div>
+          To specify
+          <ul>
+            <li>Add as a method on a class</li>
+            <li>Must be named Deconstruct</li>
+            <li>Must have a void return type</li>
+            <li>Add an out parameter for each item you want to deconstruct</li>
+          </ul>
+          <img src="../../../assets/deconstructor-1.png" />
+        </div>
+        <div>
+          Deconstructors allow you to write more complicated pattern matching.
+          The following example wil check for:
+          <ul>
+            <li>
+              Ignore fields that are not of interest with underscore to discard
+            </li>
+            <li>Any return type from the deconstructor</li>
+            <li>Any first name value</li>
+            <li>Any last name value</li>
+            <li>
+              A value from the 4rd property of the Teacher object to be Math
+            </li>
+            <li>A grade level value of 7</li>
+          </ul>
+          <img src="../../../assets/deconstructor-2.png" />
+        </div>
+        <div>
+          If you need deconstruction on a class you cant modify, you can use
+          extension methods to do so
+        </div>
+      </section>
+
+      <h2 id="finalizers">Finalizers</h2>
+      <section>
+        <ul>
+          <li>Historically called destructors</li>
+          <li>
+            Used for final clean up when a class instance is being collected by
+            a garbage collector
+            <ul>
+              <li>You have no control over when it is called</li>
+              <li>
+                These are called automatically, you can’t call them manually
+              </li>
+              <li>
+                The garbage collector will call it when it decides to dispose of
+                the object and release the memory
+              </li>
+            </ul>
+          </li>
+          <li>
+            Most cases, you can avoid it by wrapping any unmanaged handle (such
+            as a using block)
+          </li>
+          <li>
+            Usually get better performance by explicitly releasing any resources
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                For a class Car, add ~Car() { ... cleanup statements go
+                here ... }
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Inheritance</h2>
+
+      <h3 id="newModifier">New Modifier</h3>
+      <section>
+        <ul>
+          <li>
+            Used to
+            <ul>
+              <li>Create an instance of a type</li>
+              <li>
+                Explicitly hide a member that is inherited from a base class
+              </li>
+            </ul>
+          </li>
+          <li>
+            When hiding a member of a superclass, use the new keyword or the
+            compiler will issue a warning
+            <ul>
+              <li></li>
+              <li>This hides a method void Invoke on the superclass</li>
+            </ul>
+            <div class="card"><div class="card-body"><code>
+              new public void Invoke() {}"
+            </code></div></div>
+          </li>
+          <li>
+            It is an error to use new and override on the same member
+            <ul>
+              <li>
+                New creates a new member with the same name and causes the
+                original member to be hidden
+              </li>
+              <li>
+                Override modifier extends the implementation for an inherited
+                member
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="versioning">Versioning</h3>
+      <section>
+        <ul>
+          <li>
+            C# was designed so base and derived classes can evolve and maintain
+            backwards compatibility
+            <ul>
+              <li>Same concepts apply to properties, indexers, and events</li>
+            </ul>
+          </li>
+          <li>
+            New members on a base class can be added with the same name a member
+            in a derived class
+            <ul>
+              <li>
+                This method will be “hidden” when using an instance of the
+                derived class
+              </li>
+              <li>This allows both classes to evolve independently</li>
+            </ul>
+          </li>
+          <li>
+            Must explicitly state whether a method is intended to override an
+            inherited method
+          </li>
+          <li>
+            The compiler will issue a warning if a method on a derived type
+            hides a base class method
+            <ul>
+              <li>
+                If the method in the derived class is preceded with the new
+                keyword, the method is defined as being independent of the
+                method in the base class
+              </li>
+              <li>
+                If the method in the derived class is preceded with the override
+                keyword, objects of the derived class will call that method
+                instead of the bae class method
+                <ul>
+                  <li>Base class must be defined with the virtual keyword</li>
+                  <li>
+                    In the case of a derived class instance assigned to a base
+                    class variable
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            In the case of a derived class instance assigned to a base class
+            variable
+            <ul>
+              <li>
+                It will use any methods from the derived class if it
+                <ul>
+                  <li>They have the same name as the base class</li>
+                  <li>
+                    Uses the virtual/override keywords on the method definition
+                  </li>
+                </ul>
+              </li>
+              <li>
+                It will use methods from the base class if
+                <ul>
+                  <li>They have the same name as the derived class</li>
+                  <li>They are not marked as virtual/override</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Base class versions can be accessed by
+            <ul>
+              <li>Base.OverridedMethodName()</li>
+            </ul>
+          </li>
+          <li>
+            Order of operations
+            <ul>
+              <li>
+                Compiler first checks the derived class using the name and
+                parameter types given by the caller
+                <ul>
+                  <li>
+                    If there are more than one method with the same name, it
+                    will choose the one with the closet match based on the
+                    parameter types supplied
+                  </li>
+                  <li>
+                    If it can implicitly convert a parameter to a type listed on
+                    a method, it will do so and call the derived class method
+                    <ul>
+                      <li>
+                        Such as supplying a int when the method takes a double
+                      </li>
+                    </ul>
+                  </li>
+                  <li>This does not include override methods</li>
+                </ul>
+              </li>
+              <li>
+                Next, the compiler will try and match the call to overridden
+                methods with the same name and compatible parameters
+              </li>
+            </ul>
+          </li>
+          <li>
+            Keyword summary
+            <ul>
+              <li>
+                New
+                <ul>
+                  <li>Defined in derived class</li>
+                  <li>
+                    Methods in base and derived are independent of each other
+                  </li>
+                  <li>Method is base class is “hidden”</li>
+                  <li>
+                    Tells the compiler you are aware that the base method is
+                    hidden
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Override
+                <ul>
+                  <li>Defined in derived class</li>
+                  <li>Method is called instead of base class method</li>
+                  <li>
+                    These are not considered methods on the derived class, but
+                    new implementations of a method declared on the base class
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Virtual
+                <ul>
+                  <li>Defined in base class</li>
+                  <li>This is not default</li>
+                  <li>Allows a derived class to override the method</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="nameof">NameOf Expressions</h2>
+      <section>
+        <ul>
+          <li>
+            Returns the name of a variable, type, or member as as a string
+            constant
+          </li>
+          <li>Name is not fully qualified</li>
+          <li>
+            The following prints "ZipCode"
+            <div class="card"><div class="card-body"><code>
+              WriteLine(nameof(persion.Address.ZipCode))"
+            </code></div></div>
+          </li>
+          <li>Useful for printing exceptions and the offending element</li>
+          <li>Added in C# 6</li>
+        </ul>
+      </section>
+
+      <h2 id="objInit">Object Initializers</h2>
+      <section>
+        <ul>
+          <li>
+            Let you assign values to any accessible fields or properties of an
+            object at creation time without:
+          </li>
+          <li>invoke a constructor</li>
+          <li>lines of assignment statements</li>
+          <li>
+            If there are multiple constructors, you specify which to use by
+            including the necessary values in the constructor or eliminating the
+            parentheses
+            <div class="card"><div class="card-body"><code>
+              Cat cat = new Cat { Age =10, Name = “Fluffy };&#10;Cat sameCat = new Cat(“Fluffy”) { Age = 10 };&#10;"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="static">Static</h2>
+      <section>
+        <ul>
+          <li>
+            Item that does not belong to an instance of a class
+            <ul>
+              <li>Can only interact with other static elements</li>
+              <li>Use the static keyword</li>
+            </ul>
+          </li>
+          <li>
+            Static class
+            <ul>
+              <li>Can only contain static members</li>
+              <li>Acts as a placeholder for utility methods and fields</li>
+              <li>Can take a constructor, but it must be a static one</li>
+            </ul>
+          </li>
+          <li>
+            Tracking the number of instances of a class
+            <ul>
+              <li>Add a static integer field to a class</li>
+              <li>Increment this is the constructor</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

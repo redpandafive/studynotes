@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Assorted Concepts</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Useful Terminal Commands</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>cat</kbd>
+            <ul>
+              <li>
+                Reads one or more files and prints their contents to standard
+                output
+              </li>
+              <li>
+                If multiple files are listed, they are read and output in the
+                order they appearin the command line arguments
+              </li>
+              <li>
+                <kbd>cat xxxx yyyy</kbd> will read and print the output for xxxx
+                and then yyyy
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>echo</kbd>
+            <ul>
+              <li>Prints test back to the console</li>
+              <li>
+                Can redirect the output to a file instead:
+                <kbd>echo "Some Test" >> newfile.txt</kbd>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>pwd</kbd>
+            <ul>
+              <li>Print working directory</li>
+              <li>See which folder you currently are in</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>cd ~</kbd>
+            <ul>
+              <li>Go to the home directory</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>clear</kbd>
+            <ul>
+              <li>Clears the output from the CLI</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>touch</kbd>
+            <ul>
+              <li>Create an empty file</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>echo "SomeTestOutput" >> filename.txt</kbd>
+            <ul>
+              <li>Prints the output "SomeTestOutput"</li>
+              <li>Output is directed to a filename called filename.txt</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>ls</kbd>
+            <ul>
+              <li>Lists the content of the current directory</li>
+              <li>
+                Use <kbd>ls -a</kbd> to see all files, including hidden ones
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Team Coding Tips</h2>
+      <section>
+        <ul>
+          <li>
+            Feature flags
+            <ul>
+              <li>
+                These are simple conditional statements that test a boolean flag
+                <ul>
+                  <li>When true, the new feature code is executed</li>
+                  <li>When false, the old feature code is executed</li>
+                </ul>
+              </li>
+              <li>
+                These give you a centralized way to turn on/off new features in
+                case of an error when deployed
+                <ul>
+                  <li>
+                    Makes it easy to have buildable code on each commit,
+                    particuarly if the feature is still a work in progress
+                  </li>
+                  <li>
+                    If left in for the initial release, can just flip the flag
+                    to false to rollback a feature off the new feature instead
+                    of recompiling and reloading
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="card"><div class="card-body"><code>
+              if(flag) {&#10; // run new code here&#10;} else {&#10; // run existing code here&#10;}"
+            </code></div></div>
+          </li>
+          <li>
+            Commented Out Code
+            <ul>
+              <li>This can be confusing - why was it commented out?</li>
+              <li>
+                This costs time for everyone who reads it trying to figure out
+                why it is there
+              </li>
+              <li>
+                Git will remember this code block if it was committed, so don't
+                let it pollute the code base
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

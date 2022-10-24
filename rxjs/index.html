@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>RxJS</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Observables</h2>
+      <ul>
+        <li>
+          An observable object represents zero or more values that will be
+          returned now or in the future
+        </li>
+        <li>
+          Represents a stream of observable data; it is a value that changes
+          over time
+        </li>
+        <li>Are not limited to only one value</li>
+        <li>Can be syncronous or asynchronous</li>
+        <li>Offer improved error handling over promises</li>
+        <li>They can be closed independently of returning a value</li>
+        <li>Can deal with time, which promises do not</li>
+        <li>You can manipulate the data stream using map operations</li>
+        <li>
+          Observables to not actually start processing until there is a
+          subscriber
+          <ul>
+            <li>
+              Think of it like defining a function
+              <ul>
+                <li>
+                  You must declare a function, but the function will not do
+                  anything until you call it
+                </li>
+                <li>Observables must be subscribed to for it to do anything</li>
+                <li>This can be done directly or via the async pipe</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Example is observice mouse clicks over time
+          <ul>
+            <li>
+              Think of it as a timeline with multiple points where the value
+              changes
+            </li>
+            <li>
+              You can manipulate this stream of data points by using a map
+              operation, such as only observice the x value of a x,y pair
+              returned by the observable
+            </li>
+          </ul>
+        </li>
+        <li>
+          Angular's HTTP library uses observables as return values. However,
+          that doesn't mean you should abandon promises.
+          <ul>
+            <li>
+              These are great, but HTTP's request/response communication model
+              doesn't really fit in with the idea of a steady stream of data
+              (unless using sockets)
+            </li>
+            <li>
+              HTTP doesn't return streams of responses, just a discrete request
+              and data return
+            </li>
+            <li>
+              Promises are simpler to understand than observables and they fit
+              the HTTP communication model better
+            </li>
+            <li>
+              If you want, you can use the toPromise() method on Angular
+              observables and treat then as promises instead
+            </li>
+            <li>Use the approach that works best for you</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Subject</h3>
+      <section>
+        <ul>
+          <li>
+            Implement both Observer and Observable interfaces
+            <ul>
+              <li>
+                Means they can be used to both emit values and register
+                subscribers
+              </li>
+              <li>
+                Can be used as both a source of observable values and an
+                Observable itself
+              </li>
+            </ul>
+          </li>
+          <li>
+            To Subscribe
+            <ul>
+              <li>Use the same syntax you would use with an Observable</li>
+            </ul>
+          </li>
+          <li>
+            To emit a value
+            <ul>
+              <li>Call the next() function and pass a value</li>
+            </ul>
+          </li>
+          <li>
+            Will not be able to get the current value when subscribing
+            <ul>
+              <li>It will not show up until the next call to next()</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Observables vs Promises</h2>
+      <ul>
+        <li>
+          Promises
+          <ul>
+            <li>
+              Calling the <em>then</em> function both triggers the call and
+              handles the result at once
+            </li>
+            <li>
+              A promise object represents a single value that will be returned
+              in the future
+            </li>
+            <li>Limited to a single value</li>
+            <li>Asynchronous</li>
+          </ul>
+        </li>
+        <li>
+          Observables
+          <ul>
+            <li>
+              Observables are lazy
+              <ul>
+                <li>Describe how the data should be handled</li>
+                <li>
+                  Asynchronous call is not triggered until you explicitly use
+                  the subscribe method
+                </li>
+                <li>
+                  Basically, making the call and handling results are separate
+                  operations
+                </li>
+              </ul>
+            </li>
+            <li>
+              An observable object represents zero or more values that will be
+              returned now or in the future
+            </li>
+            <li>
+              Represents a stream of observable data; it is a value that changes
+              over time
+            </li>
+            <li>Can be syncronous or asynchronous</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h2>Subject vs Observable</h2>
+      <section>
+        <ul>
+          <li>
+            Observables
+            <ul>
+              <li>
+                Only behaves as an observer
+                <ul>
+                  <li>
+                    Can only be used to subscribe to a value; you can't emit
+                    value
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Cold - an observable only emits a value when there is a
+                subscriber
+              </li>
+              <li>
+                Single casting - the observable will emit a value for each
+                subscriber
+              </li>
+            </ul>
+          </li>
+          <li>
+            Subjects
+            <ul>
+              <li>
+                Can act as an observable and an observer
+                <ul>
+                  <li>
+                    Can be used to emit a value as well as subscribe to a value
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Hot - always emits a value; it doesn't matter if there is a
+                subscriber or not
+              </li>
+              <li>
+                Multi Casting - when subjet emits a value, all subscribers get
+                teh same value
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Operators</h2>
+      <section>
+        <ul>
+          <li>
+            These operate on an Observable and return an Observable
+            <ul>
+              <li>
+                This allows you to chain operators together to perform complete
+                transformations
+              </li>
+            </ul>
+          </li>
+          <li>These allow you to shape the data being returned</li>
+          <li>
+            These need to be imported into your component before you use them
+          </li>
+        </ul>
+      </section>
+
+      <h3>Catch</h3>
+      <section>
+        <ul>
+          <li>Intercepts a failed call</li>
+        </ul>
+      </section>
+
+      <h3>CatchError</h3>
+      <section>
+        <ul>
+          <li>Operator that intercepts an Observable that failed.</li>
+          <li>
+            It passes the error an error handler function that can do what it
+            wants with the error
+          </li>
+        </ul>
+      </section>
+
+      <h3>DebounceTime</h3>
+      <section>
+        <ul>
+          <li>Wait the specified number of milliseconds</li>
+          <li>Useful if you are changing content based on keystrokes</li>
+        </ul>
+      </section>
+
+      <h3>DistinctUntilChanged</h3>
+      <section>
+        <ul>
+          <li>Only take action if the contents send changed</li>
+          <li>Useful for search terms</li>
+        </ul>
+      </section>
+
+      <h3>Map</h3>
+      <section>
+        <ul>
+          <li>
+            Pass a function that returns a value that performs some sort of
+            transformation
+          </li>
+          <li>This transformation is applied to all items in the dataset</li>
+        </ul>
+      </section>
+
+      <h3>Of</h3>
+      <section>
+        <ul>
+          <li>
+            Returns an observable that emits a single value, such as an array of
+            objects
+          </li>
+          <li>Import from 'rxjs'</li>
+          <li>
+            Creates an observable object wrapped around the object you pass in
+          </li>
+        </ul>
+      </section>
+
+      <h3>Pipe</h3>
+      <section>
+        <ul>
+          <li>Method on an Observable used for composing operators</li>
+          <li>Sends the output</li>
+          <li>
+            Parameter is a comma seperated list of operators that you would like
+            to apply to the data
+          </li>
+        </ul>
+      </section>
+
+      <h3>Retry</h3>
+      <section>
+        <ul>
+          <li>
+            Automatically resubscribes to a failed Observable a specified number
+            of times
+          </li>
+          <li>
+            Use this to retry a failed connection – has the effect of reissuing
+            a HTTP request
+          </li>
+        </ul>
+      </section>
+
+      <h3>Share Replay</h3>
+      <section>
+        <ul>
+          <li>
+            You may run into situations where you end up with multiple
+            subscriptions to the same observable
+          </li>
+          <li>
+            Example would be using async pipe in a template, but adding a
+            separate subscription in the component to handle errors
+          </li>
+          <li>
+            This results in multiple calls to the server since each subscription
+            would trigger a call
+          </li>
+          <li>
+            The ShareReplay operator ensures that only one HTTP request will be
+            made to the backend in the first subscription
+          </li>
+          <li>
+            The result of that request will be served from memory to any other
+            subsequent subscribers
+          </li>
+          <li>Example</li>
+          <li>
+            Given a method on a service class called loadLessons
+            <div class="card"><div class="card-body"><code>
+              this.lessons$ = this.lessonsService.loadLessons().pipe(shareReplay());"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>switchMap</h3>
+      <section>
+        <ul>
+          <li>Takes a function argument that returns an Observable</li>
+          <li>
+            If the previous search request is still in flight, it cancels that
+            request and sends a new one
+            <ul>
+              <li>
+                Cancels and discards previous observables, returning only the
+                latest observable
+              </li>
+            </ul>
+          </li>
+          <li>
+            Useful since it preserves the original request order while only
+            returning the observable from the most recent HTTP call
+            <ul>
+              <li>Previous ones are canceled discarded</li>
+              <li>
+                Useful for something like a search box where the user can type a
+                search term
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>ThrowError</h3>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+
+      <h3>Tap</h3>
+      <section>
+        <ul>
+          <li>
+            looks at the observable values, does something with those values,
+            and passes them along
+          </li>
+          <li>it doesn't touch the values themselves</li>
+          <li>useful for logging functions</li>
+        </ul>
+      </section>
+
+      <h3>ThrowError</h3>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+
+      <h3>ToPromise</h3>
+      <section>
+        <ul>
+          <li>
+            Observables can be converted to promises using the
+            <code>toPromise()</code> method
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

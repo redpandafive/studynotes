@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>WebDriver Class and Navigation</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        <ul>
+          <li>
+            Allows you to automate a browser and simulate user interaction
+          </li>
+          <li>
+            WebDriver is a W3C standard for plaform and language netural wire
+            protocol.
+          </li>
+          <li>
+            This protocol allows out of process programs to remotely instruct
+            the behvior of web browsers
+          </li>
+          <li>
+            There are implementations of the WebDriver protocol built
+            specifically for diffrent browsers
+            <ul>
+              <li>
+                Developers write tests that use WebDriver commands useing a
+                WebDriver testing framework (such as Selenium)
+              </li>
+              <li>Commands are sent to the WebDriver implementation</li>
+              <li>WebDriver instance communicates commands to a browser</li>
+            </ul>
+          </li>
+          <li>Developers target</li>
+        </ul>
+      </section>
+
+      <h2>Usage</h2>
+      <section>
+        <ul>
+          <li>
+            In Selenium, this is of type IWebDriver (common interface for
+            different browsers)
+          </li>
+          <li>
+            Browsers have their own IWebDriver class in Selenium
+            <ul>
+              <li>ChromeDriver = Chrome</li>
+              <li>EdgeDriver = Microsoft Edge</li>
+            </ul>
+          </li>
+          <li>
+            Within a test method, create an instance of the WebDriver
+            <ul>
+              <li>
+                This wil automatically open the specified browser when run
+              </li>
+            </ul>
+          </li>
+          <li>
+            Wrap in a using block to automatically call its dispose method
+            <div class="card"><div class="card-body"><code>
+              using(IWebDriver driver = new ChromeDriver())&#10;{&#10; ....&#10;}"
+            </code></div></div>
+          </li>
+          <li>
+            V4 update
+            <ul>
+              <li>
+                For Edge at least, it looks like you need to do the following to
+                close out all background programs
+                <div class="card"><div class="card-body"><code>
+                  var driver = new EdgeDriver();&#10;try &#10;{&#10;....&#10;}&#10;finally&#10;{&#10; driver.Quit();&#10;}&#10;"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Properties / Methods</h2>
+      <section>
+        <ul>
+          <li>
+            Properties
+            <ul>
+              <li>PageSource = the HTML source of the page in string format</li>
+            </ul>
+          </li>
+          <li>
+            Methods
+            <ul>
+              <li>
+                Close() - closes the browser window that the driver has focus of
+              </li>
+              <li>
+                Dispose() - closes all browser windows and safely ends the
+                session
+              </li>
+              <li>Quit() - calls Dispose()</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Pitfalls</h2>
+      <section>
+        <ul>
+          <li>
+            If you debug a test and stop execution instead of letting it finish,
+            you can sometimes have instance of chromedriver.exe hanging around
+            <ul>
+              <li>Use Task Manager to stop these</li>
+              <li>
+                One indicator is a Solution Clean operation causes an error
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Navigation Operations</h2>
+      <section>
+        <ul>
+          <li>
+            Browse to a URL
+            <ul>
+              <li>
+                Verify that you are using the same port as the web application
+                you are testing
+                <ul>
+                  <li>Project Properties -> Debug -> App URL field</li>
+                </ul>
+              </li>
+              <li>
+                Make sure IIS Express is running using Debug -> Start Without
+                Debugging
+              </li>
+              <li>
+                In your test, navigate to a URL using this:
+                <div class="card"><div class="card-body"><code>
+                  code='driver.Navigate().GoToUrl("http://localhost:44108")'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Read the current page title
+            <ul>
+              <li>
+                Use the IWebDriver.Title property
+                <div class="card"><div class="card-body"><code>
+                  string pageTitle = driver.Title;"
+                </code></div></div>
+              </li>
+              <li>You can assert on this vs a string value in a test</li>
+            </ul>
+          </li>
+          <li>
+            Read the current page URL
+            <ul>
+              <li>
+                Use the IWebDriver.Url property
+                <div class="card"><div class="card-body"><code>
+                  string url = driver.Url;"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Reload the current page
+            <ul>
+              <li>
+                Use the following method to reload the current page
+                <div class="card"><div class="card-body"><code>
+                  driver.Navigate().Refresh();"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Navigate forwards and backwards
+            <ul>
+              <li>
+                Use the following method to move back one page (same as clicking
+                back button)
+                <div class="card"><div class="card-body"><code>
+                  driver.Navigate().Back();"
+                </code></div></div>
+              </li>
+              <li>
+                Use the following method to move forwards one page (same as
+                clicking forward button)
+                <div class="card"><div class="card-body"><code>
+                  driver.Navigate().Forward();"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

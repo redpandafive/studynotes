@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h2>File Structure</h2>
+      <section>
+        Pages consist of two files
+        <ul>
+          <li>
+            cshtml page
+            <ul>
+              <li>This holds HTML and Razor syntax</li>
+              <li>Example file name is Index2.cshtml</li>
+            </ul>
+          </li>
+          <li>
+            cshtml.cs page
+            <ul>
+              <li>This is the corresponding page model class</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Razor Pages</h2>
+      <section>
+        <ul>
+          <li>This holds HTML and Razor syntax</li>
+          <li>Example file name is Index2.cshtml</li>
+        </ul>
+        <div>
+          This file includes the <code>@page</code> directive at the head of the
+          page
+          <ul>
+            <li>Makes the file into an MVC action</li>
+            <li>
+              This means it handles requests directly without going through a
+              controller
+            </li>
+            <li>Must be the first diretive on the page</li>
+          </ul>
+        </div>
+        <div>
+          Constraints can be added to only accept request that contain certain
+          route data
+          <ul>
+            <li>
+              <div class="card"><div class="card-body"><code>
+                code='@page "{id:int}'
+              </code></div></div>
+              <ul>
+                <li>URL must have an integer in the route data</li>
+              </ul>
+            </li>
+            <li>
+              <div class="card"><div class="card-body"><code>
+                code='@page "{id:int?}"'
+              </code></div></div>
+              <ul>
+                <li>ID in the route data is optional</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <li>
+            This file also should include the Model directive at the top of the
+            cshtml page right below the Page directive
+            <ul>
+              <li>Gives access to the cshtml.cs class</li>
+              <li>
+                Example
+                <ul>
+                  <code>@model PrivacyModel</code>
+                  gives acess to the assocated PrivacyModel class
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </div>
+        <div>
+          An additional Razor block can be added for variables, much like
+          ASP.NET MVC
+          <div class="card"><div class="card-body"><code>
+            code='@{&#10; ViewData&#91;"Title"&#93; = "Edit";&#10;}&#10;'
+          </code></div></div>
+          <ul>
+            <li>Can be used to set layout page</li>
+            <li>
+              Can capture values into ViewData if multiple references are
+              needed, such as the page title
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>PageModel Classes</h2>
+      <section>
+        <div>
+          This is a class that inherits from the PageModel class and contains
+          the logic of a page
+          <ul>
+            <li>By convention, the class name is &lt;PageName&gt;Model</li>
+            <li>Example file name is Index2.cshtml.cs</li>
+            <li>Example class name would be Index2Model.cs</li>
+          </ul>
+        </div>
+        <div>
+          Dependencies can be injected into the constructor of this class to
+          access them
+        </div>
+        <div>
+          Properties and methods on the PageModel class are available on the
+          Model property in the Razor Page
+          <ul>
+            <li>Properties can be simple types or complex classes</li>
+            <li>
+              This allows you to move much of the code needed for formatting to
+              the PageObject class, reducing the amount of code needed in the
+              Razor Page
+            </li>
+            <li>
+              PageModel classes can opt into model binding by using the
+              [BindProperty] attribute
+              <ul>
+                <li>
+                  This removes the need to write code to convert HTTP data to
+                  the model type
+                </li>
+                <li>
+                  By default, only property binding only occurs on non-GET verbs
+                  <ul>
+                    <li>
+                      Opting in reduces code by using the same property to
+                      render form fields and accept the input
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  This should only be used on properties that can be changed by
+                  the client
+                  <ul>
+                    <li>
+                      Do not use it on properties that the client should not be
+                      able to change
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Example
+                  <div class="card"><div class="card-body"><code>
+                    &#91;BindProperty&#93;&#10;public Customer? Customer { get; set; }"
+                  </code></div></div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          Page events as methods that the PageModel class can use to respond to
+          HTTP requests
+          <ul>
+            <li>Hanlder methods for any HTTP verb can be added</li>
+          </ul>
+          OnGet
+          <ul>
+            <li>Runs when the page is fetched</li>
+            <li>This sets up the initial state of the page</li>
+            <li></li>
+          </ul>
+          OnPost
+          <ul>
+            <li>Runs when posting back to the page</li>
+            <li>OnPostAsync is the asynchronous version</li>
+            <li>
+              If there are validaiton erros, you can call the Page() helper
+              method
+            </li>
+            <li>
+              Calls the RedirectToPage at the end to redirect the browser to
+              another Page
+              <ul>
+                <li>Returns an instance of RedirectToPageREsult</li>
+              </ul>
+            </li>
+            <li>
+              Example signature
+              <div class="card"><div class="card-body"><code>
+                Public async Task&lt;IActionResult&gt; OnPostAsync() ..."
+              </code></div></div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          Shares much of the same syntax as MVC Controllers
+          <ul>
+            <li>
+              Can use model binding, validation, and action results the same way
+              controller methods do
+            </li>
+            <li>
+              For instance, on a form postback
+              <ul>
+                <li>Check ModelState.IsValid for errors</li>
+                <li>
+                  Return Page() to stay on the same page
+                  <ul>
+                    <li>This returns an instance of PageResult</li>
+                  </ul>
+                </li>
+                <li>
+                  Return RedirectToPage("./Index") to redirect to a different
+                  page
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Filesystem Description</h2>
+      <section>
+        The associations of URL paths to pages are determined by the page's
+        location in the file systems
+        <ul>
+          <li>
+            The runtime looks for Razor Page files in the Pages folder by
+            default
+          </li>
+          <li>Index is the default page when a URL doesn't include a page</li>
+          <li>
+            Page location in the file system determines the URL needed to access
+            them
+          </li>
+          <li>
+            Examples
+            <ul>
+              <li>/Pages/Index.cshtml => / or /Index</li>
+              <li>/Pages/Contact.cshtml => /Contact</li>
+              <li>/Pages/Store/Contact.cshtml => /Store/Contact</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

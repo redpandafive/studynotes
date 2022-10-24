@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Pipes</li>
+        </ol>
+      </nav>
+      <h1>Pipes</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/pipes.html#basics">Basics</a></li>
+          <li>
+            <a href="./angular/pipes.html#builtin">Built In Pipes</a>
+          </li>
+          <li><a href="./angular/pipes.html#custom">Custom Pipes</a></li>
+          <li>
+            <a href="./angular/pipes.html#purevsimpure"
+              >Pure vs Impure Pipes</a
+            >
+          </li>
+          <li>
+            <a href="./angular/pipes.html#templateExpression"
+              >Template Expression Operator</a
+            >
+          </li>
+          <li>
+            <a href="./angular/pipes.html#filtering"
+              >Filtering and Sorting</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>
+            These replace filters in Angular JS. Unlike filters, pipes are not
+            used for sorting or filters
+          </li>
+          <li>
+            Simple functions to use in template expressions to accept an input
+            value and return a transformed value
+          </li>
+          <li>
+            Can be used throughout the application after declaring them once
+          </li>
+          <li>
+            Allow you to present formatted data to users instead of raw data
+            <ul>
+              <li>
+                These can be chained together, sending output from one pipe to
+                another
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ birthday | date | uppercase }}</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Any number of parameters can be added to a pipe to fine tune its
+            output
+            <ul>
+              <li>Parameters can be any valid template expression</li>
+              <li>
+                Can be string literal, component property (including property
+                getter)
+              </li>
+              <li>Separate parameters by colons</li>
+              <li>Ex slice:1:5</li>
+            </ul>
+          </li>
+          <li>
+            Pipes are executed whenever it detects a change for the input value
+            or reference
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="builtin">Built In Pipes</h2>
+      <section>
+        <ul>
+          <li>
+            UpperCasePipe
+            <ul>
+              <li>
+                Converts all text to upper case
+                <div class="card">
+                  <div class="card-body">
+                    <code> .. {+{ title | uppercase }}</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            LowerCasePipe
+            <ul>
+              <li>
+                Converts all text to lower case
+                <div class="card">
+                  <div class="card-body">
+                    <code> .. {+{ title | lowercase }}</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            CurrencyPipe
+            <ul>
+              <li>
+                Transforms a number to a currency string, formatted to locale
+                rules
+              </li>
+              <li>
+                To include a $
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ amount | currency : &quot;USD&quot; }}</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                To not include a $
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ amount | currency : “USD”: false }}" </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Datepipe
+            <ul>
+              <li>Formats a date value according to locale rules</li>
+              <li>
+                Displays as Dec 8, 2018
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ curentDate | date }} </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Displays as 12/8/2018
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ curentDate | date : 'M/d/y' }} </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Displays 9/26/2036 12:00 AM
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ curentDate | date: 'short' }} </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Displays as 7:56 PM
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ curentDate | date: 'shortTime' }}</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Displays 9/26/2036
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ curentDate | date: 'shortdate' }}</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Jsonpipe
+            <ul>
+              <li>
+                Example
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ addressJson | json }}</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Decimalpipe
+            <ul>
+              <li>Formats a number as a decimal number as per locale use</li>
+              <li>
+                Syntax is
+                <div class="card">
+                  <div class="card-body">
+                    <code> number_expression |number&#91;:digitInfo&#93; </code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    number_expression is the angular expression that will give
+                    output a number
+                  </li>
+                  <li>number is a pipe keyword</li>
+                  <li>digitInfo defines number format</li>
+                  <li>
+                    digitInfo is composed as such
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+                        </code>
+                      </div>
+                    </div>
+                    <ul>
+                      <li>
+                        minIntegerDigits is the minimum number of integer digits
+                        with a default of 1
+                      </li>
+                      <li>
+                        minFractionDigits is the minimum number of fraction
+                        digits with a default of 0
+                      </li>
+                      <li>
+                        maxFractionDigits the the maximum number of fraction
+                        digits with a default of 3
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Examples
+                <ul>
+                  <li>
+                    With the variable num containing 84.4856248
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          {+{ num | number: '3.2-5' }} =&gt; 084.48562
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Percentpipe
+            <ul>
+              <li>Format a number as a percent per locale rules</li>
+              <li>
+                Syntax
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      number_expression | percent&#91;:digitInfo&#93;
+                    </code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    number_expression is the angular expression that will give
+                    output a number
+                  </li>
+                  <li>percent is a pipe keyword</li>
+                  <li>
+                    digitInfo defines number format
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
+                        </code>
+                      </div>
+                    </div>
+                    <ul>
+                      <li>
+                        minIntegerDigits is the minimum number of integer digits
+                        with a default of 1
+                      </li>
+                      <li>
+                        minFractionDigits is the minimum number of fraction
+                        digits with a default of 0
+                      </li>
+                      <li>
+                        maxFractionDigits the the maximum number of fraction
+                        digits with a default of 3
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Example
+                <ul>
+                  <li>
+                    if numPercent contains 1.5, the output would be 150.00%
+                    <div class="card">
+                      <div class="card-body">
+                        <code> {+{ numPercent | percent : '2.2-5' }}</code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Slicepipe
+            <ul>
+              <li>Used to slice some part of an array or string</li>
+              <li>
+                Creates a new array or string containing the specified elements
+              </li>
+              <li>
+                Syntax is
+                <div class="card">
+                  <div class="card-body">
+                    <code> string_or_array | slice : start&#91;:end&#93; </code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    string_or_array is the string or array to apply the pipe to
+                  </li>
+                  <li>slice is a pipe keyword</li>
+                  <li>start is the starting index of the subset to return</li>
+                  <li>end is the ending index of the subset to return</li>
+                </ul>
+              </li>
+              <li>
+                Examples
+                <ul>
+                  <li>
+                    This will output 3,4,5,6
+                    <div class="card">
+                      <div class="card-body">
+                        <code> {+{ &#91;1,2,3,4,5,6&#93; | slice: 2 }}</code>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    This will output 3,4
+                    <div class="card">
+                      <div class="card-body">
+                        <code> {+{ &#91;1,2,3,4,5,6&#93; | slice: 2:4 }} </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            AsyncPipe
+            <ul>
+              <li>
+                Unwraps a value from an asynchronous primitive from inside the
+                template syntax
+              </li>
+              <li>
+                Subscribes to an Observable or Promise automatically so you
+                don't have to do so in the component class
+                <ul>
+                  <li>Automatically subscribes to an observable</li>
+                  <li>
+                    Will automatically unsubscribe when the component is
+                    destroyed to prevent memory leaks
+                  </li>
+                  <li>Helps eliminate boilerplate code</li>
+                </ul>
+              </li>
+              <li>
+                Stateful
+                <ul>
+                  <li>Maintains a subscription to an input observable</li>
+                  <li>Delivers values are they arrive</li>
+                  <li>Returns the last value that was emitted</li>
+                </ul>
+              </li>
+              <li>This is an impure pipe</li>
+              <li>
+                Allows you to use an observable in a for loop, saving
+                boilerplate code
+              </li>
+              <li>
+                Example
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;li *ngFor=&quot;let hero of heros$ | async&quot;&gt;
+                    </code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    $ is a convention indicating that the source is an
+                    observable (the observable should be named this)
+                  </li>
+                  <li>
+                    The component class would have an observable property
+                    declared named heros$
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Deprecated pipes
+            <ul>
+              <li>FilterPipe</li>
+              <li>OrderByPipe</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="custom">Custom Pipes</h2>
+      <section>
+        <ul>
+          <li>
+            Add a new class, such as duration.pipe.ts
+            <ul>
+              <li>Class names should be upper camel case</li>
+            </ul>
+          </li>
+          <li>
+            Decorate the class with the pipe metadata
+            <div class="card">
+              <div class="card-body">
+                <code> @Pipe({ name: 'myPipeName' }) </code>
+              </div>
+            </div>
+            <ul>
+              <li>
+                Decorator allows you to define the pipe name that you will use
+                within the template expressions, so it must be a valid
+                JavaScript identifier
+              </li>
+            </ul>
+          </li>
+          <li>
+            Name property of decorator should use camel case with no hyphens
+          </li>
+          <li>
+            The pipe class should implement PipeTransform interface
+            <ul>
+              <li>
+                Includes transform method that accepts input values for each
+                parameter passed to the pipe and returns a single value
+              </li>
+            </ul>
+          </li>
+          <li>
+            For module declarations
+            <ul>
+              <li>
+                Must include the pipe in the declarations array of the AppModule
+              </li>
+              <li>
+                If you inject it into a class, you must provide it in the
+                providers array of your NgModule
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="purevsimpure">Pure vs Impure Pipes</h2>
+      <section>
+        <ul>
+          <li>
+            Pure pipes
+            <ul>
+              <li>
+                Pipes that are not dependent on any global state and do not
+                produce side effects
+              </li>
+              <li>
+                Will only trigger change detection on pure changes
+                <ul>
+                  <li>
+                    Changes to either a primitive input value or a changed
+                    object reference
+                  </li>
+                  <li>This is done to improve speed</li>
+                </ul>
+              </li>
+              <li>
+                This is set using a property on the @Pipe decorator and is set
+                to true by default
+              </li>
+              <li>
+                The pipe will return the same output when invoked with the same
+                input
+              </li>
+              <li>
+                Angular can cache the outputs for all the input parameters the
+                pipe has been invoked with and reuse them to not have to
+                recompute them on each evaluation
+              </li>
+              <li>Pure pipe should use pure functions</li>
+            </ul>
+          </li>
+          <li>
+            Impure pipes
+            <ul>
+              <li>
+                There are times when you cannot live with the default change
+                detection strategy
+              </li>
+              <li>
+                Execute the impure pipe during every component change detection
+                cycle
+              </li>
+              <li>
+                This can cause a problem with filtering and sorting since impure
+                pipes are re-run on every event in the change cycle (even ones
+                not related to the list you are sorting or filtering)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="templateExpression">Template Expression Operator</h2>
+      <section>
+        <ul>
+          <li>
+            Use when the result of an expression might require some
+            transformation before using it as output
+          </li>
+          <li>
+            Simple functions that accept an input value and return a transformed
+            value
+          </li>
+          <li>
+            Multiple pipes can be chained together
+            <div class="card">
+              <div class="card-body">
+                <code> {+{ title | uppercase | lowercase }}</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Pipes can also have parameters
+            <div class="card">
+              <div class="card-body">
+                <code> {+{ Birthdate: | date:'longDate'}} </code>
+              </div>
+            </div>
+          </li>
+          <li>JSON pipe is useful for debugging</li>
+        </ul>
+      </section>
+
+      <h2 id="filtering">Filtering and Sorting</h2>
+      <section>
+        <ul>
+          <li>
+            Unlike Angular JS, Angular does not have built in pipes to handle
+            filtering and sorting
+          </li>
+          <li>
+            This was a performance issue in Angular JS that would occasionally
+            arise
+          </li>
+          <li>
+            Angular JS used impure filters that are rerun on every change in the
+            change cycle
+          </li>
+          <li>
+            Angular does not allow this – you must do it yourself so it only
+            updates when the source data changes
+            <ul>
+              <li>Perform these operations in the component</li>
+              <li>
+                Slice JS method is useful since it will create clones of arrays
+                that you can use for display
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

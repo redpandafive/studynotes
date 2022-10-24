@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Operators</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Null Related Operators</h2>
+      <section>
+        <div>Check for Null</div>
+        <ul>
+          Use the following in a conditional to test for null
+          <li>
+            <div class="card"><div class="card-body"><code>
+              if (salesTax is null) { ..."
+            </code></div></div>
+          </li>
+        </ul>
+        <div>
+          Null-Forgiving Operator
+          <ul>
+            <li>
+              Tells the compile to supress warnings about dereferencing a
+              potentially null variable
+            </li>
+            <li>
+              The "dammit" operator - as in, I know what I am doing, dammit!
+            </li>
+            <li>Use sparingly and only when you are certain</li>
+            <li>
+              This uses the operator twice, once on the fooList (which might be
+              null since it was declared with ?) and after the find call (since
+              the result might be null)
+              <div class="card"><div class="card-body"><code>
+                code='List&lt;FooBar&gt;? fooList = FooListFactory.GetFooList();&#10;FooBar fooBar = fooList!.Find(f =&gt; f.Name == "Bar")!;'
+              </code></div></div>
+            </li>
+            <li>
+              Does not impact what the code does, only tells the compiler not to
+              show a warning
+            </li>
+            <li>
+              Does not impact runtime, just the compilers static flow analysis
+            </li>
+          </ul>
+        </div>
+        <div>
+          Null-Coalescing Operator
+          <ul>
+            <li>??</li>
+            <li>Returns the value of its left hand operand if it isnt null</li>
+            <li>
+              Otherwise, it evaluates the right hand operand and returns it
+              result
+            </li>
+            <li>
+              Right hand side is only evaluated if the left hand operand
+              evaluates to null
+            </li>
+            <li>Left hand operand cannot be a non nullable type</li>
+            <li>
+              Right associative, so <code>a ?? b ?? c</code> is the same as
+              <code>a ?? (b ?? c)</code>
+            </li>
+            <li>
+              Useful when
+              <ul>
+                <li>
+                  You are working with nullable types and need to provide a
+                  default value if something is null
+                </li>
+                <li>
+                  Can throw an exception in the right operand if one is needed
+                  when the left value is null
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          Null-Coalescing Assignment Operator
+          <ul>
+            <li>??=</li>
+            <li>
+              Assigns the value of its right hand operand to its left hand
+              operand only if the left hand operand evaluates to null
+            </li>
+            <li>
+              Right hand operand is not evaluated if the left hand operand
+              evaluates to non-null
+            </li>
+            <li>
+              Left hand operand must be a variable, property, or an indexer
+              element
+            </li>
+            <li>Left hand operand cannot be a non nullable type</li>
+          </ul>
+        </div>
+        <div>
+          Null Propagating Operator (Null Conditional Operator)
+          <ul>
+            <li>
+              Lets you access members and elements only when the receiver is not
+              null and provides a null result Otherwise
+              <ul>
+                <li>Will contain null if customers is null</li>
+                <li>Will contain an integer for length of the string if not</li>
+              </ul>
+              <div class="card"><div class="card-body"><code>
+                int? Length = customers?.Length;"
+              </code></div></div>
+            </li>
+            <li>
+              Nothing after the question mark will be evaluated unless customers
+              has a non null value
+            </li>
+            <li>
+              Can be combined with a null coalescing operator to provide a
+              default value for when the outcome is null
+              <ul>
+                <li>if customers is null, then length will be set to 0</li>
+              </ul>
+              <div class="card"><div class="card-body"><code>
+                int length = customers?.Length ?? 0;"
+              </code></div></div>
+            </li>
+            <li>
+              These can be chained and used more than once in an expressions
+              <div class="card"><div class="card-body"><code>
+                int? First = customers?&#91;0&#93;.Orders?.Count();"
+              </code></div></div>
+            </li>
+            <li>Also known as the Elvis operator</li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Indexing Related Operators</h2>
+      <section>
+        <div>
+          []
+          <ul>
+            <li>Used to access array elements and dictionary type entries</li>
+            <li>Used to specify attributes</li>
+          </ul>
+        </div>
+        <div>
+          Indexer From End Operators
+          <ul>
+            <li>You can now specify an index from the end of the collection</li>
+            <li>New feature to C# 8</li>
+            <li>Uses the hat operator</li>
+            <li>
+              The last element in the sequence will be referenced using ^1 (not
+              ^0)
+            </li>
+            <li>
+              Example - variable number will contain 5
+              <div class="card"><div class="card-body"><code>
+                var numbers = new&#91;&#93; { 1, 2, 3, 4, 5 };&#10;var number = numbers&#91;^1&#93;;&#10;"
+              </code></div></div>
+            </li>
+            <li>
+              You can also assign this to create an Index constant (use as a
+              first class data type)
+              <div class="card"><div class="card-body"><code>
+                Index index = ^2;&#10;var number = numbers&#91;index&#93;; // number contains 4"
+              </code></div></div>
+            </li>
+            <li>
+              Can combine with the Range datatype to do some interesting things,
+              such as get the last two items of an array
+              <div class="card"><div class="card-body"><code>
+                var lastTwo = numbers&#91;^2..&#93;;"
+              </code></div></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Member Operators</h2>
+      <section>
+        <div>
+          Member Access Expression
+          <ul>
+            <li>This is the period when writing a qualified name</li>
+            <li>
+              Used for
+              <ul>
+                <li>Namespace components</li>
+                <li>Accessing type members</li>
+                <li>extension methods</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

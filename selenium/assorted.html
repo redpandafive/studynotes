@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Assorted Topics</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Setup</h2>
+      <section>
+        <ul>
+          <li>
+            Install via NuGet by adding Selenium.WebDriver to your test project
+          </li>
+          <li>
+            The browser driver can also be installed through NuGet for the
+            version of browser you are using
+            <ul>
+              <li>Selenium.WebDriver.ChromeDriver</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Controlling the Browser Window</h2>
+      <section>
+        <ul>
+          <li>
+            There are several methods on an IWebDriver instance to control the
+            window size and position
+            <ul>
+              <li>
+                Maximize
+                <div class="card"><div class="card-body"><code>
+                  driver.Manage().Window.Maximize()"
+                </code></div></div>
+              </li>
+              <li>
+                Minimize
+                <div class="card"><div class="card-body"><code>
+                  driver.Manage().Window.Minimize()"
+                </code></div></div>
+              </li>
+              <li>
+                Window size
+                <ul>
+                  <li>
+                    This takes an instance of System.Drawing.Point
+                    <div class="card"><div class="card-body"><code>
+                      driver.Manage().Window.Size = new System.Drawing.Size(300, 400);"
+                    </code></div></div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Window position
+                <ul>
+                  <li>
+                    This takes an instance of System.Drawing.Point
+                    <div class="card"><div class="card-body"><code>
+                      driver.Manage().Window.Position = new System.Drawing.Point(50, 50);"
+                    </code></div></div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Fullscreen mode
+                <div class="card"><div class="card-body"><code>
+                  driver.Manage().Window.Fullscreen()"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can use the Minimize window function to handle cases like a
+            rotating carousel
+            <ul>
+              <li>
+                Hovering the mouse over the carousel can prevent it moving to
+                the next panel
+              </li>
+              <li>Minimizing the window prevents accidental interactions</li>
+              <li>
+                This is a trade-off since you cannot see what is going on in the
+                window
+              </li>
+              <li>
+                Make sure you navigate to the URL before minimizing the window
+              </li>
+            </ul>
+          </li>
+          <li>
+            Switching tabs
+            <ul>
+              <li>
+                Useful when you have a link that opens a new tab to display
+                content
+              </li>
+              <li>
+                A test that verifies that the new tab opened will fail unless
+                you shift over to the new tab
+              </li>
+              <li>
+                The WindowsHandles gives you a list of read only strings that
+                you can use as a handle to reference seperate tabs
+                <div class="card"><div class="card-body"><code>
+                  ReadOnlyCollection&lt;string&gt; allTabs = driver.WindowHandles;"
+                </code></div></div>
+              </li>
+              <li>
+                Reference individual tabs using an index
+                <div class="card"><div class="card-body"><code>
+                  string homePageTab = allTabs&#91;0&#93;;"
+                </code></div></div>
+              </li>
+              <li>
+                Switch to the tab using the IWebDriver.SwitchTo() method
+                <div class="card"><div class="card-body"><code>
+                  driver.SwitchTo().Window(homePageTab);"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Handling Window Modal Dialog Boxes</h2>
+      <section>
+        <ul>
+          <li>
+            For alert dialog Boxes
+            <ul>
+              <li>
+                First, get a reference to the alert modal
+                <div class="card"><div class="card-body"><code>
+                  IAlert alert = driver.SwitchTo().Alert();"
+                </code></div></div>
+              </li>
+              <li>
+                You can test the text that is displayed in the alert in an
+                assert as follows:
+                <div class="card"><div class="card-body"><code>
+                  code='Assert.Equal("Live chat is currently closed.", alert.Text);'
+                </code></div></div>
+              </li>
+              <li>
+                Timing may be an issue, so you may need to add a delay to get a
+                test to pass correctly
+              </li>
+              <li>
+                To close the alert
+                <div class="card"><div class="card-body"><code> alert.Accept();"</code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            For confirmation modals
+            <ul>
+              <li>
+                Setup is similar to alert modals with one additional method to
+                handle the Cancel button
+              </li>
+              <li>Use IAlert.Accept() to simulate clicking the Ok button</li>
+              <li>
+                Use IAlert.Dismiss() to simulate clicking the Cancel button
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Cookie Handling</h2>
+      <section>
+        <ul>
+          <li>
+            To set a cookie for a Test
+            <ul>
+              <li>Load a page using the GoToUrl method</li>
+              <li>
+                Set the cookie using the following:
+                <div class="card"><div class="card-body"><code>
+                  code='driver.Manage().Cookies.AddCookie(new Cookie("cookie_name", "some_value"));'
+                </code></div></div>
+              </li>
+              <li>
+                Refresh the page with the cookie set
+                <div class="card"><div class="card-body"><code>
+                  driver.Navigate().Refresh();"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            To remove a cookie
+            <div class="card"><div class="card-body"><code>
+              code='driver.Manage().Cookies.DeleteCookieNamed("acceptedCookies");'
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Screenshot Capture</h2>
+      <section>
+        <ul>
+          <li>
+            Cast a ITakesScreenshot obejct from the current IWebDriver object
+            and call the GetScreenshot method
+            <div class="card"><div class="card-body"><code>
+              code='ITakesScreenshot screenshotDriver = (ITakesScreenshot)driver;&#10;Screenshot screenshot = screenshotDriver.GetScreenshot();&#10;screenshot.SaveAsFile("filename");'
+            </code></div></div>
+          </li>
+          <li>
+            The SaveAsFile has overloads so you can save into a different file
+            format
+          </li>
+          <li>
+            This will be the contents of the browser itself, not a full
+            screenshot of the desktop
+          </li>
+          <li>
+            You can combine this with the Approval Tests library to compare
+            screenshots to test for changes (see Pluralsite course for details)
+          </li>
+        </ul>
+      </section>
+
+      <h2>Executing JavaScript In Pages</h2>
+      <section>
+        <ul>
+          <li>You can execute JS code from your test</li>
+          <li>
+            The JavaScriptExecutor can be case from the IWebDriver
+            <div class="card"><div class="card-body"><code>
+              string script = &quot;document.getElementById('HiddenLink').click();&quot;;&#10;IJavaScriptExecutor js = (IJavaScriptExecutor) driver;&#10;js.ExecuteScript(script);"
+            </code></div></div>
+          </li>
+          <li>
+            Useful to return information from the page
+            <div class="card"><div class="card-body"><code>
+              string linkText = (string)js.ExecuteScript(script);"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Actions</h2>
+      <section>
+        <ul>
+          <li>Research this</li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      https://learn.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-6.0
+
+      <section>
+        <ul>
+          <li>
+            Alternative to ASP.NET Core MVC
+            <ul>
+              <li>
+                Preferred way to create page or form-based apps in ASP.NET Core
+              </li>
+              <li>Seems very reminiscent of Web Forms</li>
+              <li>Separates logic of a page form from its presentation</li>
+            </ul>
+          </li>
+          <li>
+            Shares many of the same features as MVC
+            <ul>
+              <li>Layout pages</li>
+              <li>Partial pages</li>
+              <li>Templates</li>
+              <li>Tag helpers</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Configuration</h2>
+      <section>
+        To enable, this must be enabled in the Program.cs file
+        <ul>
+          <li>
+            Enable support for Razor pages
+            <ul>
+              <li><code>App.AddRazorPages()</code></li>
+            </ul>
+          </li>
+          <li>
+            Enable endpoints for Razor Pages
+            <ul>
+              <li><code>App.MapRazorPages()</code></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Tag Helpers</h2>
+      <section>
+        You must add the following to the top of your Razor Page cshtml file to
+        use input tag helpers
+        <code>@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers</code>
+        <p>
+          <li>https://www.learnrazorpages.com/razor-pages/tag-helpers/</li>
+        </p>
+      </section>
+
+      <h3>Input Tag Helpers</h3>
+      <section>
+        <ul>
+          <li>Asp-for</li>
+          <li>
+            Use this to bind an input to a property
+            <div class="card"><div class="card-body"><code>
+              code='&lt;input asp-for="Customer.Name /&gt;'
+            </code></div></div>
+          </li>
+          <li>
+            This binds the HTML input element to the Customer.Name model
+            expression
+          </li>
+        </ul>
+      </section>
+
+      <h3>Link Tag Helpers</h3>
+      <section>
+        <ul>
+          <li>
+            asp-page
+            <ul>
+              <li>page to generate the link to</li>
+            </ul>
+          </li>
+          <li>
+            asp-route-id
+            <ul>
+              <li>adds an ID to a URL</li>
+            </ul>
+          </li>
+          <li>
+            <ul>
+              Examples
+              <li>
+                <div class="card"><div class="card-body"><code>
+                  code='&lt;a asp-page="./Edit" asp-route-id="@contact.Id&gt;Edit&lt;/a&gt;'
+                </code></div></div>
+                <ul>
+                  <li>http://locahost:5001/Edit/1</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Form Tag Helpers</h3>
+      <section>
+        <ul>
+          <li>
+            asp-for
+            <ul>
+              <li>Input tag helper</li>
+              <li>
+                Binds an HTML input element to a model expression in your Razor
+                view
+              </li>
+              <li>
+                Generates name and id HTML attributes for the expression name
+                specified
+              </li>
+              <li>
+                Sets the HTML type attribute based on the model type and data
+                annotation attributes applied to the model property (but will
+                not overwrite an existing attribute if specified)
+              </li>
+              <li>
+                Adds HTML 5 validation attributes from data annotation attribtes
+                applied to model poperties
+              </li>
+            </ul>
+          </li>
+          <li>
+            asp-net-hander
+            <ul>
+              <li>Specifies the handler method that will handle submit</li>
+              <li>
+                Useful when you want to generate a formaction attribute on a
+                button to post a form
+              </li>
+              <li>Convention is OnPost[handler]Async</li>
+              <li>
+                Use cases
+                <ul>
+                  <li>
+                    Add a delete button to a table of data; pressing this button
+                    will post to delete the value (see example)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Example
+                <ul>
+                  <li>
+                    <div class="card"><div class="card-body"><code>
+                      code='&lt;button type="submit" asp-net-handler="delete" asp-route-id="@contact.Id&gt;Delete&lt;/button&gt; '
+                    </code></div></div>
+                    <ul>
+                      <li>
+                        Button with attribute of
+                        formaction="/Customers?id=1&amp;handler=delete"
+                      </li>
+                      <li>
+                        Add a asp-route-id attribute to specify an id number
+                      </li>
+
+                      <li>
+                        Pressing this will submit the form to the
+                        OnPostDeleteAsync method
+                      </li>
+                      <li>
+                        If it had been remove, it would post to
+                        OnPostRemoveAsync
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Validation Form Helpers</h3>
+      <section>
+        <ul>
+          <li>
+            asp-validation-for
+            <ul>
+              <li>Apply to a span or div element next to a form element</li>
+              <li>
+                When the form element is invalid and posted, the corresponding
+                error messgae will be displayed here
+              </li>
+            </ul>
+          </li>
+          <li>
+            asp-validation-summary
+            <ul>
+              <li>Apply to a div</li>
+              <li>
+                Displays all error messages on invalid elements of a form when
+                posted
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Form Validation</h2>
+      <section>
+        Validation Rules
+        <ul>
+          <li>
+            Requires jQuery, jQuery validate, and jquery validate unobtrusive
+          </li>
+          <li>
+            Declaratively specified in a model class
+            <ul>
+              <li>
+                These can be enforced anywhere in the app where the model class
+                is used
+              </li>
+            </ul>
+          </li>
+          <li>
+            The following specify the type HTML attribute of the input when
+            applied
+            <ul>
+              <li>[EmailAddress]</li>
+              <li>[Url]</li>
+              <li>[HiddenInput]</li>
+              <li>[Phone]</li>
+              <li>[DataType(DataType.Password)]</li>
+              <li>[DataType(DataType.Date)]</li>
+              <li>[DataType(DataType.Time)]</li>
+            </ul>
+          </li>
+          <li>
+            [MinimumLength]
+            <ul>
+              <li>Property must hae a value</li>
+              <li>Accepts just whitespaces to satisfy this validation</li>
+            </ul>
+          </li>
+          <li>
+            [Range(1, 100)]
+            <ul>
+              <li>Value must be between 1 and 100</li>
+            </ul>
+          </li>
+          <li>
+            [RegularExpression(@"^[A-Z]")]
+            <ul>
+              <li>Matches on the regular expression value</li>
+              <li>Limits the characters that can be used in the input</li>
+            </ul>
+          </li>
+          <li>
+            [Required]
+            <ul>
+              <li>Adds data-val-required to the form element HTML</li>
+              <li>Property must hae a value</li>
+              <li>Accepts just whitespaces to satisfy this validation</li>
+              <li>
+                Value types are inherently required and do not need this
+                attribute
+              </li>
+            </ul>
+          </li>
+          <li>
+            [StringLength(10)]
+            <ul>
+              <li>Adds data-val-length-max to the form element HTML</li>
+              <li>
+                Sets the maximum number of characters of a string property
+              </li>
+              <li>
+                Can also optionally specify the minimum number of characters
+              </li>
+            </ul>
+          </li>
+          <li>
+            [StringLength(60, MinimumLength=3)]
+            <ul>
+              <li>
+                Element must have a miminmum length of 3, maximum length of 60
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>CSS</h2>
+      <section>
+        CSS can be isolated to individual pages, views, and components
+        <ul>
+          <li>This isolation is done at build time</li>
+          <li>Does not support importing CSS in Razor code blocks</li>
+          <li>
+            CSS styles are rewritten and bundled and producted as a static asset
+            name WebApp.cshtml.css
+            <ul>
+              <li>WebApp is the assembly name, will vary</li>
+              <li>
+                A link is automatically added to the head section of
+                Pages/Shared/_Layout.cshtml
+              </li>
+            </ul>
+          </li>
+          <li>
+            For views
+            <ul>
+              <li>
+                Add a CSS file that follows the same naming convention as the
+                filename
+              </li>
+              <li>
+                For Pages/Index.cshtml, add a file for Pages/Index.cshtml.css
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>ViewData</h2>
+      <section>
+        <ul>
+          <li>Values are stored and loaded from the ViewDataDictionary</li>
+          <li>
+            Example
+            <ul>
+              <li>
+                Apply the following as an attribute to the PageModel class
+                <div class="card"><div class="card-body"><code>
+                  code='&#91;ViewData&#93;&#10;public string Title { get; } = "About";'
+                </code></div></div>
+              </li>
+              <li>
+                In the Razor page, reference it like
+                <div class="card"><div class="card-body"><code>
+                  &lt;h1&gt;@Model.Title&lt;/h1&gt;"
+                </code></div></div>
+              </li>
+              <li>
+                In a layout, read it from the ViewData ViewDataDictionary
+                <div class="card"><div class="card-body"><code>
+                  code='&lt;!DOCTYPE html&gt;&#10;&lt;html lang="en"&gt;&#10;&lt;head&gt;&#10; &lt;title&gt;@ViewData&#91;"Title"&#93; - WebApplication&lt;/title&gt;'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>TempData</h2>
+      <section>
+        <ul>
+          <li>Stores data until it is read</li>
+          <li>
+            Useful for redirection, when data is needed for more than a single
+            request
+          </li>
+          <li>
+            Peek
+            <ul>
+              <li>Allows you to read a value without triggering a delete</li>
+              <li><code>TempData.Peek("message")</code></li>
+            </ul>
+          </li>
+          <li>Keep</li>
+          <ul>
+            <li>
+              Use after a read, but it will keep the value for the next page
+              request
+              <div class="card"><div class="card-body"><code>
+                code='if (TempData&#91;"Message"&#93; != null)&#10;{&#10; &lt;h3&gt;Message: @TempData&#91;"Message"&#93;&lt;/h3&gt;&#10;}&#10;TempData.Keep("Message");'
+              </code></div></div>
+            </li>
+          </ul>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

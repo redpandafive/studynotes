@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Records</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2></h2>
+      <section>
+        <ul>
+          <li>
+            Reference type that is immutable
+            <ul>
+              <li>Intended to support immutable data models</li>
+            </ul>
+          </li>
+          <li>
+            Features
+            <ul>
+              <li>
+                Concise syntax for creating a reference type with immutable
+                properties
+              </li>
+              <li>Value-based equality</li>
+              <li>Built in formatting for display</li>
+              <li>Concise syntax for nondestructive mutations</li>
+              <li>Support for inheritance hierarchies</li>
+            </ul>
+          </li>
+          <li>
+            The compiler auto generates several things out of the box of you
+            choose that route
+            <ul>
+              <li>
+                A public auto implemented property for each positional parameter
+                provided in the records declaration
+                <ul>
+                  <li>Declared using get and init keywords</li>
+                </ul>
+              </li>
+              <li>
+                A primary constructor whose parameters match the positional
+                parameters on the records declaration
+              </li>
+              <li>
+                A Deconstruct method with an out parameter for each position
+                parameter
+              </li>
+              <li>A ToString method</li>
+            </ul>
+          </li>
+          <li>
+            Positional parameter declaration makes an object immutable
+            <ul>
+              <li>Declares properties with the init keyword instead of set</li>
+              <li>Useful when working with multi-threaded environments</li>
+              <li>
+                Shallow immutability
+                <ul>
+                  <li>Cannot change value types</li>
+                  <li>
+                    Cannot change the references that reference types point to
+                  </li>
+                  <li>Can change the data on reference types</li>
+                  <li>
+                    Cant change an array, but you can modify fields in the
+                    objects in the array
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            If you choose to do the declaration yourself, you can
+            <ul>
+              <li>Mix positional parameters with explicitly declared one</li>
+              <li>No position parameters at all</li>
+              <li>Modify properties to be mutable</li>
+            </ul>
+          </li>
+          <li>
+            Deconstructor method is automatically created on records with two or
+            more positional parameters
+          </li>
+          <li>
+            Starting with C# 10, you can define records structs
+            <ul>
+              <li>
+                Public readonly record struct ...
+                <ul>
+                  <li>immutable</li>
+                </ul>
+              </li>
+              <li>
+                Public records struct ...
+                <ul>
+                  <li>Mutable</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Value Equality</h2>
+      <section>
+        <ul>
+          <li>
+            Unlike classes, with records, two object are equal if they are of
+            the same type and store the same values
+          </li>
+          <li>
+            Comparisons between two records is done by comparing property values
+            (not reference)
+          </li>
+          <li>
+            The complier will automatically synthesize
+            <ul>
+              <li>An override of the Object.Equals(Object) method</li>
+              <li>
+                A virtual Equals method whose parameter is the records type
+              </li>
+              <li>Override of Object.GetHashCode()</li>
+              <li>Overrides of operators == and !=</li>
+            </ul>
+          </li>
+          <li>
+            You can write your own versions, in which case the compiler doesn’t
+            try to implement anything you have provided
+          </li>
+        </ul>
+      </section>
+
+      <h2>Nondestructive Mutation</h2>
+      <section>
+        <ul>
+          <li>Creates a copy of an instance with modifications</li>
+          <li>
+            Uses the with keyword
+            <ul>
+              <li>
+                Combine with an object initializer to modify the values to be
+                changed
+              </li>
+            </ul>
+          </li>
+          <li>
+            Non positional properties must have an init or set accessor to be
+            changed by a with expression
+          </li>
+          <li>
+            Example - given a record person1 with parameters string FirstName
+            and string LastName
+            <div class="card"><div class="card-body"><code>
+              code='Person person2 = person1 with { FirstName = "NewFirstName" }'
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Build In Formatting for Display</h2>
+      <section>
+        <ul>
+          <li>
+            The compiler will automatically generate an override to the
+            Object.ToString method
+          </li>
+          <li>You can provide your own for customized formatting</li>
+        </ul>
+      </section>
+
+      <h2>Inheritance</h2>
+      <section>
+        <ul>
+          <li>Records can inherit from other records</li>
+          <li>Similar syntax to specifying inheritance for a class</li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

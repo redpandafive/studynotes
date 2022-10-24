@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Dynamic Components
+          </li>
+        </ol>
+      </nav>
+      <h1>Dynamic Components</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/dynamicomponents.html#basics">Basics</a></li>
+          <li><a href="./angular/dynamicomponents.html#simple">Simple Implementation</a>
+          <li><a href="./angular/dynamicomponents.html#options">Additional Options</a></li>
+          <li><a href="./angular/dynamicomponents.html#other">Other Setups</a></li>
+          <li><a href="./angular/dynamicomponents.html#links">links</a></li>
+
+
+
+        </li>
+
+
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>
+            Dynamic components are a good alternative to extensive conditional
+            statements in your template
+            <ul>
+              <li>
+                Instead of using blocks of template code that are shown/hidden,
+                you can swap different components into a container element
+              </li>
+              <li>
+                Example would be stack of ngIf conditionals that test for a type
+                in the data, then display a different block content for each
+                type
+              </li>
+            </ul>
+          </li>
+          <li>
+            ComponentFactoryResolver was the previous way to do this. This was
+            removed with Ivy.
+            <ul>
+              <li>No longer need to create a factory to perform this</li>
+              <li>
+                You do not need to destroy any dynamically loaded components -
+                that is done automatically
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="simple">Simple Implementation</h2>
+      <section>
+        <div>
+          This is a very simple example that inserts an
+          <code>index-control</code> component into the parent
+          <code>index</code> component
+        </div>
+      </section>
+
+      <h3 id="childLoader">Setup a Generic Child Loader Directive</h3>
+      <section>
+        <ul>
+          <li>
+            This marks insertion points in the template where components can be
+            loaded
+          </li>
+          <li>
+            Use this directive throughout your application where you need
+            dynamic components
+          </li>
+          <li>
+            ViewContainerRef is injected to get access to the view container of
+            the element that will host the dynamically added component
+            <ul>
+              <li>
+                This is how the directive accesses the element that you want to
+                use to host the dynamic component.
+              </li>
+            </ul>
+          </li>
+          <li>Square brackets must be included when defining the selector</li>
+        </ul>
+        <div>
+          <em>control.directive.ts</em>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { Directive, ViewContainerRef } from '@angular/core';<br/>
+                @Directive({ selector:'&#91;appControl&#93;'})<br/>
+                export class ControlDirective {<br/>
+                constructor(public viewContainerRef: ViewContainerRef) {}
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Add Child Loader Directive to Parent Template</h3>
+      <section>
+        In the parent component template, add a ng-template tagged with the
+        appControl directive (defined in step 1) to identify where dynamic
+        compnents will be loaded
+        <ul>
+          <li>Dynamic components will be loaded at this point</li>
+          <li>Square brackets are not needed when adding the directive</li>
+          <li>Could also be done using a ng-container</li>
+        </ul>
+        <div>
+          <em>index.component.html</em>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;section&gt;<br/>
+                &lt;ng-template appControl&gt;&lt;/ng-template&gt;
+                <br/>&lt;/section&gt;"
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>In the Parent Component Class</h3>
+      <section>
+        <div>
+          <ol>
+            <li>
+              Define a reference to the child loader directive using ViewChild
+              <ul>
+                <li>
+                  Setting the static property to true tells Angular that the
+                  ViewChild will be available at anytime
+                  <ul>
+                    <li>
+                      The directive is on a static element, it can be accessed
+                      in ngOnInit
+                    </li>
+                    <li>
+                      It will query for the directive at the earliest lifecycle
+                      hook available and never query again
+                    </li>
+                    <li>
+                      See <a [routerLink]="['../decorators']">ViewChild</a> for
+                      an explaination of this decorator
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  The exclamation mark is the definitive assignment assertion;
+                  it tells TypeScript that the varaible is indeed assigned to,
+                  even if it cannot detect it
+                </li>
+                <li>It is typed to the directive type</li>
+              </ul>
+            </li>
+            <li>
+              Call createComponent() on ViewContainerRef
+              <ul>
+                <li>
+                  Target the the child component that has been marked with the
+                  load child direcive using the ViewChild property
+                </li>
+                <li>
+                  Reference the viewContaierRef property of the control
+                  ViewChild
+                </li>
+                <li>
+                  Call the createComponent method and pass the type of component
+                  to load
+                </li>
+                <li>
+                  The createComponent() method returns a reference to the loaded
+                  component.
+                  <ul>
+                    <li>
+                      Use that reference to interact with the component by
+                      assigning to its properties or calling its methods
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              To pass data to the dynamic component
+              <ul>
+                <li>
+                  Add a data input in the child component that will loaded
+                </li>
+                <li>
+                  Set this property through the viewContainerRef in the parent
+                  component
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+        <div>
+          <em>index.component.ts</em>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { Component, OnInit, ViewChild } from '@angular/core';&#10;<br/>
+                import { InputControlComponent } from './components/input-control/input-control.component';<br/>
+                import { ControlDirective } from './directives/control.directive';<br/>
+                @Component({<br/>
+                templateUrl: './index.component.html',<br/>
+                styleUrls: &#91;'./index.component.css'&#93;,&#10;})<br/>
+                export class IndexComponent implements OnInit {<br/>
+                @ViewChild(ControlDirective, { static: true }) control!: ControlDirective;<br/>
+                ngOnInit(): void {<br/>
+                this.loadComponent();<br/>
+                }<br/>
+                loadComponent(): void { <br/>
+                const viewContainerRef = this.control.viewContainerRef;<br/> 
+                const componentRef = viewContainerRef.createComponent(InputControlComponent);<br/>
+                componentRef.instance.data = {&#10; type:&quot;input&quot;,&#10; label: &quot;Name&quot;&#10; }<br/>
+                }<br/>
+                }
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Child Component Definition</h3>
+      <section>
+        <div>
+          <em>index-control.component.html</em>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;label for=&quot;&quot;&gt;{+{ data.label }}:&#10; <br/>
+                &lt;input type=&quot;{+{ data.type }}&quot; /&gt;<br/>
+                &lt;/label&gt;&#10;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <em>index-control.component.ts</em>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { Component, Input } from '@angular/core';<br/>
+                @Component({ templateUrl:'./input-control.component.html' })<br/>
+                export class InputControlComponent {&#10; @Input() data: any;&#10;}
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="options">Additional Options</h2>
+      <section>
+        <ul>
+          <li>
+            Clearing a view
+            <ul>
+              <li>
+                Use the ViewContainerRef.clear() method to destroy an existing
+                view in the container
+              </li>
+            </ul>
+          </li>
+          <li>
+            Rather than an if/else block to find a component type (to pass to
+            the creteComponent method) from a string (such as from a
+            configuration file), here is one way to map them together
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const components: {&#91;type: string&#93;: Type&lt;Field&gt;} = {<br/> 
+                  button: FormButtonComponent,&#10;<br/> 
+                  input: FormInputComponent,<br/> 
+                  select: FormSelectComponent,<br/> 
+                  card: CardComponent&#10;};&#10;&#10;// reference like
+                  this&#10;this.container.createComponent(components&#91;&quot;card&quot;&#93;);
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="other">Other Setups</h2>
+      <section>
+        <ul>
+          <li>
+            I have seen examples where the code create the component instance is
+            enclosed in one of the following
+            <ul>
+              <li>
+                A service method that receives parameters of a ViewContainerRef
+                and a data item
+              </li>
+              <li>
+                In the directive component class
+                <ul>
+                  <li>This is defined in OnInit</li>
+                  <li>
+                    No need to define the ViewChild in the parent component
+                  </li>
+                  <li>See dynamic form element project for details</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="links">links</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://stackblogger.com/dynamic-components-angular/" target="_blank">
+              https://stackblogger.com/dynamic-components-angular/
+            </a>
+          </li>
+          <li>
+            <a href="https://angular.io/guide/dynamic-component-loader" target="_blank">
+              https://angular.io/guide/dynamic-component-loader
+            </a>
+            
+            </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

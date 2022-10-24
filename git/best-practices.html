@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Best Practices</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <section></section>
+
+      <h2>Commits</h2>
+      <section>
+        <ul>
+          <li>
+            Atomic Commits
+            <ul>
+              <li>
+                Only do one change - it can be accross multiple files, but it is
+                changing one thing
+              </li>
+              <li>Keep changes small</li>
+              <li>Work on one thing at a time</li>
+              <li>Each commit should be able to get built</li>
+              <li>Should be reversable in case it breaks the build</li>
+            </ul>
+          </li>
+          <li>
+            Commit early, commit often
+            <ul>
+              <li>Commit locally all the time</li>
+              <li>Push when everything is working</li>
+            </ul>
+          </li>
+          <li>
+            Don't commit the following files
+            <ul>
+              <li>
+                Generated files
+                <ul>
+                  <li>Use .gitignore to exclude generated or compiled files</li>
+                </ul>
+              </li>
+              <li>
+                Dependencies
+                <ul>
+                  <li>
+                    Use a package manager to manage dependencies and keep them
+                    out of the repository
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Local configuration files
+                <ul>
+                  <li>Allows users to have different settings</li>
+                  <li>Files may have secrets, such as passwords or API keys</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Don't commit broken code
+            <ul>
+              <li>This blocks other developers from working on their tasks</li>
+              <li>Destabilizes the code repository</li>
+              <li>
+                Consider using the
+                <a [routerLink]="['./stash']">stash</a> feature instead
+              </li>
+            </ul>
+          </li>
+          <li>Test changes before committing</li>
+          <li>
+            Write useful commit messages
+            <ul>
+              <li>Should be straightforward</li>
+              <li>Should be meaningful</li>
+              <li>Use reference numbers if your team uses them</li>
+            </ul>
+          </li>
+          <li>
+            Refer to commits by their hash code
+            <ul>
+              <li>This uniquely identifies the commit</li>
+              <li>
+                This allows you to use the <kbd>git show</kbd> command to see
+                the contents
+              </li>
+            </ul>
+          </li>
+          <li>
+            Have a good backup in place for the repository
+            <ul>
+              <li>
+                Backup and version control are seperate concepts and should be
+                used together
+              </li>
+              <li>One is not a replacement for the other</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Assorted</h2>
+      <section>
+        <ul>
+          <li>Use a Git Workflow ???/</li>
+          <li>
+            Enforce standards, such as a .gitignore file and a commit message
+            template
+          </li>
+          <li>Don't mix refactoring with a new feature</li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

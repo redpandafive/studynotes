@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Merging</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <section>
+        <ul>
+          <li>
+            Allows you to incorporate changes from one branch into another
+          </li>
+          <li>
+            Unlike TFS, a merge ends with a commit, so there will be no
+            outstanding changes remaining in working directory
+          </li>
+          <li>
+            Source branch has the changes that you want to incorporate into the
+            target
+            <ul>
+              <li>This branch is not modified</li>
+              <li>The head pointer will not move after the merge</li>
+            </ul>
+          </li>
+          <li>
+            Target branch you want to modify by merging changes into
+            <ul>
+              <li>This branch is the only one modified</li>
+            </ul>
+          </li>
+        </ul>
+        <figure>
+          <img src="../../assets/merging-explaination-1.png" />
+          <figcaption>
+            If you examine the merge object, you will see there are two parents,
+            indicating that this commit was a Merge
+          </figcaption>
+        </figure>
+      </section>
+
+      <h2>Fast Forward Merge</h2>
+      <section>
+        <ul>
+          <li>
+            This can be performed when there are no changes made on the source
+            since the target branch was split from it
+          </li>
+          <li>
+            The head of the target branch is changed to point to the the last
+            commit on the source branch
+          </li>
+          <li>
+            Now both the source and target branch heads will point to the same
+            commit
+          </li>
+          <li>
+            When you run the merge command, the output will indicate if the
+            merge was fast-forward
+          </li>
+        </ul>
+      </section>
+
+      <h2>Conflicts</h2>
+      <section>
+        <ul>
+          <li>
+            Conflicts occur in merges when you have changes to the same line of
+            code in the same file of both branches
+            <ul>
+              <li>
+                Git needs you to decide how to combine the changes before the
+                merge can be finished
+              </li>
+              <li>These must be manually resolved before you can commit</li>
+            </ul>
+          </li>
+          <li>
+            <a [routerLink]="['./branching']"><kbd>git diff</kbd></a> can be
+            useful when you have conflicts
+          </li>
+          <li>
+            Git will put all of the contents from both versions into a single
+            file and open it in the defalt editor
+            <ul>
+              <li>
+                It will add file markers that indicate the conflicting changes
+              </li>
+              <li>You must edit this file to combine the content</li>
+              <li>
+                When finished, add and commit the changes to create a merge
+                commit
+              </li>
+            </ul>
+          </li>
+          <li>
+            A merge commit has 2 parent commits, one from each side of the merge
+            <ul>
+              <li>
+                When resolving a conflict that has two parents, make sure to
+                remove file markers when you are editing and committing
+              </li>
+              <li>
+                Only the target branch will change. The source branch will
+                remain the same
+              </li>
+              <li>
+                If you want both branches to be updated, you must run the merge
+                on both branches
+                <ul>
+                  <li><kbd>git switch colors2.0</kbd></li>
+                  <li><kbd>git merge main</kbd></li>
+                  <li><kbd>git switch main</kbd></li>
+                  <li><kbd>git merge colors2.0</kbd></li>
+                </ul>
+              </li>
+              <li>
+                When updating both branches, the second merge will be a
+                fast-forward merge
+              </li>
+            </ul>
+          </li>
+          <li>
+            In CLI, this will open the default editor and you will see syntax
+            similar to the following
+            <div class="card"><div class="card-body"><code>
+              &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD&#10;8 Granny Smith apples&#10;======&#10;1 tablespoon cinnamon&#10;10 Granny Smith apples&#10;&gt;&gt;&gt;&gt;&gt;&gt; ideas"
+            </code></div></div>
+          </li>
+          <li>Above the ====== is from the source branch, marked as HEAD</li>
+          <li>
+            Below the ====== is from the target branch, the branch you are
+            merging into. Marked by the branch name
+          </li>
+          <li>
+            To correct, modify the text to the way it should read to resolve
+            (remove head references too)
+          </li>
+          <li>
+            Afterwards, stage and commit (Git will supply a suitable message)
+          </li>
+          <li>
+            During a merge commit
+            <ul>
+              <li>
+                Before staging merge changes, <kbd>git status</kbd> will tell
+                you "You have unmerged paths"
+              </li>
+              <li>
+                After staging merge changes, <kbd>git status</kbd> will tell you
+                "All conflicts fixed but you are still merging"
+              </li>
+            </ul>
+          </li>
+          <li>
+            There may be several conflicts that you should resolve one at a
+            time. Beware of the evil merge (see in Best Practices)
+          </li>
+        </ul>
+      </section>
+
+      <h2>Bailing out of a Merge</h2>
+      <section>
+        <ul>
+          <li>
+            When you need to bail out of a merge, use the merge command with the
+            abort parameter
+          </li>
+          <li>
+            This will stop the merge and return the directory to the previous
+            state
+            <b>BEFORE THE MERGE BEGAN</b>
+          </li>
+
+          <li><kbd>git merge --abort</kbd></li>
+        </ul>
+      </section>
+
+      <h2>Best Practices</h2>
+      <section>
+        <ul>
+          <li>
+            When you split off a branch and know you must merge that new branch
+            back into its source, pull updates from the source frequently to
+            minimize time spent on conflict resolutions
+          </li>
+          <li>
+            Evil merge
+            <ul>
+              <li>
+                Introduces new content into a merge, such as changing content
+                that isnt related to a merge conflict
+              </li>
+              <li>
+                You can't trace this change back to one of the two commits in
+                the merge
+              </li>
+              <li>
+                This can be confusing since there is no context where it came
+                from or why its there.
+              </li>
+              <li>
+                This may occur if you are midway through resolving conflicts and
+                realize somethig is missing
+              </li>
+              <li>
+                Instead, you should abort the merge, add the content, then start
+                the merge again
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Scenario Descriptions</h2>
+      <section>
+        <ul>
+          <li>
+            From branch a, branch into b, add a new file, then merge b into a
+            <ul>
+              <li>Results in both branches having similar log output</li>
+              <li>
+                Both point to the same commits (therefore, same trees and nodes)
+              </li>
+              <li>
+                To perform the merge, Git added the commit from b as the tip of
+                a, then set both head pointers and HEAD to this commit
+              </li>
+            </ul>
+            <figure>
+              <img src="../../assets/branching-merge-1.png" />
+              <figcaption></figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Cherry Picking</h2>
+      <section>
+        <ul>
+          <li>
+            Useful when you want to bring over a single commit to another branch
+          </li>
+          <li>
+            This only creates a copy - the original commit is not changed,
+            removed, or altered in any way
+            <ul>
+              <li>
+                This will create a new commit on the target branch, so the
+                commit object that shows up with have a different SHA ID
+              </li>
+            </ul>
+          </li>
+          <li>Advanced feature that should not be used to replace merging</li>
+          <li>
+            <kbd>git cherry-pick</kbd> appends any commit to the head of the
+            branch you are currently working on
+          </li>
+          <li>
+            Common use cases
+            <ul>
+              <li>
+                Applying a bug fix that applies to mulitiple versions of the
+                product
+                <ul>
+                  <li>
+                    Assume different versions of the product are on different
+                    branches
+                  </li>
+                  <li>Create the fix on a single branch</li>
+                  <li>
+                    Cherry pick the commit to the other branches to apply the
+                    fix to them
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Useful to capture specific commits from an inactive branch
+              </li>
+              <li>
+                Useful when you need a feature from another branch but the
+                branches are not ready to merge yet
+              </li>
+            </ul>
+          </li>
+          <li>
+            This can cause duplicate commits in multiple branches and can
+            confuse someone if they are not aware of the pick
+          </li>
+          <li>
+            Steps and commands
+            <ul>
+              <li>
+                Find the commit you want to pick - need to find the SHA ID and
+                copy it
+                <ul>
+                  <li>
+                    <kbd>git log --oneline</kbd> = use to find the commit you
+                    want from the current branch
+                  </li>
+                  <li>
+                    <kbd>git log xxxx --oneline</kbd> = list the log from
+                    another branch
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Checkout the target branch
+                <ul>
+                  <li>
+                    <kbd>git checkout xxxx</kbd> = assuming branch xxxx is the
+                    target, checkout that branch
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Perform the cherry pick to append the specified commit to the
+                HEAD (head of current branch)
+                <ul>
+                  <li>
+                    <kbd>git cherry-pick xxxxxx</kbd> = assuming SHA ID of
+                    xxxxxx
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Commands</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>git merge xxxx</kbd>
+            <ul>
+              <li>Merges changes from branch xxxx into the current branch</li>
+              <li>
+                Branch xxxx is the source branch, the current working branch is
+                the target branch
+              </li>
+              <li>This will open a commit message editor</li>
+            </ul>
+            <figure>
+              <img src="../../assets/branching-merge-1.png" />
+              <figcaption></figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Related Pages</h2>
+      <section>
+        <ul>
+          <li><a [routerLink]="['../rebasing']">Rebasing</a></li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

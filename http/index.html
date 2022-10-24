@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>HTTP</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Headers</h2>
+      <section>
+        <ul>
+          <li>
+            Many data services can return multiple data formats. It is up to the
+            client to include a header field to indicate the data format that
+            should be used.
+          </li>
+        </ul>
+      </section>
+
+      <h2>URL components</h2>
+      <section>
+        <ul>
+          <li>
+            URLS are composed of several parts
+            <ul>
+              <li>scheme:[//host[:port]][/]path[?query][#fragment]</li>
+            </ul>
+          </li>
+          <li>
+            URLS are a mixture of case insensitive parts and potentially case
+            sensitive parts
+          </li>
+          <li>
+            Scheme
+            <ul>
+              <li>Case insensitive</li>
+            </ul>
+          </li>
+          <li>
+            Host
+            <ul>
+              <li>Case insensitive</li>
+            </ul>
+          </li>
+          <li>
+            Path
+            <ul>
+              <li>Contains data</li>
+              <li>Case sensitive</li>
+            </ul>
+          </li>
+          <li>
+            Query
+            <ul>
+              <li>Contains non-hierarchical data</li>
+              <li>Case sensitive</li>
+            </ul>
+          </li>
+          <li>
+            Fragment
+            <ul>
+              <li>Prefixed by #</li>
+              <li>Used to link directly to a section of the page</li>
+              <li>
+                Ignored by the server when processing a request, it is only used
+                by the browser
+              </li>
+              <li>Case sensitive</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Basics</h2>
+      <section>
+        <ul>
+          <li>
+            HTTP communication is an asynchronous communication pattern
+            <ul>
+              <li>Client sends a request</li>
+              <li>Servier sends a response</li>
+            </ul>
+          </li>
+          <li>
+            Evolution of asynchronous communictions in web development
+            <ul>
+              <li>
+                Callbacks - function that is executed when the reponse returns
+                from a server
+              </li>
+              <li>
+                Promises - a promise object represents a single value that will
+                be returned in the future
+              </li>
+              <li>Observables - see <a [routerLink]="['/rxjs']">RxJS</a></li>
+            </ul>
+          </li>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2>REST Services</h2>
+      <section>
+        <ul>
+          <li>Representational State Transfer</li>
+          <li>
+            Basic idea is that you will be transfering resources (data objects)
+            and taking advantage of the HTTP protocol to indicate the action
+            that should be taken with those resources.
+          </li>
+          <li>Most common way to deliver data to a web application</li>
+          <li>Also called a Web API or HTTP API</li>
+          <li>
+            Many data services can return multiple data formats. It is up to the
+            client to include a header field to indicate the data format that
+            should be used.
+          </li>
+          <li>
+            Use HTTP versbs to specify CRUD operations
+            <ul>
+              <li>Create</li>
+              <li>Read</li>
+              <li>Update</li>
+              <li>Delete</li>
+            </ul>
+          </li>
+          <li>
+            URL conventions address individual as well as collection of
+            resources
+          </li>
+          <li>
+            Use HTTP response codes to indicate success/failure of server action
+          </li>
+        </ul>
+      </section>
+
+      <h3>REST Services - Create Operations</h3>
+      <section>
+        <ul>
+          <li>Creating a resource on the data service (insert)</li>
+          <li>Uses HTTP verb POST</li>
+          <li>
+            The URL should represent the collection of the resource
+            <ul>
+              <li>For example, http://localhost/api/books</li>
+            </ul>
+          </li>
+          <li>Sends the new resource in the body of the request</li>
+          <li>
+            If successful, returns
+            <ul>
+              <li>HTTP 201 Created status code</li>
+              <li>
+                The new created resource should be sent in the boyd of the
+                response
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>REST Services - Read Opearations</h3>
+      <section>
+        <ul>
+          <li>Reads resources from a data service</li>
+          <li>Uses the HTTP verb GET</li>
+          <li>
+            The URL should indicate what you are retrieving
+            <ul>
+              <li>The entire collection - http://localhost/api/books</li>
+              <li>
+                An individual resource using its id -
+                http://localhost/api/books/5
+              </li>
+            </ul>
+          </li>
+          <li>If successful, returns HTTP 200 OK status code</li>
+        </ul>
+        <p></p>
+        <div class="card"><div class="card-body"><code> "</code></div></div>
+      </section>
+
+      <h3>REST Services - Update Opearations</h3>
+      <section>
+        <ul>
+          <li>Updates a resource from a data service</li>
+          <li>Uses the HTTP verb PUT</li>
+          <li>
+            The URL should indicate the specific resouce you are updating
+            (includes id) - http://localhost/api/books/5
+          </li>
+          <li>The body of the request should contain the resource itself</li>
+          <li>If successful, returns HTTP 204 No Content status code</li>
+        </ul>
+        <p></p>
+        <div class="card"><div class="card-body"><code> "</code></div></div>
+      </section>
+
+      <h3>REST Services - Delete Opearations</h3>
+      <section>
+        <ul>
+          <li>Deletes a resource from a data service</li>
+          <li>Uses the HTTP verb DELETE</li>
+          <li>
+            The URL should indicate the specific resouce you are deleting
+            (includes id) - http://localhost/api/books/5
+          </li>
+          <li>If successful, returns HTTP 204 No Content status code</li>
+        </ul>
+        <p></p>
+        <div class="card"><div class="card-body"><code> "</code></div></div>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

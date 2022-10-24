@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Web API</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <section>
+        <ul>
+          <li>
+            When you launch a Web API project in Visual Studio, it displayes a
+            Swagger page to test out API methods
+          </li>
+          <li>
+            Controllers should be decorated with the [ApiController] decorator
+          </li>
+          <li>
+            Controllers can be marked with a route decorator which is applied to
+            all methods
+            <ul>
+              <li>
+                All methods will be assumed to use this URL with the HTTP verb
+                distinguishing which to use
+              </li>
+              <li>
+                [Route("[controller]")]
+                <ul>
+                  <li>
+                    URL to access is now the controller name minus the
+                    Controller suffix
+                  </li>
+                </ul>
+              </li>
+              <li>
+                [Route("api/[controller]")]
+                <ul>
+                  <li>
+                    URL to access this is the controller name minue the
+                    Controller suffix with a api/ prefix
+                  </li>
+                  <li>http://localhost:5000/api/todoitems</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Mark methods with the HTTP action they should correspond to
+            <ul>
+              <li>HttpGet</li>
+              <li>HttpPost</li>
+              <li>HttpPut</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>HttpGet</h2>
+      <section>
+        <ul>
+          <li>Decorate method with the [HttpGet] decorator</li>
+          <li>
+            The decorator can also take a route template that is appended to the
+            controller route decorator
+          </li>
+          <li>
+            [HttpGet("products")]
+            <ul>
+              <li>
+                Assume controler has a route of [Route("[controller]")] and is
+                called ToDoItemsController
+              </li>
+              <li>http://localhost:5000/todoitems/products</li>
+            </ul>
+          </li>
+          <li>
+            [HttpGet("{id}")]
+            <ul>
+              <li>
+                Allows you to specify an id of a specific resource to return
+              </li>
+              <li>
+                {id} is a placeholder variable for the unique
+                identifier of the todo item
+              </li>
+              <li>
+                Assume controler has a route of [Route("[controller]")] and is
+                called ToDoItemsController
+              </li>
+              <li>http://localhost:5000/todoitems/20</li>
+            </ul>
+          </li>
+          <li>
+            Return type of the method can be ActionResult&gt;t&lt;
+            <ul>
+              <li>
+                This is automatically serialized to JSON in the reponse body
+              </li>
+              <li>Returns with a HTTP status code 200 OK</li>
+              <li>Exceptions are translated into 5xx errors</li>
+              <li>
+                Item not found is returned as a HTTP 404 Not Found error code
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>HttpPost</h2>
+      <section>
+        <ul>
+          <li>Decorate the method you would like to post to with [HttpPost]</li>
+          <li>Returns a HTTP 201 status code if successful</li>
+        </ul>
+      </section>
+
+      <h2>HttpGet</h2>
+      <section>
+        <ul>
+          <li>Use to update an existing resource</li>
+          <li>
+            HTTP specification says PUT should send the entire resource back to
+            the server
+          </li>
+          <li>Sends a response of HTTP 204 No Content</li>
+        </ul>
+      </section>
+
+      <h2>HttpDelete</h2>
+      <section>
+        <ul>
+          <li>
+            <div class="card"><div class="card-body"><code>
+              code='&#91;HttpDelete("{id}")&#93;&#10;public async Task&lt;IActionResult&gt; DeleteTodoItem(long id)&#10;{&#10;...&#10;}'
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Command Line Testing</h2>
+      <section>
+        <ul>
+          <li>
+            install http-repl from the command line
+            <div class="card"><div class="card-body"><code>
+              dotnet tool install -g Microsoft.dotnet-httprepl"
+            </code></div></div>
+          </li>
+          <li>
+            Use the following to test a POST operations
+            <ul>
+              <li>
+                Use a different port number if your Web API is on a different
+                port
+              </li>
+              <li>todoitems corresponds to controller ToDoItemsController</li>
+              <li>
+                The object passed after the -c parameter is the data you want to
+                send. There should be a corresponding type as a paraemter to the
+                method on the controller
+              </li>
+              <div class="card"><div class="card-body"><code>
+                code='httprepl https://localhost:5001/todoitems&#10;post -h Content-Type=application/json -c "{"name":"walk dog","isComplete":true}"'
+              </code></div></div>
+            </ul>
+          </li>
+          <li>
+            Verify the resource now exists (given it has an id of 1)
+            <div class="card"><div class="card-body"><code>
+              connect https://localhost:5001/api/todoitems/1&#10;get"
+            </code></div></div>
+          </li>
+          <li>
+            Use the following to test a put
+            <div class="card"><div class="card-body"><code>
+              code='connect https://localhost:5001/api/todoitems/1&#10;put -h Content-Type=application/json -c "{"id":1,"name":"feed fish","isComplete":true}"'
+            </code></div></div>
+          </li>
+          <li>
+            Use the following to delete the resource with an ID of 1
+            <div class="card"><div class="card-body"><code>
+              connect https://localhost:5001/api/todoitems/1&#10;delete"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

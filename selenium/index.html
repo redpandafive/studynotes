@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Selenium</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <ul>
+        <li>
+          <a href="./elementSelection/index.html">Element Selection</a>
+        </li>
+        <li>
+          <a href="./forms/index.html">Forms</a>
+        </li>
+        <li>
+          <a href="./pageObjectModel/index.html">Page Object Models</a>
+        </li>
+        <li>
+          <a href="./webDriver/index.html"
+            >WebDriver Class and Page Navigation</a
+          >
+        </li>
+        <li>
+          <a href="./webElement/index.html">WebElement Class</a>
+        </li>
+        <li>
+          <a href="./assorted/index.html">Assorted Topics</a>
+        </li>
+      </ul>
+
+      <section>
+        <ul>
+          <li>* Note - the course I studied was for Selenium 3</li>
+          <li>
+            Limitations
+            <ul>
+              <li>More brittle than other testing methods</li>
+              <li>Slower than other type of testing</li>
+              <li>
+                Adds additional dependencies to code base and knowledge required
+                of the team
+              </li>
+            </ul>
+          </li>
+          <li>
+            Best practices
+            <ul>
+              <li>Use Page Object Models for non-trivial tests</li>
+              <li>Check page is loaded before interacting</li>
+              <li>
+                Use the simplest, most reliable method to locate elements in the
+                page
+              </li>
+              <li>
+                Use configuration files to store things like servers and ports,
+                just like any other project
+              </li>
+              <li>Prefer explicit waits over Thread.Sleep</li>
+              <li>
+                Tests should be independent of each other and not rely on
+                executing them in a particular order
+              </li>
+              <li>Use the test features, not necessarily to test visuals</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Testing Basics</h2>
+      <section>
+        <ul>
+          <li>
+            Author uses a naming convention for test classes as follows:
+            <ul>
+              <li>
+                Class name - includes the item being tested, such as
+                CreditCardWebAppShould
+              </li>
+              <li>
+                Method name - describes what the test will confirm, such as
+                LoadApplicationPage
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are three logical phases within a Test
+            <ul>
+              <li>
+                Arrange
+                <ul>
+                  <li>Getting things setup</li>
+                  <li>Setting up a WebDriver instance, navigate to a URL</li>
+                </ul>
+              </li>
+              <li>
+                Act
+                <ul>
+                  <li>Perform actions in the browser</li>
+                  <li>Clicking buttons, submitting forms, etc</li>
+                </ul>
+              </li>
+              <li>
+                Assert
+                <ul>
+                  <li>Verify outcome of the test</li>
+                  <li>
+                    Check HTML text, check browser URL, check browser title, etc
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Testing types
+            <ul>
+              <li>
+                Smoke test - very lightweight test to make sure there is no
+                "smoke" coming out of the system
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Ecosystem</h2>
+      <section>
+        <ul>
+          <li>
+            Selenium IDE
+            <ul>
+              <li>
+                Allows you to records automation test scripts using the browser
+              </li>
+              <li>Scripts can be replayed to test websites</li>
+              <li>Scripts can be manually edited if needed</li>
+            </ul>
+          </li>
+          <li>
+            Selenium WebDriver
+            <ul>
+              <li>Code based</li>
+              <li>
+                Usually more maintainable since you can leverage the programming
+                language (such as factoring out common ocde into clases)
+              </li>
+              <li>
+                Testing architecture
+                <ul>
+                  <li>
+                    Test framework, such as NUnit - use to write test code
+                  </li>
+                  <li>
+                    Test code (e.g. C#) that you have written
+                    <ul>
+                      <li>
+                        This is independent of the language that the application
+                        is written in
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    IWebDriver API, such as WebDriver library installed from
+                    NuGet - use inside tests
+                  </li>
+                  <li>
+                    Browser driver, such as ChromeDriver - talks to the browser
+                    and performs operations
+                  </li>
+                  <li>Browser - uses HTTP to interact with Web Server</li>
+                  <li>Web Server</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

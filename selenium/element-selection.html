@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Element Selection</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Selecting HTML Elements</h2>
+      <section>
+        <ul>
+          <li>
+            Use the IWebDriver.FindElement method with an appropriate parameter
+            to find page elements
+            <ul>
+              <li>
+                Be careful if you are dealing with elements that may not be
+                visible yet, such as link on a carousel panel. This will cause
+                an error
+              </li>
+              <li>
+                FindElement will throw an exception if the element does not
+                exist on the pageTitle
+                <ul>
+                  <li>
+                    If you are testing whether an element exists or not, instead
+                    use FindElements and check the count of elements returned
+                  </li>
+                  <li>
+                    It does not throw an exception if the element is not found,
+                    it just returns an empty collection
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            To find an HTML element by id "element_id_attribute"
+            <div class="card"><div class="card-body"><code>
+              code='IWebElement tokenElement = driver.FindElement(By.Id("element_id_attribute"))'
+            >
+            </app-code-box>
+          </li>
+          <li>
+            To find an HTML element by name "element_name_attribute"
+            <div class="card"><div class="card-body"><code>
+              code='IWebElement tokenElement = driver.FindElement(By.Name("element_name_attribute"))'
+            >
+            </app-code-box>
+          </li>
+          <li>
+            To find an HTML element by its HTML tag name
+            <div class="card"><div class="card-body"><code>
+              code='IWebElement linkElement = driver.FindElement(By.TagName("td"))'
+            >
+            </app-code-box>
+            <ul>
+              <li>
+                If multiple elements have the same HTML tag, you will only get
+                the first element that matches, not all of them
+              </li>
+            </ul>
+          </li>
+          <li>
+            To find an HTML element using a CSS selector
+            <div class="card"><div class="card-body"><code>
+              IWebElement linkElement = driver.FindElement(By.CssSelector(&quot;&#91;data-slide='next'&#93;&quot;))"
+            >
+            </app-code-box>
+            <ul>
+              <li>
+                This finds an element with an attribute of data-slide that has a
+                value of next
+              </li>
+            </ul>
+          </li>
+          <li>
+            To find an HTML element using a class name 'class-name'
+            <div class="card"><div class="card-body"><code>
+              code='IWebElement linkElement = driver.FindElement(By.ClassName("class-name"))'
+            >
+            </app-code-box>
+            <ul>
+              <li>
+                If multiple elements have this class name, you will only get the
+                first element that matches, not all of them
+              </li>
+            </ul>
+          </li>
+          <li>
+            To find an HTML link by its link text (when name and id attributes
+            are missing)
+            <ul>
+              <li>
+                Using the full text of the link
+                <div class="card"><div class="card-body"><code>
+                  code='IWebElement linkElement = driver.FindElement(By.LinkText("text_from_inside_link_tag"))'
+                >
+                </app-code-box>
+              </li>
+              <li>
+                Using a partial link text (such as by a segment such as "- Apply
+                Now!")
+                <div class="card"><div class="card-body"><code>
+                  code='IWebElement linkElement = driver.FindElement(By.PartialLinkText("- Apply Now!"))'
+                >
+                </app-code-box>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Selecting Multiple HTML Elements</h2>
+      <section>
+        <ul>
+          <li>
+            Use the IWebDriver.FindElements method instead of
+            IWebDriver.FindElement method
+          </li>
+          <li>Returns a ReadOnlyCollection of IWebElement objects</li>
+          <li>
+            Use indicies to reference each IWebElement inside the collection
+          </li>
+        </ul>
+      </section>
+
+      <h2>XPath - Selecting HTML Elements</h2>
+      <section>
+        <ul>
+          <li>
+            To find an HTML link by Absolute XPath
+            <ul>
+              <li>XPath uses a query to do complex finds</li>
+              <li>
+                Two types of XPath queries
+                <ul>
+                  <li>
+                    Absolute
+                    <ul>
+                      <li>
+                        Starts at the root of the document and traces every
+                        element down to the target
+                      </li>
+                      <li>
+                        Brittle, since changes to the HTML structure anywhere in
+                        the query path can break the query
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Relative
+                    <ul>
+                      <li>Searches the entire document for a pattern</li>
+                      <li>
+                        Use online tools such as http://xpather.com to test
+                        queries
+                      </li>
+                      <li>
+                        Examples
+                        <ul>
+                          <li>
+                            Find all links that contain the text "- Apply Now!"
+                            <div class="card"><div class="card-body"><code>
+                              //a&#91;text()&#91;contains(.,'- Apply Now!')&#93;&#93;"
+                            </code></div></div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                To get the absolute XPath of an element on your pageTitle
+                <ul>
+                  <li>
+                    This uses an absolute XPath that starts at the root of the
+                    document
+                  </li>
+                  <li>Load the page in your browser</li>
+                  <li>Open the development tools panel</li>
+                  <li>Right click on the element you want to target</li>
+                  <li>Select Copy -> XPath</li>
+                  <li>
+                    Paste this value into the FindElement(By.Xpath("xxxxxx")
+                    syntax
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Absolute XPath example
+                <div class="card"><div class="card-body"><code>
+                  code='IWebElement linkElement = driver.FindElement(By.XPath("/html/body/div&#91;1&#93;/div/div&#91;2&#93;/div&#91;2&#93;/div/div/div/div&#91;2&#93;/div&#91;3&#93;/div&#91;1&#93;/div&#91;2&#93;/p"))'
+                >
+                </app-code-box>
+              </li>
+              <li>
+                Relative XPath example
+                <div class="card"><div class="card-body"><code>
+                  IWebElement linkElement = driver.FindElement(By.XPath(&quot;//a&#91;text()&#91;contains(.,'- Apply Now!')&#93;&#93;&quot;))"
+                >
+                </app-code-box>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Explicit Waits - Waiting For Elements to be Selectable</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to delay selecting elements on the page for a period of
+            time, such as waiting for the animation of a carousel to complete
+          </li>
+          <li>These are preferred over Implicit Waits</li>
+          <li>
+            First, define an instance of hte WebDriverWait class
+            <ul>
+              <li>
+                Parameters are the IWebDriver instance and a timeout specified
+                as a TimeSpan
+              </li>
+              <li>
+                The TimeSpan is the maximum amount of time to wait for the
+                element to be visible
+              </li>
+              <li>
+                This will complete before the maximum time if the element
+                becomes available
+              </li>
+              <li>
+                Example
+                <div class="card"><div class="card-body"><code>
+                  WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));"
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Next, use the until method on the WebDriverWait instance to specify
+            the function that should be called after the wait
+            <ul>
+              <li>
+                Takes a lambda function as a parameter. The lambda function
+                takes one parameter, which is the driver
+              </li>
+              <li>
+                Example
+                <div class="card"><div class="card-body"><code>
+                  code='IWebElement applyLink = wait.Until((d) =&gt; d.FindElement(By.LinkText("Easy: Apply Now!")));'
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Now, you can call methods on this IWebElement
+            <div class="card"><div class="card-body"><code> applyLink.Click()"</code></div></div>
+          </li>
+          <li>
+            There are prebuilt functions that you can use instead of a custom
+            lambda functions
+            <ul>
+              <li>
+                Need to install Selenium.Support via NuGet to get access to
+                these
+              </li>
+              <li>
+                As of the time the class was recorded, this package is in a
+                state of flux and may be out of date
+              </li>
+              <li>ExpectedConditions is the static class you will reference</li>
+              <li>This has several prebuilt methods you can use</li>
+              <li>
+                <ul>
+                  <li>
+                    ElementToBeClickable
+                    <ul>
+                      <li>
+                        Waits until the specified element can be clicked on
+                        <div class="card"><div class="card-body"><code>
+                          code='IWebElement applyLink = wait.Until(ExpectedConditions.ElementToBeClickable(By.LinkText("Easy: Apply Now!")))'
+                        </code></div></div>
+                      </li>
+                      <li>
+                        It will wait the maximum amount of time defined in the
+                        WebDriverWait
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Implicit Waits - Waiting For Elements to be Selectable</h2>
+      <section>
+        <ul>
+          <li>This is configured on the WebDriver instance</li>
+          <li>
+            The following sets up an implicit wait for up to 35 seconds
+            <div class="card"><div class="card-body"><code>
+              driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(35);"
+            </code></div></div>
+          </li>
+          <li>
+            Benefits
+            <ul>
+              <li>Less configuration neeed than with explicit waits</li>
+            </ul>
+          </li>
+          <li>
+            Disadvantages
+            <ul>
+              <li>Explicit waits are preferred</li>
+
+              <li>
+                You cannot configure complex logic like you can with Explicit
+                Waits
+              </li>
+              <li>
+                Do not mix Implicit Waits with Explicit Waits on the same
+                WebDriver instance since it leads to unpredictable behavior
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

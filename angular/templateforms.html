@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./angular/index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Template Forms
+          </li>
+        </ol>
+      </nav>
+      <h1>Template Forms</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/templateforms.html#basics">Basics</a></li>
+          <li><a href="./angular/templateforms.html#formGroups">Form Groups</a></li>
+          <li><a href="./angular/templateforms.html#validation">Validation</a></li>
+          <li><a href="./angular/templateforms.html#testing">Testing</a></li>
+          <li><a href="./angular/templateforms.html#customValidators">Custom Validators</a></li>
+
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>
+            In Template driven dorms, the source of truth is the template
+            <ul>
+              <li>Form is defined within the template</li>
+            </ul>
+          </li>
+          <li>
+            The form model is abstracted to promote simplicity over structure
+            <ul>
+              <li>
+                It is simpler, but you give up direct control over the form
+                model
+              </li>
+            </ul>
+          </li>
+          <li>
+            Primarily uses the NgModel directive for creating and managing the
+            FormControl instance for a given form element
+            <ul>
+              <li>
+                Will need to import FormsModule from @angular/forms to access
+                this
+              </li>
+            </ul>
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>... &#91;(ngModel)&#93;=&quot;username&quot;> ...</code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    This binds the input control to the username property on the
+                    component
+                  </li>
+                  <li>
+                    This uses two way binding, so any time the username property
+                    changes, the input will update as well
+                  </li>
+                  <li>This is useful when editing existing data</li>
+                </ul>
+              </li>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>... ngModel)=&quot;username&quot; ...</code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    This uses one way binding from the template to the component
+                    property username
+                  </li>
+                  <li>
+                    Use this when you do not need to update the input to any
+                    changes on the username property. An example of this could
+                    be a login form
+                  </li>
+                </ul>
+              </li>
+              <li>
+                To keep from cluttering up your component with each property on
+                your form, you can bind to a property on a single object
+                <div class="card">
+                  <div class="card-body">
+                    <code>... (ngModel)=&quot;newEvent.name&quot; ...</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Example
+                <ul>
+                  <li>
+                    When the form is submitted, this will call the login method
+                    on the component
+                  </li>
+                  <li>
+                    The template variable loginForm will be passed in as a
+                    parameter to that method call
+                  </li>
+                  <li>
+                    The form object has lots of other properties, so you can
+                    shorten this to loginForm.values to limit the data to the
+                    form input values
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;form #loginForm=&quot;ngForm&quot; (ngSubmit)=&quot;login(loginForm)&quot;&gt;
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Data flow
+            <ul>
+              <li>
+                From view to model
+                <ul>
+                  <li>
+                    new value is typed in the input element, which emits an
+                    event with the new value
+                  </li>
+                  <li>
+                    the control value accessor attached to the input triggers
+                    the setValue method on the FormControl instance
+                  </li>
+                  <li>
+                    The FormControl instance emits the new value through the
+                    valueChanges observable
+                  </li>
+                  <li>
+                    Subscribers to the valueChanges observable receive the new
+                    value
+                  </li>
+                  <li>
+                    The control value accessor also calls the
+                    NgModel.viewToModelUpdate method that emits an ngModelChange
+                    event
+                  </li>
+                  <li>
+                    Because the component template uses two way data binding for
+                    the component property, the property is updated to the value
+                    emitted by the ngModelChange event
+                  </li>
+                </ul>
+              </li>
+              <li>
+                From model to view
+                <ul>
+                  <li>The value is updated in the component</li>
+                  <li>Change detection begins</li>
+                  <li>
+                    During change detection, the ngOnChanges lifecycle hook is
+                    called on the NgModel directive instance because the value
+                    of one of its inputs has changed
+                  </li>
+                  <li>
+                    The ngOnChanges method queues an async task to set the value
+                    for the internal FormControl instance
+                  </li>
+                  <li>Change detection completes</li>
+                  <li>
+                    On the next tick, the task to set the FormControl instance
+                    value is executed
+                  </li>
+                  <li>
+                    The FormControl instance emits the latest value through the
+                    valueChanges observable
+                  </li>
+                  <li>
+                    Any subscribers to the valueChanges observable receive the
+                    new value
+                  </li>
+                  <li>
+                    The control value accessor updates the form input element in
+                    the view with the latest value
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="formGroups">Form Groups</h2>
+      <section>
+        <ul>
+          <li>
+            Useful when you are trying to match your binding model to the data
+            model that arrives/is sent to the server
+            <ul>
+              <li>
+                Useful when your data model has nested properties, but the
+                binding model does this
+              </li>
+              <li>
+                This gives your binding model nested properties so you can shape
+                it to match your data model
+              </li>
+            </ul>
+          </li>
+          <li>
+            To specify this in the template, wrap the form elements to be nested
+            in a container element with ngModelGroup directive
+            <ul>
+              <li>
+                The parameter on this directive will be the property name to use
+                for nesting
+              </li>
+            </ul>
+          </li>
+          <li>
+            The NgModel value does not have to match the name value on an input
+            <ul>
+              <li>
+                ngModel is what is used to bind to properties on the component
+              </li>
+              <li>the name is used to populate the form values</li>
+            </ul>
+          </li>
+          <li>
+            Example
+            <ul>
+              <li>
+                In template
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;div ngModelGroup=&quot;address&quot;&gt;<br/>
+                      &lt;input (ngModel)=&quot;street&quot; name=&quot;street&quot; ... /&gt;<br/> 
+                      &lt;input (ngModel)=&quot;city&quot; name=&quot;city&quot; ... /&gt;<br/>
+                      &lt;input (ngModel)=&quot;state&quot; name=&quot;state&quot; ... /&gt;<br/>
+                      &lt;/div&gt;&#10;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                If you bind the ngModel to an object on the component, that
+                object will now have an address property.
+                <ul>
+                  <li>
+                    This will contain an object with the following properties:
+                    street, city, and state
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="validation">Validation</h2>
+      <section>
+        <ul>
+          <li>
+            Validation in template driven forms uses directives and a syntax
+            similar to what you would use with native HTML form validation
+            <ul>
+              <li>
+                Directives match these attributes with validator functions in
+                the framework
+              </li>
+              <li>
+                Every time the value of a form control changes, validation is
+                run and generates a list of validation errors
+              </li>
+              <li>Can be INVALID or null (which is VALID)</li>
+            </ul>
+          </li>
+          <li>
+            To prevent the validator from displaying erors before the user has a
+            chance to edit the form, check for dirty or touched states
+            <ul>
+              <li>Dirty = when the value of the input has been changed</li>
+              <li>Touched = when the user blurs the form control element</li>
+            </ul>
+          </li>
+          <li>
+            Don’t have to put the novalidate property on the form element
+            anymore to disable HTML 5 validation
+          </li>
+          <li>
+            Simple example to setup an individual control
+            <ul>
+              <li>
+                Assign NgModel to a template variable on the form element
+                <ul>
+                  <li>
+                    This allows you to inspect the control's state
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;input type=&quot;text&quot; required #startDate=&quot;ngModel&quot; ...
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Use this template variable for a conditional to display an error
+                message
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;span *ngIf=&quot;startDate.errors&#91;'required'&#93;
+                      ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Add a CSS rule to your stylesheet to hook into one of the
+                Angular provided classes
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      input.ng-invalid { border: thin solid #b94a48 }
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Angular provides a lot of information about the current state of
+            individual form controls
+            <ul>
+              <li>
+                Since template forms use the same underlying mechanism as
+                Reactive forms, you have access to the states that are defined
+                in that section
+              </li>
+            </ul>
+          </li>
+          <li>
+            Angular also provides a lot of information about the current state
+            of the overall form
+            <ul>
+              <li>
+                Overall form validation is valid once all its fields are valid
+              </li>
+              <li>
+                Since template forms use the same underlying mechanism as
+                Reactive forms, you have access to the states that are defined
+                in that section
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            The Angular errors object has changed in version 13
+            <ul>
+              <li>
+                This
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;div *ngIf=&quot;firstName.errors?.required ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Is not this
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;div *ngIf=&quot;firstName.errors?.&#91;'required'&#93; ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>Use safe navigator in case the control is not available</li>
+          <li>
+            Built in validators
+            <ul>
+              <li>Reactive forms contain more built in validators</li>
+              <li>
+                Required
+                <ul>
+                  <li>
+                    Indicates the input must have a value to be considered valid
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;input name=&quot;username&quot; &#91;ngModel&#93;=&quot;user.userName&quot; required #uname=&quot;ngModel&quot;&gt;
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Email
+                <ul>
+                  <li>
+                    Requires the control value must contain a valid email
+                    address
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;input type=&quot;text&quot; required email ... /&gt;
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Minlength
+                <ul>
+                  <li>
+                    Value provided must have a minimum length
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;input ... &#91;ngModel&#93;=&quot;user.userName&quot; minlength=&quot;5&quot; #uname=&quot;ngModel&quot;&gt; ...
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Maxlength
+                <ul>
+                  <li>
+                    Value may not have more than the specified number of
+                    characters
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;input ... &#91;ngModel&#93;=&quot;user.userName&quot; maxlength=&quot;10&quot; #uname=&quot;ngModel&quot;&gt;
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Pattern
+                <ul>
+                  <li>
+                    Value must conform to the specified regex pattern
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;input type=&quot;text&quot; pattern=&quot;^&#91;a-zA=Z&#93;+%&quot; ... &gt;
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                  <li>Specifies the input may only contain letters</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Examples
+            <ul>
+              <li>
+                To disable a login button until a form is valid
+                <ul>
+                  <li>
+                    Assign a template variable to the form element
+                    <div class="card">
+                      <div class="card-body">
+                        <code>&lt;form #loginForm=&quot;ngForm&quot;&gt;</code>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    Disable the button when the form is invalid (use one of the
+                    two)
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;button type=&quot;submit&quot;&#91;disabled&#93;=&quot;loginForm.invalid&quot;&gt;<br/>
+                          ...<br/>
+                          &lt;button type=&quot;submit&quot; &#91;disabled&#93;=&quot;!loginForm.valid&quot;&gt; <br/>
+                          ...
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                To add an emphasis element over an input if the control is
+                invalid and the input has been touched
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;em *ngIf=&quot;loginForm.controls.userName?.invalid && loginForm.controls.userName?.touched"&gt;<br/>
+                      Required<br/>
+                      &lt;/em&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="testing">Testing</h2>
+      <section>
+        <ul>
+          <li>
+            Is more complicated since it requires a detailed knowledge of the
+            change detection process and an understanding of how directives run
+            on each cycle to ensure that elements are queried, tested, or
+            changed at the correct time
+          </li>
+          <li>
+            Mutability
+            <ul>
+              <li>
+                Rely on mutability with two way data binding to update the data
+                model in the component as changes are mode in the template
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="customValidators">Custom Validators</h2>
+      <section>
+        <ul>
+          <li>
+            Custom validators can be implemented as classes
+            <ul>
+              <li>
+                Use the Directive decorator on this class
+                <ul>
+                  <li>This should contain a selector</li>
+                </ul>
+              </li>
+              <li>The class name should end in a Validator suffix</li>
+              <li>The class should implement Validator class</li>
+              <li>
+                Contains a single method, validate
+                <ul>
+                  <li>Takes a FormGroup object as a parameter</li>
+                  <li>Returns { [key: string]: any }</li>
+                </ul>
+              </li>
+              <li>
+                To access a control named address in the FormGroup
+                <ul>
+                  <li>formGroup.controls['address']</li>
+                </ul>
+              </li>
+              <li>
+                You can navigate up the FormGroup hierarchy by accessing
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      (&lt;FormGroup&gt;formGroup.root).controls&#91;'controlInParentFormGroup'&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>Returning null means validation is passed</li>
+            </ul>
+          </li>
+
+          <li>
+            Custom validator classes must be added to Angular's validator
+            'service'
+            <ul>
+              <li>
+                Import NG_VALIDATORS from @angular/forms - this is essentially a
+                service
+              </li>
+              <li>
+                In the directive config object add
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      Providers: &#91;{provide: NG_VALIDATORS, useExisting:
+                      LocationValidator, multi: true }&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Without the multi: true parameter, this would break built in
+            validators since LocationValidatior is being configured to be
+            injected
+          </li>
+          <li>
+            The 3rd parameter adds the new validator to the collection of
+            services provided by NG_VALIDATORS that are built in by Angular
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>

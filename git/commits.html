@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+    <div class="container">
+      <h1>Commits</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+
+      <h2>Reversing Commits with Reset</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to rollback a commit by moving it back into working
+            directiory or staging area
+          </li>
+          <li>This can be used to throw changes away if needed</li>
+          <li>
+            Best practice to not reset a commit to remote origin once you have
+            updated it from your local repository
+          </li>
+        </ul>
+      </section>
+
+      <h2>Commands</h2>
+      <section>
+        <ul>
+          <li>
+            <kbd>get add .</kbd>
+            <ul>
+              <li>
+                Sends specified modifications to staging
+                <ul>
+                  <li>
+                    Use to add untracked file or files to the index so they will
+                    be tracked by Git
+                  </li>
+                  <li>
+                    Also use to add a changed file that is already being tracked
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Includes all modifications, deletions, and additions for all
+                files in the current directory and all subdirectories
+              </li>
+              <li>
+                Issuing this from the root is equivalent to
+                <kbd>git add -all</kbd>
+              </li>
+              <li>It will not include any changes from parent directories</li>
+              <li>
+                Once added, a file will show up as a change to be commmitted
+                under the
+                <kbd>git status</kbd> command output
+              </li>
+              <li>
+                Think of this as changes are staged
+                <ul>
+                  <li>
+                    If you make changes to a file, stage the file, then modify
+                    the same file again, only the first change will be included
+                    in the commit
+                  </li>
+                  <li>
+                    The file will show up under both "Changes to be commited"
+                    and "Changes not staged for commit"
+                  </li>
+                  <li>
+                    Run the add command again on the file to include both sets
+                    of changes in the next commmit
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git add -A</kbd> and <kbd>git add -all</kbd>
+            <ul>
+              <li>Includes all modifications, deletions, and additions</li>
+              <li>Does not matter which directory you are in</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git add -u</kbd>
+            <ul>
+              <li>Stages modifications and deletions, but no new files</li>
+              <li>Use <kbd>git restore</kbd> to undo this command</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git add *</kbd>
+            <ul>
+              <li>Do not use this, not equivalent to above commands</li>
+              <li>
+                The * is a shell command, not something Git specifically knows
+                how to use
+              </li>
+              <li>This will bypass .gitignore</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git commit</kbd>
+            <ul>
+              <li>
+                Sends files from the index to the repository to create a
+                snapshot
+              </li>
+              <li>
+                Without the -m option, issuing this command will open a text
+                editor so you can write out a commit message
+                <ul>
+                  <li>Default editor is Vi</li>
+                  <li>Use <kbd>:wq</kbd> to save and quit</li>
+                </ul>
+              </li>
+              <li>
+                <kbd>git commit -m "start of changes for quickfix"</kbd>
+                <ul>
+                  <li>
+                    Sends the files to the repository with an attached message
+                  </li>
+                  <li>Commits staged changes to the repository</li>
+                  <li>
+                    This will include a message of "start of changes for
+                    quickfix"
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <kbd>git commit -a -m "Some message"</kbd>
+                <ul>
+                  <li>
+                    Bypasses the staging step and commits changes directly from
+                    working area along with a message
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git reset --soft xxxxx</kbd>
+            <ul>
+              <li>Moves commit back into staging area</li>
+              <li>
+                Useful if you want to regroup changes differently or add more
+                changes before commiting
+              </li>
+              <li>
+                Moves head back to commit id xxxxx and undoes all commits beween
+                that commit (excluding specified) and the current one (including
+                current one)
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git reset --mixed xxxxx</kbd> and
+            <kbd>git reset --mixed xxxxx</kbd>
+            <ul>
+              <li>Moves commit back into working directory</li>
+              <li>This is the default if nothing else is specified</li>
+              <li>
+                Moves head back to commit id xxxxx and undoes all commits beween
+                that commit (excluding specified) and the current one (including
+                current one)
+              </li>
+              <li>Reset current HEAD ot the specified state</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>git reset --hard xxxxx</kbd>
+            <ul>
+              <li>Moves changes to the trash</li>
+              <li>
+                This will also remove changes to working directory and staging,
+                so be careful
+              </li>
+              <li>
+                Moves head back to commit id xxxxx and undoes all commits beween
+                that commit (excluding specified) and the current one (including
+                current one)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Writing Good Commit Messages</h2>
+      <section>
+        <ul>
+          <li>
+            Meaningful commit messages are necessary so you can track down
+            specific changes
+            <ul>
+              https://cbea.ms/git-commit/
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="./assets/bootstrap/js//bootstrap.bundle.js"></script>
+  </body>
+</html>
