@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            View Layer Architecture
+          </li>
+        </ol>
+      </nav>
+
+      <h1>View Layer Architecture</h1>
+      <section>
+        <ul>
+          <li>
+            Components can be separated by function
+            <ul>
+              <li>Keeps components small, simple and promotes reuse</li>
+            </ul>
+          </li>
+          <li>
+            Smart components
+            <ul>
+              <li>Aka application-level components, container components</li>
+              <li>Usually tied to an application since reuse is difficult</li>
+              <li>
+                Has too many application-specific features, such as services
+                injected into the constructor
+              </li>
+              <li>
+                Can be seen as a top-level component composed of one or more
+                presentation components
+                <ul>
+                  <li>
+                    Top level component of a route is usually a smart component
+                  </li>
+                  <li>This component handles getting data from services</li>
+                  <li>
+                    Data can be passed into a child presentation component for
+                    display
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Presentation components
+            <ul>
+              <li>Aka Pure components, dumb components</li>
+              <li>
+                Handles issues like formatting data into a table on the screen
+              </li>
+              <li>Take data using inputs and emit events to</li>
+              <li>
+                Try to make as application agnostic as possible
+                <ul>
+                  <li>
+                    Avoid service injection that ties it to a specific
+                    application
+                  </li>
+                  <li>Use inputs and outputs to get data into them</li>
+                </ul>
+              </li>
+              <li>
+                This is something that would be a good candidate for use in
+                another application or in multiple places within the same
+                application
+              </li>
+            </ul>
+          </li>
+          <li>
+            One complication is event handling
+            <ul>
+              <li>
+                Child components can only dispatch events to their parent
+                component
+              </li>
+              <li>Events do not bubble like they do in JS</li>
+              <li>A store-like service can be a solution if this is needed</li>
+            </ul>
+          </li>
+          <li>
+            These categories are guidelines or starting points
+            <ul>
+              <li>
+                Smart components do not have to be top level component only
+              </li>
+              <li>
+                You may find yourself forced to make a presentation component
+                into a smart component when need a service in it
+              </li>
+              <li>
+                It may not be worth trying to keep a component a presentation;
+                you may sacrifice simple design for the sake of reusability
+              </li>
+              <li>Design wins over reusability in this case</li>
+              <li>
+                Start with a single top level smart component and split it into
+                smaller presentation components as it gets bigger
+              </li>
+              <li>
+                With event handling, you could end up having to chain event
+                listeners all the way down the component tree to stick with this
+                paradigm
+              </li>
+              <li>
+                Probably better to make a leaf node a smart component in this
+                case as it simplifies design
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">ViewChild</li>
+        </ol>
+      </nav>
+
+      <h1>ViewChild</h1>
+
+      <section>
+        <ul>
+          <li>
+            @ViewChild and @ViewChildren are used to get a reference to
+            components that you define in the view template of your component
+          </li>
+          <li>
+            Use this when the parent component class must refer to the child
+            component class
+          </li>
+          <li>
+            Allows you to inject the child component into the parent as a
+            ViewChild
+            <ul>
+              <li>
+                Import references to the ViewChild decorator and the
+                AfterViewInit lifecycle hook
+              </li>
+              <li>Inject using the @ViewChild decorator</li>
+              <li>
+                You can now reference the child component through this variable,
+                but it is not available until after Angular displays the parent
+                view
+              </li>
+              <li>
+                Need to use the ngAfterViewInit hook to work with it. The child
+                component is not available until after Angular displays the
+                parent view
+              </li>
+              <li>
+                This can also be done with templates by referencing a template
+                reference
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @ViewChild(CountdownTimerComponent)&#10;private timerComponent:
+              CountdownTimerComponent
+            </code>
+          </div>
+        </div>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+@Component({
+   selector: &quot;app-root&quot;,                 
+   template: `                   
+      &lt;ng-template #defaultTabButtons>                                  
+         &lt;button class=&quot;tab-button&quot; (click)=&quot;login()&quot;>                  
+            {{loginText}}                  
+          &lt;/button>                  
+          &lt;button class=&quot;tab-button&quot; (click)=&quot;signUp()&quot;>                  
+            {{sig-nUpText}}                  
+          &lt;/button>                  
+      &lt;/ng-template>`})                              
+              </pre>
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

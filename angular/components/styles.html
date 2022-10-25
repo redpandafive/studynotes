@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Styling Components
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Styling Components</h1>
+
+      <section>
+        <ul>
+          <li>
+            Use to isolate CSS rules to within the component template
+            <ul>
+              <li>
+                Will not be inherited by any components nested within the
+                template nor by any content projected into the components
+              </li>
+              <li>
+                By default, component CSS styles are encapsulated into the
+                components view and don’t affect the rest of the application
+              </li>
+            </ul>
+          </li>
+          <li>
+            Best practices
+            <ul>
+              <li>
+                Do not override the styles of a component – consider then
+                private implementation details for that component
+              </li>
+              <li>
+                If you are authoring a component that others will use, you can
+                accept customization from consumers in a number of ways (see
+                https://angular.io/guide/component-styles#authoring-a-component-to-support-customization)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Special selectors from the world of shadow DOM style scoping
+            <ul>
+              <li>
+                :host
+                <ul>
+                  <li>
+                    Host element – element that matches the components selector
+                    into which the template is rendered
+                  </li>
+                  <li>This selector targets that host element</li>
+                  <li>
+                    Rules will affect the host element and all its descendants
+                  </li>
+                  <li>
+                    You can add selectors after the host selector to target
+                    elements within the component
+                  </li>
+                </ul>
+              </li>
+              <li>
+                :host(.active)
+                <ul>
+                  <li>Function form of the host selector</li>
+                  <li>Applies host styles conditionally</li>
+                  <li>
+                    Includes another selector inside parentheses after :host
+                  </li>
+                  <li>
+                    Example above targets the host element but only when it also
+                    has the active CSS class applied to it
+                  </li>
+                </ul>
+              </li>
+              <li>
+                :host-context
+                <ul>
+                  <li>
+                    Use to apply styles based on some condition outside of a
+                    component’s view
+                  </li>
+                  <li>
+                    :host-context(.theme-light) h2 would apply rules to all h2
+                    elements inside the component only if some ancestor element
+                    has the CSS class theme-light
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Ways to add styles for a component
+            <ul>
+              <li>
+                By setting styles or styleUrls properties of the Component
+                decorator
+                <ul>
+                  <li>These are arrays or strings</li>
+                  <li>
+                    If you are using the CLI to build, you can add sass, less,
+                    or stylus files into the styleUrls metadata with the
+                    appropriate extensions
+                  </li>
+                  <li>
+                    Angular CLI build process runs the pertinent CSS
+                    preprocessor
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Inline in the template HTML
+                <ul>
+                  <li>
+                    Embed a style tag into the template or a link tag to
+                    reference an external stylesheet
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            With CSS imports
+            <ul>
+              <li>use to import CSS sheets into other CSS sheets</li>
+              <li>
+                the URL is relative to the CSS file into which you are importing
+              </li>
+            </ul>
+          </li>
+          <li>
+            To control how CSS encapsulation works on a component level, you can
+            set the view encapsulation mode in the component metadata
+            (encapsulation tag)
+            <ul>
+              <li>
+                ViewEncapsulation.ShadowDom
+                <ul>
+                  <li>
+                    Uses browser's native shadow DOM implementation. The
+                    component styles are included within the shadow DOM
+                  </li>
+                  <li>
+                    Only works on browsers that have native support for shadow
+                    DOM, which is limited
+                  </li>
+                </ul>
+              </li>
+              <li>
+                ViewEncapsulation.Emulated
+                <ul>
+                  <li>Default</li>
+                  <li>
+                    Emulated the behavior of shadow DOM by preprocessing the CSS
+                    code to effective scope the CSS to the component's view
+                  </li>
+                </ul>
+              </li>
+              <li>
+                ViewEncapsulation.None
+                <ul>
+                  <li>
+                    no view encapsulation. This behaves the same as pasting the
+                    component's styles into the HTML
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            If you need to apply styles across the entire page, add the rules to
+            the site.CSS file
+          </li>
+        </ul>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code> @import './hero-details-box.css'" </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

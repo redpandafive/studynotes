@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Content Projection
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Content Projection</h1>
+
+      <section>
+        <ul>
+          <li>
+            Allows you to insert content into a child component from the parent
+            component
+          </li>
+          <li>
+            Uses the ng-content directive as a placeholder in the child
+            component
+          </li>
+          <li>
+            Does not create a real DOM element, so custom attributes applied to
+            it are ignored
+          </li>
+          <li>
+            Single slot content projection
+            <ul>
+              <li>Component accepts content from a single source</li>
+              <li>
+                Place a ng-content tag in the child component where external
+                content should be placed
+              </li>
+              <li>
+                Put context between the opening and closing tags of the child
+                component (in the parent component)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Multi slot content projection
+            <ul>
+              <li>Component accepts content from multiple sources</li>
+              <li>
+                Each slot uses a selector to determine which content goes into
+                that slot -this could be a
+                <ul>
+                  <li>CSS selector (not recommended)</li>
+                  <li>Attribute selector (recommended)</li>
+                </ul>
+              </li>
+              <li>
+                To implement
+                <ul>
+                  <li>
+                    Place a ng-content tag in the child component for each slot
+                  </li>
+                  <li>
+                    Tag each slot with a select attribute to indicate the
+                    selector
+                  </li>
+                  <li>The square brackets make this an attribute selector</li>
+                  <li>
+                    Add the selector as an attribute on the parent component
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Conditional content projection
+            <ul>
+              <li>Will render content only when specific conditions are met</li>
+              <li>
+                See documentation at
+                <a
+                  href="https://angular.io/guide/content-projection#conditional-content-projection"
+                  target="_blank"
+                  >https://angular.io/guide/content-projection#conditional-content-projection</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
