@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Component Configuration
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Component Configuration</h1>
+      <section>
+        <ul>
+          <li>
+            Uses a @Component decorator
+            <ul>
+              <li>This must be imported from @angular/core</li>
+              <li>Identifies the class immediate below is as a component</li>
+            </ul>
+          </li>
+          <li>
+            Takes a metadata object with the following properties
+            <ul>
+              <li>
+                selector – CSS selector that tells Angular to create an insert
+                an instance of this component wherever it finds the
+                corresponding tag in the template HTML
+              </li>
+              <li>
+                templateUrl - module-relative address of this component's HTML
+                template
+              </li>
+              <li>
+                template – alternative to the templateUrl that gives the HTML
+                template inline
+              </li>
+              <li>use backticks to surround it if it spans multiple lines</li>
+              <li>
+                styles – takes an array of strings that contain CSS rule
+                declarations
+              </li>
+              <li>
+                styleUrls – takes an array of CSS stylesheets that should be
+                added
+              </li>
+              <li>
+                providers – an array of providers for services that the
+                component requires
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

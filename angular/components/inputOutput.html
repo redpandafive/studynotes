@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Input / Output Properties
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Input / Output Properties</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="angularcli.html#properties">Input / Output Properties</a>
+          </li>
+          <li>
+            <a href="angularcli.html#input">Input Properties</a>
+          </li>
+          <li>
+            <a href="angularcli.html#output">Output Properties</a>
+          </li>
+          <li>
+            <a href="angularcli.html#aliases">Import / Export Aliases</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="properties">Input / Output Properties</h2>
+      <section>
+        <ul>
+          <li>
+            When binding to a template to its own component class, you have no
+            need of these.
+          </li>
+          <li>
+            These are used when binding to a property of a different component
+            <ul>
+              <li>
+                TypeScript access modifiers can’t be used to shape a component's
+                public binding API
+              </li>
+            </ul>
+          </li>
+          <li>
+            Directive properties that must be declared as inputs or outputs
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="input">Input Properties</h3>
+      <section>
+        <ul>
+          <li>
+            Settable properties; receive data values from parent components
+          </li>
+          <li>
+            Values flow into the property when it is data bound with a property
+            binding
+          </li>
+          <li>
+            Declare using Input decorator in the child class and bind the
+            property in the parent component template
+          </li>
+          <li>
+            Use ngOnChanges to detect when input property values change
+            <ul>
+              <li>This method receives a SimpleChange object</li>
+              <li>This will give you the old and new values of the inputs</li>
+            </ul>
+          </li>
+          <li>
+            Performance considerations
+            <ul>
+              <li>
+                If you are passing a static value from a parent to a child,
+                consider using the @Attribute decorator over @Input
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="output">Output Properties</h3>
+      <section>
+        <ul>
+          <li>
+            Values flow out of the component as events bound with an event
+            binding
+          </li>
+          <li>This allows a child to send data to a parent component</li>
+          <li>Observable property = means you can subscribe to it</li>
+          <li>Annotated with @Output decorator</li>
+          <li>
+            Events through outputs behave differently in Angular than they do in
+            JS
+            <ul>
+              <li>
+                Events do not bubble up to higher components like they do in JS
+              </li>
+
+              <li>
+                An event dispatched from a child component can only be heard by
+                its parent component, not any higher
+              </li>
+              <li>This was a design decision done to streamline concepts</li>
+              <li>
+                A service bus design or store solution might be alternatives if
+                this is needed (Can implement in plain JS, but this should be
+                avoided)
+              </li>
+            </ul>
+          </li>
+          <li>Almost always returns an Angular EventEmitter object</li>
+        </ul>
+
+        <p>
+          In the child component, declare an EventEmitter property with the
+          Output decorator
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @Output() DeleteRequest= new EventEmitter&lt;Hero&gt;()
+            </code>
+          </div>
+        </div>
+        <p>
+          To dispatch the event in the child, raise it with the emit method
+          call. Hero is the data you wish to pass back to the parent
+        </p>
+
+        <div class="card">
+          <div class="card-body">
+            <code> this.DeleteRequest.emit(hero)</code>
+          </div>
+        </div>
+        <p>
+          To configure the parent, add a method in the component to handle the
+          data and bind that method to the child component template. The $event
+          object contains the data dispatched by the event
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;app-item-output (deleteRequest)=&quot;addItem($event)&quot;
+              ...&gt;
+            </code>
+          </div>
+        </div>
+
+        <p>
+          Binding to an output property in a parent component. This calls a
+          method onVoted on the parent component. The parameter for this method
+          will be the payload sent by the child
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;my-component
+              (onvoted)=&quot;onVoted($event)&quot;&gt;&lt;/my-component&gt;
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3 id="aliases">Import / Export Aliases</h3>
+      <section>
+        <ul>
+          <li>
+            These are useful when you want to expose one name for a property,
+            such name it something different internally
+          </li>
+          <li>This can be done on both Inputs and Outputs</li>
+          <li>Style guide recommends this should be avoided when possible</li>
+        </ul>
+        <p>Example of export alias</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @Output('myClick') clicks = new EventEmitter&lt;string&gt;()&#10;
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
