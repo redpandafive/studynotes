@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -18,9 +18,9 @@
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
           <li class="breadcrumb-item">
-            <a href="index.html">Angular</a>
+            <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             Dynamic Components
@@ -32,16 +32,14 @@
       <section class="navlinks">
         <ul>
           <li><a href="dynamicomponents.html#basics">Basics</a></li>
-          <li><a href="dynamicomponents.html#simple">Simple Implementation</a>
-          <li><a href="dynamicomponents.html#options">Additional Options</a></li>
+          <li>
+            <a href="dynamicomponents.html#simple">Simple Implementation</a>
+          </li>
+          <li>
+            <a href="dynamicomponents.html#options">Additional Options</a>
+          </li>
           <li><a href="dynamicomponents.html#other">Other Setups</a></li>
-          <li><a href="dynamicomponents.html#links">links</a></li>
-
-
-
-        </li>
-
-
+          <li><a href="dynamicomponents.html#links">Links</a></li>
         </ul>
       </section>
 
@@ -114,9 +112,9 @@
           <div class="card">
             <div class="card-body">
               <code>
-                import { Directive, ViewContainerRef } from '@angular/core';<br/>
-                @Directive({ selector:'&#91;appControl&#93;'})<br/>
-                export class ControlDirective {<br/>
+                import { Directive, ViewContainerRef } from '@angular/core';<br />
+                @Directive({ selector:'&#91;appControl&#93;'})<br />
+                export class ControlDirective {<br />
                 constructor(public viewContainerRef: ViewContainerRef) {}
               </code>
             </div>
@@ -139,9 +137,9 @@
           <div class="card">
             <div class="card-body">
               <code>
-                &lt;section&gt;<br/>
+                &lt;section&gt;<br />
                 &lt;ng-template appControl&gt;&lt;/ng-template&gt;
-                <br/>&lt;/section&gt;"
+                <br />&lt;/section&gt;"
               </code>
             </div>
           </div>
@@ -228,22 +226,28 @@
           <div class="card">
             <div class="card-body">
               <code>
-                import { Component, OnInit, ViewChild } from '@angular/core';&#10;<br/>
-                import { InputControlComponent } from './components/input-control/input-control.component';<br/>
-                import { ControlDirective } from './directives/control.directive';<br/>
-                @Component({<br/>
-                templateUrl: './index.component.html',<br/>
-                styleUrls: &#91;'./index.component.css'&#93;,&#10;})<br/>
-                export class IndexComponent implements OnInit {<br/>
-                @ViewChild(ControlDirective, { static: true }) control!: ControlDirective;<br/>
-                ngOnInit(): void {<br/>
-                this.loadComponent();<br/>
-                }<br/>
-                loadComponent(): void { <br/>
-                const viewContainerRef = this.control.viewContainerRef;<br/> 
-                const componentRef = viewContainerRef.createComponent(InputControlComponent);<br/>
-                componentRef.instance.data = {&#10; type:&quot;input&quot;,&#10; label: &quot;Name&quot;&#10; }<br/>
-                }<br/>
+                import { Component, OnInit, ViewChild } from
+                '@angular/core';&#10;<br />
+                import { InputControlComponent } from
+                './components/input-control/input-control.component';<br />
+                import { ControlDirective } from
+                './directives/control.directive';<br />
+                @Component({<br />
+                templateUrl: './index.component.html',<br />
+                styleUrls: &#91;'./index.component.css'&#93;,&#10;})<br />
+                export class IndexComponent implements OnInit {<br />
+                @ViewChild(ControlDirective, { static: true }) control!:
+                ControlDirective;<br />
+                ngOnInit(): void {<br />
+                this.loadComponent();<br />
+                }<br />
+                loadComponent(): void { <br />
+                const viewContainerRef = this.control.viewContainerRef;<br />
+                const componentRef =
+                viewContainerRef.createComponent(InputControlComponent);<br />
+                componentRef.instance.data = {&#10; type:&quot;input&quot;,&#10;
+                label: &quot;Name&quot;&#10; }<br />
+                }<br />
                 }
               </code>
             </div>
@@ -258,8 +262,8 @@
           <div class="card">
             <div class="card-body">
               <code>
-                &lt;label for=&quot;&quot;&gt;{+{ data.label }}:&#10; <br/>
-                &lt;input type=&quot;{+{ data.type }}&quot; /&gt;<br/>
+                &lt;label for=&quot;&quot;&gt;{+{ data.label }}:&#10; <br />
+                &lt;input type=&quot;{+{ data.type }}&quot; /&gt;<br />
                 &lt;/label&gt;&#10;
               </code>
             </div>
@@ -270,9 +274,10 @@
           <div class="card">
             <div class="card-body">
               <code>
-                import { Component, Input } from '@angular/core';<br/>
-                @Component({ templateUrl:'./input-control.component.html' })<br/>
-                export class InputControlComponent {&#10; @Input() data: any;&#10;}
+                import { Component, Input } from '@angular/core';<br />
+                @Component({ templateUrl:'./input-control.component.html' })<br />
+                export class InputControlComponent {&#10; @Input() data:
+                any;&#10;}
               </code>
             </div>
           </div>
@@ -298,10 +303,11 @@
             <div class="card">
               <div class="card-body">
                 <code>
-                  const components: {&#91;type: string&#93;: Type&lt;Field&gt;} = {<br/> 
-                  button: FormButtonComponent,&#10;<br/> 
-                  input: FormInputComponent,<br/> 
-                  select: FormSelectComponent,<br/> 
+                  const components: {&#91;type: string&#93;: Type&lt;Field&gt;}
+                  = {<br />
+                  button: FormButtonComponent,&#10;<br />
+                  input: FormInputComponent,<br />
+                  select: FormSelectComponent,<br />
                   card: CardComponent&#10;};&#10;&#10;// reference like
                   this&#10;this.container.createComponent(components&#91;&quot;card&quot;&#93;);
                 </code>
@@ -341,19 +347,24 @@
       <section>
         <ul>
           <li>
-            <a href="https://stackblogger.com/dynamic-components-angular/" target="_blank">
+            <a
+              href="https://stackblogger.com/dynamic-components-angular/"
+              target="_blank"
+            >
               https://stackblogger.com/dynamic-components-angular/
             </a>
           </li>
           <li>
-            <a href="https://angular.io/guide/dynamic-component-loader" target="_blank">
+            <a
+              href="https://angular.io/guide/dynamic-component-loader"
+              target="_blank"
+            >
               https://angular.io/guide/dynamic-component-loader
             </a>
-            
-            </li>
+          </li>
         </ul>
       </section>
     </div>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>

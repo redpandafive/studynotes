@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Parent / Child Component Communication
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Parent / Child Component Communication</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#properties">Input / Output Properties</a>
+          </li>
+          <li>
+            <a href="#viewChild">View Child</a>
+          </li>
+          <li>
+            <a href="#contentChild">ContentChild</a>
+          </li>
+          <li>
+            <a href="#localVars">Local Variables</a>
+          </li>
+          <li>
+            <a href="#service">Service</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="properties">Input / Output Properties</h2>
+      <section>
+        <ul>
+          <li>
+            Recommended approach since it enforces Unidirectional flow of data
+          </li>
+          <li>
+            Parents will update child components, but not the other way around
+          </li>
+          <li>
+            Output bindings and events are used to pass data from a child to a
+            parent, but these exist outside of the change detection process
+          </li>
+          <li>See <a href="inputOutput.html">Input / Output Properties</a></li>
+        </ul>
+      </section>
+
+      <h2 id="viewChild">View Child</h2>
+      <section>
+        <ul>
+          <li>See <a href="viewChild.html">ViewChild</a></li>
+        </ul>
+      </section>
+
+      <h2 id="contentChild">
+        ContentChild <span class="devnote">Expand</span>
+      </h2>
+      <section>
+        <ul>
+          <li>
+            @ContentChild
+            <ul>
+              <li>
+                Returns a reference to the first matching component or directive
+                within the content of your component
+              </li>
+            </ul>
+          </li>
+          <li>
+            @ContentChildren
+            <ul>
+              <li>
+                Returns a reference to all matching components or directives
+                within the content of your component
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="localVars">Local Variables</h2>
+      <section>
+        <ul>
+          <li>
+            Allows a parent component to interact with child properties and
+            invoke child methods
+            <ul>
+              <li>
+                This cannot be done with data binding since it cannot read child
+                properties or invoke child methods
+              </li>
+            </ul>
+          </li>
+          <li>
+            Add a local variable on the child component
+            <ul>
+              <li>
+                This gives you a reference to the child component and the
+                ability to access any of its properties or methods from within
+                the parent template
+              </li>
+            </ul>
+          </li>
+          <li>
+            All wiring must be done entirely within the parent template
+            <ul>
+              <li>The parent component itself has no access to the child</li>
+              <li>
+                This cannot be used if an instance of the parent component class
+                must read or write child component values or must call child
+                component methods
+              </li>
+            </ul>
+          </li>
+          <li>
+            To implement
+            <ul>
+              <li>Add a template reference variable to the child component</li>
+              <li>
+                The parent template can now reference the public methods and
+                properties on the child
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code> &lt;countdown-timer #timer&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="service">Shared Service</h2>
+      <section>
+        <ul>
+          <li>
+            Parents and children can communicate via a shared service whose
+            interface enables bi-directional communication within the family
+          </li>
+          <li>
+            Useful to define a Subject within this service
+            <ul>
+              <li>
+                Have components subscribe to an Observable from this subject
+              </li>
+              <li>
+                Use the next() method to send a message to all subscribed
+                components
+              </li>
+              <li>
+                Make sure to remove all subscriptions in the ngOnDestroy hook
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

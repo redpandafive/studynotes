@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">NgIf</li>
+        </ol>
+      </nav>
+
+      <h1>NgIf</h1>
+      
+      <section class="navlinks">
+        <ul>
+          <li><a href="#ngif">NgIf</a></li>
+        </ul>
+      </section>
+      
+      <section id="ngif">
+        <ul>
+          <li>Built in structural directive</li>
+          <li>
+            Adds and removes elements based on a truthy/falsy condition from the
+            specified microsyntax
+          </li>
+          <li>
+            This adds or removes elements from the DOM, not just showing or
+            hiding them
+            <ul>
+              <li>
+                This improves performance since it potentially eliminates
+                unnecessary binding that are not needed at that moment
+                (including detaching from DOM events and detaching from Angular
+                change detection)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Since it removes and adds elements from the DOM (as opposed to
+            showing and hiding them), you get better performance, and it is
+            useful as a guard against null
+            <ul>
+              <li>
+                This will destroy a component and all subcomponents, potentially
+                freeing up resources
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            May want to use show / hide instead with the [hidden] attribute
+            instead when
+            <ul>
+              <li>It will be faster to show the element again</li>
+              <li>
+                You need to preserve state since the component is not
+                reinitialized
+              </li>
+              <li>
+                Initialization is very expensive and repeated initialization may
+                cause performance degradation
+              </li>
+            </ul>
+          </li>
+          <li>
+            The asterisk syntax is syntax sugar
+            <ul>
+              <li>
+                Translated into a ng-template element wrapped around the host
+                element
+              </li>
+              <li>
+                The ngIf directive is moved to the ng-template element where it
+                becomes a property binding [ngIf]
+              </li>
+              <li>
+                When rendering, the ng-template is replaced with a diagnostic
+                comment - this is also done when the condition is false
+              </li>
+              <li>An else condition can be added using a template</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Here is the code that you write...</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;div *ngIf=&quot;lessons else loading&quot;&gt;&#10; ... <br />
+              &#10;&lt;/div&gt;&#10;&#10;&lt;ng-template #loading&gt;&#10;<br />
+              &lt;div&gt;Loading...&lt;/div&gt;&#10;&lt;/ng-template&gt;&#10;
+            </code>
+          </div>
+        </div>
+        <p>Here is the desugared version of the above code...</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;ng-template [ngIf]=&quot;lessons&quot;
+              [ngIfElse]=&quot;loading&quot;><br />
+              &lt;div><br />
+              ...<br />
+              &lt;/div><br />
+              &lt;/ng-template><br />
+              &lt;ng-template #loading><br />
+              &lt;div>Loading...&lt;/div><br />
+              &lt;/ng-template>
+            </code>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

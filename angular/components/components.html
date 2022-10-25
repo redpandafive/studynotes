@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="./../assets/styles/site.css" />
   </head>
   <body>
@@ -22,58 +25,12 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Components
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Components</li>
         </ol>
       </nav>
 
       <h1>Components</h1>
 
-      <section class="navlinks">
-        <ul>
-          <li><a href="angularcli.html#basics">Basics</a></li>
-          <li>
-            <a href="angularcli.html#configuration">Configuration</a>
-          </li>
-
-          <li>
-            <a href="angularcli.html#properties"
-              >Input / Output Properties</a
-            >
-          </li>
-          <li>
-            <a href="angularcli.html#input">Input Properties</a>
-          </li>
-          <li>
-            <a href="angularcli.html#output">Output Properties</a>
-          </li>
-          <li>
-            <a href="angularcli.html#aliases"
-              >Import / Export Aliases</a
-            >
-          </li>
-          <li>
-            <a href="angularcli.html#setters">Property Setters</a>
-          </li>
-          <li>
-            <a href="angularcli.html#contentChild">ContentChild</a>
-          </li>
-          <li>
-            <a href="angularcli.html#localVars"
-              >Parent / Child Communication Through Local Variables</a
-            >
-          </li>
-          <li>
-            <a href="angularcli.html#service"
-              >Parent/Child Communication Through Service</a
-            >
-          </li>
-   
-        </ul>
-      </section>
-
-      <h2 id="basics">Basics</h2>
       <section>
         <ul>
           <li>Fundamental building blocks of Angular applications</li>
@@ -130,154 +87,34 @@
         </ul>
       </section>
 
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Topics</h5>
+          <a class="card-link" href="./components/configuration.html"
+            >Component Configuration</a
+          ><br />
+          <a class="card-link" href="./components/contentProjection.html"
+            >Content Projection</a
+          ><br />
+          <a class="card-link" href="./components/inputOutput.html"
+            >Input / Output Properties</a
+          ><br />
 
-
-      <h2 id="setters">Property Setters</h2>
-      <section>
-        <li>Intercept input property changes can be done with a setter –</li>
-        <li>
-          This is useful if you need to do some sort of validation or
-          standardization on inputs
-        </li>
-        <li>
-          Angular Fundamentals class uses this to create a derived value from an
-          input property
-          <ul>
-            <li>
-              Uses this to set the color of a voting icon to set or not set
-            </li>
-            <li>
-              The setting on an input property toggles the color of the icon
-            </li>
-            <li>Eliminates the need for a conditional on the icon</li>
-          </ul>
-        </li>
-        <li>
-          Parent components can bind to output event properties on children and
-          react to those events
-        </li>
-        <p>
-          Example of an input setter. This can then be used to reference an
-          internal variable _name
-        </p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              @Input()&#10;set name(name: string) {...}&#10;get name(name:
-              string) { ... }
-            </code>
-          </div>
+          <a class="card-link" href="./components/parentChildCommunication.html"
+            >Parent / Child Communication</a
+          ><br />
+          <a class="card-link" href="./components/propertySetters.html"
+            >Property Setters</a
+          ><br />
+          <a class="card-link" href="./components/styles.html"
+            >Styling Components</a
+          ><br />
+          <a class="card-link" href="./components/viewLayerArchitecture.html"
+            >View Layer Architecture</a
+          >
+          <a class="card-link" href="./components/viewChild.html">ViewChild</a>
         </div>
-      </section>
-
-      <h2 id="contentChild">
-        ContentChild <span class="devnote">Expand</span>
-      </h2>
-      <section>
-        <ul>
-          <li>
-            @ContentChild
-            <ul>
-              <li>
-                Returns a reference to the first matching component or directive
-                within the content of your component
-              </li>
-            </ul>
-          </li>
-          <li>
-            @ContentChildren
-            <ul>
-              <li>
-                Returns a reference to all matching components or directives
-                within the content of your component
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="localVars">
-        Parent / Child Communication Through Local Variables
-      </h2>
-      <section>
-        <ul>
-          <li>
-            Allows a parent component to interact with child properties and
-            invoke child methods
-            <ul>
-              <li>
-                This cannot be done with data binding since it cannot read child
-                properties or invoke child methods
-              </li>
-            </ul>
-          </li>
-          <li>
-            Add a local variable on the child component
-            <ul>
-              <li>
-                This gives you a reference to the child component and the
-                ability to access any of its properties or methods from within
-                the parent template
-              </li>
-            </ul>
-          </li>
-          <li>
-            All wiring must be done entirely within the parent template
-            <ul>
-              <li>The parent component itself has no access to the child</li>
-              <li>
-                This cannot be used if an instance of the parent component class
-                must read or write child component values or must call child
-                component methods
-              </li>
-            </ul>
-          </li>
-          <li>
-            To implement
-            <ul>
-              <li>Add a template reference variable to the child component</li>
-              <li>
-                The parent template can now reference the public methods and
-                properties on the child
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <p>Example</p>
-        <div class="card">
-          <div class="card-body">
-            <code> &lt;countdown-timer #timer&gt;</code>
-          </div>
-        </div>
-      </section>
-
-      <h2 id="service">Parent/Child Communication Through Service</h2>
-      <section>
-        <ul>
-          <li>
-            Parents and children can communicate via a shared service whose
-            interface enables bi-directional communication within the family
-          </li>
-          <li>
-            Useful to define a Subject within this service
-            <ul>
-              <li>
-                Have components subscribe to an Observable from this subject
-              </li>
-              <li>
-                Use the next() method to send a message to all subscribed
-                components
-              </li>
-              <li>
-                Make sure to remove all subscriptions in the ngOnDestroy hook
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-
-
+      </div>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

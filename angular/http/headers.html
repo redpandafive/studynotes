@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Headers</li>
+        </ol>
+      </nav>
+
+      <h1>Headers</h1>
+
+      <section id="headers">
+        <ul>
+          <li>
+            Headers can be set on the client side using a HttpHeaders object
+          </li>
+          <li>
+            There are several ways to configure them, but one way is to pass an
+            object literal
+          </li>
+          <li>
+            Useful when
+            <ul>
+              <li>
+                You need to tell the server what data format the return data
+                should be
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          This includes a data format header to tell the server to return JSON
+          data
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let getHeaders: HttpHeaders = new HttpHeaders({&#10; 'Accept':
+              'application/json'&#10;});<br />
+              this.http.get&lt;Book&gt;('/api/books', {&#10; headers:
+              getHeaders&#10;});
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

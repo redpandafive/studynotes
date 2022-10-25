@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Error Handling</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">HTTP</li>
+        </ol>
+      </nav>
+
+      <h1>Error Handling</h1>
+
+      <section id="errorHandling">
+        <ul>
+          <li>
+            HttpErrorResponse objects are returned by HttpClient when an error
+            occurs
+            <ul>
+              <li>This class contains lots of HTTP specific information</li>
+            </ul>
+          </li>
+          <li>
+            Best practice to encapsulate HTTP errors within a service and return
+            custom errors to components instead
+            <ul>
+              <li>
+                Should not expose implementation details to the component - this
+                includes HTTP specific errors
+              </li>
+              <li>
+                Use the RxJS catchError operation to react to errors within the
+                service
+              </li>
+            </ul>
+          </li>
+          <li>
+            One approach is to catch the HttpErrorResponse object and convert it
+            to a custom error you define for your application
+          </li>
+          <li>
+            The RxJS retry operator can be used to reissue a HTTP request that
+            may be the result of a network interuption
+          </li>
+        </ul>
+        <div>
+          <p>
+            Example of a function that uses catchError operator to convert a
+            HttpErrorResponse to a custom BookTrackerError
+          </p>
+          <p>
+            Since it could return an error or data object, getAllBooks must have
+            a signature that allows either type to be returned
+          </p>
+          <p>
+            When you subscribe to this, type the error object passed into the
+            second callback to be BookTrackerError to get intellisense suppport
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              getAllBooks(): Observable&lt;Book&#91;&#93; | BookTrackerError&gt;
+              {<br />
+              return this.http.get&lt;Book&#91;&#93;&gt;('/api/errors/500')<br />
+              .pipe(<br />
+              catchError(err =&gt; this.handleHttpError(err))<br />
+              );<br />
+              }<br />
+              private handleHttpError(error: HttpErrorResponse):
+              Observable&lt;BookTrackerError&gt; {<br />
+              let dataError = new BookTrackerError();<br />
+              dataError.errorNumber = 100;<br />
+              dataError.message = error.statusText;<br />
+              dataError.friendlyMessage = 'An error occured retrieving data.'<br />
+              return throwError(dataError);<br />
+              }
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

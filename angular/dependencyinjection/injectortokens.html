@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Injector Tokens
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Injector Tokens</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#tokens">Injector Tokens</a>
+          </li>
+          <li>
+            <a href="#optimization">Optimization</a>
+          </li>
+          <li>
+            <a href="l#injectionToken"
+              >Injection Token Class</a
+            >
+          </li>
+        </ul>
+      </section>
+
+
+      <section>
+        <ul>
+          <li>
+            To get a service from a dependency injector, you must give it a
+            token:
+            <ul>
+              <li>
+                This is usually done by specifying a constructor parameter and
+                its type
+              </li>
+              <li>The parameter type serves as the injector lookup token</li>
+              <li>
+                Angular passes this token to the injector, which examines its
+                register for the type of the parameter
+              </li>
+              <li>
+                If found, it assigns the match to the parameter
+                <ul>
+                  <li>
+                    When looking up a service, the injector will use a cached
+                    version if it has been requested before
+                  </li>
+                  <li>Otherwise, it creates a new instance</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            DI is easiest when a provider token is a class that is also the type
+            of returned dependency object, or service – this doesn’t have to be
+            true though
+            <ul>
+              <li>
+                Doesn’t have to be a class or can be an entirely different class
+              </li>
+            </ul>
+          </li>
+          <li>
+            TypeScript has a shorthand that can be used
+            <div class="card">
+              <div class="card-body">
+                <code> Constructor(private myService: MyService) { …" </code>
+              </div>
+            </div>
+            <ul>
+              <li>Creates a private variable in the class</li>
+              <li>Assigns myService to that private variable</li>
+              <li>
+                The myService service will be injected into the component by
+                Angular
+              </li>
+            </ul>
+          </li>
+          <li>See documentation for details on creating a custom provider</li>
+          <li>
+            Useful for something like testing a component that requires
+            localstorage
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="optimization">Optimization</h2>
+      <section>
+        <ul>
+          <li>
+            Specifying providers in the @Injectable decorator of the service
+            itself allows optimizers to perform tree shaking and remove services
+            that are not necessary to the application, leading to smaller bundle
+            sizes
+          </li>
+          <li>
+            Specifying the root injector is a good choice as the same instance
+            can be used everywhere in the application
+          </li>
+          <li>Use NgModule providers option if a module is lazy loaded</li>
+          <li>
+            Use component level injectors if you want to restrict the lifetime
+            of the service to the lifetime of the component
+          </li>
+          <li>
+            Use component level injectors if need each component instance needs
+            to have its own instance of a service that is separate from others
+          </li>
+          <li>
+            You can use the hierarchy of injectors to provide a more specialized
+            implementation of a service deeper in the component tree
+          </li>
+          <li>
+            You can specify an optional dependency as follows in the
+            constructor:
+            <div class="card">
+              <div class="card-body">
+                <code>@Optional() private logger: Logger</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You must be prepared for a null value in this if it does not have a
+            registered provider anywhere
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="injectionToken">Injection Token Class</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to create a token that you can register with and Injector
+            to provide an object to a component via dependency injection
+          </li>
+          <li>
+            The InjectionToken allows you to do this without having to wrap the
+            target object in a service
+            <ul>
+              <li>One solution to handling 3rd party libraries</li>
+              <li>
+                It is bad practice to reference 3rd party libraries (or
+                anything) that exist in the global namespace
+              </li>
+            </ul>
+          </li>
+          <li>
+            An example of this would be using Toastr
+            <ul>
+              <li>
+                Instead of wrapping a custom service class around the global
+                Toastr object, you can create an injection token so the Toastr
+                object is injected into components
+              </li>
+            </ul>
+          </li>
+          <li>
+            First create a token that you can use in dependency injection
+            without creating a class. In a file (toastr..service.ts)...
+            <ul>
+              <li>Import InjectionToken from @angular/core</li>
+              <li>
+                Create an instance of the InjectionToken
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      export let TOASTR_TOKEN = new
+                      InjectionToken&lt;Toastr&gt;(&quot;toastr&quot;)
+                    </code>
+                  </div>
+                </div>
+                <ul>
+                  <li>Convention is to name in all caps</li>
+                  <li>TOASTR_TOKEN is a JavaScript object</li>
+                  <li>
+                    String in the parameter is a description used in debugging
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Define a Toastr interface within this file and provide the
+                methods that should be available on it. This is just for type
+                safety
+              </li>
+            </ul>
+          </li>
+          <li>
+            In module
+            <ul>
+              <li>
+                Import the InjectionToken
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      import {TOASTR_TOKEN } from &quot;toaster.service&quot;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Declare the global object for toastr in the module
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      let toastr: Toastr = window&#91;&quot;toastr&quot;&#93;
+                    </code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    This tells TypeScript that there will be a toastr object in
+                    the global namespace that it is not aware of
+                  </li>
+                  <li>
+                    It will be of type Toastr, the interface defined previously
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Register the injection token in the providers section of the
+                module
+                <div class="card">
+                  <div class="card-body">
+                    <code>{ provide: TOASTR_TOKEN, useValue: toastr }</code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    This tells registration that whenever anyone requests a
+                    dependency using the TOASTR_TOKEN token, give them the
+                    toastr object from the global space
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            In the component you want to use it in, add the following as a
+            parameter to the constructor
+            <div class="card">
+              <div class="card-body">
+                <code>@Inject(TOASTR_TOKEN) private toastr: Toaster</code>
+              </div>
+            </div>
+            <ul>
+              <li>Need to import Inject from @angular/core</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="dom">Component DOM Element</h2>
+      <section>
+        <ul>
+          <li>
+            Although it is generally not encouraged, you can inject the
+            component DOM element into a component class
+            <ul>
+              <li>
+                Useful if you are using something like jQuery which needs DOM
+                access
+              </li>
+            </ul>
+          </li>
+          <li>
+            Inject ElementRef into the constructor or the component
+            <ul>
+              <li>
+                The nativeElement property is what you want to reference to get
+                to the DOM element
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

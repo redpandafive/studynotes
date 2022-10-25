@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Forms</li>
+        </ol>
+      </nav>
+      <h1>Forms</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="forms.html#basics">Basics</a></li>
+          <li><a href="forms.html#select">Select Controls</a></li>
+          <li>
+            <a href="forms.html#validation"
+              >Validation - Custom Validators</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>
+            There are two methods of building forms in Angular:
+            <ul>
+              <li>
+                Reactive forms
+                <ul>
+                  <li>more robust, scalable, reusable, and testable</li>
+                  <li>model driven approach to handing form inputs</li>
+                </ul>
+              </li>
+              <li>
+                Template driven forms
+                <ul>
+                  <li>useful for adding a simple form to an app</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Both approaches use a form model to track value changes between
+            Angular forms and form input elements
+          </li>
+          <li>
+            Both approaches use the same underlying building blocks
+            <ul>
+              <li>
+                FormControl
+                <ul>
+                  <li>
+                    Tracks the value and validation status of an individual form
+                    control
+                  </li>
+                </ul>
+              </li>
+              <li>
+                FormGroup
+                <ul>
+                  <li>
+                    Tracks the same values and status for a collection of form
+                    controls
+                  </li>
+                </ul>
+              </li>
+              <li>
+                FormArray
+                <ul>
+                  <li>
+                    Tracks the same values and status for an array of form
+                    controls
+                  </li>
+                </ul>
+              </li>
+              <li>
+                ControlValueAccessor
+                <ul>
+                  <li>
+                    Creates a bridge between Angular FormControl instances and
+                    native DOM elements
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

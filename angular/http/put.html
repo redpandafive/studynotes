@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Updating Data</li>
+        </ol>
+      </nav>
+
+      <h1>Updating Data</h1>
+      
+      <h2 id="updatingData">Updating Data</h2>
+      <section id="updatingData">
+        <ul>
+          <li>Uses the HttpClient.put method</li>
+          <li>Use this to update an existing resource on the server</li>
+          <li>This should be an idempotent operation</li>
+          <li>
+            By convention, nothing is returned in the body of the response from
+            the server
+          </li>
+          <li>
+            Since there is noting returned in the both of the response, void can
+            be specified as the type in the generic and returned Observable
+          </li>
+          <li>
+            There is a type option that tells Angular to strongly type the
+            result
+            <ul>
+              <li>
+                <code>this.http.put&gt;Book&lt;></code> tells Angular to expect
+                a type of Book
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              updateBook(updatedBook: Book): Observable&lt;void&gt; {<br />
+              return
+              this.http.put&lt;void&gt;('/api/books/${updatedBook.bookId}',
+              updatedBook, {<br />
+              headers: new HttpHeaders({<br />
+              'Content-Type': 'application/json'<br />
+              })<br />
+              });<br />
+              }
+            </code>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

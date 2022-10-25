@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Deleting Data</li>
+        </ol>
+      </nav>
+
+      <h1>Deleting Data</h1>      
+      
+      <section id="deletingData">
+        <ul>
+          <li>Uses the HttpClient.delete method</li>
+          <li>Use to remove a resource on the server</li>
+          <li>
+            By convention, nothing is returned in the body of the response from
+            the server
+          </li>
+          <li>
+            Since there is noting returned in the both of the response, void can
+            be specified as the type in the generic and returned Observable
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              deleteBook(bookId: number): Observable&lt;void&gt; {<br />
+              return this.http.delete&lt;void&gt;('/api/books/${bookId}');<br />
+              }
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            ForRoot / ForChild Pattern
+          </li>
+        </ol>
+      </nav>
+
+      <h1>ForRoot / ForChild Pattern</h1>
+
+      <section>
+        <ul>
+          <li>
+            If a module is loaded in multiple feature modules, that leads to
+            duplication of service registration
+            <ul>
+              <li>
+                Services will have multiple instances and no longer behave as a
+                singleton
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are several ways to prevent this
+            <ul>
+              <li>
+                Use the providedIn syntax on the Injectable decorator instead of
+                registering the service in the module
+              </li>
+              <li>Separate services into their own module</li>
+              <li>Define forRoot and forChild methods in the module</li>
+            </ul>
+          </li>
+          <li>
+            The ForRoot / ForChild method pattern is a static method convention
+            that makes it easy for developers to configure services and
+            providers that are intended to the singletons
+            <ul>
+              <li>Example is RouterModule.forRoot() used in routing</li>
+              <li>
+                This is how the router module prevents multiple instances of a
+                Router service (which would break the application since multiple
+                routers would break the application)
+              </li>
+              <li>The root application must import RouterModule</li>
+              <li>
+                Each feature module must import RouterModule so their components
+                can place router directives into their templates
+              </li>
+              <li>
+                The forRoot method creates a new Router instance; forChild does
+                not create a new Router instance
+              </li>
+            </ul>
+          </li>
+          <li>
+            To do this
+            <ul>
+              <li>
+                Create a static method forRoot() on the module
+                <ul>
+                  <li>This takes a UserServiceConfig object</li>
+                  <li>
+                    Returns a ModuleWithProviders object
+                    <ul>
+                      <li>
+                        Plain object with properties of ngModule and providers
+                      </li>
+                      <li>Put all providers in the providers array</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Place the providers into the forRoot method</li>
+            </ul>
+          </li>
+          <li>
+            See documentation for more info:
+            https://angular.io/guide/singleton-services#the-forroot-pattern
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

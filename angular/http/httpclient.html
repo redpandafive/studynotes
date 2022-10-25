@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">HttpClientModule and HttpClient</li>
+        </ol>
+      </nav>
+
+      <h1>HttpClientModule and HttpClient</h1>
+      <section>
+        <ul>
+          <li>HTTP is handled by the HttpClientModule module</li>
+          <li>
+            This must be imported from @angular/common/http, usually in the root
+            AppModule
+          </li>
+          <li>The class that you will inject is HttpClient</li>
+          <li>
+            Browsers support two different APIs for making HTTP requests
+            <ul>
+              <li>XMLHttpRequest interface</li>
+              <li>fetch() API</li>
+            </ul>
+          </li>
+          <li>HttpClient uses the XMLHttpRequest method</li>
+          <li>
+            HttpClient methods return an RxJS Observable of something
+            <ul>
+              <li>
+                It always emits a single value, then completes, never to emit
+                again
+              </li>
+              <li>
+                Must actually subscribe on an observable for anything to happen
+              </li>
+              <li>
+                all observables returned by HttpClient method are cold by design
+              </li>
+              <li>Execution of the HTTP request is deferred</li>
+              <li>
+                Each subscribe initiates a separate, independent execution of an
+                observable
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

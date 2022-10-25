@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Singleton Services
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Singleton Services</h1>
+      
+      <section>
+        <ul>
+          <li>
+            A service for which only one instance exists in an application
+          </li>
+          <li>
+            There are two ways to make a service a singletons
+            <ul>
+              <li>
+                Set the providedIn property of the @Injectable decorator to
+                "root"
+                <ul>
+                  <li>Preferred way</li>
+                  <li>Makes services tree shakable</li>
+                </ul>
+              </li>
+              <li>
+                Include the service in the AppModule or in a module that is only
+                imported by the AppModule
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

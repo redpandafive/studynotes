@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Getting Data</li>
+        </ol>
+      </nav>
+
+      <h1>Getting Data</h1>
+      
+      <section id="gettingData"></section>
+        <ul>
+          <li>Uses the HttpClient.get method</li>
+          <li>
+            The HTTPClient get method is a generic method that requiress a type
+            - this is the type that will be returned
+            <ul>
+              <li>Expects JSON data from the server</li>
+              <li>
+                This method returns an Observable typed to the supplied type
+              </li>
+              <li>
+                The returned data will automatically be deserialized to the
+                specified type
+              </li>
+            </ul>
+          </li>
+          <li>
+            Adding a type parameter allows type checking of the response
+            <ul>
+              <li>This will return an Observable typed to MyType</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.http.get&lt;MyType&gt;(targetUrl, { responseType:
+                  'json'});
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Parameters
+            <ul>
+              <li>
+                Parameter #1 is the URL string where the request should be sent
+              </li>
+              <li>
+                Second parameter is an options object
+                <ul>
+                  <li>
+                    Can include a repose type to specify json (optional if
+                    server defaults to JSON return type)
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          this.http.get(targetUrl, {responseType: 'json'});
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    Can be a HttpParams object to represent a search parameter
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          { params: new HttpParams().set('name', value )}
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Parameters can also just be concatenated onto the URL string
+              </li>
+            </ul>
+          </li>
+          <li>
+            You must subscribe to this return value to actually start the query
+            to the server
+          </li>
+          <li>
+            One method is to call subscribe on the Observable. This takes
+            callback functions as parameters. It can take up to three optional
+            callbacks
+            <ul>
+              <li>#1 - How to handle data if the call was successful</li>
+              <li>#2 - Handles errors -</li>
+              <li>
+                #3 - Completion handler
+                <ul>
+                  <li>
+                    This fires when the observable has returned all of its data
+                  </li>
+                  <li>
+                    Allows you to perform any wrap up work that should be done
+                    after the call
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          For HttpClient injected as http, this calls retrieves all the book
+          resources and returns an array of Book objects
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              getAllBooks(): Observable&lt;Book&#91;&#93;&gt; {<br />
+              return this.http.get&lt;Book&#91;&#93;&gt;('./api/books');<br />
+              }
+            </code>
+          </div>
+        </div>
+        <p>
+          This example uses a service class method getAllBooks that returns an
+          Observable and subscribes to it. subscribes to it. A successful method
+          assigns the returned data to the allBooks property on the component. A
+          failing method call logs the error to console. The finalizer method
+          prints a message to the console.log.
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              this.dataService.getAllBooks().subscribe(<br />
+              (data: Book&#91;&#93;) =&gt; this.allBooks = data,<br />
+              (err: any) =&gt; console.log(err),<br />
+              () =&gt; console.log('All done getting books';)<br />
+              );
+            </code>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

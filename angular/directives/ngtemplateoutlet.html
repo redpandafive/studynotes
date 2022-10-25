@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            NgTemplateOutlet
+          </li>
+        </ol>
+      </nav>
+
+      <h1>NgTemplateOutlet</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#ngtemplateoutlet">NgTemplateOutlet</a>
+          </li>
+          <li>
+            <a href="#usecase1">Use Case #1</a>
+          </li>
+          <li>
+            <a href="#usecase2">Use Case #2</a>
+          </li>
+          <li>
+            <a href="#ngtemplateoutletcontext">NgTemplateOutletContext</a>
+          </li>
+          <h2 id="ngtemplateoutletcontext">NgTemplateOutletContext</h2>
+        </ul>
+      </section>
+
+      <h2 id="ngtemplateoutlet">NgTemplateOutlet</h2>
+      <section>
+        <ul>
+          <li>
+            Structural directive to dynamically insert a template in various
+            sections of our DOM
+          </li>
+          <li>Provides more flexibilty than the ng-content</li>
+          <li>
+            NgTemplates do not render themselves - this is what this directive
+            does
+          </li>
+          <li>
+            Simple example
+            <ul>
+              <li>
+                Template is rendered in both the div and ngContainer tagged with
+                the NgTemplateOutlet directive
+              </li>
+              <li>The text within the NgContainer is not displayed</li>
+              <li>The div tag is not rendered</li>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;ng-template #template1&gt; &#10; This is a sample
+                    template&#10;&lt;/ng-template&gt;&#10; &#10;<br />
+                    &lt;ng-container
+                    *ngTemplateOutlet=&quot;template1&quot;&gt;This text is not
+                    displayed&lt;/ng-container&gt;<br />
+                    &lt;div *ngTemplateOutlet=&quot;template1&quot;&gt;<br />
+                    &lt;/div&gt;
+                  </code>
+                </div>
+              </div>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="usecase1">Use Case #1</h2>
+      <section>
+        Useful when you have a block of code that you want to repeatedly display
+        <ul>
+          <li>
+            Define a ng-template containing the code that you want to replicate
+          </li>
+          <li>Assign a template reference variable to this template</li>
+          <li>
+            Add ng-containers to all points where the code needs to display
+          </li>
+          <li>
+            Tag the ng-containers with the *ngTemplateOutput attribute. This
+            should have the template reference variable on the right side of the
+            equals sign
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="usecase2">Use Case #2</h2>
+      <section>
+        You can create a component that accepts outside templates as input
+        properties.
+        <ul>
+          <li>
+            Use template reference variables in the parent component to pass
+            templates as inputs
+          </li>
+          <li>
+            Example of a parent template passing a template to a child component
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-template #parentTemplate&gt; <br />
+                  &lt;p&gt;This template is defined in Parent, but passed to the
+                  child component.&lt;/p&gt;<br />
+                  &#10;&lt;/ng-template&gt;&#10;<br />
+                  &lt;child-component
+                  &#91;customTemplate&#93;=&quot;parentTemplate&quot;&gt;&lt;/child-component&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Child component that will receive the template
+            <ul>
+              <li>
+                Assign this as a property on your component of type TemplateRef
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  @Component({&#10; selector: 'child-component', template:<br />
+                  `&lt;h2&gt;Child Component&lt;/h2&gt;<br />
+                  &lt;ng-container
+                  *ngTemplateOutlet=&quot;customTemplate&quot;&gt;<br />
+                  &lt;/ng-container&gt; &#10; `<br />
+                  })<br />
+                  export class<br />
+                  ChildComponent {&#10; @Input() customTemplate:
+                  TemplateRef&lt;HTMLElement&gt;;&#10;}
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can define a default template (if one is not supplied)to use
+            using the following syntax. If a match for optionTemplate cannot be
+            found, defaultTemplate is used.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ... &#91;ngTemplateOutlet&#93;=&quot;optionTemplate ||
+                  defaultTemplate&quot; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use ViewChild to get access to the template from within the parent
+            component
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export class ParentComponent implements OnInit, AfterViewInit
+                  <br />
+                  {<br />
+                  @ViewChild('parentTemplate',null)myTemplate:TemplateRef&lt;HTMLElement&gt;<br />
+                  ngAfterViewInit() { ... }<br />
+                  }
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="ngtemplateoutletcontext">NgTemplateOutletContext</h2>
+      <section>
+        <ul>
+          <li>
+            Attaches a context object
+            <ul>
+              <li>Should be an object</li>
+              <li>
+                Object keys will be available for binding by the local template
+                let declarations
+              </li>
+              <li>
+                Using the key $implicit in the context object to set a default
+                value for any let parameters that do not have a match in the
+                context object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can be used to pass data to a template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container
+                  &#91;ngTemplateOutlet&#93;=&quot;optionTemplate&quot;
+                  &#91;ngTemplateOutletContext=&quot;{ prop1: val1, prop2:
+                  val2}&quot;&gt; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can pass individual values or an object if you need to pass
+            several
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-template let-person=&quot;person&quot; #template4&gt;
+                  <br />
+                  &lt;p&gt;{+{person.name}}, {+{person.message}}&lt;/p&gt;<br />
+                  &#10;&lt;/ng-template&gt;&#10; <br />
+                  &lt;ng-container <br />
+                  &#91;ngTemplateOutlet&#93;="templates" &#10; <br />
+                  &#91;ngTemplateOutletContext&#93; =&quot;{<br />
+                  person:{name:&apos;Guest&apos;,message:&apos;Welcome&apos;}<br />
+                  }&quot;&gt;&#10;&lt;/ng-container&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This can be shorthanded as
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container *ngTemplateOutlet=&quot;optionTemplate;
+                  context: { prop1 val1, prop2:
+                  val2}&quot;&gt;&lt;/ng-container&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Context can be accessed in the template using the let-*syntax to
+            defined template input variables
+            <ul>
+              <li>
+                The let-* syntax creates a local variable in the template with
+                the name *
+              </li>
+              <li>
+                The string on the right side of the assignment is the name you
+                would pass in on your object
+              </li>
+              <li></li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ng-template #optionTemplate let-prop1
+                  let-prop3=&quot;prop2&quot;&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Access the values using prop1 and prop3 syntax
+            <div class="card">
+              <div class="card-body">
+                <code> {+{ prop1 }} {+{ prop3 }}</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Passing the context allows you to use templates outside of the
+            selector component
+            <ul>
+              <li>
+                Allows you to combine state from where you define the template
+                with the context provided to you where the template is
+                instantiated
+              </li>
+              <li>
+                Can put the template anywhere, such as the very bottom of the
+                page outside of the other HTML
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://indepth.dev/posts/1405/ngtemplateoutlet"
+              target="_blank"
+            >
+              https://indepth.dev/posts/1405/ngtemplateoutlet
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

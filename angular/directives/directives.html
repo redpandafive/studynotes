@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Directives</li>
+        </ol>
+      </nav>
+
+      <h1>Directives</h1>
+      
+      <section class="navlinks">
+        <ul>
+          <li><a href="directives.html#basics">Basics</a></li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>
+            Changes the appearance or behavior of an element, component, or
+            another directive
+          </li>
+          <li>Can use as attributes of elements</li>
+          <li>
+            You can add many attribute directives to the same host element
+          </li>
+          <li>
+            Main difference between a Directive and a Component is a Directive
+            does not have a template
+          </li>
+          <li>
+            A class with the @Directive decorator
+            <ul>
+              <li>
+                A component is technically a directive, only it includes an
+                associated view
+              </li>
+            </ul>
+          </li>
+          <li>
+            When these are rendered, Angular transforms the DOM according to the
+            instructions given by the directives
+          </li>
+          <li>
+            There are two types
+            <ul>
+              <li>
+                Structural
+                <ul>
+                  <li>
+                    Alter layout by adding, removing, and replacing elements in
+                    DOM
+                  </li>
+                  <li>Examples include *ngFor, *ngIf</li>
+                </ul>
+              </li>
+              <li>
+                Attribute
+                <ul>
+                  <li>
+                    Alter the appearance or behavior of the existing element
+                  </li>
+                  <li>Look like regular HTML attributes, hence the name</li>
+                  <li>Example includes ngModel</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

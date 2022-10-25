@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">NgForOf</li>
+        </ol>
+      </nav>
+
+      <h1>NgForOf</h1>
+      
+      <section class="navlinks">
+        <ul>
+          <li><a href="directives.html#basics">Basics</a></li>
+          <li>
+            <a href="directives.html#custom"
+              >Custom Attribute Directives</a
+            >
+          </li>
+          <li>
+            <a href="directives.html#builtin"
+              >Built In Attribute Directives</a
+            >
+          </li>
+          <li>
+            <a href="directives.html#structural"
+              >Structural Directives</a
+            >
+          </li>
+          <li>
+            <a href="#ngforof">NgForOf</a>
+          </li>
+          <li>
+            <a href="#trackby">NgForOf - TrackBy</a>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2 id="ngforof">NgForOf</h2>
+      <section>
+        <ul>
+          <li>
+            Built in structural directive that acts as Angular's repeater
+            directive
+          </li>
+          <li>Should go on the element that you wish to repeat</li>
+          <li>
+            * indicates that it is a structural directive since it alters the
+            structure of the DOM
+          </li>
+          <li>
+            Used for rendering a collection
+            <ul>
+              <li>
+                It instantiates a template once per item from the collection
+              </li>
+              <li>
+                As it loops over a collection, it sets and resets properties of
+                its own context object (including index, odd, and a special
+                property called $implicit)
+              </li>
+            </ul>
+          </li>
+          <li>
+            With large rendered lists that you are adding, removing, or
+            reordering items, trackBy can give you a solid performance boost
+          </li>
+          <li>
+            When <code>let hero of heroes</code> is assigned to NgForOf, it is
+            not a template expression. It is a micro syntax then means:
+            <ul>
+              <li>
+                Take each hero in the heroes array, store it in the local hero
+                looping element, and make it available to the template HTML for
+                each iteration
+              </li>
+              <li>
+                This is translated into a ng-template, then uses that template
+                to create a new set of elements and bindings
+              </li>
+              <li>This is desugared to use template input variables</li>
+              <li>
+                Variables you can reference within a single instance of the
+                template
+              </li>
+              <li>
+                Not the same thing as template reference variables, which can be
+                accessed anywhere in the entire template and are prefixed with a
+                #
+              </li>
+            </ul>
+          </li>
+          <li>
+            In <code>*ngFor=&quot;let hero of heroes&quot;</code>
+            <ul>
+              <li>
+                Hero is a template input variable. It allows you to access the
+                properties of the current hero object on each iteration.
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can capture the current index of the iteration using the index
+            property of the NgForOf directive
+            <div>this is desugared into an attribute called let-i</div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ... *ngFor=&quot;let hero of heroes; let i=index&quot; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can determine if the current iteration is an odd or event number
+            using the odd property of the NgForOf directive
+            <ul>
+              <li>Useful for doing color coding on rows</li>
+              <li>This is desugared into the let-odd attribute</li>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      ... *ngFor=&quot;let hero of heroes; let i=index; let
+                      odd=odd&quot; ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            The microsyntax used on the right side of the equal sign is
+            translated by the parser
+            <ul>
+              <li>
+                This is parsed into attributes on a surrounding ng-template
+              </li>
+              <li>
+                <code>Let</code> declares a template input variable that you
+                reference within the template
+                <ul>
+                  <li>
+                    <code>hero</code>, <code>i</code>, and <code>odd</code> are
+                    all template input variables prefixed with
+                    <code>let-</code> (<code>let-hero</code>,
+                    <code>let-i</code>, and <code>let-odd</code>)
+                  </li>
+                  <li>
+                    <code>of</code> and <code>trackBy</code> are transformed by
+                    the parser - title cased and prefixed by
+                    <code>ngFor</code> to give two input properties,
+                    <code>ngForOf</code> and
+                    <code>ngForTrackBy</code>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="trackby">NgForOf - TrackBy</h3>
+      <section>
+        <ul>
+          <li>Object uniqueness is determined by reference by default</li>
+          <li>
+            This can cause a problem with you change the data in the collection
+            (by replacing them with different objects)
+          </li>
+          <li>
+            Angular needs to remove all the DOM elements associated with the
+            data and create them again = lots of DOM manipulations when a big
+            collection is involved
+          </li>
+          <li>
+            This is a problem in a big list where you refresh the items, but you
+            know they have not changed
+          </li>
+          <li>
+            trackBy
+            <ul>
+              <li>
+                Use can provide a hint to Angular about how to identify object
+                uniqueness using a custom tracking function
+              </li>
+              <li>
+                this is a function that takes the index and the current item as
+                arguments and needs to return the unique identifier for the item
+                (usually a primary key)
+              </li>
+              <li>
+                When using it, Angular can track which items have been added or
+                removed according to the unique identifier and create or destroy
+                only the things that changed
+              </li>
+              <li>
+                <div>In template, define as</div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      @ngForm=&quot;let item of collection; trackBy:
+                      trackByFn&quot;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div>In component</div>
+                <div class="card">
+                  <div class="card-body">
+                    <code> trackByFn(index, item) { return index; } </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

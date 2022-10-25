@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Injectors
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Injectors</h1>
+      
+      <section>
+        <ul>
+          <li>
+            Angular cannot inject a class anywhere until you configure an
+            Angular dependency injector with a provider of that service
+            <ul>
+              <li>
+                The injector is responsible for creating service instances and
+                injecting them into classes
+              </li>
+              <li>
+                Angular creates injectors for you as it executes the app,
+                staring with the root injector that it creates during the
+                bootstrap process
+                <ul>
+                  <li>
+                    This is an application wide injector, so you don’t
+                    necessarily need to create more than this
+                  </li>
+                </ul>
+              </li>
+              <li>
+                An injector maintains a container of service instances that it
+                has created
+                <ul>
+                  <li>
+                    When a requested service does not exist in the container,
+                    the injector makes one using the registered provider and
+                    adds it to the injector before returning the service to
+                    Angular
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Injectors are inherited, which mean if a given injector cannot
+            resolve a dependency, it asks the parent injector to resolve it
+            (hierarchical injection system)
+            <ul>
+              <li>
+                A component can get services from its own injector, from the
+                injectors of its component ancestors, from the injector of its
+                parent NgModule, or from the root injector (injector bubbling)
+                <ul>
+                  <li>
+                    Use @Host to prevent this bubbling behavior; for instance,
+                    if a component is used multiple times and each should have
+                    its own version of a service
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Constructor(@Host myServ: MyService)
+                <ul>
+                  <li>
+                    Use @Self in a component to only look within the component
+                    injector
+                  </li>
+                  <li>
+                    Use @SkipSelf to look in any ancestor component injectors
+                    for a dependency
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Services are singletons within the scope of an injector, so
+                there is only one instance of a service in a given injector
+              </li>
+              <li>
+                Nested injectors can create their own service instances
+                <ul>
+                  <li>
+                    A child injector is created when a component is created that
+                    has a providers metadata item specified
+                  </li>
+                  <li>
+                    A child injector is also created when a new NgModule is lazy
+                    loaded at run time
+                  </li>
+                  <li>
+                    When NgModules or components are destroyed, Angular also
+                    destroys that injector and that injector’s service instances
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Injectors can be configured with providers at different levels of
+            your app, by setting a metadata value in one of three places
+            <ul>
+              <li>
+                The @Injectable() decorator for the service itself
+                <div class="card">
+                  <div class="card-body">
+                    <code> .. { providedIn: &quot;root&quot; } .. </code>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    Uses the providedIn metadata option where you can specify
+                    the provider of a decorated service class with the root
+                    injector, or with the injector for a specific NgModule
+                  </li>
+                  <li>Angular CLI will set this up by default</li>
+                  <li>
+                    This allows Angular to optimize an app by removing the
+                    service form the compiled application if it isn’t used (tree
+                    shaking)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                The @NgModule() decorator for an NgModule
+                <ul>
+                  <li>
+                    Uses the providers metadata option where you can configure
+                    providers for NgModule level or component level injectors
+                  </li>
+                  <li>Makes it available to all components in the NgModule</li>
+                  <li>
+                    The single instance is used for all components in the module
+                  </li>
+                  <li>Using this will mean it is not tree shakable</li>
+                </ul>
+              </li>
+              <li>
+                The @Component() decorator for a component
+                <ul>
+                  <li>
+                    Uses the providers property of the @Component metadata
+                  </li>
+                  <li>
+                    Registering at the component level means you get a new
+                    instance of the service with each new instance of that
+                    component
+                  </li>
+                  <li>.. providers; [ HeroService ] ..</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Root injector
+            <ul>
+              <li>This is the only root injector for the application</li>
+              <li>Used when registering at the root or AppModule level</li>
+              <li>
+                Every class that uses a service registered here will the same
+                instances unless you configure another provider with a child
+                injector
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

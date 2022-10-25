@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Attribute Directives</li>
+        </ol>
+      </nav>
+
+      <h1>Attribute Directives</h1>
+      
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#builtin"
+              >Built In Attribute Directives</a
+            >
+          <li>
+            <a href="#custom"
+              >Custom Attribute Directives</a
+            >
+          </li>
+
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="builtin">Built In Attribute Directives</h2>
+      <section>
+        <ul>
+          <li>
+            Listen to and modify the behavior of other HTML elements,
+            attributes, properties, and components
+          </li>
+          <li>Usually applied to elements as if they were HTML attributes</li>
+          <li>
+            ngClass
+            <ul>
+              <li>Use to add or remove several classes simultaneously</li>
+              <li>For single classes, use a class binding</li>
+              <li>
+                Try binding it to a key:value control object
+                <ul>
+                  <li>Each key of the object is a CSS class name</li>
+                  <li>
+                    If its value is true, the class is added. If false, the
+                    class is removed
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div>
+                  CurrentClasses would be a property on the controller that
+                  contains an object with all class names
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code=&quot;&#91;ngClass&#93;='currentClasses'&quot;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            ngStyle
+            <ul>
+              <li>For single style binding, use a style binding</li>
+              <li>For many inline styles, you can use ngStyle</li>
+              <li>Bind to a key:value control object</li>
+              <li>
+                Each key is a style name – use strings as keys to contain the
+                property names
+              </li>
+            </ul>
+          </li>
+          <li>
+            ngModel
+            <ul>
+              <li>Two way data binding syntax</li>
+              <li>Use with FormsModule to bind to form elements</li>
+              <li>Must import this module for it to work</li>
+              <li>
+                This is syntax sugar, it actually creates
+                <ul>
+                  <li>
+                    NgModel input property to set the elements value property
+                  </li>
+                  <li>
+                    NgModelChange output event biding to listen for changes to
+                    the element's value
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            RouterLink
+            <ul>
+              <li>Directive that turns user clicks into router navigations</li>
+              <li>This is a public directive in the RouterModule</li>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code=&quot;&lt;a routerLink='/heroes'&gt;Heroes&lt;/a&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      
+      <h2 id="custom">Custom Attribute Directives</h2>
+      <section>
+        <ul>
+          <li>
+            As a minimum, you need
+            <ul>
+              <li>@Directive decorator function containing the metadata</li>
+              <li>
+                A class for the directive - add Directive as a postfix to the
+                class name (such as ChangeBgColorDirective)
+              </li>
+              <li>
+                Import the directive into the declarations array of the app
+                module
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Define a selector in the Directive metadata to identify the HTML in
+            the template that is associated with the directive
+            <ul>
+              <li>This is the only configuration property</li>
+              <li>Selector: '[myHightlight]'</li>
+              <li>the brackets make it an attribute selector</li>
+              <li>
+                This will find all elements with that name in the attributes
+              </li>
+            </ul>
+          </li>
+          <li>
+            Inject ElementRef service
+            <ul>
+              <li>Inject this into the constructor of the directive</li>
+              <li>
+                This gives you a reference to the DOM element itself through the
+                nativeElement property
+              </li>
+              <li>This reference will be of type HTMLElement</li>
+            </ul>
+          </li>
+          <li>
+            Inject Renderer service
+            <ul>
+              <li>Private renderer: Renderer</li>
+            </ul>
+          </li>
+          <li>
+            Example
+            <div>
+              To set the color of the text in the targeted ElementRef object
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.renderer.setElementSyle(this.el.nativeElement,
+                  &quot;color&quot;, colorVariable)
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can import the HostListener service to respond to DOM element
+            events that hosts an attribute directive
+            <ul>
+              <li>Import HostListener from core</li>
+              <li>
+                Add event handlers decorated with the HostListener decorator
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      @HostListner(&quot;mouseenter&quot;) onMouseEneter() {...}
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                This allows you to trap events without talking directly to the
+                DOM API
+              </li>
+            </ul>
+          </li>
+          <li>
+            @Inputs can be added to pass values into the directive
+            <ul>
+              <li>
+                You can specify this as an attribute binding or add an input
+                with the same name as the directive so you can specify the
+                directive and pass the value in one attribute
+              </li>
+              <li>
+                Example
+                <div>
+                  This uses an input name highlightColor on a directive called
+                  appHighLight
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;p appHighlight
+                      &#91;highlightColor&#93;=&quot;color&quot;&gt;...
+                    </code>
+                  </div>
+                </div>
+                <div>
+                  By changing the name of the input property to the same name as
+                  the directive, you can combine the two
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code=&quot;&lt;p
+                      &#91;appHighlight&#93;='color'...&quot;</code
+                    >
+                  </div>
+                </div>
+                <div>
+                  Aliasing the input to an appropriate may be needed for code
+                  clarity
+                </div>
+              </li>
+              <li>
+                You can add as many inputs as needed on your directive to get
+                the job done
+                <ul>
+                  <li>
+                    It will mean one more attribute on the element for each
+                    additional input defined on the directive
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Directives</li>
+        </ol>
+      </nav>
+
+      <h1>Directives</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li><a href="directives.html#ngcontent">NgContent</a></li>
+        </ul>
+      </section>
+
+      <h2 id="ngcontent">NgContent</h2>
+      <section>
+        <ul>
+          <li>
+            Used to create configurable components that can be modified
+            depending on the needs of its user
+            <ul>
+              <li>
+                Components that are used in published libraries make sue of this
+                to make themselves configurable
+              </li>
+            </ul>
+          </li>
+          <li>This is a logic construct to group other DOM elements</li>
+          <li>It is not rendered in the DOM tree</li>
+          <li>
+            Known as Content Projection
+            <ul>
+              <li>
+                Add the ng-content tag into the component where you will be
+                projecting
+              </li>
+              <li>
+                Wrap the content in the parent component that should be
+                projected between the opening and closing tags of the component
+              </li>
+            </ul>
+          </li>
+          <li>Any custom attributes applied to this tag are ignored</li>
+          <li>
+            NgContent content is always initialized, even is the child component
+            does not defined a ngContent element of if it is inside an ngIf
+            element
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code> &lt;ng-content&gt;&lt;/ng-content&gt;</code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Creating Data</li>
+        </ol>
+      </nav>
+      <h1>Creating Data</h1>
+
+      <section id="creatingData">
+        <ul>
+          <li>Uses the HttpClient.post method</li>
+          <li>
+            POST calls will return the newly created object in the Observer
+          </li>
+          <li>This is not an idempotent operation</li>
+          <li>
+            The post method requires a type of the object that will be sent in
+            the body of the response
+          </li>
+          <li>
+            There are several overloads to call it, but generally takes three
+            parameters
+            <ul>
+              <li>The target URL</li>
+              <li>JSON string of the data payload</li>
+              <li>Configuration object</li>
+            </ul>
+          </li>
+          <li>
+            There is a type option that tells Angular to strongly type the
+            result
+            <ul>
+              <li>
+                <code>this.http.post&lt;Book></code> tells Angular to expect a
+                type of Book
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          The following example:
+          <ul>
+            <li>
+              Sends a Book object named newBook to the server using the POST
+              verb
+            </li>
+            <li>
+              Includes a content-type header to tell the server to expect a JSON
+              object as data (this can be moved to a variable before the call
+              for readability)
+            </li>
+            <li>
+              Since POST returns the newly created object, the return type is
+              set to an observable of type Book
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              addBook(newBook: Book): Observable&lt;Book&gt; {<br />
+              return this.http.post&lt;Book&gt;('/api/books', newBook, {<br />
+              headers: new HttpHeaders({<br />
+              'Content-Type': 'application/json'<br />
+              })<br />
+              });<br />
+              }
+            </code>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

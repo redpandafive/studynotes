@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">NgSwitch</li>
+        </ol>
+      </nav>
+
+      <h1>NgSwitch</h1>
+      
+      <section class="navlinks">
+        <ul>
+          <li><a href="directives.html#ngswitch">NgSwitch</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <ul>
+          <li>Like a JavaScript switch statements</li>
+          <li>
+            It can display one element from among several possible elements,
+            based on a switch condition
+            <ul>
+              <li>Only the selected element is put into the DOM</li>
+            </ul>
+          </li>
+          <li>
+            Composed of a set of three cooperating directives, NgSwitch,
+            NgSwitchCase, NgSwitchDefault
+          </li>
+
+          <li>
+            NgSwitch
+            <ul>
+              <li>
+                The controller directive – bind it to an expression that return
+                the switch value
+              </li>
+              <li>
+                An attribute directive – it changes the behavior of its
+                companion directives without touching the DOM directly
+                <ul>
+                  <li>This is why it is never written with a *</li>
+                </ul>
+              </li>
+              <li>
+                Can work with strings, but can also take other data types as
+                well
+              </li>
+            </ul>
+          </li>
+          <li>
+            NgSwitchCase
+            <ul>
+              <li>
+                Structural directive because they add or remove elements from
+                the DOM
+              </li>
+              <li>
+                This is desugared into a ng-template with a ngSwitchCase
+                directive
+              </li>
+              <li>Every view that matches is rendered</li>
+            </ul>
+          </li>
+          <li>
+            NgSwitchDefault
+            <ul>
+              <li>Added if there is no match</li>
+              <li>
+                Structural directive because they add or remove elements from
+                the DOM
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p></p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;div &#91;ngSwtich&#93;=&quot;currentHeroName&quot;&gt;&#10;<br />
+              &lt;div
+              *ngSwitchCase=&quot;&apos;colin&apos;&quot;&gt;Colin&lt;/div&gt;&#10;<br />
+              &lt;div
+              *ngSwitchCase=&quot;&apos;lx&apos;&quot;&gt;LX&lt;/div&gt;&#10;<br />
+              &lt;div *ngSwitchDefault&gt;Nubbins&lt;/div&gt;&#10;<br />
+              &lt;/div&gt;
+            </code>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
