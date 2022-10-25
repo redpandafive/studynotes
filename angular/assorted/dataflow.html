@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Unidirectional Data Flow
+          </li>
+        </ol>
+      </nav>
+      <h1>Unidirectional Data Flow</h1>
+
+      <section>
+        <ul>
+          <li>A programming pattern that deals with how data is updated</li>
+          <li>
+            There are two similar Patterns
+            <ul>
+              <li>Unidirectional - data can only flow in one direction</li>
+              <li>Bidirectional - data can flow in two directions</li>
+            </ul>
+          </li>
+          <li>
+            Angular uses an unidirectional data flow refers to pass data from a
+            parent component to a child component
+            <ul>
+              <li>
+                These bindings are updated during change detections - this is
+                implemented via input bindings
+              </li>
+              <li>
+                When a bound property on a parent component is updated, those
+                changes are also reflected in the child component bound property
+              </li>
+              <li>
+                This allows a top-down pass during a change cycle. State will be
+                stabilized after a single pass and is more predictable.
+              </li>
+            </ul>
+          </li>
+          <li>
+            However, changes to a child component are not pushed to the parent
+            <ul>
+              <li>
+                Updating an input parameter on a child component will not update
+                the corresponding value in the parent component
+              </li>
+            </ul>
+          </li>
+          <li>
+            Changes from the child to parent use output bindings and event
+            emitters, but this exists outside the change detection process
+          </li>
+          <li>
+            This is one of the reasons for the speed boost over Angular JS
+            <ul>
+              <li>
+                Angular JS used bidirectional data flow, so you could update a
+                parent through a child
+              </li>
+              <li>
+                This triggers multiple digest cycles to get the data model to
+                stabilize
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Mode</li>
+        </ol>
+      </nav>
+
+      <h1 id="scrolling">Mode (need better nane)</h1>
+      <section>
+        <ul>
+          <li>
+            Templates are generated to the browser by Angular
+            <ul>
+              <li>
+                Angular does not generate HTML as a string when interpreting a
+                template
+              </li>
+              <li>
+                Angular directly generates DOM data structures from the data via
+                a component renderer
+              </li>
+              <li>
+                This renderer is a function that builds the DOM data structures
+              </li>
+            </ul>
+          </li>
+          <li>
+            The Angular compiler generates the renderer function at different
+            times depending on which mode it is running in
+            <ul>
+              <li>
+                JIT mode
+                <ul>
+                  <li>
+                    These functions are generated at the application startup in
+                    the browser
+                  </li>
+                  <li>Compiler must be shipped to the browser</li>
+                  <li>
+                    Must wait for this compilation to finish before being able
+                    to display data on the screen
+                  </li>
+                </ul>
+              </li>
+              <li>
+                AOT mode
+                <ul>
+                  <li>
+                    Renderer function for a component is generated at build
+                    time, not application startup time
+                  </li>
+                  <li>
+                    This is more efficient since
+                    <ul>
+                      <li>Don't need to ship the compiler to the browser</li>
+                      <li>
+                        Faster since compilation is done at build time, not at
+                        runtime
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
