@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Binding Types and Syntax
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Binding Types and Syntax</h1>
+
+      <section>
+        <ul>
+          <li>
+            Connects application data to the DOM
+            <ul>
+              <li>Template directives provide program logic</li>
+              <li>Binding markup connects your application data and the DOM</li>
+            </ul>
+          </li>
+          <li>
+            Combines HTML with Angular markup that can modify HTML elements
+            before they are displayed
+            <ul>
+              <li>This tells Angular how to render a component</li>
+            </ul>
+          </li>
+          <li>
+            Templates resemble regular HTML, but also contain
+            <ul>
+              <li>
+                Directives - provide program logic to determine what is
+                displayed
+              </li>
+              <li>
+                Binding Markup (Bindings)
+                <ul>
+                  <li>
+                    Eliminates the need to write code to push and pull data from
+                    controls and bindings
+                  </li>
+                  <li>Connects application data and the DOM</li>
+                </ul>
+              </li>
+              <li>Pipes - used to transform data before it is displayed</li>
+            </ul>
+          </li>
+          <li>
+            Almost all HTML syntax is valid template syntax
+            <ul>
+              <li>
+                Script tags are forbidden to eliminate the risk of script
+                injection attacks
+              </li>
+              <li>
+                Some tags such as html, body, and base have no useful role
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Binding types other than interpolation have a target name to the
+            left of the equals sign
+            <ul>
+              <li>
+                either surrounded by punctuation ([], ()) or preceded by a
+                prefix (bind-, on-, bindon-)
+              </li>
+              <li>
+                the target name is the name of a property. It may look like the
+                name of an attribute, but it never is
+              </li>
+            </ul>
+          </li>
+          <li>
+            Once you start data binding with Angular, you are no longer working
+            with HTML attributes
+            <ul>
+              <li>
+                You are setting the properties of DOM elements, components, and
+                directives
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
