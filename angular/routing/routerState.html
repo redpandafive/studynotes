@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Router State
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Router State</h1>
+
+      <section>
+        <ul>
+          <li>
+            You can access the current RouterState from anywhere in the
+            application using the Router service and the routerState property
+            <ul>
+              <li>
+                After the end of each successful navigation lifecycle, the
+                router builds a tree of ActivatedRoute objects that make up the
+                current state of the router
+              </li>
+              <li>
+                You can transverse up and down these ActivatedRoute tree to get
+                information from parent, child, and sibling routes
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

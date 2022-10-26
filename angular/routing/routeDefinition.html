@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Route Definition
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Route Definition</h1>
+      <section>
+        <ul>
+          <li>
+            A route object provides a mapping between a URL fragment and a
+            component
+            <ul>
+              <li>
+                This is a generic object that represents one possible URL the
+                user can navigate to
+              </li>
+            </ul>
+          </li>
+          <li>
+            An array of route objects represents all possible URLs the user can
+            navigate to
+            <ul>
+              <li>
+                This array is typed as Routes (@angular/router)
+                <ul>
+                  <li>Type this so you get Intellisense</li>
+                </ul>
+              </li>
+              <li>
+                Order matters in route object array definitions
+                <ul>
+                  <li>uses a first match wins strategy when matching routes</li>
+                  <li>
+                    specific routes should be placed above less specific route
+                  </li>
+                  <li>
+                    Put specific routes above parameterized routes so they do
+                    not unintentionally match
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Route object parameters
+            <ul>
+              <li>
+                Path (required)
+                <ul>
+                  <li>
+                    string that matches the URL in the browser address bar
+                  </li>
+                  <li>this should not contain a leading slash</li>
+                </ul>
+              </li>
+              <li>
+                component (required)
+                <ul>
+                  <li>
+                    the component that the router should create when navigating
+                    to this route
+                  </li>
+                </ul>
+              </li>
+              <li>
+                data (optional)
+                <ul>
+                  <li>
+                    use to store arbitrary data associated with a specific route
+                  </li>
+                  <li>
+                    takes an object that contains any properties that you need
+                  </li>
+                  <li>
+                    can store things like page titles, breadcrumb text, and
+                    other read only static data
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Parameterized routes
+            <ul>
+              <li>
+                contains a placeholder for a value that the URL will contain,
+                such as an Id
+              </li>
+              <li>{ path: 'detail/:id', component: HeroDetailComponent }</li>
+              <li>This would allow a URL such as detail/10</li>
+              <li>
+                Be careful with route order with these – this would match
+                detail/new as well
+              </li>
+              <li>See Activated Route object section on how to access</li>
+            </ul>
+          </li>
+          <li>
+            RedirectTo, PathMatch, and Empty Routes
+            <ul>
+              <li>
+                Matches to the specified route will redirect the browser to the
+                URL provided
+              </li>
+              <li>
+                This will redirect the browser to './dashboard' when matched
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                The pathMatch parameter takes two options
+                <ul>
+                  <li>Full – redirect if the URL matches the specified path</li>
+                  <li>
+                    Prefix – redirect if the URL starts with the specified path
+                  </li>
+                </ul>
+              </li>
+              <li>
+                This is useful for empty routes
+                <ul>
+                  <li>
+                    This is selected when an empty route is in the address bar,
+                    usually at the start of navigation to the application
+                  </li>
+                  <li>This redirects an empty route to the dashboard route</li>
+                </ul>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Wildcard routes
+            <ul>
+              <li>This should be the last entry in the route definitions</li>
+              <li>
+                Handles "route not found" situations
+                <ul>
+                  <li>
+                    This route is selected if the requested URL does not match
+                    any paths for routes defined earlier in the configuration
+                  </li>
+                  <li>
+                    Will match all routes – add this to prevent a crash if URLs
+                    are not matched
+                  </li>
+                </ul>
+              </li>
+              <li>Useful for displaying 404 pages</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  { path: '**', component: PageNotFoundComponent }
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Debugging
+            <ul>
+              <li>Route definitions do not begin with slashes</li>
+              <li>
+                You can output each router event that takes place during each
+                navigation lifecycle to the browser console
+              </li>
+              <li>
+                Set the enableTracing: true option in an object as pass it as
+                the second argument to the RouterModule.forRoot method
+              </li>
+              <li>
+                You can use both relative and absolute paths when navigating
+                between application views
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

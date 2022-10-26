@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -18,88 +18,16 @@
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
           <li class="breadcrumb-item">
-            <a href="index.html">Angular</a>
+            <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Pipes</li>
+          <li class="breadcrumb-item active" aria-current="page">Built In Pipes</li>
         </ol>
       </nav>
-      <h1>Pipes</h1>
-      <section class="navlinks">
-        <ul>
-          <li><a href="pipes.html#basics">Basics</a></li>
-          <li>
-            <a href="pipes.html#builtin">Built In Pipes</a>
-          </li>
-          <li><a href="pipes.html#custom">Custom Pipes</a></li>
-          <li>
-            <a href="pipes.html#purevsimpure"
-              >Pure vs Impure Pipes</a
-            >
-          </li>
-          <li>
-            <a href="pipes.html#templateExpression"
-              >Template Expression Operator</a
-            >
-          </li>
-          <li>
-            <a href="pipes.html#filtering"
-              >Filtering and Sorting</a
-            >
-          </li>
-        </ul>
-      </section>
 
-      <h2 id="basics">Basics</h2>
-      <section>
-        <ul>
-          <li>
-            These replace filters in Angular JS. Unlike filters, pipes are not
-            used for sorting or filters
-          </li>
-          <li>
-            Simple functions to use in template expressions to accept an input
-            value and return a transformed value
-          </li>
-          <li>
-            Can be used throughout the application after declaring them once
-          </li>
-          <li>
-            Allow you to present formatted data to users instead of raw data
-            <ul>
-              <li>
-                These can be chained together, sending output from one pipe to
-                another
-                <div class="card">
-                  <div class="card-body">
-                    <code> {+{ birthday | date | uppercase }}</code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li>
-            Any number of parameters can be added to a pipe to fine tune its
-            output
-            <ul>
-              <li>Parameters can be any valid template expression</li>
-              <li>
-                Can be string literal, component property (including property
-                getter)
-              </li>
-              <li>Separate parameters by colons</li>
-              <li>Ex slice:1:5</li>
-            </ul>
-          </li>
-          <li>
-            Pipes are executed whenever it detects a change for the input value
-            or reference
-          </li>
-        </ul>
-      </section>
+      <h1>Built In Pipes</h1>
 
-      <h2 id="builtin">Built In Pipes</h2>
       <section>
         <ul>
           <li>
@@ -442,175 +370,7 @@
           </li>
         </ul>
       </section>
-
-      <h2 id="custom">Custom Pipes</h2>
-      <section>
-        <ul>
-          <li>
-            Add a new class, such as duration.pipe.ts
-            <ul>
-              <li>Class names should be upper camel case</li>
-            </ul>
-          </li>
-          <li>
-            Decorate the class with the pipe metadata
-            <div class="card">
-              <div class="card-body">
-                <code> @Pipe({ name: 'myPipeName' }) </code>
-              </div>
-            </div>
-            <ul>
-              <li>
-                Decorator allows you to define the pipe name that you will use
-                within the template expressions, so it must be a valid
-                JavaScript identifier
-              </li>
-            </ul>
-          </li>
-          <li>
-            Name property of decorator should use camel case with no hyphens
-          </li>
-          <li>
-            The pipe class should implement PipeTransform interface
-            <ul>
-              <li>
-                Includes transform method that accepts input values for each
-                parameter passed to the pipe and returns a single value
-              </li>
-            </ul>
-          </li>
-          <li>
-            For module declarations
-            <ul>
-              <li>
-                Must include the pipe in the declarations array of the AppModule
-              </li>
-              <li>
-                If you inject it into a class, you must provide it in the
-                providers array of your NgModule
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="purevsimpure">Pure vs Impure Pipes</h2>
-      <section>
-        <ul>
-          <li>
-            Pure pipes
-            <ul>
-              <li>
-                Pipes that are not dependent on any global state and do not
-                produce side effects
-              </li>
-              <li>
-                Will only trigger change detection on pure changes
-                <ul>
-                  <li>
-                    Changes to either a primitive input value or a changed
-                    object reference
-                  </li>
-                  <li>This is done to improve speed</li>
-                </ul>
-              </li>
-              <li>
-                This is set using a property on the @Pipe decorator and is set
-                to true by default
-              </li>
-              <li>
-                The pipe will return the same output when invoked with the same
-                input
-              </li>
-              <li>
-                Angular can cache the outputs for all the input parameters the
-                pipe has been invoked with and reuse them to not have to
-                recompute them on each evaluation
-              </li>
-              <li>Pure pipe should use pure functions</li>
-            </ul>
-          </li>
-          <li>
-            Impure pipes
-            <ul>
-              <li>
-                There are times when you cannot live with the default change
-                detection strategy
-              </li>
-              <li>
-                Execute the impure pipe during every component change detection
-                cycle
-              </li>
-              <li>
-                This can cause a problem with filtering and sorting since impure
-                pipes are re-run on every event in the change cycle (even ones
-                not related to the list you are sorting or filtering)
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="templateExpression">Template Expression Operator</h2>
-      <section>
-        <ul>
-          <li>
-            Use when the result of an expression might require some
-            transformation before using it as output
-          </li>
-          <li>
-            Simple functions that accept an input value and return a transformed
-            value
-          </li>
-          <li>
-            Multiple pipes can be chained together
-            <div class="card">
-              <div class="card-body">
-                <code> {+{ title | uppercase | lowercase }}</code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Pipes can also have parameters
-            <div class="card">
-              <div class="card-body">
-                <code> {+{ Birthdate: | date:'longDate'}} </code>
-              </div>
-            </div>
-          </li>
-          <li>JSON pipe is useful for debugging</li>
-        </ul>
-      </section>
-
-      <h2 id="filtering">Filtering and Sorting</h2>
-      <section>
-        <ul>
-          <li>
-            Unlike Angular JS, Angular does not have built in pipes to handle
-            filtering and sorting
-          </li>
-          <li>
-            This was a performance issue in Angular JS that would occasionally
-            arise
-          </li>
-          <li>
-            Angular JS used impure filters that are rerun on every change in the
-            change cycle
-          </li>
-          <li>
-            Angular does not allow this – you must do it yourself so it only
-            updates when the source data changes
-            <ul>
-              <li>Perform these operations in the component</li>
-              <li>
-                Slice JS method is useful since it will create clones of arrays
-                that you can use for display
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
     </div>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Routing Setup</li>
+        </ol>
+      </nav>
+
+      <h1>Routing Setup</h1>
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#basics">Basics</a>
+          </li>
+          <li>
+            <a href="#htmlSetup">HTML Page Setup</a>
+          </li>
+          <li>
+            <a href="#routerOutlet">Router Outlet Directive</a>
+          </li>
+          <li>
+            <a href="#multipleModules">Routing with Mulitple Modules</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>Newer versions of Angular use HTML History API strategy</li>
+          <li>Older versions separated Angular parts of the URL using the #</li>
+        </ul>
+      </section>
+
+      <h2 id="htmlSetup">HTML Page Setup</h2>
+      <section>
+        <ul>
+          <li>
+            Index.html page should have a base element added as the first child
+            in the head tag to tell the router how to compose navigation URLs
+          </li>
+          <li>
+            If in the application root, you would add
+            <code>&lt;base href="/"&gt;</code>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="routerOutlet">Router Outlet Directive</h3>
+      <section>
+        <ul>
+          <li>Directive that is used like a component</li>
+          <li>
+            A placeholder that marks the spot in a template where the router
+            should display the components for that outlet
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>
+          </div>
+        </div>
+      </section>
+
+
+      <h2 id="multipleModules">Routing with Mulitple Modules</h2>
+      <section>
+        <ol>
+          <li>Give each feature module its own module file</li>
+          <li>
+            Give each fature module a component to act as the hub
+            <ul>
+              <li>This will contian the router-outlet element</li>
+            </ul>
+          </li>
+          <li>
+            Create routing module in each feature module
+            <ul>
+              <li>This will hold routes specific to that module</li>
+            </ul>
+          </li>
+          <li>
+            Import each routing module into its corresponding feature module
+          </li>
+          <li>For consistency, add a routing module to the root module</li>
+          <li>Import each feature module into the root module</li>
+        </ol>
+      </section>
+
+      
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

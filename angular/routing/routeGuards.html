@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Route Guards
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Route Guards</h1>
+
+      <section>
+        <ul>
+          <li>
+            These can
+            <ul>
+              <li>Prevent a user from navigating to a page</li>
+              <li>Prevent a user from navigating away from a page</li>
+            </ul>
+          </li>
+
+          <li>
+            There are two properties on the Route object to do this
+            <ul>
+              <li>
+                canActivate
+                <ul>
+                  <li>Can the user go to a route?</li>
+                </ul>
+              </li>
+              <li>
+                canDeactivate
+                <ul>
+                  <li>Can the user leave the route?</li>
+                  <li>
+                    Useful if you want to want a user to save their data before
+                    leaving the page
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            CanActivate as a Service (can be a function or service)
+            <ul>
+              <li>
+                Create a service that implements CanActivate (@angular/route)
+              </li>
+              <li>
+                This method will take a ActivatedRouteSnapshot (@angular/route)
+                object as a parameter
+              </li>
+              <li>
+                Define how you will determine if the route should be activated
+                or not
+                <ul>
+                  <li>
+                    For example, you could use a different service to check if a
+                    parameter id represents a valid data object
+                  </li>
+                </ul>
+              </li>
+              <li>
+                If you are not going to activate the route, you can add a
+                redirect using the router.navigate method
+              </li>
+              <li>Return true/false if the route should be activated or not</li>
+              <li>
+                For the target route, add a CanActivate parameter and a
+                reference to the service
+              </li>
+            </ul>
+          </li>
+          <li>
+            CanDeactivate as a Function (can be a function or service)
+            <ul>
+              <li>
+                Add a canDeactivate option to the route
+                <ul>
+                  <li>Its value should be an array with a string</li>
+                  <li>... canDeactivate: ['canDeactivateEvent']</li>
+                </ul>
+              </li>
+              <li>
+                You can register a function as a provider in a module
+                <ul>
+                  <li>
+                    Use the longhand version of registering a provider
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          { provide: 'canDeactivateEvent', useValue:
+                          checkDirtyState}
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Define the function checkDirtyState somewhere and import it into
+                the module
+                <ul>
+                  <li>
+                    This function will have a parameter passed to it which is
+                    the component specified in the route
+                  </li>
+                </ul>
+              </li>
+              <li>
+                You can add a property to the component to be flagged when a
+                save is done
+                <ul>
+                  <li>
+                    Check this parameter in the checkDirtyState function since
+                    it receives the component as a parameter
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

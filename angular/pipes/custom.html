@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Pipes</li>
+        </ol>
+      </nav>
+
+      <h1>Custom Pipes</h1>
+
+      <section>
+        <ul>
+          <li>
+            Add a new class, such as duration.pipe.ts
+            <ul>
+              <li>Class names should be upper camel case</li>
+            </ul>
+          </li>
+          <li>
+            Decorate the class with the pipe metadata
+            <div class="card">
+              <div class="card-body">
+                <code> @Pipe({ name: 'myPipeName' }) </code>
+              </div>
+            </div>
+            <ul>
+              <li>
+                Decorator allows you to define the pipe name that you will use
+                within the template expressions, so it must be a valid
+                JavaScript identifier
+              </li>
+            </ul>
+          </li>
+          <li>
+            Name property of decorator should use camel case with no hyphens
+          </li>
+          <li>
+            The pipe class should implement PipeTransform interface
+            <ul>
+              <li>
+                Includes transform method that accepts input values for each
+                parameter passed to the pipe and returns a single value
+              </li>
+            </ul>
+          </li>
+          <li>
+            For module declarations
+            <ul>
+              <li>
+                Must include the pipe in the declarations array of the AppModule
+              </li>
+              <li>
+                If you inject it into a class, you must provide it in the
+                providers array of your NgModule
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

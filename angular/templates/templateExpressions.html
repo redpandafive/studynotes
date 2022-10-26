@@ -135,14 +135,16 @@
         </div>
       </section>
 
-
-
-      <h3 id="operators">Template Expressions – Operators</h3>
+      <h3 id="operators">Template Expressions Operators</h3>
       <section>
         <ul>
           <li>
+            Angular templates employ a subset of JavaScript syntax with a few special operators added for specific scenarios
+          </li>
+          <li>
             Pipe operators
             <ul>
+              <li>Simple funcitons that accept an input value and return a transformed value</li>
               <li>Transform data for presentation</li>
               <li>
                 The display value will be blank, but the app will not crash with
@@ -152,6 +154,23 @@
                 May be more appropriate to use a *ngIf conditional instead,
                 especially if you are waiting on data to return
               </li>
+              <li>
+                Multiple pipes can be chained together
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ title | uppercase | lowercase }}</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Pipes can also have parameters
+                <div class="card">
+                  <div class="card-body">
+                    <code> {+{ Birthdate: | date:'longDate'}} </code>
+                  </div>
+                </div>
+              </li>
+              <li>These have higher precedence than the ternary operator.  A good practive is to use parentheses.</li>
             </ul>
           </li>
           <li>
@@ -161,6 +180,11 @@
                 Guards against null and undefined values in property paths
               </li>
             </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>The item name is: {{item?.name}} </code>
+              </div>
+            </div>
           </li>
           <li>
             Non-null assertion operator
@@ -180,13 +204,16 @@
                 that the element will not cause a null exception, so TypeScript
                 doesn't have to enforce this
               </li>
-            </ul>
+            </ul>            
+            <div class="card">
+              <div class="card-body">
+                <code>item.color!.toUpperCase()</code>
+              </div>
+            </div>
           </li>
         </ul>
       </section>
 
-
-      
       <h3 id="expressionvsstatement">
         Template Expressions vs Template Statements
       </h3>

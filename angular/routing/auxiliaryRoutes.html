@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Auxiliary Routes
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Auxiliary Routes</h1>
+
+      <section>
+        <ul>
+          <li>
+            Allows you to have multiple router outlets on the same component
+            <ul>
+              <li>
+                Name attributes are added to each router outlet except for the
+                primary one
+              </li>
+              <li>
+                Routes are defined with an outlet attribute to distinguish which
+                router outlet component they should be loaded into
+              </li>
+            </ul>
+          </li>
+          <li>
+            Used when multiple portions of the screen depend on the value of the
+            URL
+            <ul>
+              <li>
+                There will be primary router outlet component defined with no
+                name attribute
+              </li>
+              <li>
+                There will be one or more auxiliary router outlet components
+                defined, each with a name attribute
+              </li>
+            </ul>
+          </li>
+          <li>Each auxiliary route has its own distinct URL</li>
+          <li>
+            Uses a special syntax for the URL
+            <ul>
+              <li>
+                Given routes with
+                <ul>
+                  <li>AllLessons component mapped to "lessons"</li>
+                  <li>
+                    PlayList component mapped to "playlist" that has a name of
+                    "aside"
+                  </li>
+                </ul>
+              </li>
+              <li>
+                /lessons(aside:playlist)
+                <ul>
+                  <li>
+                    /lessons would load AllLessons component into the primary
+                    route outlet
+                  </li>
+                  <li>
+                    (aside:playlist) would load the PlayList component in the
+                    router outlet named aside
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Multiple auxiliary routes can be loaded, each separated by a //
+                <ul>
+                  <li>/lessons(aside:playlist//leftmenu:/some/path)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Use cases
+            <ul>
+              <li>
+                Allows you to divide the browser window into multiple mini
+                browser windows
+              </li>
+            </ul>
+          </li>
+          <li>
+            Example
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  { <br />
+                  path: 'courses, component: CoursesComponent,<br />
+                  children: &#91;<br />
+                  { path: '', component: CourseCardsComponent},<br />
+                  { path: '':id', component: CoursesCategoryComponent },<br />
+                  { path: '', outlet: 'sidemenu', component: SideMenuComponent
+                  }<br />
+                  &#93;<br />
+                  }
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This will load
+            <ul>
+              <li>
+                CoursesComponent into the top router outlet when the URL starts
+                with courses
+              </li>
+              <li>
+                SideMenuComponent into the router outlet named sidemenu on the
+                CoursesComponent
+              </li>
+              <li>
+                CoursesCategoryComponent into the primary outlet on the
+                CoursesComponent when there is an id in the URL
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

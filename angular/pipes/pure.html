@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Pure vs Impure Pipes
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Pure vs Impure Pipes</h1>
+
+      <section>
+        <ul>
+          <li>
+            Pure pipes
+            <ul>
+              <li>
+                Pipes that are not dependent on any global state and do not
+                produce side effects
+              </li>
+              <li>
+                Will only trigger change detection on pure changes
+                <ul>
+                  <li>
+                    Changes to either a primitive input value or a changed
+                    object reference
+                  </li>
+                  <li>This is done to improve speed</li>
+                </ul>
+              </li>
+              <li>
+                This is set using a property on the @Pipe decorator and is set
+                to true by default
+              </li>
+              <li>
+                The pipe will return the same output when invoked with the same
+                input
+              </li>
+              <li>
+                Angular can cache the outputs for all the input parameters the
+                pipe has been invoked with and reuse them to not have to
+                recompute them on each evaluation
+              </li>
+              <li>Pure pipe should use pure functions</li>
+            </ul>
+          </li>
+          <li>
+            Impure pipes
+            <ul>
+              <li>
+                There are times when you cannot live with the default change
+                detection strategy
+              </li>
+              <li>
+                Execute the impure pipe during every component change detection
+                cycle
+              </li>
+              <li>
+                This can cause a problem with filtering and sorting since impure
+                pipes are re-run on every event in the change cycle (even ones
+                not related to the list you are sorting or filtering)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

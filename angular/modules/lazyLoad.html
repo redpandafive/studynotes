@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Lazy Loading Feature Modules
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Lazy Loading Feature Modules</h1>
+
+      <h3 id="lazy">Lazy Loading Feature Modules</h3>
+      <section>
+        <ul>
+          <li>
+            When loading large applications, it may make sense not to load
+            everything upfront. An example would be loading the administration
+            panel of an application separate from the user facing UI
+          </li>
+          <li>
+            Lazy loading is when you load modules only when you need them. This
+            is opposed to eager loading, which loads everything at once
+          </li>
+          <li>
+            Services specific to the module to the lazy loaded should be listed
+            in the providers array of that module
+            <ul>
+              <li>
+                When the module is lazy loaded, it creates a new injector that
+                is a child of the root application injector
+              </li>
+              <li>
+                Providers are added to this child injector so they are preferred
+                to the application root injector
+              </li>
+            </ul>
+          </li>
+          <li>
+            Don't lazy load default routes
+            <ul>
+              <li>
+                When the user loads the default route, lazy loading will require
+                downloading the module file and all dependencies. Later the file
+                needs to be parsed by the JavaScript VM and evaluated
+              </li>
+              <li>
+                Triggering extra HTTP requests and performing unnecessary
+                computations during the initial page load is a bad practice
+                since it slows down the initial page rendering
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>Setup</p>
+        <div>
+          Configre routes to the feature modules in AppRoutingModule. For
+          instance, if you are adding a User feature module, you could add the
+          following to your app module routes.
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              {<br />
+              path: ‘user’, <br />
+              loadChildren: () =&gt; import(‘./user/user.module’).then(m =&gt;
+              m.UserModule) <br />
+              }
+            </code>
+          </div>
+        </div>
+        <div>
+          This will return a promise that contains the module to be imported.
+          Use the then statement to get to the module class
+        </div>
+        <div>
+          For feature modules:
+          <ul>
+            <li>Each feature acts as a doorway via the router</li>
+            <li>Connects the AppRoutingModule to the feature module</li>
+            <li>
+              Modules hook into the following components
+              <ul>
+                <li>
+                  Routing Modules
+                  <ul>
+                    <li>
+                      these will use the component syntax on routes since they
+                      should be eagerly loaded
+                    </li>
+                    <li>
+                      don’t need to include the context since this will be
+                      accounted for in the AppRoutingModule (default route can
+                      just be an empty string)
+                    </li>
+                  </ul>
+                </li>
+                <li>Component</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

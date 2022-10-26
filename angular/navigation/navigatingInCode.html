@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Navigating in Code
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Navigating in Code</h1>
+
+      <section>
+        <ul>
+          <li>
+            There are two methods to do this available on the Router object
+            <ul></ul>
+          </li>
+          <li>
+            Navigate
+            <ul>
+              <li>
+                References a route in the route table
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      this.router.navigate(&#91;'courses', course.id&#93;)
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            navigateByUrl
+            <ul>
+              <li>
+                references a URL
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      this.router.navigateByUrl('/courses/${course.id}');
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Must inject the Router object form @angular/router to do this
+            <ul>
+              <li>Import Router from @angular/router</li>
+              <li>Inject it into the constructor</li>
+            </ul>
+          </li>
+          <li>
+            Basic navigation to a defined route
+            <div class="card">
+              <div class="card-body">
+                <code> this.router.navigate(&#91;'/events'&#93;)</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            To pass query parameters with route, the second parameter takes an
+            object
+            <ul>
+              <li>
+                The resulting URL will be
+                http://localhost:4200/books?orderby=price
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      this.router.navigate(&#91;'/books'&#93;, { queryParams: {
+                      orderby: 'price' } })
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            QueryParamsHandling property
+            <ul>
+              <li>
+                Preserve query parameters between URL requests
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      this.router.navigate(&#91;'/books'&#93;, {
+                      queryParamsHandling: 'preserve' })
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Calling this from http://localhost:4200/dvds?orderby=price will
+                result in http://localhost:4200/books?orderby=price
+              </li>
+            </ul>
+          </li>
+          <li>
+            Merge previous query parameters with any new ones
+            <ul>
+              <li>
+                Calling this from http://localhost:4200/dvds?orderby=price will
+                result in http://localhost:4200/books?orderby=price&type=kindle
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      this.router.navigate(&#91;'/books'&#93;, { <br />
+                      queryParams: { type: 'kindle' }, <br />
+                      queryParamsHandling: 'merge' })
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

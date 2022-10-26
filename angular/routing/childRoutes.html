@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Child Routes
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Child Routes</h1>
+      <section>
+        <ul>
+          <li>
+            Allow you to create nested routes to build up a hierarchy in your
+            routing table
+            <ul>
+              <li>One use case is with a Master – Detail UI pattern</li>
+            </ul>
+          </li>
+          <li>
+            Restrictions
+            <ul>
+              <li>
+                When a route has multiple child routes, only one of those routes
+                can be active at a time
+              </li>
+            </ul>
+          </li>
+          <li>Allows multiple router outlets the component tree</li>
+          <li>
+            Example
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  { <br />
+                  path: 'courses', component CoursesComponent, <br />
+                  { children: &#91; <br />
+                  { path: 'new', component: NewCourseCardsComponent },<br />
+                  { path: '', component: CourseCardsComponent },<br />
+                  &#93;}}
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This will display the CoursesComponent in the topmost router outlet
+            when the URL starts with courses
+            <ul>
+              <li>
+                An additional router outlet component should be on the
+                CoursesComponent template
+              </li>
+            </ul>
+          </li>
+          <li>
+            If the URL starts with courses/new, the NewCourseCardsComponent will
+            be loaded into the router outlet on the CourseCardsComponent
+          </li>
+          <li>
+            If the URL starts with courses/, the CourseCardsComponent will be
+            loaded into the router outlet on the CourseCardsComponent
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

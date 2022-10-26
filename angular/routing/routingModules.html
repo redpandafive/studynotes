@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Routing Modules
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Routing Modules</h1>
+
+      <section>
+        <ul>
+          <li>
+            Since routing configurations can be substantial, it may be
+            appropriate to refactor it out into an external module
+          </li>
+          <li>
+            Should contain the word routing and be named as a sibling to the
+            module
+            <ul>
+              <li>
+                Ex app.module.ts should have a app-routing.module.ts file paired
+                with it
+              </li>
+              <li>
+                feature.module.ts should have a feature-routing.module.ts file
+                paired with it
+              </li>
+            </ul>
+          </li>
+          <li>Module must import RouterModule (@angular/router)</li>
+          <li>
+            Import the RouterModule and configure it to include routes
+            definition
+            <ul>
+              <li>
+                For AppRoutingModule, use RouterModule.forRoot(routesObject)
+              </li>
+              <li>
+                For feature routing modules, use
+                RouterModule.forChild(routesObject)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Routes can be defined as an array of type Route and sit outside the
+            module class definition (but inside the file)
+          </li>
+          <li>
+            General steps to setup
+            <ul>
+              <li>Import the required routing services</li>
+              <li>Define the routes in a variable</li>
+              <li>Import this routing module into the associated module</li>
+
+              <li>
+                Call the forRoot (or forChild) on the imports section of the
+                associated module (and include the route definitions)
+              </li>
+              <li>
+                Add RouterLink and RouterOutlet to list of exports in the
+                associated module so that the components in the companion module
+                have access to Router declarations
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const routes: Routes = &#91;<br/> 
+                  { path: '', component: IndexComponent, pathMatch: 'full' },<br/> 
+                  { path: 'sanitize', component: CodeBoxEncoderComponent },<br/> 
+                  { path: '**', component: RouteNotFoundComponent }<br/>
+                  &#93;<br/>
+                  @NgModule({<br/> 
+                    imports: &#91;RouterModule.forRoot(routes)&#93;,<br/> 
+                    exports: &#91;RouterModule&#93;,<br/>
+                  })<br/>
+                  export class AppRoutingModule {}
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Make sure AppRoutingModule is the last item in the imports array of
+            AppModule (particularly if you define a wildcard route here). This
+            ensures the wildcard will be the last. It will be hit before other
+            routes in feature modules if you dont do this
+          </li>
+          <li>
+            Angular CLI syntax to generate this is:
+            <ul>
+              <li>
+                <kdb>ng generate module app-routing --flat --module=app</kdb>
+              </li>
+              <li>
+                The –flat switch puts the file in the src/app instead of its own
+                folder
+              </li>
+              <li>
+                The –module=app tells the CLI to register it in the imports
+                array of the AppModule
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

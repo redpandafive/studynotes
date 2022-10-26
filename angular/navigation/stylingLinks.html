@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Styling Links
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Styling Links</h1>      
+      <section>
+        <ul>
+          <li>
+            The RouterLinkActive directive can be added to add a space delimited
+            string of CSS classes that will be added when the link is active
+            <ul>
+              <li>
+                This applies when the link goes to the current URL
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code='&lt;a
+                      &#91;routerLink&#93;="&#91;&apos;/events&apos;&#93;"
+                      routerLinkActive="active"&gt;My Link&lt;/a&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                This applies the CSS class "active" when the link is active
+              </li>
+              <li>
+                This will match is the current route begins with the routerLink
+                value
+                <ul>
+                  <li>It will also match ['/events/new']</li>
+                </ul>
+              </li>
+              <li>
+                To get an exact match add routerLinkActiveOptions object
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code='&lt;a &#91;routerLink="&apos;/events&apos;"
+                      routerLinkActive="active"
+                      routerLinkActiveOptions="{exact:true}"&#93;&gt;All
+                      Events&lt;/a&gt;&#10;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Anchor tags with no href attribute will not display a pointer when
+            you hover over it
+            <ul>
+              <li>
+                You can work around this by adding a CSS rule
+                <div class="card">
+                  <div class="card-body">
+                    <code> a { cursor: pointer}</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

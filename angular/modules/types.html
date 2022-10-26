@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Modules</li>
+        </ol>
+      </nav>
+
+      <h1>Modules</h1>
+
+      <h2 id="categories">Categories</h2>
+
+      <h2 id="feature">Feature</h2>
+      <section>
+        <ul>
+          <li>
+            Organization best practice, not a concept of the core Angular API
+          </li>
+          <li>
+            Helps partition the app into focused areas
+            <ul>
+              <li>these are opposed to root modules</li>
+            </ul>
+          </li>
+          <li>
+            To create
+            <ul>
+              <li><kbd>generate module CustomerDashboard</kbd></li>
+              <li>
+                this will put the module in a folder named customer-dashboard
+              </li>
+            </ul>
+          </li>
+          <li>
+            To add a component to this module
+            <ul>
+              <li>
+                <kbd
+                  >ng generate component
+                  customer-dashboard/CustomerDashboard</kbd
+                >
+              </li>
+              <li>This will also add the component to the module</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="appvsfeature">App vs Feature</h2>
+      <section>
+        <ul>
+          <li>App modules will import BrowserModule; feature modules do not</li>
+          <li>
+            To define routes
+            <ul>
+              <li>App modules call <kbd>RouterModule.forRoot()</kbd></li>
+              <li>Feature modules call <kbd>RouterModule.forChild()</kbd></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        Feature modules fall into five categories
+        <ul>
+          <li>
+            Domain
+            <ul>
+              <li>dedicated to a particular application domain</li>
+              <li>
+                have a top-level component with several private supporting
+                subcomponents under it
+              </li>
+              <li>Only top-level component should be exported</li>
+              <li>
+                Usually don't have providers – lifecycle should be the same as
+                the module lifecycle if it does
+              </li>
+              <li>
+                Typically imported exactly once by a larger feature module
+              </li>
+            </ul>
+          </li>
+          <li>
+            Routed
+            <ul>
+              <li>
+                Domain feature modules whose top components are targets of
+                router navigation routes
+              </li>
+              <li>
+                Are lazy loaded modules are routed feature modules by definition
+              </li>
+              <li>
+                Should not imported by any module (which would trigger eager
+                loading)
+              </li>
+              <li>
+                Don't export anything since their components never appear in the
+                template of an external component
+              </li>
+              <li>
+                Rarely have providers – if so, it should have the same lifecycle
+                of the module
+              </li>
+            </ul>
+          </li>
+          <li>
+            Routing
+            <ul>
+              <li>
+                Provides routing configuration for another modules and separates
+                routing concerns
+              </li>
+              <li>Defines routes</li>
+              <li>Adds router configuration to the module's imports</li>
+              <li>
+                Adds guard and resolves service providers to the module's
+                providers
+              </li>
+              <li>
+                AppRoutingModule will contain the forRoot call, all other
+                routing modules will use forChild
+              </li>
+              <li>Does not contain its own declarations</li>
+              <li>Only imported by its companion module</li>
+              <li>
+                The name should parallel the name of its companion module using
+                the suffix “Routing”
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Service
+            <ul>
+              <li>Consist entirely of providers with no declarations</li>
+              <li>
+                The root AppModule is the only module that should import service
+                modules
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Widget
+            <ul>
+              <li>
+                Components, directives, and pipes available to external modules
+              </li>
+              <li>Consist entirely of declarations, most of them exported</li>
+              <li>Should rarely have providers</li>
+              <li>
+                These are imported into any module whose component templates
+                need the widgets
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="shared">Shared</h3>
+      <section>
+        <ul>
+          <li>
+            SharedModule is a convention name for an NgModule with the
+            components, directives, and pipes that you use everywhere in your
+            app
+          </li>
+          <li>
+            Should consist entirely of declarations, most of them exported
+          </li>
+          <li>
+            Can also re-export modules that you use widely, such as
+            CommonModule, FormsModule, etc
+          </li>
+          <li>Should not have providers</li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

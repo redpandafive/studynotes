@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Defining Links in Templates
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Defining Links in Templates</h1>
+
+      <section>
+        <ul>
+          <li>
+            RouterLink directive on tags give the router control over those
+            elements
+            <ul>
+              <li>navigation paths are fixed, so they are one-time bindings</li>
+            </ul>
+          </li>
+          <li>
+            QueryParams directive is used to pass query parameters
+            <ul>
+              <li>http://localhost:4200/books?orderby=price</li>
+              <li>
+                Example
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;a &#91;routerLink&#93;=&quot;&#91;'/books'&#93;&quot;
+                      &#91;queryParams&#93;={ orderby: 'price' }&quot;&gt;"
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                QueryParamsHandling option can configure query parameter
+                behavior
+                <ul>
+                  <li>See Routing – Navigating in Code section for details</li>
+                </ul>
+              </li>
+              <li>
+                Examples
+                <ul>
+                  <li>
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          code='&lt;a routerLink=""&gt;Home&lt;/a&gt;'
+                        </code>
+                      </div>
+                    </div>
+                    <ul>
+                      <li>
+                        This creates a link to the root of the application
+                      </li>
+                      <li>This would hit the empty route if defined</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          code='&lt;a
+                          &#91;routerLink&#93;="courses"&gt;Courses&lt;/a&gt;'
+                        </code>
+                      </div>
+                    </div>
+                    <ul>
+                      <li>
+                        This creates a link that appends /courses onto the
+                        current URL
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;a &#91;routerLink&#93;=&quot;&#91;'/events',
+                          event.id&#93;&quot;&gt;"
+                        </code>
+                      </div>
+                    </div>
+                    <ul>
+                      <li>
+                        This creates a link to the events route and concatenates
+                        id onto the URL as a route parameter
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          &lt;a
+                          &#91;routerLink&#93;=&quot;&#91;'/events'&#93;&quot;
+                          &#91;queryParams&#93;=&quot;{ orderby: 'price',
+                          category: 'fiction' }&quot; ..."
+                        </code>
+                      </div>
+                    </div>
+                    <ul>
+                      <li>
+                        Adds ?orderby=price&category=fiction as a query
+                        parameter
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
