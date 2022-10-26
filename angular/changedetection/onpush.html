@@ -39,10 +39,14 @@
             ChangeDetection property of a component's configuration so it will
             be in OnPush change detection mode
           </li>
-
           <li>
             This disables the change detection mechanism for subtrees of the
             component tree.
+            <ul>
+              <li>Angular will only perform checks on inputs when it detets there is a new reference with the change</li>
+              <li>It will not check bound properties on the object from the input, only the object has a new reference</li>
+              <li>Allows you to skip entire entire subtrees during change detection</li>
+            </ul>
           </li>
           <li>
             This mode will make the change detection perform only when the
@@ -117,6 +121,30 @@
               <li>
                 Will not introduce a bug since the only way to modify data is to
                 create new objects
+              </li>
+            </ul>
+          </li>
+          <li>If needed, you can manually mark a component to be included in the next change detection cycle
+            <ul>
+              <li>
+                Inject ChangeDetectorRef in the component constructor
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      constructor(private cd: ChangeDetectorRef) {}
+                    </code>
+                  </div>
+                </div>                
+              </li>
+              <li>
+                Mark the path from the component until the root to be changed for the next change detection run
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      this.cd.markForCheck();
+                    </code>
+                  </div>
+                </div>                
               </li>
             </ul>
           </li>

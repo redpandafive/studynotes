@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Templates as Input Parameters
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Templates as Input Parameters</h1>
+
+      <h2 id="inputParams">Templates as Input Parameters</h2>
+      <section>
+        <p>
+          Start by defining the custom template for the buttons in the parent
+          component
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+@Component({
+  selector: &apos;app-root&apos;,&#10; 
+  template: `
+    &lt;ng-template #customTabButtons&gt;
+      &lt;div class=&quot;custom-class&quot;&gt;
+        &lt;button class=&quot;tab-button&quot; (click)=&quot;login()&quot;&gt;
+          {+{loginText}}
+        &lt;/button&gt;
+        &lt;button class="tab-button" (click)="signUp()"&gt;
+          {+{signUpText}}
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/ng-template&gt;
+    &lt;tab-container &#91;headerTemplate&#93;=&quot;customTabButtons&quot;&gt;&lt;/tab-container&gt;
+    `})
+    export class AppComponent {}</pre
+              >
+            </code>
+          </div>
+        </div>
+        <p>
+          On the tab container component, define an input property which is also
+          a template named headerTemplate. If an input is provided, display that
+          template. Otherwise, display the defaultTabButtons template.
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+@Component({
+  selector: &apos;tab-container&apos;,
+  template: `
+    &lt;ng-template #defaultTabButtons&gt;
+      &lt;div class="default-tab-buttons"&gt;
+      ...  
+      &lt;/div&gt;
+    &lt;/ng-template&gt;
+    &lt;ng-container
+      *ngTemplateOutlet=&quot;headerTemplate ? headerTemplate: defaultTabButtons&quot;&gt;
+    &lt;/ng-container&gt;
+    ... rest of tab container component ...
+  `})
+  export class TabContainerComponent {
+    @Input() headerTemplate: TemplateRef&lt;any&gt;
+  }</pre
+              >
+            </code>
+          </div>
+        </div>
+        <p>
+          Can expand on this, create multiple inputs in the presentation
+          component, and toggle between them based on some condition.
+        </p>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

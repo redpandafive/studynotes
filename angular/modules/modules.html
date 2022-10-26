@@ -6,8 +6,8 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -18,14 +18,16 @@
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
           <li class="breadcrumb-item">
-            <a href="index.html">Angular</a>
+            <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Modules</li>
         </ol>
       </nav>
+
       <h1>Modules</h1>
+
       <section class="navlinks">
         <ul>
           <li><a href="modules.html#basics">Basics</a></li>
@@ -123,111 +125,6 @@
         Typically have one or more feature modules
       </section>
 
-      <h2 id="configuration">Configuration</h2>
-      <section>
-        Declare using a class marked with the @NgModule decorator
-        <ul>
-          <li>
-            Takes a metadata object that describes how to compile a component’s
-            template and how to create an injector at run time
-          </li>
-          <li>
-            Identifies components, directives, pipes that belong to the module
-          </li>
-          <ul>
-            <li>These can be made public using the exports property</li>
-          </ul>
-        </ul>
-
-        <li>Adds service providers to the application dependency injectors</li>
-        Accepts a metadata object that includes the following properties:
-        <ul>
-          <li>declarations</li>
-          <ul>
-            <li>
-              Declarable classes such as components, directives, and pipes that
-              belong to the module
-            </li>
-            <li>
-              Components should be in the declarations section of exactly one
-              module of the application
-            </li>
-            <li>
-              Should not add Module classes, Service classes, and non-Angular
-              classes and objects
-            </li>
-          </ul>
-
-          <li>exports</li>
-          <ul>
-            <li>
-              Subset of the declarations that should be visible and useable in
-              the component templates of other NgModules
-            </li>
-            <li>Private items do not need to be exported</li>
-            <li>Only items that other modules will use should be exported</li>
-            <li>
-              Can export an entire module that effectively exports all their
-              exported classes
-            </li>
-            <li>
-              Re-exporting classes and modules is a good way to selectively
-              aggregate classes from other NgModules and consolidate them
-            </li>
-            <li>Don t export the following</li>
-            <ul>
-              <li>private components, directives, and pipes</li>
-              <li>
-                Non declarable objects such as services, functions,
-                configurations, and entity models
-              </li>
-              <li>Dynamically loaded components</li>
-              <li>
-                Pure service modules that don’t have public (exported)
-                declarations
-              </li>
-            </ul>
-          </ul>
-          <li>imports</li>
-          <ul>
-            <li>
-              modules whose exported classes are needed by the component
-              templates declared in this module
-            </li>
-            <li>
-              Should always import CommonModule (either directly or through
-              another NgModule that re-exports it)
-            </li>
-            <ul>
-              <li>
-                Each feature module must explicitly import CommonModule to do
-                any Angular work (it can import it from another module)
-              </li>
-            </ul>
-
-            <li>
-              Import modules with providers exactly once, preferably in the
-              application's root module
-            </li>
-            <li>BrowserModule should be imported in the AppModule</li>
-            <li>avoid circular references</li>
-          </ul>
-          <li>providers</li>
-          <ul>
-            <li>
-              creators of services that this module contributes to the global
-              collection of services.
-            </li>
-            <li>These become accessible to all parts of the app.</li>
-            <li>These can also be specified at the component level</li>
-          </ul>
-          <li>Bootstrap</li>
-          <ul>
-            <li>main application view, called the root component.</li>
-            <li>Only a root module should have this set.</li>
-          </ul>
-        </ul>
-      </section>
 
       <h2 id="readability">Configuration & Readability</h2>
       <section>
@@ -665,6 +562,6 @@
         </div>
       </section>
     </div>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>

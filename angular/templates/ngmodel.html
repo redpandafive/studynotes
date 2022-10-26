@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            NgModel / Two-Way Bindings
+          </li>
+        </ol>
+      </nav>
+
+      <h1>NgModel / Two-Way Bindings</h1>
+
+      <section>
+        <ul>
+          <li>Bi-directional binding from DOM to component</li>
+          <li>
+            Use when you want to display a data property in the DOM and update
+            that property when the user makes changes on the interface
+          </li>
+          <li>
+            “Banana in a box” syntax
+            <ul>
+              <li>
+                Combines the brackets of property binding [x] with the
+                parentheses of event binding (x)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Really just syntax sugar for a property binding and an event binding
+          </li>
+          <li>Useful for custom components</li>
+        </ul>
+
+        <p>
+          Need an input property that you will use on the right side of the
+          equals sign on the parent component
+        </p>
+        <div class="card">
+          <div class="card-body"><code> @Input() size: number; </code></div>
+        </div>
+
+        <p>
+          Need an output method triggers an EventEmitter. Should be named the
+          same as the input property with Change appended to the end
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              @Output() sizeChagne = new EventEmitter&lt;number&gt;()
+            </code>
+          </div>
+        </div>
+
+        <ul>
+          <li>
+            Native HTML elements do not follow the x value and xChange event
+            pattern, so this cannot be used on them (without a custom directive,
+            such as ngModel)
+          </li>
+          <li>
+            Built in directive to use this form forms is NgModel
+            <ul>
+              <li>
+                Use to establish a two-way data binding between a form element
+                and a data property
+              </li>
+              <li>
+                Allows you to set the value in the class and the user to update
+                it in the view
+              </li>
+              <li>
+                This is a shorthand method – you can do the same thing without
+                the NgModel directive, it is just more verbose
+              </li>
+              <li>
+                Requirements
+                <ul>
+                  <li>Must import FormsModule from@angular/forms</li>
+                  <li>
+                    Element must support ControlValueAccessor – Angular provides
+                    value accessors for all the basic HTML form elements
+                  </li>
+                  <li>
+                    Cannot apply NgModel to a non form native element or 3rd
+                    part custom component until you write a suitable value
+                    accessor
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Binding Mechanics
+          </li>
+        </ol>
+      </nav>
+      <h1>Binding Mechanics</h1>
+
+      <section>
+        <ul>
+          <li>
+            Provides communication between
+            <ul>
+              <li>A template and its component</li>
+              <li>Parent and child components</li>
+            </ul>
+          </li>
+          <li>
+            Angular processes all data bindings once for each JavaScript event
+            cycle
+            <ul>
+              <li>
+                Starts from the root of the application component tree through
+                all child components
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can create an Angular binding, you technically aren’t working
+            with HTML attributes anymore, even though it appears you are
+            <ul>
+              <li>
+                You are setting properties on DOM elements, components, and
+                directives
+              </li>
+              <li>
+                Template binding only works with events and properties, not
+                attributes
+              </li>
+            </ul>
+          </li>
+          <li>
+            HTML attribute vs DOM property
+            <ul>
+              <li>Some attributes have corresponding properties</li>
+              <li>Some are found in one, but not the other</li>
+              <li>Others appear to map, but not in the way you think</li>
+              <li>
+                Attributes initialize DOM properties and then they are done -
+                this is the initial value
+              </li>
+            </ul>
+          </li>
+          <li>
+            Property values can change, but attribute values cannot change -
+            this is a the current value
+          </li>
+          <li>
+            For example, if you initialize an input to Bob, then change the
+            value to Sally, the attribute value will remain unchanged
+          </li>
+          <li>
+            Another example is the disabled attribute
+            <ul>
+              <li>
+                When initialized with a disabled attribute, it set the initial
+                value of the disabled property to true
+              </li>
+              <li>Otherwise, it sets it to false</li>
+              <li>
+                In other words, this does not set the button to enabled
+                (disabled=”false”)
+              </li>
+            </ul>
+          </li>
+          <li>Targets of data binding is something in the DOM</li>
+          <li>
+            Data binding target vs data binding source
+            <ul>
+              <li>
+                Target is
+                <ul>
+                  <li>To the left of the =</li>
+                  <li>Property or event inside the binding punctuation</li>
+                  <li>
+                    These are limited to properties that are explicitly
+                    identified as inputs and outputs
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Source is
+            <ul>
+              <li>To the right of the =</li>
+              <li>Either inside quotes or within an interpolation</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

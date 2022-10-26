@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Attribute Bindings
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Attribute Bindings</h1>
+
+      <section>
+        <ul>
+          <li>
+            Sometimes properties and attributes aren't always 1 to 1
+            <ul>
+              <li>Remember, you are working with the DOM, not HTML</li>
+              <li>This is done for performance reasons</li>
+              <li>
+                Binding to an attribute is expensive because attributes are
+                reflected in the DOM
+                <ul>
+                  <li>
+                    A change in the DOM causes reevaluation of CS styles that
+                    might match after the change
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Properties are just a value in a JavaScript object that changed
+              </li>
+            </ul>
+          </li>
+          <li>
+            You must use attribute binding when there is no element property to
+            bind to
+          </li>
+          <li>
+            For example, ARIA, AVG, and table span attributes are pure
+            attributes, do not correspond to element properties, and do not set
+            element properties
+          </li>
+          <li>
+            The syntax is to start with prefix attr, followed by a dot, then the
+            name if the attribute. Surround this with square brackets
+            <ul>
+              <li>This opts into the expensive behavior</li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          Binding to colspan (otherwise, you would need to bind to colSpan, not
+          colspan)
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              code='&lt;td &#91;attr.colspan&#93;="1 + 1"&gt;&lt;/td&gt;'
+            </code>
+          </div>
+        </div>
+        <p>Binding to the for attribute of a label</p>
+        <p>This works</p>
+        <div class="card">
+          <div class="card-body">
+            <code> code='&lt;label &#91;for&#93;="someId"&gt;' </code>
+          </div>
+        </div>
+
+        <p>This does not work</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;label attr.for=&quot;{+{someId}}&quot;&gt;<br />
+              &lt;label &#91;attr.for&#93;=&quot;someId&quot;&gt;<br />
+              &lt;label &#91;htmlFor&#93;=&quot;someId&quot;&gt;
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

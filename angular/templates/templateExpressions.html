@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Template Expressions
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Template Expressions</h1>
+
+      <section>
+        <ul>
+          <li>
+            This produces a value, which Angular creates when it executes the
+            expression and assigns it to a property of the binding target
+            <ul>
+              <li>Could be an HTML element, component, or directive</li>
+            </ul>
+          </li>
+          <li>
+            Syntax differs depending on the binding syntax
+            <ul>
+              <li>{{ 1 + 1 }} is used in interpolation</li>
+              <li>
+                [property]=”expression” - this will evaluate the expression part
+              </li>
+            </ul>
+          </li>
+          <li>
+            Recommendations when using
+            <ul>
+              <li>Should not perform operations with side effects</li>
+              <li>Should be simple and fast; put complex logic in component</li>
+              <li>Should be idempotent</li>
+            </ul>
+          </li>
+          <li>
+            There are parts of JS that cannot be used
+            <ul>
+              <li>Cannot use assignment operators</li>
+              <li>
+                Cannot chain multiple expressions using semicolon or comma
+              </li>
+              <li>Cannot refer to window or document or global namespace</li>
+              <li>Cannot call console.log()</li>
+            </ul>
+          </li>
+          <li>
+            There are a few operators that are not found in JavaScript
+            <ul>
+              <li>Pipe operator = |</li>
+              <li>
+                Safe navigation operator = ?.
+                <ul>
+                  <li>
+                    Useful to guard against null and undefined values in
+                    property paths
+                  </li>
+                  <li>
+                    This will short circuit evaluation when a null is
+                    encountered
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Expression context
+            <ul>
+              <li>Part of the application to which the expression belongs</li>
+              <li>
+                Typically, the component instance, so variables in the
+                expression will reference the properties of the associated
+                component
+              </li>
+              <li>
+                You can change the context using a template input variable or a
+                template reference variable
+              </li>
+              <li>
+                Ex *ngFor creates a template variable-you would use this to
+                reference the current item within the for loop
+              </li>
+            </ul>
+          </li>
+          <li>
+            Recommendations for guidelines
+            <ul>
+              <li>
+                Should not change any application state other than the value of
+                the target property
+              </li>
+              <li>No visible side effects</li>
+              <li>
+                Write for quick execution since these are evaluation after every
+                change detection cycle.
+              </li>
+              <li>Cache expensive values</li>
+              <li>Keep them simple; otherwise move logic into the component</li>
+              <li>
+                Idempotence = always returns the exact same thing given the same
+                inputs and no side effects
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example of safe navigation operator</p>
+        <div class="card">
+          <div class="card-body"><code> {+{ currentHero?.name }} </code></div>
+        </div>
+      </section>
+
+
+
+      <h3 id="operators">Template Expressions – Operators</h3>
+      <section>
+        <ul>
+          <li>
+            Pipe operators
+            <ul>
+              <li>Transform data for presentation</li>
+              <li>
+                The display value will be blank, but the app will not crash with
+                a null reference
+              </li>
+              <li>
+                May be more appropriate to use a *ngIf conditional instead,
+                especially if you are waiting on data to return
+              </li>
+            </ul>
+          </li>
+          <li>
+            Safe navigation operator
+            <ul>
+              <li>
+                Guards against null and undefined values in property paths
+              </li>
+            </ul>
+          </li>
+          <li>
+            Non-null assertion operator
+            <ul>
+              <li>
+                With TypeScript 2, you can enforce strict null checking to
+                ensure that no variable is unintentionally null or undefined
+              </li>
+              <li>Does not guard against null or undefined</li>
+              <li>
+                Tells the TypeScript type checker to suspend strict null checks
+                for a specific property expression
+              </li>
+              <li>
+                For example, you could use this within a conditional that will
+                not add an element if a property is null. You have guaranteed
+                that the element will not cause a null exception, so TypeScript
+                doesn't have to enforce this
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      
+      <h3 id="expressionvsstatement">
+        Template Expressions vs Template Statements
+      </h3>
+      <section>
+        <ul>
+          <li>
+            Template expressions
+            <ul>
+              <li>
+                You should never worry that reading a component value might
+                change some other display value. The view should be stable
+                throughout a single rendering pass
+              </li>
+              <li>
+                Idempotent expressions are ideal since they are free of side
+                effects and improve Angular's change detention performance
+              </li>
+            </ul>
+          </li>
+          <li>
+            Template Statements
+            <ul>
+              <li>
+                responds to an event raised by a binding target such as an
+                element, component, or directive.
+              </li>
+              <li>
+                usually have side effects; it’s usually the point of an event
+              </li>
+              <li>
+                Unidirectional data flow – you are free to change anything,
+                anywhere, during this turn of the event loop
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

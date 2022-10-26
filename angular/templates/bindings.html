@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Binding Types
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Binding Types</h1>
+
+      <section>
+        <ul>
+          <li>
+            Connects application data to the DOM
+            <ul>
+              <li>Template directives provide program logic</li>
+              <li>Binding markup connects your application data and the DOM</li>
+            </ul>
+          </li>
+          <li>
+            Binding types other than interpolation have a target name to the
+            left of the equals sign
+            <ul>
+              <li>
+                either surrounded by punctuation ([], ()) or preceded by a
+                prefix (bind-, on-, bindon-)
+              </li>
+              <li>
+                the target name is the name of a property. It may look like the
+                name of an attribute, but it never is
+              </li>
+            </ul>
+          </li>
+          <li>
+            Once you start data binding with Angular, you are no longer working
+            with HTML attributes
+            <ul>
+              <li>
+                You are setting the properties of DOM elements, components, and
+                directives
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are two types
+            <ul>
+              <li>
+                Event binding
+                <ul>
+                  <li>
+                    Allows your application to respond to user input in the
+                    target environment by updating the application data
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Property binding
+                <ul>
+                  <li>
+                    Allows you to interpolate values that are computed from the
+                    application data
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            {{ "{{ }}" }}
+            <ul>
+              <li>
+                interpolation, a type of one-way data binding from component to
+                DOM
+              </li>
+              <li>use when you want to display the value</li>
+              <li>
+                value between the curly braces is called a template expression
+                <ul>
+                  <li>evaluates all expressions</li>
+                  <li>converts the expression results to strings</li>
+                  <li>links them with neighboring literal strings</li>
+                  <li>
+                    assigns this composite interpolated result to an element or
+                    directive property
+                  </li>
+                </ul>
+              </li>
+              <li>
+                this can be used to weave calculated strings into the text
+                between HTML element tags and within attribute assignments
+              </li>
+              <li>
+                You can use this between HTML tags or as a property on a HTML
+                tag
+              </li>
+            </ul>
+          </li>
+          <li>
+            ()
+            <ul>
+              <li>Event binding</li>
+              <li>One way binding from DOM to component</li>
+              <li>Used to bind an event from view target to data source</li>
+              <li>
+                Alternative syntax removes the () and uses a on- prefix (such as
+                on-target=”statement”)
+              </li>
+            </ul>
+          </li>
+          <li>
+            []
+            <ul>
+              <li>Property binding</li>
+              <li>One way binding from component to DOM</li>
+              <li>Use when you want to bind to a property on a DOM element</li>
+              <li>
+                Use for input property binding or any valid property in HTML
+                <ul>
+                  <li>This removed over 40 directives from Angular JS</li>
+                </ul>
+              </li>
+              <li>Makes it the target of a property binding expression</li>
+              <li>
+                You can also use an alternative syntax that does not use braces,
+                but prefixes the property (such as bind-class=”property”)
+              </li>
+            </ul>
+          </li>
+          <li>
+            ['']
+            <ul>
+              <li>Binding to a string literal</li>
+              <li>Define an Input on the child component of type string</li>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code> &#91;value&#93;=&quot;myString&quot; </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            [()]
+            <ul>
+              <li>
+                Combination of event and property biding. This is just syntax
+                sugar for a property binding and event binding
+              </li>
+              <li>Two-way binding between DOM and component</li>
+              <li>
+                Alternative syntax is to use a bindon prefix (such as
+                Bindon-target="expression")
+              </li>
+              <li>
+                You can use this on DOM elements since this is desugared into
+                separate property and event bindings (propertyChange)
+              </li>
+              <li>Must use ngModel for form elements</li>
+            </ul>
+          </li>
+          <li>
+            [attri.attributeName]
+            <ul>
+              <li>Attribute binding expression</li>
+              <li>
+                Only use when you need to bind to an attribute that does not
+                have a corresponding property
+              </li>
+              <li>
+                Usually table elements (such as colspan ), ARIA, and SVG
+                attributes
+              </li>
+            </ul>
+          </li>
+          <li>
+            Class binding
+            <ul>
+              <li>Used to add and remove CSS class names</li>
+              <li>Use this to add or remove a single class</li>
+              <li>Resembles property binding</li>
+              <li>
+                This will be added when the template expression evaluates to
+                truthy and removed when falsy
+              </li>
+            </ul>
+            <div>
+              To bind a class name to a property named isExample
+              <div class="card">
+                <div class="card-body">
+                  <code> &#91;class.example&#93;=&quot;isExample&quot; </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Style binding
+            <ul>
+              <li>Resembles property binding</li>
+              <li>
+                To bind the background color to a property, use the following
+                syntax. Based on truthiness of canSave, either cyan or gray will
+                be assigned as the background color.
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &#91;style.background-color&#93;=&quot;canSave ? 'cyan' :
+                      'gray'&quot;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                To add a measurement, use the following syntax
+                <div class="card">
+                  <div class="card-body">
+                    <code> &#91;style.font-size.em&#93; ... </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

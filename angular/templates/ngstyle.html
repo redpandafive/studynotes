@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Style / NgStyle
+          </li>
+        </ol>
+      </nav>
+      <h1>Style / NgStyle</h1>
+
+      <section>
+        <ul>
+          <li>Allows you to set inline styles</li>
+          <li>
+            You can add a plain style attribute to the HTML element that will
+            always be displayed
+            <ul>
+              <li>Any Angular bindings would be additive to this</li>
+            </ul>
+          </li>
+          <li>
+            Like property binding
+            <ul>
+              <li>prefix with style</li>
+              <li>follow with a dot</li>
+              <li>
+                follow with the name of a CSS style property - this can be
+                either dash case or camel case
+              </li>
+              <li>Use a ternary template expression</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;button &#91;style.background-color&#93;=&quot;canSave ? 'cyan'
+              : 'gray'&quot;&gt;
+            </code>
+          </div>
+        </div>
+
+        <ul>
+          <li>
+            To change several inline styles at the same time, use the NgStyle
+            directive
+          </li>
+          <li>Bind ngStyle to a key: value control object in the class</li>
+          <li>Each key of the control object is a style name</li>
+          <li>
+            Each value should be the appropriate value for that style (including
+            measurement if needed)
+          </li>
+          <li>
+            Like the ngClass directive, this can be bound to a function that
+            returns an object with all rules
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;div
+              &#91;ngStyle=&quot;getStartTimeStyle()&quot;&#93;&gt;...&lt;/div&gt;
+            </code>
+          </div>
+        </div>
+
+        <p>In getStartTimeStyle method, return something like</p>
+        <div class="card">
+          <div class="card-body">
+            <code> { color: '#003300', 'font-weight': 'bold' } </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

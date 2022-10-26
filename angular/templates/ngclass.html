@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Class / NgClass
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Class / NgClass</h1>
+      <section>
+        <ul>
+          <li>
+            Allows you to add and remove CSS class names form an elements class
+            attribute
+          </li>
+        </ul>
+        <div>
+          Class bindings are better for single classes
+          <ul>
+            <li>Resembles property binding</li>
+            <li>Start with prefix class</li>
+            <li>Follow with a dot</li>
+            <li>Follow with the name of a class</li>
+            <li>Enclose in brackets</li>
+            <li>
+              Supply a Boolean expression; if it is evaluated to true, the class
+              is added
+            </li>
+          </ul>
+          <p>
+            This will add the “green” class to the div if the event property has
+            a property called time that contains a value of "8:00 am"
+          </p>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div &#91;class.green&#93;=&quot;event.time === '8:00
+                am'&quot;&gt; ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          ngClass is better for multiple classes
+          <ul>
+            <li>Each key of the object is a CSS class name</li>
+            <li>
+              Each value should be true (class is added) or false (class is
+              removed)
+            </li>
+            <li>
+              Adds the “green” and “bold” classes if the time property contains
+              a value of “8:00 am”
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div &#91;ngClass&#93;=&quot;{green: time === '8:00 am',
+                Bold: time === '8:00 am'}&quot;&gt;&lt;/div&gt;"
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p>ngClass can also be used with a function call</p>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div ngClass=&quot;getStartTimeClass()&quot;&gt;&lt;/div&gt;
+              </code>
+            </div>
+          </div>
+          <div>
+            getStartTimeClass function can return an object with a property for
+            each class and a Boolean value for each if they should be added
+            <div class="card">
+              <div class="card-body">
+                <code> {green: true, Bold: true} </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            getStartTimeClass Function can instead return a space separated
+            string containing all the classes that should be added
+            <div class="card">
+              <div class="card-body"><code>&quot;green Bold&quot;</code></div>
+            </div>
+          </div>
+          <div>
+            getStartTimeClass Function can instead return an array of strings
+            containing all the classes that should be added
+            <div class="card">
+              <div class="card-body">
+                <code>&#91;&quot;green&quot;, &quot;Bold&quot;&#93;&quot;</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

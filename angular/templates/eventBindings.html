@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Event Bindings
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Event Bindings</h1>
+
+      <section>
+        <ul>
+          <li>
+            Angular binds an event handler to a DOM event
+            <ul>
+              <li>
+                When the event is raised, the handler executes the template
+                statement
+              </li>
+            </ul>
+          </li>
+          <li>
+            Consists of
+            <ul>
+              <li>
+                Target event name within parentheses on the left of an equal
+                sign
+              </li>
+              <li>quoted template statement on the right of an equals sign</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Use the event syntax binding to do this (one of two formats)</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              ... (click)=&quot;onSelect(hero)&quot; ...<br />
+              ... on-click=&quot;onSave($event)&quot; ...
+            </code>
+          </div>
+        </div>
+        <p>
+          Make sure you are aware of the execution context of the template
+          statement – identifiers in a template statement belong to a specific
+          context object, usually the Angular component controlling the template
+        </p>
+        <ul>
+          <li>
+            The binding conveys information about the event, including data
+            values, through an event object named $event (event payload)
+            <ul>
+              <li>
+                The shape of the event object is determined by the target event
+              </li>
+              <li>
+                If it is a native DOM element event, then $event is a DOM event
+                object
+              </li>
+              <li>
+                All standard DOM event objects have a target property
+                <ul>
+                  <li>Refers to the element that raised the event</li>
+                  <li>
+                    Target.value is usually the value currently in the target
+                    element
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            In called component method, you can type the event parameter that
+            you pass
+            <ul>
+              <li>
+                You can type it as any for simplicity, but you lose code
+                completion assistance
+              </li>
+              <li>
+                Alternatively, you could be specific in the typing, such as
+                KeyboardEvent
+              </li>
+            </ul>
+          </li>
+          <li>
+            Passing the entire event object can cause a separation of concerns
+            problem
+            <ul>
+              <li>
+                That gives the method far more knowledge of the template details
+                than it needs to do its job
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can use a template reference variable if you only need direct
+            access to an element from within a template
+            <ul>
+              <li>
+                Component does nothing with this and no bindings are needed
+              </li>
+            </ul>
+          </li>
+          <li>
+            Key event filtering with Key.Enter
+            <ul>
+              <li>
+                When you only want to trigger a keyup event when the enter key
+                is pressed
+              </li>
+              <li>Bind to the (keyup.enter) event</li>
+            </ul>
+          </li>
+          <li>
+            Directives typically raise custom events with an Angular
+            EventEmitter
+            <ul>
+              <li>Creates an EventEmitter and exposes it as a property</li>
+              <li>
+                The directive calls EventEmitter.emit(payload) to fire an event,
+                passing in a message payload(could be anything)
+              </li>
+              <li>
+                Parent directives listen for the event by binding to this
+                property and accessing the payload through the $event object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Built in events
+            <ul>
+              <li>(blur) - Event triggered when leaving the element</li>
+              <li>(mouseenter) - Mouse is over the element</li>
+              <li>(mouseleave) - Mouse is leaving the element</li>
+              <li>
+                (ngSubmit) - Event on the forms element that triggers when the
+                form is submitted
+              </li>
+            </ul>
+          </li>
+          <li>
+            Recommendations
+            <ul>
+              <li>Use template variables to refer to elements</li>
+              <li>Pass values, not elements</li>
+              <li>Keep template statements simple</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Template Statements
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Template Statements</h1>
+
+      <section>
+        <ul>
+          <li>
+            Methods or properties that you can use in your HTML to respond to
+            user events
+            <ul>
+              <li>
+                Send to respond to an event raised by an a binding target such
+                as an element, component, or directive
+              </li>
+            </ul>
+          </li>
+          <li>
+            These appear on the right side of the equals sign on an event
+            binding
+          </li>
+          <li>
+            Allows basic assignment and chaining expressions, unlike template
+            expressions
+            <ul>
+              <li>Does allow you to chain expressions together with ;</li>
+            </ul>
+          </li>
+
+          <li>
+            Has a context much like expressions
+            <ul>
+              <li>Statement context is typically the component instance</li>
+              <li>
+                It may also refer to properties on the template own context,
+                such as template input variables, $event object
+              </li>
+
+              <li>
+                Useful within a for loop to pass the object to the event handler
+                function
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Guidelines
+            <ul>
+              <li>
+                Should be kept short and simple; a method call or simple
+                property assignment should be the norm
+              </li>
+              <li>
+                Can technically chain statements with semicolons, but this is
+                discouraged
+              </li>
+              <li>Do not need to be idempotent</li>
+              <li>These can have side effects</li>
+              <li>Can use the assignment operator within a statement (=)</li>
+            </ul>
+          </li>
+          <li>
+            Restrictions
+            <ul>
+              <li>No assignment operators within the statement (except =)</li>
+              <li>No new keyword</li>
+              <li>No chaining statements with semicolon</li>
+              <li>No access to global namespace</li>
+            </ul>
+          </li>
+          <li>Best practices</li>
+          <li>
+            Use method calls or basic property assignments to keep template
+            statements minimal
+          </li>
+          <li>
+            Cannot refer to anything in the global namespace, such as window or
+            document
+          </li>
+        </ul>
+        <p>
+          The template statement appears in quotes to the right of the equals
+          sign (call to deleteHero method)
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;button type=&quot;button&quot;
+              (click)=&quot;deleteHero()&quot;&gt;Delete&lt;/button&gt;
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3 id="expressionvsstatement">
+        Template Expressions vs Template Statements
+      </h3>
+      <section>
+        <ul>
+          <li>
+            Template expressions
+            <ul>
+              <li>
+                You should never worry that reading a component value might
+                change some other display value. The view should be stable
+                throughout a single rendering pass
+              </li>
+              <li>
+                Idempotent expressions are ideal since they are free of side
+                effects and improve Angular's change detention performance
+              </li>
+            </ul>
+          </li>
+          <li>
+            Template Statements
+            <ul>
+              <li>
+                responds to an event raised by a binding target such as an
+                element, component, or directive.
+              </li>
+              <li>
+                usually have side effects; it’s usually the point of an event
+              </li>
+              <li>
+                Unidirectional data flow – you are free to change anything,
+                anywhere, during this turn of the event loop
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

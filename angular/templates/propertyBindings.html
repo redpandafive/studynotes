@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Property Bindings
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Property Bindings</h1>
+
+      <h2 id="propertyBinding">Property Binding</h2>
+      <section>
+        <p>Set the property to the value of the template expression</p>
+        <div class="card">
+          <div class="card-body">
+            <code> &#91;disabled&#93;='isUnchanged'</code>
+          </div>
+        </div>
+        <ul>
+          <li>
+            This is a one-way binding since data only flows from the components
+            data property into a target element property
+          </li>
+          <li>Cannot be used to read the property</li>
+          <li>
+            The binding target is the left side of the equals sign
+            <ul>
+              <li>
+                Angular first looks to see if the name is a property of a known
+                directive
+              </li>
+              <li>Otherwise, it set the property</li>
+            </ul>
+          </li>
+          <li>
+            The brackets indicate Angular should evaluate the right side and a
+            template expression
+          </li>
+          <li>
+            Use interpolation when rendering data values as string; when setting
+            an element property to a non-string data value, you must use
+            property binding
+          </li>
+          <li>
+            Angular automatically sanitizes values before displaying them
+            <ul>
+              <li>
+                It will not allow HTML with script tags to leak into the
+                browser, neither with interpolation no property binding
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are special cases when you should use template syntax for one
+            way binding
+            <ul>
+              <li>
+                This is the only exception to the rule that a binding sets a
+                target property. This is the only biding that creates and sets
+                an attribute
+              </li>
+            </ul>
+          </li>
+          <li>
+            Interpolation vs property binding
+            <ul>
+              <li>
+                If setting a string, you can use either depending on the coding
+                style
+              </li>
+              <li>If setting a non-string, you must use property binding</li>
+            </ul>
+          </li>
+          <li>
+            Recommendations
+            <ul>
+              <li>
+                Avoid side effects; such if the expression invokes a property or
+                method that has size effects
+              </li>
+              <li>
+                Return the proper type - the template expression should evaluate
+                to the type of value expected by the target property
+              </li>
+              <li>
+                Remember brackets
+                <ul>
+                  <li>
+                    If you omit brackets, Angular treats the string as a
+                    constant and initializes the target property with that
+                    string. It does not evaluate the string
+                  </li>
+                </ul>
+              </li>
+              <li>
+                One time string initialization - eliminate the brackets when all
+                the following are true
+                <ul>
+                  <li>The target property accepts a string value</li>
+                  <li>
+                    The string is a fixed value that you can bake into the
+                    template
+                  </li>
+                  <li>This initial value never changes</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

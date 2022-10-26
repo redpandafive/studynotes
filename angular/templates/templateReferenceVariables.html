@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Template Reference Variables</li>
+        </ol>
+      </nav>
+
+      <h1>Template Reference Variables</h1>
+
+      <section>
+        <ul>
+          <li>
+            A way of capturing a reference to a specific element, component, or
+            directive so it can be used elsewhere in the same template
+            <ul>
+              <li>
+                Scope is the entire template, so don't re-declare a template
+                reference variable name
+              </li>
+              <li>
+                Scope exception is when ng-template, *ngIf, *ngFor creates a new
+                template scope and reference variables declared inside will not
+                be available for use outside
+              </li>
+            </ul>
+          </li>
+          <li>
+            In most cases, Angular sets the reference variables value to the
+            element on which it was declared
+            <ul>
+              <li>Directives can take over and change the value.</li>
+              <li>
+                For example, ngForm.
+                <ul>
+                  <li>
+                    This takes over the default reference of HTMLFormElement.
+                  </li>
+                  <li>
+                    This allows you to track the value and validity of every
+                    control in the form
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Template reference variables will resolve in this order
+            <ul>
+              <li>
+                A directive or component specifically referenced by its exportAs
+                property
+              </li>
+              <li>
+                When the expoirtAs property is applied to it metdata to allow
+                that directive to be specifically targeted by a template
+                reference variable
+              </li>
+              <li>The component attached to the element, if present</li>
+              <li>The HTML element, if no component is present</li>
+            </ul>
+          </li>
+          <li>
+            Can be useful if you want a parent component to bind to a property
+            on the child component
+          </li>
+        </ul>
+        <p>
+          Declare using the hash symbol - can alternatively be defined using the
+          ref- prefix
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code> &lt;input #phone type=&quot;text&quot; /&gt; </code>
+          </div>
+        </div>
+        <p>
+          You can then pass its value to an event handler on an entirely
+          different element as such
+        </p>
+        <div class="card">
+          <div class="card-body">
+            <code> (click)=&quot;callphone(phone.value)&quot;</code>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

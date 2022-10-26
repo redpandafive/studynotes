@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Showing / Hiding Elements
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Showing / Hiding Elements</h1>
+
+      <section>
+        <ul>
+          <li>Can use truthy and false values with these</li>
+          <li>
+            Using NgIf to hide elements
+            <ul>
+              <li>Physically remove them from the DOM</li>
+              <li>
+                Since it removes and adds elements from the DOM (as opposed to
+                showing and hiding them), you get better performance, and it is
+                useful as a guard against null
+              </li>
+              <li>
+                Prevent elements from being initialized (such as subcomponents)
+                when some condition is false
+              </li>
+              <li>
+                This will destroy a component and all subcomponents, potentially
+                freeing up resources
+              </li>
+              <li>
+                This improves performance since it potentially eliminates
+                unnecessary binding that are not needed at that moment
+                (including detaching from DOM events and detaching from Angular
+                change detection)
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <li>
+          Using [hidden] attribute binding to hide an element
+          <ul>
+            <li>It will be faster to show the element again</li>
+            <li>
+              You need to preserve state since the component is not
+              reinitialized
+            </li>
+            <li>
+              Initialization is very expensive and repeated initialization may
+              cause performance degradation
+            </li>
+          </ul>
+        </li>
+        <p>Examples</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;div *ngIf=&quot;somePropertyValue&quot; ... <br />&lt;div
+              &#91;hidden&#93;=&quot;someBooleanValue&quot;
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
