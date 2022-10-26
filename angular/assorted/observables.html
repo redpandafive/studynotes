@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Managing Observables
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Managing Observables</h1>
+
+      <h2>Unsubscribing From Observables</h2>
+      <section>
+        <ul>
+          <li>
+            You must unsubsribe from observables or you could end up with a
+            memory leak.
+          </li>
+          <li>There are several ways to do this.</li>
+          <li>
+            See this link for other approaches
+            <a
+              href="https://www.tektutorialshub.com/angular/unsubscribing-from-an-observable-in-angular/"
+              target="_blank"
+            >
+              https://www.tektutorialshub.com/angular/unsubscribing-from-an-observable-in-angular/
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Use an Async Pipe</h2>
+      <section>
+        <ul>
+          <li>
+            Main advantage is Angular handles all the subscription and
+            unsubscription work automatically
+          </li>
+          <li>
+            Main disadvantage is since data is resolved in the template, no
+            manipulation can be done on it from the component
+          </li>
+        </ul>
+        <div>
+          <ul>
+            <li>Assign the observable to a property on the component.</li>
+            <li>
+              The dollar sign at the end of the property name is a convention
+              that identifies it as an observable
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code> obs1$ = interval(1000).pipe( ... </code>
+          </div>
+        </div>
+        <div>Use the async pipe in the template.</div>
+        <div class="card">
+          <div class="card-body">
+            <code> Observable 1 value: {{obs1$ | async}} </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Custom Array of Subscriptions</h2>
+      <section>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+private subs: Subscription[] = [];
+....
+
+ngOnInit() {
+    const sub1 = interval(1000).subscribe((value) => {
+        this.logger.log('sub1', value);
+    });
+    this.subs.push(sub1);                
+}
+
+ngOnDestroy() {
+    this.subs.forEach((s) => s.unsubscribe());
+}</pre
+              >
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Use Take or First Operators</h2>
+      <section>
+        <div>This converts all infinite observables to finite observables</div>
+        <div>
+          Take emits the first x number of values, then stops the source
+          observable
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code> obs = of(1, 2, 3, 4, 5).pipe(take(2)); </code>
+          </div>
+        </div>
+        <div>First emits the first value, then stops the source observable</div>
+        <div class="card">
+          <div class="card-body">
+            <code> obs = of(1, 2, 3, 4, 5).pipe(first()); </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Use TakeUntil Operator</h2>
+      <section>
+        <div>
+          <ul>
+            <li>
+              Use the TakeUntil operator on all observables to pass in a
+              seperate notifier observable.
+            </li>
+            <li>
+              Use the notifier observable in the OnDestroy method to trigger
+              unsubscriptions in all observables that reference it
+            </li>
+          </ul>
+        </div>
+
+        <div>Create the notifier observable on the component</div>
+        <div class="card">
+          <div class="card-body">
+            <code> stop$ = new Subject&lt;void&gt;(); </code>
+          </div>
+        </div>
+
+        <div>Define OnDestroy to trigger this observable</div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              ngOnDestroy() { this.stop$.next(); this.stop$.complete(); }
+            </code>
+          </div>
+        </div>
+        <div>
+          When subscribing to observables, use the TakeUntil operator and pass
+          in the notifier observable
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              this.src.pipe(takeUntil(this.stop$)).subscribe(value => { ...
+            </code>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
