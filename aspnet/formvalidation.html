@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Form Validation</li>
+        </ol>
+      </nav>
+
+      <h1>Form Validation</h1>
+      <section>
+        Validation Rules
+        <ul>
+          <li>
+            Requires jQuery, jQuery validate, and jquery validate unobtrusive
+          </li>
+          <li>
+            Declaratively specified in a model class
+            <ul>
+              <li>
+                These can be enforced anywhere in the app where the model class
+                is used
+              </li>
+            </ul>
+          </li>
+          <li>
+            The following specify the type HTML attribute of the input when
+            applied
+            <ul>
+              <li>[EmailAddress]</li>
+              <li>[Url]</li>
+              <li>[HiddenInput]</li>
+              <li>[Phone]</li>
+              <li>[DataType(DataType.Password)]</li>
+              <li>[DataType(DataType.Date)]</li>
+              <li>[DataType(DataType.Time)]</li>
+            </ul>
+          </li>
+          <li>
+            [MinimumLength]
+            <ul>
+              <li>Property must hae a value</li>
+              <li>Accepts just whitespaces to satisfy this validation</li>
+            </ul>
+          </li>
+          <li>
+            [Range(1, 100)]
+            <ul>
+              <li>Value must be between 1 and 100</li>
+            </ul>
+          </li>
+          <li>
+            [RegularExpression(@"^[A-Z]")]
+            <ul>
+              <li>Matches on the regular expression value</li>
+              <li>Limits the characters that can be used in the input</li>
+            </ul>
+          </li>
+          <li>
+            [Required]
+            <ul>
+              <li>Adds data-val-required to the form element HTML</li>
+              <li>Property must hae a value</li>
+              <li>Accepts just whitespaces to satisfy this validation</li>
+              <li>
+                Value types are inherently required and do not need this
+                attribute
+              </li>
+            </ul>
+          </li>
+          <li>
+            [StringLength(10)]
+            <ul>
+              <li>Adds data-val-length-max to the form element HTML</li>
+              <li>
+                Sets the maximum number of characters of a string property
+              </li>
+              <li>
+                Can also optionally specify the minimum number of characters
+              </li>
+            </ul>
+          </li>
+          <li>
+            [StringLength(60, MinimumLength=3)]
+            <ul>
+              <li>
+                Element must have a miminmum length of 3, maximum length of 60
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

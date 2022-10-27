@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Tag Helpers
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Tag Helpers</h1>
+
+     
+
+
+      <h2>Tag Helpers</h2>
+      <section>
+        You must add the following to the top of your Razor Page cshtml file to
+        use input tag helpers
+        <code>@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers</code>
+        <p>
+          <li>https://www.learnrazorpages.com/razor-pages/tag-helpers/</li>
+        </p>
+      </section>
+
+      <h3>Input Tag Helpers</h3>
+      <section>
+        <ul>
+          <li>Asp-for</li>
+          <li>
+            Use this to bind an input to a property
+            <div class="card">
+              <div class="card-body">
+                <code> code='&lt;input asp-for="Customer.Name /&gt;' </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This binds the HTML input element to the Customer.Name model
+            expression
+          </li>
+        </ul>
+      </section>
+
+      <h2>Link Tag Helpers</h2>
+      <section>
+        <ul>
+          <li>
+            asp-page
+            <ul>
+              <li>page to generate the link to</li>
+            </ul>
+          </li>
+          <li>
+            asp-route-id
+            <ul>
+              <li>adds an ID to a URL</li>
+            </ul>
+          </li>
+          <li>
+            <ul>
+              Examples
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      code='&lt;a asp-page="./Edit"
+                      asp-route-id="@contact.Id&gt;Edit&lt;/a&gt;'
+                    </code>
+                  </div>
+                </div>
+                <ul>
+                  <li>http://locahost:5001/Edit/1</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Form Tag Helpers</h2>
+      <section>
+        <ul>
+          <li>
+            asp-for
+            <ul>
+              <li>Input tag helper</li>
+              <li>
+                Binds an HTML input element to a model expression in your Razor
+                view
+              </li>
+              <li>
+                Generates name and id HTML attributes for the expression name
+                specified
+              </li>
+              <li>
+                Sets the HTML type attribute based on the model type and data
+                annotation attributes applied to the model property (but will
+                not overwrite an existing attribute if specified)
+              </li>
+              <li>
+                Adds HTML 5 validation attributes from data annotation attribtes
+                applied to model poperties
+              </li>
+            </ul>
+          </li>
+          <li>
+            asp-net-hander
+            <ul>
+              <li>Specifies the handler method that will handle submit</li>
+              <li>
+                Useful when you want to generate a formaction attribute on a
+                button to post a form
+              </li>
+              <li>Convention is OnPost[handler]Async</li>
+              <li>
+                Use cases
+                <ul>
+                  <li>
+                    Add a delete button to a table of data; pressing this button
+                    will post to delete the value (see example)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Example
+                <ul>
+                  <li>
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          code='&lt;button type="submit"
+                          asp-net-handler="delete"
+                          asp-route-id="@contact.Id&gt;Delete&lt;/button&gt; '
+                        </code>
+                      </div>
+                    </div>
+                    <ul>
+                      <li>
+                        Button with attribute of
+                        formaction="/Customers?id=1&amp;handler=delete"
+                      </li>
+                      <li>
+                        Add a asp-route-id attribute to specify an id number
+                      </li>
+
+                      <li>
+                        Pressing this will submit the form to the
+                        OnPostDeleteAsync method
+                      </li>
+                      <li>
+                        If it had been remove, it would post to
+                        OnPostRemoveAsync
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Validation Form Helpers</h2>
+      <section>
+        <ul>
+          <li>
+            asp-validation-for
+            <ul>
+              <li>Apply to a span or div element next to a form element</li>
+              <li>
+                When the form element is invalid and posted, the corresponding
+                error messgae will be displayed here
+              </li>
+            </ul>
+          </li>
+          <li>
+            asp-validation-summary
+            <ul>
+              <li>Apply to a div</li>
+              <li>
+                Displays all error messages on invalid elements of a form when
+                posted
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+
+      
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -3,50 +3,35 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="../../assets/styles/site.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
     <div class="container">
-      <h1>Support Pages</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
-
-      <section>
-        Files with leading underscore are not intended to be browsable - these
-        could be
-        <ul>
-          <li>Layout pages - _Layout.cshtml</li>
-          <li>_ViewImports.cshtml</li>
-          <li>_ViewStart.cshtml</li>
-          <li>Partial pages</li>
-        </ul>
-      </section>
-
-      <h2>Layout Pages</h2>
-      <section>
-        <ul>
-          <li>Function like previous version of ASP.NET MVC</li>
-          <li>
-            Layout files should be placed in Pages/Shared folder
-            <ul>
-              <li>Do not put in View/Shared – that is MVC</li>
-              <li>
-                Razor Pages are meant to rely on folder hierarchy, not path
-                conventions
-              </li>
-            </ul>
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">ASP.NET Core</a>
           </li>
-          <li>
-            Setting a layout page
-            <div class="card"><div class="card-body"><code>
-              code='@ {&#10; Layout = "_Layout"&#10;}'
-            </code></div></div>
+          <li class="breadcrumb-item active" aria-current="page">
+            ViewImport Pages
           </li>
-        </ul>
-      </section>
+        </ol>
+      </nav>
 
-      <h2>ViewImports Pages</h2>
+      <h1>ViewImport Pages</h1>
       <section>
         These pages are named _ViewImports.cshtml
         <ul>
@@ -143,72 +128,6 @@
                 page
               </li>
             </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2>ViewStart Pages</h2>
-      <section>
-        These pages are named _ViewStart.cshtml
-        <ul>
-          <li>
-            Code that is executed at the start of each Razor page execution
-            <ul>
-              <li>
-                Common use case is to set the layout page for each Razor page
-              </li>
-            </ul>
-          </li>
-          <li>
-            Affects all Razor pages in the same folder or any of its subfolders
-          </li>
-          <li>
-            These are hierarchical, so you can have them at different levels in
-            the folder strucutre
-          </li>
-          <li>
-            Those located in subfolders will be executed after those located
-            higher up the file system hierarchy
-          </li>
-        </ul>
-      </section>
-
-      <h2>Partial Pages</h2>
-      <section>
-        <ul>
-          <li>
-            Contain snippets of HTML and server side code to be included in any
-            number of pages or layouts
-          </li>
-          <li>Use to break up complex pages into smaller units</li>
-          <li>
-            Automatically inherits the ViewData associated with the calling
-            view, so it may behave differently on differnt Razor pages
-          </li>
-          <li>
-            View Components give a more powerful alternative to these in .NET 6
-          </li>
-        </ul>
-      </section>
-
-      <h2>View Components</h2>
-      <section>
-        <ul>
-          <li>
-            Replace ChildActions from ASP.NET MVC and give a more powerful
-            alternative to Partial Pages
-          </li>
-          <li>
-            They do everything partials do and behave more consistently across
-            Razor views
-          </li>
-          <li>
-            Do not inherit ViewData or model binding from the calling page
-          </li>
-          <li>They depend on data passed when calling the view component</li>
-          <li>
-            Drive from ViewComponent and typically have an associated Razor file
-            for markup
           </li>
         </ul>
       </section>

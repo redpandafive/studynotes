@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Closures</li>
+        </ol>
+      </nav>
+
+      <h1>Closures</h1>
+      <section>
+        <ul>
+          <li>
+            Think of it as a set of data associated with a function
+            <ul>
+              <li>
+                Think of an object as a set of methods associated with data
+              </li>
+            </ul>
+          </li>
+          <li>
+            This may be an alternative to some problems rather a
+            larger-than-necessary OO solution
+          </li>
+          <li>
+            Use lambda expressions to implement closures in C#
+            <ul>
+              <li>
+                Lambda expressions can “capture” variables in the outer method
+                and reference them
+              </li>
+              <li>
+                These variables are not garbage collected until all references
+                are done, include the underlying Delegate that is constructed
+                under the hood with lambdas
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

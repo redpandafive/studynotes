@@ -3,12 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="../../assets/styles/site.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="./">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">Home</a>
+      </div>
+    </nav>
     <div class="container">
       <h2>File Structure</h2>
       <section>
@@ -53,17 +62,21 @@
           route data
           <ul>
             <li>
-              <div class="card"><div class="card-body"><code>
-                code='@page "{id:int}'
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code> code='@page "{id:int}' </code>
+                </div>
+              </div>
               <ul>
                 <li>URL must have an integer in the route data</li>
               </ul>
             </li>
             <li>
-              <div class="card"><div class="card-body"><code>
-                code='@page "{id:int?}"'
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code> code='@page "{id:int?}"' </code>
+                </div>
+              </div>
               <ul>
                 <li>ID in the route data is optional</li>
               </ul>
@@ -89,9 +102,13 @@
         <div>
           An additional Razor block can be added for variables, much like
           ASP.NET MVC
-          <div class="card"><div class="card-body"><code>
-            code='@{&#10; ViewData&#91;"Title"&#93; = "Edit";&#10;}&#10;'
-          </code></div></div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                code='@{&#10; ViewData&#91;"Title"&#93; = "Edit";&#10;}&#10;'
+              </code>
+            </div>
+          </div>
           <ul>
             <li>Can be used to set layout page</li>
             <li>
@@ -156,9 +173,14 @@
                 </li>
                 <li>
                   Example
-                  <div class="card"><div class="card-body"><code>
-                    &#91;BindProperty&#93;&#10;public Customer? Customer { get; set; }"
-                  </code></div></div>
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        &#91;BindProperty&#93;&#10;public Customer? Customer {
+                        get; set; }"
+                      </code>
+                    </div>
+                  </div>
                 </li>
               </ul>
             </li>
@@ -193,9 +215,13 @@
             </li>
             <li>
               Example signature
-              <div class="card"><div class="card-body"><code>
-                Public async Task&lt;IActionResult&gt; OnPostAsync() ..."
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    Public async Task&lt;IActionResult&gt; OnPostAsync() ..."
+                  </code>
+                </div>
+              </div>
             </li>
           </ul>
         </div>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Discards</li>
+        </ol>
+      </nav>
+
+      <h1>Namespaces</h1>
+      <section id="namespaces">
+        <ul>
+          <li>
+            The using directive allows you to use types defined in a namespace
+            without specifying the fully qualified namespace of that type
+          </li>
+          <li>
+            Does not give you access to any namespaces that are nested in the
+            namespace you specify
+          </li>
+          <li>
+            Example
+            <ul>
+              <li>
+                <code>using System.Text</code>
+              </li>
+              <li>
+                This imports all the types from the single namespace
+                (System.Text)
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are two types
+            <ul>
+              <li>User defined – namespaces defined in your code</li>
+              <li>System defined – namespaces defined in the framework</li>
+            </ul>
+          </li>
+          <li>
+            Using alias directive
+            <ul>
+              <li>
+                Example
+                <div class="card"><div class="card-body"><code>
+                  using Project = PC.MyCompany.Project;"
+                </code></div></div>
+              </li>
+              <li>
+                Makes it easier to qualify an identifier to a namespace or type
+              </li>
+              <li>
+                Cannot use a using alias in the declaration of a using directive
+              </li>
+            </ul>
+          </li>
+          <li>
+            Global modifier
+            <ul>
+              <li>
+                Prefix a using directive with the keyword global to apply the
+                using to all files in the compilation
+              </li>
+              <li>Added in C# 10</li>
+              <li>
+                Example
+                <div class="card"><div class="card-body"><code> global using System.Text"</code></div></div>
+              </li>
+              <li>
+                Restrictions
+                <ul>
+                  <li>Can appear the beginning of any source code file</li>
+                  <li>Order does not matter</li>
+                  <li>
+                    Must appear before all using directives without the global
+                    keyword
+                  </li>
+                  <li>
+                    Must appear before all namespace and type declarations in
+                    the file
+                  </li>
+                  <li>Typically keep in a single location</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Static modifier
+            <ul>
+              <li>
+                Allows you to access static members of a type without specifying
+                the type name
+              </li>
+              <li>
+                Doesn’t matter if there are also instance members on the same
+                type
+              </li>
+              <li>
+                Example
+                <ul>
+                  <li>
+                    You can now just write WriteLine instead of System.WriteLine
+                  </li>
+                </ul>
+                <div class="card"><div class="card-body"><code> using static System.Console"</code></div></div>
+              </li>
+              <li>
+                Restrictions
+                <ul>
+                  <li>Does not import inherited members</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Application Settings
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Application Settings</h1>
+
+      <section>
+        <ul>
+          <li>
+            ASP.NET MVC
+            <ul>
+              <li>
+                Uses web.config in the application folder and a machine.config
+                on the server
+              </li>
+              <li>
+                Most apps store settings in the appSettings or connectionStrings
+                elements
+              </li>
+              <li>
+                System.Configuration.ConfigurationManager is used to access
+                configuration elements
+              </li>
+            </ul>
+          </li>
+          <li>
+            ASP.NET Core
+            <ul>
+              <li>
+                appsettings
+                <ul>
+                  <li>
+                    Application configuration file that is automatically created
+                    in the root of the project
+                  </li>
+                  <li>
+                    Contents are JSON formatted, so values are stored in
+                    key-value pairs
+                  </li>
+                  <li>
+                    Custom keys can be added to this to add application scope
+                    global variables
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Environment specific overrides can be applied using a file like
+                appsettings.Develpment.json
+              </li>
+              <li>
+                To access values in this configuration you can inject a
+                IConfiguration into your class Constructor
+                <ul>
+                  <li>
+                    Access a value using configuration["MyKey"] syntax to get
+                    the value associated with the key "MyKey"
+                  </li>
+                </ul>
+              </li>
+              <li>
+                The default implementation will include entries for:
+                <ul>
+                  <li>
+                    ConnectionStrings
+                    <ul>
+                      <li>
+                        This contain multiple connnection strings, each with its
+                        own unique key
+                      </li>
+                    </ul>
+                  </li>
+                  <li>Logging</li>
+                  <li>AllowedHosts</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

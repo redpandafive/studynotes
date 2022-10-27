@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Layout Pages
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Layout Pages</h1>
+      <section>
+        <ul>
+          <li>Function like previous version of ASP.NET MVC</li>
+          <li>
+            Layout files should be placed in Pages/Shared folder
+            <ul>
+              <li>Do not put in View/Shared – that is MVC</li>
+              <li>
+                Razor Pages are meant to rely on folder hierarchy, not path
+                conventions
+              </li>
+            </ul>
+          </li>
+          <li>
+            Setting a layout page
+            <div class="card">
+              <div class="card-body">
+                <code> code='@ {&#10; Layout = "_Layout"&#10;}' </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

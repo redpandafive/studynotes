@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            ViewData
+          </li>
+        </ol>
+      </nav>
+
+      <h1>ViewData</h1>
+      <section>
+        <ul>
+          <li>Values are stored and loaded from the ViewDataDictionary</li>
+          <li>
+            Example
+            <ul>
+              <li>
+                Apply the following as an attribute to the PageModel class
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &#91;ViewData&#93;&#10;public string Title { get; }
+                      = "About";
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                In the Razor page, reference it like
+                <div class="card">
+                  <div class="card-body">
+                    <code> &lt;h1&gt;@Model.Title&lt;/h1&gt;</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                In a layout, read it from the ViewData ViewDataDictionary
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;!DOCTYPE html&gt;&#10;&lt;html
+                      lang="en"&gt;&#10;&lt;head&gt;&#10;
+                      &lt;title&gt;@ViewData&#91;"Title"&#93; -
+                      WebApplication&lt;/title&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

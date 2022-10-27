@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Running from Command Line
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Running from Command Line</h1>
+      <section>
+        <ul>
+          <li>
+            HttpContext
+            <ul>
+              <li>Vintage ASP.NET context</li>
+              <li>
+                No base class and is not virtual, so no way to mock it for
+                testing
+              </li>
+              <li>Not recommended to pass it around as function arguments</li>
+              <li>Use instances of HttpContextBase instead</li>
+            </ul>
+          </li>
+          <li>
+            HttpContextBase
+            <ul>
+              <li>C# 3.5 replacement for HttpContext</li>
+              <li>Abstract, so it is mockable</li>
+              <li>
+                Functions that are passed a context should expect one of these
+              </li>
+              <li>Can use an IOC framework to inject the HttpCOntextBase</li>
+            </ul>
+          </li>
+          <li>
+            HttpContextWrapper
+            <ul>
+              <li>Concrete implementation to HttpContextBase</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

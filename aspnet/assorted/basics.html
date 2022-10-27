@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Basics
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Basics</h1>
+      <section>
+        <ul>
+          <li>Redesign of ASP.NET 4.x</li>
+          <li>Leaner, more modular framework</li>
+          <li>Unifies Web UI and Web APIs</li>
+          <li>
+            Features
+            <ul>
+              <li>Runs on Windows, MacOS, and Linux</li>
+              <li>Open sourced</li>
+              <li>Built in dependency injection</li>
+              <li>
+                Applications are standalone programs and not dependent on IIS
+              </li>
+            </ul>
+          </li>
+          <li>
+            Drops support for
+            <ul>
+              <li>WCF</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        Files with leading underscore are not intended to be browsable - these
+        could be
+        <ul>
+          <li>Layout pages - _Layout.cshtml</li>
+          <li>_ViewImports.cshtml</li>
+          <li>_ViewStart.cshtml</li>
+          <li>Partial pages</li>
+        </ul>
+      </section>
+
+      <section>
+        <ul>
+          <li>
+            Alternative to ASP.NET Core MVC
+            <ul>
+              <li>
+                Preferred way to create page or form-based apps in ASP.NET Core
+              </li>
+              <li>Seems very reminiscent of Web Forms</li>
+              <li>Separates logic of a page form from its presentation</li>
+            </ul>
+          </li>
+          <li>
+            Shares many of the same features as MVC
+            <ul>
+              <li>Layout pages</li>
+              <li>Partial pages</li>
+              <li>Templates</li>
+              <li>Tag helpers</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Configuration</h2>
+      <section>
+        To enable, this must be enabled in the Program.cs file
+        <ul>
+          <li>
+            Enable support for Razor pages
+            <ul>
+              <li><code>App.AddRazorPages()</code></li>
+            </ul>
+          </li>
+          <li>
+            Enable endpoints for Razor Pages
+            <ul>
+              <li><code>App.MapRazorPages()</code></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

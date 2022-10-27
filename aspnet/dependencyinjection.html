@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Dependency Injection
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Dependency Injection</h1>
+
+
+      
+      <h2>Configuration - Dependency Injection</h2>
+      <section>
+        <ul>
+          <li>
+            ASP.NET MVC
+            <ul>
+              <li>
+                DI is not built in so it must be added in by including an IOC
+                container (such as Ninject or Unity)
+              </li>
+            </ul>
+          </li>
+          <li>
+            ASP.NET Core
+            <ul>
+              <li>
+                Not just built into the framework, but is assumed you will use
+                it
+              </li>
+              <li>
+                Required to bring support for framework features into your
+                ASP.NET Core apps
+              </li>
+              <li>Types are registered in the ConfigureServices method</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      
+      <h2>Configuration - Dependency Injection – Best Practices</h2>
+      <section>
+        <ul>
+          <li>
+            A class that takes too many dependencies in its constructor is a
+            code smell
+          </li>
+          <li>
+            Constructor injection makes Single Responsibility Principle
+            violations glaringly obvious
+          </li>
+          <li>
+            If you hit 3-4 dependencies, time to consider if that class is doing
+            too much
+          </li>
+          <li>
+            Can cut down dependencies on a class by using Facade Service class
+            <ul>
+              <li>Aggregates dependencies behind a new abstraction</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

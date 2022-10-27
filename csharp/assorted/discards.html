@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Discards</li>
+        </ol>
+      </nav>
+
+      <h1>Discards</h1>
+      <section>
+        <ul>
+          <li>
+            Placeholder variable that are intentionally unused in application
+            code
+            <ul>
+              <li>Do not contain a value</li>
+              <li>This communicates intent to others that read your code</li>
+              <li>
+                also called write-only, you cannot read the value from this
+                parameter
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can be used in
+            <ul>
+              <li>Results returned from an expression</li>
+              <li>One or more members of a tuple expression</li>
+              <li>An out parameter to a method</li>
+              <li>Tuple deconstruction for fields you do not intent to use</li>
+              <li>
+                Switch expressions – this will match anything, including null
+              </li>
+              <li>
+                Ignore a Task object were you don’t need to handle exceptions
+              </li>
+              <li>Input parameters of a lambda expression (C# 9)</li>
+            </ul>
+          </li>
+          <li>Use the underscore character to represent this</li>
+          <li>
+            Example
+            <div class="card"><div class="card-body"><code>
+              if(int.TryParse(ReadLine(), out int _)"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

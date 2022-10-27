@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Discards</li>
+        </ol>
+      </nav>
+
+      <h1>Yield Return</h1>
+ 
+      <section id="yieldReturn">
+        <ul>
+          <li>
+            Use within
+            <ul>
+              <li>
+                a method that returns an IEnumerable&lt;type&gt; where type is
+                the type of data being returned (an individual item in the
+                collection, not the entire collection)
+              </li>
+              <li>an iterator</li>
+            </ul>
+          </li>
+          <li>
+            Returns a individual value for each turn of the iterator without
+            existing the method
+            <ul>
+              <li>
+                Values are returned one at a time, so should be used within an
+                iterator on the caller
+              </li>
+              <li>
+                Eliminates the need to create a temporary collection to store
+                data before it is returned
+              </li>
+              <li>
+                Control is returned to the caller each time the yield return
+                statement is encountered and executed
+              </li>
+              <li>
+                This preserves the callee's state information so that execution
+                can continue immediately after the yield statement when the
+                control returns
+              </li>
+            </ul>
+          </li>
+          <li></li>
+          <li>
+            There are two possible uses of the yield keyword
+            <ul>
+              <li>yield return</li>
+              <li>
+                yield break
+                <ul>
+                  <li>Use to terminate the enumeration</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Really just syntax sugar
+            <ul>
+              <li>
+                Returns an object that implements the IEnumerable interface
+              </li>
+              <li>
+                Under the hood it creates a state machine to maintain state
+                information
+              </li>
+            </ul>
+          </li>
+          <li>
+            Benefits
+            <ul>
+              <li>
+                Do not need a temporary collection to hold values generated
+                within an iterator
+              </li>
+              <li>
+                Items that are returned are created only on demand
+                <ul>
+                  <li>
+                    You could add a conditional within the iterator block to
+                    yield return only if certain conditions are true
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Useful situations
+                <ul>
+                  <li>
+                    Generating a sequence of strings where each string in the
+                    sequence depends on the value of the previous string
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Processing a text file sequentially where different kinds of
+                lines are treated differently
+              </li>
+              <li>
+                Sequentially filtering or modifying a large List collection of
+                objects
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Downsides
+            <ul>
+              <li>
+                Generates a state machine under the hood. It returns a promise
+                to generate points later if asked (iterated over)
+                <ul>
+                  <li>
+                    This can cause an unexpected problem if you assume the value
+                    returned by the method containing it is a straight up
+                    IEnumerable
+                    <ul>
+                      <li>
+                        Example is assigning the results to a variable without
+                        performing an iteration
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    This can be fixed by assigning a call ToList() after the
+                    method call
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

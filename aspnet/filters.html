@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Filters</li>
+        </ol>
+      </nav>
+
+      <h1>Filters</h1>
+      <section>
+        <ul>
+          <li>
+            ASP.NET Core allow code to run before or after specific states in
+            the request processing pipeline
+          </li>
+          <li>
+            Built in filters include
+            <ul>
+              <li>Authorization</li>
+              <li>Response caching</li>
+            </ul>
+          </li>
+          <li>
+            Use custom filters to handle cross cutting concerns to avoid
+            duplicating code, such as
+            <ul>
+              <li>Error handling</li>
+              <li>Caching</li>
+              <li>Configuration</li>
+              <li>Logging</li>
+              <li>Authorization</li>
+            </ul>
+          </li>
+          <li>
+            These are executed in the filter pipeline section of the ASP.NET
+            Core action invocation pipeline
+          </li>
+          <li>
+            There is a specific order these are executed
+            <ul>
+              <li>
+                Authorization filters
+                <ul>
+                  <li>Determine if the user is authorized for the request</li>
+                  <li>
+                    Short circuit the pipeline if the request is not authorized
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Resource filters
+                <ul>
+                  <li>
+                    OnResouceExecuting runs code before the reset of the filter
+                    pipeline
+                  </li>
+                  <li>
+                    OnResourceExecuted runs code after the rest of the pipeline
+                    has completed
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Action filters
+                <ul>
+                  <li>
+                    Run immediately before and after an action method is called
+                  </li>
+                  <li>Can change the arguments passed into an action</li>
+                  <li>Can change the result returned from the action</li>
+                  <li>Not supported in Razor pages</li>
+                </ul>
+              </li>
+              <li>
+                Exception filters
+                <ul>
+                  <li>
+                    Apply global policies to unhandled exceptions that occur
+                    before the response body has been written
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Result filters
+                <ul>
+                  <li>
+                    Run immediately before and after the execution of action
+                    results
+                  </li>
+                  <li>Run only when the action method executes successfully</li>
+                  <li>
+                    Are useful for logic that must surround view or formatter
+                    execution
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

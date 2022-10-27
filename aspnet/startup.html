@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Startup Configuration
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Startup Configuration</h1>
+      <section>
+        <ul>
+          <li>
+            ASP.NET MVC
+            <ul>
+              <li>
+                Relies on IIS to instantiate certain objects and call certain
+                methods when a request arrives
+              </li>
+              <li>
+                Creates an instance of Global.asax
+                <ul>
+                  <li>
+                    Calls Application_Start on the first request before the
+                    request is handled
+                  </li>
+                  <li>This handles any application startup tasks</li>
+                  <li>
+                    App_Start folder also turns either immediately before or
+                    just after Application_Start
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            ASP.NET Core
+            <ul>
+              <li>
+                Applications are standalone programs
+                <ul>
+                  <li>These are executable apps</li>
+                  <li>
+                    You can run from the command line using
+                    <kbd>dotnet run</kbd> command
+                  </li>
+                </ul>
+              </li>
+              <li>
+                For ASP.NET 6 and above, Program.cs is the entry point for the
+                application
+                <ul>
+                  <li>
+                    This file consists of top level statements that exist
+                    outside of an explicit class and methods (these are not
+                    explicitly defined)
+                  </li>
+                  <li>
+                    Creates a request pipeline that handles how every request to
+                    the app is handled
+                  </li>
+                  <li>Adds services to the container</li>
+                  <li>
+                    Steps to start the program in the files
+                    <ul>
+                      <li>Creates an instance of WebApplicationBuilder</li>
+                      <li>
+                        Adds services to the WebApplicationBuilder instances
+                      </li>
+                      <li>
+                        Calls Build method to create an instance of
+                        WebApplication
+                      </li>
+                      <li>Configures HTTP request pipeline components</li>
+                      <li>Executes the WebApplication to start running</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                In ASP.NET 5 and below
+                <ul>
+                  <li>
+                    This is a Startup class with two methods
+                    <ul>
+                      <li>ConfigureServices</li>
+                      <li>Configure</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Best Practices
+            <ul>
+              <li>
+                Use extension methods that take a IServiceCollection to handle
+                detailed configuration instead of loading up the Program class
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

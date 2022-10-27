@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Using Directives</li>
+        </ol>
+      </nav>
+
+      <h1>Using Directives</h1>
+      <section>
+        <ul>
+          <li>
+            A using directive can be used to automatically call the Dispose
+            method
+            <ul>
+              <li>This ensures the correct use of IDisposable objects</li>
+              <li>
+                Ensures Dispose will be classed even if an exception occurs
+              </li>
+            </ul>
+          </li>
+          <li>
+            For instance, rather than explicitly closing an open SQL connection,
+            you can surround it with a using directive to have that done
+            automatically
+          </li>
+          <li>
+            Pre C# 8
+            <ul>
+              <li>
+                Should declare and instantiate within the using statement so the
+                Dispose methos is automatically called and the object goes out
+                of scope at the same time
+              </li>
+              <li>
+                Multiple instances can be declared in a single using statement
+                using a comma separated list
+              </li>
+            </ul>
+            <div class="card"><div class="card-body"><code>
+              using(var reader = new StringReader(manyLines)) {...}"
+            </code></div></div>
+          </li>
+          <li>
+            C# 8
+            <ul>
+              <li>Curly braces and parentheses are no longer needed</li>
+            </ul>
+            <div class="card"><div class="card-body"><code>
+              using(var reader = new StringReader(manyLines)) {...}"
+            </code></div></div>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

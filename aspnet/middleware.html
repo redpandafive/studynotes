@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Index</title>    
+    <title>Index</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
@@ -18,50 +19,33 @@
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Angular Material
+            Middleware
           </li>
         </ol>
       </nav>
 
-      <h1>Angular Material</h1>
-
-      <section class="navlinks">
-        <ul>
-          <li>
-            <a href="./angularmaterial/index.html#materialDesign"
-              >Material Design</a
-            >
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="materialDesign">Material Design</h2>
+      <h1>Middleware</h1>
       <section>
         <ul>
           <li>
-            Design language designed by Google to
+            By default, ASP.NET Core does not support service static files
             <ul>
-              <li>Synthesize classic design principles</li>
-              <li>Unified experience across platofrms</li>
-            </ul>
-          </li>
-          <li>
-            Key underlying principles
-            <ul>
-              <li>Material is the metaphor</li>
-              <li>Bold, graphic and intentional</li>
               <li>
-                Motion provides meaning
-                <ul>
-                  <li>Transitions have meaning</li>
-                </ul>
+                This must be configured by hooking into the appropriate
+                middleware
               </li>
+              <li>When configured, only files stored in wwwroot are shared</li>
             </ul>
           </li>
         </ul>
       </section>
+
+
     </div>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>
