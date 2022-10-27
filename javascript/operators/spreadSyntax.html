@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>ECMASCript / JavaScript</h1>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">How To</h5>
+          <a class="card-link" href="./howto/object.html">Object</a><br />
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Types</h5>
+          <a class="card-link" href="./types/array.html">Array</a><br />
+          <a class="card-link" href="./types/index.html">Types</a><br />
+          <a class="card-link" href="./types/object.html">Object</a><br />
+        </div>
+      </div>
+
+      <h2>Operators</h2>
+      <section>
+        <ul>
+          <li>
+            <code>typeof</code> - use to detect the type of a variable (see
+            Types) section
+          </li>
+        </ul>
+      </section>
+
+      <h2>Spread Syntax</h2>
+      <section>
+        <ul>
+          <li>New syntax added in ES6</li>
+          <li>Takes an array and examps it into individual elements</li>
+          <li>
+            Can be used to
+            <ul>
+              <li>Make shallow copies of JS objects</li>
+              <li>Append one array to another</li>
+              <li>Create a copy of an array</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          To spread elements of an array to function arguments
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function multiply(number1, number2, number3) {<br />
+                console.log(number1 * number2 * number3);<br />
+                }<br />
+                let numbers = &#91;1,2,3&#93;;<br />
+                multiply(...numbers);<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To copy an array
+          <div class="card">
+            <div class="card-body">
+              <code>let array2 = &#91;...array1&#93;; </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To append an array to another without modifying the original arrays
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let desserts = &#91;'cake', 'cookie', 'donut'&#93;;<br />
+                let desserts1 = &#91;'icecream', 'flan', 'frozen yoghurt',
+                ...desserts&#93;;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
