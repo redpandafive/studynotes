@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Symbols</li>
+        </ol>
+      </nav>
+
+      <h1>Symbols</h1>
+
+      <section>
+        <ul>
+          <li>Primitive values that are guaranteed to be unique</li>
+          <li>
+            Since they are unique, they act like object when checking for
+            equality
+            <ul>
+              <li>
+                Two different symbols will never be equal (unlike other
+                primitives)
+                <ul>
+                  <li>
+                    <code>Symbol() === Symbol()</code> will always be false
+                  </li>
+                  <li>
+                    Before Symbols, objects were the best choice if we need
+                    values that were unique
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Created using the factory function <code>Symbol()</code>
+                <ul>
+                  <li>
+                    Can pass in an optional string parameter to provide a
+                    description
+                  </li>
+                  <li>
+                    In ES2019, this description can be accessed via the
+                    description property
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Use Cases</h2>
+      <section>
+        <div>
+          Values for constants
+          <ul>
+            <li>
+              Can be used instead of strings so you can guarantee they will not
+              be overwritten
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    <pre>
+                      const COLOR_GREEN  = Symbol('Green');
+                      const COLOR_YELLOW = Symbol('Yellow');
+                      const COLOR_RED    = Symbol('Red');
+                      
+                      function getComplement(color) {
+                        switch (color) {
+                          case COLOR_RED:
+                            return COLOR_GREEN;
+                          case COLOR_YELLOW:
+                            return COLOR_VIOLET;
+                          case COLOR_GREEN:
+                            return COLOR_RED;
+                          default:
+                            throw new Exception('Unknown color: '+color);
+                        }
+                      }</pre
+                    >
+                  </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          Unique property keys
+          <ul>
+            <li>
+              Since Symbols are guaranteed to be unique, you can safely use it
+              as a property name on an object without worrying about overwriting
+              an existing property with the same name
+            </li>
+            <li>
+              If you do not share the Symbols, you can guarantee they will never
+              be overwritten
+            </li>
+            <li></li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Symbol Registry</h2>
+      <section>
+        <ul>
+          <li>
+            Can use <code>Symbol.for()</code> that takes a string arguments
+          </li>
+          <li>
+            If no Symbol is created with the same string, then a new one is
+            created and returned
+          </li>
+          <li>Otherwise, the existing Symbol is returned</li>      
+          <li>Calling <code>Symbol.keyFor()</code> returns the description if provided</li>    
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              et s = Symbol.for("shared");<br/>
+              let t = Symbol.for("shared");<br/>
+              s === t // => true<br/>
+              s.toString() // => "Symbol(shared)"<br/>
+              Symbol.keyFor(t) // => "shared"<br/>
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Methods</h2>
+      <section>
+        <ul>
+          <li>
+            toString()
+            <ul>
+              <li>Will include the description if one is provided</li>
+              <li>Example output <em>"Symbol(sym_x)"</em></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

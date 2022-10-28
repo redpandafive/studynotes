@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Numbers</li>
+        </ol>
+      </nav>
+
+      <h1>Numbers</h1>
+      <section>
+        <ul>
+          <li>Represents integers and approximates real numbers</li>
+          <li>
+            Integer literals can be in one of several formats, including base
+            10, hexadecimal, octal, and binary
+          </li>
+          <li>
+            Floating point numbers can represented using exponential notation
+            <ul>
+              <li><code>[digits][.digits][(E|e)[(+|-)]digits]</code></li>
+              <li>
+                <code>1.4738223E-32</code> is 1.4738223 raised to the 10 to the
+                -32 power
+              </li>
+            </ul>
+          </li>
+          <li>
+            Underscore characters can be added to numeric literals for
+            readability
+            <code>let billion = 1_000_000_000;</code>
+          </li>
+          <li>
+            Floating point numbers are approximations of an actual number
+            <ul>
+              <li>
+                This can lead to unexpected precision problems
+
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      let x = .3 - .2; // thirty cents minus 20 cents <br />
+                      let y = .2 - .1; // twenty cents minus 10 cents <br />
+                      x === y // => false: the two values are not the same!
+                      <br />
+                      x === .1 // => false: .3-.2 is not equal to .1 <br />
+                      y === .1 // => true: .2-.1 is equal to .1
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                This problem shows up in any programming language that uses
+                binary floating point numbers
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Numeric Operations</h2>
+      <section>
+        <ul>
+          <li>
+            The Math object has several functions and constants that can be
+            useful for more complex math operations
+          </li>
+          <li>ES2016 adds ** operator for exponentiation</li>
+        </ul>
+      </section>
+
+      <h2>Mathmatical Errors</h2>
+      <section>
+        <div>
+          JS does not raise errors in cases of overflow, underflow, or division
+          by zero. Instead, it returns special values.
+          <ul>
+            <li>Infinity and -Infinity</li>
+            <li>
+              Anything added, substracted, multiplied, or divided by infinity
+              results in infinity (or -infinity)
+            </li>
+            <li>
+              Can result from
+              <ul>
+                <li>
+                  Overflow = result of a numeric operation is larger than the
+                  largest representable number.
+                </li>
+                <li>Dividing by zero</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          NaN is a special not-a-number value
+          <ul>
+            <li>
+              Can result from
+              <ul>
+                <li>Dividing zero by zero</li>
+                <li>Divide infinity by infinity</li>
+                <li>Take square root of a negative number</li>
+                <li>
+                  Use arithmatic operators with non numeric operantds that
+                  cannot be converted to numbers
+                </li>
+              </ul>
+            </li>
+            <li>
+              Does not compare equal to any other value, including itself
+              <ul>
+                <li>Cannot use <code>x === NaN</code> to detect it</li>
+                <li>
+                  Use <code>x != x</code> or
+                  <code>Number.isNaN(x)</code> instead
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          Underflow occurs when the result of a numeric operation is closer to
+          zero than the smallest representable number
+          <ul>
+            <li>JS returns 0 when this occurs</li>
+          </ul>
+        </div>
+        <div>
+          Related functions on Number
+          <ul>
+            <li>
+              <code>Number.isFinite()</code> = returns treu if the argument is a
+              number other than NaN, Infinity, or -Infinity
+            </li>
+          </ul>
+        </div>
+        <div>
+          Related global functions
+          <ul>
+            <li>
+              <code>isFinite()</code> = returns true if the argument is, or can
+              be converted to, a finite number
+            </li>
+
+            <li>
+              <code>isNaN()</code> = returns true if the argument is a non
+              numeric value that cannot be converted to a number
+            </li>
+          </ul>
+        </div>
+      </section>
+
+
+      <h2>Methods</h2>
+      <section>
+        <ul>
+          <li>toExponential()
+            <ul>
+              <li>
+                Convertsa number to string using exponential notation
+              </li>
+            </ul>
+          </li>
+          <li>toFixed()
+            <ul>
+              <li>Number to string conversion</li>
+              <li>Add a parameter to specify the number of digits after the decimal point</li>
+            </ul>
+          </li>
+          <li>toString()
+            <ul>
+              <li>Defaults to base 10</li>
+              <li>Can specify an optional argument to convert to other bases (such as 2 for binary)</li>
+            </ul>
+          </li>
+        </ul>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank">
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+        </a>
+      </section>
+
+
+      <h2>Global Object Methods</h2>
+      <section>
+        <ul>
+          <li>Number global object has two methods that provide more flexible converstions
+            <ul>
+              <li>parseInt()</li>
+              <li>parseFloat()</li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank">
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+              </a>
+            </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

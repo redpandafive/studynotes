@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Dates</li>
+        </ol>
+      </nav>
+
+      <h1>Strings</h1>
+
+      <section>
+        <ul>
+          <li>Considered a primitive in JS</li>
+          <li>Immutable</li>
+          <li>
+            There is no special type that represents a single elements of a
+            string (such as Char in C#)
+          </li>
+          <li>
+            Use the UTF-16 encoding of the Unicode character set
+            <ul>
+              <li>Strings are sequences of 16 bit values</li>
+              <li>
+                The length of the string is the number of 16-bit values it
+                contains
+              </li>
+              <li>An empty string has a length of zero</li>
+            </ul>
+          </li>
+          <li>Can be treated like a read only array in that you can index into it to access individual characters</li>
+        </ul>
+      </section>
+
+      <h2>String Literals</h2>
+      <section>
+        <ul>
+          <li>
+            Literals are enclosed by a matched pair or single quotes, double
+            quotes, or backticks
+          </li>
+          <li>
+            ES 5 allows multiple line strings by ending each line but the last
+            with a backslash (\)
+          </li>
+          <li>ES 6 allows multiple lines when enclosed with backticks</li>
+        </ul>
+      </section>
+
+      <h2>Comparing Strings</h2>
+      <section>
+        <ul>
+          <li>
+            Two strings are equal if and only if they consist of exactly the
+            same sequence of 16 bit values
+          </li>
+          <li>Can be compared with greater than and lesser than operators</li>
+        </ul>
+      </section>
+
+
+      <h2>Template Literals</h2>
+      <section>
+        <ul>
+          <li>Strings delimited with backticks</li>
+          <li>Can contain JavaScript expressions</li>
+          <li>Final string is calculated by
+            <ul>
+              <li>Evaluating any included expressions</li>
+              <li>Converting the results of those expressions to strings</li>
+              <li>Combining results with the literal strings within the backticks</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              // greeting will contain "Hello Bob."<br/>
+              let name = "Bob";<br/>
+              let greeting = `Hello ${ name }.`; <br/>
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Pattern Matching</h2>
+      <section>
+        <ul>
+          <li>RegExp object is used for regular expression pattern matching</li>
+        </ul>
+        <div>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank">
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+          </a>
+        </div>
+      </section>
+
+      <h2>Properties</h2>
+      <section>
+        <ul>
+          <li>length = the number of 16 bit values contained in the string</li>
+        </ul>
+      </section>
+
+      <h2>Methods</h2>
+      <div>Searching a String</div>
+      <ul>
+        <li>
+          endsWith("Hello")
+          <ul>
+            <li>Returns boolean value if the string ends with the substring</li>
+            <li>ES6 method</li>
+          </ul>
+        </li>
+        <li>
+          includes("Hello")
+          <ul>
+            <li>Returns boolean value if the string contains the substring</li>
+            <li>ES6 method</li>
+          </ul>
+        </li>
+        <li>
+          indexOf("zz")
+          <ul>
+            <li>
+              Accepts a substring and returns the index of the first occurence
+              in the string
+            </li>
+            <li>Returns -1 if not found</li>
+          </ul>
+        </li>
+
+        <li>
+          startsWith("Hello")
+          <ul>
+            <li>
+              Returns boolean value if the string begins with the substring
+            </li>
+            <li>ES6 method</li>
+          </ul>
+        </li>
+      </ul>
+      <div>
+        Finding Portions of a String
+        <ul>
+          <li>
+            substring(1,4)
+            <ul>
+              <li>Finds a substring of the substring</li>
+              <li>First parameter is first character to include</li>
+              <li>Second parameter is the number of charaters to include</li>
+              <li><code>"Hello World".substring(1,4)</code> returns "ell"</li>
+            </ul>
+          </li>
+          <li>
+            slice(1,4)
+            <ul>
+              <li>Similar to substring</li>
+            </ul>
+          </li>
+          <li>
+            split(" ,")
+            <ul>
+              <li>
+                Returns an array of substrings after splitting on the specified
+                delimiter
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        Padding Strings
+        <ul>
+          <li>
+            padStart(5)
+            <ul>
+              <li>
+                Pads the start with spaces until it reaches the specified length
+                (first paramter)
+              </li>
+            </ul>
+          </li>
+          <li>
+            padStart(5, "*")
+            <ul>
+              <li>
+                Pads the start with the second parameter until it reaches the
+                specified length (first paramter)
+              </li>
+            </ul>
+          </li>
+          <li>
+            padEnd(5)
+            <ul>
+              <li>
+                Pads the end with the second parameter until it reaches the
+                specified length (first paramter)
+              </li>
+            </ul>
+          </li>
+          <li>
+            padEnd(5, "*")
+            <ul>
+              <li>
+                Pads the end with the second parameter until it reaches the
+                specified length (first paramter)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        Trimming Strings
+        <ul>
+          <li>
+            trim()
+            <ul>
+              <li>Removes spaces from the start and end of the string</li>
+            </ul>
+          </li>
+          <li>
+            trimStart()
+            <ul>
+              <li>Removes spaces from the start of the string</li>
+            </ul>
+          </li>
+          <li>
+            trimEnd()
+            <ul>
+              <li>Removes spaces from the end of the string</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        Assorted Methods
+        <ul>
+          <li>at(idx)
+            <ul>
+              <li>Returns the character at the specifed index</li>
+              <li>Accepts negative numbers, which count back from the last string character</li>
+            </ul>
+          </li>
+          <li>
+            "test".repeat(5)
+            <ul>
+              <li>Concatenates 5 copies of the specified string</li>
+              <li>"testtesttesttesttest" is the result</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        See
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#instance_methods"
+        >
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#instance_methods
+        </a>
+      </div>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

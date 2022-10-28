@@ -25,17 +25,38 @@
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">TypeOf</li>
+          <li class="breadcrumb-item active" aria-current="page">Boolean</li>
         </ol>
       </nav>
 
-      <h1>TypeOf</h1>
+      <h1>Boolean</h1>
 
       <section>
         <ul>
+          <li>Possible values are <em>true</em> and <em>fakse</em></li>
+        </ul>
+        <li>Any JavaScript value can be converted to a boolean value</li>
+      </section>
+
+      <h2>Truthy and Falsy</h2>
+      <section>
+        <ul>
+          <li>Any JavaScript value can be converted to a boolean value</li>
           <li>
-            <code>typeof</code> - use to detect the type of a variable (see
-            Types) section
+            Falsy values - the following convert to (and function like) false
+            <ul>
+              <li>undefined</li>
+              <li>null</li>
+              <li>0</li>
+              <li>-0</li>
+              <li>NaN</li>
+              <li>"" (the empty string)</li>
+            </ul>
+          </li>
+          <li>All other values are Truthy values</li>
+          <li>
+            This allows you to write <code>if(0)...</code> instead of
+            <code> if(0 !== null) ...</code>
           </li>
         </ul>
       </section>
