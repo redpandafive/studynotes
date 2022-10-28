@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -27,10 +30,15 @@
           </li>
         </ol>
       </nav>
+
       <h1>Template Forms</h1>
+
       <section class="navlinks">
         <ul>
           <li><a href="#basics">Basics</a></li>
+          <li><a href="#dif">Key Differences with Reactive Forms</a></li>
+          <li><a href="#dataflow">Data Flow</a></li>
+          <li><a href="#syntax">Syntax</a></li>
           <li><a href="#formGroups">Form Groups</a></li>
           <li><a href="#validation">Validation</a></li>
           <li><a href="#testing">Testing</a></li>
@@ -45,6 +53,11 @@
             In Template driven dorms, the source of truth is the template
             <ul>
               <li>Form is defined within the template</li>
+              <li>
+                Relies on directives in the template to create and manipulate
+                the underlying object model
+              </li>
+              <li>Form model is implicit since you do not have direct programmatic access to the underlying FOrmControl instance</li>
             </ul>
           </li>
           <li>
@@ -66,152 +79,181 @@
               </li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h2 id="dif">Key Differences with Reactive Forms</h2>
+      <section>
+        <ul>
           <li>
-            Syntax
+            Template
+            <ul>
+              <li>Setup of form model = Implicit, created by directives</li>
+              <li>Data model = Unstructured and mutable</li>
+              <li>Data flow = Asynchronous</li>
+              <li>Form validation = Directives</li>
+
+            </ul>
+          </li>
+          <li>
+            Reactive
+            <ul>
+              <li>Setup of form model = Explicit, created in component class</li>
+              <li>Data model = Structured and immutable</li>
+              <li>Data flow = Synchronous</li>
+              <li>Form validation = Functions</li>
+            </ul>   
+          </li>
+        </ul>
+      </section>
+
+      
+      <h2 id="dataflow">Data Flow</h2>
+      <section>
+        <ul>
+          <li>
+            From view to model
             <ul>
               <li>
-                <div class="card">
-                  <div class="card-body">
-                    <code>... &#91;(ngModel)&#93;=&quot;username&quot;> ...</code>
-                  </div>
-                </div>
-                <ul>
-                  <li>
-                    This binds the input control to the username property on the
-                    component
-                  </li>
-                  <li>
-                    This uses two way binding, so any time the username property
-                    changes, the input will update as well
-                  </li>
-                  <li>This is useful when editing existing data</li>
-                </ul>
+                new value is typed in the input element, which emits an event
+                with the new value
               </li>
               <li>
-                <div class="card">
-                  <div class="card-body">
-                    <code>... ngModel)=&quot;username&quot; ...</code>
-                  </div>
-                </div>
-                <ul>
-                  <li>
-                    This uses one way binding from the template to the component
-                    property username
-                  </li>
-                  <li>
-                    Use this when you do not need to update the input to any
-                    changes on the username property. An example of this could
-                    be a login form
-                  </li>
-                </ul>
+                the control value accessor attached to the input triggers the
+                setValue method on the FormControl instance
               </li>
               <li>
-                To keep from cluttering up your component with each property on
-                your form, you can bind to a property on a single object
-                <div class="card">
-                  <div class="card-body">
-                    <code>... (ngModel)=&quot;newEvent.name&quot; ...</code>
-                  </div>
-                </div>
+                The FormControl instance emits the new value through the
+                valueChanges observable
               </li>
               <li>
-                Example
-                <ul>
-                  <li>
-                    When the form is submitted, this will call the login method
-                    on the component
-                  </li>
-                  <li>
-                    The template variable loginForm will be passed in as a
-                    parameter to that method call
-                  </li>
-                  <li>
-                    The form object has lots of other properties, so you can
-                    shorten this to loginForm.values to limit the data to the
-                    form input values
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          &lt;form #loginForm=&quot;ngForm&quot; (ngSubmit)=&quot;login(loginForm)&quot;&gt;
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                Subscribers to the valueChanges observable receive the new value
+              </li>
+              <li>
+                The control value accessor also calls the
+                NgModel.viewToModelUpdate method that emits an ngModelChange
+                event
+              </li>
+              <li>
+                Because the component template uses two way data binding for the
+                component property, the property is updated to the value emitted
+                by the ngModelChange event
               </li>
             </ul>
           </li>
           <li>
-            Data flow
+            From model to view
             <ul>
+              <li>The value is updated in the component</li>
+              <li>Change detection begins</li>
               <li>
-                From view to model
-                <ul>
-                  <li>
-                    new value is typed in the input element, which emits an
-                    event with the new value
-                  </li>
-                  <li>
-                    the control value accessor attached to the input triggers
-                    the setValue method on the FormControl instance
-                  </li>
-                  <li>
-                    The FormControl instance emits the new value through the
-                    valueChanges observable
-                  </li>
-                  <li>
-                    Subscribers to the valueChanges observable receive the new
-                    value
-                  </li>
-                  <li>
-                    The control value accessor also calls the
-                    NgModel.viewToModelUpdate method that emits an ngModelChange
-                    event
-                  </li>
-                  <li>
-                    Because the component template uses two way data binding for
-                    the component property, the property is updated to the value
-                    emitted by the ngModelChange event
-                  </li>
-                </ul>
+                During change detection, the ngOnChanges lifecycle hook is
+                called on the NgModel directive instance because the value of
+                one of its inputs has changed
               </li>
               <li>
-                From model to view
-                <ul>
-                  <li>The value is updated in the component</li>
-                  <li>Change detection begins</li>
-                  <li>
-                    During change detection, the ngOnChanges lifecycle hook is
-                    called on the NgModel directive instance because the value
-                    of one of its inputs has changed
-                  </li>
-                  <li>
-                    The ngOnChanges method queues an async task to set the value
-                    for the internal FormControl instance
-                  </li>
-                  <li>Change detection completes</li>
-                  <li>
-                    On the next tick, the task to set the FormControl instance
-                    value is executed
-                  </li>
-                  <li>
-                    The FormControl instance emits the latest value through the
-                    valueChanges observable
-                  </li>
-                  <li>
-                    Any subscribers to the valueChanges observable receive the
-                    new value
-                  </li>
-                  <li>
-                    The control value accessor updates the form input element in
-                    the view with the latest value
-                  </li>
-                </ul>
+                The ngOnChanges method queues an async task to set the value for
+                the internal FormControl instance
+              </li>
+              <li>Change detection completes</li>
+              <li>
+                On the next tick, the task to set the FormControl instance value
+                is executed
+              </li>
+              <li>
+                The FormControl instance emits the latest value through the
+                valueChanges observable
+              </li>
+              <li>
+                Any subscribers to the valueChanges observable receive the new
+                value
+              </li>
+              <li>
+                The control value accessor updates the form input element in the
+                view with the latest value
               </li>
             </ul>
           </li>
         </ul>
       </section>
+
+      <h2 id="syntax">Syntax</h2>
+      <section>
+        <ul>
+          <li>
+            <div class="card">
+              <div class="card-body">
+                <code>... &#91;(ngModel)&#93;=&quot;username&quot;> ...</code>
+              </div>
+            </div>
+            <ul>
+              <li>
+                This binds the input control to the username property on the
+                component
+              </li>
+              <li>
+                This uses two way binding, so any time the username property
+                changes, the input will update as well
+              </li>
+              <li>This is useful when editing existing data</li>
+            </ul>
+          </li>
+          <li>
+            <div class="card">
+              <div class="card-body">
+                <code>... (ngModel)=&quot;username&quot; ...</code>
+              </div>
+            </div>
+            <ul>
+              <li>
+                This uses one way binding from the template to the component
+                property username
+              </li>
+              <li>
+                Use this when you do not need to update the input to any changes
+                on the username property. An example of this could be a login
+                form
+              </li>
+            </ul>
+          </li>
+          <li>
+            To keep from cluttering up your component with each property on your
+            form, you can bind to a property on a single object
+            <div class="card">
+              <div class="card-body">
+                <code>... (ngModel)=&quot;newEvent.name&quot; ...</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Example
+            <ul>
+              <li>
+                When the form is submitted, this will call the login method on
+                the component
+              </li>
+              <li>
+                The template variable loginForm will be passed in as a parameter
+                to that method call
+              </li>
+              <li>
+                The form object has lots of other properties, so you can shorten
+                this to loginForm.values to limit the data to the form input
+                values
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;form #loginForm=&quot;ngForm&quot;
+                      (ngSubmit)=&quot;login(loginForm)&quot;&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
 
       <h2 id="formGroups">Form Groups</h2>
       <section>
@@ -257,10 +299,13 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      &lt;div ngModelGroup=&quot;address&quot;&gt;<br/>
-                      &lt;input (ngModel)=&quot;street&quot; name=&quot;street&quot; ... /&gt;<br/> 
-                      &lt;input (ngModel)=&quot;city&quot; name=&quot;city&quot; ... /&gt;<br/>
-                      &lt;input (ngModel)=&quot;state&quot; name=&quot;state&quot; ... /&gt;<br/>
+                      &lt;div ngModelGroup=&quot;address&quot;&gt;<br />
+                      &lt;input (ngModel)=&quot;street&quot;
+                      name=&quot;street&quot; ... /&gt;<br />
+                      &lt;input (ngModel)=&quot;city&quot; name=&quot;city&quot;
+                      ... /&gt;<br />
+                      &lt;input (ngModel)=&quot;state&quot;
+                      name=&quot;state&quot; ... /&gt;<br />
                       &lt;/div&gt;&#10;
                     </code>
                   </div>
@@ -322,7 +367,8 @@
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          &lt;input type=&quot;text&quot; required #startDate=&quot;ngModel&quot; ...
+                          &lt;input type=&quot;text&quot; required
+                          #startDate=&quot;ngModel&quot; ...
                         </code>
                       </div>
                     </div>
@@ -399,7 +445,8 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      &lt;div *ngIf=&quot;firstName.errors?.&#91;'required'&#93; ...
+                      &lt;div *ngIf=&quot;firstName.errors?.&#91;'required'&#93;
+                      ...
                     </code>
                   </div>
                 </div>
@@ -419,7 +466,9 @@
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          &lt;input name=&quot;username&quot; &#91;ngModel&#93;=&quot;user.userName&quot; required #uname=&quot;ngModel&quot;&gt;
+                          &lt;input name=&quot;username&quot;
+                          &#91;ngModel&#93;=&quot;user.userName&quot; required
+                          #uname=&quot;ngModel&quot;&gt;
                         </code>
                       </div>
                     </div>
@@ -435,7 +484,8 @@
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          &lt;input type=&quot;text&quot; required email ... /&gt;
+                          &lt;input type=&quot;text&quot; required email ...
+                          /&gt;
                         </code>
                       </div>
                     </div>
@@ -450,7 +500,10 @@
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          &lt;input ... &#91;ngModel&#93;=&quot;user.userName&quot; minlength=&quot;5&quot; #uname=&quot;ngModel&quot;&gt; ...
+                          &lt;input ...
+                          &#91;ngModel&#93;=&quot;user.userName&quot;
+                          minlength=&quot;5&quot; #uname=&quot;ngModel&quot;&gt;
+                          ...
                         </code>
                       </div>
                     </div>
@@ -466,7 +519,10 @@
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          &lt;input ... &#91;ngModel&#93;=&quot;user.userName&quot; maxlength=&quot;10&quot; #uname=&quot;ngModel&quot;&gt;
+                          &lt;input ...
+                          &#91;ngModel&#93;=&quot;user.userName&quot;
+                          maxlength=&quot;10&quot;
+                          #uname=&quot;ngModel&quot;&gt;
                         </code>
                       </div>
                     </div>
@@ -481,7 +537,8 @@
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          &lt;input type=&quot;text&quot; pattern=&quot;^&#91;a-zA=Z&#93;+%&quot; ... &gt;
+                          &lt;input type=&quot;text&quot;
+                          pattern=&quot;^&#91;a-zA=Z&#93;+%&quot; ... &gt;
                         </code>
                       </div>
                     </div>
@@ -512,9 +569,12 @@
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          &lt;button type=&quot;submit&quot;&#91;disabled&#93;=&quot;loginForm.invalid&quot;&gt;<br/>
-                          ...<br/>
-                          &lt;button type=&quot;submit&quot; &#91;disabled&#93;=&quot;!loginForm.valid&quot;&gt; <br/>
+                          &lt;button
+                          type=&quot;submit&quot;&#91;disabled&#93;=&quot;loginForm.invalid&quot;&gt;<br />
+                          ...<br />
+                          &lt;button type=&quot;submit&quot;
+                          &#91;disabled&#93;=&quot;!loginForm.valid&quot;&gt;
+                          <br />
                           ...
                         </code>
                       </div>
@@ -528,8 +588,9 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      &lt;em *ngIf=&quot;loginForm.controls.userName?.invalid && loginForm.controls.userName?.touched"&gt;<br/>
-                      Required<br/>
+                      &lt;em *ngIf=&quot;loginForm.controls.userName?.invalid &&
+                      loginForm.controls.userName?.touched"&gt;<br />
+                      Required<br />
                       &lt;/em&gt;
                     </code>
                   </div>
