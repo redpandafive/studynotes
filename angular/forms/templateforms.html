@@ -40,9 +40,13 @@
           <li><a href="#dataflow">Data Flow</a></li>
           <li><a href="#syntax">Syntax</a></li>
           <li><a href="#formGroups">Form Groups</a></li>
-          <li><a href="#validation">Validation</a></li>
-          <li><a href="#testing">Testing</a></li>
+          <li><a href="#validation">Control Validation</a></li>
+          <li><a href="#formvalidation">Form Validation</a></li>
+          <li><a href="#errorchanges">Changes to Error Object in v13</a></li>
+          <li><a href="#validators">Built In Validator</a></li>
           <li><a href="#customValidators">Custom Validators</a></li>
+          <li><a href="#testing">Testing</a></li>
+          <li><a href="#examples">Examples</a></li>
         </ul>
       </section>
 
@@ -57,7 +61,10 @@
                 Relies on directives in the template to create and manipulate
                 the underlying object model
               </li>
-              <li>Form model is implicit since you do not have direct programmatic access to the underlying FOrmControl instance</li>
+              <li>
+                Form model is implicit since you do not have direct programmatic
+                access to the underlying FOrmControl instance
+              </li>
             </ul>
           </li>
           <li>
@@ -92,22 +99,22 @@
               <li>Data model = Unstructured and mutable</li>
               <li>Data flow = Asynchronous</li>
               <li>Form validation = Directives</li>
-
             </ul>
           </li>
           <li>
             Reactive
             <ul>
-              <li>Setup of form model = Explicit, created in component class</li>
+              <li>
+                Setup of form model = Explicit, created in component class
+              </li>
               <li>Data model = Structured and immutable</li>
               <li>Data flow = Synchronous</li>
               <li>Form validation = Functions</li>
-            </ul>   
+            </ul>
           </li>
         </ul>
       </section>
 
-      
       <h2 id="dataflow">Data Flow</h2>
       <section>
         <ul>
@@ -254,7 +261,6 @@
         </ul>
       </section>
 
-
       <h2 id="formGroups">Form Groups</h2>
       <section>
         <ul>
@@ -326,7 +332,7 @@
         </ul>
       </section>
 
-      <h2 id="validation">Validation</h2>
+      <h2 id="validation">Control Validation</h2>
       <section>
         <ul>
           <li>
@@ -345,6 +351,17 @@
             </ul>
           </li>
           <li>
+            Angular provides a lot of information about the current state of
+            individual form controls
+            <ul>
+              <li>
+                Since template forms use the same underlying mechanism as
+                Reactive forms, you have access to the states that are defined
+                in that section
+              </li>
+            </ul>
+          </li>
+          <li>
             To prevent the validator from displaying erors before the user has a
             chance to edit the form, check for dirty or touched states
             <ul>
@@ -352,28 +369,26 @@
               <li>Touched = when the user blurs the form control element</li>
             </ul>
           </li>
-          <li>
-            Don’t have to put the novalidate property on the form element
-            anymore to disable HTML 5 validation
-          </li>
+
           <li>
             Simple example to setup an individual control
             <ul>
               <li>
-                Assign NgModel to a template variable on the form element
-                <ul>
-                  <li>
-                    This allows you to inspect the control's state
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          &lt;input type=&quot;text&quot; required
-                          #startDate=&quot;ngModel&quot; ...
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                Don’t have to put the novalidate property on the form element
+                anymore to disable HTML 5 validation
+              </li>
+              <li>
+                Export NgModel to a template variable to access the control's
+                state
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;input type="text" id="name" name="name" required
+                      minlength="4" appForbiddenName="bob"
+                      [(ngModel)]="hero.name" #name="ngModel"&gt;
+                    </code>
+                  </div>
+                </div>
               </li>
               <li>
                 Use this template variable for a conditional to display an error
@@ -400,223 +415,137 @@
               </li>
             </ul>
           </li>
+        </ul>
+      </section>
 
+      <h2 id="formvalidation">Form Validation</h2>
+      <section>
+        Angular provides a lot of information about the current state of the
+        overall form
+        <ul>
           <li>
-            Angular provides a lot of information about the current state of
-            individual form controls
-            <ul>
-              <li>
-                Since template forms use the same underlying mechanism as
-                Reactive forms, you have access to the states that are defined
-                in that section
-              </li>
-            </ul>
+            Overall form validation is valid once all its fields are valid
           </li>
           <li>
-            Angular also provides a lot of information about the current state
-            of the overall form
-            <ul>
-              <li>
-                Overall form validation is valid once all its fields are valid
-              </li>
-              <li>
-                Since template forms use the same underlying mechanism as
-                Reactive forms, you have access to the states that are defined
-                in that section
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            The Angular errors object has changed in version 13
-            <ul>
-              <li>
-                This
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;div *ngIf=&quot;firstName.errors?.required ...
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Is not this
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;div *ngIf=&quot;firstName.errors?.&#91;'required'&#93;
-                      ...
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li>Use safe navigator in case the control is not available</li>
-          <li>
-            Built in validators
-            <ul>
-              <li>Reactive forms contain more built in validators</li>
-              <li>
-                Required
-                <ul>
-                  <li>
-                    Indicates the input must have a value to be considered valid
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          &lt;input name=&quot;username&quot;
-                          &#91;ngModel&#93;=&quot;user.userName&quot; required
-                          #uname=&quot;ngModel&quot;&gt;
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Email
-                <ul>
-                  <li>
-                    Requires the control value must contain a valid email
-                    address
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          &lt;input type=&quot;text&quot; required email ...
-                          /&gt;
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Minlength
-                <ul>
-                  <li>
-                    Value provided must have a minimum length
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          &lt;input ...
-                          &#91;ngModel&#93;=&quot;user.userName&quot;
-                          minlength=&quot;5&quot; #uname=&quot;ngModel&quot;&gt;
-                          ...
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Maxlength
-                <ul>
-                  <li>
-                    Value may not have more than the specified number of
-                    characters
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          &lt;input ...
-                          &#91;ngModel&#93;=&quot;user.userName&quot;
-                          maxlength=&quot;10&quot;
-                          #uname=&quot;ngModel&quot;&gt;
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Pattern
-                <ul>
-                  <li>
-                    Value must conform to the specified regex pattern
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          &lt;input type=&quot;text&quot;
-                          pattern=&quot;^&#91;a-zA=Z&#93;+%&quot; ... &gt;
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                  <li>Specifies the input may only contain letters</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            Examples
-            <ul>
-              <li>
-                To disable a login button until a form is valid
-                <ul>
-                  <li>
-                    Assign a template variable to the form element
-                    <div class="card">
-                      <div class="card-body">
-                        <code>&lt;form #loginForm=&quot;ngForm&quot;&gt;</code>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    Disable the button when the form is invalid (use one of the
-                    two)
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          &lt;button
-                          type=&quot;submit&quot;&#91;disabled&#93;=&quot;loginForm.invalid&quot;&gt;<br />
-                          ...<br />
-                          &lt;button type=&quot;submit&quot;
-                          &#91;disabled&#93;=&quot;!loginForm.valid&quot;&gt;
-                          <br />
-                          ...
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                To add an emphasis element over an input if the control is
-                invalid and the input has been touched
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;em *ngIf=&quot;loginForm.controls.userName?.invalid &&
-                      loginForm.controls.userName?.touched"&gt;<br />
-                      Required<br />
-                      &lt;/em&gt;
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            Since template forms use the same underlying mechanism as Reactive
+            forms, you have access to the states that are defined in that
+            section
           </li>
         </ul>
       </section>
 
-      <h2 id="testing">Testing</h2>
+      <h2 id="errorchanges">Changes to Error Object in v13</h2>
       <section>
+        The Angular errors object has changed in version 13
         <ul>
+          <li>Use safe navigator in case the control is not available</li>
+
           <li>
-            Is more complicated since it requires a detailed knowledge of the
-            change detection process and an understanding of how directives run
-            on each cycle to ensure that elements are queried, tested, or
-            changed at the correct time
+            This
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;div *ngIf=&quot;firstName.errors?.required ...
+                </code>
+              </div>
+            </div>
           </li>
           <li>
-            Mutability
+            Is not this
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;div *ngIf=&quot;firstName.errors?.&#91;'required'&#93; ...
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="validators">Built In Validators</h2>
+      <section>
+        <ul>
+          <li>Reactive forms contain more built in validators</li>
+          <li>
+            Required
             <ul>
               <li>
-                Rely on mutability with two way data binding to update the data
-                model in the component as changes are mode in the template
+                Indicates the input must have a value to be considered valid
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;input name=&quot;username&quot;
+                      &#91;ngModel&#93;=&quot;user.userName&quot; required
+                      #uname=&quot;ngModel&quot;&gt;
+                    </code>
+                  </div>
+                </div>
               </li>
+            </ul>
+          </li>
+          <li>
+            Email
+            <ul>
+              <li>
+                Requires the control value must contain a valid email address
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;input type=&quot;text&quot; required email ... /&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Minlength
+            <ul>
+              <li>
+                Value provided must have a minimum length
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;input ... &#91;ngModel&#93;=&quot;user.userName&quot;
+                      minlength=&quot;5&quot; #uname=&quot;ngModel&quot;&gt; ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Maxlength
+            <ul>
+              <li>
+                Value may not have more than the specified number of characters
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;input ... &#91;ngModel&#93;=&quot;user.userName&quot;
+                      maxlength=&quot;10&quot; #uname=&quot;ngModel&quot;&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Pattern
+            <ul>
+              <li>
+                Value must conform to the specified regex pattern
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;input type=&quot;text&quot;
+                      pattern=&quot;^&#91;a-zA=Z&#93;+%&quot; ... &gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>Specifies the input may only contain letters</li>
             </ul>
           </li>
         </ul>
@@ -692,6 +621,76 @@
           <li>
             The 3rd parameter adds the new validator to the collection of
             services provided by NG_VALIDATORS that are built in by Angular
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="testing">Testing</h2>
+      <section>
+        <ul>
+          <li>
+            Is more complicated since it requires a detailed knowledge of the
+            change detection process and an understanding of how directives run
+            on each cycle to ensure that elements are queried, tested, or
+            changed at the correct time
+          </li>
+          <li>
+            Mutability
+            <ul>
+              <li>
+                Rely on mutability with two way data binding to update the data
+                model in the component as changes are mode in the template
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <ul>
+          <li>
+            To disable a login button until a form is valid
+            <ul>
+              <li>
+                Assign a template variable to the form element
+                <div class="card">
+                  <div class="card-body">
+                    <code>&lt;form #loginForm=&quot;ngForm&quot;&gt;</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Disable the button when the form is invalid (use one of the two)
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;button
+                      type=&quot;submit&quot;&#91;disabled&#93;=&quot;loginForm.invalid&quot;&gt;<br />
+                      ...<br />
+                      &lt;button type=&quot;submit&quot;
+                      &#91;disabled&#93;=&quot;!loginForm.valid&quot;&gt;
+                      <br />
+                      ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            To add an emphasis element over an input if the control is invalid
+            and the input has been touched
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;em *ngIf=&quot;loginForm.controls.userName?.invalid &&
+                  loginForm.controls.userName?.touched"&gt;<br />
+                  Required<br />
+                  &lt;/em&gt;
+                </code>
+              </div>
+            </div>
           </li>
         </ul>
       </section>
