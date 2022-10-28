@@ -35,13 +35,23 @@
           <li>
             Variables and constants must be declared before they can be used
           </li>
+          <li>
+            Type is decided when you assign a value to a variable
+            <ul>
+              <li>
+                You can switch the type of a variable by assigning a different
+                value type, but this is generally discouraged
+              </li>
+            </ul>
+          </li>
         </ul>
       </section>
 
       <h2>Pre ES6</h2>
       <section>
         <ul>
-          <li>Uses the <code>var</code> keyword</li>
+          <li>Only way is to use the <code>var</code> keyword</li>
+          <
         </ul>
       </section>
 
@@ -50,7 +60,7 @@
         <ul>
           <li>Uses the <code>let</code> and <code>const</code> keywords</li>
           <li>
-            Block scope
+            See <a id="block">block section of Scope</a>
             <ul>
               <li>
                 Only defined within the block of code in which they appear
@@ -82,7 +92,23 @@
           <li>
             Global scope
             <ul>
-              <li></li>
+              <li>
+                Declarations made at the top level outside of any code blocks
+              </li>
+              <li>
+                In Node and client side JS modules, the scope is the file it is
+                defined in
+              </li>
+              <li>
+                In traditional client side JS, the scope it the HTML document in
+                which it is defined
+                <ul>
+                  <li>
+                    A global declaration declared in one script, it is defined
+                    in all of the script elements in the document
+                  </li>
+                </ul>
+              </li>
             </ul>
           </li>
           <li>
@@ -90,6 +116,34 @@
             <ul>
               <li>
                 Only defined within the block of code in which they appear
+              </li>
+              <li>
+                Cannot delcare 2 variable or constants with the same name in the
+                same block
+                <ul>
+                  <li>
+                    You can do this if one is in a nested scope, but this is
+                    generally discouraged
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Function scope
+            <ul>
+              <li>
+                Variables are scoped to the containing function
+                <ul>
+                  <li>Nesting within the function does not make a differece</li>
+                  <li>
+                    Global variables are declared as properties on the Global
+                    object
+                  </li>
+                  <li>
+                    It is legal to declare the same variable multiple times
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>
