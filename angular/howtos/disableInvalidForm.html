@@ -30,81 +30,20 @@
         </ol>
       </nav>
 
-      <h1>Manipulating Forms</h1>
+      <h1>Disable the Submit Button on an Invalid Form</h1>
 
       <section>
         <ul>
           <li>
-            <a href="#reactiveDisableSubmit">
-              Disable the Submit Button on an Invalid Form - Reactive Forms
-            </a>
+            <a href="#template"> Template Driven Forms </a>
           </li>
           <li>
-            <a href="#templateDisableSubmit">
-              Disable the Submit Button on an Invalid Form - Template Forms
-            </a>
+            <a href="#reactive"> Reactive Forms </a>
           </li>
         </ul>
       </section>
 
-      <h2 id="reactiveDisableSubmit">
-        Disable the Submit Button on an Invalid Form - Reactive Forms
-      </h2>
-      <section>
-        <ul>
-          <li>
-            Setup a FormGroup property in the component and setup validators
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  reactiveForm: FormGroup;<br />
-                  ....<br />
-                  ngOnInit() {<br />
-                  this.reactiveForm = this.builder.group({<br />
-                  age: [null, Validators.required]<br />
-                  });<br />
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Associate the FormGroup to the form element in the template
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;form [formGroup]="reactiveForm"&gt;&lt;/form&gt;
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Bind the disabled attribute on the button to the state of the
-            FormGroup (uses same states as template version)
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;button type="submit"
-                  [disabled]="reactiveForm.invalid"&gt;Submit&lt;/button&gt;
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Both forms and controls have additional state properties you can
-            reference if needed
-            <ul>
-              <li><code>myVar.valid</code></li>
-              <li><code>myVar.invalid</code></li>
-              <li><code>myVar.status</code></li>
-              <li><code>myVar.disabled</code></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="templateDisableSubmit">
-        Disable the Submit Button on an Invalid Form - Template Forms
-      </h2>
+      <h2 id="template">Template Driven Forms</h2>
       <section>
         <ul>
           <li>
@@ -176,49 +115,55 @@
         </ul>
       </section>
 
-      <h2 id="reactiveReset">Resetting a Reactive Form</h2>
+      <h2 id="reactive">Reactive Forms</h2>
       <section>
         <ul>
           <li>
-
+            Setup a FormGroup property in the component and setup validators
             <div class="card">
               <div class="card-body">
                 <code>
-                  &lt;button (click)="myForm.reset()"&gt;Reset&lt;/button&gt;
-                </code>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="reactiveSubmit">Submitting a Reactive Form</h2>
-      <section>
-        <ul>
-          <li>
-            Can bind to the Submit event on the form element.  This passes the JSON object of input values to the addProduct method.
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;form [formGroup]="myForm"
-                  (ngSubmit)="addProduct(myForm.value)"&gt;&lt;/form&gt;
+                  reactiveForm: FormGroup;<br />
+                  ....<br />
+                  ngOnInit() {<br />
+                  this.reactiveForm = this.builder.group({<br />
+                  age: [null, Validators.required]<br />
+                  });<br />
                 </code>
               </div>
             </div>
           </li>
           <li>
-            Can also bind to the click event of the submit button.  This passes the JSON object of input values to the addProduct method.
+            Associate the FormGroup to the form element in the template
             <div class="card">
               <div class="card-body">
                 <code>
-                  &lt;form [formGroup]=”myForm”&gt;<br />
-                  ...<br />
-                  &lt;button type="submit" [disabled]="myForm.invalid"
-                  (click)="addProduct(myForm.value)"&gt;Submit&lt;/button&gt;<br />
-                  &lt;/form&gt;
+                  &lt;form [formGroup]="reactiveForm"&gt;&lt;/form&gt;
                 </code>
               </div>
             </div>
+          </li>
+          <li>
+            Bind the disabled attribute on the button to the state of the
+            FormGroup (uses same states as template version)
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;button type="submit"
+                  [disabled]="reactiveForm.invalid"&gt;Submit&lt;/button&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Both forms and controls have additional state properties you can
+            reference if needed
+            <ul>
+              <li><code>myVar.valid</code></li>
+              <li><code>myVar.invalid</code></li>
+              <li><code>myVar.status</code></li>
+              <li><code>myVar.disabled</code></li>
+            </ul>
           </li>
         </ul>
       </section>

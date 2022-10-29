@@ -876,6 +876,41 @@ private restrictedWords(words)
         </ul>
       </section>
 
+
+
+      <h2 id="reactiveSubmit">Submitting a Reactive Form</h2>
+      <section>
+        <ul>
+
+          
+          <li>
+            Can bind to the Submit event on the form element.  This passes the JSON object of input values to the addProduct method.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;form [formGroup]="myForm"
+                  (ngSubmit)="addProduct(myForm.value)"&gt;&lt;/form&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Can also bind to the click event of the submit button.  This passes the JSON object of input values to the addProduct method.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;form [formGroup]=”myForm”&gt;<br />
+                  ...<br />
+                  &lt;button type="submit" [disabled]="myForm.invalid"
+                  (click)="addProduct(myForm.value)"&gt;Submit&lt;/button&gt;<br />
+                  &lt;/form&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
       <h2 id="customValidators">Custom Validators</h2>
       <section>
         <ul>
