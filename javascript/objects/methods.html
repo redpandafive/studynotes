@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Object Methods</li>
+        </ol>
+      </nav>
+
+      <h1>Object Methods</h1>
+
+
+      <h2>Object.keys()</h2>
+      <section>
+        <ul>
+          <li>
+            Returns an array of a given objects own enumerable property names
+            <ul>
+              <li>Returned as an array of strings</li>
+            </ul>
+          </li>
+          <li>Iterates the same order that a normal loop would</li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const object1 = {
+                a: 'somestring',
+                b: 42,
+                c: false
+              };                
+              console.log(Object.keys(object1));
+              // expected output: Array ["a", "b", "c"]
+            </pre
+              >
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Object.create()</h2>
+      <section>
+        <ul>
+          <li>
+            Creates a new object using an existing object as the prototype of
+            the newly created object
+          </li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const person = {
+                isHuman: false,
+                printIntroduction: function() {
+                  console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+                }
+              };
+              
+              const me = Object.create(person);
+              
+              me.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
+              me.isHuman = true; // inherited properties can be overwritten
+              
+              me.printIntroduction();
+              // expected output: "My name is Matthew. Am I human? true"
+            </pre
+              >
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Object.entries()</h2>
+      <section>
+        <ul>
+          <li>
+            Returns an array of a given object's own enumerable string keyed
+            property [key,value] pairs
+          </li>
+          <li>
+            Similar to iterating over a for..in loop, but that look enumerates
+            properties in the prototype chain too
+          </li>
+          <li>The results can be passed to the constructor of a Map object</li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"
+              target="_blank"
+            >
+            </a>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const object1 = {
+                a: 'somestring',
+                b: 42
+              };
+              
+              for (const [key, value] of Object.entries(object1)) {
+                console.log(`${key}: ${value}`);
+              }
+              
+              // expected output:
+              // "a: somestring"
+              // "b: 42"
+            </pre
+              >
+            </code>
+          </div>
+        </div>
+        <div>
+          Destructuring allows you to iterate through objects
+          <div class="card">
+            <div class="card-body">
+              <code>
+                <pre>
+                const obj = { foo: 'bar', baz: 42 };
+                Object.entries(obj).forEach(([key, value]) => console.log(`${key}: ${value}`)); 
+                
+                // exprected output: "foo: bar", "baz: 42"
+              </pre
+                >
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
