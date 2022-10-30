@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -52,7 +55,7 @@
       <h2>Pre ES6</h2>
       <section>
         <ul>
-          <li>Only way is to use the <code>var</code> keyword</li>          
+          <li>Only way is to use the <code>var</code> keyword</li>
         </ul>
       </section>
 
@@ -61,16 +64,21 @@
         <ul>
           <li>Use the <code>let</code> and <code>const</code> keywords</li>
           <li>
-            See <a id="block">block section of Scope</a>
+            See <a href="scope.html#block">block scope</a>
             <ul>
               <li>
                 Only defined within the block of code in which they appear
               </li>
-              <li>If you attempt use a variable declared with these keywords wihtout initializing it, you will get an error</li>
-              <li>Contrast this to <code>var</code> which will just generate an undefined value</li>
+              <li>
+                If you attempt use a variable declared with these keywords
+                wihtout initializing it, you will get an error
+              </li>
+              <li>
+                Contrast this to <code>var</code> which will just generate an
+                undefined value
+              </li>
             </ul>
           </li>
-
           <li>
             Can declare multiple variables in one let statement:
             <code>let i, sum;</code>
@@ -88,88 +96,6 @@
           </li>
         </ul>
       </section>
-
-      <h2>Scope</h2>
-      <section>
-        <ul>
-          <li>
-            Global Scope
-            <ul>
-              <li>
-                Declarations made at the top level outside of any code blocks
-              </li>
-              <li>
-                In Node and client side JS modules, the scope is the file it is
-                defined in
-              </li>
-              <li>
-                In traditional client side JS, the scope it the HTML document in
-                which it is defined
-                <ul>
-                  <li>
-                    A global declaration declared in one script, it is defined
-                    in all of the script elements in the document
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            Block Scope
-            <ul>
-              <li>
-                Only defined within the block of code in which they appear
-              </li>
-              <li>
-                Cannot delcare 2 variable or constants with the same name in the
-                same block
-                <ul>
-                  <li>
-                    You can do this if one is in a nested scope, but this is
-                    generally discouraged
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            Function Scope
-            <ul>
-              <li>
-                Variables are scoped to the containing function
-                <ul>
-                  <li>Nesting within the function does not make a differece</li>
-                  <li>
-                    Global variables are declared as properties on the Global
-                    object
-                  </li>
-                  <li>
-                    It is legal to declare the same variable multiple times
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-    <h2>Hoisting</h2>
-    <section>
-    <ul>
-      <li>An unusual feature of using var and function scope</li>
-      <li>Variables declared anywhere in the function are hoisted to the top of the function
-        <ul>
-          <li>Allows them to be used anywhere in the function</li>
-        </ul>
-      </li>
-      <li>The initialization remains where you wrote it
-        <ul>
-          <li>If you reference the variable before the initialiaiton code, it will contain undefined</li>
-          <li>This will not be flagged as an error, so it is a source of a lot of bugs</li>
-        </ul>
-      </li>
-    </ul>
-    </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Hoisting</li>
+        </ol>
+      </nav>
+
+      <h1>Hoisting</h1>
+
+      <section>
+        <ul>
+          <li>An unusual feature of using var and function scope</li>
+          <li>
+            Variables declared anywhere in the function are hoisted to the top
+            of the function
+            <ul>
+              <li>Allows them to be used anywhere in the function</li>
+            </ul>
+          </li>
+          <li>
+            The initialization remains where you wrote it
+            <ul>
+              <li>
+                If you reference the variable before the initialiaiton code, it
+                will contain undefined
+              </li>
+              <li>
+                This will not be flagged as an error, so it is a source of a lot
+                of bugs
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Scope</li>
+        </ol>
+      </nav>
+
+      <h1>Scope</h1>
+
+      <h2>Global Scope</h2>
+      <section>
+        <ul>
+          <li>Declarations made at the top level outside of any code blocks</li>
+          <li>
+            In Node and client side JS modules, the scope is the file it is
+            defined in
+          </li>
+          <li>
+            In traditional client side JS, the scope it the HTML document in
+            which it is defined
+            <ul>
+              <li>
+                A global declaration declared in one script, it is defined in
+                all of the script elements in the document
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="block">Block Scope</h2>
+      <section>
+        <ul>
+          <li>Only defined within the block of code in which they appear</li>
+          <li>
+            Cannot delcare 2 variable or constants with the same name in the
+            same block
+            <ul>
+              <li>
+                You can do this if one is in a nested scope, but this is
+                generally discouraged
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Function Scope</h2>
+      <section>
+        <ul>
+          <li>
+            Variables are scoped to the containing function
+            <ul>
+              <li>Nesting within the function does not make a differece</li>
+              <li>
+                Global variables are declared as properties on the Global object
+              </li>
+              <li>It is legal to declare the same variable multiple times</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
