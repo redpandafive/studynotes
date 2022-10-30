@@ -3,14 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="../">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
     <div class="container">
-      <h1>Terminology</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <h1>Terminology</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/angularcli.html#commands">Commands</a></li>
+        </ul>
+      </section>
 
       <section>
         <div>
@@ -112,6 +123,28 @@
                 <li>Indexers</li>
               </ul>
             </li>
+          </ul>
+        </div>
+
+        <div>
+          Iterator
+          <ul>
+            <li>Used to step through collections such as lists and arrays</li>
+            <li>
+              What C# calls an iterator is more commonly called a generator in
+              other languages
+              <ul>
+                <li>
+                  Iterator methods use the <code>yield return</code> statement
+                  to return each element one at a time
+                </li>
+                <li>
+                  Can consume an iterator using a <code>foreach</code> statement
+                  or a LINQ query
+                </li>
+              </ul>
+            </li>
+            <li>See <a href="assorted/yieldReturn.html">Yield Return</a></li>
           </ul>
         </div>
 

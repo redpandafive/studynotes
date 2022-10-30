@@ -33,8 +33,24 @@
       <h2>For / In Loops</h2>
       <section>
         <ul>
+          <li>Enumerates over all enumerable string properties of an object
+            <ul>
+              <li>This includes inherited enumerable properties from its prototype chain</li>
+              <li>Does not include symbol properties</li>
+            </ul>
+          </li>
           <li>
-            You can use a constant declaration as long as a new value is not assigned within the loop
+            To remember its usage, think "for..in keys == foreign keys == use
+            for..in for keys"
+          </li>
+          <li>You can use a for..in loop with arrays, but it is better to use for, foreach, or for of loop instead
+            <ul>
+              <li>These other methods avoid non index properties</li>
+            </ul>
+          </li>
+          <li>
+            You can use a constant declaration as long as a new value is not
+            assigned within the loop
             <div class="card">
               <div class="card-body">
                 <code>
@@ -46,12 +62,70 @@
         </ul>
       </section>
 
-
       <h2>For / Of Loops</h2>
       <section>
+        <div>
+          In this pseudocode, variable receives a value form each iterator,
+          iterable is an iterable object that is operated on, statement is a
+          block statement executed for every iteration
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code> for (variable of iterable) { statement } </code>
+          </div>
+        </div>
         <ul>
           <li>
-            You can use a constant declaration as long as a new value is not assigned within the loop
+            This loop is said to iterate over the iterable, operating on each
+            item operates one by one in sequential order
+          </li>
+          <li>
+            Loops over an iterable object, invoking the Symbol.iterator property
+            on the iterable
+            <ul>
+              <li>This returns interator object</li>
+              <li>
+                The loop will call the interactor's next() method to produce the
+                values to be assigned to the variable
+              </li>
+              <li>
+                This will continue until 
+                <ul>
+                  <li>The iterator's next method returns an object containing <em>done: true</em></li>
+                  <li>A break exists the loop</li>
+                  <li>a return statement runs</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Returns a list of values of the object being iterated
+            <ul>
+              <li>
+                Compare with for..in loops that returns a list of keys on the
+                object being iterated
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  <pre>
+let list = [4, 5, 6];
+                  for (let i in list) {
+                    console.log(i); // "0", "1", "2",
+                  }
+                  for (let i of list) {
+                    console.log(i); // 4, 5, 6
+                  }</pre
+                  >
+                </code>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li>
+            You can use a constant declaration as the variable as long as a new value is not
+            assigned within the loop
             <div class="card">
               <div class="card-body">
                 <code>
@@ -62,7 +136,6 @@
           </li>
         </ul>
       </section>
-
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

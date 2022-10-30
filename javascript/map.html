@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Map</li>
+        </ol>
+      </nav>
+
+      <h1>Map</h1>
+
+      <section>
+        <ul>
+          <li>Holds key-value pairs</li>
+          <li>Remembers the original insertion order of the keys</li>
+          <li>
+            Any value can be used as either a key or value
+            <ul>
+              <li>This includes both objects and primitive values</li>
+            </ul>
+          </li>
+          <li>Keys are unique in the collection, so it may only occur once</li>
+          <li>Only contain entries that you put it it, nothing by default</li>
+          <li>
+            It is an iterable, so you can directly iterate on it
+            <ul>
+              <li>Can use foreach method on the Map object</li>
+              <li>Can use for / of loop</li>
+            </ul>
+          </li>
+        </ul>
+
+        <div>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"
+            target="_blank"
+          >
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+          </a>
+        </div>
+      </section>
+
+      <h2>Properties</h2>
+      <section>
+        <div>size</div>
+        <ul>
+          <li>Returns the number of key / value pairs in the Map object</li>
+        </ul>
+      </section>
+
+      <h2>Methods</h2>
+      <section>
+        <div>clear()</div>
+        <ul>
+          <li>Removes all key-value pairs from the Map object</li>
+        </ul>
+        <div>delete(x)</div>
+        <ul>
+          <li>Removes the item indexed by key x</li>
+          <li>Returns true if the element was removed</li>
+          <li>Returns false if the element does not exist</li>
+        </ul>
+        <div>get(x)</div>
+        <ul>
+          <li>Retrieves the value identified by key x</li>
+        </ul>
+        <div>has(x)</div>
+        <ul>
+          <li>Returns true/false if the key x exists</li>
+        </ul>
+        <div>set(x,y)</div>
+        <ul>
+          <li>Sets the value of y for the key of x</li>
+          <li>
+            <em>DO NOT USE BRACKET SYNTAX</em>
+            <ul>
+              <li>
+                This will appear to work, but it is actually setting the
+                property on the generic object
+              </li>
+              <li>Other Map methods will not detect these</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

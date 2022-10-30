@@ -30,18 +30,273 @@
       </nav>
 
       <h1>Operators</h1>
-      
-      <h2>Testing for Equality</h2>
+
       <section>
         <ul>
-            <li>Equality operator (==) applies type conversions, which can lead to undesired results
-                <ul>
-                    <li>"0" == false => true since both are converted to zero</li>
-                </ul>
-            </li>
-            <li>Strict equality operator (=== and !==) does not consider operands to be equal if they are not of the same type</li>
-         </ul>
+          <li>Operators combine subexpressions into new expressions</li>
+          <li>
+            Expressions are evaluated left to right (this is not the same thing
+            as operator precedence)
+          </li>
+          <li>
+            In <code> w = x + y * z</code>
+            <ul>
+              <li>Subexpression w is evaluated first</li>
+              <li>Subexpressions x, y, and z are evaluated</li>
+              <li>Values of y and z are multiplied</li>
+              <li>Above is added to value of x</li>
+              <li>
+                Above is assigned to the variable or property specified by
+                expression w
+              </li>
+            </ul>
+          </li>
+        </ul>
       </section>
+
+      <h2>Operator Categories</h2>
+      <section>
+        <ul>
+          <li>
+            Unary
+            <ul>
+              <li>
+                Converts a single expression into a single, more complex
+                expression
+              </li>
+              <li>Negation operator (-) is an example</li>
+            </ul>
+          </li>
+          <li>
+            Binary
+            <ul>
+              <li>
+                Combine two expressions into a single, more complex epxression
+              </li>
+              <li>Includes most operators</li>
+            </ul>
+          </li>
+          Ternary
+          <ul>
+            <li>Combines three expressions into a single expression</li>
+            <li>Conditional operator (?:) is teh only one</li>
+          </ul>
+        </ul>
+      </section>
+
+      <h2>Operator Associativity</h2>
+      <section>
+        <ul>
+          <li>The order that operators of the same precedence are performed</li>
+          <li>
+            Left-to-right associativity
+            <ul>
+              <li>Operations are performed from left to right</li>
+              <li>
+                <code>w = x - y - z;</code> is equivalent to
+                <code>w = ((x - y) - z);</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Right-to-left associativity
+            <ul>
+              <li>Operations are performed from right to left</li>
+              <li>
+                <code>w = x = y = z;</code> is equivalent to
+                <code>w = (x = (y = z));</code>
+              </li>
+              <li>
+                <code>q = a?b:c?d:e?f:g;</code> is equivalent to
+                <code>q = a?b:(c?d:(e?f:g));</code>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Operand Types and Operators</h2>
+      <section>
+        <ul>
+          <li>Some operators require their operands to be a specific type</li>
+          <li>
+            Some can work with any type
+            <ul>
+              <li>
+                Every JS value is either truthy or falsy, so operators that
+                expect boolean operands will work with an operand of any type
+              </li>
+            </ul>
+          </li>
+          <li>
+            Operators usually convert the type of their operands as needed
+            <ul>
+              <li>
+                <code>"3" * "5"</code> results in 15. The multiplication
+                operator converts both strings to numbers automatically.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Some operators behave differently, depending on the type of operands
+            used
+            <ul>
+              <li>
+                The + operator will add numeric operands togehter, but
+                concatenate string operands
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Operator Side Effects</h2>
+      <section>
+        <ul>
+          <li>
+            Some expressions have side effects, so their evaluation may affect
+            the result of future evaluations
+          </li>
+          <li>Assignment operators are good examples of these</li>
+        </ul>
+      </section>
+
+      <h2>Operators</h2>
+      <section>
+        <ul>
+          <li>
+            Arithmatic operators
+            <ul>
+              <li>**, *, /, %, +, -</li>
+              <li>** is a new operator called the exponentiation operator</li>
+              <li>
+                All numbers are floating point, so all division operations have
+                floating point results
+              </li>
+            </ul>
+          </li>
+          <li>
+            Unary operators
+            <ul>
+              <li>
+                + as a unary operator converts its operand to a number and
+                performs no action on a number
+              </li>
+              <li>-, ++, --</li>
+            </ul>
+          </li>
+          <li>
+            Boolean operators
+            <ul>
+              <li>&&, ||, and !</li>
+              <li>
+                If the left side operand of && is false, it will short circuit
+                and return without evaluating the right hand side expression
+                <ul>
+                  <li>
+                    This allows the following two lines of code to function
+                    identically
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          if (a === b) stop();<br />
+                          (a === b) && stop();<br />
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                If the left side operand of || is true, it will short circuit
+                and return without evaluating the right hand side expression
+                <ul>
+                  <li>
+                    This allows you to do the following to select the first truthy value
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          let max = maxWidth || preferences.maxWidth || 500;
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Testing for Equality
+            <ul>
+              <li>
+                Equality operator (==) applies type conversions, which can lead
+                to undesired results
+                <ul>
+                  <li>"0" == false => true since both are converted to zero</li>
+                </ul>
+              </li>
+              <li>
+                Strict equality operator (=== and !==) does not consider
+                operands to be equal if they are not of the same type
+              </li>
+            </ul>
+          </li>
+          <li>
+            <code>in</code>
+            <ul>
+              <li>
+                Left side should be a string (or something that can be converted
+                to one)
+              </li>
+              <li>Right side should be an object</li>
+              <li>
+                Returns true is the left side value is the name of a property of
+                the right side object
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  // An array with elements (indices) 0, 1, and 2<br />
+                  let data = [7,8,9];<br />
+                  // => true: array has an element "0"<br />
+                  "0" in data <br />
+                  // => true: numbers are converted to strings<br />
+                  1 in data <br />
+                  // => false: no element 3<br />
+                  3 in data <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            <code>instanceof</code>
+            <ul>
+              <li>Left side should be an object</li>
+              <li>
+                Right side should be a class of objects (the constructor
+                function that creates the class)
+              </li>
+              <li>
+                Returns true is the left side value has the right hand function
+                is in its prototype chain
+              </li>
+            </ul>
+          </li>
+          <li>
+            Complete list of operators can be found at
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators"
+              target="_"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Testing for Equality</h2>
+      <section></section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

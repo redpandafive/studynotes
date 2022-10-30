@@ -30,9 +30,10 @@
       </nav>
 
       <h1>Yield Return</h1>
- 
+
       <section id="yieldReturn">
         <ul>
+          <li>C# calls this an interator, but it is more commonly called a generator in other languages</li>
           <li>
             Use within
             <ul>
@@ -157,6 +158,39 @@
         </ul>
       </section>
 
+      <h2>Example Program</h2>
+      <section>
+        <div>
+          This outputs 6 8 10 12 14 16 18
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+                static void Main()
+                {
+                    foreach (int number in EvenSequence(5, 18))
+                    {
+                        Console.Write(number.ToString() + " ");
+                    }
+                    Console.ReadKey();
+                }
+                
+                public static IEnumerable<int> EvenSequence(int firstNumber, int lastNumber)
+                {
+                    // Yield even numbers in the range.
+                    for (int number = firstNumber; number &lt;= lastNumber; number++)
+                    {
+                        if (number % 2 == 0)
+                        {
+                            yield return number;
+                        }
+                    }
+                }</pre>
+            </code>
+          </div>
+        </div>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

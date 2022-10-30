@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Set</li>
+        </ol>
+      </nav>
+
+      <h1>Set</h1>
+
+      
+      <section>
+        <ul>
+          <li>A collection of values</li>
+          <li>Remembers the original insertion order of the keys</li>
+          <li>Values are unique in the collection, so they may only occur once</li>
+          <li>Only contain entries that you put it it, nothing by default</li>
+          <li>
+            It is an iterable, so you can directly iterate on it
+            <ul>
+              <li>Can use foreach method on the Map object</li>
+              <li>Can use for / of loop</li>
+            </ul>
+          </li>
+        </ul>
+
+        <div>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" target="_blank">
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+          </a>
+        </div>
+      </section>
+
+      <h2>Properties</h2>
+      <section>
+        <div>size</div>
+        <ul>
+          <li>Returns the number of values in the Set object</li>
+        </ul>
+      </section>
+
+      <h2>Methods</h2>
+      <section>
+        <div>add(x)</div>
+        <ul>
+          <li>Adds the item x if it does not already exist</li>
+        </ul>
+        <div>clear()</div>
+        <ul>
+          <li>Removes all items from the Set object</li>
+        </ul>
+        <div>delete(x)</div>
+        <ul>
+          <li>Removes the item x if it exists</li>
+          <li>Returns true if the item was removed</li>
+          <li>Returns false if the item does not exist</li>
+        </ul>
+        <div>has(x)</div>
+        <ul>
+          <li>Returns true/false if the item x exists</li>
+        </ul>
+        <div>values()</div>
+        <ul>
+          <li>Returns a new iterator object that yields the values for each element in the Set object in insertion order</li>
+        </ul>
+      </section>
+
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

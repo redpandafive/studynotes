@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Destructuring Assignment
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Destructuring Assignment</h1>
+
+      <section>
+        <ul>
+          <li>A compound declaration and assignment syntax</li>
+          <li>
+            The right side of the assignment operator is a structured value
+            <ul>
+              <li>Array</li>
+              <li>Object</li>
+              <li>See examples for syntax for each type</li>
+            </ul>
+          </li>
+          <li>
+            The left side specifies one or more variable names that mimics array
+            and object literal syntax
+            <ul>
+              <li>
+                These are usually variables to initialize as part of
+                <code>const</code>, <code>var</code>,
+                <code>let</code> statements
+              </li>
+            </ul>
+          </li>
+          <li>
+            Assignment means one or more values are extracted (destructued) from
+            the value on the right and store into the variables on the left
+          </li>
+        </ul>
+        <div>
+          Simple Examples
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Same as let x=1, y=2<br />
+                let [x,y] = [1,2];<br />
+
+                // Same as x = x + 1, y = y + 1<br />
+                [x,y] = [x+1,y+1];<br />
+
+                // Swap the value of the two variables. x now contains 3 and y
+                contains 2<br />
+                [x,y] = [y,x];
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Simplifies working with functions that return arrays
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function a(x,y) {<br />
+                return [y,x];<br />
+                }<br />
+
+                function b(y,x) {<br />
+                return [x,y];<br />
+                }<br />
+
+                // y contains 2, x contains 1<br />
+                let [y,x] = a(1,2);<br />
+
+                // r contains 1, s contains 2<br />
+                let [r,s] = b(y,x);
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          This uses a for loop to loop over all properties of an object and use
+          destructuring to conver those pairs from 2 element arryas into
+          individual variables
+
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // outputs "x 1" and "y 2" <br />
+                let o = { x: 1, y: 2 }; <br />
+                for(const [name, value] of Object.entries(o)) {<br />
+                console.log(name, value); <br />
+                }
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Extra variables on the left are undefined, extra values on the right
+          are ignored.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // x == 1; y == undefined<br />
+                let [x,y] = [1]; <br />
+
+                // x == 1; y == 2<br />
+                [x,y] = [1,2,3]; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Use commas on the left to skip certain values on the right
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // x == 2; y == 4<br />
+                [,x,,y] = [1,2,3,4]; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Use three dots to collect unused or remaining values into a single
+          variable
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // y == [2,3,4] <br />
+                let [x, ...y] = [1,2,3,4];
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          This assigns global functions from the Math object into variables.
+          Variable names on the left should match the property you want to copy.
+          Items from MATH not listed on the left are ignored.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Same as const sin=Math.sin, cos=Math.cos, tan=Math.tan <br />
+                const {sin, cos, tan} = Math;
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          This performs like the above code, but gives the variables on the left
+          different names
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Same as const cosine = Math.cos, tangent = Math.tan;<br />
+                const { cos: cosine, tan: tangent } = Math;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

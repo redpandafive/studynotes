@@ -65,6 +65,8 @@
               <li>
                 Only defined within the block of code in which they appear
               </li>
+              <li>If you attempt use a variable declared with these keywords wihtout initializing it, you will get an error</li>
+              <li>Contrast this to <code>var</code> which will just generate an undefined value</li>
             </ul>
           </li>
 
@@ -149,6 +151,24 @@
           </li>
         </ul>
       </section>
+
+    <h2>Hoisting</h2>
+    <section>
+    <ul>
+      <li>An unusual feature of using var and function scope</li>
+      <li>Variables declared anywhere in the function are hoisted to the top of the function
+        <ul>
+          <li>Allows them to be used anywhere in the function</li>
+        </ul>
+      </li>
+      <li>The initialization remains where you wrote it
+        <ul>
+          <li>If you reference the variable before the initialiaiton code, it will contain undefined</li>
+          <li>This will not be flagged as an error, so it is a source of a lot of bugs</li>
+        </ul>
+      </li>
+    </ul>
+    </section>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
