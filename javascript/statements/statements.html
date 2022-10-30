@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Statements</li>
+        </ol>
+      </nav>
+
+      <h1>Statements</h1>
+
+      <section>
+        <ul>
+          <li>
+            While expressions are evaluated to produce a value, statements are
+            JavaScript sentences or commands that make somethign happen
+          </li>
+          <li>
+            JS programs are just a sequence of statements that are executed in a
+            default order
+            <ul>
+              <li>Default is the order they are written</li>
+              <li>
+                This order can be altered by a control structure
+                <ul>
+                  <li>Conditionala</li>
+                  <li>Loopa</li>
+                  <li>Jumps</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            An expression with side effects (assignments and function
+            invocations) can be a statement
+            <ul>
+              <li>This is called an expression statement</li>
+            </ul>
+          </li>
+          <li>
+            Declaration statements
+            <ul>
+              <li>Declare new variables and define new functions</li>
+              <li></li>
+            </ul>
+          </li>
+
+          <li>Terminated with semicolons</li>
+        </ul>
+      </section>
+
+      <h2>Expression Statements</h2>
+      <section>
+        <ul>
+          <li>
+            Simplest kind of statement that is an expression with side effects
+          </li>
+          <li>
+            Assignment Statements
+            <ul>
+              <li>
+                <code>++</code> and <code>--</code> operators have the side
+                effect of changing a variable value, just as if an assignment
+                has been performed
+              </li>
+              <li>
+                <code>delete</code> operator deletes an object property and is
+                almost always used as a statement, rather than part of a larger
+                expression
+              </li>
+            </ul>
+          </li>
+          <li>
+            Function Invocations
+            <ul>
+              <li>
+                Function calls are expressions, but they have side effects that
+                affect the host environment or program state
+              </li>
+              <li>
+                A funciton call without a side effect (such as returning a
+                result that is assigned to a variable) is pointless, so they are
+                also considered statements
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Compound Statements</h2>
+      <section>
+        <ul>
+          <li>
+            A statement block combines multiple statements into a single
+            compound statement
+            <ul>
+              <li>
+                They are sequence of statements enclosed within curly
+                braces
+              </li>
+              <li>
+                Act as a single single statement and can be used anywhere JS expects a single statement
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </section>
+
+      <h2>Empty Statements</h2>
+      <section>
+        <ul>
+          <li>Simply a semicolon</li>
+          <li>The JS interpreter takes no action when this is encounterd</li>
+          <li>Usually a good idea to put a commnet in your code when you need to use one of these</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Initialize an array a<br/>
+                for(let i = 0; i &lt; a.length; a[i++] = 0) ;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
