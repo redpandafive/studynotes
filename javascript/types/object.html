@@ -69,9 +69,13 @@
       <section>
         <ul>
           <li>Evaluates to the value of an object property</li>
-          <li>Can use either a dot notation or brackets
+          <li>
+            Can use either a dot notation or brackets
             <ul>
-              <li>Dot notation only works when the property has a legal identifier (cannot include spaces or punctuation marks)</li>
+              <li>
+                Dot notation only works when the property has a legal identifier
+                (cannot include spaces or punctuation marks)
+              </li>
               <li>Use square brakets when the property name is not static</li>
             </ul>
           </li>
@@ -91,10 +95,15 @@
       <h2 id="cpae">Conditional Property Access Expressions</h2>
       <section>
         <ul>
-          <li>If the expression on the left of a property access expression is null or undefined, a TypeError will result</li>
+          <li>
+            If the expression on the left of a property access expression is
+            null or undefined, a TypeError will result
+          </li>
           <li>Use a conditional version to guard against this</li>
           <li>This allows you to chain together property accessors</li>
-          <li>If one link in the chain is null or undefined, the result will be short circuited
+          <li>
+            If one link in the chain is null or undefined, the result will be
+            short circuited
             <ul>
               <li>The entire result will be undefined</li>
               <li>Will not throw a TypeError</li>
@@ -103,179 +112,208 @@
         </ul>
         <div>
           This results in undefined, not an error
-        <div class="card">
-          <div class="card-body">
-            <code>
-              let a = { b: {} };<br/>
-              a.b?.c?.d;
-            </code>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let a = { b: {} };<br />
+                a.b?.c?.d;
+              </code>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        Can also be used with square bracket notation
-      <div class="card">
-        <div class="card-body">
-          <code>
-            let a = { b: {} };<br/>
-            a?.["b"]?.["c"]?.["d"];
-          </code>
+        <div>
+          Can also be used with square bracket notation
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let a = { b: {} };<br />
+                a?.["b"]?.["c"]?.["d"];
+              </code>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
       </section>
 
       <h2 id="create">Object Creation Expressions</h2>
       <section>
         <ul>
-          <li>Creates a new object and invokes a constructor function to initialize the properties of that object</li>
-          <li>If no arguments are passed, no parentheses are needed</li>
+          <li>
+            Creates a new object and invokes a constructor function to
+            initialize the properties of that object
+          </li>
+          <li>
+            If no arguments are passed, no parentheses are needed
             <ul>
               <li>The entire result will be undefined</li>
               <li>Will not throw a TypeError</li>
             </ul>
           </li>
         </ul>
-      <div>
-        
-      <div class="card">
-        <div class="card-body">
-          <code>
-            new Object();<br/>
-            new Object;<br/>
-            new Point(2,3); <br/>           
-          </code>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                new Object();<br />
+                new Object;<br />
+                new Point(2,3); <br />
+              </code>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
       </section>
 
+      <h2>Deleting a Property</h2>
+      <section>
+        <ul>
+          <li>
+            The <code>delete</code> operator to delete the specified object
+            property
+          </li>
+          <li>Used for side effect, not the vlaue it returns</li>
+          <li>
+            This will remove the property, not just set its value to undefined
+          </li>
+          <li>Only works when the operand is a property access expression</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let o = {x: 1, y: 2};<br />
 
-
+                // returns true <br />
+                delete o.x;<br />
+                // returns false or errors in strict mode delete 0; new
+                Point(2,3); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <h2>Built In Methods</h2>
+
+      <h3>Object.keys()</h3>
       <section>
-        <div>
-          Object.keys
-          <ul>
-            <li>
-              Returns an array of a given objects own enumerable property names
-              <ul>
-                <li>Returned as an array of strings</li>
-              </ul>
-            </li>
-            <li>Iterates the same order that a normal loop would</li>
-            <li>
-              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
-            </li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                <pre>
-                const object1 = {
-                  a: 'somestring',
-                  b: 42,
-                  c: false
-                };                
-                console.log(Object.keys(object1));
-                // expected output: Array ["a", "b", "c"]
-              </pre
-                >
-              </code>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          Object.create()
-          <ul>
-            <li>
-              Creates a new object using an existing object as the prototype of
-              the newly created object
-            </li>
-            <li>
-              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
-            </li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                <pre>
-                const person = {
-                  isHuman: false,
-                  printIntroduction: function() {
-                    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
-                  }
-                };
-                
-                const me = Object.create(person);
-                
-                me.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
-                me.isHuman = true; // inherited properties can be overwritten
-                
-                me.printIntroduction();
-                // expected output: "My name is Matthew. Am I human? true"
-              </pre
-                >
-              </code>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          Object.entries()
-          <ul>
-            <li>
-              Returns an array of a given object's own enumerable string keyed
-              property [key,value] pairs
-            </li>
-            <li>
-              Similar to iterating over a for..in loop, but that look enumerates
-              properties in the prototype chain too
-            </li>
-            <li>
-              The results can be passed to the constructor of a Map object
-            </li>
-            <li>
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"
-                target="_blank"
+        <ul>
+          <li>
+            Returns an array of a given objects own enumerable property names
+            <ul>
+              <li>Returned as an array of strings</li>
+            </ul>
+          </li>
+          <li>Iterates the same order that a normal loop would</li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const object1 = {
+                a: 'somestring',
+                b: 42,
+                c: false
+              };                
+              console.log(Object.keys(object1));
+              // expected output: Array ["a", "b", "c"]
+            </pre
               >
-              </a>
-            </li>
-          </ul>
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>Object.create()</h3>
+      <section>
+        <ul>
+          <li>
+            Creates a new object using an existing object as the prototype of
+            the newly created object
+          </li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const person = {
+                isHuman: false,
+                printIntroduction: function() {
+                  console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+                }
+              };
+              
+              const me = Object.create(person);
+              
+              me.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
+              me.isHuman = true; // inherited properties can be overwritten
+              
+              me.printIntroduction();
+              // expected output: "My name is Matthew. Am I human? true"
+            </pre
+              >
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>Object.entries()</h3>
+      <section>
+        <ul>
+          <li>
+            Returns an array of a given object's own enumerable string keyed
+            property [key,value] pairs
+          </li>
+          <li>
+            Similar to iterating over a for..in loop, but that look enumerates
+            properties in the prototype chain too
+          </li>
+          <li>The results can be passed to the constructor of a Map object</li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"
+              target="_blank"
+            >
+            </a>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const object1 = {
+                a: 'somestring',
+                b: 42
+              };
+              
+              for (const [key, value] of Object.entries(object1)) {
+                console.log(`${key}: ${value}`);
+              }
+              
+              // expected output:
+              // "a: somestring"
+              // "b: 42"
+            </pre
+              >
+            </code>
+          </div>
+        </div>
+        <div>
+          Destructuring allows you to iterate through objects
           <div class="card">
             <div class="card-body">
               <code>
                 <pre>
-                const object1 = {
-                  a: 'somestring',
-                  b: 42
-                };
+                const obj = { foo: 'bar', baz: 42 };
+                Object.entries(obj).forEach(([key, value]) => console.log(`${key}: ${value}`)); 
                 
-                for (const [key, value] of Object.entries(object1)) {
-                  console.log(`${key}: ${value}`);
-                }
-                
-                // expected output:
-                // "a: somestring"
-                // "b: 42"
+                // exprected output: "foo: bar", "baz: 42"
               </pre
                 >
-              </code>
-            </div>
-          </div>
-          <div>Destructuring allows you to iterate through objects</div>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                <pre>
-                  const obj = { foo: 'bar', baz: 42 };
-                  Object.entries(obj).forEach(([key, value]) => console.log(`${key}: ${value}`)); 
-                  
-                  // exprected output: "foo: bar", "baz: 42"
-                </pre>
               </code>
             </div>
           </div>

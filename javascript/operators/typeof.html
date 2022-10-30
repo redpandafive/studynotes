@@ -34,9 +34,29 @@
       <section>
         <ul>
           <li>
+            A unary operator that evaluates to a string that specifies the type
+            of the operand
+          </li>
+          <li>
             <code>typeof</code> - use to detect the type of a variable (see
             Types) section
           </li>
+          <li>This will not differentiate between object types - use <code>instanceof</code> for that</li>
+        </ul>
+      </section>
+
+      <h2>Possible Return Values</h2>
+      <section>
+        <ul>
+          <li>undefined => "undefined"</li>
+          <li>null => "object"</li>
+          <li>true or false => "boolean"</li>
+          <li>any number or NaN => "number"</li>
+          <li>any BigInt => "bigint"</li>
+          <li>any string => "string"</li>
+          <li>any symbol => "symbol"</li>
+          <li>any function => "function"</li>
+          <li>any nonfunction object => "object"</li>
         </ul>
       </section>
     </div>

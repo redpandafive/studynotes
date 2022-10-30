@@ -31,6 +31,18 @@
 
       <h1>Operators</h1>
 
+
+      <h2>See also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="object.html#delete">Delete</a>
+
+            <a href="typeof.html">Typeof</a>
+          </li>
+        </ul>
+      </section>
+
       <section>
         <ul>
           <li>Operators combine subexpressions into new expressions</li>
@@ -64,7 +76,7 @@
                 Converts a single expression into a single, more complex
                 expression
               </li>
-              <li>Negation operator (-) is an example</li>
+              <li>Negation operator (-) and delete operator are examples</li>
             </ul>
           </li>
           <li>
@@ -212,7 +224,8 @@
                 and return without evaluating the right hand side expression
                 <ul>
                   <li>
-                    This allows you to do the following to select the first truthy value
+                    This allows you to do the following to select the first
+                    truthy value
                     <div class="card">
                       <div class="card-body">
                         <code>
@@ -221,10 +234,46 @@
                       </div>
                     </div>
                   </li>
+                  <li>
+                    Since it is looking for truthy values, it will skip zeros,
+                    empty strings, and false boolean values
+                  </li>
+                  <li>
+                    An alternative is to use the first defined (??) operator if
+                    you want to find the finst defined operator instead of the
+                    first truthy operator
+                  </li>
                 </ul>
               </li>
             </ul>
           </li>
+
+          <li>
+            First Defined Operator
+            <ul>
+              <li>
+                Returns its first operand if it is not null and not undefined
+              </li>
+              <li>Otherwise, it returns the value of the right operand</li>
+              <li>Like && and ||, it is short circuiting</li>
+              <li>Useful alternative to || if you want to find the first defined operand instead of the first truthy operand
+                <ul>
+                  <li>Unlike ||, it will consider zero, empty strings, and false as truthy values</li>
+                </ul>
+              </li>
+            </ul>
+            <div>
+              If there are no side effects, this is equivlant to
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    (a !== null && a !== undefined) ? a : b;
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+
           <li>
             Testing for Equality
             <ul>
@@ -282,6 +331,23 @@
                 is in its prototype chain
               </li>
             </ul>
+          </li>
+          <li>
+            <ul>
+              <li>Binary operator whose operands may be of any type</li>
+              <li>Evaluates the left operand, then its right operand, the returns the right operand</li>              
+            </ul>
+            <div>
+              The following two are equivalent
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    i=0, j=1, k=2;<br />
+                    i = 0; j = 1; k = 2;
+                  </code>
+                </div>
+              </div>
+            </div>
           </li>
           <li>
             Complete list of operators can be found at

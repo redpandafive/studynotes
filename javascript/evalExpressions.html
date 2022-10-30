@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Evalutation Expressions
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Evaluation Expressions</h1>
+
+      <section>
+        <ul>
+          <li>
+            JS can interpret strings of JS source code and evaluate them to
+            produce a value
+          </li>
+          <li>This is similar to other intepreted languages</li>
+          <li>This is done with the global function <code>eval()</code></li>
+
+          <li>
+            Technically is a function, but it should have been an operator
+            <ul>
+              <li>
+                Prevents interpreters from performing code analysis and
+                optmimization on it
+              </li>
+            </ul>
+          </li>
+          <li>
+            This is a very powerful language feature and you should think
+            carefully before using since
+            <ul>
+              <li>This can open a security hole in your application</li>
+              <li>
+                Never pass any string derived from user input to it since there
+                is no way so sanitize input enough for it to be safe
+              </li>
+              <li>
+                Many web servers use the HTTP "Content-Security-Policy" to
+                disable eval for an entire site
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Syntax</h2>
+      <section>
+        <ul>
+          <li>Expects one argument</li>
+          <li>
+            If a string is supplied, that is parsed
+            <ul>
+              <li>If it fails parsing, an error is thrown</li>
+              <li>
+                If something other than a string is passed, it returns that
+                value
+              </li>
+            </ul>
+          </li>
+          <li>
+            If parsed, it evaluates the parameter assigned
+            <ul>
+              <li>
+                Returns the value of the last epxression or statement in the
+                string
+              </li>
+              <li>
+                Undefined if the last expression or statement has no value
+              </li>
+            </ul>
+          </li>
+          <li>
+            The string must make sense as a standalone script to be considered
+            valid
+          </li>
+        </ul>
+      </section>
+
+      <h2>Invocation</h2>
+      <section>
+        <ul>
+          <li>Eval uses the variable environment of the code that calls it</li>
+          <li>
+            In other words, it looks up variables and defines new ones and
+            functions in the same way that local code does
+          </li>
+          <li>
+            <code>Let</code> and <code>const</code> declare variables local to
+            the evaluation and are not defined in the calling environment
+          </li>
+        </ul>
+      </section>
+
+      <h2>Global Eval</h2>
+      <section>
+        <ul>
+          <li>
+            JS specification states that a call to eval made by any other name
+            other than eval (such as if you copy the eval funciton to another
+            variable), then it should evaluate the string as if it were top
+            level global code
+          </li>
+          <li>Local varaibles are not used or modified, so it does not interfere with local optimizations</li>
+          <li>Variables and functions are declared globally when using the var keyword</li>
+          <li>This allows you to execute string of code as if they were independent, top level scripts
+            <ul>
+              <li>It is rare that you would need this, but a global eval is preferable to a local eval</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>See also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="strictmode.html#eval">Strict Mode</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

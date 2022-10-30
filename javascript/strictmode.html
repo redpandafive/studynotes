@@ -30,17 +30,56 @@
 
       <h1>Strict Mode</h1>
 
+
+      <h2 id="delete">Delete Operator</h2>
+      <section>
+        <ul>
+          <li>In strict mode, the delete operator will raise an error if its operand is an unqualified identifier, such as
+            <ul>
+              <li>variable</li>
+              <li>function</li>
+              <li>function parameter</li>
+            </ul>
+          </li>
+          <li>An error will also raise when trying to delete a nonconfigurable property</li>
+        </ul>
+      </section>
+      <h2 id="eval">Eval</h2>
       <section>
         <ul>
           <li>
-            If you attempt to use an undeclared variable, you will get a reference error when you run your code
+            In strict mode, eval will
             <ul>
-              <li>Outside of strinct mode, it will automatically be created as a new global variable</li>
+              <li>Perform a local eval with a private variable environment</li>
+              <li>Can query and set local varaibles</li>
+              <li>Cannot define new variables or functions in local scope</li>
+            </ul>
+          </li>
+          <li>
+            Eval is treated more like a keyword
+            <ul>
+              <li>Cannot overwrite eval funciton with a new variable</li>
             </ul>
           </li>
         </ul>
       </section>
 
+
+      <h2>Variable Declaration</h2>
+      <section>
+        <ul>
+          <li>
+            If you attempt to use an undeclared variable, you will get a
+            reference error when you run your code
+            <ul>
+              <li>
+                Outside of strinct mode, it will automatically be created as a
+                new global variable
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
