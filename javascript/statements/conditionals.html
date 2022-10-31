@@ -28,9 +28,104 @@
         </ol>
       </nav>
 
-      <h1>Conditionals</h1>
+      <h1>Conditional Statements</h1>
+
       <section>
         <ul>
+          <li>Execute or skip other statements depending on the value of a specified expression</li>
+          <li>These are decision points in our code, also known as branches</li>
+        </ul>
+      </section>
+
+
+      <h2>If</h2>
+      <section>
+        <ul>
+          <li>Basic form contains an expression.  If the expression if truthy, the statement is executed.  If falsy, then the statement is not executed.
+            <ul>
+              <li>Parentheses around the expression are required</li>
+              <li>Use a statement block to combine multiple statements into one</li>
+              <li>An </li><code>else</code> statement can be added to execute when the expression if falsy</li>
+            </ul>             
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  if (expression)     
+                     statement
+                </code>
+              </div>
+            </div>
+          </li>
+          <li><code>else if</code> not a JavaScript statement, but a programming idiom that results when repeated if/else statements are used
+          <ul>
+            <li>Allows a multi-way branch</li>
+            <li>Prevents having to write deeply nested statements</li>
+            <li>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    if (n === 1) {<br/>
+                      // Execute code block #1<br/>
+                      } else if (n === 2) {<br/>
+                      // Execute code block #2<br/>
+                      } else if (n === 3) {<br/>
+                      // Execute code block #3<br/>
+                      } else {<br/>
+                      // If all else fails, execute block #4<br/>
+                  </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Switch</h2>
+      <section>
+        <ul>
+          <li>Handles a multi way branch when all branches depend on the value of the same expression</li>
+          <li>To pick a branch
+            <ul>
+              <li>Computes the value of the expression</li>
+              <li>Looks for a case label whose expression evaluates to the same value (determined by ===)
+                <ul>
+                  <li>Avoid case expressions that have side effects</li>
+                </ul>
+              </li>
+              <li>If a match is found, execute the block of code at the statement labelled by the case
+                <ul>
+                  <li>Break statements are jump statements that cause the interpreter to jump to the end of the switch block</li>
+                  <li>The interpreter will continue executing statements from subsequent cases if no break statement is encountered</li>
+                  <li>Another option is to use return statements to return from the enclosing function - no break statement needed</li>
+                </ul>
+              </li>
+              <li>If no match is found, look for the statement labelled default and execute it</li>
+              <li>If no default is found, do nothing</li>
+            </ul>
+          </li>
+          <li>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  switch(n) {<br/>
+                    case 1: // Start here if n === 1<br/>
+                    // Execute code block #1.<br/>
+                    break; // Stop here<br/>
+                    case 2: // Start here if n === 2<br/>
+                    // Execute code block #2.<br/>
+                    break; // Stop here<br/>
+                    case 3: // Start here if n === 3<br/>
+                    // Execute code block #3.<br/>
+                    break; // Stop here<br/>
+                    default: // If all else fails...<br/>
+                    // Execute code block #4.<br/>
+                    break; // Stop here<br/>
+                    }<br/>                    
+                </code>
+              </div>
+            </div>
+          </li>
         </ul>
       </section>
 

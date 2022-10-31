@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Jump Statements
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Jump Statements</h1>
+      <section>
+        <ul>
+          <li>
+            Cause the JavaScript interpreter to jump to a new location in source
+            code
+          </li>
+        </ul>
+      </section>
+
+      <h2>Break</h2>
+      <section>
+        <ul>
+          <li>Jump to the end of a loop or switch statement</li>
+          <li>
+            Use in loops to end an iteration without executing all the code
+          </li>
+          <li>
+            Can includes an optional label that allows the program to break out
+            of a labelled statement
+            <ul>
+              <li>
+                Break statements must be nested within any label it references
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      outerBlock: {<br />
+                      innerBlock: {<br />
+                      console.log("1");<br />
+                      break outerBlock; // breaks out of both innerBlock and
+                      outerBlock<br />
+                      console.log(":-("); // skipped<br />
+                      }<br />
+                      console.log("2"); // skipped<br />
+                      }
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Continue</h2>
+      <section>
+        <ul>
+          <li>
+            Skip the rest of the body of a loop and jump back to the top of a
+            loop to begin a new iteration
+          </li>
+          <li>This restarts the loop at the next iteration</li>
+          <li>Can includes an optional label similar to break</li>
+        </ul>
+      </section>
+
+      <h2>Return</h2>
+      <section>
+        <ul>
+          <li>
+            Jump from a function invocation back to the code that invoked it
+          </li>
+          <li></li>
+          <li>
+            if an expression is added after the return statement, that
+            expression is evaluated and returned to the code that invoked the
+            function
+          </li>
+          <li>
+            If no expression is added after the return statement, undefined is
+            returned
+          </li>
+        </ul>
+      </section>
+
+      <h2>Throw</h2>
+      <section>
+        <ul>
+          <li>Raises an exception</li>
+          <li>
+            Try/catch/finally statements can be used to handle the error
+            <ul>
+              <li>Try - block of code whose exceptions are to be handled</li>
+              <li>
+                Catch
+                <ul>
+                  <li>Block of code to execute when an error occurs</li>
+                  <li>
+                    Can also include an identifier in parentheses. The exception
+                    object will be assigned here.
+                  </li>
+                  <li>Optional</li>
+                </ul>
+              </li>
+              <li>
+                Finally - block of cleanup code guaranteed to be executed
+                (optional)
+              </li>
+            </ul>
+          </li>
+          <li>
+            The interpreter will jump to the nearest handler when throw raises
+            and error
+            <ul>
+              <li>
+                The interpreter will check up the call stack until it finds a
+                catch statement
+              </li>
+              <li>
+                If none is found, the program reports an error to the user
+              </li>
+            </ul>
+          </li>
+          <li>
+            Any expression can follow a throw statement
+            <ul>
+              <li>This can evaluate to any type</li>
+              <li>
+                This could be a number indicating an error code or a string that
+                contains a human readable message
+              </li>
+              <li>
+                Can also be an instance of the Error class or one of its
+                subclasses
+                <ul>
+                  <li>
+                    This includes a message (string passed to constructor
+                    function) and name (type of error) properties
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

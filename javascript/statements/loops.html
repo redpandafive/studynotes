@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -19,32 +22,224 @@
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a></li>
+            <a href="../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../../index.html">JavaScript</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Loops
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Loops</li>
         </ol>
       </nav>
 
       <h1>Control Statements</h1>
 
+      <h2>While</h2>
+      <section>
+        <ul>
+          <li>
+            Evaluates an expression at the start of the loop and executes the
+            statement until the expression if falsy
+          </li>
+        </ul>
+      </section>
+
+      <h2>Do / While</h2>
+      <section>
+        <ul>
+          <li>
+            Like a <code>while</code> loops, but the expression is tested at the
+            bottom of the loop
+          </li>
+          <li>Body is executed at least once</li>
+        </ul>
+      </section>
+
+      <h2>For</h2>
+      <section>
+        <ul>
+          <li>
+            Simplifies loops that follow a pattern:
+            <ul>
+              <li>
+                Initialize a counter before it starts
+                <ul>
+                  <li>This is done only once</li>
+                  <li>
+                    Can be an expression with side effects (assignment) or a
+                    variable declaration statement
+                  </li>
+                  <li>
+                    Allows you to declare and initialize a counter at the same
+                    time
+                  </li>
+                </ul>
+              </li>
+              <li>Test the counter before each iteration</li>
+              <li>
+                Update the counter at the end of the loop body
+                <ul>
+                  <li>
+                    Must also be an expression with side effects to be useful,
+                    such as an assignment or ++, --
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  for(initialize ; test ; increment)<br />
+                  statement
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This is also the only place that the comma operator is commonly used
+            in JS
+            <ul>
+              <li>
+                Can combine multiple initialization and increment expressions
+                into a single expression
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let i, j, sum = 0;<br />
+                  for(i = 0, j = 10 ; i &lt; 10 ; i++, j--) {<br />
+                  sum += i * j;<br />
+                  }
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>For / Of</h2>
+      <section>
+        <ul>
+          <li>
+            Works with iterable objects (string, arrays, sets, and maps)
+            <ul>
+              <li>
+                Cannot be used with an object, but you can iterate over
+                Object.keys() and Object.values()
+              </li>
+            </ul>
+          </li>
+          <li>
+            This loop is said to iterate over the iterable, operating on each
+            item, one by one, in sequential order
+            <ul>
+              <li>
+                Loops over an iterable object, invoking the Symbol.iterator
+                property on the iterable
+                <ul>
+                  <li>This returns an interator object</li>
+                  <li>
+                    The loop will call the interactor's next() method to produce
+                    the values to be assigned to the variable
+                  </li>
+                  <li>
+                    This will continue until
+                    <ul>
+                      <li>
+                        The iterator's next method returns an object containing
+                        <em>done: true</em>
+                      </li>
+                      <li>A break exists the loop</li>
+                      <li>a return statement runs</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            This loop returns a list of values of the object being iterated
+            <ul>
+              <li>
+                Compare with for..in loops that returns a list of keys on the
+                object being iterated
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  <pre>
+    let list = [4, 5, 6];
+                      for (let i in list) {
+                        console.log(i); // "0", "1", "2",
+                      }
+                      for (let i of list) {
+                        console.log(i); // 4, 5, 6
+                      }</pre
+                  >
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div>
+          Syntax breakdown
+          <ul>
+            <li>
+              <p>Variable receives a value from each iterator.</p>
+              <p>
+                You can use a constant declaration as the variable as long as a
+                new value is not assigned within the loop
+              </p>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    for(const datum of data) { console.log(property); }
+                  </code>
+                </div>
+              </div>
+            </li>
+
+            <li>iterable is an iterable object that is operated on</li>
+            <li>statement is a block statement executed for every iteration</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code> for (variable of iterable) { statement } </code>
+          </div>
+        </div>
+      </section>
+
       <h2>For / In</h2>
       <section>
         <ul>
-          <li>Enumerates over all enumerable string properties of an object
+          <li>
+            Enumerates over all enumerable string properties of an object
             <ul>
-              <li>This includes inherited enumerable properties from its prototype chain</li>
+              <li>
+                This includes inherited enumerable properties from its prototype
+                chain
+              </li>
               <li>Does not include symbol properties</li>
+            </ul>
+          </li>
+          <li>Execution steps
+            <ul>
+              <li>Evaluate teh object expression</li>
+              <li>If null or undefined, skip loop</li>
+              <li>Evaluate the variable expression and assign the name of the property to it</li>
+              <li>Execute the body once for each enumerable property of the object</li>
             </ul>
           </li>
           <li>
             To remember its usage, think "for..in keys == foreign keys == use
             for..in for keys"
           </li>
-          <li>You can use a for..in loop with arrays, but it is better to use for, foreach, or for of loop instead
+          <li>
+            You can use a for..in loop with arrays, but it is better to use for,
+            foreach, or for of loop instead
             <ul>
               <li>These other methods avoid non index properties</li>
             </ul>
@@ -56,81 +251,6 @@
               <div class="card-body">
                 <code>
                   for(const property in object) { console.log(property); }
-                </code>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <h2>For / Of</h2>
-      <section>
-        <div>
-          In this pseudocode, variable receives a value form each iterator,
-          iterable is an iterable object that is operated on, statement is a
-          block statement executed for every iteration
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <code> for (variable of iterable) { statement } </code>
-          </div>
-        </div>
-        <ul>
-          <li>
-            This loop is said to iterate over the iterable, operating on each
-            item operates one by one in sequential order
-          </li>
-          <li>
-            Loops over an iterable object, invoking the Symbol.iterator property
-            on the iterable
-            <ul>
-              <li>This returns interator object</li>
-              <li>
-                The loop will call the interactor's next() method to produce the
-                values to be assigned to the variable
-              </li>
-              <li>
-                This will continue until 
-                <ul>
-                  <li>The iterator's next method returns an object containing <em>done: true</em></li>
-                  <li>A break exists the loop</li>
-                  <li>a return statement runs</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            Returns a list of values of the object being iterated
-            <ul>
-              <li>
-                Compare with for..in loops that returns a list of keys on the
-                object being iterated
-              </li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  <pre>
-let list = [4, 5, 6];
-                  for (let i in list) {
-                    console.log(i); // "0", "1", "2",
-                  }
-                  for (let i of list) {
-                    console.log(i); // 4, 5, 6
-                  }</pre
-                  >
-                </code>
-              </div>
-            </div>
-          </li>
-          <li></li>
-          <li>
-            You can use a constant declaration as the variable as long as a new value is not
-            assigned within the loop
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  for(const datum of data) { console.log(property); }
                 </code>
               </div>
             </div>

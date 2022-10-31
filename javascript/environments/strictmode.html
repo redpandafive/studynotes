@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -19,7 +22,8 @@
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a></li>
+            <a href="../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
           </li>
@@ -31,40 +35,82 @@
 
       <h1>Strict Mode</h1>
 
+      <section>
+        <ul>
+          <li>This is a directive introduced in ES5</li>
+          <li>Contains no language keywords, just a special string literal</li>
+          <li>
+            Can only appear at the start of a script or function body, before
+            any real statements have appeared
+          </li>
+          <li>Code that is written in classes and modules is automatically in strict mode</li>
+        </ul>
+      </section>
 
       <h2 id="delete">Delete Operator</h2>
       <section>
         <ul>
-          <li>In strict mode, the delete operator will raise an error if its operand is an unqualified identifier, such as
+          <li>
+            In strict mode, the delete operator will raise an error if its
+            operand is an unqualified identifier, such as
             <ul>
               <li>variable</li>
               <li>function</li>
               <li>function parameter</li>
             </ul>
           </li>
-          <li>An error will also raise when trying to delete a nonconfigurable property</li>
+          <li>
+            An error will also raise when trying to delete a non configurable
+            property
+          </li>
         </ul>
       </section>
+
       <h2 id="eval">Eval</h2>
       <section>
         <ul>
           <li>
             In strict mode, eval will
             <ul>
-              <li>Perform a local eval with a private variable environment</li>
-              <li>Can query and set local varaibles</li>
+              <li>Perform a local eval with a private variable environment that is discarded when it returns</li>
+              <li>Can query and set local variables</li>
               <li>Cannot define new variables or functions in local scope</li>
             </ul>
           </li>
           <li>
             Eval is treated more like a keyword
             <ul>
-              <li>Cannot overwrite eval funciton with a new variable</li>
+              <li>Cannot overwrite eval function with a new variable</li>
             </ul>
           </li>
         </ul>
       </section>
 
+      <h2 id="functions">Functions</h2>
+      <section>
+        <ul>
+          <li>Functions invoked as function have a <code>this</code> value of undefined</li>
+          <li>When invoked with call() or apply(), the <code>this</code> value is exactly the value passed as the first argument to call() or apply()</li>
+          <li>Cannot have two or more parameters with the same name</li>
+        </ul>
+      </section>
+
+
+
+      <h2 id="properties">Properties</h2>
+      <section>
+        <ul>
+          <li>The following will trigger an error (instead of failing silently)
+            <ul>
+              <li>
+                Assignments to non writable properties
+              </li>
+              <li>Attempts to create new properties on non-extensible objects</li>
+            </ul>
+          </li>
+<li>An object literal cannot define two or more properties by the same name</li>
+        </ul>
+      </section>
 
       <h2>Variable Declaration</h2>
       <section>
@@ -74,10 +120,22 @@
             reference error when you run your code
             <ul>
               <li>
-                Outside of strinct mode, it will automatically be created as a
+                Outside of strict mode, it will automatically be created as a
                 new global variable
               </li>
             </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      
+      <h2 id="with">With</h2>
+      <section>
+        <ul>
+          <li>Forbidden in strict mode</li>
+          <li>
+            <a href="../statements/with.html">With Statement</a>
           </li>
         </ul>
       </section>

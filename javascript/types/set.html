@@ -52,6 +52,29 @@
         </div>
       </section>
 
+
+      <h2>Iteration</h2>
+      <section>
+        <ul>
+          <li>Use a for / of loop to iterate over each element in the set</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let text = "Na na na na na na na na Batman!";<br/>
+                let wordSet = new Set(text.split(" "));<br/>
+                let unique = [];<br/>
+                for(let word of wordSet) {<br/>
+                 unique.push(word);<br/>
+                }<br/>
+                unique // => ["Na", "na", "Batman!"]<br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <h2>Properties</h2>
       <section>
         <div>size</div>
