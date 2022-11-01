@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Import and Export
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Import and Export</h1>
+
+      <section>
+        <ul>
+          <li>
+            Declarations used to make values defined in one module of JS code
+            available in another module
+          </li>
+          <li>
+            Modules are files of JS code with its own global namespace and
+            independent of other modules
+          </li>
+        </ul>
+      </section>
+
+      <h2>Export</h2>
+      <section>
+        <ul>
+          <li>Make code in the module available for other modules to use</li>
+          <li>
+            Use the export keyword next to
+            <ul>
+              <li><code>let</code>, <code>var</code>, <code>const</code></li>
+              <li>Function declarations</li>
+              <li>Class declarations</li>
+              <li>
+                Can use <code>{ name1, name2 }</code> to export a list of names
+                declared elsewhere
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are two types
+            <ul>
+              <li>
+                Named
+                <ul>
+                  <li>
+                    Use to export several values since you can have more than
+                    one
+                  </li>
+                  <li>
+                    When importing, it is mandatory to use the same name of the
+                    corresponding export module object
+                  </li>
+                  <li>Can use <code>as</code> to rename the export</li>
+                </ul>
+              </li>
+              <li>
+                Default
+                <ul>
+                  <li>Can only have one per module</li>
+                  <li>
+                    Use to export only a single object, function, or variable
+                  </li>
+                  <li>Can use any name for it in an import</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Re-exporting / Aggregating
+            <ul>
+              <li>
+                Modules can relay values exported from other modules without
+                writing 2 separate import/export statements
+              </li>
+              <li>This uses the "export from" syntax</li>
+              <li>
+                Fewer lines, but you will not be able to use the imported items
+                in the current module
+                <ul>
+                  <li>
+                    Useful in a module that combines exports from others
+                    modules, but doesn't actually work with them except to
+                    re-export them
+                  </li>
+                  <li>
+                    Barrel module = a single module concentrating exports from
+                    various modules
+                  </li>
+                </ul>
+              </li>
+              <li>
+                To re-export all named exports in the aggregate module
+                <ul>
+                  <li>
+                    <code>export * as ns from "mod</code>
+                  </li>
+                  <li>
+                    Note, default exports will not be included. The correct fix
+                    is name as such
+                    <ul>
+                      <li>
+                        <code
+                          >export { default as DefaultExport } from
+                          'bar.js';</code
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Examples
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export const TAU = 2 * Math.PI;<br />
+                export function magnitude(x,y) { return Math.sqrt(x*x + y*y);
+                }<br />
+              </code>
+            </div>
+          </div>
+          <div>
+            Use the default keyword to set a default export
+            <div class="card">
+              <div class="card-body">
+                <code> export default class Circle { ... } </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Use the <code>default</code> keyword to refer to the export function
+            if you re-export it
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export { default as function1, function2, } from 'bar.js';
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Simple re-export that allows function1 and function2 to be defined
+            in the current module
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  // <br />
+                  import { default as function1, function2 } from 'bar.js';<br />
+                  export { function1, function2 };<br />
+
+                  // Similar as above, but does not define function1 and
+                  function2 in the current module export { default as function1,
+                  function2 } from 'bar.js';<br />
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Re-export example that uses export..from. Note, function1 and
+            function2 will not be available in the current module
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export { default as function1, function2 } from 'bar.js';<br />
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Import</h2>
+      <section>
+        <ul>
+          <li>
+            Import code to use from another module
+            <ul>
+              <li>Also gives them names within the current module</li>
+              <li>
+                The other module must export this code to make it available
+              </li>
+            </ul>
+          </li>
+          <li>
+            If the item was exported as a named export, you must use the same
+            name to import it
+            <ul>
+              <li>Can use <code>as</code> to rename the import</li>
+            </ul>
+          </li>
+          <li>Default exports can be imported with any name</li>
+        </ul>
+
+        <div>
+          Examples
+          <div>
+            Single item, multiple items, single item with a rename
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  import Circle from './geometry/circle.js'; <br />
+                  import { PI, TAU } from './geometry/constants.js'; <br />
+                  import { magnitude as hypotenuse } from './vectors/utils.js';
+                  <br />
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Working with a default export
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // file test.js <br />
+                const k = 12; <br />
+                export default k; <br />
+                <br />
+                // some other file <br />
+                // note that we have the freedom to use import m instead of
+                import k, because k was default export<br />
+                import m from './test'; <br />
+                // will log 12<br />
+                console.log(m);
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#:~:text=Browser%20compatibility%20%20%20%20%20%20desktop,%20Full%20support%20Deno%201.0%20Toggle%20history%20" target="_blank">
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#:~:text=Browser%20compatibility%20%20%20%20%20%20desktop,%20Full%20support%20Deno%201.0%20Toggle%20history%20
+        </a>
+      </div>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

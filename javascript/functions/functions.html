@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -36,7 +39,8 @@
             <li>They are not just part of the language syntax</li>
           </ul>
         </li>
-        <li>There are thre ways to define a function
+        <li>
+          There are thre ways to define a function
           <ul>
             <li><a href="#statement">Function Statements</a></li>
             <li><a href="#arrow">Arrow Functions</a></li>
@@ -47,7 +51,18 @@
 
       <h2 id="statement">Function Statements</h2>
       <section>
-        
+        <h2>
+          <ul>
+            <li>
+              Function declarations are "hoisted" - it is as if they had all
+              been moved up to the top of whatever scope they are defined in
+            </li>
+            <li>
+              Code that invokes a function can exist in your program before any
+              code that declares the function
+            </li>
+          </ul>
+        </h2>
       </section>
 
       <h2 id="arrow">Arrow Functions</h2>
@@ -62,29 +77,26 @@
         </ul>
       </section>
 
-
-
       <h2 id="fde">Function Definition Expressions</h2>
       <section>
         <ul>
-          <li>Defines a function and its value is the newly defined function</li>
+          <li>
+            Defines a function and its value is the newly defined function
+          </li>
         </ul>
         <div class="card">
           <div class="card-body">
-            <code>
-              let square = function(x) { return x * x; };
-            </code>
+            <code> let square = function(x) { return x * x; }; </code>
           </div>
         </div>
       </section>
-
-
 
       <h2 id="invoke">Invocation Expressions</h2>
       <section>
         <ul>
           <li>Syntax for calling a function or method</li>
-          <li>Consists of
+          <li>
+            Consists of
             <ul>
               <li>Function expression</li>
               <li>Open parenthesis</li>
@@ -92,86 +104,101 @@
               <li>Close parenthesis</li>
             </ul>
           </li>
-          <li>When evaluated, 
+          <li>
+            When evaluated,
             <ul>
-              <li>The argument expressions are evaluated to create a list of argument values</li>
-              <li>Argument values are assigned, in order, to the parameter names specified when the function was defined</li>
+              <li>
+                The argument expressions are evaluated to create a list of
+                argument values
+              </li>
+              <li>
+                Argument values are assigned, in order, to the parameter names
+                specified when the function was defined
+              </li>
               <li>The body of the function executes</li>
-              <li>If the return statement returns a value, that becomes the value of the invocation expressions</li>
-              <li>Otherwise, the value of the invocation expression is undefined</li>
+              <li>
+                If the return statement returns a value, that becomes the value
+                of the invocation expressions
+              </li>
+              <li>
+                Otherwise, the value of the invocation expression is undefined
+              </li>
             </ul>
           </li>
-          <li>If the expression starts with a property access expression, the invocation is a method invocation
+          <li>
+            If the expression starts with a property access expression, the
+            invocation is a method invocation
             <ul>
-              <li>The array or object that is the subject of the property access becomes the value for the <code>this</code> keyword</li>
-              <li>This is true within the body of the function being executed</li>
+              <li>
+                The array or object that is the subject of the property access
+                becomes the value for the <code>this</code> keyword
+              </li>
+              <li>
+                This is true within the body of the function being executed
+              </li>
             </ul>
           </li>
         </ul>
         <div class="card">
           <div class="card-body">
-            <code>
-              let square = function(x) { return x * x; };
-            </code>
+            <code> let square = function(x) { return x * x; }; </code>
           </div>
         </div>
       </section>
-
 
       <h2 id="condinvoke">Conditional Invocation Expressions</h2>
       <section>
         <ul>
           <li>Added in ES202</li>
-          <li>Short circuiting, so right side is not evaluated if the left side is null or undefined</li>
-          <li>If the left side of <code>?.</code> evaluates to null or undefined
-          <ul>
-            <li>The function or method is not invoked</li>
-            <li>Undefined will be the result of the function invocation expression</li>
-            <li>Does not check if it is actually a function, only that it is not null</li>
-          </ul>
+          <li>
+            Short circuiting, so right side is not evaluated if the left side is
+            null or undefined
+          </li>
+          <li>
+            If the left side of <code>?.</code> evaluates to null or undefined
+            <ul>
+              <li>The function or method is not invoked</li>
+              <li>
+                Undefined will be the result of the function invocation
+                expression
+              </li>
+              <li>
+                Does not check if it is actually a function, only that it is not
+                null
+              </li>
+            </ul>
           </li>
         </ul>
         <div>
-
-        If log is null or undefined, it will not be evaluated.  Result will be undefined 
-        <div class="card">
-          <div class="card-body">
-            <code>
-              log?.(x);
-            </code>
+          If log is null or undefined, it will not be evaluated. Result will be
+          undefined
+          <div class="card">
+            <div class="card-body">
+              <code> log?.(x); </code>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-
-        Understand the difference between the following
-        <div class="card">
-          <div class="card-body">
-            <code>
-              // Regular property access, regular invocation<br/>
-              o.m();<br/>
-              // Conditional property access, regular invocation<br/>
-              o?.m(); <br/>
-              // Regular property access, conditional invocation<br/>
-              o.m?.(); <br/>
-            </code>
+        <div>
+          Understand the difference between the following
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Regular property access, regular invocation<br />
+                o.m();<br />
+                // Conditional property access, regular invocation<br />
+                o?.m(); <br />
+                // Regular property access, conditional invocation<br />
+                o.m?.(); <br />
+              </code>
+            </div>
           </div>
         </div>
-      </div>
-
-
       </section>
-
 
       <h2 id="argument">Argument Expressions</h2>
       <section>
-        <ul>
-
-        </ul>
+        <ul></ul>
       </section>
-
-
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
