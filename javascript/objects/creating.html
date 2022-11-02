@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Creating Objects
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Creating Objects</h1>
+
+      <h2 id="init">Object Initializers / Object Literals</h2>
+      <section>
+        <ul>
+          <li>
+            Expressions whose value is a newly created object
+            <ul>
+              <li>Are not primary expressions</li>
+            </ul>
+          </li>
+          <li>Also known as object literals</li>
+          <li>
+            Composed of
+            <ul>
+              <li>
+                Property name = a JavaScript identifier or string literal
+                <ul>
+                  <li>Must be quoted if using a space or hyphen in the name</li>
+                </ul>
+              </li>
+              <li>
+                Property value = any JavaScript expression
+                <ul>
+                  <li>
+                    The value of the expression is the value of the property
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          An object with 2 properties
+          <div class="card">
+            <div class="card-body">
+              <code> et p = { x: 2.3, y: -1.2 }; </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          ES6 allows nested object literals
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let rectangle = {<br />
+                upperLeft: { x: 2, y: 2 },<br />
+                lowerRight: { x: 4, y: 5 }<br />
+                };<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="create">Object Creation Expressions</h2>
+      <section>
+        <ul>
+          <li>Creates a new object</li>
+          <li>
+            Invokes a constructor function to initialize the properties of that
+            object
+          </li>
+          <li>
+            If no arguments are passed, no parentheses are needed
+            <ul>
+              <li>The entire result will be undefined</li>
+              <li>Will not throw a TypeError</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                new Object();<br />
+                new Object;<br />
+                new Point(2,3); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Object.create()</h2>
+      <section>
+        <ul>
+          <li>
+            Creates a new object using its first argument as a prototype of that
+            object
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    // o1 inherits properties x and y.<br />
+                    let o1 = Object.create({x: 1, y: 2}); <br />
+                    // results in 3 <br />
+                    o1.x + o1.y<br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Passing null will create a new object that has no prototype and no
+            inherited properties, not even basic things like toString
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code> let o1 = Object.create(null); <br /> </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Instead, pass Object.prototype to get an object like {} or new
+            Object()
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    let o1 = Object.create(Object.prototype); <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Useful when you want to pass an object, but want to prevent
+            modification of it
+            <ul>
+              <li>
+                The created object will inherit all properties of the original
+              </li>
+              <li>
+                Changes to the new object will not alter the original object
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

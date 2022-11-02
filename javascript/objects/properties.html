@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Objects</li>
+        </ol>
+      </nav>
+
+      <h1>Properties</h1>
+
+      <section>
+        <ul>
+          <li>Property names must be unique</li>
+          <li>
+            JS uses the term "own property" to refer to non-inherited properties
+          </li>
+          <li>
+            Properties have three property attributes
+            <ul>
+              <li>
+                writable - can the value of the property be set?
+              </li>
+              <li>
+                enumerable - is the property name returned in a for / in loop?
+              </li>
+              <li>
+                configurable - can the property be deleted and attributes
+                altered?
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="pae">Property Access Expressions</h2>
+      <section>
+        <ul>
+          <li>Evaluates to the value of an object property</li>
+          <li>Can use either a dot or square brackets operators</li>
+          <li>
+            Dot notation
+            <ul>
+              <li>
+                Dot notation only works when the property has a legal identifier
+                (cannot include spaces or punctuation marks)
+              </li>
+              <li>Static and must be hardcoded into the program</li>
+            </ul>
+          </li>
+          <li>
+            Square bracket notations
+            <ul>
+              <li>
+                Expression in brackets must be an expression that
+                <ul>
+                  <li>Evaluates to a string</li>
+                  <li>Can be converted to a string (can use numbers)</li>
+                  <li>Is a symbol</li>
+                </ul>
+              </li>
+              <li>Use square brackets when the property name is not static</li>
+            </ul>
+          </li>
+          <li>
+            Property access expressions fail if the left side is null or
+            undefined
+            <ul>
+              <li>
+                However, it will not fail if the right side is null or undefined
+              </li>
+              <li>
+                Protect again this by using a conditional property access
+                expression or equivalent expression
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>Both of these expressions evaluate to 1</div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let o = {x: 1, y: {z: 3}};<br />
+              o.x <br />
+              o["x"]<br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="cpae">Conditional Property Access Expressions</h2>
+      <section>
+        <ul>
+          <li>
+            If the expression on the left of a property access expression is
+            null or undefined, a TypeError will result
+          </li>
+          <li>Use a conditional version to guard against this</li>
+          <li>This allows you to chain together property accessors</li>
+          <li>
+            If one link in the chain is null or undefined, the result will be
+            short circuited
+            <ul>
+              <li>The entire result will be undefined</li>
+              <li>Will not throw a TypeError</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          A similar expression can be constructed with boolean AND operators
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let a = { b: {} };<br />
+                a && b && c && d;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This results in undefined, not an error
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let a = { b: {} };<br />
+                a.b?.c?.d;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Can also be used with square bracket notation
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let a = { b: {} };<br />
+                a?.["b"]?.["c"]?.["d"];
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Deleting a Property</h2>
+      <section>
+        <ul>
+          <li>
+            The <code>delete</code> operator to delete the specified object
+            property
+            <ul>
+              <li>Only works for own properties, not inherited ones</li>
+            </ul>
+          </li>
+          <li>
+            Used for side effect, not the value it returns
+            <ul>
+              <li>Returns true if the delete succeeded</li>
+              <li>Returns true if the delete had not effect</li>
+            </ul>
+          </li>
+          <li>
+            This will remove the property, not just set its value to undefined
+          </li>
+          <li>
+            Only works when
+            <ul>
+              <li>The operand is a property access expression</li>
+              <li>The configurable attribute is true</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let o = {x: 1, y: 2};<br />
+
+                // returns true <br />
+                delete o.x;<br />
+                // returns false or errors in strict mode delete 0; new
+                Point(2,3); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Testing for Properties</h2>
+      <section>
+        <ul>
+          <li>There are several ways to test if an object has a property</li>
+          <li>
+            <code>in</code> operator
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let o = { x: 1 };<br />
+                  "x" in o // => true: o has an own property "x"<br />
+                  "y" in o // => false: o doesn't have a property "y"<br />
+                  "toString" in o // => true: o inherits a toString property
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            <code>hasOwnProperty()</code> method - returns false for inherited
+            properties
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let o = { x: 1 };<br />
+                  o.hasOwnProperty("x") // => true: o has an own property x<br />
+                  o.hasOwnProperty("y") // => false: o doesn't have a property
+                  y<br />
+                  o.hasOwnProperty("toString") // => false: toString is an
+                  inherited property
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            <code>propertyIsEnumerable()</code> method - returns true if own
+            property and it is enumerable
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let o = { x: 1 };<br />
+                  o.propertyIsEnumerable("x") // => true: o has an own
+                  enumerable property x<br />
+                  o.propertyIsEnumerable("toString") // => false: not an own
+                  property<br />
+                  Object.prototype.propertyIsEnumerable("toString") // => false:
+                  not enumerable
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>Query for the property</li>
+        </ul>
+      </section>
+
+      <h2>Enumerating Properties</h2>
+      <section>
+        <ul>
+          <li>
+            for/in loop
+            <ul>
+              <li>
+                Runs a loop for each enumerable property - own or inherited
+              </li>
+
+              <li>Does not include built in methods that object inherit</li>
+            </ul>
+            <div>
+              To exclude inherited properties
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    for(let p in o) {<br />
+                      if (!o.hasOwnProperty(p)) continue; <br />
+                    }
+                  </code>
+                </div>
+              </div>
+            </div>
+            <div>
+              To exclude methods
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    for(let p in o) {<br />
+                      if (typeof o[p] === "function") continue; <br />
+                    }
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Get an array of property names for an object, then loop using a for/of loop?
+            <ul>
+              <li>Object.keys()</li>
+              <li>Object.getOwnPropertyNames() = when keys are strings</li>
+              <li>Object.getOwnPropertySymbols() = when keys are Symbols</li>
+              <li>Object.ownKeys()</li>
+
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

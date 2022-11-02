@@ -25,46 +25,146 @@
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Object Methods</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Object Methods
+          </li>
         </ol>
       </nav>
 
       <h1>Object Methods</h1>
 
+      <h2>Object Methods - Call on object instance</h2>
 
-      <h2>Object.keys()</h2>
+      <h3>toJSON()</h3>
+      <section>
+        <ul>
+          <li>This is not defined on Object.prototype by default</li>
+          <li>JSON.stringify() looks for this method on an object it is asked to serialize</li>
+        </ul>
+      </section>
+
+      <h3>toLocaleString()</h3>
+      <section>
+        <ul>
+          <li>Default just calls toString()</li>
+          <li>
+            Date and Number classes define customized versions that try to
+            format numbers, dates, and times according to local conventions
+          </li>
+          <li>Can define a custom version on your object</li>
+        </ul>
+      </section>
+
+      <h3>toString()</h3>
       <section>
         <ul>
           <li>
-            Returns an array of a given objects own enumerable property names
+            Returns a string that somehow represents the object on which it is
+            invoked
+          </li>
+          <li>
+            This is called automatically when it needs to be converted to a
+            stringify
             <ul>
-              <li>Returned as an array of strings</li>
+              <li>
+                Example is using the + operator to concatenate it to a string
+              </li>
             </ul>
           </li>
-          <li>Iterates the same order that a normal loop would</li>
           <li>
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+            The default version is not very informative
+            <ul>
+              <li>[object Object]</li>
+              <li>
+                Objects can implement their own version to be more helpful
+              </li>
+            </ul>
           </li>
         </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              <pre>
-              const object1 = {
-                a: 'somestring',
-                b: 42,
-                c: false
-              };                
-              console.log(Object.keys(object1));
-              // expected output: Array ["a", "b", "c"]
-            </pre
-              >
-            </code>
+      </section>
+
+      <h3>toLocaleString()</h3>
+      <section>
+        <ul>
+          <li>Default just calls toString()</li>
+          <li>
+            Date and Number classes define customized versions that try to
+            format numbers, dates, and times according to local conventions
+          </li>
+          <li>Can define a custom version on your object</li>
+        </ul>
+      </section>
+
+      <h3>valueOf()</h3>
+      <section>
+        <ul>
+          <li>
+            Called when the object needs to convert the object to something
+            other than a string, typically a number
+          </li>
+          <li>Can define a custom version on your object</li>
+        </ul>
+      </section>
+
+      <h2>Object Methods - Call on Object</h2>
+
+      <h3>Object.assign()</h3>
+      <section>
+        <ul>
+          <li>
+            Expects two or more objects as it argument
+            <ul>
+              <li>
+                First argument is the target object
+                <ul>
+                  <li>This is modified</li>
+                </ul>
+              </li>
+              <li>
+                Second and subsequent objects
+                <ul>
+                  <li>These are source objects</li>
+                  <li>These are not modified</li>
+                </ul>
+              </li>
+              <li>
+                For each source object, it copies the enumerable own properties
+                of that object into the target object
+                <ul>
+                  <li>
+                    Properties are copied when matches are found in the source
+                    object
+                  </li>
+                  <li>
+                    This is done so properties on the last source object are the
+                    last items to be copied
+                  </li>
+                  <li>This includes Symbols</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Overwrites everything in o with defaults
+          <div class="card">
+            <div class="card-body">
+              <code> Object.assign(o, defaults); </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Creates a new object, copy the defaults object's properties into it,
+          and then override those defaults with the properties in o
+          <div class="card">
+            <div class="card-body">
+              <code> o = Object.assign({}, defaults, o); </code>
+            </div>
           </div>
         </div>
       </section>
 
-      <h2>Object.create()</h2>
+      <h3>Object.create()</h3>
       <section>
         <ul>
           <li>
@@ -100,7 +200,7 @@
         </div>
       </section>
 
-      <h2>Object.entries()</h2>
+      <h3>Object.entries()</h3>
       <section>
         <ul>
           <li>
@@ -155,6 +255,38 @@
                 >
               </code>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Object.keys()</h3>
+      <section>
+        <ul>
+          <li>
+            Returns an array of a given objects own enumerable property names
+            <ul>
+              <li>Returned as an array of strings</li>
+            </ul>
+          </li>
+          <li>Iterates the same order that a normal loop would</li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const object1 = {
+                a: 'somestring',
+                b: 42,
+                c: false
+              };                
+              console.log(Object.keys(object1));
+              // expected output: Array ["a", "b", "c"]
+            </pre
+              >
+            </code>
           </div>
         </div>
       </section>

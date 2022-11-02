@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Prototypes and Prototype Inheritance
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Prototypes and Prototype Inheritance</h1>
+      <section>
+        <ul>
+          <li>
+            JS uses the term "own property" to refer to non-inherited properties
+          </li>
+          <li>
+            Almost every JS object has a second JS object associated with it
+            known as a prototype
+            <ul>
+              <li>Objects inherit the properties from its prototype</li>
+            </ul>
+          </li>
+
+          <li>
+            All objects created by object literals have the same prototype
+            object
+            <ul>
+              <li>Use <code>Object.prototype</code> to refer to this object</li>
+            </ul>
+          </li>
+          <li>
+            Objects created with the new keyword and a constructor invocation
+            are different
+            <ul>
+              <li>
+                The value of the prototype property of the constructor function
+                is their prototype
+              </li>
+              <li>
+                Object created by <code>new Object()</code> inherits from
+                Object.prototype (like {})
+              </li>
+              <li>
+                Object created by <code>new Array()</code> inherits from
+                Date.prototype (like {})
+              </li>
+            </ul>
+          </li>
+          <li>Prototype chain = linked series of prototype objects</li>
+          <li>
+            The prototype chain is searched for looking for a property
+            <ul>
+              <li>
+                When querying for a property on an object x, it first checks
+                "its own properties"
+              </li>
+              <li>
+                If not found there, the prototype object of x is checked for the
+                property.
+              </li>
+              <li>
+                If not found there and there is a prototype object, check that
+                for the property
+              </li>
+              <li>
+                This continues until the property is found or an object with a
+                null prototype is searched
+              </li>
+            </ul>
+          </li>
+          <li>
+            Inheritance occurs when querying properties, but not setting them
+            <ul>
+              <li>
+                Making an assignment to a prototype property creates a property
+                on the outermost object
+              </li>
+              <li>It will never make an assignment to a prototype property.</li>
+              <li>This allows us to selectively override inherited properties.</li>
+              <li>
+                If you add a property to an object that has the same name as a
+                property on the prototype, it only hides the property on the
+                prototype.
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
