@@ -172,6 +172,118 @@
           </li>
         </ul>
       </section>
+
+      <h2>ES6 Shortcuts</h2>
+
+      <h3>Shorthand Properties</h3>
+      <section>
+        <ul>
+          <li>
+            You can drop the colon when creating a new object from existing
+            variables that have the same name
+          </li>
+        </ul>
+        <div>
+          Before...
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let x = 1, y = 2;<br />
+                let o = {<br />
+                x: x,<br />
+                y: y<br />
+                };<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Can be rewritten as
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let x = 1, y = 2;<br />
+                let o = { x, y };<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h3>Computed Property Names</h3>
+      <section>
+        <ul>
+          <li>Useful when you need to set a specific property name, but that name is not a compile time constant</li>
+          <li>Before, you would create the object, then set the property using bracket notation</li>
+          <li>ES6 uses computed properties that allows you to put the bracket notation into an object literal</li>
+          <li>One use case is working with a JS library that expects to be passed objects with specific set of properties and those properties are defined as constants in the library</li>
+        </ul>
+        <div>
+          Can be rewritten as
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const PROPERTY_NAME = "p1";<br />
+                function computePropertyName() { return "p" + 2; }<br />
+                let o = {};<br />
+                o[PROPERTY_NAME] = 1;<br />
+                o[computePropertyName()] = 2;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Can be rewritten as
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const PROPERTY_NAME = "p1";<br />
+                function computePropertyName() { return "p" + 2; }<br />
+                let p = {<br />
+                [PROPERTY_NAME]: 1,<br />
+                [computePropertyName()]: 2<br />
+                };<br />                
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h2>Method Shorthand</h2>
+      <section>
+        <ul>
+          <li>Can now eliminate the function keyword and colon when defining an method on an object</li>
+        </ul>
+        <div>
+          Before ...
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let square = {<br />  
+                  area: function() { return this.side * this.side; },<br />  
+                  side: 10<br />  
+                  };<br />  
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Can be written as
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let square = {<br />  
+                  area() { return this.side * this.side; },<br />  
+                  side: 10<br />  
+                  };<br />  
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
