@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            FormGroup
+          </li>
+        </ol>
+      </nav>
+
+      <h1>FormGroup</h1>
+
+
+      <section>
+        <ul>
+          <li>
+            Create a new instance of this class and set it as a property on the
+            component
+          </li>
+          <li>This takes an object for each of your FormControls</li>
+          <li>
+            You can access the value of a FormControl object using the following
+            <ul>
+              <li>
+                The value property - gives a snapshot of the current value
+              </li>
+              <li>
+                Using the valueChanges observable
+                <ul>
+                  <li>
+                    can listen for changes in the:
+                    <ul>
+                      <li>template using the AsyncPipe</li>
+                      <li>component using the subscribe method</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Example just uses interpolation to display the value, which is
+                updated on each change, so not really sure there the above come
+                from
+              </li>
+            </ul>
+          </li>
+          <li>
+            SetValue method
+            <ul>
+              <li>
+                call this to replace the old value of the control entirely
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      updateName() { <br/>
+                        this.name.setValue('Nancy');<br/>
+                      }<br/>
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="formGroups">FormGroups</h2>
+      <section>
+        <ul>
+          <li>Use the FormGroup class to group FormControl together</li>
+          <li>
+            This tracks the form state of a group of form control instances
+            <ul>
+              <li>This becomes the source of truth for the model value</li>
+            </ul>
+          </li>
+          <li>Each control is tracked by name when creating the form group</li>
+          <li>
+            To create
+            <ul>
+              <li>
+                Create a new FormGroup and provide the constructor with an
+                object of named keys mapped to their FormControl
+              </li>
+              <li>
+                This group has the name properties an methods as a form control
+                instance
+              </li>
+              <li>
+                This tracks the status and changes for each of its controls, so
+                it one control changes, the parent control also emits a new
+                status or value change
+              </li>
+            </ul>
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                Add [formGroup]=&quot;formGroupPropertyName&quot; to the form
+                element containing controls
+              </li>
+              <li>
+                Add formControlName=&quot;formControlName&quot; to each control
+                <ul>
+                  <li>Node square brackets are only on the formGroup</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Nested Form Groups
+            <ul>
+              <li>
+                FormGroup objects can contain nested FormGroup objects (which
+                may contain additional FormControls and FormGroups) for
+                organization
+              </li>
+              <li>
+                Changes in status and value from the nested form groups
+                propagate to the parent form group
+              </li>
+              <li>
+                In the template, need to add some grouping element around all
+                inputs in the subgroup, such as the following:
+                <div class="card">
+                  <div class="card-body">
+                    <code
+                      >&lt;div formGroupName=&quot;formGroupName&quot; ...</code
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            To access specific form controls using the get method
+            <div class="card">
+              <div class="card-body">
+                <code>this.profileForm.get('aliases') as FormArray</code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

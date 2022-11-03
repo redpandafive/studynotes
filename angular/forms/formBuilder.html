@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            FormBuilder
+          </li>
+        </ol>
+      </nav>
+
+      <h1>FormBuilder</h1>
+
+      <section>
+        <ul>
+          <li>
+            Service that provides convenience methods for generating FormGroup
+            and FormControls
+          </li>
+          <li>
+            Setup
+            <ul>
+              <li>
+                Import the service into your component
+                <div class="card">
+                  <div class="card-body">
+                    <code> import { FormBuilder } from '@angular/forms'; </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                This is a service, so you must inject it into the component
+                <div class="card">
+                  <div class="card-body">
+                    <code> constructor(private fb: FormBuilder) { } </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                There are three methods on this service for generating form
+                components
+                <ul>
+                  <li>
+                    control()
+                    <ul>
+                      <li>Constructs a new FormControl</li>
+                    </ul>
+                  </li>
+                  <li>
+                    group()
+                    <ul>
+                      <li>Creates a new FormGroup instance</li>
+                    </ul>
+                  </li>
+                  <li>
+                    array()
+                    <ul>
+                      <li>Creates a new FormArray</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            call the group() method to generate a FormGroup object
+            <ul>
+              <li>pass an object to define the properties in the model</li>
+              <li>
+                the value of each control name is an array containing the
+                initial value as the first item in the array
+                <ul>
+                  <li>
+                    second and third values in the array will be synchronous and
+                    asynchronous validators
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Example:
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      this.formBuilder.group({ firstName:
+                      &#91;&quot;&quot;&#93;, lastName: &#91;&quot;&quot;&#93;
+                      })
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

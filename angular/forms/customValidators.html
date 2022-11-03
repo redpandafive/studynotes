@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Custom Validators
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Custom Validators</h1>
+      
+      <section>
+        <ul>
+          <li>
+            Custom validators can be implemented as classes
+            <ul>
+              <li>
+                Use the Directive decorator on this class
+                <ul>
+                  <li>This should contain a selector</li>
+                </ul>
+              </li>
+              <li>The class name should end in a Validator suffix</li>
+              <li>The class should implement Validator class</li>
+              <li>
+                Contains a single method, validate
+                <ul>
+                  <li>Takes a FormGroup object as a parameter</li>
+                  <li>Returns { [key: string]: any }</li>
+                </ul>
+              </li>
+              <li>
+                To access a control named address in the FormGroup
+                <ul>
+                  <li>formGroup.controls['address']</li>
+                </ul>
+              </li>
+              <li>
+                You can navigate up the FormGroup hierarchy by accessing
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      (&lt;FormGroup&gt;formGroup.root).controls&#91;'controlInParentFormGroup'&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>Returning null means validation is passed</li>
+            </ul>
+          </li>
+
+          <li>
+            Custom validator classes must be added to Angular's validator
+            'service'
+            <ul>
+              <li>
+                Import NG_VALIDATORS from @angular/forms - this is essentially a
+                service
+              </li>
+              <li>
+                In the directive config object add
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      Providers: &#91;{provide: NG_VALIDATORS, useExisting:
+                      LocationValidator, multi: true }&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Without the multi: true parameter, this would break built in
+            validators since LocationValidator is being configured to be
+            injected
+          </li>
+          <li>
+            The 3rd parameter adds the new validator to the collection of
+            services provided by NG_VALIDATORS that are built in by Angular
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
