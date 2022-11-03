@@ -808,14 +808,55 @@ private restrictedWords(words)
         </ul>
       </section>
 
-      <h2 id="formbuilder">FormBuilder</h2>
+      <h2 id="formbuilder">FormBuilder Service</h2>
       <section>
         <ul>
           <li>
             Service that provides convenience methods for generating FormGroup
             and FormControls
           </li>
-          <li>this is a service, so you must inject it into the component</li>
+          <li>Setup
+            <ul>
+              <li>Import the service into your component
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      import { FormBuilder } from '@angular/forms';
+                    </code>
+                  </div>
+                </div>      
+              </li>
+              <li>This is a service, so you must inject it into the component
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      constructor(private fb: FormBuilder) { }
+                    </code>
+                  </div>
+                </div>      
+              </li>
+              <li>There are three methods on this service for generating form components
+                <ul>
+                  <li>control()
+                    <ul>
+                      <li>Constructs a new FormControl</li>
+                    </ul>
+                  </li>
+                  <li>group()
+                    <ul>
+                      <li>Creates a new FormGroup instance</li>
+                    </ul>
+                  </li>
+                  <li>array()
+                    <ul>
+                      <li>Creates a new FormArray</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+            </ul>
+          </li>
           <li>
             call the group() method to generate a FormGroup object
             <ul>
