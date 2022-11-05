@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Array Properties and Methods
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Array Properties and Methods</h1>
+
+      <h2>Properties</h2>
+
+      <h3>length</h3>
+      <section>
+        <ul>
+          <li>This property makes arrays different form regular JS objects</li>
+          <li>For non-sparse arrays, the number of elements in the array
+            <ul>
+              <li>The length will be one more than number of elements in the array</li>
+            </ul>
+          </li>
+          <li>For sparse arrays, length is greater than the number of elements
+            <ul>
+              <li>Can guarantee that the length value is guaranteed to be larger than the index of every element in the array</li>
+            </ul>
+          </li>
+          <li>You can assign a value to the length property
+            <ul>
+              <li>Increasing the length does not add any new elements, just creates a sparse area at the end</li>
+              <li>Decreasing the length removes elements that are outside of the boundaries</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Factory Methods</h2>
+      
+
+      <h3>Array.from()</h3>
+      <section>
+        <ul>
+          <li>Expects an iterable or array like object as its first argument</li>
+          <li>Returns a new array that contains the elements of that object</li>
+          <li>When an iterable is passed, it works like the spread operator
+            <ul>
+              <li>Simple way to make a copy of an array</li>
+            </ul>
+          </li>
+          <li>Some web browser methods use array-like objects as return values
+            <ul>
+              <li>Have a numeric length property and values stored with properties whose names are integers</li>
+              <li>Easier to work with by converting to a JS array object</li>
+            </ul>
+          </li>
+          <li>The optional second parameter accepts a function
+            <ul>
+              <li>Each element from the source object is sent through the function</li>
+              <li>Similar to map, but more efficient that building up the array, then mapping it into another.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h3>Array.of()</h3>
+      <section>
+        <ul>
+          <li>Useful when you need to create an array with a single numeric element.  Trying something similar with the Array constructor, it will consider the number to be a length, not a value</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              // returns an empty array
+              Array.of();
+              // returns an array with a single value, 10
+              Array.of(10) // => [10]; 
+              // returns an array of [1,2,3]
+              Array.of(1,2,3)              
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Methods</h2>
+
+      <h3>filter()</h3>
+      <section>
+        <ul>
+          <li>Creates a shallow copy of a portion of a given array,</li>
+          <li>
+            Filtered down to just the elements from the given array that pass
+            the test implemented by the provided function.
+          </li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              const words = &#91;'spray', 'limit', 'elite', 'exuberant',
+              'destruction', 'present'&#93;;&#10;const result =
+              words.filter(word =&gt; word.length &gt;
+              6);&#10;console.log(result);&#10;// expected output: Array
+              &#91;&quot;exuberant&quot;, &quot;destruction&quot;,
+              &quot;present&quot;&#93;"
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>find()</h3>
+      <section>
+        <ul>
+          <li>
+            Returns the first element in the provided array that satisfies the
+            provided testing function.
+          </li>
+          <li>
+            If no values satisfy the testing function, undefined is returned.
+          </li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              const array1 = &#91;5, 12, 8, 130, 44&#93;;&#10;&#10;const found =
+              array1.find(element =&gt; element &gt;
+              10);&#10;&#10;console.log(found);&#10;// expected output: 12&#10;"
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>foreach()</h3>
+      <section>
+        <ul>
+          <li>Executes a provided function once for each array element</li>
+          <li>Doesn't actually return anything</li>
+          <li>Use to mutate an array or do something with each value in it</li>
+          <li>Slower than map()</li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const array1 = &#91;'a', 'b',
+                'c'&#93;;&#10;&#10;array1.forEach(element =&gt;
+                console.log(element));&#10;&#10;// expected output:
+                &quot;a&quot;&#10;// expected output: &quot;b&quot;&#10;//
+                expected output: &quot;c&quot;"
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>includes()</h3>
+      <section>
+        <ul>
+          <li>
+            Determines whether an array includes a certain value among its
+            entries, returning true or false as appropriate.
+          </li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body"><code> "</code></div>
+          </div>
+        </div>
+      </section>
+
+      <h3>map()</h3>
+      <section>
+        <ul>
+          <li>
+            Creates a new array with the results of calling a provided function
+            on every element in the calling array
+          </li>
+          <li>
+            Supports immutability since you don't modify the existing array
+          </li>
+          <li>Faster than foreach()</li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const numbers = [1, 4, 9];<br />
+                const roots = numbers.map((num) => Math.sqrt(num));<br />
+                <br />
+                // roots is now [1, 2, 3], numbers is still [1, 4, 9]
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h3>Adding / Removing Elements</h3>
+      <section>
+        <ul>
+<li>pop()
+  <ul>
+    <li>Removes the last element of the array and returns it</li>
+    <li>This reduces the length of an array by 1</li>
+  </ul>
+</li>
+          <li>push()
+            <ul>
+              <li>Adds an element to the end of the array</li>
+              <li>Adds the new element to array[array.length]</li>
+            </ul>
+          </li>
+          <li>shift()
+            <ul>
+              <li>Removes and returns the first element of the array</li>
+              <li>This reduces the length of an array by 1</li>
+              <li>Shifts all elements down to an index one lower than the current index</li>
+            </ul>
+          </li>
+          <li>splice()
+            <ul>
+              <li>General method for inserting, deleting, or replacing array elements</li>
+            </ul>
+          </li>
+          <li>unshift()
+            <ul>
+              <li>Adds an element to the beginning of the array</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

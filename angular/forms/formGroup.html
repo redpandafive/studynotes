@@ -26,14 +26,11 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            FormGroup
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">FormGroup</li>
         </ol>
       </nav>
 
       <h1>FormGroup</h1>
-
 
       <section>
         <ul>
@@ -75,9 +72,9 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      updateName() { <br/>
-                        this.name.setValue('Nancy');<br/>
-                      }<br/>
+                      updateName() { <br />
+                      this.name.setValue('Nancy');<br />
+                      }<br />
                     </code>
                   </div>
                 </div>
@@ -90,71 +87,181 @@
       <h2 id="formGroups">FormGroups</h2>
       <section>
         <ul>
-          <li>Use the FormGroup class to group FormControl together</li>
           <li>
-            This tracks the form state of a group of form control instances
+            Defines a form with a fixed set of controls that you can manage
+            together
             <ul>
+              <li>
+                This tracks the form state of a group of form control instances
+              </li>
               <li>This becomes the source of truth for the model value</li>
             </ul>
           </li>
           <li>Each control is tracked by name when creating the form group</li>
           <li>
-            To create
+            FormGroup has the same properties and methods as a form control
+            instance
+          </li>
+          <li>
+            It tracks the status and changes for each of its controls, so it one
+            control changes, the parent control also emits a new status or value
+            change
+          </li>
+        </ul>
+      </section>
+
+      <h2>To Create</h2>
+      <section>
+        <ul>
+          <li>
+            Create a new FormGroup and provide the constructor with an object of
+            named keys mapped to their FormControl
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  profileForm = new FormGroup({ <br />
+                  firstName: new FormControl(''),<br />
+                  lastName: new FormControl(''),<br />
+                  });
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Add [formGroup]=&quot;formGroupPropertyName&quot; to the form
+            element containing controls
             <ul>
               <li>
-                Create a new FormGroup and provide the constructor with an
-                object of named keys mapped to their FormControl
+                This creates a communication layer between the model and the
+                form containing the inputs
               </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code> &lt;form [formGroup]="profileForm"&gt; </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Add formControlName=&quot;formControlName&quot; to each control.
+            Note, the square brackets are only on the FormGroup
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;form [formGroup]="profileForm"&gt; &lt;label
+                  for="first-name"&gt;First Name: &lt;/label&gt; &lt;input
+                  id="first-name" type="text" formControlName="firstName"&gt;
+                  &lt;label for="last-name"&gt;Last Name: &lt;/label&gt;
+                  &lt;input id="last-name" type="text"
+                  formControlName="lastName"&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Add a submit button inside the form to trigger the submit
+            <ul>
               <li>
-                This group has the name properties an methods as a form control
-                instance
+                The submit emit is emitted by the form tag using the built in
+                DOM event
               </li>
+              <li>Trigger teh event by clicking a button with submit type</li>
               <li>
-                This tracks the status and changes for each of its controls, so
-                it one control changes, the parent control also emits a new
-                status or value change
+                This lets the user press the Enter key to submit the completed
+                form
               </li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h2>Working Data</h2>
+      <section>
+        <ul>
           <li>
-            Syntax
+            The FormGroup directive listens for the submit event emitted by the
+            form element
             <ul>
               <li>
-                Add [formGroup]=&quot;formGroupPropertyName&quot; to the form
-                element containing controls
+                It emits an ngSubmit event that you can bind to a callback
+                function
               </li>
               <li>
-                Add formControlName=&quot;formControlName&quot; to each control
+                The callback function can use EventEmitter to send the out of
+                the component
                 <ul>
-                  <li>Node square brackets are only on the formGroup</li>
+                  <li>This keeps the form encapsulated inside the component</li>
                 </ul>
               </li>
             </ul>
           </li>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form [formGroup]="profileForm" (ngSubmit)="onSubmit()"&gt;
+              </code>
+            </div>
+          </div>
+        </ul>
+      </section>
+
+      <h2>Nested Form Groups</h2>
+      <section>
+        <ul>
           <li>
-            Nested Form Groups
+            FormGroup objects can contain nested FormGroup objects (which may
+            contain additional FormControls and FormGroups) for organization
             <ul>
               <li>
-                FormGroup objects can contain nested FormGroup objects (which
-                may contain additional FormControls and FormGroups) for
-                organization
+                This makes working with complex forms more manageable by
+                breaking large form groups into smaller, more manageable ones
               </li>
-              <li>
-                Changes in status and value from the nested form groups
-                propagate to the parent form group
-              </li>
-              <li>
-                In the template, need to add some grouping element around all
-                inputs in the subgroup, such as the following:
-                <div class="card">
-                  <div class="card-body">
-                    <code
-                      >&lt;div formGroupName=&quot;formGroupName&quot; ...</code
-                    >
-                  </div>
-                </div>
-              </li>
+              <li>Examples of this are a name section and a separate address section</li>
             </ul>
+          </li>
+          <li>
+            Changes in status and value from the nested form groups propagate to
+            the parent form group
+          </li>
+          <li>
+Create a nested group in the component as follows.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  profileForm = new FormGroup({ <br/>
+                    firstName: new FormControl(''), <br/>
+                    lastName: new FormControl(''),<br/>
+                    address: new FormGroup({<br/>
+                      street: new FormControl(''),<br/>
+                      city: new FormControl(''),<br/>
+                      state: new FormControl(''),<br/>
+                      zip: new FormControl('')<br/>
+                    })<br/>
+                  });
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            In the template, need to add some grouping element around all inputs
+            in the subgroup, such as the following:
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;div formGroupName=&quot;formGroupName&quot; <br/>
+                  &lt;div formGroupName="address"&gt;<br/>
+                  &lt;h2&gt;Address&lt;/h2&gt;<br/>                  
+                  &lt;label for="street"&gt;Street: &lt;/label&gt; <br/>
+                  &lt;input id="street" type="text" formControlName="street"&gt; <br/>                  
+                  &lt;label for="city"&gt;City: &lt;/label&gt; <br/>
+                  &lt;input id="city" type="text" formControlName="city"&gt; <br/>                  
+                  &lt;label for="state"&gt;State: &lt;/label&gt; <br/>
+                  &lt;input id="state" type="text" formControlName="state"&gt; <br/>                  
+                  &lt;label for="zip"&gt;Zip Code: &lt;/label&gt; <br/>
+                  &lt;input id="zip" type="text" formControlName="zip"&gt; <br/>
+                </code>
+              </div>
+            </div>
           </li>
           <li>
             To access specific form controls using the get method

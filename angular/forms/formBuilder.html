@@ -40,73 +40,102 @@
             Service that provides convenience methods for generating FormGroup
             and FormControls
           </li>
+        </ul>
+      </section>
+
+      <h2>Setup</h2>
+      <section>
+        <ul>
           <li>
-            Setup
+            Import the service into your component
+            <div class="card">
+              <div class="card-body">
+                <code> import { FormBuilder } from '@angular/forms'; </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This is a service, so you must inject it into the component
+            <div class="card">
+              <div class="card-body">
+                <code> constructor(private fb: FormBuilder) { } </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            There are three methods on this service for generating form
+            components
             <ul>
               <li>
-                Import the service into your component
-                <div class="card">
-                  <div class="card-body">
-                    <code> import { FormBuilder } from '@angular/forms'; </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                This is a service, so you must inject it into the component
-                <div class="card">
-                  <div class="card-body">
-                    <code> constructor(private fb: FormBuilder) { } </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                There are three methods on this service for generating form
-                components
+                control()
                 <ul>
-                  <li>
-                    control()
-                    <ul>
-                      <li>Constructs a new FormControl</li>
-                    </ul>
-                  </li>
-                  <li>
-                    group()
-                    <ul>
-                      <li>Creates a new FormGroup instance</li>
-                    </ul>
-                  </li>
-                  <li>
-                    array()
-                    <ul>
-                      <li>Creates a new FormArray</li>
-                    </ul>
-                  </li>
+                  <li>Constructs a new FormControl</li>
+                </ul>
+              </li>
+              <li>
+                group()
+                <ul>
+                  <li>Creates a new FormGroup instance</li>
+                </ul>
+              </li>
+              <li>
+                array()
+                <ul>
+                  <li>Creates a new FormArray</li>
                 </ul>
               </li>
             </ul>
           </li>
           <li>
-            call the group() method to generate a FormGroup object
+            Call the group() method to generate a FormGroup object
             <ul>
-              <li>pass an object to define the properties in the model</li>
               <li>
-                the value of each control name is an array containing the
+                Pass an object to define the properties in the model
+              </li>
+              <li>
+                The value of each control name is an array containing the
                 initial value as the first item in the array
                 <ul>
                   <li>
-                    second and third values in the array will be synchronous and
+                    Second and third values in the array will be synchronous and
                     asynchronous validators
                   </li>
                 </ul>
               </li>
               <li>
-                Example:
+                Example with a nested FormGroup:
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      this.formBuilder.group({ firstName:
-                      &#91;&quot;&quot;&#93;, lastName: &#91;&quot;&quot;&#93;
-                      })
+                      this.fb.group({ <br/>
+                        firstName: [''], <br/>
+                        lastName: [''], <br/>
+                        address: this.fb.group({ <br/>
+                          street: [''], <br/>
+                          city: [''], <br/>
+                          state: [''], <br/>
+                          zip: [''] <br/>
+                        }),<br/>
+                      });<br/>
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Compare to the manual version
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      profileForm = new FormGroup({ <br/>
+                        firstName: new FormControl(''), <br/>
+                        lastName: new FormControl(''), <br/>
+                        address: new FormGroup({ <br/>
+                          street: new FormControl(''), <br/>
+                          city: new FormControl(''), <br/>
+                          state: new FormControl(''), <br/>
+                          zip: new FormControl('') <br/>
+                        }) <br/>
+                      });<br/>
                     </code>
                   </div>
                 </div>

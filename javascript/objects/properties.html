@@ -55,10 +55,10 @@
         </ul>
       </section>
 
-      <h2 id="pae">Property Access Expressions</h2>
+      <h2 id="pae">Data Property Access Expressions</h2>
       <section>
         <ul>
-          <li>Evaluates to the value of an object property</li>
+          <li>Evaluates to the value of an object data property</li>
           <li>Can use either a dot or square brackets operators</li>
           <li>
             Dot notation
@@ -110,7 +110,7 @@
         </div>
       </section>
 
-      <h2 id="cpae">Conditional Property Access Expressions</h2>
+      <h2 id="cpae">Conditional Data Property Access Expressions</h2>
       <section>
         <ul>
           <li>
@@ -163,7 +163,7 @@
         </div>
       </section>
 
-      <h2>Deleting a Property</h2>
+      <h2>Deleting a Data Property</h2>
       <section>
         <ul>
           <li>
@@ -207,7 +207,7 @@
         </div>
       </section>
 
-      <h2>Testing for Properties</h2>
+      <h2>Testing for Data Properties</h2>
       <section>
         <ul>
           <li>There are several ways to test if an object has a property</li>
@@ -308,6 +308,81 @@
 
             </ul>
           </li>
+        </ul>
+      </section>
+
+
+
+      <h2>Property Getters and Setters</h2>
+      <section>
+        <ul>
+          <li>These are also called accessor properties</li>
+          <li>If a property has both a getter and setter methods, it is a read/write property</li>
+          <li>These are inherited just like data properties are</li>
+          <li>These do not have a single value, but instead have one or two accessor methods
+            <ul>
+              <li>getter
+                <ul>
+                  <li>Called when the program queries the value of an accessor property</li>
+                </ul>
+              </li>
+              <li>setter
+                <ul>
+                  <li>Invoked when setting the value of an accessor property</li>
+                  <li>Return value is ignored</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Syntax
+            <ul>
+              <li>Defined as one or two methods whose name is the same as the property name</li>
+              <li>In ES6, you can use computed property names after <code>get</code> or <code>set</code> with an expression in square brackets</li>
+            </ul>
+          </li>
+          <div>
+          Simple Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let o = {<br/>
+                  // An ordinary data property <br/>
+                  dataProp: value, <br/>
+                  // An accessor property defined as a pair of functions. <br/>
+                  get accessorProp() { return this.dataProp; }, <br/>
+                  set accessorProp(value) { this.dataProp = value; } <br/>
+                  }; <br/>
+              </code>
+            </div>
+          </div>
+          </div>
+          <div>
+            More complicated example.  The <code>this</code> keyword points to object p
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  <pre>
+let p = { 
+     // x and y are read-write data properties. 
+     x: 1.0, 
+     y: 1.0, 
+
+     // r is a read-write accessor property with getter and setter                    
+     get r() { return Math.hypot(this.x, this.y); },  
+     set r(newvalue) {  
+         let oldvalue = Math.hypot(this.x, this.y);  
+         let ratio = newvalue/oldvalue;  
+         this.x *= ratio;  
+         this.y *= ratio;  
+      },  
+      // theta is a read-only accessor property with getter only.  
+      get theta() { return Math.atan2(this.y, this.x); } 
+};</pre>
+                </code>
+              </div>
+            </div>
+  
+            </div>
         </ul>
       </section>
     </div>

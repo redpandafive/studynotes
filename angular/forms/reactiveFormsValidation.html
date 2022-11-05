@@ -256,9 +256,9 @@
                         <div class="card">
                           <div class="card-body">
                             <code>
-                              private restrictedWords(control: formControl):
+                              private restrictedWords(control: formControl):<br />
                               {&#91;key: string&#93;: any} {<br />
-                              return control.value.includes('foo') ?
+                              return control.value.includes('foo') ?<br />
                               {'restrictedWords': 'foo'} : null; <br />
                               }
                             </code>
@@ -272,7 +272,7 @@
                           <div class="card-body">
                             <code>
                               ... <br />
-                              new FormControl('', &#91;Validators.required,
+                              new FormControl('', &#91;Validators.required,<br />
                               this.restrictedWords&#93;) <br />
                               ...
                             </code>
@@ -308,7 +308,7 @@
                       <div class="card-body">
                         <code>
                           ... <br />
-                          new FormControl('', &#91;Validators.required,
+                          new FormControl('', &#91;Validators.required,<br />
                           this.restrictedWords('foo', 'bar')&#93;)<br />
                           ...
                         </code>

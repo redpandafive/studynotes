@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Editing Array Elements
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Editing Array Elements</h1>
+
+      <h2>Reading / Writing Array Elements</h2>
+      <section>
+        <ul>
+          <li>
+            Access an element to read/write array elements using the [] operator
+            <ul>
+              <li>
+                Array reference should be on the left side of the brackets
+              </li>
+              <li>
+                Array index = non-negative integer expression should be in the
+                brackets
+              </li>
+            </ul>
+          </li>
+          <li>
+            Arrays are just specialized objects
+            <ul>
+              <li>
+                The expression you pass is converted into a string that is used
+                as a property name
+              </li>
+              <li>
+                There is no notion of an out-of-bounds error with arrays
+                <ul>
+                  <li>
+                    When you try to query a nonexistent property of an array,
+                    you get undefined
+                  </li>
+                  <li>This is the same behavior as objects</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            When using an expression that is an in-range, non-negative integer,
+            it is treated as an array index
+            <ul>
+              <li>
+                You can pass a non-negative integer as an integer or a string
+                and it will be treated as an array index
+              </li>
+              <li>
+                The array automatically maintains the value of the length
+                property for you
+              </li>
+            </ul>
+          </li>
+          <li>
+            When using an expression that is not an in-range integer, it is
+            treated as a regular object property
+          </li>
+          <div>
+            Examples
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let i = 2; a[i] = 3; <br />
+                  let a = ["world"]; <br />
+                  a[i + 1] = "hello"; <br />
+                </code>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </section>
+
+      <h2>Deleting an Array Element</h2>
+      <section>
+        <ul>
+          <li>
+            The <code>delete</code> operator to delete the specified object
+            property
+          </li>
+          <li>
+            This does not change the length of the array
+            <ul>
+              <li>
+                This will remove the property, not just set its value to
+                undefined
+              </li>
+              <li>
+                Does not shift elements with higher indexes down to fill the gap
+                left by the deleted property
+              </li>
+              <li>The array becomes sparse</li>
+            </ul>
+          </li>
+          <li>Primarily used for side effect, not the value it returns</li>
+          <li>Only works when the operand is a property access expression</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Start with an array <br />
+                let a = [1,2,3];<br />
+                // Delete the last element of the array<br />
+                delete a[2];<br />
+                // => false: Array element 2 doesn't exist anymore<br />
+                2 in a<br />
+                // => 3: Array length doesn't change<br />
+                a.length
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

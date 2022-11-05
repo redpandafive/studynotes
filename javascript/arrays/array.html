@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Arrays</li>
+        </ol>
+      </nav>
+
+      <h1>Arrays</h1>
+
+      <section>
+        <ul>
+          <li>
+            An ordered collection of values
+            <ul>
+              <li>Values in the array are called elements</li>
+              <li>
+                Each element has a numeric position in the array, known as its
+                index
+              </li>
+              <li>
+                Index numbers are 32 bit and can range from 0 to 4,294,967,294
+              </li>
+            </ul>
+          </li>
+          <li>
+            Specialized form of a JS object
+            <ul>
+              <li>
+                Array indexes are really little more than property names that
+                happen to be integers
+              </li>
+              <li>
+                However, arrays are optimized, so access to indexes is generally
+                significantly faster than access to regular object properties
+              </li>
+            </ul>
+          </li>
+          <li>
+            Untyped
+            <ul>
+              <li>Can contain any type, including a objects or other arrays</li>
+              <li>Can be mixture of types</li>
+              <li>ES6 adds new array classes that can be typed</li>
+            </ul>
+          </li>
+          <li>
+            Dynamic
+            <ul>
+              <li>Grow and shrink as needed automatically</li>
+              <li>
+                No need to declare a fixed size or reallocate it if more
+                elements are needed
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can be sparse
+            <ul>
+              <li>Elements need not be contiguous, so you can have gaps</li>
+              <li>
+                The value of the length property will be greater than the number
+                of elements
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
