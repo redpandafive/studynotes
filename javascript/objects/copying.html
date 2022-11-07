@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Copying Objects
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Copying Objects</h1>
+
+      <section>
+        <ul>
+          <li>Common task when writing functional JS code</li>
+          <li>Objects are reference types, so you cannot simply assign one object to another variable and create a copy (just copies reference)</li>
+        </ul>
+      </section>
+
+      <h2 id="assign">Object.assign()</h2>
+      <section>
+        <ul>
+          <li>Creates a shallow copy</li>
+          <li>
+            This will copy all enumerable own properties from one object to
+            another
+          </li>
+          <li>Nested objects are still copied as reference</li>
+          <li>See <a href="methods.html#assign">Object.assign()</a> method</li>
+        </ul>
+      </section>
+
+      <h2>Spread Operator</h2>
+      <section>
+        <ul>
+          <li>Works the same way as Object.assign, but it less verbose</li>
+          <li>This will create a shallow copy</li>
+          <li>See <a href="../operators/spread.html">Spread Operator</a></li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>var cloneObj = { ..sourceObj }</code>
+          </div>
+        </div>
+      </section>
+
+
+      <h2 id="assign">JSON</h2>
+      <section>
+        <ul>
+          <li>Will perform a deep clone</li>
+          <li>
+            Does not work with Dates, functions, undefined, regExp or infinity
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>JSON.parse(JSON.stringify(object))</code>
+          </div>
+        </div>
+      </section>
+
+      <h2>StructuredClone Method</h2>
+      <section>
+        <ul>
+          <li>
+            Creates a deep clone of a given value using the structured clone
+            algorithm
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/structuredClone"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/API/structuredClone
+            </a>
+          </li>
+        </ul>
+      </section>
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

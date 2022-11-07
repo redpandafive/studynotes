@@ -117,7 +117,7 @@
         </ul>
       </section>
 
-      <h2>For / Of</h2>
+      <h2 id="forof">For / Of</h2>
       <section>
         <ul>
           <li>
@@ -157,7 +157,6 @@
               </li>
             </ul>
           </li>
-
           <li>
             This loop returns a list of values of the object being iterated
             <ul>
@@ -183,8 +182,10 @@
             </div>
           </li>
         </ul>
-        <div>
-          Syntax breakdown
+        </section>
+
+        <h3>Syntax Breakdown</h3>
+        <section>
           <ul>
             <li>
               <p>Variable receives a value from each iterator.</p>
@@ -204,13 +205,27 @@
             <li>iterable is an iterable object that is operated on</li>
             <li>statement is a block statement executed for every iteration</li>
           </ul>
-        </div>
         <div class="card">
           <div class="card-body">
             <code> for (variable of iterable) { statement } </code>
           </div>
         </div>
       </section>
+
+      <h3>Capturing the Index</h3>
+      <section>
+        <ul>
+          <li>If you need to capture the index of each array element, use the entries() method of the array and destructure variable</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              for(let [index, letter] of letters.entries()) { ... }                            
+            </code>
+          </div>
+        </div>
+      </section>
+
 
       <h2>For / In</h2>
       <section>

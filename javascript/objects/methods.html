@@ -108,25 +108,12 @@
 
       <h2>Object Methods - Call on Object</h2>
 
-      <h3>Object.assign()</h3>
+      <h3 id="assign">Object.assign()</h3>
       <section>
         <ul>
           <li>
             Expects two or more objects as it argument
             <ul>
-              <li>
-                First argument is the target object
-                <ul>
-                  <li>This is modified</li>
-                </ul>
-              </li>
-              <li>
-                Second and subsequent objects
-                <ul>
-                  <li>These are source objects</li>
-                  <li>These are not modified</li>
-                </ul>
-              </li>
               <li>
                 For each source object, it copies the enumerable own properties
                 of that object into the target object
@@ -140,6 +127,19 @@
                     last items to be copied
                   </li>
                   <li>This includes Symbols</li>
+                </ul>
+              </li>
+              <li>
+                First argument is the target object
+                <ul>
+                  <li>This is modified</li>
+                </ul>
+              </li>
+              <li>
+                Second and subsequent objects
+                <ul>
+                  <li>These are source objects</li>
+                  <li>These are not modified</li>
                 </ul>
               </li>
             </ul>

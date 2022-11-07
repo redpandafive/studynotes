@@ -25,27 +25,48 @@
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Iteration</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Iterating Over Arrays
+          </li>
         </ol>
       </nav>
 
-      <h1>Iteration</h1>
+      <h1>Iterating Over Arrays</h1>
 
       <h2>for/of</h2>
       <section>
         <ul>
-
+          <li>
+            This will stop on gaps in sparse arrays, so make sure you test if
+            you are working with a sparse array
+          </li>
+          <li>
+            See <a href="../statements/loops.html#forof">For / Of Loop</a>
+          </li>
         </ul>
       </section>
-
 
       <h2>forEach()</h2>
       <section>
         <ul>
-          
+          <li>Offers a more functional approach</li>
+          <li>See <a href="methods.html#foreach">For / Of Loop</a></li>
         </ul>
       </section>
 
+      <h2>For loop</h2>
+      <section>
+        <ul>
+          <li>
+            In performance critical code, you can capture the array length once
+            in a constant so it is only referenced once on the Array object
+          </li>
+          <li>
+            You should test for undefined or nonexistant elements in sparse
+            arrays
+          </li>
+        </ul>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
