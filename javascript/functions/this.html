@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">This</li>
+        </ol>
+      </nav>
+
+      <h1>This</h1>  
+      <section>
+        <ul>
+          <li>
+            It is a keyword, not a variable or property named
+            <ul>
+              <li>You cannot assign a value to it</li>
+            </ul>
+          </li>
+          <li>
+            A function nested within a method and invoked as a function cannot
+            use <code>this</code> to access the parent object
+            <ul>
+              <li>
+                Its value of <code>this</code> will be the global object or
+                undefined (depending on strict mode)
+              </li>
+              <li>This is a common mistake to make</li>
+              <li>
+                Workarounds
+                <ul>
+                  <li>
+                    Capture the value of <code>this</code> into a variable - see
+                    example
+                  </li>
+                  <li>
+                    Use an arrow function instead of a the nested function -
+                    this will inherit <code>this</code>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div>
+              Example of capturing an invocation context to a variable
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    // An object o. <br />
+                    let o = { <br />
+                    m: function() { <br />
+                    let self = this; <br />
+                    // At this point, this points to 0 <br />
+                    <br />
+                    function f() { <br />
+                    // at this point, this points to undefined or global object
+                    <br />
+                    // self points to o and is accessible here <br />
+                    }<br />
+                    }<br />
+                    };<br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Regular function expressions generally do not use <code>this</code>
+            <ul>
+              <li>This is the invocation context</li>
+              <li>See <a href="#funcExpression">more notes here</a></li>
+            </ul>
+          </li>
+          <li>
+            The array or object that is the subject of the property access
+            becomes the value for the <code>this</code> keyword
+          </li>
+          <li>
+            This is the basis for method chaining
+            <ul>
+              <li>
+                If your method does not have a return value, consider returning
+                <code>this</code>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

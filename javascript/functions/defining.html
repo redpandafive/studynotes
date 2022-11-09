@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Defining Functions</li>
+        </ol>
+      </nav>
+
+      <h1>Defining Functions</h1>
+      <section>
+        <ul>
+          <li>
+            There are three ways to define a function
+            <ul>
+              <li><a href="#statement">Function Statements</a></li>
+              <li><a href="#arrow">Arrow Functions</a></li>
+              <li><a href="#fde">Function Definition Expressions</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="statement">Function Statements</h2>
+      <section>
+        <h2>
+          <ul>
+            <li>
+              Consists of
+              <ul>
+                <li>Function keyword</li>
+                <li>
+                  An identifier that names the function
+                  <ul>
+                    <li>
+                      This becomes a variable whose value is the function itself
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  A pair of parentheses around a comma separated list of zero or
+                  more identifiers
+                  <ul>
+                    <li>
+                      These are the parameter names for the function and they
+                      behave as local variables within the function body
+                    </li>
+                    <li>
+                      A pair of curly braces with zero more JS statements inside
+                      <ul>
+                        <li>This is the body of the function</li>
+                        <li>Executed when the function is invoked</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Function declarations are "hoisted" - it is as if they had all
+              been moved up to the top of whatever scope they are defined in
+            </li>
+            <li>
+              Code that invokes a function can exist in your program before any
+              code that declares the function
+            </li>
+            <li>
+              Actually declares a variable and assigns a function object to it
+            </li>
+          </ul>
+        </h2>
+      </section>
+
+      <h2 id="fde">Function Definition Expressions</h2>
+      <section>
+        <ul>
+          <li>
+            Defines a function and its value is the newly defined function
+          </li>
+          <li>
+            Differ from function statements in that:
+            <ul>
+              <li>
+                Appears in the context of a larger expression or statement
+              </li>
+              <li>The identifier is optional</li>
+              <li>
+                It is up to you to assign the newly defined function object to a
+                constant or variable
+              </li>
+              <li>
+                They are not hoisted, so you must define them before they can be
+                evaluated
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code> let square = function(x) { return x * x; }; </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="arrow">Arrow Functions</h2>
+      <section>
+        <ul>
+          <li>
+            Shorthand syntax to define a function added in ES6
+            <ul>
+              <li>These are expressions, not statements</li>
+              <li>Does not use the function keyword</li>
+              <li>Does not use a function named</li>
+            </ul>
+          </li>
+          <li>Separates the argument list from the function body using =></li>
+          <li>
+            Most commonly used when you want to pass an unnamed function as an
+            argument to another function
+          </li>
+          <li>
+            Different from functions defined in other ways since they:
+            <ul>
+              <li>
+                Do not have a prototype property, so no constructor can be used
+              </li>
+              <li>
+                Use the invocation context where they are defined instead of
+                creating a new one
+                <ul>
+                  <li>
+                    Useful workaround if you have one nested inside a method
+                  </li>
+                  <li>
+                    Means you have access to <code>this</code> in the
+                    surrounding method
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Basic syntax
+          <div class="card">
+            <div class="card-body">
+              <code>const sum = (x, y) => { return x + y; };</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          If the body is a single return statement, you can do the following:
+          <div class="card">
+            <div class="card-body">
+              <code>const sum = (x, y) => x + y;</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          If there is only a single parameter, you can write:
+          <div class="card">
+            <div class="card-body">
+              <code>const polynomial = x => x*x + 2*x + 3;</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          If the body is a single return statement and returns an object
+          literal, you must include parentheses:
+          <div class="card">
+            <div class="card-body">
+              <code>const polynomial = x => x*x + 2*x + 3;</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          If there are not parameters, you must use an empty pair of
+          parentheses:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const f = x => { return { value: x }; };<br />
+                const g = x => ({ value: x });
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
