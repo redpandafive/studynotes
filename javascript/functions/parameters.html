@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Function Parameters
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Function Parameters</h1>
+
+      <section>
+        <ul>
+          <li>
+            Function definitions do not check parameters passed as arguments to
+            a function
+            <ul>
+              <li>No type checking</li>
+              <li>Does not check the number of arguments passed</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Optional Parameters</h2>
+      <section>
+        <ul>
+          <li>
+            Allow you to pass fewer arguments than the function signature
+            defines
+          </li>
+          <li>
+            If there are fewer arguments than the declared parameters, a default
+            value is passed (usually <code>undefined</code>)
+          </li>
+          <li>
+            Optional parameters should be tested before attempting to use them
+          </li>
+          <li>
+            Always list optional parameters at the end of the parameter list
+          </li>
+          <li></li>
+        </ul>
+        <div>
+          Testing with a conditional
+          <div>
+            Use a conditional
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  if (a === undefined) { <br />
+                  a = []; <br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Use the || operator as a shorthand. Returns first argument if
+            truthy, otherwise returns the second
+            <div class="card">
+              <div class="card-body">
+                <code> a = a || [];<br /> </code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Default Parameters</h2>
+      <section>
+        <ul>
+          <li>
+            In ES6, you can specify a default value to use if one is not passed
+            to the function
+          </li>
+          <li>
+            These are evaluated when the function is called, not when defined
+          </li>
+          <li>
+            Not necessary, but usually clearer to make defaults constant values
+          </li>
+          <li>
+            Can use the value of a previous parameter to define the default
+            value of the parameters that follow it
+          </li>
+          <li>Can be used with arrow functions</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>const rectangle = (w, h=w*2) => ({w, h});</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Rest Parameters</h2>
+      <section>
+        <ul>
+          <li>
+            Allow you to write functions that can be invoked with more arguments
+            than parameters
+          </li>
+          <li>These are called variadic functions or vararg functions</li>
+          <li>Precede it by three periods</li>
+          <li>Must be the lsat parameter in a function declaration</li>
+          <li>
+            The rest parameters will be passed as an array
+            <ul>
+              <li>
+                It will contain all arguments passed as non-rest parameters
+              </li>
+              <li>It will never be undefined, just an empty array</li>
+              <li>
+                Never useful to define a parameter default for a rest parameter
+              </li>
+            </ul>
+          </li>
+          <li>
+            Don't confuse this with the spread operator, which can be used in
+            function invocations
+          </li>
+          <li>
+            Pre-ES 6, this was done using the Arguments object. However, you
+            should not use this in new code and refactor it out of old code
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>function max(first=-Infinity, ...rest) {...</code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
