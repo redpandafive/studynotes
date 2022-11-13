@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Classes</li>
+        </ol>
+      </nav>
+
+      <h1>Classes</h1>
+
+      <section>
+        <ul>
+          <li>
+            In JS, the prototype object is the central feature of a class
+            <ul>
+              <li>
+                A class is a set of objects that inherit properties from the
+                same prototype object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Instances of a class have
+            <ul>
+              <li>Their own properties to hold or define their state</li>
+              <li>
+                Methods that define their behavior. These are defined by the
+                class and shared by all instances
+              </li>
+            </ul>
+          </li>
+          <li>
+            Defining a JS class is basically:
+            <ul>
+              <li>Define a prototype object</li>
+              <li>
+                Use <code>Object.create()</code> to create objects that inherit
+                from it
+              </li>
+              <li>
+                Common to define a factory function that creates and initializes
+                the new object
+              </li>
+            </ul>
+          </li>
+          <li>
+            JS classes use prototype based Inheritance
+            <ul>
+              <li>
+                If two objects inherit properties from the same prototype, then
+                those objects are instances of the same class
+              </li>
+              <li>
+                Usually (not always) means they were created and initialized by
+                the same constructor function or factory function
+              </li>
+            </ul>
+          </li>
+          <li>
+            Code that is written in a class is automatically in strict mode
+          </li>
+        </ul>
+      </section>
+
+      <div>
+        Very simple JS Classes without a Constructor
+        <ul>
+          <li>
+            Use Object.create to build an object that inherits from the
+            prototype object methods
+          </li>
+          <li>
+            The prototype object is stored as a property on this function - all
+            instances inherit these methods
+          </li>
+          <li>Create an instance using <code>let r = range(1,3)</code></li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              function range(from, to) { <br />
+              let r = Object.create(range.methods);<br />
+              r.from = from;<br />
+              r.to = to;<br />
+              return r;<br />
+              }<br />
+              <br />
+              range.methods = {<br />
+              includes(x) { return this.from &lt;= x && x &lt;= this.to; },<br />
+              toString() { return "(" + this.from + "..." + this.to + ")"; }<br />
+              };<br />
+            </code>
+          </div>
+        </div>
+      </div>
+
+
+
+      <h2>Constructors</h2>
+      <section>
+        <ul>
+          <li>A function designed for the initialization of newly created objects</li>
+          <li>Uses the <code>new</code> keyword
+          <ul>
+            <li>This automatically creates the new object</li>
+            <li>Just need to initialize the state of that new object </li>
+          </ul></li>
+        </ul>
+      </section>
+
+      <h2>Pre-ES6 Syntax</h2>
+      <section>
+        <ul>
+          <li>JS has always allowed the definition of classes</li>
+        </ul>
+      </section>
+
+      <h2>ES6 Syntax</h2>
+      <section>
+        <ul>
+          <li>ES 6 introduced syntax to make it easier to create classes</li>
+          <li>
+            Classes still function the same way, this is just new, simplified
+            syntax
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
