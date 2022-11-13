@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Closures</li>
+        </ol>
+      </nav>
+
+      <h1>Closures</h1>
+      
+      <section>
+        <ul>
+          <li>
+            Combination of a function and its bundled references to its
+            surrounding state
+            <ul>
+              <li>Also called the lexical environment</li>
+            </ul>
+          </li>
+          <li>
+            This means a closure gives you access to an outer function's scope
+            from an inner function
+          </li>
+          <li>
+            Closures are created every time a function is created
+            <ul>
+              <li>
+                Normally, they are invoked from the same scope they were defined
+                in
+              </li>
+              <li>
+                In such cases, it does not really matter that there is a closure
+                involved
+              </li>
+            </ul>
+          </li>
+          <li>
+            Closures become useful when they are invoked from a different scope
+            than the one they were defined in
+            <ul>
+              <li>
+                They capture the local variable bindings of the outer function
+                within which they are defined
+              </li>
+            </ul>
+          </li>
+          <li>
+            To use a closure
+            <ul>
+              <li>Define a function inside of another function</li>
+              <li>
+                Expose the inner function by either returning it or passing it
+                to another function
+              </li>
+              <li>
+                The inner function will have access to the variables in the
+                outer function scope, even after the outer function has returned
+              </li>
+            </ul>
+          </li>
+          <li>
+            Simple example
+            <ul>
+              <li>
+                Since the call to checkscope returns a function, the last line
+                immediately invokes the returned function and stores the result
+                in s
+              </li>
+              <li>
+                When function f is invoked outside of its local scope, it still
+                has access to the variable scope defined in the outer function
+              </li>
+              <li>
+                It does not matter that checkscope has returned, f still has
+                access to the variables it maintains a reference to
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let scope = "global scope"; <br />
+                  function checkscope() {<br />
+                  let scope = "local scope";<br />
+                  function f() { return scope; } <br />
+                  return f;<br />
+                  }<br />
+                  let s = checkscope()();<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Example of a closure that tracks the number of times a function is
+            invoked
+            <ul>
+              <li>
+                First line assigns the inner function to the uniqueInteger
+                variable (note open parenthesis)
+              </li>
+              <li>
+                The inner function has exclusive access to the counter variable
+                <ul>
+                  <li>
+                    Once the outer function returns, no other code can see the
+                    counter variable
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let uniqueInteger = (function() { <br />
+                  let counter = 0; <br />
+                  return function() { return counter++; };<br />
+                  }());<br />
+
+                  // first call returns zero <br />
+                  uniqueInteger() // second call returns one <br />
+                  uniqueInteger();
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can have two or more nested functions that share access to the same variables in the outer scope
+            <ul>
+              <li>Multiple calls to counter() produce multiple, independent objects that do not share variables</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function counter() {<br/>
+                    let n = 0;<br/>
+                    return {<br/>
+                      count: function() { return n++; },<br/>
+                      reset: function() { n = 0; }<br/>
+                    };<br/>
+                  }<br/>
+                  <br/>
+                  let c = counter(), d = counter();<br/>
+                  <br/>
+                  // returns 0 for both (postfix increment)<br/>
+                  c.count();<br/>
+                  d.count();<br/>
+                  <br/>
+                  // returns 0 <br/>
+                  c.reset(); <br/>
+                  c.count();<br/>
+                  <br/>
+                  // d is not impacted by reset on c, so will return 1<br/>
+                  d.count();<br/>
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use for data object privacy
+            <ul>
+              <li></li>
+            </ul>
+          </li>
+          <li>Can be used to create stateful functions</li>
+        </ul>
+        <div>
+          <ul>
+            <li>
+              <a
+                href="https://dmitripavlutin.com/simple-explanation-of-javascript-closures/"
+                target="_blank"
+              >
+                https://dmitripavlutin.com/simple-explanation-of-javascript-closures/
+              </a>
+            </li>
+            <li>
+              <a href="https://dmitripavlutin.com/simple-explanation-of-javascript-closures/" target="_blank">
+                https://dmitripavlutin.com/simple-explanation-of-javascript-closures/
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

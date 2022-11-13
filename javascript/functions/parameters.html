@@ -36,6 +36,14 @@
       <section>
         <ul>
           <li>
+            When you invoke a function with a list of argument values, those
+            values are assigned to the parameters declared in the function
+            definition
+            <ul>
+              <li>Similar to variable assignment</li>
+            </ul>
+          </li>
+          <li>
             Function definitions do not check parameters passed as arguments to
             a function
             <ul>
@@ -119,7 +127,7 @@
         </div>
       </section>
 
-      <h2>Rest Parameters</h2>
+      <h2 id="rest">Rest Parameters</h2>
       <section>
         <ul>
           <li>
@@ -144,6 +152,13 @@
           <li>
             Don't confuse this with the spread operator, which can be used in
             function invocations
+            <ul>
+              <li>
+                They are useful to use together, since you can pass in as many
+                parameters are you want using the spread operator, but the
+                function can capture any number of them in the rest parameter
+              </li>
+            </ul>
           </li>
           <li>
             Pre-ES 6, this was done using the Arguments object. However, you
@@ -154,6 +169,97 @@
           <div class="card">
             <div class="card-body">
               <code>function max(first=-Infinity, ...rest) {...</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="destruct">Destructuring Parameters</h2>
+      <section>
+        <ul>
+          <li>
+            Function definitions may be easier to read if you destructure arrays
+            or objects into more clearly named parameters in the function
+            signature
+          </li>
+          <li>
+            Parameter names within square brackets = expect an array value to be
+            passed for each pair of square brackets
+            <ul>
+              <li>
+                Array arguments are unpacked into individually named parameters
+              </li>
+            </ul>
+          </li>
+          <li>
+            Parameter names in curly brackets = expect an object
+            <ul>
+              <li>
+                Simpler syntax is to match the property name to the parameter
+                name
+              </li>
+              <li>
+                Can rename the parameter name, but the syntax is more verbose
+                <ul>
+                  <li>Left-hand side of the colon = property name</li>
+                  <li>Right-hand side of the colon = parameter name</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Parameters can have defaults using the usual default syntax</li>
+        </ul>
+        <div>
+          Function definition that passes arrays
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function vectorAdd(v1, v2) {<br />
+                return [v1[0] + v2[0], v1[1] + v2[1]];<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Function definition that passes arrays, but destructures them in the
+          signature
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function vectorAdd([x1,y1], [x2,y2]) { <br />
+                return [x1 + x2, y1 + y2];<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Function definition that passes an object and destructures its
+          properties
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function vectorMultiply({x, y}, scalar) {<br />
+                return { x: x*scalar, y: y*scalar };<br />
+                }<br />
+                vectorMultiply({x: 1, y: 2}, 2);<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Function definition that passes an object, destructures its
+          properties, and remaps to different parameter names
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function vectorAdd({x: x1, y: y1}, {x: x2, y: y2}) {<br />
+                return { x: x1 + x2, y: y1 + y2 };<br />
+                }<br />
+                vectorAdd({x: 1, y: 2}, {x: 3, y: 4})<br />
+              </code>
             </div>
           </div>
         </div>

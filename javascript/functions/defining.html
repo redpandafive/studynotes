@@ -38,6 +38,7 @@
               <li><a href="#statement">Function Statements</a></li>
               <li><a href="#arrow">Arrow Functions</a></li>
               <li><a href="#fde">Function Definition Expressions</a></li>
+              <li><a href="#constructor">Function Constructor</a></li>
             </ul>
           </li>
         </ul>
@@ -209,6 +210,46 @@
         </div>
       </section>
 
+
+      <h2 id="constructor">Function Constructor</h2>
+      <section>
+        <ul>
+          <li>Since a function is an object, there is a constructor that can be used to create new functions</li>
+          <li>Syntax
+            <ul>
+              <li>Expects one or more string arguments</li>
+              <li>The last argument is a string containing the function body
+                <ul>
+                  <li>Statements should be separated by semicolons</li>
+                </ul>
+              </li>
+              <li>Any argument before this should be a string and represents a parameter in the function
+                <ul>
+                  <li>If the function does not have any parameters, there would only be one string passed to the constructor (the body)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            This creates anonymous functions
+          </li>
+          <li>Allows JS functions to be dynamically created and compiled at runtime</li>
+          <li>Less efficient in loops or frequently called functions since they must be recompiled each time they are called</li>
+          <li>Does not use lexical scoping - always compiled as if they are top level functions, so variables are global</li>
+          <li>Will probably never need to use this</li>
+        </ul>
+        <div>
+          The following two are equivalent
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const f = new Function("x", "y", "return x*y;");<br />
+                const f = function(x, y) { return x*y; };
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

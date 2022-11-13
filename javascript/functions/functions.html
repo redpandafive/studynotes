@@ -35,10 +35,53 @@
           <li>
             JS differs from other static languages in that functions and classes
             are values that can be manipulated by JavaScript programs
+          </li>
+          <li>
+            In JS, function are values
             <ul>
               <li>They are not just part of the language syntax</li>
               <li>They are objects that can be manipulated by programs</li>
+              <li>Since it is a type of object, it can have properties</li>
+              <li>Can be assigned to variables</li>
+              <li>Can be set to properties of objects</li>
+              <li>Can be elements of arrays</li>
+              <li>Can be passed as arguments to functions</li>
             </ul>
+          </li>
+          <li>
+            Functions can be assigned to other variables and function the same
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function square(x) { return x*x; } <br />
+                  let s = square; <br />
+                  // these two return the same value <br />
+                  square(4) <br />
+                  s(4) <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Since functions can be assigned to properties, you could do
+            something like this
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const operators = {<br />
+                  add: (x,y) => x+y,<br />
+                  subtract: (x,y) => x-y,<br />
+                  multiply: (x,y) => x*y,<br />
+                  divide: (x,y) => x/y,<br />
+                  pow: Math.pow <br />
+                  };<br />
+
+                  // invoke a method in this using something like the
+                  following<br />
+                  operators["add"](5, 6);<br />
+                </code>
+              </div>
+            </div>
           </li>
           <li>Functions can be nested within other functions</li>
           <li>
@@ -46,6 +89,225 @@
             are defined => Closures
           </li>
         </ul>
+      </section>
+
+      <h2>Built-In Properties</h2>
+
+      <h3>length</h3>
+      <section>
+        <ul>
+          <li>
+            Returns the number of parameters it declares in its parameter list
+          </li>
+          <li>Read-only property</li>
+          <li>Does not include rest parameters</li>
+        </ul>
+      </section>
+
+      <h3>name</h3>
+      <section>
+        <ul>
+          <li>Returns the name that was used when the function was defined</li>
+          <li>Read-only property</li>
+          <li>Primarily used for writing debugging or error messages</li>
+        </ul>
+      </section>
+
+      <h3>prototype</h3>
+      <section>
+        <ul>
+          <li>
+            Refers to the prototype object
+            <ul>
+              <li>
+                When a function is used as a constructor, the newly created
+                object inherits properties from the prototype object
+              </li>
+            </ul>
+          </li>
+          <li>All functions except arrow functions have a prototype object</li>
+        </ul>
+      </section>
+
+
+      <h2>Built-in Methods</h2>
+
+        <h3>apply() and call()</h3>
+        <section>
+          <ul>
+            <li>Allows you to indirectly invoke a function as if it were a method of some other object
+              <ul>
+                <li>Calls to this are ignored for arrow functions</li>
+              </ul>
+            </li>
+            <li>First argument is the object on which the function is to be invoked
+              <ul>
+                <li>This is the invocation context</li>
+                <li>Becomes the value of the <code>this</code> keyword within the body of the function </li>
+                <li>The function is invoked as if it were a method on this object</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+      <h3>apply()</h3>
+      <section>
+        <ul>
+          <li>
+            Similar to <code>call()</code>
+          </li>
+          <li>
+            Any arguments after the first are values passed to the function that is invoked
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              // given a function f and object o <br/>
+              f.apply(o, [1,2]);<br/>
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>call()</h3>
+      <section>
+        <ul>
+          <li>
+            Similar to <code>apply()</code>
+          </li>
+          <li>All arguments are passed as an array in the second argument position</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              // given a function f and object o <br/>
+              f.call(o, 1, 2);<br/>
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>bind()</h3>
+      <section>
+        <ul>
+          <li>Binds a function to an object</li>
+          <li>This is generally done to make non-arrow functions behave like arrow functions</li>
+          <li>Returns a new function
+            <ul>
+              <li>Invoking it (as a function) invokes the original function as a method of the object</li>
+              <li>Any arguments passed to the new function are passed to the original function</li>
+            </ul>
+          </li>
+          <li>
+            Arrow functions will not have <code>this</code> overridden
+          </li>
+        </ul>
+        <div>
+          Calling g(2) will have the same result as o.g(2) (assuming there is a method g on object o)
+          <div class="card">
+            <div class="card-body">
+              <code>            
+                function f(y) { return this.x + y; }<br/>
+                let o = { x: 1 };<br/>
+                let g = f.bind(o); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>toString()</h3>
+      <section>
+        <ul>
+          <li>Returns a string that usually is the complete source code for the function</li>
+        </ul>
+      </section>
+
+      
+
+      <h2>Properties on Functions</h2>
+      <section>
+        <ul>
+          <li>
+            Since functions are objects, they can have properties on the
+            function itself
+          </li>
+          <li>
+            Useful when you need a "static" variable whose value persists across
+            invocations
+          </li>
+          <li>
+            Consider using a closure if you need to encapsulate a property so it
+            cannot be modified from outside
+          </li>
+          <li>
+            Examples
+            <ul>
+              <li>
+                A function that returns a unique value each time it is invoked
+                <ul>
+                  <li>
+                    Can store values that have been previously returned on a
+                    property of the function
+                  </li>
+                  <li>
+                    On each invocation, the function checks the values that have
+                    been returned, finds and returns the next unique value, and
+                    adds the value to the property
+                  </li>
+                </ul>
+              </li>
+              <li>Can be used to cache previously computed results</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Functions as Namespaces</h2>
+      <section>
+        <ul>
+          <li>
+            Variables declared within a function are not visible outside of the
+            function
+          </li>
+          <li>
+            Useful technique to keep variables out of global, where they may
+            conflict with other code
+          </li>
+          <li>
+            Immediately invoked function expression
+            <ul>
+              <li>Useful design pattern to keep variables out of global</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          This defines only a single global variable and will keep any body
+          declarations out of global
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function chunkNamespace() { <br />
+                ... <br />
+                } <br />
+                chunkNamespace(); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          IIFE
+          <div class="card">
+            <div class="card-body">
+              <code>
+                (function() { <br />
+                ... <br />
+                }());<br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

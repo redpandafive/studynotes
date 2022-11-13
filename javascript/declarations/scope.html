@@ -33,7 +33,181 @@
 
       <h1>Scope</h1>
 
-      <h2>Global Scope</h2>
+      <section>
+        <ul>
+          <li>
+            When you declare a variable, you want it to have some boundaries
+            where it is accessible
+          </li>
+          <li>
+            Scope is the area where a variable is visible and accessible to
+            other code
+            <ul>
+              <li>Code within scope of a variable can access it</li>
+              <li>Code outside scope of a variable cannot access it</li>
+            </ul>
+          </li>
+          <li>
+            Since scope isolates variables, different scopes can have variables
+            with the same name without colliding
+          </li>
+        </ul>
+      </section>
+
+      <h2>Nested Scopes and Scope Chains</h2>
+      <section>
+        <ul>
+          <li>
+            In JS, nested functions have access to variables defined within
+            their containing functions
+            <ul>
+              <li>
+                Note, outer functions cannot access the scope of their children
+              </li>
+            </ul>
+          </li>
+          <li>
+            Every JS function maintains a link to its outer lexical environment
+            <ul>
+              <li>
+                This creates a chain of scopes, since each function can access
+                its parent scope as well as global scope
+              </li>
+              <li>
+                Global scope is the last link in a JS scope chain (last place
+                checked)
+              </li>
+              <li>Can also think of this as a hierarchy</li>
+            </ul>
+          </li>
+
+          <li>
+            When attempting to resolve a variable, JS will
+            <ol>
+              <li>First check the innermost scope for a match</li>
+              <li>
+                Next, move to the next link in the chain (or move up a tier in
+                the hierarchy, if that is a better description) and look for a
+                match
+              </li>
+              <li>Finally check global object for a match</li>
+              <li>Raise an error if not found</li>
+            </ol>
+          </li>
+          <li>
+            This means if there are variables in each level of the scope chain
+            with the same name, one closest
+          </li>
+        </ul>
+
+        <div>
+          Calling <code>outer()</code> will print "inner"
+          <div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  <pre>
+const myvar = "global"
+
+const outer = () => {
+  const myvar = "outer"
+  const inner = () => {     
+    const myvar = "inner"
+    console.log(myvar) 
+  } 
+  inner()
+}</pre
+                  >
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Now, calling <code>outer()</code> will print "outer"
+          <div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  <pre>
+const myvar = "global"
+
+const outer = () => {
+  const myvar = "outer"
+  const inner = () => {     
+    console.log(myvar) 
+  } 
+  inner()
+}</pre
+                  >
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Now, calling <code>outer()</code> will print "global"
+          <div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  <pre>
+const myvar = "global"
+
+const outer = () => {
+  const inner = () => {     
+    console.log(myvar) 
+  } 
+  inner()
+}</pre
+                  >
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li>
+              <a
+                href="https://justacoding.blog/javascript-closures-and-lexical-scoping-basic-examples/"
+                target="_blank"
+              >
+                https://justacoding.blog/javascript-closures-and-lexical-scoping-basic-examples/
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Lexical Scoping</h2>
+      <section>
+        <ul>
+          <li>Also called static scoping</li>
+          <li>The scoping mechanism that JS uses</li>
+          <li>
+            The accessibility of variables is determined by the position of
+            variables inside nested scopes
+            <ul>
+              <li>
+                Determined by examining the JS source code and where code is
+                defined, not where it is executed
+              </li>
+            </ul>
+          </li>
+          <li>Each JS function maintains a link to its outer lexical environment
+            <ul>
+              <li>This is what JS checks when searching for a variable</li>
+            </ul>
+          </li>
+          <li>KEY TAKEAWAY = JS functions are executed using the scope they are defined in</li>
+
+        </ul>
+      </section>
+
+      <h2>Types of Scope</h2>
+
+      <h3>Global Scope</h3>
       <section>
         <ul>
           <li>Declarations made at the top level outside of any code blocks</li>
@@ -54,12 +228,12 @@
         </ul>
       </section>
 
-      <h2 id="block">Block Scope</h2>
+      <h3 id="block">Block Scope</h3>
       <section>
         <ul>
           <li>Only defined within the block of code in which they appear</li>
           <li>
-            Cannot delcare 2 variable or constants with the same name in the
+            Cannot declare 2 variable or constants with the same name in the
             same block
             <ul>
               <li>
@@ -71,21 +245,21 @@
         </ul>
       </section>
 
-      <h2>Function Scope</h2>
+      <h3>Function Scope</h3>
       <section>
         <ul>
+          <li>Variables are scoped to the containing function</li>
+          <li>Nesting within the function does not make a difference</li>
           <li>
-            Variables are scoped to the containing function
-            <ul>
-              <li>Nesting within the function does not make a differece</li>
-              <li>
-                Global variables are declared as properties on the Global object
-              </li>
-              <li>It is legal to declare the same variable multiple times</li>
-            </ul>
+            Global variables are declared as properties on the Global object
           </li>
+          <li>It is legal to declare the same variable multiple times</li>
         </ul>
       </section>
+
+
+
+      
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

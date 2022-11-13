@@ -37,13 +37,25 @@
       <section>
         <ul>
           <li>New syntax added in ES6</li>
-          <li>Takes an array and expands it into individual elements</li>
+          <li>Takes an array and expands it into individual elements
+            <ul>
+              <li>Unpacks (or spreads out) teh elements of an array in a context where individual values are expected</li>
+              <li>Not a true operator in the sense that it cannot be evaluated to produce a value</li>
+            </ul>
+          </li>
           <li>
             Can be used to
             <ul>
               <li>Make shallow copies of JS objects</li>
               <li>Append one array to another</li>
               <li>Create a copy of an array</li>
+              <li>Used with a function invocation
+                <ul>
+                  <li>Note, a similar syntax can be used in a function definition to gather multiple function arguments into an array</li>
+                  <li>This is the opposite effect to the spread operator</li>
+                  <li>See <a href="../functions/parameters.html#rest">Rest Parameters</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
           <li>
