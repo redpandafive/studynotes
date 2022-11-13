@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Type Conversions
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Type Conversions</h1>
+
+      <h2>Implicit Type Conversion</h2>
+      <section>
+        <ul>
+          <li>
+            JS is very flexible with type conversions and can perform them
+            automatically
+          </li>
+          <li>
+            Some automatic conversions are unexpected
+            <ul>
+              <li>
+                Strings to numbers convert unless there any non-space characters
+                that are not part of a numeric literal. This will produce NaN
+              </li>
+              <li>Boolean converts to 1 (from true) and 0 (from false)</li>
+            </ul>
+          </li>
+          <li>
+            You can take advantage of implicit conversions to explicitly perform
+            a conversion
+            <ul>
+              <li>
+                Append the + operator to convert a string to a number
+                <ul>
+                  <li>Let aNumber = 5;</li>
+                  <li>Let aString = +5;</li>
+                </ul>
+              </li>
+              <li>
+                Subtract zero to conver to a number
+                <ul>
+                  <li>x - 0</li>
+                </ul>
+              </li>
+              <li>
+                Use the unary operator to convert the operand to Boolean
+                <ul>
+                  <li>let aBooleanVar = !aVariable</li>
+                  <li>let aBooleanVar = !!aVariable</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Explicit Type Conversion</h2>
+      <section>
+        <div>Explicit conversion functions</div>
+        <ul>
+          <li>Boolean(), Number(), String()</li>
+          <li>
+            Calling these with the new keyword will return a wrapper object
+            leftover from early JS days - no good reason to use these
+          </li>
+          <li>
+            Number global object has two methods that provide more flexible
+            converstions
+            <ul>
+              <li>parseInt()</li>
+              <li>parseFloat()</li>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                  target="_blank"
+                >
+                  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

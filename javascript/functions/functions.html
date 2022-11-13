@@ -264,51 +264,6 @@
         </ul>
       </section>
 
-      <h2>Functions as Namespaces</h2>
-      <section>
-        <ul>
-          <li>
-            Variables declared within a function are not visible outside of the
-            function
-          </li>
-          <li>
-            Useful technique to keep variables out of global, where they may
-            conflict with other code
-          </li>
-          <li>
-            Immediately invoked function expression
-            <ul>
-              <li>Useful design pattern to keep variables out of global</li>
-            </ul>
-          </li>
-        </ul>
-        <div>
-          This defines only a single global variable and will keep any body
-          declarations out of global
-          <div class="card">
-            <div class="card-body">
-              <code>
-                function chunkNamespace() { <br />
-                ... <br />
-                } <br />
-                chunkNamespace(); <br />
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          IIFE
-          <div class="card">
-            <div class="card-body">
-              <code>
-                (function() { <br />
-                ... <br />
-                }());<br />
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
