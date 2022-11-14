@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="./../assets/styles/site.css" />
   </head>
   <body>
@@ -27,77 +30,127 @@
       </nav>
 
       <h1>Services</h1>
-      
+
       <section class="navlinks">
         <ul>
-          <li><a href="services.html#basics">Basics</a></li>
+          <li>
+            <a href="#basics">Basics</a>
+          </li>
+          <li>
+            <a href="#configuration">Configuration</a>
+          </li>
         </ul>
       </section>
 
       <h2 id="basics">Basics</h2>
       <section>
-      <ul>
-        <li>
-          These provide specific functionality not directly related to views
-          <ul>
-            <li>This is logic that can be shared across components</li>
-          </ul>
-        </li>
-        <li>
-          Injected into components as dependencies to provide separation of
-          logic
-          <ul>
-            <li>Modularity – keeps components lean and efficient</li>
-            <li>
-              Services can depend on other services, so you keep them focused
-              and specialized
-            </li>
-          </ul>
-        </li>
-        <li>
-          Can be anything, but typically is a class with a narrow well-defined
-          purpose
-          <ul>
-            <li>
-              Could be any value, function, or feature that your application
-              needs
-            </li>
-          </ul>
-        </li>
-        <li>
-          Identified by the @Injectable() decorator
-          <ul>
-            <li>
-              Technically only required when you inject a service that has
-              dependency services of its own
-            </li>
-            <li>Best practice to just add it</li>
-          </ul>
-        </li>
-        <li>
-          Services are singletons – there are two ways to make a singleton
-          service in Angular
-          <ul>
-            <li>
-              Declare root for the value of the @Injectable providedIn property
-            </li>
-            <li>
-              Include the service in the AppModule or in a module that is only
-              imported by the AppModule
-            </li>
-          </ul>
-        </li>
-        <li>
-          Beginning with Angular 6, setting the providedIn to root is the
-          preferred way since it makes them tree shakable
-          <ul>
-            <li>
-              Pre-Angular 6, the preferred way is to register them in the
-              providers array of modules
-            </li>
-          </ul>
-        </li>
-      </ul>
+        <ul>
+          <li>
+            Can be anything, but typically is a class with a narrow well-defined
+            purpose
+            <ul>
+              <li>
+                Could be any value, function, or feature that your application
+                needs
+              </li>
+            </ul>
+          </li>
+          <li>
+            These provide specific functionality not directly related to views
+            <ul>
+              <li>
+                Components should limit its functionality to 
+                <ul>
+                  <li>Present properties and methods for data binding</li>
+                  <li>Mediate between the view and application logic</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Injected into components as dependencies to provide separation of
+            logic
+            <ul>
+              <li>This is logic that can be shared across components</li>
+              <li>Promotes modularity, keeping components lean and efficient</li>
+              <li>
+                Services can depend on other services, so you keep them focused
+                and specialized
+              </li>
+            </ul>
+          </li>
+          <li>Services are singletons</li>
+        </ul>
+      </section>
+
+      <h2 id="configuration">Configuration</h2>
+      <section>
+        <ul>
+          <li>
+            Identified by the @Injectable() decorator
+            <ul>
+              <li>
+                Technically only required when you inject a service that has
+                dependency services of its own
+              </li>
+              <li>Best practice to just add it</li>
+            </ul>
+          </li>
+          <li>
+            To inject the service, list it as a parameter in the target class constructor            
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  constructor(private logger: Logger) {  }
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            There are two ways to make a singleton service in Angular
+            <ul>
+              <li>
+                Declare root for the value of the @Injectable providedIn
+                property
+              </li>
+              <li>
+                Include the service in the AppModule or in a module that is only
+                imported by the AppModule
+              </li>
+            </ul>
+          </li>
+          <li>
+            Beginning with Angular 6, setting the providedIn to root is the
+            preferred way since it makes them tree shakable
+            <ul>
+              <li>
+                Pre-Angular 6, the preferred way is to register them in the
+                providers array of modules
+              </li>
+              <li>
+                Setting providedIn to root makes the service available throughout the application
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Simple example of a service class
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { Injectable } from '@angular/core';<br/>
+                <br/>
+                @Injectable({<br/>
+                  providedIn: 'root',<br/>
+                })<br/>
+                export class HeroService {<br/>
+                  constructor() { }<br/>
+                }<br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

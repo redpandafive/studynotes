@@ -5,7 +5,10 @@
     <title>Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -29,112 +32,205 @@
 
       <h1>Select Controls</h1>
 
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="#currentValue">Get the Current Value of a Select Control</a>
+          </li>
+          <li>
+            <a href="#reactive">Using a Select Control in a Reactive Form</a>
+          </li>
+          <li>
+            <a href="#template">Using a Select Control in a Template Driven Form</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="currentValue">Get the Current Value of a Select Control</h2>
+
+      <h3>Method #1: Use the change event on the select control</h3>
       <section>
         <ul>
-          <li>Three ways to get the current value of a select control</li>
           <li>
-            Method #1: Use the change event on the select control
-            <ul>
-              <li>
-                Add a template variable to the select control
-                <div class="card">
-                  <div class="card-body">
-                    <code> &lt;select #teams&gt;</code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Bind the change event on the control to a method
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;select #teams
-                      (change)=&quot;onSelected(teams.value)&quot;&gt;
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Assign the value into a component property
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      export class TeamWithChangeEventComponent {<br />
-                      selectedTeam = '';<br />
-                      onSelected(value:string): void { <br />
-                      this.selectedTeam = value;<br />
-                      }<br />}
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            Add a template variable to the select control
+            <div class="card">
+              <div class="card-body">
+                <code> &lt;select #teams&gt;</code>
+              </div>
+            </div>
           </li>
           <li>
-            Method #2: Use ViewChild and a template reference variable
-            <ul>
-              <li>
-                Add a template variable to the select control
-                <div class="card">
-                  <div class="card-body">
-                    <code> &lt;select #teams&gt;</code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Bind the change event on the control to a method, but do not
-                pass any parameters
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;select #teams (change)=&quot;onSelected()&quot;&gt;
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Use a ViewChild decorator to reference the tempalte variable to
-                access the current value
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      export class TeamUsingViewChildComponent {<br />
-                      @ViewChild('teams') teams!: ElementRef;<br />
-                      selectedTeam = '';<br />
-                      onSelected():void {<br />
-                      this.selectedTeam = this.teams.nativeElement.value;<br />
-                      }<br />
-                      }
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            Bind the change event on the control to a method
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;select #teams
+                  (change)=&quot;onSelected(teams.value)&quot;&gt;
+                </code>
+              </div>
+            </div>
           </li>
           <li>
-            Method #3: Use NgModel and 2 way data binding
-            <ul>
-              <li>
-                Use the NgModel directive in your Template
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;select &#91;(ngModel)&#93;="selectedTeam"&gt;&#10;
-                      <br />
-                      &lt;option default&gt;Pick a team&lt;/option&gt;<br />
-                      &lt;option&gt;Lakers&lt;/option&gt;<br />
-                      &lt;option&gt;Miami&lt;/option&gt;<br />
-                      &lt;option&gt;Cleveland&lt;/option&gt;<br />
-                      &lt;/select&gt;
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                This will bind to a property named selectedTeam on your
-                component
-              </li>
-            </ul>
+            Assign the value into a component property
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export class TeamWithChangeEventComponent {<br />
+                  selectedTeam = '';<br />
+                  onSelected(value:string): void { <br />
+                  this.selectedTeam = value;<br />
+                  }<br />}
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Method #2: Use ViewChild and a template reference variable</h3>
+      <section>
+        <ul>
+          <li>
+            Add a template variable to the select control
+            <div class="card">
+              <div class="card-body">
+                <code> &lt;select #teams&gt;</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Bind the change event on the control to a method, but do not pass
+            any parameters
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;select #teams (change)=&quot;onSelected()&quot;&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use a ViewChild decorator to reference the tempalte variable to
+            access the current value
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export class TeamUsingViewChildComponent {<br />
+                  @ViewChild('teams') teams!: ElementRef;<br />
+                  selectedTeam = '';<br />
+                  onSelected():void {<br />
+                  this.selectedTeam = this.teams.nativeElement.value;<br />
+                  }<br />
+                  }
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Method #3: Use NgModel and 2 way data binding</h3>
+      <section>
+        <ul>
+          <li>
+            Use the NgModel directive in your Template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;select &#91;(ngModel)&#93;="selectedTeam"&gt;&#10;
+                  <br />
+                  &lt;option default&gt;Pick a team&lt;/option&gt;<br />
+                  &lt;option&gt;Lakers&lt;/option&gt;<br />
+                  &lt;option&gt;Miami&lt;/option&gt;<br />
+                  &lt;option&gt;Cleveland&lt;/option&gt;<br />
+                  &lt;/select&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This will bind to a property named selectedTeam on your component
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="reactive">Using a Select Control in a Reactive Form</h2>
+      <section>
+        <ul>
+          <li>
+            Setting up the template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;form [formGroup]="form"&gt;<br />
+                  &lt;select formControlName="state"&gt;<br />
+                  &lt;option *ngFor="let state of states"
+                  [ngValue]="state"&gt;<br />
+                  {{ state.abbrev }}<br />
+                  &lt;/option&gt;<br />
+                  &lt;/select&gt;<br />
+                  &lt;/form&gt;<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Basic component setup. This sets the state at index 3 to the current
+            value.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  states = [<br />
+                  {name: 'Arizona', abbrev: 'AZ'},<br />
+                  {name: 'California', abbrev: 'CA'},<br />
+                  {name: 'Colorado', abbrev: 'CO'},<br />
+                  {name: 'New York', abbrev: 'NY'},<br />
+                  {name: 'Pennsylvania', abbrev: 'PA'},<br />
+                  ];<br />
+                  <br />
+                  form = new FormGroup({<br />
+                  state: new FormControl(this.states[3]),<br />
+                  });<br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="template">Using a Select Control in a Template Driven Form</h2>
+      <section>
+        <ul>
+          <li>
+            Setting up the template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;form #f="ngForm"&gt; &lt;select name="state" ngModel&gt;<br />
+                  &lt;option value="" disabled&gt;Choose a state&lt;/option&gt;<br />
+                  &lt;option *ngFor="let state of states" [ngValue]="state"&gt;<br />
+                  {{ state.abbrev }} &lt;/option&gt; &lt;/select&gt;<br />
+                  &lt;/form&gt;<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Basic component setup. This sets the state at index 3 to the current
+            value.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  states = [<br />
+                  {name: 'Arizona', abbrev: 'AZ'},<br />
+                  {name: 'California', abbrev: 'CA'},<br />
+                  {name: 'Colorado', abbrev: 'CO'},<br />
+                  {name: 'New York', abbrev: 'NY'},<br />
+                  {name: 'Pennsylvania', abbrev: 'PA'},<br />
+                  ];<br />
+                </code>
+              </div>
+            </div>
           </li>
         </ul>
       </section>
