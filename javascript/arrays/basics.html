@@ -34,7 +34,29 @@
       <section>
         <ul>
           <li>
-            An ordered collection of values
+            Specialized form of a JS object
+            <ul>
+              <li>
+                Array indexes are really little more than property names that
+                happen to be integers
+              </li>
+              <li>
+                However, they are optimized so access to indexes is generally
+                significantly faster than access to regular object properties
+              </li>
+              <li>
+                They have the following features other objects do not have
+                <ul>
+                  <li>Length property is automatically updated as elements change</li>
+                  <li>Setting the length property to a smaller value truncates the array</li>
+                  <li>Inherits useful methods from Array.prototype</li>
+                  <li>Array.isArray() returns true for it</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Represent an ordered collection of values
             <ul>
               <li>Values in the array are called elements</li>
               <li>
@@ -43,27 +65,6 @@
               </li>
               <li>
                 Index numbers are 32 bit and can range from 0 to 4,294,967,294
-              </li>
-            </ul>
-          </li>
-          <li>
-            Specialized form of a JS object
-            <ul>
-              <li>
-                Array indexes are really little more than property names that
-                happen to be integers
-              </li>
-              <li>
-                However, arrays are optimized, so access to indexes is generally
-                significantly faster than access to regular object properties
-              </li>
-              <li>They have the following features other objects do not have
-                <ul>
-                  <li>Length property is automatically updated as elements change</li>
-                  <li>Setting the length property to a smaller value truncates the array</li>
-                  <li>Inherits useful methods from Array.prototype</li>
-                  <li>Array.isArray() returns true for it</li>
-                </ul>
               </li>
             </ul>
           </li>
@@ -90,28 +91,13 @@
             <ul>
               <li>Elements need not be contiguous, so you can have gaps</li>
               <li>
-                The value of the length property will be greater than the number
+                In a sparse array, the value of the length property will be greater than the number
                 of elements
               </li>
               <li>See <a href="methods.html#filter">Filter()</a> for an example of removing gaps from a sparse array</li>
             </ul>
           </li>
-          <li>JS does not support true multi-dimensional arrays,  but you can approximate them with arrays of arrays</li>
-          <li>To access a single value, use the [] operator twice</li>
         </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              let table = new Array(10); <br/>
-              for(let i = 0; i &lt; table.length; i++) { <br/>
-                table[i] = new Array(10);  <br/>
-              } <br/>
-
-              // to access a single element, use  <br/>
-              table[5][7] <br/>              
-            </code>
-          </div>
-        </div>
       </section>
 
     </div>

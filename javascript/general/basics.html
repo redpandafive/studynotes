@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -19,7 +22,7 @@
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a></li>
+            <a href="../../index.html">Home</a>
           </li>
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
@@ -30,36 +33,42 @@
 
       <h1>Basics</h1>
 
-      <ul>
-        <li>Interpreted programming language</li>
-        <li>
-          Suitable for both object oriented and functional programming styles
-        </li>
-        <li>
-          Syntax is loosely based on Java, but the lanuages are otherwise
-          unrelated
-        </li>
-        <li>
-          Case sensitive, so identifiers must be typed with a consistent
-          captialization of letters
-        </li>
-        <li>Largely ignores whitespace and line breaks</li>
-        <li>Garbage collection is performed automatically by the JavaScript interpreter</li>
-      </ul>
+      <h2>Language Characteristics</h2>
+      <section>
+        JS is
+        <ul>
+          <li>An interpreted programming language</li>
+          <li>
+            Suitable for multiple programming styles, including object oriented
+            and functional programming
+          </li>
+        </ul>
+      </section>
 
       <h2>History</h2>
       <section>
         <ul>
+          <li>ECMASCript is the specification name for the language</li>
           <li>
-            ECMASCript is the specification name for the language
-            <ul>
-              <li>
-                JavaScript is a trademark licensed from Oracle to describe the
-                the original Netscape implemenation
-              </li>
-              <li>In practive, everyone just calls the language JavaScript</li>
-            </ul>
+            JavaScript is a trademark licensed from Oracle to describe the the
+            original Netscape implementation
           </li>
+          <li>In practice, everyone just calls the language JavaScript</li>
+        </ul>
+      </section>
+
+      <h2>Lexical Characteristics</h2>
+      <section>
+        <ul>
+          <li>
+            Syntax is loosely based on Java, but the languages are otherwise
+            unrelated
+          </li>
+          <li>
+            Case sensitive, so identifiers must be typed with a consistent
+            capitalization of letters
+          </li>
+          <li>Largely ignores whitespace and line breaks</li>
         </ul>
       </section>
 
@@ -67,26 +76,28 @@
       <section>
         <ul>
           <li>
-            The core JavaScript lanuage defines a minimal api for working with
+            The core JavaScript language defines a minimal api for working with
             numbers, texts, arrays, etc
-          </li>
-          <li>It does include any input or output functionality</li>
-          <li>
-            This is the responsibility of the host environment within which
-            JavaScript runs
+            <ul>
+              <li>It does include any input or output functionality</li>
+              <li>
+                This is the responsibility of the host environment within which
+                JavaScript runs
+              </li>
+            </ul>
           </li>
           <li>
             Host environments include
             <ul>
               <li>
-                Web browser
+                Web browsers
                 <ul>
                   <li>
                     Original and most commonly used host environment for JS
                   </li>
                   <li>
-                    Allows JS code to display output to the user with HTML and
-                    CSS
+                    Allows JS code to display output to the user combined with
+                    HTML and CSS
                   </li>
                   <li>Uses APIs built into the browser</li>
                 </ul>
@@ -101,12 +112,18 @@
                   </li>
                   <li>
                     Is used for a wide range of functions, including
-                    implementing web servers and simple utility scripts to
-                    replace shell scripts
+                    <ul>
+                      <li>Implementing web servers</li>
+                      <li>Simple utility scripts to replace shell scripts</li>
+                    </ul>
                   </li>
                 </ul>
               </li>
             </ul>
+          </li>
+          <li>
+            Garbage collection is performed automatically by the JavaScript
+            hosting environment
           </li>
         </ul>
       </section>
@@ -115,7 +132,7 @@
       <section>
         <ul>
           <li>
-            Identifers must follow these rules
+            Identifiers must follow these rules
             <ul>
               <li>Can begin with a letter, underscore, or dollar sign</li>
               <li>
@@ -130,7 +147,7 @@
               <li>Some are only reserved in certain contexts</li>
               <li>
                 Some cannot be fully reserved to keep backwards compatibility
-                with older programes (such as let)
+                with older programs (such as <code>let</code>)
               </li>
               <li>
                 Some reserved words are restricted since they might be used in
@@ -156,36 +173,52 @@
       <h2>Line Delimiters</h2>
       <section>
         <ul>
-          <li>JS uses semicolons as line delimiters</li>
           <li>
-            These are optional - you can usually omit the semicolor between two
-            statements if those statements are written on seperate lines
+            JS uses semicolons as line delimiters
+            <ul>
+              <li>These are optional</li>
+              <li>
+                You can usually omit the semicolon between two statements if
+                those statements are written on separate lines
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Generally, JS treats a line break as a semicolon if the next
+            non-space character cannot be interpreted as a continuation of the
+            current statement. There are three exceptions
+            <ul>
+              <li>
+                A line break after certain identifiers is always interpreted as
+                a semicolon
+                <ul>
+                  <li><code>return</code></li>
+                  <li><code>throw</code></li>
+                  <li><code>yield</code></li>
+                  <li><code>break</code></li>
+                  <li><code>continue</code></li>
+                </ul>
+              </li>
+            </ul>
           </li>
           <li>
-            There are two styles of programming
+            There are two coding styles for adding delimiters
             <ul>
               <li>Always add a delimiter, even when it is not required</li>
               <li>Only add a delimiter when it is required</li>
             </ul>
           </li>
           <li>
-            Generally, JS treats a line break as a semicolon if the next
-            nonspace character cannot be interpreted as a continuation of the
-            current statement
-          </li>
-          <li>There are three exceptions
-            <ul>              
-              <li>A line break after certain identifiers is always interpreted as a semicolon</li>
-              <li>return, throw, yield, break, continue</li>
-            </ul>
-          </li>
-          <li>Defensive semicolons can be added to guard against unintentional interpretation
+            Defensive semicolons can be added to guard against unintentional
+            interpretation
             <div class="card">
               <div class="card-body">
                 <code>
-                  // defensive semicolon prevents absence of semicolon from being interpreted as a line continuation
-                  let x = 0 
-                  ;[x,x+1,x+2].forEach(console.log)
+                  // defensive semicolon prevents absence of semicolon from
+                  being interpreted as a line continuation 
+                  let x = 0<br/>
+                  ;[x,x+1,x+2].forEach(console.log)<br/>
                 </code>
               </div>
             </div>

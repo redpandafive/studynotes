@@ -3,14 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="../">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
     <div class="container">
-      <h1>TypeScript</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <h1>TypeScript</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/angularcli.html#commands">Commands</a></li>
+        </ul>
+      </section>
       <section>
         <ul>
           <li>
@@ -170,17 +181,24 @@
             <ul>
               <li>
                 To define an object type, list the properties and their types
-                <div class="card"><div class="card-body"><code>
-                  function printName(obj: { first: string; last?: string }) {"
-                </code></div></div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      function printName(obj: { first: string; last?: string })
+                      {"
+                    </code>
+                  </div>
+                </div>
               </li>
               <li>
                 Optional properties can be marked with a ?. Make sure to check
                 for undefined or use a safe navigation operatior when using
                 these.
-                <div class="card"><div class="card-body"><code>
-                  console.log(obj.last?.toUpperCase());"
-                </code></div></div>
+                <div class="card">
+                  <div class="card-body">
+                    <code> console.log(obj.last?.toUpperCase());" </code>
+                  </div>
+                </div>
               </li>
             </ul>
           </li>
@@ -196,9 +214,11 @@
                 Can use the non-null assertion operator to tell the compiler
                 that a value cannot be null. TS will not check this when
                 applied.
-                <div class="card"><div class="card-body"><code>
-                  console.log(x!.toFixed());"
-                </code></div></div>
+                <div class="card">
+                  <div class="card-body">
+                    <code> console.log(x!.toFixed());" </code>
+                  </div>
+                </div>
               </li>
             </ul>
           </li>
@@ -237,10 +257,13 @@
             <ul>
               <li>
                 Function with typed parameters and return type
-                <div class="card"><div class="card-body"><code>
-                  "
-                  function greet(person: string, date: Date): string { ...
-                </code></div></div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      " function greet(person: string, date: Date): string { ...
+                    </code>
+                  </div>
+                </div>
               </li>
             </ul>
           </li>
@@ -279,30 +302,53 @@
             </ul>
             <div>
               Example of a simple union type
-              <div class="card"><div class="card-body"><code>
-                getAllBooks(): Observable&lt;Book&#91;&#93; | CustomError&gt; { ...."
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    getAllBooks(): Observable&lt;Book&#91;&#93; |
+                    CustomError&gt; { ...."
+                  </code>
+                </div>
+              </div>
             </div>
             <div>
               Example of a function that can accept a union Type - this will
               trigger an error since number does not have a toUpperCase method
-              <div class="card"><div class="card-body"><code>
-                function printId(id: number | string) {&#10; console.log(id.toUpperCase());&#10;}"
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    function printId(id: number | string) {&#10;
+                    console.log(id.toUpperCase());&#10;}"
+                  </code>
+                </div>
+              </div>
             </div>
             <div>
               Example of using narrowing to prevent the above error
-              <div class="card"><div class="card-body"><code>
-                function printId(id: number | string) {&#10; if (typeof id === &quot;string&quot;) {&#10; // In this branch, id is of type 'string'&#10; console.log(id.toUpperCase());&#10; } else {&#10; // Here, id is of type 'number'&#10; console.log(id);&#10; }&#10;}"
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    function printId(id: number | string) {&#10; if (typeof id
+                    === &quot;string&quot;) {&#10; // In this branch, id is of
+                    type 'string'&#10; console.log(id.toUpperCase());&#10; }
+                    else {&#10; // Here, id is of type 'number'&#10;
+                    console.log(id);&#10; }&#10;}"
+                  </code>
+                </div>
+              </div>
             </div>
             <div>
               Example of a function that could return an error type or a data
               type
             </div>
-            <div class="card"><div class="card-body"><code>
-              getAllBooks(): Observable&lt;Book&#91;&#93; | CustomError&gt; { ...."
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  getAllBooks(): Observable&lt;Book&#91;&#93; | CustomError&gt;
+                  { ...."
+                </code>
+              </div>
+            </div>
           </li>
         </ul>
       </section>
@@ -313,16 +359,22 @@
           <li>A name for a type</li>
           <li>
             Example
-            <div class="card"><div class="card-body"><code>
-              type Point = {&#10; x: number;&#10; y: number;&#10;};"
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  type Point = {&#10; x: number;&#10; y: number;&#10;};"
+                </code>
+              </div>
+            </div>
           </li>
         </ul>
         <li>
           A type alias for a union type
-          <div class="card"><div class="card-body"><code>
-            type ID = number | string;"
-          </code></div></div>
+          <div class="card">
+            <div class="card-body">
+              <code> type ID = number | string;" </code>
+            </div>
+          </div>
         </li>
       </section>
 
@@ -331,9 +383,13 @@
         <ul>
           <li>
             Another way to name an object type (in addition to aliases)
-            <div class="card"><div class="card-body"><code>
-              interface Point {&#10; x: number;&#10; y: number;&#10;}"
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  interface Point {&#10; x: number;&#10; y: number;&#10;}"
+                </code>
+              </div>
+            </div>
           </li>
           <li>Interfaces can extend other interfaces</li>
           <li>
@@ -359,9 +415,14 @@
           <li>
             This gives a more specific HTMLElement type (TS figures out it is a
             HTMLElement, but you know it is a HTMLCanvasElement by the id)
-            <div class="card"><div class="card-body"><code>
-              code='const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement;'
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  code='const myCanvas = document.getElementById("main_canvas")
+                  as HTMLCanvasElement;'
+                </code>
+              </div>
+            </div>
           </li>
           <li>
             Allows type assertions which convert to a more specific or less
@@ -380,15 +441,25 @@
           <li>
             One example where this is useful is defining a function that only
             accepts a certain set of known values
-            <div class="card"><div class="card-body"><code>
-              code='function printText(s: string, alignment: "left" | "right" | "center") { ...'
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  code='function printText(s: string, alignment: "left" |
+                  "right" | "center") { ...'
+                </code>
+              </div>
+            </div>
           </li>
           <li>
             Another example is a function that only returns specific numbers
-            <div class="card"><div class="card-body"><code>
-              function compare(a: string, b: string): -1 | 0 | 1 {&#10; return a === b ? 0 : a &gt; b ? 1 : -1;&#10;}"
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function compare(a: string, b: string): -1 | 0 | 1 {&#10;
+                  return a === b ? 0 : a &gt; b ? 1 : -1;&#10;}"
+                </code>
+              </div>
+            </div>
           </li>
           <li>
             There are two boolean literal types, true and false
@@ -496,9 +567,16 @@
         <div>
           Enums can be reverse mapped, so you can access the enum name as well
           as the enum value
-          <div class="card"><div class="card-body"><code>
-            code='enum Weekend {&#10; Friday = 1,&#10; Saturday,&#10; Sunday&#10;}&#10;Weekend.Saturday // returns 2&#10;Weekend&#91;"Saturday"&#93;; // returns 2&#10;Weekend&#91;2&#93;; // returns Saturday'
-          </code></div></div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                code='enum Weekend {&#10; Friday = 1,&#10; Saturday,&#10;
+                Sunday&#10;}&#10;Weekend.Saturday // returns
+                2&#10;Weekend&#91;"Saturday"&#93;; // returns
+                2&#10;Weekend&#91;2&#93;; // returns Saturday'
+              </code>
+            </div>
+          </div>
         </div>
         <div>
           There are three types:
@@ -512,15 +590,31 @@
                 Enums can be declared as constant for a performance boost.
               </li>
             </ul>
-            <div class="card"><div class="card-body"><code>
-              const enum Weekend1 {&#10; Friday,&#10; Saturday,&#10; Sunday&#10;}&#10;&#10;enum Weekend2 {&#10; Friday = 1,&#10; Saturday,&#10; Sunday&#10;}&#10;&#10;enum Weekend3 {&#10; Friday = 1,&#10; Saturday = 13,&#10; Sunday = 5&#10;}&#10;&#10;enum Weekend {&#10; Friday = 1,&#10; Saturday = getDate('TGIF'),&#10; Sunday = Saturday * 40&#10;}&#10;&#10;function getDate(day : string): number {&#10; if (day === 'TGIF') {&#10; return 3;&#10; }&#10;}"
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const enum Weekend1 {&#10; Friday,&#10; Saturday,&#10;
+                  Sunday&#10;}&#10;&#10;enum Weekend2 {&#10; Friday = 1,&#10;
+                  Saturday,&#10; Sunday&#10;}&#10;&#10;enum Weekend3 {&#10;
+                  Friday = 1,&#10; Saturday = 13,&#10; Sunday =
+                  5&#10;}&#10;&#10;enum Weekend {&#10; Friday = 1,&#10; Saturday
+                  = getDate('TGIF'),&#10; Sunday = Saturday *
+                  40&#10;}&#10;&#10;function getDate(day : string): number
+                  {&#10; if (day === 'TGIF') {&#10; return 3;&#10; }&#10;}"
+                </code>
+              </div>
+            </div>
           </div>
           <div>
             String
-            <div class="card"><div class="card-body"><code>
-              enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday = 'SATURDAY',&#10; Sunday = 'SUNDAY'&#10;}"
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday =
+                  'SATURDAY',&#10; Sunday = 'SUNDAY'&#10;}"
+                </code>
+              </div>
+            </div>
           </div>
           <div>
             Heterogeneous
@@ -528,9 +622,14 @@
               <li>Consist of a mixture of strings and numbers.</li>
               <li>Limited ue cases and generally not recommended to use.</li>
             </ul>
-            <div class="card"><div class="card-body"><code>
-              enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday = 1,&#10; Sunday = 2&#10;}"
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday = 1,&#10;
+                  Sunday = 2&#10;}"
+                </code>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -551,16 +650,26 @@
           The following will cause an error: Variable 'x' is used before being
           assigned.
         </div>
-        <div class="card"><div class="card-body"><code>
-          let x: number;&#10;initialize();&#10;console.log(x + x);&#10;&#10;function initialize() {&#10; x = 10;&#10;}"
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let x: number;&#10;initialize();&#10;console.log(x +
+              x);&#10;&#10;function initialize() {&#10; x = 10;&#10;}"
+            </code>
+          </div>
+        </div>
         <div>
           Adding the ! operator will prevent TypeScript from triggering the
           error
         </div>
-        <div class="card"><div class="card-body"><code>
-          let x: number;&#10;initialize();&#10;console.log(x! + x!);&#10;&#10;function initialize() {&#10; x = 10;&#10;}"
-        </code></div></div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let x: number;&#10;initialize();&#10;console.log(x! +
+              x!);&#10;&#10;function initialize() {&#10; x = 10;&#10;}"
+            </code>
+          </div>
+        </div>
       </section>
 
       <h2>Object Types</h2>
@@ -570,21 +679,38 @@
           <ul>
             <li>
               Can be annonymous
-              <div class="card"><div class="card-body"><code>
-                code='function greet(person: { name: string; age: number }) {&#10; return "Hello " + person.name;&#10;}'
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    code='function greet(person: { name: string; age: number })
+                    {&#10; return "Hello " + person.name;&#10;}'
+                  </code>
+                </div>
+              </div>
             </li>
             <li>
               Can also use an interface
-              <div class="card"><div class="card-body"><code>
-                code='interface Person {&#10; name: string;&#10; age: number;&#10;}&#10; &#10;function greet(person: Person) {&#10; return "Hello " + person.name;&#10;}'
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    code='interface Person {&#10; name: string;&#10; age:
+                    number;&#10;}&#10; &#10;function greet(person: Person)
+                    {&#10; return "Hello " + person.name;&#10;}'
+                  </code>
+                </div>
+              </div>
             </li>
             <li>
               Can also use a type aliases
-              <div class="card"><div class="card-body"><code>
-                code='type Person = {&#10; name: string;&#10; age: number;&#10;};&#10; &#10;function greet(person: Person) {&#10; return "Hello " + person.name;&#10;}'
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    code='type Person = {&#10; name: string;&#10; age:
+                    number;&#10;};&#10; &#10;function greet(person: Person)
+                    {&#10; return "Hello " + person.name;&#10;}'
+                  </code>
+                </div>
+              </div>
             </li>
             <li>
               In each of the three styles written above, the parameter object
@@ -603,9 +729,14 @@
             <li>
               Basically says if the property is set, it better have a specific
               type
-              <div class="card"><div class="card-body"><code>
-                interface PaintOptions {&#10; shape: Shape;&#10; xPos?: number;&#10; yPos?: number;&#10;}"
-              </code></div></div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    interface PaintOptions {&#10; shape: Shape;&#10; xPos?:
+                    number;&#10; yPos?: number;&#10;}"
+                  </code>
+                </div>
+              </div>
             </li>
           </ul>
         </li>

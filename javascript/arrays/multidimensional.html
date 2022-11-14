@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Multi-Dimensional Arrays</li>
+        </ol>
+      </nav>
+
+      <h1>Multi-Dimensional Arrays</h1>
+
+      <section>
+        <ul>
+          <li>JS does not support true multi-dimensional arrays,  but you can approximate them with arrays of arrays</li>
+          <li>To access a single value, use the [] operator twice</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let table = new Array(10); <br/>
+              for(let i = 0; i &lt; table.length; i++) { <br/>
+                table[i] = new Array(10);  <br/>
+              } <br/>
+
+              // to access a single element, use  <br/>
+              table[5][7] <br/>              
+            </code>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

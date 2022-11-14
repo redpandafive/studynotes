@@ -37,33 +37,25 @@
       <section>
         <ul>
           <li>
-            Access an element to read/write array elements using the [] operator
+            Access an array element to read/write values by using the [] operator
             <ul>
               <li>
-                Array reference should be on the left side of the brackets
+                Array identifier should be on the left side of the brackets
               </li>
               <li>
-                Array index = non-negative integer expression should be in the
-                brackets
+                An array index should be a non-negative integer expression 
               </li>
+              <li>Index should be in the brackets</li>
             </ul>
           </li>
           <li>
             Arrays are just specialized objects
             <ul>
               <li>
-                The expression you pass is converted into a string that is used
-                as a property name
-              </li>
-              <li>
-                There is no notion of an out-of-bounds error with arrays
+                The expression used an an index is converted into a string
                 <ul>
-                  <li>
-                    When you try to query a nonexistent property of an array,
-                    you get undefined
-                  </li>
-                  <li>This is the same behavior as objects</li>
-                </ul>
+                  <li>That is used as a property name</li>
+                </ul> 
               </li>
             </ul>
           </li>
@@ -85,6 +77,16 @@
             When using an expression that is not an in-range integer, it is
             treated as a regular object property
           </li>
+          <li>
+            There is no notion of an out-of-bounds error with arrays
+            <ul>
+              <li>
+                When you try to query a nonexistent property of an array,
+                you get undefined
+              </li>
+              <li>This is the same behavior as objects</li>
+            </ul>
+          </li>
           <div>
             Examples
             <div class="card">
@@ -104,7 +106,7 @@
       <section>
         <ul>
           <li>
-            The <code>delete</code> operator to delete the specified object
+            Use the <code>delete</code> operator to delete the specified object
             property
           </li>
           <li>
@@ -128,7 +130,6 @@
           <div class="card">
             <div class="card-body">
               <code>
-                // Start with an array <br />
                 let a = [1,2,3];<br />
                 // Delete the last element of the array<br />
                 delete a[2];<br />

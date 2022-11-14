@@ -33,10 +33,9 @@
 
       <h1>Creating Arrays</h1>
 
-      <h2 id="init">Array Initializers</h2>
+      <h2 id="init">Array Initializers / Array Literals</h2>
       <section>
         <ul>
-          <li>Also known as array literals</li>
           <li>
             Expressions whose value is a newly created array
             <ul>
@@ -44,21 +43,32 @@
             </ul>
           </li>
           <li>
-            Initialized to the values of the supplied comma separated
+            Arrays are initialized to the values of the supplied comma separated
             expressions
           </li>
         </ul>
+
         <div>
+          An array with no elements
           <div class="card">
             <div class="card-body">
-              <code>
-                // An array with no elements<br />
-                let empty = []; <br />
-                // An array with 5 numeric elements<br />
-                let primes = [2, 3, 5, 7, 11]; <br />
-                // 3 elements of various types and trailing comma<br />
-                let misc = [ 1.1, true, "a", ]; <br />
-              </code>
+              <code> let empty = []; <br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          An array with 5 numeric elements
+          <div class="card">
+            <div class="card-body">
+              <code> let primes = [2, 3, 5, 7, 11]; <br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          An array with 3 elements of various types and trailing comma
+          <div class="card">
+            <div class="card-body">
+              <code> let misc = [ 1.1, true, "a", ]; <br /> </code>
             </div>
           </div>
         </div>
@@ -93,87 +103,73 @@
 
       <h2>Array Constructor</h2>
       <section>
-        <ul>
-          <li>
-            Additional way to create an array. The constructor can be invokes in
-            three ways:
-            <ul>
-              <li>
-                Create an empty array with no elements (similar to array literal
-                [])
-                <div class="card">
-                  <div class="card-body">
-                    <code>let a = new Array(); </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Pass a single numeric argument to specify a array length with no
-                values when you know in advance how many elements will be
-                required
-                <div class="card">
-                  <div class="card-body">
-                    <code>let a = new Array(); </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Alternatively, the ES6 Array.of() factory function can be used.
-                Useful when an array consisting of a single numeric argument is
-                needed.
-                <div class="card">
-                  <div class="card-body">
-                    <code>Array.of(10);</code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Pass a comma seperated list of values. An array literal is
-                simpler to use.
-                <div class="card">
-                  <div class="card-body">
-                    <code>let a = new Array(1,2,3);</code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <div>
+          Create an empty array with no elements (similar to array literal [])
+          <div class="card">
+            <div class="card-body">
+              <code>let a = new Array(); </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Pass a single numeric argument to specify a array length with no
+          values when you know in advance how many elements will be required
+          <div class="card">
+            <div class="card-body">
+              <code>let a = new Array(); </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Alternatively, the ES6 Array.of() factory function can be used. Useful
+          when an array consisting of a single numeric argument is needed.
+          <div class="card">
+            <div class="card-body">
+              <code>Array.of(10);</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Pass a comma separated list of values. An array literal is simpler to
+          use.
+          <div class="card">
+            <div class="card-body">
+              <code>let a = new Array(1,2,3);</code>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h2>Spread Operator</h2>
       <section>
         <ul>
           <li>See <a href="../operators/spread.html">Spread Operator</a></li>
-          <li>
-            Spread can be used with arrays to
-            <ul>
-              <li>
-                Include the elements of one array within an array literal
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      // b == [0, 1, 2, 3, 4] <br />
-                      let a = [1, 2, 3]; <br />
-                      let b = [0, ...a, 4];<br />
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Create a shallow copy of an array. The copy can be modified
-                without changing the original.
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      let original = [1,2,3]; let copy = [...original];
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
         </ul>
+        <div>
+          Can be used to include the elements of one array within an array
+          literal
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // b == [0, 1, 2, 3, 4] <br />
+                let a = [1, 2, 3]; <br />
+                let b = [0, ...a, 4];<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Can also create a shallow copy of an array. The copy can be modified without
+          changing the original.
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                let original = [1,2,3];<br/> 
+                let copy = [...original];<br/>
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
