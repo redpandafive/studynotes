@@ -27,12 +27,12 @@
             <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            FormBuilder
+            Reactive Forms - FormBuilder
           </li>
         </ol>
       </nav>
 
-      <h1>FormBuilder</h1>
+      <h1>Reactive Forms - FormBuilder</h1>
 
       <section>
         <ul>
@@ -89,9 +89,7 @@
           <li>
             Call the group() method to generate a FormGroup object
             <ul>
-              <li>
-                Pass an object to define the properties in the model
-              </li>
+              <li>Pass an object to define the properties in the model</li>
               <li>
                 The value of each control name is an array containing the
                 initial value as the first item in the array
@@ -107,16 +105,16 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      this.fb.group({ <br/>
-                        firstName: [''], <br/>
-                        lastName: [''], <br/>
-                        address: this.fb.group({ <br/>
-                          street: [''], <br/>
-                          city: [''], <br/>
-                          state: [''], <br/>
-                          zip: [''] <br/>
-                        }),<br/>
-                      });<br/>
+                      this.fb.group({ <br />
+                      firstName: [''], <br />
+                      lastName: [''], <br />
+                      address: this.fb.group({ <br />
+                      street: [''], <br />
+                      city: [''], <br />
+                      state: [''], <br />
+                      zip: [''] <br />
+                      }),<br />
+                      });<br />
                     </code>
                   </div>
                 </div>
@@ -126,16 +124,16 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      profileForm = new FormGroup({ <br/>
-                        firstName: new FormControl(''), <br/>
-                        lastName: new FormControl(''), <br/>
-                        address: new FormGroup({ <br/>
-                          street: new FormControl(''), <br/>
-                          city: new FormControl(''), <br/>
-                          state: new FormControl(''), <br/>
-                          zip: new FormControl('') <br/>
-                        }) <br/>
-                      });<br/>
+                      profileForm = new FormGroup({ <br />
+                      firstName: new FormControl(''), <br />
+                      lastName: new FormControl(''), <br />
+                      address: new FormGroup({ <br />
+                      street: new FormControl(''), <br />
+                      city: new FormControl(''), <br />
+                      state: new FormControl(''), <br />
+                      zip: new FormControl('') <br />
+                      }) <br />
+                      });<br />
                     </code>
                   </div>
                 </div>
@@ -144,7 +142,6 @@
           </li>
         </ul>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
