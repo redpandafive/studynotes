@@ -38,21 +38,22 @@
       <h3>length</h3>
       <section>
         <ul>
-          <li>This property makes arrays different form regular JS objects</li>
+          <li>This property distinguishes arrays from regular JS objects</li>
           <li>
-            For non-sparse arrays, the number of elements in the array
+            For non-sparse arrays, this is the number of elements in the array
             <ul>
               <li>
-                The length will be one more than number of elements in the array
+                Zero based, so the length value will be one more than the last
+                element in the array
               </li>
             </ul>
           </li>
           <li>
-            For sparse arrays, length is greater than the number of elements
+            For sparse arrays, the length is greater than the number of elements
             <ul>
               <li>
-                Can guarantee that the length value is guaranteed to be larger
-                than the index of every element in the array
+                Can guarantee that the length value is greater than the index of
+                every element in the array
               </li>
             </ul>
           </li>
@@ -83,10 +84,19 @@
       <h3>Array.join()</h3>
       <section>
         <ul>
-          <li>Converts all elements of an array to strings, then concatenates them</li>
-          <li>Defaults to comma as a separator</li>
-          <li>Can pass a parameter to specify a different separator</li>
-          <li>Calling the <code>toString()</code> method on an array works the same as this with no arguments</li>
+          <li>
+            Converts all elements of an array to strings, then concatenates them
+          </li>
+          <li>
+            Defaults to comma as a separator
+            <ul>
+              <li>Pass a parameter to specify a different separator</li>
+            </ul>
+          </li>
+          <li>
+            Calling the <code>toString()</code> method on an array has the same
+            result as this (with default delimiter)
+          </li>
         </ul>
       </section>
 
@@ -100,11 +110,17 @@
       <h3>Array.from()</h3>
       <section>
         <ul>
-          <li>Factory method for creating a new array</li>
           <li>
-            Expects an iterable or array like object as its first argument
+            Factory method for creating a new array
+            <ul>
+              <li>
+                Expects an iterable or array like object as its first argument
+              </li>
+              <li>
+                Returns a new array that contains the elements of that object
+              </li>
+            </ul>
           </li>
-          <li>Returns a new array that contains the elements of that object</li>
           <li>
             When an iterable is passed, it works like the spread operator
             <ul>
@@ -128,7 +144,7 @@
                 Each element from the source object is sent through the function
               </li>
               <li>
-                Similar to map, but more efficient that building up the array,
+                Similar to map, but more efficient than building up the array,
                 then mapping it into another.
               </li>
             </ul>
@@ -142,17 +158,37 @@
           <li>Factory method for creating a new array</li>
           <li>
             Useful when you need to create an array with a single numeric
-            element. Trying something similar with the Array constructor, it
-            will consider the number to be a length, not a value
+            element.
+            <ul>
+              <li>
+                If you attempt something similar using the Array constructor, it
+                will consider the number to be a length, not a value
+              </li>
+            </ul>
           </li>
         </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              // returns an empty array Array.of(); // returns an array with a
-              single value, 10 Array.of(10) // => [10]; // returns an array of
-              [1,2,3] Array.of(1,2,3)
-            </code>
+        <div>
+          Returns an empty array
+          <div class="card">
+            <div class="card-body">
+              <code> Array.of(); <br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Returns an array with a single value, 10
+          <div class="card">
+            <div class="card-body">
+              <code> Array.of(10) <br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Returns an array of [1,2,3]
+          <div class="card">
+            <div class="card-body">
+              <code> Array.of(1,2,3)<br /> </code>
+            </div>
           </div>
         </div>
       </section>
@@ -161,37 +197,31 @@
 
       <h3>Iterator Methods</h3>
       <section>
+        <div>Typically have the following characteristics</div>
         <ul>
           <li>
-            All methods in this section share these characteristics
+            Accept a function as their first argument
+            <ul>
+              <li>Invoke the function once for each element of the array</li>
+              <li>
+                The function is not evoked on nonexistent elements in sparse
+                arrays
+              </li>
+              <li>Arrow functions work well here</li>
+            </ul>
+          </li>
+          <li>
+            Several accept a second optional argument
             <ul>
               <li>
-                Accept a function as their first argument
-                <ul>
-                  <li>
-                    Invoke the function once for each element of the array
-                  </li>
-                  <li>
-                    The function is not evoked an nonexistent elements in sparse
-                    arrays
-                  </li>
-                </ul>
+                The object passed becomes the value of the
+                <code>this</code> keyword inside the function
               </li>
-              <li>
-                Several accept a second optional argument
-                <ul>
-                  <li>
-                    When supplied, this becomes the value of the
-                    <code>this</code> keyword inside the function
-                  </li>
-                </ul>
-              </li>
-              <li>
-                None modify the array on which they are invoked (unless done in
-                the function)
-              </li>
-              <li>Arrow functions work well with these methods</li>
             </ul>
+          </li>
+          <li>
+            Do not modify the array on which they are invoked (unless done
+            explicity in the function)
           </li>
         </ul>
       </section>
@@ -204,8 +234,8 @@
             all elements in the array
           </li>
           <li>
-            Returns false the first time the predicate returns false and short
-            circuits remaining iterations
+            Returns false the first time the predicate function returns false
+            and short circuits remaining iterations
           </li>
           <li>
             Only iterates through all elements if the predicate always returns
@@ -229,18 +259,19 @@
       <section>
         <ul>
           <li>
-            Returns an array containing a subset of the elements of the array on
-            which it is invoked
+            Returns a new array containing a subset of the elements from the
+            original array
             <ul>
               <li>
-                Filtered down to just the elements from the given array that
-                pass the test implemented by the provided function.
+                Filtered down to just the elements that pass the test
+                implemented by the provided function
               </li>
               <li>Creates a shallow copy of a portion of a given array</li>
             </ul>
           </li>
           <li>
-            The function you pass should be a predicate (return true or false)
+            The function you pass should be a predicate (return either true or
+            false)
             <ul>
               <li>
                 If the return value is true, the element is included in the
@@ -271,23 +302,32 @@
               </div>
             </div>
           </li>
-          <li>
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-          </li>
         </ul>
         <div>
           <div class="card">
             <div class="card-body">
               <code>
                 const words = &#91;'spray', 'limit', 'elite', 'exuberant',
-                'destruction', 'present'&#93;;&#10;const result =
-                words.filter(word =&gt; word.length &gt;
-                6);&#10;console.log(result);&#10;// expected output: Array
-                &#91;&quot;exuberant&quot;, &quot;destruction&quot;,
-                &quot;present&quot;&#93;"
+                'destruction', 'present'&#93;;&#10;<br />
+                const result = words.filter(word =&gt; word.length &gt; 6);<br />
+
+                // result should be Array&#91;&quot;exuberant&quot;,
+                &quot;destruction&quot;,&quot;present&quot;&#93;
               </code>
             </div>
           </div>
+        </div>
+        <div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
+                target="_blank"
+              >
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -305,29 +345,38 @@
             The function you pass should be a predicate (return true or false)
           </li>
           <li>
-            Find() returns the value of the matched element
+            Find() returns the value of the first matched element
             <ul>
               <li>Returns undefined if no match is found</li>
             </ul>
           </li>
           <li>
-            FindIndex() returns the index of the matched element
+            FindIndex() returns the index of the first matched element
             <ul>
               <li>Returns -1 if no match is found</li>
             </ul>
-          </li>
-          <li>
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
           </li>
         </ul>
         <div class="card">
           <div class="card-body">
             <code>
-              const array1 = &#91;5, 12, 8, 130, 44&#93;;&#10;&#10;const found =
-              array1.find(element =&gt; element &gt;
-              10);&#10;&#10;console.log(found);&#10;// expected output: 12&#10;"
+              const array1 = &#91;5, 12, 8, 130, 44&#93;;<br />
+              const found = array1.find(element =&gt; element &gt; 10);<br />
+              // found should contain 12
             </code>
           </div>
+        </div>
+        <div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find"
+                target="_blank"
+              >
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -335,14 +384,14 @@
       <section>
         <ul>
           <li>
-            An array method that offers a functional approach to array iteration
+            Offers a functional approach to array iteration
             <ul>
               <li>Executes a provided function once for each array element</li>
               <li>Will not invoke the function on gaps in sparse arrays</li>
             </ul>
           </li>
           <li>
-            Parameters
+            Parameters of the passed function
             <ul>
               <li>First parameter is value of the array element</li>
               <li>Second parameter is the the array index</li>
@@ -357,34 +406,45 @@
               </li>
             </ul>
           </li>
-          <li>Slower than map()</li>
           <li>
-            There is no way to terminate iteration before all elements have been
-            passed to the function
-          </li>
-          <li>
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+            Drawbacks
+            <ul>
+              <li>Slower than map()</li>
+              <li>
+                There is no way to terminate iteration before all elements have
+                been passed to the function
+              </li>
+            </ul>
           </li>
         </ul>
         <div>
           <div class="card">
             <div class="card-body">
               <code>
-                const array1 = &#91;'a', 'b',
-                'c'&#93;;&#10;&#10;array1.forEach(element =&gt;
-                console.log(element));&#10;&#10;// expected output:
-                &quot;a&quot;&#10;// expected output: &quot;b&quot;&#10;//
-                expected output: &quot;c&quot;"
+                const array1 = &#91;'a', 'b', 'c'&#93;;<br />
+                array1.forEach(element =&gt; console.log(element)); <br />
+                // Should print "a", then "b", then "c" <br />
               </code>
             </div>
           </div>
+        </div>
+        <div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"
+                target="_blank"
+              >
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
       <h4>map()</h4>
       <section>
         <ul>
-          <li>The function that is passed should return a value</li>
           <li>
             Creates a new array with the results of calling a provided function
             on every element in the calling array
@@ -399,9 +459,8 @@
             Supports immutability since you don't modify the existing array
           </li>
           <li>Faster than foreach()</li>
-          <li>
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
-          </li>
+          <li>The function that is passed should return a value</li>
+
           <li>
             If you need to flatten the result, use
             <a href="#flatmap">flatMap</a> instead
@@ -419,6 +478,18 @@
             </div>
           </div>
         </div>
+        <div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
+                target="_blank"
+              >
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+              </a>
+            </li>
+          </ul>
+        </div>
       </section>
 
       <h4>reduce()</h4>
@@ -430,9 +501,9 @@
               <li>This is a common operation in functional programming</li>
             </ul>
           </li>
-          <li>This is done in order from lowest index number to highest</li>
+          <li>Perfomred in order from lowest index number to highest</li>
           <li>
-            Parameters of the reduce function call
+            Parameters of reduce()
             <ul>
               <li>
                 1st = the function that performs the reduction operation
@@ -454,7 +525,7 @@
                 <ul>
                   <li>
                     For the first call to the function, it is the initial value
-                    you passed as the second argument to reduce
+                    you passed as the second argument to reduce()
                   </li>
                   <li>
                     On subsequent calls, it is the value returned by the
@@ -469,12 +540,11 @@
           </li>
           <li>
             If no initial value is specified, the first call to the reduction
-            function, if uses the first element of the array as the initial
-            value
+            function uses the first element of the array as the initial value
             <ul>
               <li>
-                So, the first and second array elements are the first and second
-                arguments
+                The first and second array elements are the first and second
+                arguments in the first iteration
               </li>
             </ul>
           </li>
@@ -491,7 +561,7 @@
         </ul>
 
         <div>
-          Example 1
+          Example
           <div class="card">
             <div class="card-body">
               <code>
@@ -507,20 +577,44 @@
               returns 1
             </li>
             <li>
-              Second call to the reducer function, it has arguments 1 (previous
-              result) and 2 (second array element); returns 3
+              Second call to the reducer function
+              <ul>
+                <li>
+                  It has arguments 1 (previous result) and 2 (second array
+                  element)
+                </li>
+                <li>Returns 3</li>
+              </ul>
             </li>
             <li>
-              Third call to the reducer function, it has arguments 3 (previous
-              result) and 3 (third array element); returns 6
+              Third call to the reducer function
+              <ul>
+                <li>
+                  It has arguments 3 (previous result) and 3 (third array
+                  element)
+                </li>
+                <li>Returns 6</li>
+              </ul>
             </li>
             <li>
-              Fifth call to the reducer function, it has arguments 6 (previous
-              result) and 4 (fourth array element); returns 10
+              Fourth call to the reducer function
+              <ul>
+                <li>
+                  It has arguments 6 (previous result) and 4 (fourth array
+                  element)
+                </li>
+                <li>Returns 10</li>
+              </ul>
             </li>
             <li>
-              Sixth call to the reducer function, it has arguments 10 (previous
-              result) and 5 (fifth array element); returns last result of 15
+              Fifth call to the reducer function
+              <ul>
+                <li>
+                  It has arguments 10 (previous result) and 5 (fifth array
+                  element)
+                </li>
+                <li>Returns 15</li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -677,7 +771,7 @@
         <ul>
           <li>Returns a slice (subarray) of the specified array</li>
           <li>
-            Arguments
+            Parameters
             <ul>
               <li>1st = index of the first element to include in the slice</li>
               <li>
@@ -801,10 +895,14 @@
           <div class="card">
             <div class="card-body">
               <code>
-                // Start with no elements and length 5 let a = new Array(5); //
-                => [0,0,0,0,0]; fill the array with zeros a.fill(0); // =>
-                [0,9,9,9,9]; fill with 9 starting at index 1 a.fill(9, 1); // =>
-                [0,9,8,8,9]; fill with 8 at indexes 2, 3 a.fill(8, 2, -1);
+                // Start with no elements and length 5 <br />
+                let a = new Array(5); // => [0,0,0,0,0]; <br />
+                // fill the array with zeros <br />
+                a.fill(0); // => [0,9,9,9,9]; <br />
+                // fill with 9 starting at index 1 <br />
+                a.fill(9, 1); // => [0,9,8,8,9]; <br />
+                //fill with 8 at indexes 2, 3 <br />
+                a.fill(8, 2, -1); <br />
               </code>
             </div>
           </div>
@@ -815,6 +913,8 @@
       <section>
         <ul>
           <li>Copies a slice of an array to a new position within the array</li>
+        </ul>
+        <div>
           <li>
             <a
               href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin"
@@ -822,7 +922,7 @@
               https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
             </a>
           </li>
-        </ul>
+        </div>
       </section>
 
       <h3>Searching and Sorting Methods</h3>
@@ -845,9 +945,12 @@
             <ul>
               <li>Primitives are compared by value</li>
               <li>Objects are compared by reference</li>
-              <li>Does not consider NaN equals to itself, so it cannot find it</li>
               <li>
-                Use the first method if you need to look at content of an object
+                Does not consider NaN equals to itself, so it cannot find it
+              </li>
+              <li>
+                Use the <code>first()</code> method if you need to look at the
+                content of an object
               </li>
             </ul>
           </li>
@@ -858,8 +961,6 @@
         </ul>
       </section>
 
-
-
       <h4>includes()</h4>
       <section>
         <ul>
@@ -868,7 +969,8 @@
             entries, returning true or false as appropriate.
           </li>
           <li>Effectively a set membership test for arrays</li>
-          <li>Unlike indexOf, it will detect NaN
+          <li>
+            Unlike indexOf, it will detect NaN
             <ul>
               <li>It considers NaN to be equal to itself.</li>
             </ul>
@@ -878,9 +980,16 @@
           </li>
         </ul>
         <div>
-          <div class="card">
-            <div class="card-body"><code> "</code></div>
-          </div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes"
+                target="_blank"
+              >
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -890,10 +999,12 @@
           <li>
             Returns true if and only if the predicate function returns true for
             at least one element in the array
-          </li>
-          <li>
-            Returns true the first time the predicate returns true and short
-            circuits remaining iterations
+            <ul>
+              <li>
+                Short-circuits remaining iterations if the predicate returns
+                true
+              </li>
+            </ul>
           </li>
           <li>
             Only iterates through all elements if the predicate always returns
@@ -903,32 +1014,39 @@
         <div class="card">
           <div class="card-body">
             <code>
-              let a = [1,2,3,4,5]; // Evaluates to true; a has some even numbers<br/>
-              a.some(x => x%2===0)<br/>
+              let a = [1,2,3,4,5]; // Evaluates to true; a has some even
+              numbers<br />
+              a.some(x => x%2===0)<br />
             </code>
           </div>
         </div>
       </section>
 
-
       <h4>sort()</h4>
       <section>
         <ul>
-          <li>Sorts elements of an array in place
+          <li>
+            Sorts elements of an array in place
             <ul>
               <li>Does return the sorted array</li>
             </ul>
           </li>
-          <li>If no parameters are passed, it sorts alphabetically (converting elements to strings, if necessary)</li>
           <li>
-             To sort any other way, pass a comparison function as an argument
-             <ul>
+            If no parameters are passed, it sorts alphabetically (converting
+            elements to strings, if necessary)
+          </li>
+          <li>
+            To sort any other way, pass a comparison function as an argument
+            <ul>
               <li>Takes two parameters</li>
-              <li>Returns negative number if first should appear before the second</li>
-              <li>Returns positive number if first should appear after the second</li>
+              <li>
+                Returns negative number if first should appear before the second
+              </li>
+              <li>
+                Returns positive number if first should appear after the second
+              </li>
               <li>If they are equivalent, zero is returned</li>
-
-             </ul>
+            </ul>
           </li>
         </ul>
         <div>
@@ -936,9 +1054,9 @@
           <div class="card">
             <div class="card-body">
               <code>
-                a.sort(function(a,b) { <br/>
-                  return a-b; <br/>
-                  }); <br/>
+                a.sort(function(a,b) { <br />
+                return a-b; <br />
+                }); <br />
               </code>
             </div>
           </div>
@@ -948,96 +1066,111 @@
           <div class="card">
             <div class="card-body">
               <code>
-                a.sort(function(s,t) { <br/>
-                  let a = s.toLowerCase(); <br/>
-                  let b = t.toLowerCase(); <br/>
-                  if (a &lt; b) return -1; <br/>
-                  if (a &gt; b) return 1; <br/>
-                  return 0; <br/>
-                });  <br/>
+                a.sort(function(s,t) { <br />
+                let a = s.toLowerCase(); <br />
+                let b = t.toLowerCase(); <br />
+                if (a &lt; b) return -1; <br />
+                if (a &gt; b) return 1; <br />
+                return 0; <br />
+                }); <br />
               </code>
             </div>
           </div>
         </div>
+        <div>
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"
+                target="_blank"
+              >
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+              </a>
+            </li>
+          </ul>
+        </div>
       </section>
 
-      <h4>Reverse</h4>
+      <h4>reverse()</h4>
       <section>
         <ul>
-          <li>Reverses the order of elements in an array and returns the reversed array</li>
+          <li>
+            Reverses the order of elements in an array and returns the reversed
+            array
+          </li>
           <li>This is done in place</li>
         </ul>
         <div>
           To sort alphabetically, but case insensitive...
           <div class="card">
             <div class="card-body">
-              <code>
-                [1,2,3].reverse(); <br/>
-              </code>
+              <code> [1,2,3].reverse(); <br /> </code>
             </div>
           </div>
         </div>
       </section>
 
-
-
       <h3>Adding / Removing Elements</h3>
       <section>
         <ul>
           <li>These modify the array in place</li>
+        </ul>
+      </section>
+
+      <h4>pop()</h4>
+      <section>
+        <ul>
+          <li>Removes the last element of the array and returns it</li>
+          <li>This reduces the length of an array by 1</li>
           <li>
-            pop()
-            <ul>
-              <li>Removes the last element of the array and returns it</li>
-              <li>This reduces the length of an array by 1</li>
-              <li>
-                Use if you need to treat the array as a first in, last out stack
-              </li>
-            </ul>
+            Use if you need to treat the array as a first in, last out stack
+          </li>
+        </ul>
+      </section>
+
+      <h4>push()</h4>
+      <section>
+        <ul>
+          <li>Adds an element to the end of the array</li>
+          <li>Adds the new element to array[array.length]</li>
+          <li>
+            Use if you need to treat the array as a first in, last out stack
+          </li>
+        </ul>
+      </section>
+
+      <h4>splice()</h4>
+      <section>
+        <ul>
+          <li>
+            General method for inserting, deleting, or replacing array elements
+          </li>
+        </ul>
+      </section>
+
+      <h4>shift()</h4>
+      <section>
+        <ul>
+          <li>Removes and returns the first element of the array</li>
+          <li>This reduces the length of an array by 1</li>
+          <li>
+            Shifts all elements down to an index one lower than the current
+            index
           </li>
           <li>
-            push()
-            <ul>
-              <li>Adds an element to the end of the array</li>
-              <li>Adds the new element to array[array.length]</li>
-              <li>
-                Use if you need to treat the array as a first in, last out stack
-              </li>
-            </ul>
+            Combine with <code>push()</code> if you need to treat the array as a
+            queue
           </li>
+        </ul>
+      </section>
+
+      <h4>unshift()</h4>
+      <section>
+        <ul>
+          <li>Adds an element to the beginning of the array</li>
           <li>
-            splice()
-            <ul>
-              <li>
-                General method for inserting, deleting, or replacing array
-                elements
-              </li>
-            </ul>
-          </li>
-          <li>
-            shift()
-            <ul>
-              <li>Removes and returns the first element of the array</li>
-              <li>This reduces the length of an array by 1</li>
-              <li>
-                Shifts all elements down to an index one lower than the current
-                index
-              </li>
-              <li>
-                Combine with <code>push()</code> if you need to treat the array
-                as a queue
-              </li>
-            </ul>
-          </li>
-          <li>
-            unshift()
-            <ul>
-              <li>Adds an element to the beginning of the array</li>
-              <li>
-                Can add multiple items as parameters, but it does not result in
-                the same ordering as two calls to unshift
-              </li>
-            </ul>
+            Can add multiple items as parameters, but it does not result in the
+            same ordering as two calls to unshift
           </li>
         </ul>
       </section>

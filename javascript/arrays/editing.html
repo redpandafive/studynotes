@@ -36,27 +36,24 @@
       <h2>Reading / Writing Array Elements</h2>
       <section>
         <ul>
+          <li>Arrays are just specialized objects</li>
           <li>
-            Access an array element to read/write values by using the [] operator
+            Access an array element to read/write values by using the []
+            operator
             <ul>
               <li>
-                Array identifier should be on the left side of the brackets
+                Array identifier should be on the left side of the brackets and
+                the index should be between the brakcets
               </li>
               <li>
-                An array index should be a non-negative integer expression 
+                The array index should be a non-negative integer expression
               </li>
-              <li>Index should be in the brackets</li>
             </ul>
           </li>
           <li>
-            Arrays are just specialized objects
+            The expression used as an index is converted into a string
             <ul>
-              <li>
-                The expression used an an index is converted into a string
-                <ul>
-                  <li>That is used as a property name</li>
-                </ul> 
-              </li>
+              <li>That is used as a property name</li>
             </ul>
           </li>
           <li>
@@ -81,8 +78,8 @@
             There is no notion of an out-of-bounds error with arrays
             <ul>
               <li>
-                When you try to query a nonexistent property of an array,
-                you get undefined
+                When you try to query a nonexistent property of an array, you
+                get undefined
               </li>
               <li>This is the same behavior as objects</li>
             </ul>
@@ -106,8 +103,7 @@
       <section>
         <ul>
           <li>
-            Use the <code>delete</code> operator to delete the specified object
-            property
+            Use the <code>delete</code> operator to delete the targetted array element
           </li>
           <li>
             This does not change the length of the array

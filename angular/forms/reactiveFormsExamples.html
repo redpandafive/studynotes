@@ -34,77 +34,122 @@
 
       <h1>Reactive Forms - Examples</h1>
 
-
       <h2 id="basicexample">Basic Example</h2>
 
-      <h3>Setting up the Component and Template</h3>
+      <h2>Basic Form with No FormGroup</h2>
       <section>
-        Given a FormGroup property named profileForm
+        <div>
+          Register the reactive forms module to include the reactive form
+          directives needed
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { ReactiveFormsModule } from '@angular/forms';
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add a <code>FormControl</code> instance to the component
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export class NameEditorComponent { <br />
+                name = new FormControl(''); <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Register the <code>FormControl</code> in the template
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;input id="name" type="text" [formControl]="name"&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Form Using a FormGroup</h2>
+      <section>
         <ul>
           <li>
-            Must import ReactiveFormsModule from @angular/forms
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  import { ReactiveFormsModule } from '@angular/forms';
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            In component, create a FormGroup property and assign the following
-            to it. This will contain a FormControl instance for each control on
-            the page.
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  let firstName = new FormControl();<br />
-                  let lastName = new FormControl();<br />
-                  this.profileForm = new FormGroup({<br />
-                  firstName: firstName,<br />
-                  lastName: lastName<br />
-                  });
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Associate the component FormControls to the form control element in
-            the template. This is done using the FormControlDirective
+            There are two ways to grouping multiple related controls into a
+            single input form
             <ul>
-              <li>Add [formGroup]=”profileForm” to bind to the form element</li>
               <li>
-                For each element, specify the input each FormControl should
-                correspond to. This adds a FormControlDirective to the element
+                <a href="formGroup.html">FormGroup</a>
               </li>
-              <li>The form control and DOM element now communicate with each other; updates to one updates the other</li>
               <li>
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt; id="name" type="text" [formControl]="name" &gt;
-                    </code>
-                  </div>
-                </div>
+                <a href="formArray.html">FormArray</a>
               </li>
             </ul>
           </li>
         </ul>
+        <div>
+          Create a FormGroup instance on the component
+          <ul>
+            <li>
+              Provide the constructor with an object of named keys mapped to
+              their control
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                profileForm = new FormGroup({ <br />
+                firstName: new FormControl(''), <br />
+                lastName: new FormControl(''), <br />
+                }); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Associate the FormGroup model and view.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form [formGroup]="profileForm"&gt; &lt;label
+                for="first-name"&gt;First Name: &lt;/label&gt; &lt;input
+                id="first-name" type="text" formControlName="firstName"&gt;
+                &lt;label for="last-name"&gt;Last Name: &lt;/label&gt; &lt;input
+                id="last-name" type="text" formControlName="lastName"&gt;
+                &lt;/form&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The FormGroup directive listens for the submit event emitted by the
+          form element and emits an ngSubmit event that you can bind to a
+          callback function. Add an ngSubmit event listener to the form tag with
+          the onSubmit() callback method.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form [formGroup]="profileForm" (ngSubmit)="onSubmit()"&gt;
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h3>Displaying Values in the Template</h3>
       <section>
         <ul>
-          <li>The following gives a snapshot of the current value.  It changes as you update the form element.
+          <li>
+            The following gives a snapshot of the current value. It changes as
+            you update the form element.
             <div class="card">
               <div class="card-body">
-                <code>
-                  &lt;p&gt;Value: {{ name.value }}&lt;/p&gt;
-                </code>
+                <code> &lt;p&gt;Value: {{ name.value }}&lt;/p&gt; </code>
               </div>
             </div>
           </li>
-
         </ul>
       </section>
 
@@ -130,7 +175,6 @@
           </li>
         </ul>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
