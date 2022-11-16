@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="./../assets/styles/site.css" />
   </head>
   <body>
@@ -25,12 +28,12 @@
             <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Active Route Informaiton
+            Active Route Information
           </li>
         </ol>
       </nav>
 
-      <h1>Active Route Informaiton</h1>
+      <h1>Active Route Information</h1>
 
       <section>
         <ul>
@@ -329,6 +332,50 @@
             </ul>
           </li>
         </ul>
+      </section>
+
+      <h2>Examples</h2>
+
+      <h3>Setup</h3>
+      <section>
+        <div>
+          Import ActivatedRoute and ParamMap
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { Router, ActivatedRoute, ParamMap } from
+                '@angular/router';
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Inject an instance of ActivatedRoute by adding it to your
+          application's constructor:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                constructor(private route: ActivatedRoute) {} <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Get Path Fragment From Snapshot</h3>
+      <section>
+        <div>
+          This gets the right most part of the URL. This is the
+          <code>path</code> value of the current active ActivatedRoute
+          <div class="card-body">
+            <code>
+              ngOnInit() { <br />
+              this.searchMethod = this.route.snapshot.routeConfig.path; <br />
+              } <br />
+            </code>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
