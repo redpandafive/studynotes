@@ -27,15 +27,13 @@
             <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Reactive Forms Validation
+            Reactive Forms - Validation
           </li>
         </ol>
       </nav>
 
-      <h1>Reactive Forms Validation</h1>
+      <h1>Reactive Forms - Validation</h1>
 
-
-      <h2 id="validation">Validation</h2>
       <section>
         <ul>
           <li>
@@ -45,45 +43,58 @@
           <li>
             There are a set of built-in validators that can be imported and used
             to check user input on forms
-            <ul>
-              <li>Need to import Validators from @angular/forms</li>
-            </ul>
           </li>
-          <li>
-            Add the validator as a second parameter when declaring a FormControl
-            <ul>
-              <li>
-                The validators field can also take an array of validators if you
-                need more than one on an array
-              </li>
-              <li>
-                These are just functions – see custom validators section for
-                more details
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      let firstName = new FormControl(initial_value,
-                      Validators.required)
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
+        </ul>
+      </section>
 
-          <li>
-            To test if the entire for is valid, check the valid property on the
-            FormGroup
-            <div class="card">
-              <div class="card-body">
-                <code>if(this.profileForm.valid) ...</code>
-              </div>
+      <h2>Syntax</h2>
+      <section>
+        <div>
+          Need to import Validators from @angular/forms
+          <div class="card">
+            <div class="card-body">
+              <code> import { Validators } from '@angular/forms'; </code>
             </div>
-          </li>
+          </div>
+        </div>
+        <div>
+          Add the validator as a second parameter when declaring a FormControl
+          <ul>
+            <li>
+              The validators field can also take an array of validators if you
+              need more than one on an array
+            </li>
+            <li>
+              These are just functions – see custom validators section for more
+              details
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let firstName = new FormControl(initial_value,
+                Validators.required)
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To test if the entire for is valid, check the valid property on the
+          FormGroup
+          <div class="card">
+            <div class="card-body">
+              <code>if(this.profileForm.valid) ...</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Control Status</h2>
+      <section>
+        <ul>
           <li>
-            There are several properties available on the FormControl and
-            FormGroup classes to give you an idea about the current state of the
-            form
+            FormControl and FormGroup classes have properties to give you an
+            idea about the current state of the form
             <ul>
               <li>
                 Given a FormGroup named loginForm
@@ -122,7 +133,6 @@
               </li>
             </ul>
           </li>
-
           <li>
             Combine these with CSS to style inputs to give feedback to the user
             about invalid values
@@ -166,182 +176,86 @@
               </li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h2>Built-In Validators</h2>
+      <section>
+        <ul>
           <li>
-            Built in validators
+            These are static methods added to the second parameter of the
+            FormsControl constructor
+          </li>
+          <li>
+            Check the documentation for more built-in validators (search for
+            validators in docs)
+          </li>
+        </ul>
+      </section>
+
+      <h3>Required Fields</h3>
+      <section>
+        <ul>
+          <li>Add the HTML 5 required attribute to the form element</li>
+          <li>firstName: ['', Validators.required]</li>
+        </ul>
+      </section>
+
+      <h3>Min and Max for Numbers</h3>
+      <section>
+        <ul>
+          <li>Validators.min(x) - Number must be at least x</li>
+          <li>Validators.max(x) - Number cannot be larger than x</li>
+          <li>
+            MinLength and maxLength for strings
             <ul>
               <li>
-                These are static methods added to the second parameter of the
-                FormsControl constructor
+                Validators.maxLength(x) - String cannot contain more than x
+                characters
               </li>
               <li>
-                Required fields
-                <ul>
-                  <li>Add the HTML 5 required attribute to the form element</li>
-                  <li>firstName: ['', Validators.required]</li>
-                </ul>
-              </li>
-              <li>
-                Min and max for numbers
-                <ul>
-                  <li>Validators.min(x) - Number must be at least x</li>
-                  <li>Validators.max(x) - Number cannot be larger than x</li>
-                  <li>
-                    MinLength and maxLength for strings
-                    <ul>
-                      <li>
-                        Validators.maxLength(x) - String cannot contain more
-                        than x characters
-                      </li>
-                      <li>
-                        Validators.minLength(x) - String must contain x
-                        characters
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Pattern matching
-                <ul>
-                  <li>Use for regular expression pattern matching</li>
-                  <li>Validators.pattern('[a-zA-Z.*]')</li>
-                  <li>
-                    Does this exist as an HTML 5 attribute????? Demo seems to
-                    suggest so
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Check the documentation for more built-in validators (search for
-                validators in docs)
+                Validators.minLength(x) - String must contain x characters
               </li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h3>Pattern Matching</h3>
+      <section>
+        <ul>
+          <li>Use for regular expression pattern matching</li>
+          <li>Validators.pattern('[a-zA-Z.*]')</li>
           <li>
-            Custom validators
+            Does this exist as an HTML 5 attribute????? Demo seems to suggest so
+          </li>
+        </ul>
+      </section>
+
+      <h2>Custom Validators</h2>
+      <section>
+        <ul>
+          <li>
+            When there are no built-in validators to match your needs, you can
+            define your own
+          </li>
+          <li>
+            It is essentially just a function
             <ul>
+              <li>Returns null if the value is valid</li>
+              <li>Error object if the value is invalid</li>
+            </ul>
+          </li>
+          <li>
+            Signature
+            <ul>
+              <li>Takes a FormControl object as a parameter</li>
               <li>
-                When there are no built-in validators to match your needs, you
-                can define your own
-              </li>
-              <li>
-                It is essentially just a function
+                Returns {[key: string]: any}
                 <ul>
-                  <li>Returns null if the value is valid</li>
-                  <li>Error object if the value is invalid</li>
-                </ul>
-              </li>
-              <li>
-                Signature
-                <ul>
-                  <li>Takes a FormControl object as a parameter</li>
-                  <li>
-                    Returns {[key: string]: any}
-                    <ul>
-                      <li>Returns an object</li>
-                      <li>Key is typically the name of the validator</li>
-                      <li>Value can be whatever you want</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Example
-                <ul>
-                  <li>
-                    Check if the control contains the word foo
-                    <ul>
-                      <li>
-                        Define a validator function in the component
-                        <div class="card">
-                          <div class="card-body">
-                            <code>
-                              private restrictedWords(control: formControl):<br />
-                              {&#91;key: string&#93;: any} {<br />
-                              return control.value.includes('foo') ?<br />
-                              {'restrictedWords': 'foo'} : null; <br />
-                              }
-                            </code>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        Add this to the validator array for the target
-                        FormControl
-                        <div class="card">
-                          <div class="card-body">
-                            <code>
-                              ... <br />
-                              new FormControl('', &#91;Validators.required,<br />
-                              this.restrictedWords&#93;) <br />
-                              ...
-                            </code>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        You can reference the errors in the returned object
-                        using
-                        <ul>
-                          <li>This assumes a control named abstract</li>
-                          <li>
-                            You can use this in your error messages that you
-                            report back to the user
-                            <div class="card">
-                              <div class="card-body">
-                                <code>
-                                  ...<br />
-                                  { abstract.errors.restrictedWords }<br />
-                                  ...
-                                </code>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    You can take this one step further and specify an array of
-                    words to check for on the FormControl
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          ... <br />
-                          new FormControl('', &#91;Validators.required,<br />
-                          this.restrictedWords('foo', 'bar')&#93;)<br />
-                          ...
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    The validator function should now be a function that returns
-                    a function
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          <pre>
-private restrictedWords(words)
-{
-   return (control: formControl): ): {[key: string]: any} => {
-      if(!words) {
-        return null;
-      }
-      var invalidWords = words.map(w => control.value.includes(w) ? w: null)
-         .filter(w => w != null);
-      return invalidWords && invalidWords.length > 0 ? {'restrictedWords': invalidWords.join(',')} : null
-}}
-</pre
-                          >
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    To make this reusable, put this function into a file (such
-                    as restricted-words.validator.ts) and export it
-                  </li>
+                  <li>Returns an object</li>
+                  <li>Key is typically the name of the validator</li>
+                  <li>Value can be whatever you want</li>
                 </ul>
               </li>
             </ul>
@@ -349,6 +263,94 @@ private restrictedWords(words)
         </ul>
       </section>
 
+      <h3>Example Custom Validator</h3>
+      <section>
+        <div>Check if the control contains the word foo</div>
+        <div>
+          Define a validator function in the component
+          <div class="card">
+            <div class="card-body">
+              <code>
+                private restrictedWords(control: formControl):<br />
+                {&#91;key: string&#93;: any} {<br />
+                return control.value.includes('foo') ?<br />
+                {'restrictedWords': 'foo'} : null; <br />
+                }
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add this to the validator array for the target FormControl
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br />
+                new FormControl('', &#91;Validators.required,<br />
+                this.restrictedWords&#93;) <br />
+                ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can reference the errors in the returned object using
+          <ul>
+            <li>This assumes a control named abstract</li>
+            <li>
+              You can use this in your error messages that you report back to
+              the user
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ...<br />
+                { abstract.errors.restrictedWords }<br />
+                ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can take this one step further and specify an array of words to
+          check for on the FormControl
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br />
+                new FormControl('', &#91;Validators.required,<br />
+                this.restrictedWords('foo', 'bar')&#93;)<br />
+                ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The validator function should now be a function that returns a
+          function. To make this reusable, put this function into a file (such
+          as restricted-words.validator.ts) and export it.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                <pre>
+private restrictedWords(words)
+{
+return (control: formControl): ): {[key: string]: any} => {
+if(!words) {
+return null;
+}
+var invalidWords = words.map(w => control.value.includes(w) ? w: null)
+.filter(w => w != null);
+return invalidWords && invalidWords.length > 0 ? {'restrictedWords': invalidWords.join(',')} : null
+}}
+</pre
+                >
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
