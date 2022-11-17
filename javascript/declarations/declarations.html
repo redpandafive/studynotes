@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -19,16 +22,18 @@
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a></li>
+            <a href="../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Declarations and Variables</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Declarations and Variables
+          </li>
         </ol>
       </nav>
 
       <h1>Declarations and Variables</h1>
-
 
       <section>
         <ul>
@@ -36,11 +41,62 @@
             Variables and constants must be declared before they can be used
           </li>
           <li>
-            Type is decided when you assign a value to a variable
+            The type is decided when you assign a value to a variable
             <ul>
               <li>
                 You can switch the type of a variable by assigning a different
                 value type, but this is generally discouraged
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Identifiers</h2>
+      <section>
+        <ul>
+          <li>
+            Identifiers must follow these rules
+            <ul>
+              <li>Can begin with a letter, underscore, or dollar sign</li>
+              <li>
+                Subsequent characters can be letters, digits, underscores, or
+                dollar signs
+              </li>
+            </ul>
+          </li>
+          <li>
+            Reserved words cannot be used as identifiers
+            <ul>
+              <li>Some are only reserved in certain contexts</li>
+              <li>
+                Some cannot be fully reserved to keep backwards compatibility
+                with older programs (such as <code>let</code>)
+              </li>
+              <li>
+                Some reserved words are restricted since they might be used in
+                the future, such as interface, public, and protected
+              </li>
+            </ul>
+          </li>
+          <li>
+            JS does allow Unicode letters, digits, and ideographs in identifiers
+            <ul>
+              <li>
+                The typical convention is to stick with ASCII characters in
+                identifiers
+              </li>
+              <li>
+                Unicode escape sequences can be used for incompatible systems
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are different code conventions for identifiers
+            <ul>
+              <li>
+                One coding convention capitalizes all letters in a constant
+                identifier
               </li>
             </ul>
           </li>
@@ -57,18 +113,26 @@
       <h2>ES6 and Later</h2>
       <section>
         <ul>
-          <li>Use the <code>let</code> and <code>const</code> keywords</li>
-          <li>Replaces <code>var</code>, so no reason to use that keyword now</li>
           <li>
-            See <a href="scope.html#block">block scope</a>
+            Use the <code>let</code> and <code>const</code> keywords
+            <ul>
+              <li>
+                Replaces <code>var</code>, so no reason to use that keyword now
+              </li>
+            </ul>
+          </li>
+          <li>
+            These follow <a href="scope.html#block">block scoping</a>
             <ul>
               <li>
                 Only defined within the block of code in which they appear
               </li>
-              <li>
-                If you attempt use a variable declared with these keywords
-                without initializing it, you will get an error
-              </li>
+            </ul>
+          </li>
+          <li>
+            If you attempt use a variable declared with these keywords without
+            initializing it, you will get an error
+            <ul>
               <li>
                 Contrast this to <code>var</code> which will just generate an
                 undefined value
@@ -76,19 +140,17 @@
             </ul>
           </li>
           <li>
-            Can declare multiple variables in one let statement:
+            Multiple variables can be declared in one
+            <code>let</code> statement:
             <code>let i, sum;</code>
           </li>
           <li>
-            Good practice to set an initial value on the same line
+            Good practice to set an initial value on the same line as the
+            declaration
             <ul>
-              <li>Variable will contain <em>undefined</em> if not</li>
+              <li>Otherwise, the variable will contain <em>undefined</em></li>
               <li>Constants must be initialized when you declare it</li>
             </ul>
-          </li>
-          <li>
-            One coding convention capitalizes all letters in a constant
-            identifier
           </li>
         </ul>
       </section>
@@ -96,28 +158,29 @@
       <h2>Function</h2>
       <section>
         <ul>
-          <li>See<a href="../functions/functions.html">Function</li>
+          <li>
+            See <a href="../functions/defining.html">Defining Functions</a>
+          </li>
         </ul>
       </section>
-
-
 
       <h2>Class</h2>
       <section>
         <ul>
-          <li>See<a href="../declarations/class.html">Classes</li>
+          <li>See <a href="../classes/class.html">Classes</a>
+          </li>
         </ul>
       </section>
-
-
 
       <h2>Import and Export</h2>
       <section>
         <ul>
-          <li>See<a href="../declarations/class.html">Classes</li>
+          <li>
+            See
+            <a href="../declarations/importExport.html">Import and Export</a>
+          </li>
         </ul>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

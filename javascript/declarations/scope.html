@@ -54,6 +54,33 @@
         </ul>
       </section>
 
+      <h2>Lexical Scoping / Static Scoping</h2>
+      <section>
+        <ul>
+          <li>The scoping mechanism that JS uses</li>
+          <li>
+            The accessibility of variables is determined by the position of
+            variables inside nested scopes
+            <ul>
+              <li>
+                Determined by examining the JS source code and where code is
+                defined, not where it is executed
+              </li>
+            </ul>
+          </li>
+          <li>
+            Each JS function maintains a link to its outer lexical environment
+            <ul>
+              <li>This is what JS checks when searching for a variable</li>
+            </ul>
+          </li>
+          <li>
+            KEY TAKEAWAY = JS functions are executed using the scope they are
+            defined in
+          </li>
+        </ul>
+      </section>
+
       <h2>Nested Scopes and Scope Chains</h2>
       <section>
         <ul>
@@ -61,9 +88,7 @@
             In JS, nested functions have access to variables defined within
             their containing functions
             <ul>
-              <li>
-                Note, outer functions cannot access the scope of their children
-              </li>
+              <li>Outer functions cannot access the scope of their children</li>
             </ul>
           </li>
           <li>
@@ -75,16 +100,16 @@
               </li>
               <li>
                 Global scope is the last link in a JS scope chain (last place
-                checked)
+                checked for a variable name)
               </li>
-              <li>Can also think of this as a hierarchy</li>
+              <li>Can think of this as a hierarchy</li>
             </ul>
           </li>
 
           <li>
             When attempting to resolve a variable, JS will
             <ol>
-              <li>First check the innermost scope for a match</li>
+              <li>First check the innermost scope for a match ("own" scope)</li>
               <li>
                 Next, move to the next link in the chain (or move up a tier in
                 the hierarchy, if that is a better description) and look for a
@@ -96,7 +121,8 @@
           </li>
           <li>
             This means if there are variables in each level of the scope chain
-            with the same name, one closest
+            with the same name, the one closest to the reference will be
+            selected
           </li>
         </ul>
 
@@ -180,43 +206,20 @@ const outer = () => {
         </div>
       </section>
 
-      <h2>Lexical Scoping</h2>
-      <section>
-        <ul>
-          <li>Also called static scoping</li>
-          <li>The scoping mechanism that JS uses</li>
-          <li>
-            The accessibility of variables is determined by the position of
-            variables inside nested scopes
-            <ul>
-              <li>
-                Determined by examining the JS source code and where code is
-                defined, not where it is executed
-              </li>
-            </ul>
-          </li>
-          <li>Each JS function maintains a link to its outer lexical environment
-            <ul>
-              <li>This is what JS checks when searching for a variable</li>
-            </ul>
-          </li>
-          <li>KEY TAKEAWAY = JS functions are executed using the scope they are defined in</li>
-
-        </ul>
-      </section>
-
       <h2>Types of Scope</h2>
 
       <h3>Global Scope</h3>
       <section>
         <ul>
-          <li>Declarations made at the top level outside of any code blocks</li>
+          <li>
+            Declarations are made at the top level outside of any code blocks
+          </li>
           <li>
             In Node and client side JS modules, the scope is the file it is
             defined in
           </li>
           <li>
-            In traditional client side JS, the scope it the HTML document in
+            In traditional client side JS, the scope is the HTML document in
             which it is defined
             <ul>
               <li>
@@ -242,6 +245,10 @@ const outer = () => {
               </li>
             </ul>
           </li>
+          <li>
+            <code>let</code> and <code>const</code> are declared using this
+            scope
+          </li>
         </ul>
       </section>
 
@@ -254,12 +261,9 @@ const outer = () => {
             Global variables are declared as properties on the Global object
           </li>
           <li>It is legal to declare the same variable multiple times</li>
+          <li><code>var</code> is declared using this scope</li>
         </ul>
       </section>
-
-
-
-      
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

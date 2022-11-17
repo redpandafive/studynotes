@@ -33,23 +33,19 @@
       <section>
         <ul>
           <li>
-            JS differs from other static languages in that functions and classes
-            are values that can be manipulated by JavaScript programs
-          </li>
-          <li>
-            In JS, function are values
+            In JS, functions are values that can be manipulated by programs
             <ul>
               <li>They are not just part of the language syntax</li>
               <li>They are objects that can be manipulated by programs</li>
               <li>Since it is a type of object, it can have properties</li>
               <li>Can be assigned to variables</li>
               <li>Can be set to properties of objects</li>
-              <li>Can be elements of arrays</li>
-              <li>Can be passed as arguments to functions</li>
+              <li>Can be elements of an array</li>
+              <li>Can be passed as arguments to other functions</li>
             </ul>
           </li>
           <li>
-            Functions can be assigned to other variables and function the same
+            Functions can be assigned to other variables and work the same way
             <div class="card">
               <div class="card-body">
                 <code>
@@ -63,8 +59,8 @@
             </div>
           </li>
           <li>
-            Since functions can be assigned to properties, you could do
-            something like this
+            Since functions can be assigned to properties, you can do something
+            like this
             <div class="card">
               <div class="card-body">
                 <code>
@@ -86,7 +82,10 @@
           <li>Functions can be nested within other functions</li>
           <li>
             Functions have access to any variables that are in scope where they
-            are defined => Closures
+            are defined
+            <ul>
+              <li>aka Closures</li>
+            </ul>
           </li>
         </ul>
       </section>
@@ -97,10 +96,11 @@
       <section>
         <ul>
           <li>
-            Returns the number of parameters it declares in its parameter list
+            Returns the number of parameters a function declares in its
+            parameter list
           </li>
           <li>Read-only property</li>
-          <li>Does not include rest parameters</li>
+          <li>This count does not include rest parameters</li>
         </ul>
       </section>
 
@@ -116,55 +116,57 @@
       <h3>prototype</h3>
       <section>
         <ul>
+          <li>Refers to the prototype object</li>
           <li>
-            Refers to the prototype object
-            <ul>
-              <li>
-                When a function is used as a constructor, the newly created
-                object inherits properties from the prototype object
-              </li>
-            </ul>
+            When a function is used as a constructor, the newly created object
+            inherits properties from the prototype object
           </li>
           <li>All functions except arrow functions have a prototype object</li>
         </ul>
       </section>
 
-
       <h2>Built-in Methods</h2>
 
-        <h3>apply() and call()</h3>
-        <section>
-          <ul>
-            <li>Allows you to indirectly invoke a function as if it were a method of some other object
-              <ul>
-                <li>Calls to this are ignored for arrow functions</li>
-              </ul>
-            </li>
-            <li>First argument is the object on which the function is to be invoked
-              <ul>
-                <li>This is the invocation context</li>
-                <li>Becomes the value of the <code>this</code> keyword within the body of the function </li>
-                <li>The function is invoked as if it were a method on this object</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
+      <h3>apply() and call()</h3>
+      <section>
+        <ul>
+          <li>
+            Allows you to indirectly invoke a function as if it were a method of
+            some other object
+            <ul>
+              <li>Calls to this are ignored for arrow functions</li>
+            </ul>
+          </li>
+          <li>
+            First argument is the object on which the function is to be invoked
+            <ul>
+              <li>This is the invocation context</li>
+              <li>
+                Becomes the value of the <code>this</code> keyword within the
+                body of the function
+              </li>
+              <li>
+                The function is invoked as if it were a method on this object
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
 
       <h3>apply()</h3>
       <section>
         <ul>
+          <li>Similar to <code>call()</code></li>
           <li>
-            Similar to <code>call()</code>
-          </li>
-          <li>
-            Any arguments after the first are values passed to the function that is invoked
+            Any arguments after the first are values passed to the function that
+            is invoked
           </li>
         </ul>
         <div class="card">
           <div class="card-body">
             <code>
-              // given a function f and object o <br/>
-              f.apply(o, [1,2]);<br/>
+              // given a function f and object o <br />
+              f.apply(o, [1,2]);<br />
             </code>
           </div>
         </div>
@@ -173,16 +175,16 @@
       <h3>call()</h3>
       <section>
         <ul>
+          <li>Similar to <code>apply()</code></li>
           <li>
-            Similar to <code>apply()</code>
+            All arguments are passed as an array in the second argument position
           </li>
-          <li>All arguments are passed as an array in the second argument position</li>
         </ul>
         <div class="card">
           <div class="card-body">
             <code>
-              // given a function f and object o <br/>
-              f.call(o, 1, 2);<br/>
+              // given a function f and object o <br />
+              f.call(o, 1, 2);<br />
             </code>
           </div>
         </div>
@@ -192,25 +194,34 @@
       <section>
         <ul>
           <li>Binds a function to an object</li>
-          <li>This is generally done to make non-arrow functions behave like arrow functions</li>
-          <li>Returns a new function
-            <ul>
-              <li>Invoking it (as a function) invokes the original function as a method of the object</li>
-              <li>Any arguments passed to the new function are passed to the original function</li>
-            </ul>
+          <li>
+            This is generally done to make non-arrow functions behave like arrow
+            functions
           </li>
           <li>
-            Arrow functions will not have <code>this</code> overridden
+            Returns a new function
+            <ul>
+              <li>
+                Invoking it (as a function) invokes the original function as a
+                method of the object
+              </li>
+              <li>
+                Any arguments passed to the new function are passed to the
+                original function
+              </li>
+            </ul>
           </li>
+          <li>Arrow functions will not have <code>this</code> overridden</li>
         </ul>
         <div>
-          Calling g(2) will have the same result as o.g(2) (assuming there is a method g on object o)
+          Calling g(2) will have the same result as o.g(2) (assuming there is a
+          method g on object o)
           <div class="card">
             <div class="card-body">
-              <code>            
-                function f(y) { return this.x + y; }<br/>
-                let o = { x: 1 };<br/>
-                let g = f.bind(o); <br/>
+              <code>
+                function f(y) { return this.x + y; }<br />
+                let o = { x: 1 };<br />
+                let g = f.bind(o); <br />
               </code>
             </div>
           </div>
@@ -220,11 +231,12 @@
       <h3>toString()</h3>
       <section>
         <ul>
-          <li>Returns a string that usually is the complete source code for the function</li>
+          <li>
+            Returns a string that usually is the complete source code for the
+            function
+          </li>
         </ul>
       </section>
-
-      
 
       <h2>Properties on Functions</h2>
       <section>
@@ -263,7 +275,6 @@
           </li>
         </ul>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

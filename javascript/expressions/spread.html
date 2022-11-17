@@ -22,7 +22,8 @@
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a></li>
+            <a href="../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
           </li>
@@ -36,11 +37,20 @@
 
       <section>
         <ul>
-          <li>New syntax added in ES6</li>
-          <li>Takes an array and expands it into individual elements
+          <li>
+            Takes an array and expands it into individual elements
             <ul>
-              <li>Unpacks (or spreads out) teh elements of an array in a context where individual values are expected</li>
-              <li>Not a true operator in the sense that it cannot be evaluated to produce a value</li>
+              <li>
+                Unpacks (or spreads out) the elements of an array in a context
+                where individual values are expected
+              </li>
+              <li>
+                Not a true operator in the sense that it cannot be evaluated to
+                produce a value.
+              </li>
+              <li>
+                It is a special case syntax available only within object literals
+              </li>
             </ul>
           </li>
           <li>
@@ -49,11 +59,15 @@
               <li>Make shallow copies of JS objects</li>
               <li>Append one array to another</li>
               <li>Create a copy of an array</li>
-              <li>Used with a function invocation
+              <li>
+                Separate arguments in a function invocation
                 <ul>
-                  <li>Note, a similar syntax can be used in a function definition to gather multiple function arguments into an array</li>
+                  <li>
+                    <a href="../functions/parameters.html#rest"
+                    >Rest Parameters</a> have a similar syntax, but can be used in a function definition
+                    to gather multiple function arguments into an array
+                  </li>
                   <li>This is the opposite effect to the spread operator</li>
-                  <li>See <a href="../functions/parameters.html#rest">Rest Parameters</a></li>
                 </ul>
               </li>
             </ul>
@@ -62,15 +76,13 @@
             Be careful when using this heavily since it is a substantial amount
             of work to the JavaScript interpreter
           </li>
-          <li>
-            Not a true JS operator, but a special case syntax available only
-            within object literals
-          </li>
           <li>Can be used on any iterable object</li>
+          <li>New syntax added in ES6</li>
         </ul>
-        </section>
+      </section>
 
-        <h2>Examples</h2>
+      <h2>Examples</h2>
+      <section>
         <div>
           To spread elements of an array to function arguments
           <div class="card">
