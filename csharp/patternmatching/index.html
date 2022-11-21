@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Pattern Matching</li>
+        </ol>
+      </nav>
+
+      <h1>Pattern Matching</h1>
+
+
+      
+
+
+      <section>
+        <ul>
+          <li>
+            Introduced in C# 7, but each version since extends the pattern
+            matching capabilities
+          </li>
+          <li>
+            These expressions and statements support pattern matching:
+            <ul>
+              <li>Is expression</li>
+              <li>Switch statement</li>
+              <li>Switch expression</li>
+            </ul>
+          </li>
+          <li>
+            https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns
+          </li>
+        </ul>
+      </section>
+
+      <h2>Declaration Pattern</h2>
+      <section>
+        <ul>
+          <li>
+            Checks if the run-time type of an expression is compatible with a
+            given type
+          </li>
+          <li>
+            Also declares a new local variable that is assigned a converted
+            expression result
+          </li>
+          <li>
+            Matches when
+            <ul>
+              <li>Expression result is not null</li>
+              <li>
+                Either
+                <ul>
+                  <li>The runtime type of an expression result is T</li>
+                  <li>
+                    The runtime type of an expression result derives from type
+                    T, implements interface T, or another implicit reference
+                    conversion exists from it to T
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Examples
+          <ul>
+            <li>
+              Outputs 1
+              <div class="card"><div class="card-body"><code>
+                code='if(1 is int x) { Console.WriteLine($"{x}"); }'
+              </code></div></div>
+            </li>
+            <li>
+              Outputs 1
+              <div class="card"><div class="card-body"><code>
+                code='object y = 1;&#10;if(y is int x) { Console.WriteLine($"Assigned value is {x}"); }'
+              </code></div></div>
+            </li>
+            <li>
+              Outputs 15
+              <div class="card"><div class="card-body"><code>
+                code='if(5 + 10) is int x) { Console.WriteLine($"{x}"); }'
+              </code></div></div>
+            </li>
+            <li>
+              Outputs Success
+              <div class="card"><div class="card-body"><code>
+                if(5 is int_) { Console.WriteLine(“Success”) }"
+              </code></div></div>
+              <ul>
+                <li>Disregards the assignment</li>
+                <li>Can use a Type Pattern instead of this</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Type Pattern</h2>
+      <section>
+        <ul>
+          <li>
+            Like a Declaration Pattern matching, but doesn’t assign the value to
+            a new variable
+          </li>
+          <li>Added to C# 9</li>
+        </ul>
+        <div>
+          Examples
+          <ul>
+            <li>
+              Outputs Success
+              <div class="card"><div class="card-body"><code>
+                if(5 is int) { Console.WriteLine(“Success”); }"
+              </code></div></div>
+            </li>
+            <li>
+              Given a class Car and Truck that have a common superclass Vehicle
+              <div class="card"><div class="card-body"><code>
+                Var result = vehicle switch {&#10; Car =&gt; “car”&#10; Truck =&gt; “truck”&#10; _ =&gt; throw new ArgumentExcepiton(“Unknown type”)&#10;}"
+              </code></div></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Constant Pattern</h2>
+      <section>
+        <ul>
+          <li>
+            Use to test if an expression result equals a specified constant
+          </li>
+          <li>
+            Expressions can be
+            <ul>
+              <li>Integer or floating point numeric literal</li>
+              <li>Char or string literal</li>
+              <li>Boolean value (true/false)</li>
+              <li>Enum value</li>
+              <li>Name of a declared const field</li>
+              <li>Null</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Examples
+          <ul>
+            <li>
+              Outputs Success
+              <div class="card"><div class="card-body"><code>
+                var x = 10;&#10;if(x is 10) { Console.WriteLine(“Success”) }"
+              </code></div></div>
+            </li>
+            <li>
+              True if x contains null; this ensures that no user overloaded
+              equality operator is invoked when evaluated
+              <div class="card"><div class="card-body"><code> if(x is null)..."</code></div></div>
+            </li>
+            <li>
+              Checks for non null
+              <div class="card"><div class="card-body"><code>
+                if(input is not null)..."
+              </code></div></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <li>
+        <div class="card"><div class="card-body"><code> "</code></div></div>
+      </li>
+
+      <h2>Relational Patterns</h2>
+      <section>
+        <ul>
+          <li>
+            Use to compare a relational pattern to compare an expression result
+            with a constant
+          </li>
+          <li>Added in C# 9</li>
+          <li>
+            These can be combined with logical pattern combinators to make more
+            complex conditionals
+          </li>
+        </ul>
+        <div>
+          Examples
+          <br />
+          <img src="../../../assets/pattern-matching-1.png" />
+        </div>
+      </section>
+
+      <h2>Logical Petterns</h2>
+      <section>
+        <ul>
+          <li>
+            Use and (conjunctive), or (disjunctive), and not (negation) pattern
+            combiners to create logical patterns
+          </li>
+          <li>
+            These are evaluated in the following precedence order:
+            <ul>
+              <li>not</li>
+              <li>and</li>
+              <li>or</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Examples
+          <br />
+          <img src="../../../assets//pattern-matching-2.png" />
+        </div>
+      </section>
+
+      <h2>Property Pattern</h2>
+      <section>
+        <ul>
+          <li>Added in C# 8</li>
+          <li>
+            Use to match an expression’s properties or fields against nested
+            patterns
+          </li>
+          <li>Matches when</li>
+          <li>Expression result is non-null</li>
+          <li>
+            Every nested pattern matches the corresponding property or field of
+            the expression result
+          </li>
+          <li>Do not have to check every property on the item</li>
+          <li>
+            It appears you can only compare the variable to a constant, not two
+            variables
+          </li>
+          <li>
+            arrayVariable is { Length: variableB } is not allowed
+          </li>
+          <li>Allows recursive checks on child property objects</li>
+        </ul>
+        <div>
+          Examples
+          <ul>
+            <li>
+              Basic example
+              <div class="card"><div class="card-body"><code>
+                ol IsConferenceDay(DateTime date) =&gt; date is { Year: 2020, Month: 5, Day: 19 or 20 or 21 };"
+              </code></div></div>
+            </li>
+            <li>
+              Recursive example
+              <div class="card"><div class="card-body"><code>
+                public record Point(int X, int Y);&#10;public record Segment(Point Start, Point End);&#10;static bool IsAnyEndOnXAxis(Segment segment) =&gt; segment is { Start: { Y: 0 } } or { End: { Y: 0 } };"
+              </code></div></div>
+            </li>
+            <li>
+              Starting with C# 10
+              <div class="card"><div class="card-body"><code>
+                bool IsAnyEndOnXAxis(Segment segment) =&gt; segment is { Start.Y: 0 } or { End.Y: 0 };"
+              </code></div></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Positional Pattern</h2>
+      <section>
+        <ul>
+          <li>
+            Use a deconstructor on an expression result and match the resulting
+            values against the corresponding nested patterns
+          </li>
+          <li>
+            CONTINUE ON
+            https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

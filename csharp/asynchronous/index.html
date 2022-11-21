@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Asynchronous Programming
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Asynchronous Programming</h1>
+
+      <h2>Synchronous Programming</h2>
+      <section>
+        <ul>
+          <li>
+            Easier to read since code reads like a sequence of statements
+            <ul>
+              <li>Step by step instructions make it easier to understand</li>
+            </ul>
+          </li>
+          <li>
+            Computer will block on each statement until the work is complete
+            before moving on to the next statement
+            <ul>
+              <li>
+                Bad practice to construct synchronous code to perform
+                asynchronous operations
+              </li>
+            </ul>
+          </li>
+          <li>
+            This ties the thread up waiting for the task to complete (database
+            query, download, etc.)
+            <ul>
+              <li>
+                This can take longer since that thread could be doing work
+                somewhere else which some external operation completes
+              </li>
+              <li>
+                This can freeze the UI on a client program since the thread is
+                blocking
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Asynchronous Programming</h2>
+      <section>
+        <ul>
+          <li>
+            Frees up the thread to done something else while waiting on some
+            asynchronous operation, such as a database query or web service call
+          </li>
+          <li>
+            C# now has built in support for asynchronous programming
+            <ul>
+              <li>
+                Without language support, the drawback is more complicated code
+                requiring callbacks, events, etc
+              </li>
+              <li>Called a Task-based Asynchronous Pattern</li>
+            </ul>
+          </li>
+          <li>
+            You will want to use this anytime you have any I/O bound needs or
+            expensive CPU bound code
+            <ul>
+              <li>Requesting data from a network</li>
+              <li>Accessing a database</li>
+              <li>Reading and writing to a file system</li>
+            </ul>
+          </li>
+
+          <li>
+            Critical to distinguish between I/O bound and CPU bound operations
+            since keyword usage is a bit different
+            <ul>
+              <li>I/O bound</li>
+              <li>CPU bound</li>
+            </ul>
+          </li>
+          <li>Under the hood, C# creates a state machine</li>
+        </ul>
+      </section>
+
+      <h2>Async Keyword</h2>
+      <section>
+        <ul>
+          <li>
+            Turns a method into an async method, which allows you to use the
+            await keyword in its body
+          </li>
+          <li>
+            Methods with this added must have an await keyword in their body
+          </li>
+          <li>
+            Will run normally, but it is inefficient since you have the overhead
+            of constructing the state machine
+          </li>
+          <li>
+            Methods marked with this will return
+            <ul>
+              <li>
+                Task – no return statement or a return statement that does not
+                return an operand
+              </li>
+              <li>Task&lt;TResult&gt;</li>
+              <li>
+                As of C# 7, any return type that includes a GetAwaiter method
+                (ValueTask is an example)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Await Keyword</h2>
+      <section>
+        <ul>
+          <li>
+            Provides a non-blocking way to start a task, then continue execution
+            when that task completes
+            <ul>
+              <li>Designates a suspension point</li>
+              <li>
+                This isn’t an exit from the method and finally blocks don’t run
+              </li>
+            </ul>
+          </li>
+          <li>
+            When applied, it
+            <ul>
+              <li>
+                Yields control to the caller of the method that performed the
+                await
+              </li>
+              <li>Resumes execution when the background job has finished</li>
+            </ul>
+          </li>
+          <li>Can only be used in an async method</li>
+          <li>
+            Arrange your code so this is applied at the moment you need the data
+            from an asynchronous operation
+            <ul>
+              <li>
+                Code between when a Task object is created and when the await
+                keyword is applied will continue to execute
+              </li>
+              <li>
+                In the code below, the GetStringAsync task will start on the
+                first line, then DoSomeIndepenentWork will execute
+              </li>
+              <li>
+                Execution will be suspended until GetStringAsync completes when
+                it hits the await keyword
+              </li>
+              <li>Control will be returned to the caller in the meantime</li>
+              <li>Control resumes when the GetStringAsync task completes</li>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    Task&lt;string&gt; myTask = (new
+                    HttpClient()).GetStringAsync(…some
+                    URL…);&#10;DoSomeIndependentWork();&#10;String contents =
+                    await getStringTask;"
+                  </code>
+                </div>
+              </div>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Task Objects</h2>
+      <section>
+        <ul>
+          <li>Model asynchronous operations</li>
+          <li>Used to model work being done in the background</li>
+          <li>
+            If you are not returning data, but want to use asynchronous code,
+            return a Task object from the method (with no type)
+          </li>
+          <li>
+            These are reference types, so they are created on the heap
+            <ul>
+              <li>
+                Can use the ValueTask as a lightweight implementation of an
+                generalized task-returning value
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Task.WhenAll</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to write code that performs non-blocking waits on
+            multiple background jobs
+          </li>
+          <li>
+            Creates a Task object that will complete when all the supplied tasks
+            have completed
+          </li>
+          <li>Use this instead of Task.WaitAll</li>
+        </ul>
+      </section>
+
+      <h2>Task.WhenAny</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to write code that performs non-blocking waits on
+            multiple background jobs
+          </li>
+          <li>
+            Creates a task object that will complete when any of the supplied
+            tasks have completed
+          </li>
+          <li>
+            Use this to start multiple tasks at the same time and process then
+            one by one as they are completed
+          </li>
+          <li>Use this instead of Task.WaitAny</li>
+        </ul>
+      </section>
+
+      <h2>I/O Bound Work</h2>
+      <section>
+        <ul>
+          <li>waiting for something, such as data from a database</li>
+          <li>Use async and await without Task.Run</li>
+          <li>Should not use the Task Parallel Library</li>
+          <li>
+            This moves work to a background thread, but that doesn’t help at all
+            when waiting on an external resource
+          </li>
+          <li>
+            In a web server environment, the server will shift the thread to
+            another request instead of block on the current one
+          </li>
+          <li>
+            This does not create additional threads to use, so it does not
+            require multithreading
+          </li>
+        </ul>
+      </section>
+
+      <h2>CPU Bound Work</h2>
+      <section>
+        <ul>
+          <li>code is performing an expensive computation</li>
+          <li>Use async and wait</li>
+          <li>Also spawn off the work on another thread with Task.Run</li>
+          <li>This moves the work to a background thread</li>
+          <li>
+            Use Task Parallel Library if the work is appropriate for concurrency
+            and parallelism
+          </li>
+        </ul>
+      </section>
+
+      <h2>Additional Advice</h2>
+      <section>
+        <ul>
+          <li>
+            Be careful when mixing LINQ with asynchronous code since it uses
+            deferred (lazy) execution
+          </li>
+          <li>End an async method name with Async by convention</li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

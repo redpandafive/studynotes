@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Delegates</li>
+        </ol>
+      </nav>
+
+      <h1>Tuple</h1>
+
+      <h2>Tuple Types and Tuple Literals</h2>
+      <section>
+        <ul>
+          <li>
+            Added to C# 7 to provide a lightweight way to return multiple values
+            from a single function
+          </li>
+          <li>
+            Advantages
+            <ul>
+              <li>Can contain different types</li>
+              <li>Good alternative to out parameters</li>
+              <li>Not immutable</li>
+              <li>Cleaner syntax</li>
+              <li>Value types</li>
+            </ul>
+          </li>
+          <li>
+            Legacy Tuple class
+            <ul>
+              <li>Passed by reference, so stored on heap</li>
+              <li>Must access members using Item1, Item2, etc...</li>
+            </ul>
+          </li>
+          <li>
+            New Tuple version advantages
+            <ul>
+              <li>
+                Value types and value equality; two tuples are equal if all
+                their elements are pairwise equal
+              </li>
+              <li>These are mutable (unlike Tuple class)</li>
+              <li>Simpler than using the Tuple object</li>
+            </ul>
+            <div class="card"><div class="card-body"><code>
+              (int value1, int value2) GetPrice(int itemId) { ...&#10;var product = (500, 500);&#10;return product;"
+            </code></div></div>
+          </li>
+          <li>
+            Requires an additional NuGet package to work in certain versions of
+            C# - System.ValueTuple
+          </li>
+          <li>
+            To access the values within a tuple, you must follow a convention
+            <ul>
+              <li>
+                <code>var price = (500, 100)</code> assigned to a variable price
+                would be accessed by price.Item1 and price.item2
+              </li>
+              <li>
+                <code>var price = (a: 500, b: 100)</code> would use price.a and
+                price.b
+              </li>
+              <li>
+                if returning from a function, you can assign friendly names in
+                the method signature
+                <div class="card"><div class="card-body"><code>
+                  (int price, int discount) GetPrice(int itemId) { ..."
+                </code></div></div>
+              </li>
+            </ul>
+          </li>
+          <li>Can also be used as keys to a dictionary</li>
+          <li>
+            Return type = <code>(String firstname, String lastName)</code>
+            <ul>
+              <li>
+                Can have it without the parameter names, but then you must refer
+                to the individual items as Item1 and Item2 (to be compatible
+                with previous version)
+              </li>
+              <li>
+                Don't have to have the same names are the variables that hold
+                the values you are returning
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can define the receiving parameters:
+            <ul>
+              <li><code>var name =methodThatReturnsTuple()</code></li>
+              <li>can use name.firstName and name.lastName to get values</li>
+              <li>Can deconstruct the Tuple into individual variables</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Tuple Deconstruction</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to access a tuple member directly with its name without
+            using any tuple variable name
+          </li>
+          <li>
+            Three ways to do this
+            <ul>
+              <li>
+                for function GetPrice that returns a tuple (int price, int
+                discount)
+                <div class="card"><div class="card-body"><code>
+                  (int price, int discount) = GetPrice();&#10;var (price, discount) = GetPrice();&#10;var (int price, int discount) = GetPrice();"
+                </code></div></div>
+              </li>
+              <li>
+                This can be used when the variables have already been declared
+                <div class="card"><div class="card-body"><code>
+                  (price, discount) = GetPrice();"
+                </code></div></div>
+              </li>
+              <li>
+                Use when discount is declared, but price is not (must use C# 10)
+                <div class="card"><div class="card-body"><code>
+                  (price, int discount) = GetPrice();"
+                </code></div></div>
+              </li>
+              <li>Can now access variables price and discount</li>
+            </ul>
+          </li>
+          <li>
+            You must assign each element of the tuple to a variable
+            <ul>
+              <li>
+                Discards can be used on values that you don’t intend to use
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

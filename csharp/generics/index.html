@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Generics</li>
+        </ol>
+      </nav>
+
+      <h1>Generics</h1>
+      <section>
+        <ul>
+          <li>
+            Allows you to create multiple type safe and efficient objects using
+            a single class definition
+            <ul>
+              <li>
+                Type definition is deferred until the class is declared and
+                instantiated by the client
+              </li>
+              <li>Cannot be used as is - more like a blueprint for a type</li>
+              <li>
+                Client code must declare and instantiate a constructed type by
+                specifying a type parameter inside the angle brackets
+              </li>
+            </ul>
+          </li>
+          <li>
+            Type parameter that is a placeholder for a specific type that a
+            client specifies when they create an instance of the generic type
+            <ul>
+              <li>Type can be any recognized by the compiler</li>
+              <li>
+                These can be used as
+                <ul>
+                  <li>Placeholder for the types of object that is stores</li>
+                  <li>Types of its fields</li>
+                  <li>Parameter types of its methods</li>
+                  <li>Type of a return value</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>.NET namespaces</h2>
+      <section>
+        <ul>
+          <li>
+            System.Collections.Generic
+            <ul>
+              <li>Generic collection types</li>
+              <li>List, Dictionary, etc.</li>
+            </ul>
+          </li>
+          <li>
+            System.Collections.ObjectModel
+            <ul>
+              <li>Additional generic collection types</li>
+              <li>ReadOnlyCollections</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Terminology</h2>
+      <section>
+        <ul>
+          <li>
+            Generic type definition
+            <ul>
+              <li>Class, structure, interface that functions as template</li>
+              <li>Cannot create instances that are generic type definition</li>
+            </ul>
+          </li>
+          <li>
+            Generic type parameters
+            <ul>
+              <li>Placeholders in a generic type or method definition</li>
+            </ul>
+          </li>
+          <li>
+            Constructed generic type
+            <ul>
+              <li>
+                Result of specifying types for the generic type parameters of a
+                generic type definition
+              </li>
+            </ul>
+          </li>
+          <li>
+            Generic type argument
+            <ul>
+              <li>Type that is substituted for a generic type parameter</li>
+            </ul>
+          </li>
+          <li>
+            Generic type
+            <ul>
+              <li>
+                Includes both constructed types and generic type definitions
+              </li>
+            </ul>
+          </li>
+          <li>
+            Variance
+            <ul>
+              <li>Covariance and contravariance</li>
+              <li>
+                Allow you to construct generic types whose type arguments are
+                more derived or less derived than a target constructed type
+              </li>
+            </ul>
+          </li>
+          <li>
+            Constraints
+            <ul>
+              <li>Limited placed on generic type parameters</li>
+            </ul>
+          </li>
+          <li>
+            Generic method definition a method with two parameter lists
+            <ul>
+              <li>A list of generic type parameters</li>
+              <li>List of formal parameters</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Benefits</h2>
+      <section>
+        <ul>
+          <li>Type safety</li>
+          <li>Reusability and less code</li>
+          <li>Better performance since boxing value types is not needed</li>
+        </ul>
+      </section>
+
+      <h2>Naming Recommendations</h2>
+      <section>
+        <ul>
+          <li>
+            Name generic type parameters with descriptive names, unless a single
+            letter name is completely self-explanatory and a description name
+            would not add value
+          </li>
+          <li>
+            Use T as the type parameter name for types with one single letter
+            type parameter
+          </li>
+          <li>Prefix descriptive type parameter names with T</li>
+        </ul>
+      </section>
+
+      <h2>Recommendations</h2>
+      <section>
+        <ul>
+          <li>
+            Apply the maximum constraints possible that will still let you
+            handle the types you must handle
+          </li>
+        </ul>
+      </section>
+
+      <h2>Generic Classes</h2>
+      <section>
+        <ul>
+          <li>
+            Generic class can inherit from
+            <ul>
+              <li>Concrete type classes = no generic parameters</li>
+              <li>
+                Closed constructed type = Generic base class with the generic
+                parameter set to a specific type
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      Class NodeOpen&lt;T&gt; : BaseGeneric&lt;int&gt; {}"
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Open constructed type = generic base class with a generic
+                parameter
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      Class NodeOpen&lt;T&gt; : BaseGeneric&lt;T&gt; {}"
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Generic classes must supply type arguments for any base class type
+            <ul>
+              <li>
+                This causes a compiler error
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      Class NodeOpen&lt;T&gt; : BaseGeneric&lt;T, U&gt; {}"
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Generic classes that inherit from base open constructed types
+                must specify constrains that are a superset of the constraints
+                on the base class
+              </li>
+              <li>
+                Concrete classes can inherit from closed constructed base
+                classes
+                <ul>
+                  <li>
+                    Cannot inherit form generics with open constructed type
+                  </li>
+                  <li>
+                    No way to supply the type argument to instantiate the base
+                    class
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Generic Methods</h2>
+      <section>
+        <ul>
+          <li>Can appear on generic or non-generic class types</li>
+          <li>
+            A method is not generic because it belongs to a generic type or it
+            has formal parameters whose types are generic parameters of the
+            enclosing type
+          </li>
+          <li>
+            It is generic only if it has its own list of type parameters
+            <ul>
+              <li>
+                <code>T Method1(T arg) ...</code>
+              </li>
+              <li>It is generic even if its enclosing class is not generic</li>
+              <li>Belonging to a generic class</li>
+            </ul>
+          </li>
+          <li>
+            Definition
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  T DoStuff&lt;T&gt;(T arg) {&#10; T temp = arg;&#10; Return
+                  temp; &#10;}&#10;"
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Can call this as
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  var DoStuff&lt;int&gt;(5);&#10;var DoStuff(5);&#10;"
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            If defined in a generic class, do not need the &gt;T&lt; after the
+            method name if you are using the same identifier
+            <ul>
+              <li>If it is a different one, then you will need it</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Constraints on Type Parameters</h2>
+      <section>
+        <ul>
+          <li>
+            You can tell the compiler about the capabilities a type argument
+            must have
+            <ul>
+              <li>By default, it can be any type (System.object)</li>
+              <li>
+                Allows you use the operations and method calls of the
+                constraining type
+              </li>
+            </ul>
+          </li>
+          <li>
+            Example
+            <ul>
+              <li>“Employee” can be</li>
+              <li>“Struct”, “class”, “notnull”</li>
+              <li>a base class name</li>
+              <li>an interface name</li>
+              <li>
+                new() = argument must have a public parameterless constructor
+              </li>
+              <li>
+                for more, see
+                https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  public class GenericClass&lt;T&gt; where T : Employee ..."
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Multiple constraints can be applied using a comma separated list
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  class Test&lt;Y, U&gt; where U : stuct, where T : Base, new()"
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

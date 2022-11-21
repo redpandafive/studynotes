@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Delegates</li>
+        </ol>
+      </nav>
+
+      <h1>Expression Body Members</h1>
+
+      <section>
+        <ul>
+          <li>
+            Allow you to replace statements blocks with expressions (just like
+            with lambda expressions)
+          </li>
+          <li>
+            Looks like a lambda expression (it uses the token =&lt;), but it
+            does not mean there is a delegate involved
+          </li>
+          <li>Purely syntax sugar, so no overhead is incurrent</li>
+        </ul>
+        <div>Example</div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              public Point Move(int dx, int dy) =&gt; new Point(x + dx, y +
+              dy);)"
+            </code>
+          </div>
+        </div>
+        <div>To make a property read only</div>
+        <div class="card">
+          <div class="card-body">
+            <code> public string Name { get; }" </code>
+          </div>
+        </div>
+        <div>Example</div>
+        <div class="card">
+          <div class="card-body"><code> "</code></div>
+        </div>
+        <div>To make a getter using an expression body member</div>
+        <div class="card">
+          <div class="card-body">
+            <code> public string Name =&gt; _name" </code>
+          </div>
+        </div>
+        <div>To make a getter and setter using an expression body member</div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              public string Name &#10;{&#10; get =&gt; _name; // lambda
+              expression – returns a value&#10; set =&gt; _name = value; //
+              lambda statement – no return value&#10;}&#10;"
+            </code>
+          </div>
+        </div>
+        <div>To make a getter and setter with a exception throw</div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              public string Name&#10;{&#10; get =&gt; _name;&#10; set =&gt;
+              _name = value ?? throw new InvalidOperationException();&#10;}"
+            </code>
+          </div>
+        </div>
+        <div>
+          These can be declared on a void method, but they use must use a
+          statement expression
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

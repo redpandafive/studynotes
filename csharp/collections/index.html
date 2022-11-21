@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Collections</li>
+        </ol>
+      </nav>
+
+      <h1>Collections</h1>
+
+      <h2>IEnumerable</h2>
+      <section>
+        <ul>
+          <li>Requires definition of a GetEnumerator method</li>
+          <li>
+            Returns an IEnumerator
+            <ul>
+              <li>
+                This method returns one item at a time using yield return
+                statements
+              </li>
+            </ul>
+          </li>
+          <li>
+            If the generic interface is implemented, you must implement generic
+            GetEnumerator and non-generic GetEnumerator
+            <ul>
+              <li>
+                The non-generic implementation defers to the generic
+                implementation
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Collection Types</h2>
+      <section>
+        <p>
+          More flexible than arrays since you can grow or shrink the size of the
+          collection dynamically
+        </p>
+        <div>
+          System.Collections.Generic
+          <ul>
+            <li>
+              ICollection&gt;T&lt; - Defines methods to manipulate generic
+              collections
+            </li>
+            <li>
+              IEnumerable&lt;T%gt; - Exposes the enumerator, which supports
+              simple interation over a collection of a specified type
+            </li>
+            <li>
+              IList&lt;T%gt; - Derives from ICollection and ICollection&lt;T%gt;
+            </li>
+            <li>
+              IDictionary&lt;TKey, TValue&gt; - Represents a generic collection
+              of key/value pairs
+            </li>
+            <li>
+              Dictionary
+              <ul>
+                <li>Represents a collection of keys and values</li>
+              </ul>
+            </li>
+            <li>
+              List&lt;T%gt;
+              <ul>
+                <li>
+                  Strongly types list of objects that can be accessed by an
+                  index
+                </li>
+                <li>Replaces ArrayList class</li>
+              </ul>
+            </li>
+            <li>
+              Queue&lt;T%gt;
+              <ul>
+                <li>FIFO (First in, first out) collection of objects</li>
+              </ul>
+            </li>
+            <li>
+              SortedDicitonary&lt;TKey, TValue&gt;
+              <ul>
+                <li>
+                  Represents a collection of key/value pairs that are sorted on
+                  the key
+                </li>
+              </ul>
+            </li>
+            <li>
+              SortedList&lt;TKey, TValue&gt;
+              <ul>
+                <li>
+                  Represents a collection of key/value pairs that are sorted on
+                  the list
+                </li>
+              </ul>
+            </li>
+            <li>
+              Stack&lt;T%gt;
+              <ul>
+                <li>LIFO (Last in, first out) collection of objects</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          System.Collections.Concurrent
+          <ul>
+            <li>
+              Use when multiple threads might be adding or removing items form
+              the collection concurrently
+            </li>
+            <li>ConcurrentQueue&lt;T%gt; - Thread safe FIFO</li>
+            <li>ConcurrentStack&lt;T%gt; - Thread safe LIFO</li>
+          </ul>
+        </div>
+        <div>
+          System.Collections.Immutable - Use when immutability is needed
+        </div>
+        <div>
+          System.Collections
+          <ul>
+            <li>These classes are non-typed, legacy</li>
+            <li>
+              Recommended to use the generic counterpart to non-generic classes
+              <ul>
+                <li>Can be error prone since they are untyped</li>
+                <li>Less performance since value types have to be boxed</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Custom collections</li>
+            <li>Implement the IEnumerable&lt;T%gt; interface</li>
+            <li>Usually better to use built in objects</li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Array</h2>
+      <section>
+        <ul>
+          <li>
+            Array class in the System namespace is the base class for all arrays
+            in the CLR
+          </li>
+          <li>
+            Useful when working with a fixed number of strongly typed objects
+          </li>
+          <li>
+            Implements IList, but methods to add and remove elements will cause
+            an error
+          </li>
+        </ul>
+      </section>
+
+      <h2>Dictionaries</h2>
+      <section>
+        <ul>
+          <li>
+            Gives access to elements in a collection by using the key of each
+            element
+          </li>
+          <li>Retrieval is fast since it is implemented as a hash table</li>
+          <li>
+            Unsorted by default
+            <ul>
+              <li>
+                Can use LINQ to sort, but it can be slow on big collections
+              </li>
+              <li>
+                Consider a SortedDictionary instead, particularly when you will
+                need repeated access
+              </li>
+            </ul>
+          </li>
+          <li>
+            Entries are added as KeyValuePair objects
+            <ul>
+              <li>
+                Iterating over the dictionary will return an object of this type
+                on each turn of the iteration
+              </li>
+            </ul>
+          </li>
+          <li>
+            Methods to know
+            <ul>
+              <li>
+                ContainsKey
+                <ul>
+                  <li>Boolean if the dictionary contains the specified key</li>
+                  <li>
+                    Error is thrown if you attempt to access a key that does not
+                    exist
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Lists</h2>
+      <section>
+        <ul>
+          <li>
+            ForEach
+            <ul>
+              <li>This is a List extension method, so not part of LINQ</li>
+              <li>
+                Executes the supplied method on each item in the collection
+              </li>
+              <li>This modifies the original List items</li>
+              <li>
+                Can be combined with a Where call to only apply the function to
+                certain items
+              </li>
+              <li>
+                This requires calling a ToList since Where returns an
+                IEnumerable
+              </li>
+              <li>
+                Unfortunately, this has the overhead of creating a new copy of
+                the data
+              </li>
+              <li>You are usually better off just using a foreach loop</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Iterators</h2>
+      <ul>
+        <li>
+          Method that steps through a collection such as lists and arrays
+          <ul>
+            <li>
+              Can be consumed from client code using a foreach statement or LINQ
+              query
+            </li>
+            <li>Returns an element one at a time</li>
+            <li>
+              When a yield return statement is reached, the current location in
+              code is remembered
+            </li>
+            <li>
+              Execution is restarted from that location the next time the
+              iterator is called
+            </li>
+          </ul>
+        </li>
+        <li>
+          Iterator method definition
+          <ul>
+            <li>Returns a typed IEnumerable</li>
+            <li>
+              Use yield return statements at each point where you want an item
+              returned
+            </li>
+            <li><code>yield return 3;</code></li>
+            <li>
+              Important to remember that an item is returned each time a yield
+              return is hit
+            </li>
+            <li>
+              For example, the following is valid
+              <ul>
+                <li>This could be consumed by a for each statement</li>
+              </ul>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    Public IEnumerable&lt;int&gt; GetNumbers() {&#10; yield
+                    return 3&#10; yield return 5&#10; yield return 8&#10;}"
+                  </code>
+                </div>
+              </div>
+            </li>
+            <li><code>Yield break</code> - use to end the iteration early</li>
+          </ul>
+        </li>
+        <li>
+          Uses
+          <ul>
+            <li>
+              Wrap around a larger list of items and return a subset that fit
+              only certain criteria
+            </li>
+            <li>Can iterate in a foreach loop</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h2>Collection Initializers</h2>
+      <section>
+        <ul>
+          <li>
+            Simple example
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  List&lt;int&gt; digits = new List&lt;int&gt; { 0, 1, 2, 3, 4,
+                  5, 6, 7, 8, 9 }; "
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Example with a null value
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  code='List&lt;Cat&gt; moreCats = new List&lt;Cat&gt; {&#10;
+                  new Cat{ Name = "Furrytail", Age=5 },&#10; new Cat{ Name =
+                  "Peaches", Age=4 },&#10; Null &#10;};&#10;'
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Sorting Collections</h2>
+      <section>
+        <ul>
+          <li>Use the Sort method to do this</li>
+          <li>
+            Your class that you store in the collection should implement the
+            IComparable&lt;T%gt; interface
+          </li>
+          <li>Requires a CompareTo method to be implemented</li>
+          <li>
+            Returns
+            <ul>
+              <li>
+                Less than zero if the current object is “less than” the other
+                object
+              </li>
+              <li>
+                Greater than zero if the current object “greater than” the other
+                object
+              </li>
+            </ul>
+          </li>
+          <li>Zero if equal</li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

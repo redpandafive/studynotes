@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/../styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Tableau</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Hyper API</li>
+        </ol>
+      </nav>
+
+      <h1>Hyper API</h1>
+
+      <section>
+        <ul>
+          <li>
+            Part of Data Connectivity component of Tableau Developer Tools
+            <ul>
+              <li>Connector SDK</li>
+              <li>Hyper API</li>
+              <li>Web Data Connector</li>
+            </ul>
+          </li>
+          <li>
+            When to Use
+            <ul>
+              <li>
+                Custom data source without out of the box Tableau connector
+              </li>
+              <li>
+                Custom ETL process with integration in Tableau
+                <ul>
+                  <li>
+                    Perform ETL on data, route results to a .hyper file (Tableau
+                    extract), then publish this to Tableau
+                  </li>
+                </ul>
+              </li>
+              <li>Develop application with integration to Tableau</li>
+            </ul>
+          </li>
+          <li>Can use with Python, Java, C++, .NET</li>
+          <li>
+            What you can do with it
+            <ul>
+              <li>Create .hyper files</li>
+              <li>Insert data into .hyper files</li>
+              <li>Single table or multiple tables</li>
+              <li>Load data directly from CSV files</li>
+              <li>Create, update, delete, read data from .hyper files</li>
+              <li>SQL based API</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Hyper</h2>
+      <section>
+        <ul>
+          <li>
+            Tableau's next generation general purpose data engine
+            <ul>
+              <li>SQL Based</li>
+              <li>Scalable</li>
+              <li>Optimized for hybrid workloads (reads and writes)</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Hyper Files</h2>
+      <section>
+        <ul>
+          <li>
+            Contain
+            <ul>
+              <li>
+                Schemas
+                <ul>
+                  <li>Think of as namespaces</li>
+                </ul>
+              </li>
+              <li>
+                Tables
+                <ul>
+                  <li>Contained in schemas</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            When switching from Live to Extract, you end up with a hyperfile
+            <ul>
+              <li>
+                This is usually a single table named Extract within a namespace
+                called Extract
+              </li>
+            </ul>
+          </li>
+          <li>
+            Newly created database contains
+            <ul>
+              <li>A schema called Public</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>How It Fits Into Your Workflow</h2>
+      <section>
+        <ul>
+          <li>
+            Within your application..
+            <ul>
+              <li>
+                Your client code
+                <ul>
+                  <li>Calls the Hyper API front end</li>
+                </ul>
+              </li>
+              <li>
+                Hyper API front end (part of the api that is shipped in four
+                different languages)
+                <ul>
+                  <li>Interacts with the Hyper API backend</li>
+                </ul>
+              </li>
+              <li>
+                Hyper API backend
+                <ul>
+                  <li>.dll / .so</li>
+                  <li>Shared library since this does the heavy lifting</li>
+                  <li>Optimized machine code</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Hyper process
+            <ul>
+              <li>This is the Hyper database engine</li>
+              <li>Hyper API creates and communicates with this</li>
+              <li>Uses a SQL connection to communicate</li>
+              <li>Can have multiple SQL connections simultaneously</li>
+              <li>Not recommended to have multiple processes simultaneously</li>
+              <li>
+                Only SQL is used to communicate, so convenience classes are
+                translated into SQL
+              </li>
+            </ul>
+          </li>
+          <li>
+            .Hyper files
+            <ul>
+              <li>Database = extract = Hyper file</li>
+              <li>
+                You can have multiple hyper files attached to the same Hyper
+                process
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>What Does It Do / What Does It Not Do</h2>
+      <section>
+        <ul>
+          <li>
+            Allows for the creation / read / update of <em>local</em> .hyper
+            files
+            <ul>
+              <li>This means the local machien where you update your script</li>
+            </ul>
+          </li>
+
+          <li>
+            It does not
+            <ul>
+              <li>Need any other Tableau product installed</li>
+              <li>Interact with any other Tableau product</li>
+              <li>
+                Cannot interact with Tableau server
+                <ul>
+                  <li>
+                    Does not allow upload / download / access to extracts on
+                    Tableau server
+                  </li>
+                  <li>Use the Rest API to interact with Tableau server</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2>What Can You Do With a .Hyper File Connection</h2>
+      <section>
+        <ul>
+          <li>
+            Data Injestion
+            <ul>
+              <li>
+                Create tables and define columns - can be done with high level
+                API
+              </li>
+              <li>
+                Insert / append rows into a table - can be done with high level
+                API
+              </li>
+              <li>
+                Bulk insert data from CSV into table - done with SQL
+                <ul>
+                  <li>
+                    Faster than reading each line yourself and inserting rows
+                    individually
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Update / Deletes
+            <ul>
+              <li>Update / change data in a table</li>
+              <li>Delete rows from a table</li>
+              <li>Drop a table</li>
+              <li>Alter the schema of a table</li>
+            </ul>
+          </li>
+          <li>
+            Read data
+            <ul>
+              <li>Scan a table</li>
+              <li>
+                Do complex SQL query on one or multiple tables
+                <ul>
+                  <li>
+                    No longer limited to just reading data from the Tableau
+                    dashboard
+                  </li>
+                  <li>These can span multiple databases</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Read metadata
+            <ul>
+              <li>Read schemas and tables - can be done with high level API</li>
+              <li>Read columns of tables - can be done with high level API</li>
+              <li>
+                Read data types of columns - can be done with high level API
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2></h2>
+      <section>
+        <ul>
+          <li>When you do an extract, you create a hyper file</li>
+          <li>
+            When you create a hyper file programatically,
+            <ul>
+              <li>This contains data</li>
+              <li>
+                Does not contain information on how you got the data into the
+                file
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            When switching from Live to Extract on the server
+            <ul>
+              <li>It does contain information on where the data come frome</li>
+            </ul>
+          </li>
+          <li>Telemetry object sends annonymous usage data to Tableau</li>
+          <li>
+            Always has the following two lines
+            <ul>
+              <li>Connect to a HyperProcess</li>
+              <li>
+                Open a connection and attach a database to it
+                <ul>
+                  <li>
+                    This can be done with a convenience method or explicitly
+                    attaching it
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Always close a connection so the file does not remain locked
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Names</h2>
+      <section>
+        <ul>
+          <li>Names are case sensitive</li>
+          <li>
+            Qualified vs Unqualified
+            <ul>
+              <li>
+                A database can contain multiple schemas that have a table with
+                the same name
+              </li>
+            </ul>
+          </li>
+          <li>
+            When querying a database with multiple schemas, you must qualify the
+            schema name if there is ambiguity
+            <ul>
+              <li>
+                <code>SELECT * FROM "y1"."z"</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            When querying accross databases, must further qualify with the
+            database name
+            <ul>
+              <li>
+                <code>SELECT * FROM "x"."y1"."z"</code>
+              </li>
+              <li>
+                This is only necessary when multiple databases are attached
+              </li>
+            </ul>
+          </li>
+          <li>
+            Always user name classes - never use raw names in SQL strings
+            <ul>
+              <li>
+                Escaping correctly is difficult, particularly with integrating
+                user input
+              </li>
+              <li>Error prone</li>
+              <li>
+                Hyper API has classes to handle names
+                <ul>
+                  <li>
+                    <code>class Name</code>
+                    <ul>
+                      <li>An escaped, unqualified name</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <code>class TableName</code>
+                    <ul>
+                      <li>An escaped table name</li>
+                      <li>
+                        Can include options to specifiy a schema and database
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Data Types</h2>
+      <section>
+        <ul>
+          <li>
+            Numeric
+            <ul>
+              <li>small_int</li>
+              <li>integer</li>
+              <li>big_int</li>
+              <li>numeric</li>
+              <li>double</li>
+            </ul>
+          </li>
+          <li>
+            Text data
+            <ul>
+              <li>text</li>
+              <li>
+                varchar - <em>NEVER USE</em> - only added to conform to SQL
+                standard
+              </li>
+              <li>
+                char - <em>NEVER USE</em> - only added to conform to SQL
+                standard
+              </li>
+            </ul>
+          </li>
+          <li>
+            Date & Time
+            <ul>
+              <li>date</li>
+              <li>time</li>
+              <li>timestamp = date + time</li>
+              <li>interval</li>
+            </ul>
+          </li>
+          <li>
+            Other
+            <ul>
+              <li>bool</li>
+              <li>bytes</li>
+              <li>geography</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Multiple Databases</h2>
+      <section>
+        <ul>
+          <li>
+            Use cases
+            <ul>
+              <li>Multiple versions of the same dataset</li>
+            </ul>
+          </li>
+          <li>You can attach multiple databases to the same connection</li>
+          <li>
+            Join data from two hyper files in a query
+            <div>
+              <img src="../../assets/images/tableau_api_2.png" />
+            </div>
+          </li>
+          <li>
+            Union two or more hyper files into a new hyper file
+            <div>
+              <img src="../../assets/images/tableau_api_3.png" />
+            </div>
+            <div>
+              <img src="../../assets/images/tableau_api_4.png" />
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Exploring an Extract</h2>
+      <section>
+        <ul>
+          <li>
+            The connection object has a catalog property that can be used to get
+            schema metadata
+          </li>
+          <li>
+            Use to find
+            <ul>
+              <li>Tables names in a schema</li>
+              <li>Table definition</li>
+              <li>Column definition</li>
+            </ul>
+          </li>
+        </ul>
+        <img src="../../assets/images/tableau_api_1.png" />
+      </section>
+
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://help.tableau.com/current/api/hyper_api/en-us/"
+              target="_blank"
+            >
+              https://help.tableau.com/current/api/hyper_api/en-us/
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

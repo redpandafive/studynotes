@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Delegates</li>
+        </ol>
+      </nav>
+
+      <h1>Terminology</h1>
+
+      <section>
+        <div>
+          Arguments
+          <ul>
+            <li>Concrete values passed by code when it calls a method</li>
+            <li>Must be compatible with the parameter type</li>
+          </ul>
+        </div>
+
+        <div>
+          Assignment compatibility
+          <ul>
+            <li>
+              An object of a more derived type can be assigned to an object of a
+              less or equivalent derived type
+            </li>
+          </ul>
+        </div>
+        <div>
+          Dereferencing
+          <ul>
+            <li>
+              Access one of an object's members using the dot (.) operator
+            </li>
+            <li>
+              Example would be message.Length where message is a string object
+            </li>
+            <li>
+              Derefenceing a variable whose value is null triggers a
+              System.NullReferenceException
+            </li>
+          </ul>
+        </div>
+        <div>
+          Event Handlers
+          <ul>
+            <li>
+              Nothing more than methods that are invoked through delegates
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          Expression
+          <ul>
+            <li>
+              A combination of values and functions that are combined to create
+              a new value
+            </li>
+            <li>Can be used in places where a value is expected</li>
+            <li>
+              In functional languages, everything is an expression, including
+              statements
+            </li>
+            <li>
+              Multiple expressions can be composed together into larger
+              expressions
+            </li>
+            <li>
+              Idempotent, calling the came expression for the same input any
+              number of times always produces the same result
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          Expression-bodied Members
+          <ul>
+            <li>
+              Define a members implementation in a very concise, readable form
+            </li>
+            <li>
+              Use whenever the logic for any supported member (such as method or
+              property) consists of a single expression
+            </li>
+            <li>General form is member => expression</li>
+            <li>
+              Can be used on
+              <ul>
+                <li>
+                  Methods
+                  <ul>
+                    <li>
+                      Returns a value that matches the method’s return type or
+                      returns void for actions
+                    </li>
+                    <li>Never uses the return keyword</li>
+                  </ul>
+                </li>
+                <li>Read-only properties</li>
+                <li>Properties</li>
+                <li>Constructors</li>
+                <li>
+                  Consists of a single assignment expression or a method call
+                  that handles constructor’s arguments
+                </li>
+                <li>Finalizers</li>
+                <li>Indexers</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          Iterator
+          <ul>
+            <li>Used to step through collections such as lists and arrays</li>
+            <li>
+              What C# calls an iterator is more commonly called a generator in
+              other languages
+              <ul>
+                <li>
+                  Iterator methods use the <code>yield return</code> statement
+                  to return each element one at a time
+                </li>
+                <li>
+                  Can consume an iterator using a <code>foreach</code> statement
+                  or a LINQ query
+                </li>
+              </ul>
+            </li>
+            <li>See <a href="assorted/yieldReturn.html">Yield Return</a></li>
+          </ul>
+        </div>
+
+        <div>
+          Parameters
+          <ul>
+            <li>Defined on the method signature</li>
+            <li>Specifying the name and types</li>
+          </ul>
+        </div>
+
+        <div>
+          Signature
+          <ul>
+            <li>
+              Signature is comprised of
+              <ul>
+                <li>Declaration such as class, struct, or interface</li>
+                <li>Access level such as private or public</li>
+                <li>Optional modifiers such as abstract or sealed</li>
+                <li>The return value</li>
+                <li>Method name</li>
+                <li>Method parameters</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          Statement
+          <ul>
+            <li>
+              Just a standalone unit of execution and doesn’t return anything
+            </li>
+            <li>
+              Imperative languages rely heavily on statements to accomplish
+              everything
+            </li>
+            <li>Modify variables and change state</li>
+            <li>Do not guarantee idempotency</li>
+            <li>Must be evaluated in order</li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Keywords</h2>
+      <section>
+        <ul>
+          <li>
+            this
+            <ul>
+              <li>Refers to current instance of the class</li>
+              <li>
+                Also used as a modifier of the first parameter of an extension
+                method
+              </li>
+            </ul>
+          </li>
+          <li>
+            virtual
+            <ul>
+              <li>
+                Allows the member to be overridden in a derived class, changing
+                the implementation
+              </li>
+              <li>
+                Can be applied to a method, property, indexer or event
+                declaration
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Shallow immutability</h2>
+      <section>
+        <ul>
+          <li>Cannot change value types</li>
+          <li>Cannot change the references that reference types point to</li>
+          <li>Can change the data on reference types</li>
+          <li>
+            Can't change an array, but you can modify fields in the objects in
+            the array
+          </li>
+        </ul>
+      </section>
+
+      <h2>Special Characters</h2>
+      <section>
+        <ul>
+          <li>
+            @
+            <ul>
+              <li>
+                Enables C# keywords to be used as identifiers.
+                <ul>
+                  <li>
+                    The @ character prefixes a code element that the compiler is
+                    to interpret as an identifier rather than a C# keyword.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Indicates that a string literal is to be interpreted as a
+                verbatim string literal
+                <ul>
+                  <li>
+                    The following are interpreted literally
+                    <ul>
+                      <li>
+                        Simple escape sequences (such as "\\" for a backslash)
+                      </li>
+                      <li>
+                        Hexadecimal escape sequences (such as "\x0041" for an
+                        uppercase A)
+                      </li>
+                      <li>
+                        Unicode escape sequences (such as "\u0041" for an
+                        uppercase A) are interpreted literally
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    The following are not
+                    <ul>
+                      <li>
+                        Quote escape sequence ("") is not interpreted literally;
+                        it produces one double quotation mark.
+                      </li>
+                      <li>
+                        Interpolated string brace escape sequences produce
+                        single brace characters
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            $
+            <ul>
+              <li>
+                When prepended to a string, this indicates the string uses
+                interpolation
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Operators</h2>
+      <section>
+        <div>
+          Null-Forgiving Operator
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+        <div>
+          Null-Coalescing Operator
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+        <div>
+          Null-Conditional Operator
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

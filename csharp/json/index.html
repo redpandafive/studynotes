@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">JSON</li>
+        </ol>
+      </nav>
+
+      <h1>JSON</h1>
+
+      <section>
+        <ul>
+          <li>
+            C# 8 now has built in JSON support
+            <ul>
+              <li>
+                JSON.NET was the standard way to serialize and deserialize JSON
+                data
+              </li>
+              <li>
+                Since this was an external library, any applications you write
+                and dependent on it-may lead to versioning problems wince you
+                are tied to it
+              </li>
+            </ul>
+          </li>
+          <li>
+            System.Text.Json namespace
+            <ul>
+              <li>Contains classes for JSON finality</li>
+              <li>
+                Fast
+                <ul>
+                  <li>JSON.NET had to work with UTF16 strings</li>
+                  <li>New namespace works with ray Utf8 format</li>
+                </ul>
+              </li>
+              <li>Minimizes memory allocation using the new Span datatype</li>
+              <li>Not as feature rich as JSON.NET</li>
+              <li>
+                Don’t have to switch to this, but if your needs are simple, they
+                are definitely faster
+              </li>
+            </ul>
+          </li>
+          <li>
+            Reading JSON data with Utf8JsonReader class
+            <ul>
+              <li>
+                Very low level - can be difficult to work with if you don’t this
+                granular level control
+                <ul>
+                  <li>Most applications will not use this</li>
+                </ul>
+              </li>
+              <li>Read file in as bytes</li>
+              <li>Convert to Span</li>
+              <li>Loop through a line at a time</li>
+            </ul>
+          </li>
+          <li>
+            Reading JSON data with JsonDocument
+            <ul>
+              <li>More friendly way to interact with JSON data</li>
+              <li>
+                Gives you a document object model object to reference items
+              </li>
+            </ul>
+          </li>
+          <li>Writing JSON data using Utf8JsonWriter</li>
+          <li>Using JsonSerializer</li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
