@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            System.CommandLine
+          </li>
+        </ol>
+      </nav>
+
+      <h1>System.CommandLine</h1>
+
+      <section>
+        <ul>
+          <li>
+            This replaces the deprecated Microsoft.Extensions.CommandLineUtils
+          </li>
+          <li>
+
+          </li>
+        </ul>
+      </section>
+
+      <h2>Terminology</h2>
+      <section>
+        <ul>
+          <li>
+            Arguments
+            <ul>
+              <li></li>
+            </ul>
+          </li>
+          <li>
+            Commands
+            <ul>
+              <li>
+                Specifies an action or defines a group of releated actions
+              </li>
+            </ul>
+          </li>
+          <li>
+            Options
+            <ul>
+              <li></li>
+            </ul>
+          </li>
+          <li>
+            Tokens
+            <ul>
+              <li>Strings delimited by spaces</li>
+              <li>
+                Command line input is parsed into a set of tokens, which are
+                strings delimited by spaces
+              </li>
+            </ul>
+          </li>
+          <li>
+            Verbs
+            <ul>
+              <li>Also known as subcommands</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Command Line Input Parsing</h2>
+      <section>
+        <ul>
+          <li>
+            Input is parsed into tokens
+            <ul>
+              <li>Tokens can contain spaces if enclosed by quotation marks</li>
+            </ul>
+          </li>
+          <li>
+            Tokens are interpretted as
+            <ul>
+              <li>Commands</li>
+              <li>Options</li>
+              <li>Arguments</li>
+            </ul>
+          </li>
+          <li>
+            The app being invoked determines how the tokens after the first one
+            are interpreted
+          </li>
+        </ul>
+      </section>
+
+      <h2>Commands</h2>
+      <section>
+        <ul>
+          <li>Specifies an action or defines a group of releated actions</li>
+          <li>
+            Examples
+            <ul>
+              <li>
+                <kbd>dotnet run</kbd> = run is a command that specifies an
+                action
+              </li>
+              <li>
+                <kbd>dotnet tool install</kbd> = install is a command that
+                specifies an action, and tool is a command that specifies a
+                group of related commands.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Root command
+            <ul>
+              <li>Specifies the name of the app's executable</li>
+              <li>Examples<ul>
+                <li>
+                  <kbd>dotnet tool install</kbd> - donet is the root command
+                </li>
+              </ul>
+            </li>
+            </ul>
+          </li>
+          <li>
+            Subcommands
+            <ul>
+              <li>Also called Verbs</li>
+              <li>These can have their own subcommands</li>
+              <li>
+                <kbd>dotnet tool install</kbd> = tool is a subcommand and
+                install is a subcommand of tool
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Options</h2>
+      <section>
+        <ul>
+          <li>A named parameter that can be passed to a command</li>
+        </ul>
+      </section>
+
+<h2>Simple Build</h2>
+<section>
+  <ul>
+    <li>
+      To build a command line project, use the following command: <kbd>dotnet build</kbd>
+    </li>
+  </ul>
+</section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://learn.microsoft.com/en-us/dotnet/standard/commandline/"
+              target="_blank"
+            >
+              https://learn.microsoft.com/en-us/dotnet/standard/commandline/
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
