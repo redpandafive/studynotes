@@ -100,11 +100,33 @@
                 on the outermost object
               </li>
               <li>It will never make an assignment to a prototype property.</li>
-              <li>This allows us to selectively override inherited properties.</li>
+              <li>
+                This allows us to selectively override inherited properties.
+              </li>
               <li>
                 If you add a property to an object that has the same name as a
                 property on the prototype, it only hides the property on the
                 prototype.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Inheritance is dynamic
+            <ul>
+              <li>Properties modified after creation are still inherited</li>
+              <li>
+                Useful for adding new language features in older versions of the
+                language
+                <ul>
+                  <li>
+                    Must be careful with this since it can lead to future
+                    incompatibility and confusion
+                  </li>
+                  <li>
+                    Could even add to <code>Object.prototype</code>, but this
+                    usually is not a good idea
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>

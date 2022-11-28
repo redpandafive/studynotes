@@ -36,27 +36,7 @@
       <section>
         <ul>
           <li>
-            In JS, the prototype object is the central feature of a class
-            <ul>
-              <li>
-                A class is a set of objects that inherit properties from the
-                same prototype object
-              </li>
-            </ul>
-          </li>
-          <li>
-            Instances of a class have
-            <ul>
-              <li>Their own properties to hold or define their state</li>
-              <li>
-                Methods that define their behavior. These are defined by the
-                class and shared by all instances
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            JS classes use prototype based Inheritance
+            JS classes use prototype based inheritance
             <ul>
               <li>
                 If two objects inherit properties from the same prototype, then
@@ -66,6 +46,44 @@
                 Usually (not always) means they were created and initialized by
                 the same constructor function or factory function
               </li>
+              <li>
+                Dynamic, so you can augment JS classes by adding new methods to prototype objects, even after creation
+              </li>
+              <li>
+                See
+                <a href="../objects/prototype.html">Prototype Inheritance</a>
+              </li>
+              <li>
+                In JS, the prototype object is the central feature of a class,
+                not the constructor function
+                <ul>
+                  <li>
+                    A class is a set of objects that inherit properties from the
+                    same prototype object
+                  </li>
+                  <li>
+                    Two objects are instances of the same class if and only if
+                    they inherit from the same prototype object
+                  </li>
+                  <li>
+                    Two constructor functions may have prototype properties that
+                    point to the same prototype object
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Instances of a class have
+                <ul>
+                  <li>Their own properties to hold or define their state</li>
+                  <li>
+                    Methods that define their behavior. These are defined by the
+                    class and shared by all instances
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Before implementing inheritance and class hierarchies, consider if composition would be a better approach
+              </li>
             </ul>
           </li>
           <li>
@@ -73,10 +91,6 @@
           </li>
         </ul>
       </section>
-
-
-
-
 
       <h2>Pre-ES6 Syntax</h2>
       <section>
@@ -91,8 +105,8 @@
                 from it
               </li>
               <li>
-                Usually to define a factory function that creates and initializes
-                the new object
+                Usually to define a factory function that creates and
+                initializes the new object
               </li>
             </ul>
           </li>
@@ -105,8 +119,8 @@
               prototype object methods
             </li>
             <li>
-              The prototype object is stored as a property on this function - all
-              instances inherit these methods
+              The prototype object is stored as a property on this function -
+              all instances inherit these methods
             </li>
             <li>Create an instance using <code>let r = range(1,3)</code></li>
           </ul>
@@ -122,7 +136,8 @@
                 <br />
                 range.methods = {<br />
                 includes(x) { return this.from &lt;= x && x &lt;= this.to; },<br />
-                toString() { return "(" + this.from + "..." + this.to + ")"; }<br />
+                toString() { return "(" + this.from + "..." + this.to + ")";
+                }<br />
                 };<br />
               </code>
             </div>
@@ -130,27 +145,379 @@
         </div>
       </section>
 
-      
-
       <h2>Constructors</h2>
       <section>
         <ul>
-          <li>A function designed for the initialization of newly created objects</li>
-          <li>Uses the <code>new</code> keyword
+          <li>
+            A function designed for the initialization of newly created objects
+          </li>
+          <li>
+            Not fundamental to the identity of a class
+            <ul>
+              <li>
+                Two constructor functions may have prototype properties that
+                point to the same prototype object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Serves as the public face of a class
+            <ul>
+              <li>
+                Name of the class is usually adopted as the name of the class
+              </li>
+            </ul>
+          </li>
+          <li>
+            The prototype property of the constructor is used as the prototype
+            of the new object
+            <ul>
+              <li>
+                While all objects have a prototype property, it is function
+                objects that actually have one assigned
+              </li>
+              <li>
+                All objects created with the same constructor function inherit
+                from the same object.
+              </li>
+              <li>This means they are members of the same class</li>
+            </ul>
+          </li>
+          <li>
+            Uses the <code>new</code> keyword
+            <ul>
+              <li>This automatically creates the new object</li>
+              <li>Just need to initialize the state of that new object</li>
+              <li>
+                Do not need to call <code>Object.create()</code> or take any
+                action to create a new object
+              </li>
+              <li>
+                Use <code>this</code> to access the new object within the
+                constructor
+              </li>
+            </ul>
+          </li>
+          <li>
+            Capitalize constructor function identifiers
+            <ul>
+              <li>
+                Indicates it should be invoked with the <code>new</code> keyword
+                or it will not work properly
+              </li>
+            </ul>
+          </li>
+          <li>
+            In the example, <code>Range.prototype</code> syntax is mandatory
+            <ul>
+              <li>
+                Invoking the constructor function will automatically use this as
+                the prototype if the convention is followed
+              </li>
+            </ul>
+          </li>
+          <li>
+            Cannot use arrow functions here
+            <ul>
+              <li>
+                They do not have a prototype property, so cannot be used as
+                constructors
+              </li>
+              <li>
+                Inherit <code>this</code> from the context where they are
+                invoked
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Idiomatic way to create a class pre-ES6 with a constructor
           <ul>
-            <li>This automatically creates the new object</li>
-            <li>Just need to initialize the state of that new object </li>
-          </ul></li>
+            <li>
+              Create an instance with <code>let r = new Range(1,3);</code>
+            </li>
+          </ul>
+          <div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function Range(from, to) { <br />
+                  this.from = from; <br />
+                  this.to = to; <br />
+                  } <br />
+                  Range.prototype = { <br />
+                  includes: function(x) { return this.from &lt;= x && x &lt;=
+                  this.to; }, <br />
+                  toString: function() { <br />
+                  return "(" + this.from + "..." + this.to + ")"; } <br />
+                  };<br />
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h3>Inheritance</h3>
+      <section>
+        <ul>
+          <li>To make a subclass B inherit from superclass A, you must arrange for B.prototype to inherit from A.prototype</li>
+          <li>
+            <code>B.prototype = Object.create(A.prototype);</code>
+            <ul>
+              <li>B will inherit from both B.prototype and A.prototype</li>
+            </ul>
+          </li>
+          <li>
+            Hard to do since there was no simple way to invoke constructors and methods on superclasses without ES6 syntax
+          </li>
+        </ul>
+      </section>
+
+      <h2>Constructor Property</h2>
+      <section>
+        <ul>
+          <li>Any regular JS function can be used as a constructor</li>
+          <li>Constructor invocations need a prototype property</li>
+          <li>
+            Therefore, every JS function automatically has a prototype property
+          </li>
+          <li>
+            The value of this property is an object that has a single,
+            non-enumerable <code>constructor</code> property
+          </li>
+          <li>The value of the constructor property is the function object</li>
+          <li>This constructor property gives the class of an object</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let F = function() {}; // This is a function object.<br />
+                let p = F.prototype; // This is the prototype object associated
+                with F.<br />
+                let c = p.constructor; // This is the function associated with
+                the prototype.<br />
+                c === F // => true: F.prototype.constructor === F for any F<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          One technique used in older code is to use the predefined prototype
+          object with its constructor property and add methods to it one at a
+          time
+          <div class="card">
+            <div class="card-body">
+              <code>
+                Range.prototype.includes = function(x) {<br />
+                return this.from &lt;= x && x &lt;= this.to;<br />
+                };<br />
+                Range.prototype.toString = function() {<br />
+                return "(" + this.from + "..." + this.to + ")";<br />
+                };<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 class="instanceof">Instanceof and isPrototypeOf</h2>
+      <section>
+        <ul>
+          <li>Tests for membership in a class</li>
+          <li>Example: <code>r instanceof Range</code></li>
+          <li>
+            Technically, it is checking with r inherits from Range.prototype
+            <ul>
+              <li>Does not have to be a direct inheritance</li>
+              <li>
+                It does use the constructor function on the right hand side, but
+                this is mainly an intermediary
+              </li>
+              <li>
+                Will return true if you manually set the prototype property
+                instead of using a constructor function
+              </li>
+            </ul>
+          </li>
+          <li>
+            Use <code>isPrototypeOf()</code> instead if you want to test for a
+            specific constructor function
+          </li>
         </ul>
       </section>
 
       <h2>ES6 Syntax</h2>
+
+      <h3>Basics</h3>
       <section>
         <ul>
           <li>ES 6 introduced syntax to make it easier to create classes</li>
           <li>
-            Classes still function the same way, this is just new, simplified
-            syntax
+            Classes still function the same way under the hood
+            <ul>
+              <li>This is just syntactic sugar</li>
+            </ul>
+          </li>
+          <li>Characteristics
+            <ul>
+              <li>Implicitly in strict mode even if no "use strict" directive is added</li>
+              <li>Class declarations are not hoisted</li>
+            </ul>
+          </li>
+          <li>
+            The <code>constructor</code> is optional if you do not need any
+            initialization
+            <ul>
+              <li>A default one is created if omitted</li>
+            </ul>
+          </li>
+          <li>
+            There are two forms (like function declarations)
+            <ul>
+              <li>Statement form</li>
+              <li>
+                Expression form
+                <ul>
+                  <li>
+                    Not really something used unless you are writing a class
+                    that takes a class as an argument and returns a subclass
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Statement form example
+          <ul>
+            <li>
+              Create a new instance using <code>let r = new Range(1,3);</code>
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                class Range { <br />
+                constructor(from, to) { <br />
+                this.from = from; <br />
+                this.to = to;<br />
+                }<br />
+                includes(x) { return this.from &lt;= x && x &lt;= this.to; }<br />
+                toString() { return `(${this.from}...${this.to})`; }<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Expression form example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let Square = class { constructor(x) { this.area = x * x; } };
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Subclass</h3>
+      <section>
+        <ul>
+          <li>
+            Given class B that extends class A
+            <ul>
+              <li>
+                A is the superclass
+              </li>
+              <li>
+                B is the subclass
+              </li>
+            </ul>
+          </li>
+          <li>
+          </li>
+          <li>
+            Use the <code>extends</code> keyword to inherit from another class
+            <ul>
+              <li>This works even for built in classes</li>
+              <li>This will also include any static methods defined on the superclass</li>
+            </ul>
+          </li>
+          <li>
+            Use the <code>super</code> keyword to invoke constructor and methods of a superclass
+            <ul>
+              <li>Invoke a constructor using <code>super(entries);</code></li>
+            </ul>
+          </li>
+          <li>Must invoke a superclass constructor with <code>super()</code> before you can use <code>this</code>
+          <ul>
+            <li>This enforces restriction that superclasses get to initialize before subclasses</li>
+          </ul>
+        </li>
+        </ul>
+      </section>
+
+      <h3>Abstract Classes</h3>
+      <section>
+        <ul>
+          <li>No formal implementation in JS</li>
+          <li>Throw an error in abstract methods so subclasses are forced to define their own working version of methods
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  class AbstractSet { <br/>
+                    has(x) { throw new Error("Abstract method"); }<br/>
+                    }<br/>
+                  </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      
+      <h3>Static Methods</h3>
+      <section>
+        <ul>
+          <li>
+            Defined as properties of the constructor function instead of properties of the prototype object
+          </li>
+          <li>
+            Defined as <code>Range.parse()</code>, not <code>Range.prototype.parse()</code>
+          </li>
+          <li>
+            Does not make sense to use the <code>this</code> keyword in one
+          </li>
+          <li>
+            Add <code>static</code> to a method declaration
+          </li>
+        </ul>
+      </section>
+
+      <h3>Getter and Setter Methods</h3>
+      <section>
+        <ul>
+          <li>These can be defined just as in object literals</li>
+          <li>
+            See <a href="../objects/properties.html#getters">Object Getters and Setters</a>
+          </li>
+        </ul>
+      </section>
+
+
+      <h3>Public, Private, and Static Fields (Properties)</h3>
+      <section>
+        <ul>
+          <li>Setting fields must be done in a constructor or within a method</li>
+          <li>Standardization is underway to add these, but they are not fully supported yet</li>
+          <li>Proposed design would allow field initialization outside of the constructor</li>
+            <ul>
+              <li>Does not require the use of the <code>this</code> keyword</li>
+            </ul>
           </li>
         </ul>
       </section>

@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -19,7 +22,8 @@
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a></li>
+            <a href="../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
           </li>
@@ -31,8 +35,387 @@
 
       <section>
         <ul>
-          <li>Code that is written in a module is automatically in strict mode</li>
+          <li>
+            Encapsulating or hiding private implementation details
+            <ul>
+              <li>
+                Keeps global namespace tidy so modules do not overwrite each
+                other
+              </li>
+            </ul>
+          </li>
+          <li>
+            Code that is written in a module is automatically in strict mode
+          </li>
         </ul>
+      </section>
+
+      <h2>Closure Based Modularity</h2>
+      <section>
+        <ul>
+          <li>
+            Does not offer a way to hide internal implementation details inside
+            the module
+          </li>
+          <li>
+            Nested functions and local variables within a function can be used
+            to achieve a kind of modularity
+            <ul>
+              <li>The return value of the fuction acts as a public API</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Node Modules</h2>
+      <section>
+        <ul>
+          <li>Each file is an independent module with a private namespace</li>
+          <li>
+            Constants, variables, functions, and classes defined in a file are
+            private unless the exports them
+          </li>
+          <li>
+            These are only visible in another module if it explicitly imports
+            them
+          </li>
+          <li>Imports are done with the <code>require()</code> function</li>
+        </ul>
+      </section>
+
+      <h3>Exports</h3>
+      <section>
+        <ul>
+          <li>
+            Node defines a global <code>exports</code> object that is always
+            defined
+          </li>
+          <li>
+            Exports are done by
+            <ul>
+              <li>Setting properties on the <code>exports</code> object</li>
+              <li>
+                Overwriting the module.exports object entirely
+                <ul>
+                  <li>
+                    Can overwrite with a single item or a new object that
+                    aggregates all exports together
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Both approaches assign to the same object (module.exports)</li>
+        </ul>
+        <div>
+          Export multiple items by creating properties for each
+          <div class="card">
+            <div class="card-body">
+              <code>
+                exports.mean = data => data.reduce(sum)/data.length;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Export a single item by assigning it to <code>module.exports</code>
+          <div class="card">
+            <div class="card-body">
+              <code> module.exports = class BitSet ... </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Imports</h3>
+      <section>
+        <ul>
+          <li>
+            Use the <code>require()</code> function to import a module into
+            another
+          </li>
+          <li>Argument is the name of the module to be imported</li>
+          <li>Return value is the value that the module exports</li>
+          <li>
+            To import a system module, use the unqualified name
+            <ul>
+              <li>
+                <code>const fs = require("fs");</code>
+              </li>
+              <li>
+                Without any "/", it looks for a a system module built in to Node
+                or a model installed via a package manager
+              </li>
+            </ul>
+          </li>
+          <li>
+            To import a module of your own code, pass a file path
+            <ul>
+              <li>Begin with a "/" to specify an absolute path</li>
+              <li>
+                Begin with "./" or "../" to specify a relative path (relative to
+                current module file location)
+              </li>
+            </ul>
+          </li>
+          <li>
+            If a module exports multiple properties, you can either
+            <ul>
+              <li>
+                Import all exports
+                <div class="card">
+                  <div class="card-body">
+                    <code> const stats = require('./stats.js'); </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Import only part of the exports using a destructuring syntax
+                <div class="card">
+                  <div class="card-body">
+                    <code> const { stddev } = require('./stats.js'); </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>ES6 Modules</h2>
+      <section>
+        <ul>
+          <li>Conceptually the same as Node modularity</li>
+          <li>
+            Vs regular JS scripts
+            <ul>
+              <li>Each file has its own private context</li>
+              <li>
+                Automatically use strict mode without having to write "use
+                strict"
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Exports</h3>
+      <section>
+        <ul>
+          <li>
+            Add <code>export</code> keyword before each declaration that you
+            want to export
+            <div class="card">
+              <div class="card-body">
+                <code>export const PI = Math.PI;</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can have multiple individual exports in a file, but you can
+            aggregate them into a single export
+            <ul>
+              <li>Can only be done on declarations that have a name</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code> export { Circle, degreesToRadians, PI }; </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use an <code>export default</code> when there is only a single
+            exported value
+            <ul>
+              <li>
+                Can export any expression, including:
+                <ul>
+                  <li>Anonymous function expressions</li>
+                  <li>Anonymous class expressions</li>
+                  <li>Object literals</li>
+                </ul>
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code> export default class BitSet { } </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Imports</h3>
+      <section>
+        <ul>
+          <li>
+            Import values using the <code>import</code> keyword
+            <div class="card">
+              <div class="card-body">
+                <code>import BitSet from './bitset.js';</code>
+              </div>
+            </div>
+          </li>
+          <li>The identifier (BitSet in above example) is a constant</li>
+          <li>
+            Module specifier string points to the target file ('./bitset.js' in
+            above example)
+            <ul>
+              <li>
+                In browsers, the path is a relative URL relative to the location
+                of the module that is doing the importing
+              </li>
+              <li>Can be an absolute path that starts with "/"</li>
+              <li>Can be a relative path starting with "./" or "../"</li>
+              <li>Can be a complete URL with protocol and hostname</li>
+              <li>
+                Note, cannot use "bare module specifiers" such as "myfile.js"
+                since it is ambiguous with system modules
+              </li>
+              <li>Use "./myfile.js" for files in the same directory</li>
+            </ul>
+          </li>
+          <li>These must appear outside of classes, functions, etc.</li>
+          <li>
+            Convention is to put them at the top, but this is not required
+            <ul>
+              <li>
+                Imports are hoisted to the top, so all imports are available for
+                any code
+              </li>
+            </ul>
+          </li>
+          <li>
+            Import multiple values or a subset of the exported values using
+            <div class="card">
+              <div class="card-body">
+                <code>import { mean, stddev } from "./stats.js";</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Default exports can any local name that you provide in the import
+            statement
+            <ul>
+              <li>
+                The importing module chooses the name, not the exporting module
+              </li>
+            </ul>
+          </li>
+          <li>
+            Non-default exports must use the names provided by the exporting
+            module
+          </li>
+          <li>
+            Style guides recommend you explicitly import every symbol your
+            module will use
+          </li>
+          <li>
+            You can import everything using the following:
+            <div class="card">
+              <div class="card-body">
+                <code>import * as stats from "./stats.js";</code>
+              </div>
+            </div>
+            <ul>
+              <li>
+                Non default exports of the module become properties of the
+                <code>stat</code> object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Self contained code that does not need to export anything can be
+            included as
+            <div class="card">
+              <div class="card-body">
+                <code>import "./analytics.js";</code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Renaming with Imports/Exports</h3>
+      <section>
+        <ul>
+          <li>
+            Useful when importing from two modules that have exports with the
+            same name
+            <div class="card">
+              <div class="card-body">
+                <code>import { render as renderUI } from "./ui.js";</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This also allows you to import a default export and named exports as
+            follows
+            <div class="card">
+              <div class="card-body">
+                <code
+                  >import { default as Histogram, mean, stddev } from
+                  "./histogram-stats.js";</code
+                >
+              </div>
+            </div>
+          </li>
+          <li>
+            Exports can also rename using the <code>as</code> keyword
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export { layout as calculateLayout, render as renderLayout };
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Re-Export Statements</h3>
+      <section>
+        <ul>
+          <li>
+            Useful when you must import a module, but want to turn around and
+            re-export it
+          </li>
+          <li>Can use the <code>as</code> keyword to rename</li>
+        </ul>
+        <div>
+          The following statements
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { mean } from "./stats/mean.js";<br />
+                import { stddev } from "./stats/stddev.js";<br />
+                export { mean, stdev };<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Can be rewritten as
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export { mean } from "./stats/mean.js";<br />
+                export { stddev } from "./stats/stddev.js";<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Or
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export * from "./stats/mean.js";<br />
+                export * from "./stats/stddev.js";<br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
