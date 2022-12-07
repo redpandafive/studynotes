@@ -34,105 +34,103 @@
       <h1>Navigating in Code</h1>
 
       <section>
+        Start with importing and injecting the Router object form
+        @angular/router
         <ul>
-          <li>Import the router into your component
+          <li>Import Router from @angular/router</li>
+          <li>Inject it into the constructor</li>
+        </ul>
+        <div>
+          Import the router into your component
+          <div class="card">
+            <div class="card-body">
+              <code> import { Router } from '@angular/router'; </code>
+            </div>
+          </div>
+        </div>
+
+        There are two methods to do this available on the Router object
+        <ul>
+          <li>
+            Reference a route in the route table using <code>navigate</code>
             <div class="card">
               <div class="card-body">
                 <code>
-                  import { Router } from '@angular/router';
+                  this.router.navigate(&#91;'courses', course.id&#93;)
                 </code>
               </div>
             </div>
-
           </li>
+          Reference a URL using
+          <code>navigateByUrl</code>
           <li>
-            There are two methods to do this available on the Router object
-            <ul>
-              <li>
-                Navigate
-                <ul>
-                  <li>
-                    References a route in the route table
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          this.router.navigate(&#91;'courses', course.id&#93;)
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                navigateByUrl
-                <ul>
-                  <li>
-                    references a URL
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          this.router.navigateByUrl('/courses/${course.id}');
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            Must inject the Router object form @angular/router to do this
-            <ul>
-              <li>Import Router from @angular/router</li>
-              <li>Inject it into the constructor</li>
-            </ul>
-          </li>
-          <li>
-            Basic navigation to a defined route
+            navigateByUrl
             <div class="card">
               <div class="card-body">
-                <code> this.router.navigate(&#91;'/events'&#93;)</code>
+                <code>
+                  this.router.navigateByUrl('/courses/${course.id}');
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <div>
+          Basic navigation to a defined route
+          <div class="card">
+            <div class="card-body">
+              <code> this.router.navigate(&#91;'/events'&#93;)</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Navigating using a child route
+          <div class="card">
+            <div class="card-body">
+              <code> this.router.navigate([&#91;'parent'&#93;, &#91;'child'&#93;])</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To pass query parameters with route, the second parameter takes an
+          object
+          <ul>
+            <li>
+              The resulting URL will be
+              http://localhost:4200/books?orderby=price
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    this.router.navigate(&#91;'/books'&#93;, { queryParams: {
+                    orderby: 'price' } })
+                  </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>QueryParamsHandling Property</h2>
+      <section>
+        <ul>
+          <li>
+            Preserve query parameters between URL requests
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.router.navigate(&#91;'/books'&#93;, {
+                  queryParamsHandling: 'preserve' })
+                </code>
               </div>
             </div>
           </li>
           <li>
-            To pass query parameters with route, the second parameter takes an
-            object
-            <ul>
-              <li>
-                The resulting URL will be
-                http://localhost:4200/books?orderby=price
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      this.router.navigate(&#91;'/books'&#93;, { queryParams: {
-                      orderby: 'price' } })
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li>
-            QueryParamsHandling property
-            <ul>
-              <li>
-                Preserve query parameters between URL requests
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      this.router.navigate(&#91;'/books'&#93;, {
-                      queryParamsHandling: 'preserve' })
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Calling this from http://localhost:4200/dvds?orderby=price will
-                result in http://localhost:4200/books?orderby=price
-              </li>
-            </ul>
+            Calling this from http://localhost:4200/dvds?orderby=price will
+            result in http://localhost:4200/books?orderby=price
           </li>
           <li>
             Merge previous query parameters with any new ones

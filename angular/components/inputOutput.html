@@ -138,52 +138,61 @@
           <li>Almost always returns an Angular EventEmitter object</li>
         </ul>
 
-        <p>
+        <div>
+          Import the required items in the child component
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { EventEmitter, Output } from "@angular/core";
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
           In the child component, declare an EventEmitter property with the
           Output decorator
-        </p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              @Output() DeleteRequest= new EventEmitter&lt;Hero&gt;()
-            </code>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Output() DeleteRequest= new EventEmitter&lt;Hero&gt;()
+              </code>
+            </div>
           </div>
         </div>
-        <p>
+        <div>
           To dispatch the event in the child, raise it with the emit method
           call. Hero is the data you wish to pass back to the parent
-        </p>
-
-        <div class="card">
-          <div class="card-body">
-            <code> this.DeleteRequest.emit(hero)</code>
+          <div class="card">
+            <div class="card-body">
+              <code> this.DeleteRequest.emit(hero)</code>
+            </div>
           </div>
         </div>
-        <p>
+        <div>
           To configure the parent, add a method in the component to handle the
           data and bind that method to the child component template. The $event
           object contains the data dispatched by the event
-        </p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              &lt;app-item-output (deleteRequest)=&quot;addItem($event)&quot;
-              ...&gt;
-            </code>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;app-item-output (deleteRequest)=&quot;addItem($event)&quot;
+                ...&gt;
+              </code>
+            </div>
           </div>
         </div>
 
-        <p>
-          Binding to an output property in a parent component. This calls a
+        <div>
+          Bind to an output property in a parent component. This calls a handler
           method onVoted on the parent component. The parameter for this method
-          will be the payload sent by the child
-        </p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              &lt;my-component
-              (onvoted)=&quot;onVoted($event)&quot;&gt;&lt;/my-component&gt;
-            </code>
+          will be the payload sent by the child.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;my-component
+                (onvoted)=&quot;onVoted($event)&quot;&gt;&lt;/my-component&gt;
+              </code>
+            </div>
           </div>
         </div>
       </section>
