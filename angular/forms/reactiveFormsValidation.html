@@ -35,56 +35,10 @@
       <section>
         <ul>
           <li>
-            Reactive forms have the benefit of allowing you to define validation
-            in the component where it is unit testable
+            Validation is defined in the component where it can be unit tested
           </li>
-          <li>
-            There are a set of built-in validators that can be imported and used
-            to check user input on forms
-          </li>
+          <li>Includes a set of built-in set of common validators</li>
         </ul>
-      </section>
-
-      <h2>Syntax</h2>
-      <section>
-        <div>
-          Need to import Validators from @angular/forms
-          <div class="card">
-            <div class="card-body">
-              <code> import { Validators } from '@angular/forms'; </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Add the validator as a second parameter when declaring a FormControl
-          <ul>
-            <li>
-              The validators field can also take an array of validators if you
-              need more than one on an array
-            </li>
-            <li>
-              These are just functions – see custom validators section for more
-              details
-            </li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                let firstName = new FormControl(initial_value,
-                Validators.required)
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          To test if the entire for is valid, check the valid property on the
-          FormGroup
-          <div class="card">
-            <div class="card-body">
-              <code>if(this.profileForm.valid) ...</code>
-            </div>
-          </div>
-        </div>
       </section>
 
       <h2>Control Status</h2>
@@ -261,7 +215,81 @@
         </ul>
       </section>
 
-      <h3>Example Custom Validator</h3>
+      <h2>Syntax</h2>
+      <section>
+        <div>
+          Need to import Validators from @angular/forms
+          <div class="card">
+            <div class="card-body">
+              <code> import { Validators } from '@angular/forms'; </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add the validator as a second parameter when declaring a FormControl
+          <ul>
+            <li>
+              The validators field can also take an array of validators if you
+              need more than one on an array
+            </li>
+            <li>
+              These are just functions – see custom validators section for more
+              details
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let firstName = new FormControl(initial_value,
+                Validators.required)
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To test if the entire for is valid, check the valid property on the
+          FormGroup
+          <div class="card">
+            <div class="card-body">
+              <code>if(this.profileForm.valid) ...</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Examples</h2>
+
+      <h3>Input Validation</h3>
+      <section>
+        <div>
+          For a cleaner presentation, error messages can be hidden until the
+          user has touched the control and left an invalid value
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;input type="text" id="name" name="name"
+                formControlName="name" required [class.has-error]="name.invalid
+                && (name.dirty || name.touched)"&gt;<br />
+                &lt;div *ngIf="name.invalid && (name.dirty ||
+                name.touched)"&gt;<br />
+                &lt;div *ngIf="name.errors?.['required']"&gt;<br />
+                This field is required.<br />
+                &lt;/div&gt;<br />
+                &lt;div *ngIf="name.errors?.['minlength']"&gt;<br />
+                This field must have at least 1 character.<br />
+                &lt;/div&gt;<br />
+                &lt;div *ngIf="name.errors?.['maxlength']"&gt;<br />
+                This field must have at most 250 characters.<br />
+                &lt;/div&gt;<br />
+                &lt;/div&gt;<br />
+                &lt;/div&gt;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Custom Validator</h3>
       <section>
         <div>Check if the control contains the word foo</div>
         <div>

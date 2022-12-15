@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Boolean Operators
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Boolean Operators</h1>
+
+      <h2>Logical AND</h2>
+      <section>
+        <ul>
+          <li>&&</li>
+          <li>
+            If the left side operand of && is false, it will short circuit and
+            return without evaluating the right hand side expression
+            <ul>
+              <li>
+                This allows the following two lines of code to function
+                identically
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      if (a === b) stop();<br />
+                      (a === b) && stop();<br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Logical AND Assignment</h2>
+      <section>
+        <ul>
+          <li>
+            <code>&&=</code>
+          </li>
+          <li>Logically equivalent to <code>x && (x = y)</code></li>
+          <li>Only perform assignment if left side is truthy</li>
+          <li>Will short circuit</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let x = 0;<br />
+                let y = 1;<br />
+                <br />
+                x &&= 0; // 0<br />
+                x &&= 1; // 0<br />
+                y &&= 1; // 1<br />
+                y &&= 0; // 0<br />                
+              </code>
+            </div>
+          </div>  
+        </div>
+      </section>
+
+      <h2>Logical OR</h2>
+      <section>
+        <ul>
+          <li>||</li>
+          <li>
+            If the left side operand of || is true, it will short circuit and
+            return without evaluating the right hand side expression
+            <ul>
+              <li>
+                This allows you to do the following to select the first truthy
+                value
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      let max = maxWidth || preferences.maxWidth || 500;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Since it is looking for truthy values, it will skip zeros, empty
+                strings, and false boolean values
+              </li>
+              <li>
+                An alternative is to use the first defined (??) operator if you
+                want to find the finst defined operator instead of the first
+                truthy operator
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Logical OR Assignment</h2>
+      <section>
+        <ul>
+          <li>
+            <code>||=</code>
+          </li>
+          <li>Only perform assignment if left side is falsy</li>
+          <li>Logically equivalent to <code>x || (x = y)</code></li>
+          <li>Short circuits, so no assignment is performed if the left hand side is not falsy
+            <ul>
+              <li>If the left hand side is truthy, the overall expression has to be truthy</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let x = 0;<br />
+                let y = 1;<br />
+                <br />
+                x &&= 0; // 0<br />
+                x &&= 1; // 0<br />
+                y &&= 1; // 1<br />
+                y &&= 0; // 0<br />                
+              </code>
+            </div>
+          </div>  
+        </div>
+      </section>
+
+
+
+
+
+
+      <h2>First Defined Operator</h2>
+      <section>
+        <ul>
+          <li>Returns its first operand if it is not null and not undefined</li>
+          <li>Otherwise, it returns the value of the right operand</li>
+          <li>Like && and ||, it is short circuiting</li>
+          <li>
+            Useful alternative to || if you want to find the first defined
+            operand instead of the first truthy operand
+            <ul>
+              <li>
+                Unlike ||, it will consider zero, empty strings, and false as
+                truthy values
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          If there are no side effects, this is equivlant to
+          <div class="card">
+            <div class="card-body">
+              <code> (a !== null && a !== undefined) ? a : b; </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h3>Nullish Coalescing Operator</h3>
+      <section>
+        <ul>
+          <li>Returns the right hand side operand when its left hand side operand is null or undefined
+            <ul>
+              <li>Otherwise, returns it left hand side operand</li>
+            </ul>
+          </li>
+          <li>Similar to a logical OR operator, but only checks the left for null or undefined (not falsy)</li>
+          <li>
+            Short circuits, so the right hand side is not evaluated if the left hand side is neither null or undefined
+          </li>
+          <li>Useful in the case of default values for varaibles
+            <ul>
+              <li>
+                <code>const someDummyText = foo || "Hello!";</code>
+              </li>
+              <li>
+                This will coherse the left side to a boolean, so any falsy value will be overwritten (0, "", false)
+              </li>
+              <li>
+                This may not be desired if those values are valid
+              </li>
+              <li>
+                Nullish coalescing operator avoids this by only checking for null or undefined (not falsy)
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const nullValue = null; <br/>
+                const emptyText = ""; <br/>
+                const someNumber = 42;<br/>
+                <br/>
+                const valA = nullValue ?? "default for A";  // "default for A"<br/>
+                const valB = emptyText ?? "default for B";  // ""<br/>
+                const valC = someNumber ?? 0; // 42<br/>
+              </code>
+            </div>
+          </div>  
+        </div>
+      </section>
+
+
+      <h3>Nullish Coalescing Assignment</h3>
+      <section>
+        <ul>
+          <li>
+            <code>??=</code>
+          </li>
+          <li>
+            Only assigns if left side is nullish (null or undefined)
+          </li>
+          <li>
+            Equivalent to <code>x ?? (x = y);</code>
+          </li>
+          <li>
+            Will short circuit, so no assignment is made if the left hand side is not nullish
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const x = 1;<br/>
+                x ??= console.log("y evaluated"); // logs nothing<br/> 
+              </code>
+            </div>
+          </div>  
+        </div>
+      </section>
+
+      <h3>Optional Chaining Operator</h3>
+      <section>
+        <ul>
+          <li>Accesses an object's property or calls a function</li>
+          <li>If the object is undefined or null, it returns undefined instead of throwing an error</li>
+          <li>This is similar to the chaining operator, but will not throw an an error if the reference is null</li>
+          <li>The following are equivalent
+            <ul>
+              <li>
+                <code>const nestedProp = obj.first && obj.first.second;</code>
+              </li>
+              <li>
+                <code>const nestedProp = obj.first?.second</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            See Also
+            <ul>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">
+                  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            Complete list of operators can be found at
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators"
+              target="_"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

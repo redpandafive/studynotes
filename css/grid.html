@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active">Grid</li>
+        </ol>
+      </nav>
+
+      <h1>Grid Layout</h1>
+
+      <h2>Basics</h2>
+      <section>
+        <ul>
+          <li>
+            Offers a grid based layout system with rows and columns without
+            resorting to floats, positioning, and tables
+          </li>
+          <li>
+            <code>float</code>, <code>clear</code>,
+            <code>vertical-align</code> has no effect on grid items
+          </li>
+        </ul>
+      </section>
+
+      <h2>Basic Example</h2>
+      <section>
+        <ul>
+          <li>The following creates a 3 x 3 grid</li>
+          <li>
+            The direct children of the grid-container element will be the cells
+          </li>
+          <li>
+            If the child elements did not contain content and no height/width
+            specifications, the grid would be empty
+            <ul>
+              <li>
+                Adding width and/or height to the child elements would show the
+                grid
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                .grid-container {<br />
+                display: grid;<br />
+                grid-template-columns: auto auto auto;<br />
+                }<br />
+                ...<br />
+                ...<br />
+                &lt;div class="grid-container"&gt; &lt;div
+                class="grid-item"&gt;1&lt;/div&gt; &lt;div
+                class="grid-item"&gt;2&lt;/div&gt; &lt;div
+                class="grid-item"&gt;3&lt;/div&gt; &lt;div
+                class="grid-item"&gt;4&lt;/div&gt; &lt;div
+                class="grid-item"&gt;5&lt;/div&gt; &lt;div
+                class="grid-item"&gt;6&lt;/div&gt; &lt;div
+                class="grid-item"&gt;7&lt;/div&gt; &lt;div
+                class="grid-item"&gt;8&lt;/div&gt; &lt;div
+                class="grid-item"&gt;9&lt;/div&gt; &lt;/div&gt;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Terminology</h2>
+      <section>
+        <ul>
+          <li>
+            Container
+            <ul>
+              <li>
+                The element that establishes teh grid and wraps the grid items
+              </li>
+            </ul>
+          </li>
+          <li>
+            Grid Item
+            <ul>
+              <li>Child elements inside a grid container</li>
+            </ul>
+          </li>
+          <li>
+            Grid Lines
+            <ul>
+              <li>Horizontal and vertical lines that divide a grid</li>
+            </ul>
+          </li>
+          <li>
+            Grid Tracks
+            <ul>
+              <li>Any grid column or row</li>
+              <li>What is between grid lines</li>
+            </ul>
+          </li>
+          <li>
+            Grid Cell
+            <ul>
+              <li>A single cell</li>
+              <li>Where column and row intersects</li>
+            </ul>
+          </li>
+          <li>
+            Grid Area
+            <ul>
+              <li>
+                Any rectuangular area of one or more cells bound by 4 grid lines
+              </li>
+            </ul>
+          </li>
+          <li>
+            Gap
+            <ul>
+              <li>The spacing between grid cells</li>
+              <li>Grid cells do not have margins, use gap instead</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Measurement Units and Options</h2>
+      <section>
+        <ul>
+          <li>
+            <code>Fr</code> Unit
+            <ul>
+              <li>Flexible length value</li>
+              <li>
+                Useful on <code>grid-template-rows</code> and
+                <code>grid-template-columns</code>
+              </li>
+              <li>
+                Represents a fraction of any space left over in a grid container
+              </li>
+              <li>
+                Calculated based on available space left over after any other
+                layout factors that take priority
+              </li>
+            </ul>
+          </li>
+          <li>
+            <code>repeat(3, auto)</code>
+            <ul>
+              <li>This will repeat the second parameter three times</li>
+              <li>
+                Useful in <code>grid-template-rows</code> and
+                <code>grid-template-columns</code>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Grid Container Level Rules</h2>
+
+      <h3>Initializing Grid</h3>
+      <section>
+        <ul>
+          <li>
+            display: grid
+            <ul>
+              <li>Turns a parent element into a grid</li>
+              <li>All direct children automatically become grid items</li>
+              <li>Generates a block level grid</li>
+            </ul>
+          </li>
+          <li>
+            display: inline-grid
+            <ul>
+              <li>Turns a parent element into a grid</li>
+              <li>All direct children automatically become grid items</li>
+              <li>Generates an inline level grid</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Default Dimensions of Cells</h3>
+      <section>
+        <ul>
+          <li>
+            grid-auto-rows: 100px
+            <ul>
+              <li>Sets the default height of the child cells</li>
+            </ul>
+          </li>
+          <li>
+            grid-auto-columns: 100px
+            <ul>
+              <li>Sets the default width of the child cells</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Column / Row Definitions</h3>
+      <section>
+        <ul>
+          <li>Use to define track size</li>
+          <li>
+            Use the <code>repeat(n, p)</code> to repeat measurement p for n times
+          </li>
+          <li>
+            These accept
+            <ul>
+              <li>Measurement values</li>
+              <li><code>none</code> keyword (default)</li>
+              <li><code>auto</code> keyword</li>
+              <li><code>fit-content()</code> function</li>
+              <li><code>minmax(min, max)</code> function</li>
+              <li><code>maxcontent</code> keyword</li>
+              <li><code>mincontent</code> keyword</li>
+            </ul>
+          </li>
+
+          <li>
+            <code>grid-template-rows: 100px 100px 100px</code>
+            <ul>
+              <li>Specifies the size and number of row grid tracks</li>
+              <li>
+                Specifies the grid should have three rows, each 100px wide
+              </li>
+            </ul>
+          </li>
+          <li>
+            <code>grid-template-columns: 100px 100px 100px</code>
+            <ul>
+              <li>Specifies the size and number of column grid tracks</li>
+              <li>
+                Specifies the grid should have three columns, each 100px wide
+              </li>
+            </ul>
+          </li>
+          <li>
+            Examples
+            <ul>
+              <li>
+                <code>grid-template-columns: 100px 200px 100px</code>
+                <ul>
+                  <li>
+                    Specifies the grid should have three columns, the first
+                    100px wide, the second 200px wide, and the third 100px wide
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <code>grid-template-columns: auto auto auto</code>
+                <ul>
+                  <li>
+                    Specifies the grid should have three columns, each the same
+                    width and filling 1/3 of available space
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <code>grid-template-columns: repeat(3, auto)</code>
+                <ul>
+                  <li>
+                    Alternate syntax to
+                    <code>grid-template-columns: auto auto auto</code>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Gap Rules</h3>
+      <section>
+        <ul>
+          <li>
+            grid-column-gap: 5px
+            <ul>
+              <li>Sets the size of the gap between an element's columns</li>
+              <li>Above adds a 5px gap between columns</li>
+            </ul>
+          </li>
+          <li>
+            grid-row-gap: 5px
+            <ul>
+              <li>Sets the size of the gap between an element's rows</li>
+              <li>Above adds a 5px gap between rows</li>
+            </ul>
+          </li>
+          <li>
+            gap
+            <ul>
+              <li>Shorthand for the row-gap and column-gap properties</li>
+              <li>
+                Set each independent of each other with
+                <code>gap: 50px 100px;</code>
+              </li>
+              <li>Set both to the same value with <code>gap: 50px;</code></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Cell Container Level Rules</h2>
+
+      <h3>Column Placement Rules</h3>
+      <section>
+        <ul>
+          <li>
+            These allow you to specify the number of columns a cell should span
+          </li>
+          <li>Parameters are NOT zero based</li>
+          <li>
+            grid-column-start
+            <ul>
+              <li>Specifies which column and item in the grid should start</li>
+              <li>Parameter is an integer representing the column to start</li>
+              <li>
+                <code>grid-column-start: 2</code> starts at the second column
+              </li>
+              <li>Can alternately take a span parameter (see example)</li>
+            </ul>
+          </li>
+          <li>
+            grid-column-end
+            <ul>
+              <li>Specifies at which column the item in the grid should end</li>
+              <li>
+                Parameter is an integer representing the column to end before
+              </li>
+              <li>
+                <code>grid-column-start: 3</code> means it should end just
+                before the 3rd column
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Row Placement Rules</h3>
+      <section>
+        <ul>
+          <li>
+            These allow you to specify the number of rows a cell should span
+          </li>
+          <li>Parameters are NOT zero based</li>
+          <li>
+            grid-row-start
+            <ul>
+              <li>
+                Specifies a grid item's start position within the grid row
+              </li>
+              <li>Parameter is an integer representing the column to start</li>
+              <li>
+                <code>grid-column-start: 2</code> starts at the second column
+              </li>
+              <li>Can alternately take a span parameter (see example)</li>
+            </ul>
+          </li>
+          <li>
+            grid-row-end
+            <ul>
+              <li>Specifies which row and item in the grid should end</li>
+              <li>
+                Parameter is an integer representing the row to end before
+              </li>
+              <li>
+                <code>grid-row-start: 3</code> means it should end just before
+                the 3rd row
+              </li>
+            </ul>
+          </li>
+          <li>
+            Examples
+            <ul>
+              <li>
+                Example 1: Sets an element to span two rows
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      .my-target { <br />
+                      grid-row-start: 1;<br />
+                      grid-row-end: 3;<br />
+                      }<br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Example 2: Sets an element to span two rows using span syntax
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      .my-target {<br />
+                      grid-row-start: span 2;<br />
+                      }<br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Grid Areas</h2>
+      <section>
+        <ul>
+          <li>Alternative to controlling a grid as columns and rows</li>
+        </ul>
+      </section>
+
+      <h3>Setting up Areas</h3>
+      <section>
+        <ol>
+          <li>
+            Start by assigning area names to elements using
+            <code>grid-area</code>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  .content {<br />
+                  grid-area: Content;<br />
+                  }<br />
+                  <br />
+                  .header {<br />
+                  grid-area: Header;<br />
+                  }<br />
+                  <br />
+                  .sidebar {<br />
+                  grid-area: Sidebar;<br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use the <code>grid-template-areas</code> property on the grid
+            container elements to describe how the areas should be distributed
+            <ul>
+              <li>
+                Takes a parameter of n string values, where n is the nubmer of
+                rows in the grid layout you are creating
+              </li>
+              <li>
+                Each string will contain the name of the areas seperated by
+                spaces
+              </li>
+              <li>Each area name is a column</li>
+              <li>
+                Examples
+                <ul>
+                  <li>
+                    <code
+                      >grid-template-areas: "Header Header Header" "Content
+                      Content Sidebar";</code
+                    >
+                    <ul>
+                      <li>Creates a 3 column by 2 row grid</li>
+                      <li>
+                        First row spans 3 columns and is the element tagged with
+                        the <code>header</code> class
+                      </li>
+                      <li>
+                        Second row has <code>content</code> spanning 2 columns,
+                        then <code>sidebar</code> spanning 1 column
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

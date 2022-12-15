@@ -31,18 +31,6 @@
 
       <h1>Operators</h1>
 
-
-      <h2>See also</h2>
-      <section>
-        <ul>
-          <li>
-            <a href="object.html#delete">Delete</a>
-
-            <a href="typeof.html">Typeof</a>
-          </li>
-        </ul>
-      </section>
-
       <section>
         <ul>
           <li>Operators combine subexpressions into new expressions</li>
@@ -174,184 +162,121 @@
       </section>
 
       <h2>Operators</h2>
+
+      <h2>Arithmatic Operators</h2>
+      <section>
+        <ul>
+          <li>**, *, /, %, +, -</li>
+          <li>** is a new operator called the exponentiation operator</li>
+          <li>
+            All numbers are floating point, so all division operations have
+            floating point results
+          </li>
+        </ul>
+      </section>
+
+      <h2>Unary Operators</h2>
       <section>
         <ul>
           <li>
-            Arithmatic operators
-            <ul>
-              <li>**, *, /, %, +, -</li>
-              <li>** is a new operator called the exponentiation operator</li>
-              <li>
-                All numbers are floating point, so all division operations have
-                floating point results
-              </li>
-            </ul>
+            + as a unary operator converts its operand to a number and performs
+            no action on a number
           </li>
-          <li>
-            Unary operators
-            <ul>
-              <li>
-                + as a unary operator converts its operand to a number and
-                performs no action on a number
-              </li>
-              <li>-, ++, --</li>
-            </ul>
-          </li>
-          <li>
-            Boolean operators
-            <ul>
-              <li>&&, ||, and !</li>
-              <li>
-                If the left side operand of && is false, it will short circuit
-                and return without evaluating the right hand side expression
-                <ul>
-                  <li>
-                    This allows the following two lines of code to function
-                    identically
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          if (a === b) stop();<br />
-                          (a === b) && stop();<br />
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                If the left side operand of || is true, it will short circuit
-                and return without evaluating the right hand side expression
-                <ul>
-                  <li>
-                    This allows you to do the following to select the first
-                    truthy value
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          let max = maxWidth || preferences.maxWidth || 500;
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    Since it is looking for truthy values, it will skip zeros,
-                    empty strings, and false boolean values
-                  </li>
-                  <li>
-                    An alternative is to use the first defined (??) operator if
-                    you want to find the finst defined operator instead of the
-                    first truthy operator
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+          <li>-, ++, --</li>
+        </ul>
+      </section>
 
-          <li>
-            First Defined Operator
-            <ul>
-              <li>
-                Returns its first operand if it is not null and not undefined
-              </li>
-              <li>Otherwise, it returns the value of the right operand</li>
-              <li>Like && and ||, it is short circuiting</li>
-              <li>Useful alternative to || if you want to find the first defined operand instead of the first truthy operand
-                <ul>
-                  <li>Unlike ||, it will consider zero, empty strings, and false as truthy values</li>
-                </ul>
-              </li>
-            </ul>
-            <div>
-              If there are no side effects, this is equivlant to
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    (a !== null && a !== undefined) ? a : b;
-                  </code>
-                </div>
-              </div>
-            </div>
-          </li>
 
+
+      <h2>Testing for Equality</h2>
+      <section>
+        <ul>
           <li>
-            Testing for Equality
+            Equality operator (==) applies type conversions, which can lead to
+            undesired results
             <ul>
-              <li>
-                Equality operator (==) applies type conversions, which can lead
-                to undesired results
-                <ul>
-                  <li>"0" == false => true since both are converted to zero</li>
-                </ul>
-              </li>
-              <li>
-                Strict equality operator (=== and !==) does not consider
-                operands to be equal if they are not of the same type
-              </li>
+              <li>"0" == false => true since both are converted to zero</li>
             </ul>
           </li>
           <li>
-            <code>in</code>
-            <ul>
-              <li>
-                Left side should be a string (or something that can be converted
-                to one)
-              </li>
-              <li>Right side should be an object</li>
-              <li>
-                Returns true is the left side value is the name of a property of
-                the right side object
-              </li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  // An array with elements (indices) 0, 1, and 2<br />
-                  let data = [7,8,9];<br />
-                  // => true: array has an element "0"<br />
-                  "0" in data <br />
-                  // => true: numbers are converted to strings<br />
-                  1 in data <br />
-                  // => false: no element 3<br />
-                  3 in data <br />
-                </code>
-              </div>
-            </div>
+            Strict equality operator (=== and !==) does not consider operands to
+            be equal if they are not of the same type
+          </li>
+        </ul>
+      </section>
+
+      <h2>in</h2>
+      <section>
+        <ul>
+          <li>
+            Left side should be a string (or something that can be converted to
+            one)
+          </li>
+          <li>Right side should be an object</li>
+          <li>
+            Returns true is the left side value is the name of a property of the
+            right side object
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              // An array with elements (indices) 0, 1, and 2<br />
+              let data = [7,8,9];<br />
+              // => true: array has an element "0"<br />
+              "0" in data <br />
+              // => true: numbers are converted to strings<br />
+              1 in data <br />
+              // => false: no element 3<br />
+              3 in data <br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>instanceof</h2>
+      <section>
+        <ul>
+          <li>Left side should be an object</li>
+          <li>
+            Right side should be a class of objects (the constructor function
+            that creates the class)
           </li>
           <li>
-            <code>instanceof</code>
+            Returns true is the left side value has the right hand function is
+            in its prototype chain
+          </li>
+          <li>
+            See <a href="../classes/class.html#instanceof">Classes</a> for more
+            details
+          </li>
+        </ul>
+      </section>
+
+
+
+      <h2>Testing for Equality</h2>
+      <section>
+        <ul>
+          <li>
+            Equality operator (==) applies type conversions, which can lead to
+            undesired results
             <ul>
-              <li>Left side should be an object</li>
-              <li>
-                Right side should be a class of objects (the constructor
-                function that creates the class)
-              </li>
-              <li>
-                Returns true is the left side value has the right hand function
-                is in its prototype chain
-              </li>
-              <li>
-                See <a href="../classes/class.html#instanceof">Classes</a> for more details
-              </li>
+              <li>"0" == false => true since both are converted to zero</li>
             </ul>
           </li>
           <li>
-            <ul>
-              <li>Binary operator whose operands may be of any type</li>
-              <li>Evaluates the left operand, then its right operand, the returns the right operand</li>              
-            </ul>
-            <div>
-              The following two are equivalent
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    i=0, j=1, k=2;<br />
-                    i = 0; j = 1; k = 2;
-                  </code>
-                </div>
-              </div>
-            </div>
+            Strict equality operator (=== and !==) does not consider operands to
+            be equal if they are not of the same type
           </li>
+        </ul>
+      </section>
+
+      
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
           <li>
             Complete list of operators can be found at
             <a
@@ -363,9 +288,6 @@
           </li>
         </ul>
       </section>
-
-      <h2>Testing for Equality</h2>
-      <section></section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
