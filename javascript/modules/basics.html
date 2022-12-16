@@ -417,6 +417,70 @@
           </div>
         </div>
       </section>
+
+      <h2>Web</h2>
+      <section>
+        <ul>
+          <li>
+            Bundling still has uses in production, but are no longer needed in
+            development since all current browers support modules
+          </li>
+          <li>
+            To use modules in a page, notify the HTML using the following to
+            define the main entry point module
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;script type="module"&gt;import "./main.js";&lt;/script&gt;
+                </code>
+              </div>
+            </div>
+            <ul>
+              <li>
+                Loading of the code being as soon as the HTML parser encounters
+                the script tag
+              </li>
+              <li>Code execution begins when HTML parsing is complete</li>
+              <li>
+                Once HTML is parsed, scripts are executed in the order in which
+                they appear in the HTML document
+              </li>
+            </ul>
+          </li>
+          <li>
+            Script tags of type module are restricted on where they can be loaded
+            <ul>
+              <li>
+                Modules can only be loaded from the same origin as the containing HTML document
+              </li>
+              <li>Exception to this is if the proper CORS headers are in place to allow cross origin loads</li>
+              <li>Regular script tags do not have this restriction</li>
+            </ul>
+          </li>
+          <li>Some use .mjs extension to distinguish modular JS files from regular js files
+            <ul>
+<li>Must configure your web server to serve them with the same MIME type as js files</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Legacy Compatibility</h3>
+      <section>
+        <ul>
+          <li>
+            The <code>nomodule</code> attribute on a script tag can be used for
+            compatibility issues with legacy browsers
+            <ul>
+              <li>The script will be ignored by module aware browsers</li>
+              <li>
+                The script will be loaded by non-module aware browsers (IE11 is
+                the last one)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
