@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Azure</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Storage Accounts
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Storage Accounts</h1>
+
+      <section>
+        <ul>
+          <li>Services that comprise Azure storage are managed through a common Azure resource called a storage account
+            <ul>
+              <li>Represents a shared pool of storage that can contain blob containers, file shared, tables, etc</li>
+            </ul>
+          </li>
+          <li>Contains all of your Azure Storage data objects</li>
+          <li>This is an Azure Resource Manager resource</li>
+          <li>Provides a unique namespace for Azure Storage data</li>
+          <li>
+            Naming restrictions
+            <ul>
+              <li>Be between 3 and 24 numbers and/or lowercase letters</li>
+              <li>Must be unique within Azure</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Associated Resources</h2>
+
+      <h3>Storage Accounts</h3>
+      <section>
+        <ul>
+          <li>
+            Gives a unique namespace in Azure
+            <ul>
+              <li>
+                Each object you store has an address that includes your unique
+                account name
+              </li>
+              <li>
+                Account name + Blob Storage endpoint forms the base address for
+                the objects
+              </li>
+              <li>
+                Example: for storage account <em>myaccount</em>,
+                <code>http://myaccount.blob.core.windows.net</code>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Container in a Storage Account</h3>
+      <section>
+        <ul>
+          <li>See <a href="./container.html">Containers</a></li>
+        </ul>
+      </section>
+
+      <h3>Blobs in the Container</h3>
+      <section>
+        <ul>
+          <li>
+            Naming rules
+            <ul>
+              <li>Contain any combination of characters</li>
+              <li>Max 1,024 characters</li>
+              <li>Must be case sensitive</li>
+              <li>Must escape reserved URL characters</li>
+              <li>Avoid ending with . or /</li>
+            </ul>
+          </li>
+          <li>
+            Example URI is simlar to
+            <code
+              >https://myaccount.blob.core.windows.net/mycontainer/myblob</code
+            >
+          </li>
+        </ul>
+      </section>
+
+      <h2>Types</h2>
+      <section>
+        <ul>
+          <li>
+            There are four Types
+            <ul>
+              <li>
+                Standard general purpose v2 - standard account type that is
+                recommended for most scenarios
+              </li>
+              <li>Premium block blobs</li>
+              <li>Premium file shares</li>
+              <li>Premium page blobs</li>
+            </ul>
+          </li>
+          <li>You cannot change to a different type after it is</li>
+          <li>
+            See
+            <a
+              href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json"
+            >
+              https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Storage Account Endpoint</h2>
+      <section>
+        <ul>
+          <li>
+            Storage account provides a unique namespace in Azure for data
+            <ul>
+              <li>
+                Combination of Storage Account name and service endpoint forms
+                the endpoint for your storage account
+              </li>
+            </ul>
+          </li>
+          <li>
+            Have two endpoint types available
+            <ul>
+              <li>
+                Standard = 250 storage accounts per region with standard
+                endpoints in a subscription (recommended)
+              </li>
+              <li>
+                Azure DNS zone = up to 5000 storage accounst per region (in
+                preview)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Standard Endpoints</h2>
+      <section>
+        <ul>
+          <li>
+            Format for the standard endpoints for each Azure Storage services
+            <ul>
+              <li>Blob Storage = https://myaccount.blob.core.windows.net</li>
+              <li>
+                Static website (Blob Storage) =
+                https://myaccount.web.core.windows.net
+              </li>
+              <li>
+                Data Lake Storage Gen2 = https://myaccount.dfs.core.windows.net
+              </li>
+              <li>Azure Files = https://myaccount.file.core.windows.net</li>
+              <li>Queue Storage = https://myaccount.queue.core.windows.net</li>
+              <li>Table Storage = https://myaccount.table.core.windows.net</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Creating</h2>
+      <section>
+        <ul>
+          <li>
+            Since it is a Azure Resource Manager resource, it must belong to an
+            Azure resource group
+          </li>
+          <li>
+            You can create a new resource gruop or use an existing one when
+            creating a storage account
+          </li>
+          <li>
+            Steps
+            <ul>
+              <li>Select Storage Accounts from left panel</li>
+              <li>Click Create</li>
+              <li>
+                See specifics for options here:
+                <a
+                  href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&tabs=azure-portal"
+                >
+                  https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&tabs=azure-portal
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Associated Resources</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json"
+            >
+              https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
