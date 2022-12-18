@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Azure</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Blob Storage
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Blob Storage</h1>
+
+      <section>
+        Used to store massive amounts of unstructured data
+        <ul>
+          <li>Serving images or documents directly to a browser.</li>
+          <li>Storing files for distributed access.</li>
+          <li>Streaming video and audio.</li>
+          <li>Writing to log files.</li>
+          <li>
+            Storing data for backup and restore, disaster recovery, and
+            archiving.
+          </li>
+          <li>
+            Storing data for analysis by an on-premises or Azure-hosted service.
+          </li>
+        </ul>
+      </section>
+
+      <h2>Blob Types</h2>
+      <section>
+        <ul>
+          <li>
+            Block blobs
+            <ul>
+              <li>Store text and binary data</li>
+              <li>Can be managed individually</li>
+              <li>Can store up to about 190.7 TiB</li>
+            </ul>
+          </li>
+          <li>
+            Append blobs
+            <ul>
+              <li>Consist of blocks, but optimized for append operations</li>
+              <li>Useful for logging data</li>
+            </ul>
+          </li>
+          <li>
+            Page blobs
+            <ul>
+              <li>Store random access files up to 8 TiB</li>
+              <li>Store VHD files and disks for Azure VMs</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Moving Data to Blob Storage</h2>
+      <section>
+        <ul>
+          <li>AzCopy</li>
+          <li>
+            Azure Storage Data Movement Library - moves data between Azure
+            sotrage services
+          </li>
+          <li>
+            Azure Data Factory - copes data to and from Blob Storage using the
+            account key
+          </li>
+          <li>Blobfuse - virtual file system driver for Blob Storage</li>
+          <li>
+            Azure Data Box Service - transfers on premesis data to Blob storage
+            when large datasets or network constrats make uploading data over
+            the wire unreleasing
+          </li>
+          <li>
+            Azure Import / Export Service - imports / exports large amounts of
+            data to and from your storage account using hard drives that you
+            provide
+          </li>
+        </ul>
+      </section>
+
+      <h2>Access Tiers</h2>
+
+      <section>
+        <ul>
+          <li>Only allowed on Block Blobs</li>
+          <li>
+            Storage accounts have a default access tier setting
+            <ul>
+              <li>Default is hot</li>
+              <li>
+                Blobs that do not have an access tier specified at upload
+                inherit this setting, either
+                <ul>
+                  <li>Hot (inferred)</li>
+                  <li>Cool (inferred)</li>
+                </ul>
+              </li>
+              <li>
+                This can be overridden for an individual blob when uploading or
+                changing its tier
+              </li>
+              <li>
+                Changing the default will cause all inferred blobs to be updated
+                as well
+                <ul>
+                  <li>
+                    Will be charged for write operations if moving from hot to
+                    cool
+                  </li>
+                  <li>
+                    Will be charged for read and write operations if moving from
+                    cool to hot
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            See also
+            <ul>
+              <li>
+                <a
+                  href="https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview"
+                  _target="blank"
+                >
+                  https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-online-manage?tabs=azure-portal"
+                  _target="blank"
+                >
+                  https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-online-manage?tabs=azure-portal
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Possible Settings</h3>
+      <section>
+        <ul>
+          <li>
+            Hot tier
+            <ul>
+              <li>Online access tier, so can be immediately accessed</li>
+              <li>Data that is accessed or modified frequently.</li>
+              <li>
+                Highest storage costs, but lowest access costs ($.018 per GB
+                roughly).
+              </li>
+              <li>Supports redundancy configurations</li>
+              <li>
+                Good for
+                <ul>
+                  <li>Data in active use or needs frequent reads and writes</li>
+                  <li>
+                    Data staged for processing, but will eventually move to cool
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Cool tier
+            <ul>
+              <li>Online access tier, so can be immediately accessed</li>
+              <li>
+                Data that is infrequently accessed or modified, but must be
+                available for reads/writes
+              </li>
+              <li>Should be stored for a minimum of 30 days.</li>
+              <li>
+                Lower storage costs and higher access costs compared to the hot
+                tier ($.01 per GB roughly).
+              </li>
+              <li>Supports redundancy configurations</li>
+              <li>
+                Subject to penalty if deleted or moved to a different tier
+                before 30 days has elapsed (prorated)
+              </li>
+              <li>
+                Good for
+                <ul>
+                  <li>Short term data backup and disaster recovery</li>
+                  <li>
+                    Order data sets that are not used frequently, but need
+                    immediate access
+                  </li>
+                  <li>
+                    Stored large data sets waiting for other data to be gathered
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Archive tier
+            <ul>
+              <li>An offline tier for storing data that is rarely accessed</li>
+              <li>Must be rehydrated before it can be read / written</li>
+              <li>Used for storing data that is rarely accessed</li>
+              <li>Requires time to rehydrate to access, up to 15 hours</li>
+              <li>
+                Must be stored for a minimum of 180 days or be subject to an
+                early deletion charge (prorated)
+              </li>
+              <li>
+                Account must be configured for LRS, GRS, or RA-GRS redundancy
+                configurations
+                <ul>
+                  <li>
+                    If you need to change the redundancy config that contains
+                    archive blobs, you must first hydrate all of them to either
+                    hot or cold first
+                  </li>
+                  <li>
+                    Recommended you avoid changing the redundancy configuration
+                    of a storage account that contains several archived blobs
+                  </li>
+                </ul>
+              </li>
+              <li>See also
+                <ul>
+                  <li>
+                    <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/archive-blob?tabs=azure-portal" _target="blank">
+                      https://learn.microsoft.com/en-us/azure/storage/blobs/archive-blob?tabs=azure-portal
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/archive-rehydrate-to-online-tier?tabs=azure-portal" _target="blank">
+                      https://learn.microsoft.com/en-us/azure/storage/blobs/archive-rehydrate-to-online-tier?tabs=azure-portal
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Good for
+            <ul>
+              <li>Long term backup, secondary backup, and archival datasets</li>
+              <li>
+                Original (raw) data that must be preserved, even after it has
+                been processed into final usable form
+              </li>
+              <li>
+                Compliance and archival data that needs to be stored for a long
+                time and is hardly ever accessed
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>How to Set</h3>
+      <section>
+        <ul>
+          <li>
+            Set the default online access tier (Hot or Cool) for the storage
+            account.
+            <ul>
+              <li>
+                Blobs in the account inherit this access tier unless you
+                explicitly override the setting for an individual blob.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Set a blob's tier on upload.
+            <ul>
+              <li>You can create a blob in the Hot, Cool, or Archive tier.</li>
+            </ul>
+          </li>
+          <li>
+            Change an existing blob's tier with a Set Blob Tier operation
+            <ul>
+              <li>Typically to move from a hotter tier to a cooler one.</li>
+            </ul>
+          </li>
+          <li>
+            Copy a blob with a Copy Blob operation
+            <ul>
+              <li>Typically to move from a cooler tier to a hotter one.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

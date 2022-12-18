@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Azure</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Containers</li>
+        </ol>
+      </nav>
+
+      <h1>Containers</h1>
+
+      <h2>Container in a Storage Account</h2>
+      <section>
+        <ul>
+          <li>Organizes a set of blobs like a filesystem</li>
+          <li>Account can have unlimited containers</li>
+          <li>Containers can contain unlimited blobs</li>
+          <li>
+            Container names must be a valid DNS name since it part of the unique
+            URI to address the container
+            <ul>
+              <li>Between 3 and 63 characters long</li>
+              <li>Must start with letter or number</li>
+              <li>
+                Can onl contain lowercase letters, numbers, and dash character
+                (no consecutive dashes)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Creating</h2>
+      <section>
+        <ul>
+          <li>
+            Choose <em>Storage Accounts</em> from left hand panel and choose the
+            storage account
+          </li>
+          <li>
+            Select <em>Containers</em> from the <em>Data Storage</em> section
+          </li>
+          <li>Click <em>+ Container</em> and provide a name</li>
+          <li>
+            Set <em>Public Access Level</em> to recommended level of private
+          </li>
+        </ul>
+      </section>
+
+      <h2>Properties</h2>
+      <section>
+        <ul>
+          <li>
+            Click the <em>...</em> button next to the container, then select
+            properties
+          </li>
+          <li>
+            The Edit Metadata option allows you add custom key/value pairs
+            <ul>
+              <li>
+                Useful for organization if you hae a large number of objects
+              </li>
+              <li>These do not impact how container behaves</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Container Access</h2>
+      <section>
+        <ul>
+          <li>
+            See
+            <a
+              href="https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal"
+            >
+              https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Leases</h2>
+      <section>
+        <ul>
+          <li>Use to establish or manage a lock for delete operations</li>
+          <li>
+            See
+            <a
+              href="https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal"
+            >
+              https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Deleting</h2>
+      <section>
+        <ul>
+          <li>Deleting a container will delete all blobs in it as well</li>
+          <li>
+            Recommended to enable soft delete so containers can be restored if
+            needed
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
