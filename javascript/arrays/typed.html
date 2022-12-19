@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Typed Arrays
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Typed Arrays</h1>
+
+      <section>
+        <ul>
+          <li>
+            A set of 11 classes (there is no single TypedArray class)
+            <ul>
+              <li>A new ES6 feature</li>
+              <li>
+                Brings features closer to other low level languages such as C
+                and Java
+              </li>
+              <li>
+                Not technically Array objects, but they implement all Array
+                methods
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            How they are different from regular Array objects
+            <ul>
+              <li>
+                Elements are all numbers, but they allow you to specify the type
+                and size of the numbers to be stored
+              </li>
+              <li>Must specify the length when you create it</li>
+              <li>Length can never change after created</li>
+              <li>
+                Elements are always initialized to 0 when the array is created
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Types</h2>
+      <section>
+        <ul>
+          <li>Int8Array() signed bytes</li>
+          <li>Uint8Array() unsigned bytes</li>
+          <li>Uint8ClampedArray() unsigned bytes without rollover</li>
+          <li>Int16Array() signed 16-bit short integers</li>
+          <li>Uint16Array() unsigned 16-bit short integers</li>
+          <li>Int32Array() signed 32-bit integers</li>
+          <li>Uint32Array() unsigned 32-bit integers</li>
+          <li>BigInt64Array() signed 64-bit BigInt values (ES2020)</li>
+          <li>BigUint64Array() unsigned 64-bit BigInt values (ES2020)</li>
+          <li>Float32Array() 32-bit floating-point value</li>
+          <li>
+            Float64Array() 64-bit floating-point value: a regular JavaScript
+            number
+          </li>
+        </ul>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>Did not completely cover this topic, see book for more details</li>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays">
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

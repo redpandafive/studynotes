@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -19,7 +22,8 @@
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a></li>
+            <a href="../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../index.html">JavaScript</a>
           </li>
@@ -37,6 +41,11 @@
             Any value can be used as either a key or value
             <ul>
               <li>This includes both objects and primitive values</li>
+              <li>
+                Keys are compared by identity, so if you use an object or array
+                as a key, it will be considered different from every other
+                object and array
+              </li>
             </ul>
           </li>
           <li>Keys are unique in the collection, so it may only occur once</li>
@@ -46,6 +55,18 @@
             <ul>
               <li>Can use foreach method on the Map object</li>
               <li>Can use for / of loop</li>
+            </ul>
+          </li>
+          <li>
+            Maps hold a strong reference to its keys
+            <ul>
+              <li>
+                This prevents them from being garbage collected, even if all
+                other references to them are gone
+                <ul>
+                  <li>Alternative is to use a WeakMap variant (see section)</li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -60,22 +81,63 @@
         </div>
       </section>
 
-
-      <h2>Iteration</h2>
+      <h2>Construction</h2>
       <section>
         <ul>
-          <li>Use a for / of loop to iterate over each element in the map</li>
-          <li>Iterates over key/value pairs, returning a 2 element array on each iteration ([key,value])</li>
+          <li>
+            Can be initialized with
+            <ul>
+              <li>No parameters</li>
+              <li>
+                An iterable object that yields two element [key, value] arrays
+                <ul>
+                  <li>
+                    Such as an array of arrays, each with an equal number of
+                    elements
+                  </li>
+                </ul>
+              </li>
+              <li>Another map object</li>
+            </ul>
+          </li>
         </ul>
         <div>
           <div class="card">
             <div class="card-body">
               <code>
-                let m = new Map([[1, "one"]]);<br/>
-                for(let [key, value] of m) {<br/>
-                 key // => 1<br/>
-                 value // => "one"<br/>
-                }<br/>                
+                let m = new Map(); // Create a new, empty map<br />
+                let n = new Map([ <br />
+                ["one", 1],<br />
+                ["two", 2]<br />
+                ]);<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Iteration</h2>
+      <section>
+        <ul>
+          <li>Use a for / of loop to iterate over each element in the map</li>
+          <li>
+            Iterates over key/value pairs, returning a 2 element array on each
+            iteration ([key,value])
+          </li>
+          <li>
+            Idiomatic to use destructuring assignment to assign the key and
+            value to separate variables on each iteration
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let m = new Map([[1, "one"]]);<br />
+                for(let [key, value] of m) {<br />
+                key // => 1<br />
+                value // => "one"<br />
+                }<br />
               </code>
             </div>
           </div>
@@ -121,6 +183,42 @@
                 property on the generic object
               </li>
               <li>Other Map methods will not detect these</li>
+            </ul>
+          </li>
+          <li>
+            Returns the Map that is being modified, so you can chain multiple
+            fluent calls together
+          </li>
+        </ul>
+      </section>
+
+      <h2>WeakMap</h2>
+      <section>
+        <ul>
+          <li>A variant (not actual subclass) of the Map class</li>
+          <li>Keeps weak references to its key values
+            <ul>
+              <li>Does not prevent its key values from being garbage collected</li>
+            </ul>
+          </li>
+          <li>Intended use is to allow you to associate values with objects without causing memory leaks</li>
+          <li>Differences between WeakMap and Map
+            <ul>
+              <li>WeakMap keys must be objects or arrays; no primitives since they are not subject to garbage collection</li>
+              <li>WeakMap only has get, set, has, and delete methods</li>
+              <li>WeakMap is not iterable
+                <ul>
+                  <li>Does not define keys, values, forEach methods</li>
+                </ul>
+              </li>
+              <li>WeakMap does not have a size property since the size of it can change at any time as objects are garbage collected</li>
+            </ul>
+          </li>
+          <li>
+            Example use would be a cache object that stores computed values for later Use
+            <ul>
+              <li>A normal Map would not reclaim objects over the lifecycle of the Map</li>
+              <li>A WeakMap can reclaim objects once their last reference has dropped off</li>
             </ul>
           </li>
         </ul>

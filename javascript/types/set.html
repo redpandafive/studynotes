@@ -61,8 +61,27 @@
       <h2>Construction</h2>
       <section>
         <ul>
-          <li></li>
+          <li>
+            Can be initialized with
+            <ul>
+              <li>No parameters</li>
+              <li>An array of elements</li>
+              <li>Any iterable object, including another set</li>
+            </ul>
+          </li>
         </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let s = new Set();<br/>
+                let t = new Set([1, s]);<br/>
+                let u = new Set(s); // A new set that copies the elements of s.<br/>
+                let unique = new Set("Mississippi"); // 4 elements: "M", "i", "s", and "p"<br/>
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
 
@@ -71,6 +90,7 @@
         <ul>
           <li>Use a for / of loop to iterate over each element in the set</li>
         </ul>
+        <li>Items will be ordered in the way they were added</li>
         <div>
           <div class="card">
             <div class="card-body">
@@ -101,6 +121,8 @@
         <div>add(x)</div>
         <ul>
           <li>Adds the item x if it does not already exist</li>
+          <li>Only takes a single argument</li>
+          <li>Returns the set it is invoked on, so you can chain calls</li>
         </ul>
         <div>clear()</div>
         <ul>
@@ -114,11 +136,28 @@
         </ul>
         <div>has(x)</div>
         <ul>
-          <li>Returns true/false if the item x exists</li>
+          <li>Returns true/false if the item x exists in the set</li>
+          <li>Optimized for membership testing, so this method is very fast on very large sets</li>
         </ul>
         <div>values()</div>
         <ul>
           <li>Returns a new iterator object that yields the values for each element in the Set object in insertion order</li>
+        </ul>
+      </section>
+
+
+      <h2>WeakSet</h2>
+      <section>
+        <ul>
+          <li>Does not prevent garbage collection from removing object that no longer have references</li>
+          <li>Not frequently used</li>
+          <li>Has the following differences with Set
+            <ul>
+              <li>Does not allow primitive values as members since they are not garbage collected</li>
+              <li>Only has add, has, and delete methods and is not iterable</li>
+              <li>Does not have a size property</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
