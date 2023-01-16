@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Regular Expressions
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Regular Expressions</h1>
+
+      <section>
+        <ul>
+          <li>An object that describes a textual pattern</li>
+        </ul>
+      </section>
+
+      <h2>RegExp Objects</h2>
+      <section>
+        <ul>
+          <li>Represent a regular expression</li>
+          <li>
+            Can be created with
+            <ul>
+              <li>RegExp constructor</li>
+              <li>A special literal syntax</li>
+            </ul>
+            <div>
+              The following two lines are equivalent
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    let pattern = /s$/;<br />
+                    let pattern = new RegExp("s$");<br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Regular Expression Literals</h2>
+      <section>
+        <ul>
+          <li>Specified as characters within a pair of slash characters</li>
+        </ul>
+      </section>
+
+      <h2>Definition</h2>
+      <section>
+        <ul>
+          <li>
+            Most characters (alphanumeric) describe characters to be matched
+            literally
+            <ul>
+              <li>
+                <code>/java/</code> matches any string that contains the
+                substring java
+              </li>
+            </ul>
+          </li>
+          <li>
+            Some characters are not matched literally, but have special
+            significance.
+            <ul>
+              <li>
+                Example is the $ character that matches the end of the string
+              </li>
+              <li>
+                <code>s$</code> matches any string that contains the letter s as
+                its last character
+              </li>
+            </ul>
+          </li>
+          <li>
+            Flag characters affect how regular expressions work
+            <ul>
+              <li>
+                <code>/s$/i</code> matches strings that have s as the last
+                character using a case insensitive search
+              </li>
+            </ul>
+          </li>
+          <li>
+            Escape sequences can represent certain non-alphanumeric characters
+            <ul>
+              <li>\t = tab</li>
+              <li>\n = newline</li>
+              <li>\r = carriage return</li>
+            </ul>
+          </li>
+          <li>
+            Several punctuation characters have special meanings
+            <ul>
+              <li>These must be escaped with \ to be treated literally</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Character Classes</h2>
+      <section>
+        <ul>
+          <li>
+            Matches any one character that is contained within it
+            <ul>
+              <li>
+                <code>/[abc]/</code> matches any one of the letters a, b, or c
+              </li>
+            </ul>
+          </li>
+          <li>
+            Negated character classes match any character that is not included
+            in the class
+            <ul>
+              <li>
+                <code>/[^abc]/</code> matches any one character other than a, b,
+                or c
+              </li>
+            </ul>
+          </li>
+          <li>
+            Ranges of characters can be specified using the hyphen
+            <ul>
+              <li>
+                <code>/[a-z]/</code> matches any one lowercase character
+                <code>/[a-zA-Z0-9]/</code> matches any letter or digit from the
+                Latin alphabet
+              </li>
+            </ul>
+          </li>
+          <li>
+            Common shortcut character classes include
+            <ul>
+              <li>
+                <code>\s</code> matches the space, tab, or any other Unicode
+                whitespace character
+              </li>
+              <li>
+                <code>\S</code> matches any character that is not Unicode
+                whitespace
+              </li>
+              <li><code>\d</code> matches any ASCII digit (same as [0-9])</li>
+              <li>
+                <code>\D</code> matches any character other than an ASCII digit
+                (same as [^0-9])
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Repetition</h2>
+      <section>
+        <ul>
+          <li>
+            Specify how many times an element of a regular expression may be
+            repeated
+          </li>
+          <li>Applies to the preceding single character or character class</li>
+          <li>Use parentheses to define a group to match on</li>
+          <li>
+            Greedy vs non-greedy repetition
+            <ul>
+              <li>Greedy repetition</li>
+            </ul>
+          </li>
+
+          </ul>
+          </section>
+
+          <h2>Greedy Repetition Syntax</h2>
+          <section>
+            <ul>     
+          <li>
+            Repetition syntax
+            <ul>
+              <li>
+                {n,m} = match the previous item at least n times but no more
+                than m times
+              </li>
+              <li>{n,} = match the previous item n or more times</li>
+              <li>{n} = match the previous item exactly n times</li>
+            </ul>
+          </li>
+          <li>
+            Common cases have their own shorthand syntax
+            <ul>
+              <li>
+                ? = matches zero or more occurrences of the previous item
+                <ul>
+                  <li>Means the previous item is optional</li>
+                  <li>Same as <code>{0,1}</code></li>
+                  <li>Use with caution - this is allowed to match nothing</li>
+                </ul>
+              </li>
+              <li>
+                + = matches one or more occurrences of the previous item
+                <ul>
+                  <li>Equivalent to <code>{1,}</code></li>
+                </ul>
+              </li>
+              <li>
+                * = matches zero or more occurrences of the previous item
+                <ul>
+                  <li>Equivalent to <code>{0,}</code></li>
+                  <li>Use with caution - this is allowed to match nothing</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <ul>
+          <li>
+            <code> /\d{2,4}/;</code> =  match between two and four digits
+          </li>
+          <li>
+            <code>/\w{3}\d?/;</code> = match exactly three word characters and
+            an optional digit
+          </li>
+          <li>
+            <code>/\s+java\s+/;</code> = match "java" with one or more spaces before and after
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
