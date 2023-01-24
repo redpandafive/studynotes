@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Lists</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Lists</li>
+        </ol>
+      </nav>
+
+      <h1>Lists</h1>
+      <section>
+        <ul>
+          <li>
+            Ordered lists = &lt;ol&gt;
+            <ul>
+              <li>Display numbers next to list items</li>
+              <li>Contain list items</li>
+            </ul>
+          </li>
+          <li>
+            Unordered lists = = &lt;ul&gt;
+            <ul>
+              <li>Display bullet points next to list items</li>
+            </ul>
+          </li>
+
+          <li>
+            Menu lists = = &lt;menu&gt;
+            <ul>
+              <li>Semantic alternative to ul
+                <ul>
+                  <li>Treated by browsers no different than ul</li>
+                  <li>Ul is primiarly for items for display, while menu was indended for interactive items</li>
+                </ul>
+              </li>
+              <li>Represent an unordered list of items</li>
+              <li>An example would be a list of social media share buttons</li>
+              <li>Display bullet points next to list items</li>
+            </ul>
+          </li>
+          <li>
+            Description lists = = &lt;dl&gt;
+            <ul>
+              <li>
+                Used for a glossary or to display metadata (key-value pairs)
+              </li>
+              <li>Do not use list markers</li>
+              <li>
+                Use Description Terms (&lt;dt&gt;) and Description Details
+                (&lt;dd&gt;)
+              </li>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl"
+                >
+                  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl
+                </a>
+              </li>
+            </ul>
+            <div>
+              <p>Cryptids of Cornwall:</p>
+              <dl>
+                <dt>Beast of Bodmin</dt>
+                <dd>A large feline inhabiting Bodmin Moor.</dd>
+
+                <dt>Morgawr</dt>
+                <dd>A sea serpent.</dd>
+
+                <dt>Owlman</dt>
+                <dd>A giant owl-like creature.</dd>
+              </dl>
+
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;p&gt;Cryptids of Cornwall:&lt;/p&gt;<br />
+                    &lt;dl&gt;<br />
+                    &lt;dt&gt;Beast of Bodmin&lt;/dt&gt;<br />
+                    &lt;dd&gt;A large feline inhabiting Bodmin
+                    Moor.&lt;/dd&gt;<br />
+                    &lt;dt&gt;Morgawr&lt;/dt&gt;<br />
+                    &lt;dd&gt;A sea serpent.&lt;/dd&gt;<br />
+                    &lt;dt&gt;Owlman&lt;/dt&gt;<br />
+                    &lt;dd&gt;A giant owl-like creature.&lt;/dd&gt;<br />
+                    &lt;/dl&gt;<br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>List Markers</h2>
+      <section>
+        <ul>
+          <li>Symbol to the left of a list item</li>
+          <li>Typically a number or bullet</li>
+          <li>
+            Use the <a href="../css/pseudoelement.html">::marker</a> pseudo
+            element to style
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Cookbook</h2>
+      <section>
+        <div>
+          Remove list markers from ol, ul, or menu
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ol, ul, menu {<br />
+                  list-style: none;<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        Useful links
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

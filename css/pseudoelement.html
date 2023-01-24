@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Pseudo Elements</li>
+        </ol>
+      </nav>
+
+      <h1>Pseudo Elements</h1>
+
+      <section>
+        <ul>
+          <li>A keyword added to a selector that lets you style a specific part of the selected element(s)</li>
+          <li>Can only use one pseudo element in a sector</li>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">
+              https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements
+            </a>
+          </li>
+          <li>
+            :: after and ::before
+            <ul>
+              <li>Creates a pseudo element that is the first child or the last child of the selected element</li>
+              <li>Often used to add cosmetic content to an element with the <code>content</code> property</li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before">
+                  https://developer.mozilla.org/en-US/docs/Web/CSS/::before
+                </a>
+              </li>
+            </ul>
+            <div>
+              Outputs <em>&lt;&lt;Some quotes&gt;&gt;, he said, &lt;&lt;are better than none.&gt;&gt;</em>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  q::before {<br/>
+                    content: "&lt;&lt;";<br/>
+                  }<br/>
+                  <br/>
+                  q::after {<br/>
+                    content: "&gt;&gt;";<br/>
+                  }<br/>
+                  
+                } <br/>
+                ...<br/>
+                &lt;q&gt;Some quotes&lt;/q&gt;, he said, &lt;q&gt;are better than none.&lt;/q&gt;
+                </code>
+              </div>
+            </div>
+          </div>
+          </li>
+          <li>
+            ::marker
+            <ul>
+              <li>Selects the marker box of a list item, which typically contains a bullet or number</li>
+              <li>Works on any element set to <code>display: list-item</code>, such as  &lt;li&gt; and &lt;summary&gt;</li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::marker">
+                  https://developer.mozilla.org/en-US/docs/Web/CSS/::marker
+                </a>
+              </li>
+            </ul>
+            <div>
+              The following sets the list marker to a cross of font size 1.2
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  li::marker { <br/>
+                    content: '✝ '; <br/>
+                    font-size: 1.2em; <br/>
+                } <br/>
+                </code>
+              </div>
+            </div>
+          </div>
+          </li>
+          <li>
+            ::placeholder
+            <ul>
+              <li>Targets placeholder text in an &lt;input&gt; and &lt;textarea&gt;</li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder">
+                  https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder
+                </a>
+              </li>
+            </ul>
+            <div>
+              The following styles placeholder text of input elements to red, bold, and .5 opacity
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  input::placeholder { <br/>
+                    font-weight: bold; <br/>
+                    opacity: 0.5; <br/>
+                    color: red; <br/>
+                } <br/>
+                </code>
+              </div>
+            </div>
+          </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

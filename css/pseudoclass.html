@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Pseudo Classes
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Pseudo Classes</h1>
+
+      <section>
+        <ul>
+          <li>
+            A keyword added to a selector that specifies a special state of the
+            selected element(s
+          </li>
+          <li>
+            Syntax consists of a color followed by a pseudo-class name
+            <ul>
+              <li>
+                The element it is attached to is defined as an anchor element
+              </li>
+            </ul>
+          </li>
+          <li>
+            This extends styling to an element not only in relation to the
+            content of the document tree, but also:
+            <ul>
+              <li>
+                External factors like the history of the navigator (:visited)
+              </li>
+              <li>Status of its content (:checked)</li>
+              <li>Position of the mouse (:hover)</li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Functional Pseudo Classes</h2>
+      <section>
+        <ul>
+          <li>
+            :has()
+            <ul>
+              <li>Matches an element if any of the relative selectors that are passed as an argument match at least one element when anchored against this element</li>
+            </ul>
+          </li>
+          <li>
+            :is()
+            <ul>
+              <li>
+                Takes a selector list as its argument
+                <ul>
+                  <li>
+                    This is a forgiving selector list, so any selector that
+                    cannot be parsed is ignored (instead of invalidating the
+                    entire list)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Selects any element that can be selected by one of the selectors
+                in that list
+              </li>
+              <li>
+                Takes the specificity of the most specific selector in its
+                arguments
+              </li>
+              <li>T</li>
+            </ul>
+          </li>
+
+          <li>
+            :not()
+            <ul>
+              <li>Matches elements that do not match a list of selectors</li>
+            </ul>
+          </li>
+          <li>
+            :where()
+            <ul>
+              <li>
+                Takes a selector list as its argument
+                <ul>
+                  <li>
+                    This is a forgiving selector list, so any selector that
+                    cannot be parsed is ignored (instead of invalidating the
+                    entire list)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Selects any element that can be selected by one of the selectors
+                in that list
+              </li>
+              <li>Differs from :is() in that it alwsys has a 0 specificity</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>User Action Pseudo Clases</h2>
+      <section>
+        <ul>
+          <li>Require user interaction to apply</li>
+          <ul>
+            <li>
+              :focus
+              <ul>
+                <li>Matches when an element has focus</li>
+              </ul>
+            </li>
+            <li>
+              :hover
+              <ul>
+                <li>Matches when the mouse is over the anchor item</li>
+              </ul>
+            </li>
+          </ul>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
