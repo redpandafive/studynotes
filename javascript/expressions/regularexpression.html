@@ -192,13 +192,16 @@
               <li>Greedy repetition</li>
             </ul>
           </li>
+        </ul>
+      </section>
 
-          </ul>
-          </section>
-
-          <h2>Greedy Repetition Syntax</h2>
-          <section>
-            <ul>     
+      <h2>Greedy Repetition Syntax</h2>
+      <section>
+        <ul>
+          <li>
+            Greedy repetition will match as many times as possible while still
+            allowing any following parts of the regular expression to match
+          </li>
           <li>
             Repetition syntax
             <ul>
@@ -239,18 +242,24 @@
         </ul>
       </section>
 
+      <h2>Non-Greedy Repetition</h2>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+
       <h2>Examples</h2>
       <section>
         <ul>
-          <li>
-            <code> /\d{2,4}/;</code> =  match between two and four digits
-          </li>
+          <li><code> /\d{2,4}/;</code> = match between two and four digits</li>
           <li>
             <code>/\w{3}\d?/;</code> = match exactly three word characters and
             an optional digit
           </li>
           <li>
-            <code>/\s+java\s+/;</code> = match "java" with one or more spaces before and after
+            <code>/\s+java\s+/;</code> = match "java" with one or more spaces
+            before and after
           </li>
         </ul>
       </section>
