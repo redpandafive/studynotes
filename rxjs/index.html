@@ -3,14 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="../">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
     <div class="container">
-      <h1>RxJS</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <h1>RxJS</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./angular/angularcli.html#commands">Commands</a></li>
+        </ul>
+      </section>
 
       <h2>Observables</h2>
       <ul>
@@ -271,6 +282,60 @@
         </ul>
       </section>
 
+      <h3>forkJoin</h3>
+      <section>
+        <ul>
+          <li>Takes a group of observables that are called simulataneously</li>
+          <li>Values are emitted when all observables complete</li>
+          <li>
+            Common use case is issuing multiple requests on page load and only
+            want to take action when a response has been received for all
+          </li>
+          <li>Similar to <code>Promise.all</code></li>
+          <li>An error on one observable will cause all to fail</li>
+          <li>
+            <a
+              href="https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin"
+            >
+              https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin
+            </a>
+          </li>
+        </ul>
+        <div>
+          Example using an array of Observables
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const obs = [<br />
+                exampleServiceClass1.getData(), exampleServiceCLass2.getData()
+                ];<br />
+                forkJoin(obs).subscribe(d => {<br />
+                console.log(d[0]]);<br />
+                console.log(d[1]);<br />
+                });
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example using an dictionary of Observables
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const obs = {<br />
+                di1: exampleServiceClass1.getData(), <br/>
+                di2: exampleServiceCLass2.getData() <br/>
+                };<br />
+                forkJoin(obs).subscribe(d => {<br />
+                console.log(d.di1);<br />
+                console.log(d.di2);<br />
+                });
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <h3>Map</h3>
       <section>
         <ul>
@@ -348,9 +413,14 @@
           <li>Example</li>
           <li>
             Given a method on a service class called loadLessons
-            <div class="card"><div class="card-body"><code>
-              this.lessons$ = this.lessonsService.loadLessons().pipe(shareReplay());"
-            </code></div></div>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.lessons$ =
+                  this.lessonsService.loadLessons().pipe(shareReplay());"
+                </code>
+              </div>
+            </div>
           </li>
         </ul>
       </section>
@@ -415,6 +485,22 @@
           <li>
             Observables can be converted to promises using the
             <code>toPromise()</code> method
+          </li>
+        </ul>
+      </section>
+
+      <h2>Cookbook</h2>
+      <section>
+        <ul>
+          <li>
+            To call a group of Observables simulataneously and only trigger when
+            all results are returned:
+            <ul>
+              <li>Use the <code>forkJoin</code> operator</li>
+              <li>
+                A common use case is issuing multiple requests on page load.
+              </li>
+            </ul>
           </li>
         </ul>
       </section>

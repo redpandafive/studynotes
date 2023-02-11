@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Enums</li>
+        </ol>
+      </nav>
+
+      <h1>Enums</h1>
+
+      <section>
+        <ul>
+          <li>
+            Easy way to encapsulate a set of public, read only properties into a
+            single object without having to explicitly define a type first
+          </li>
+        </ul>
+      </section>
+
+      <h2>Cookbook</h2>
+      <section>
+        <div>
+          To convert an enum to the string representation of the entry, use the built in ToString() method.  The following will output "Red"
+        <div class="card">
+          <div class="card-body">
+            <code>
+              enum Colors {Red = 1, Blue = 2};
+              Enum myColors = Colors.Red;
+              Console.WriteLine("{0}", myColors.ToString());
+            </code>
+          </div>
+        </div>
+      </div>
+
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
