@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Reactive Forms - FormArray
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Reactive Forms - FormArray</h1>
+
+      <h2>FormArray</h2>
+      <section>
+        <ul>
+          <li>
+            Allows you to manage any number of unnamed controls as an array
+            <ul>
+              <li>Opposed to FormGroup, which stores controls as properties</li>
+              <li>
+                You can dynamically add or remove controls from form array
+                instance
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can dynamically add or remove controls from form array instance
+          </li>
+          <li>Can contain a FormGroup, FormControl, or another FormArray</li>
+          <li>
+            This is a good option if you do not know the number of child values
+            in advance
+          </li>
+          <li>
+            See
+            <a href="./dynamicReactiveForms.html"
+              >Reactive Forms - Dynamic Forms</a
+            >
+          </li>
+          <li>
+            <code>FormArray</code> instance value and validation status is
+            calculated from its child controls
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                use the FormBuilder.array() method to create a new FormArray
+                when using FormBuilder
+              </li>
+              <li>
+                use FormBuilder.control('') to push a new control to the array
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Example</h2>
+      <section>
+        <ul>
+          <li>
+            Create an instance using FormBuilder
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ... <br />
+                  profileForm = this.fb.group({ <br />
+                  skillsForm: FormGroup;<br />
+                  constructor(private fb:FormBuilder) {<br />
+                  <br />
+                  this.skillsForm = this.fb.group({<br />
+                  name: '',<br />
+                  skills: this.fb.array([]) ,<br />
+                  });<br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            New FormGroup items can be added dynamically to the FormArray
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  newSkill(): FormGroup { <br />
+                  return this.fb.group({ <br />
+                  skill: '', <br />
+                  exp: '', <br />
+                  }) <br />
+                  } <br />
+                  ... <br />
+                  addSkills() { <br />
+                  this.skills.push(this.newSkill()); <br />
+                  } <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            A getter method can be added to clean template code and type it
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  get skills() : FormArray {<br />
+                  return this.skillsForm.get("skills") as FormArray<br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            A getter method can be added to clean template code and type it
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  get skills() : FormArray {<br />
+                  return this.skillsForm.get("skills") as FormArray<br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Within the form element bound to skillsForm, bind to the array using
+            formArrayName and iterate using NgFor directive. Capture the current
+            index of the iteration in the template local variable
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;div formArrayName="skills"&gt; <br />
+                  &lt;div *ngFor="let skill of skills().controls; let
+                  i=index"&gt; <br />
+                  ... <br />
+                  &lt;/div&gt; <br />
+                  &lt;/div&gt; <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Each element in the array is a FormGroup. It does not hae a name, so
+            the index of the element is automatically assigned as the name.  You can them assign the controls
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;div formArrayName="skills"&gt; <br/>
+                  &lt;div *ngFor="let skill of skills().controls; let i=index"&gt; <br/>
+                  &lt;div [formGroupName]="i"&gt; <br/>
+                        {{i}} <br/>
+                        skill name : <br/>
+                        &lt;input type="text" formControlName="skill"&gt; <br/>
+                        exp: <br/>
+                        &lt;input type="text" formControlName="exp"&gt; <br/>
+                 
+                        &lt;button (click)="removeSkill(i)"&gt;Remove&lt;/button&gt; <br/>
+                        &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;/div&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="https://www.tektutorialshub.com/angular/angular-formarray-example-in-reactive-forms/">
+              https://www.tektutorialshub.com/angular/angular-formarray-example-in-reactive-forms/
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Methods</h2>
+      <section>
+        <ul>
+          <li>
+            controls
+            <ul>
+              <li>
+                An array containing all teh controls that are part of the array
+              </li>
+            </ul>
+          </li>
+          <li>
+            length
+            <ul>
+              <li>Total length of the array</li>
+            </ul>
+          </li>
+          <li>
+            at(index)
+            <ul>
+              <li>returns the form control at the given array position</li>
+            </ul>
+          </li>
+          <li>
+            push(FormControl)
+            <ul>
+              <li>Adds a new control to the end of the array</li>
+              <li>This could also be a FormGroup</li>
+            </ul>
+          </li>
+          <li>
+            removeAt(index)
+            <ul>
+              <li>Removes a control at a given index number of the array</li>
+            </ul>
+          </li>
+          <li>
+            getRawValue()
+            <ul>
+              <li>
+                Gets the values of all form controls via the
+                <code>control.value</code> property fo each control
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://blog.angular-university.io/angular-form-array/"
+              >https://blog.angular-university.io/angular-form-array/</a
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Reactive Forms - Forms Split Across Subcomponents
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Reactive Forms - Forms Split Across Subcomponents</h1>
+
+      <h2>FormGroupDirective</h2>
+      <section>
+        <ul>
+          <li>
+              A child component can have access to the parent component's FormGroup instance
+          </li>
+          <li>
+            It does this through the FormGroupDirective
+            <ul>
+              <li>This is injected into the constructor of the child component</li>
+              <li>Access this in the OnInit method</li>
+              <li>This gives access to the parent's FormGroup instance</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Define the following in the child component.  No additional configuration is needed in the parent component.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                form: FormGroup; <br />
+                ... <br/>
+                ngOnInit(): void { <br/>
+                  this.form = this.rootFormGroup.control; <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Define the following in the child template.  
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form [formGroup]="form"&gt; <br />
+                ... <br/>
+                ngOnInit(): void { <br/>
+                  this.form = this.rootFormGroup.control; <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h2>Handling FormGroups</h2>
+      <section>
+        <ul>
+          <li>The root FormGroup in the parent may divide controls into one or more sub-FormGroups 
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.userForm = this.fb.group({ <br/>
+                    basicInfo: this.fb.group({ <br/>
+                      firstName: [], <br/>
+                      lastName: [], <br/>
+                      email: [], <br/>
+                      age: [] <br/>
+                    }), <br/>
+                    address: this.fb.group({ <br/>
+                      street: [], <br/>
+                      number: [], <br/>
+                      postal: [], <br/>
+                      company: [] <br/>
+                    }) <br/>
+                  }); <br/>
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            The child template should reference the FormGroup needed since it has access to the entire FormGroup
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;form [formGroup]="form"&gt;  <br/>
+                  &lt;div formGroupName="basicInfo"&gt;  <br/>
+                  ...  <br/>
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Alternatively, you can isolate the nested FormGroup and leave out the reference in the template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ngOnInit(): void {  <br/>
+                    this.form = this.rootFormGroup.control.get("basicInfo") as FormGroup <br/>
+                  }   <br/>
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This can be made more flexible by passing the FormGroup name as in as an input 
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  // in the parent template <br/>
+                  &lt;app-basic-info formGroupName="basicInfo"&gt;&lt;/app-basic-info&gt; <br/>
+                  .. <br/>
+                  // in the child component <br/>
+                  @Input() formGroupName: string; <br/>
+                  ... <br/>
+                  ngOnInit(): void { <br/>
+                    this.form = this.rootFormGroup.control.get(this.formGroupName) as FormGroup; <br/>
+                  } <br/>
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

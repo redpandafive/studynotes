@@ -158,81 +158,85 @@
       <section>
         <ul>
           <li>
-            There are two directives used when working with dynamic options in a
-            select control
-          </li>
-          <li>
-            ngFor
+            There are three directives used when working with dynamic options in
+            a select control
             <ul>
-              <li>Use to iterate over every element in the array</li>
-            </ul>
-          </li>
-          <li>
-            ngValue
-            <ul>
-              <li>Use to bind an object to an option HTML element</li>
-              <li>Can bind to the full object or just a property</li>
               <li>
-                This will not perform string conversions like binding to the
-                value attribute will
+                ngFor
+                <ul>
+                  <li>Use to iterate over every element in the array</li>
+                </ul>
               </li>
-            </ul>
-            <div>
-              This binds to the a property on the object, so the value of
-              myModel the value of the bound property
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    <select [(ngModel)]="myModel">
-                      <option *ngFor="let book of myBooks" [ngValue]="book">
-                        {{book.title}}
-                      </option>
-                    </select>
-                  </code>
+              <li>
+                ngValue
+                <ul>
+                  <li>Use to bind an object to an option HTML element</li>
+                  <li>Can bind to the full object or just a property</li>
+                  <li>
+                    This will not perform string conversions like binding to the
+                    value attribute will
+                  </li>
+                </ul>
+                <div>
+                  This binds to the a property on the object, so the value of
+                  myModel the value of the bound property
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        &lt;select [(ngModel)]="myModel"&gt; <br/>
+                        &lt;option *ngFor="let book of myBooks" [ngValue]="book"&gt; <br/>
+                            {{book.title}} <br/>
+                            &lt;/option&gt; <br/>
+                            &lt;/select&gt; <br/>
+                      </code>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div>
-              This binds to the entire object, so the value of myModel will be
-              the selected object
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    <select [(ngModel)]="selectedBook">
-                      <option *ngFor="let book of myBooks" [ngValue]="book.id">
-                        {{book.title}}
-                      </option>
-                    </select>
-                  </code>
+                <div>
+                  This binds to the entire object, so the value of myModel will
+                  be the selected object
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        &lt;select [(ngModel)]="selectedBook"&gt; <br/>
+                        &lt;option <br/>
+                            *ngFor="let book of myBooks" <br/>
+                            [ngValue]="book.id"&gt; <br/>
+                            {{book.title}} <br/>
+                            &lt;/option&gt; <br/>
+                            &lt;/select&gt; <br/>
+                      </code>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            value
-            <ul>
-              <li>Binds to the value attribute</li>
-              <li>This always binds to a string</li>
-              <li>
-                If you bind to a property, its value will be converted to a
-                string
               </li>
               <li>
-                Use this if you are binding to strings - you can end up with
-                conversion problems if you use a non-string
+                value
+                <ul>
+                  <li>Binds to the value attribute</li>
+                  <li>This always binds to a string</li>
+                  <li>
+                    If you bind to a property, its value will be converted to a
+                    string
+                  </li>
+                  <li>
+                    Use this if you are binding to strings - you can end up with
+                    conversion problems if you use a non-string
+                  </li>
+                </ul>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      <select [(ngModel)]="myModel">
+                        <option *ngFor="let i of items" [ngValue]="i">
+                          {{i.value}}
+                        </option>
+                      </select>
+                    </code>
+                  </div>
+                </div>
               </li>
             </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  <select [(ngModel)]="myModel">
-                    <option *ngFor="let i of items" [ngValue]="i">
-                      {{i.value}}
-                    </option>
-                  </select>
-                </code>
-              </div>
-            </div>
           </li>
         </ul>
         <div>

@@ -27,49 +27,14 @@
             <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Reactive Forms - Dynamic Forms and FormArray
+            Reactive Forms - Dynamic Forms
           </li>
         </ol>
       </nav>
 
-      <h1>Reactive Forms - Dynamic Forms and FormArray</h1>
+      <h1>Reactive Forms - Dynamic Forms</h1>
 
-      <h2>FormArray</h2>
-      <section>
-        <ul>
-          <li>
-            Allows you to manage any number of unnamed controls
-            <ul>
-              <li>
-                You can dynamically add or remove controls from form array
-                instance
-              </li>
-              <li>Do not need to define a key for each control by name</li>
-              <li>
-                This is a good option if you do not know the number of child
-                values in advance
-              </li>
-              <li>Use this as an alternative to <code>FormGroup</code></li>
-            </ul>
-          </li>
-          <li>
-            <code>FormArray</code> instance value and validation status is
-            calculated from its child controls
-          </li>
-          <li>
-            Syntax
-            <ul>
-              <li>
-                use the FormBuilder.array() method to create a new FormArray
-                when using FormBuilder
-              </li>
-              <li>
-                use FormBuilder.control('') to push a new control to the array
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+
 
       <h2>Basic Dynamic Form</h2>
       <section>
@@ -134,22 +99,22 @@
           <div class="card">
             <div class="card-body">
               <code>
-                &lt;div formArrayName="aliases"&gt;
-                  &lt;h2&gt;Aliases&lt;/h2&gt;
-                  &lt;button type="button" (click)="addAlias()"&gt;
-                    + Add another alias
-                  &lt;/button&gt;
+                &lt;div formArrayName="aliases"&gt; <br />
+                  &lt;h2&gt;Aliases&lt;/h2&gt; <br />
+                  &lt;button type="button" (click)="addAlias()"&gt; <br />
+                    + Add another alias <br />
+                  &lt;/button&gt; <br />
 
-                  &lt;div *ngFor="let alias of aliases.controls; let i=index"&gt;
-                    &lt;!-- The repeated alias template --&gt;
-                    &lt;label for="alias-{{ i }}"&gt;Alias:&lt;/label&gt;
-                    &lt;input
-                      id="alias-{{ i }}"
-                      type="text"
-                      [formControlName]="i"
-                    /&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
+                  &lt;div *ngFor="let alias of aliases.controls; let i=index"&gt; <br />
+                    &lt;!-- The repeated alias template --&gt; <br />
+                    &lt;label for="alias-{{ i }}"&gt;Alias:&lt;/label&gt; <br />
+                    &lt;input <br />
+                      id="alias-{{ i }}" <br />
+                      type="text" <br />
+                      [formControlName]="i" <br />
+                    /&gt; <br />
+                  &lt;/div&gt; <br />
+                &lt;/div&gt; <br />
               </code>
             </div>
           </div>
