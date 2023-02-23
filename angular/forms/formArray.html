@@ -38,23 +38,38 @@
       <section>
         <ul>
           <li>
-            Allows you to manage any number of unnamed controls as an array
+            Manages a collection of AbstractControl objects
             <ul>
-              <li>Opposed to FormGroup, which stores controls as properties</li>
               <li>
-                You can dynamically add or remove controls from form array
-                instance
+                Can contain a FormGroup, FormControl, or another FormArray
+              </li>
+              <li>
+                Since objects in the array are considered AbstractControls, they
+                must be typed when you retrieve them
               </li>
             </ul>
           </li>
           <li>
-            You can dynamically add or remove controls from form array instance
+            Extension of the AbstractControl class. Therefore, it contains
+            properties that it has in common with them, such as
+            <ul>
+              <li>valid</li>
+              <li>dirty</li>
+              <li>disabled</li>
+              <li>controls</li>
+            </ul>
           </li>
-          <li>Can contain a FormGroup, FormControl, or another FormArray</li>
           <li>
-            This is a good option if you do not know the number of child values
-            in advance
+            Allows you to manage any number of unnamed controls as an array
+            <ul>
+              <li>Opposed to FormGroup, which stores controls as properties</li>
+              <li>
+                This is a good option if you do not know the number of child
+                values in advance
+              </li>
+            </ul>
           </li>
+
           <li>
             See
             <a href="./dynamicReactiveForms.html"
@@ -80,30 +95,155 @@
         </ul>
       </section>
 
-      <h2>Example</h2>
+      <h2>Validation</h2>
+      <section>
+        <ul>
+          <li>The validity of a FormArray is determined by its AbstractControls validity</li>
+        </ul>
+      </section>
+
+      <h2>Cookbook</h2>
+      <h3>Basic FormArray with a Collection of FormControls</h3>
       <section>
         <ul>
           <li>
-            Create an instance using FormBuilder
+            This is more to understand the concepts, not particularly practical
+          </li>
+          <li>
+            In the component, define the FormArray. Also, add methods to add and
+            remove a control as well as clear all controls
             <div class="card">
               <div class="card-body">
                 <code>
-                  ... <br />
-                  profileForm = this.fb.group({ <br />
-                  skillsForm: FormGroup;<br />
-                  constructor(private fb:FormBuilder) {<br />
+                  skills = new FormArray([]); <br />
                   <br />
-                  this.skillsForm = this.fb.group({<br />
-                  name: '',<br />
-                  skills: this.fb.array([]) ,<br />
-                  });<br />
+                  add() { <br />
+                  this.skills.push(new FormControl('')); <br />
+                  } <br />
+                  remove(index: number) {<br />
+                  this.skills.removeAt(index);<br />
+                  }<br />
+                  removeAll(index: number) {<br />
+                  this.skills.clear();<br />
                   }<br />
                 </code>
               </div>
             </div>
           </li>
           <li>
-            New FormGroup items can be added dynamically to the FormArray
+            In the template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;div *ngFor="let control of skills.controls; index as
+                  i"&gt; <br />
+                  &lt;input [formControl]="skills.controls[i]" /&gt; <br />
+                  %lt;button (click)="remove(i)"&gt;X%lt;/button&gt; <br />
+                  &lt;/div&gt; <br />
+                  %lt;button (click)="removeAll()"&gt;Remove All%lt;/button&gt;
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Basic FormArray with a FormGroup</h3>
+      <section>
+        <ul>
+          <li>
+            This is more to understand the concepts, not particularly practical
+          </li>
+          <li>
+            In the component, define the FormArray. Also, add methods to add and
+            remove a control as well as clear all controls
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  skills = new FormArray([]); <br />
+                  <br />
+                  add() { <br />
+                  const group = new FormGroup({ <br />
+                  level: new FormControl(''), <br />
+                  name: new FormControl('') <br />
+                  }); <br />
+                  <br />
+                  this.skills.push(group); <br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            In the template,
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;div *ngFor="let skill of skills.controls"&gt; <br />
+                  &lt;ng-container [formGroup]="skill" /&gt; <br />
+                  &lt;input formControlName="skill" /&gt; <br />
+                  &lt;input formControlName="skill" /&gt; <br />
+                  &lt;/ng-container&gt; <br />
+                  &lt;/div&gt; <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="https://netbasal.com/angular-reactive-forms-the-ultimate-guide-to-formarray-3adbe6b0b61a">
+              https://netbasal.com/angular-reactive-forms-the-ultimate-guide-to-formarray-3adbe6b0b61a
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>FormGroup containing a FormArray</h2>
+      <section>
+        <ul>
+          <li>A more complex, but practical example</li>
+          <li>
+            Create a FormGroup instance in the component
+            <ul>
+              <li>
+                Defining a property gives you a shortcut to the FormArray
+                element
+              </li>
+              <li>
+                The property must type the returned AbstractControl object to
+                get access method syntax for FormArray
+              </li>
+              <li>Can also use FormBuilder to do this</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ... <br />
+                  user = new FormGroup({ <br />
+                  name: new FormControl(''), <br />
+                  skills: new FormArray([]) <br />
+                  }); <br />
+                  ... <br />
+                  get skills() { <br />
+                  return this.user.get('skills') as FormArray; <br />
+                  } <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            New FormGroup items can be added dynamically to the FormArray - the
+            following code:
+            <ul>
+              <li>
+                Creates a utility function on the component to generate a new
+                FormGroup item
+              </li>
+              <li>
+                Provides an addSkills method that the template can bind to to
+                trigger the action
+              </li>
+            </ul>
             <div class="card">
               <div class="card-body">
                 <code>
@@ -122,73 +262,78 @@
             </div>
           </li>
           <li>
-            A getter method can be added to clean template code and type it
+            Define the following in the template:
+            <ul>
+              <li>
+                The name input is just a simple control also defined with the
+                FormArray in the FormGroup
+              </li>
+              <li>
+                The FormControlName directive is different for FormArrays; we
+                have to look for the index since controls in the FormArray do
+                not have keys
+              </li>
+            </ul>
             <div class="card">
               <div class="card-body">
                 <code>
-                  get skills() : FormArray {<br />
-                  return this.skillsForm.get("skills") as FormArray<br />
+                  &lt;form [formGroup]="user"&gt; <br />
+                  &lt;input formControlName="name" /&gt; <br />
+                  &lt;ng-container formArrayName="skills"&gt; <br />
+                  &lt;div *ngFor="let _ of skills.controls; index as i"&gt;
+                  <br />
+                  &lt;input [formControlName]="i" /&gt; <br />
+                  &lt;/div&gt; <br />
+                  &lt;/ng-container&gt; <br />
+                  &lt;/form&gt; <br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Example with a FormArray that Contains a Collection of FormGroups</h3>
+      <section>
+        <ul>
+          <li>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export class UserComponent {<br />
+                    user = new FormGroup({<br />
+                      name: new FormControl(''),<br />
+                      skills: new FormArray([<br />
+                        new FormGroup({<br />
+                          name: new FormControl(''),<br />
+                          level: new FormControl('')<br />
+                        })<br />
+                      ])<br />
+                    });<br />                  
+                    skills = this.user.get('skills') as FormArray;<br />
                   }<br />
                 </code>
               </div>
             </div>
           </li>
           <li>
-            A getter method can be added to clean template code and type it
+            Since the FormArray now contains FormGroups, we must use the FormGroupName directive
             <div class="card">
               <div class="card-body">
                 <code>
-                  get skills() : FormArray {<br />
-                  return this.skillsForm.get("skills") as FormArray<br />
-                  }<br />
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Within the form element bound to skillsForm, bind to the array using
-            formArrayName and iterate using NgFor directive. Capture the current
-            index of the iteration in the template local variable
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;div formArrayName="skills"&gt; <br />
-                  &lt;div *ngFor="let skill of skills().controls; let
-                  i=index"&gt; <br />
-                  ... <br />
+                  &lt;form [formGroup]="user"&gt; <br />
+                  &lt;input formControlName="name" /&gt; <br />
+                  &lt;ng-container formArrayName="skills"&gt; <br />
+                  &lt;div *ngFor="let _ of skills.controls; index as i"&gt; <br />                  
+                  &lt;ng-container [formGroupName]="i"&gt; <br />
+                  &lt;input formControlName="name" /&gt; <br />
+                  &lt;/ng-container&gt;     
                   &lt;/div&gt; <br />
-                  &lt;/div&gt; <br />
+                  &lt;/ng-container&gt; <br />
+                  &lt;/form&gt; <br />
                 </code>
               </div>
             </div>
-          </li>
-          <li>
-            Each element in the array is a FormGroup. It does not hae a name, so
-            the index of the element is automatically assigned as the name.  You can them assign the controls
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;div formArrayName="skills"&gt; <br/>
-                  &lt;div *ngFor="let skill of skills().controls; let i=index"&gt; <br/>
-                  &lt;div [formGroupName]="i"&gt; <br/>
-                        {{i}} <br/>
-                        skill name : <br/>
-                        &lt;input type="text" formControlName="skill"&gt; <br/>
-                        exp: <br/>
-                        &lt;input type="text" formControlName="exp"&gt; <br/>
-                 
-                        &lt;button (click)="removeSkill(i)"&gt;Remove&lt;/button&gt; <br/>
-                        &lt;/div&gt;
-                        &lt;/div&gt;
-                        &lt;/div&gt;
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            <a href="https://www.tektutorialshub.com/angular/angular-formarray-example-in-reactive-forms/">
-              https://www.tektutorialshub.com/angular/angular-formarray-example-in-reactive-forms/
-            </a>
           </li>
         </ul>
       </section>
@@ -200,7 +345,7 @@
             controls
             <ul>
               <li>
-                An array containing all teh controls that are part of the array
+                An array containing all the controls that are part of the array
               </li>
             </ul>
           </li>
@@ -217,10 +362,23 @@
             </ul>
           </li>
           <li>
-            push(FormControl)
+            push(AbstractControl)
             <ul>
               <li>Adds a new control to the end of the array</li>
-              <li>This could also be a FormGroup</li>
+              <li>These are added to the controls property</li>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      skills = new FormArray([]); <br />
+                      ... <br />
+                      addSkill() { <br />
+                      this.skills.push(new FormControl('')); <br />
+                      } <br />
+                    </code>
+                  </div>
+                </div>
+              </li>
             </ul>
           </li>
           <li>

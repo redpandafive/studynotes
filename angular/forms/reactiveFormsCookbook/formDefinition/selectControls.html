@@ -7,22 +7,28 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
+      href="../../../../assets/bootstrap/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../../assets/styles/site.css" />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../">Home</a>
+        <a class="navbar-brand" href="../../../">Home</a>
       </div>
     </nav>
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Home</a></li>
           <li class="breadcrumb-item">
-            <a href="../index.html">Angular</a>
+            <a href="../../index.html">Angular</a>
+          </li>       
+          <li class="breadcrumb-item" aria-current="page">
+            <a href="index.html">Reactive Forms Cookbook</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">
+            <a href="index.html">Form Definition</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             Select Controls
@@ -35,15 +41,15 @@
       <section class="navlinks">
         <ul>
           <li>
-            <a href="#currentValue"
+            <a href="selectControls.html#currentValue"
               >Get the Current Value of a Select Control</a
             >
           </li>
           <li>
-            <a href="#reactive">Using a Select Control in a Reactive Form</a>
+            <a href="selectControls.html#reactive">Using a Select Control in a Reactive Form</a>
           </li>
           <li>
-            <a href="#template"
+            <a href="selectControls.html#template"
               >Using a Select Control in a Template Driven Form</a
             >
           </li>
@@ -51,107 +57,115 @@
       </section>
 
       <h2 id="currentValue">Get the Current Value of a Select Control</h2>
-
-      <h3>Method #1: Use the change event on the select control</h3>
       <section>
-        <div>
-          Add a template variable to the select control
-          <div class="card">
-            <div class="card-body">
-              <code> &lt;select #teams&gt;</code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Bind the change event on the control to a method
-          <div class="card">
-            <div class="card-body">
-              <code>
-                &lt;select #teams
-                (change)=&quot;onSelected(teams.value)&quot;&gt;
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Assign the value into a component property
-          <div class="card">
-            <div class="card-body">
-              <code>
-                export class TeamWithChangeEventComponent {<br />
-                selectedTeam = '';<br />
-                onSelected(value:string): void { <br />
-                this.selectedTeam = value;<br />
-                }<br />}
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Method #2: Use ViewChild and a template reference variable</h3>
-      <section>
-        <div>
-          Add a template variable to the select control
-          <div class="card">
-            <div class="card-body">
-              <code> &lt;select #teams&gt;</code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Bind the change event on the control to a method, but do not pass any
-          parameters
-          <div class="card">
-            <div class="card-body">
-              <code>
-                &lt;select #teams (change)=&quot;onSelected()&quot;&gt;
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Use a ViewChild decorator to reference the tempalte variable to access
-          the current value
-          <div class="card">
-            <div class="card-body">
-              <code>
-                export class TeamUsingViewChildComponent {<br />
-                @ViewChild('teams') teams!: ElementRef;<br />
-                selectedTeam = '';<br />
-                onSelected():void {<br />
-                this.selectedTeam = this.teams.nativeElement.value;<br />
-                }<br />
-                }
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Method #3: Use NgModel and 2 way data binding</h3>
-      <section>
-        <div>
-          Use the NgModel directive in your Template
-          <ul>
-            <li>
-              This will bind to a property named selectedTeam on your component
-            </li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                &lt;select &#91;(ngModel)&#93;="selectedTeam"&gt;&#10;
-                <br />
-                &lt;option default&gt;Pick a team&lt;/option&gt;<br />
-                &lt;option&gt;Lakers&lt;/option&gt;<br />
-                &lt;option&gt;Miami&lt;/option&gt;<br />
-                &lt;option&gt;Cleveland&lt;/option&gt;<br />
-                &lt;/select&gt;
-              </code>
-            </div>
-          </div>
-        </div>
+        <ul>
+          <li>
+            Method #1: Use the change event on the select control
+            <ul>
+              <li>
+                Add a template variable to the select control
+                <div class="card">
+                  <div class="card-body">
+                    <code> &lt;select #teams&gt;</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Bind the change event on the control to a method
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;select #teams
+                      (change)=&quot;onSelected(teams.value)&quot;&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Assign the value into a component property
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      export class TeamWithChangeEventComponent {<br />
+                      selectedTeam = '';<br />
+                      onSelected(value:string): void { <br />
+                      this.selectedTeam = value;<br />
+                      }<br />}
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Method #2: Use ViewChild and a template reference variable
+            <ul>
+              <li>
+                Add a template variable to the select control
+                <div class="card">
+                  <div class="card-body">
+                    <code> &lt;select #teams&gt;</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Bind the change event on the control to a method, but do not
+                pass any parameters
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;select #teams (change)=&quot;onSelected()&quot;&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Use a ViewChild decorator to reference the tempalte variable to
+                access the current value
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      export class TeamUsingViewChildComponent {<br />
+                      @ViewChild('teams') teams!: ElementRef;<br />
+                      selectedTeam = '';<br />
+                      onSelected():void {<br />
+                      this.selectedTeam = this.teams.nativeElement.value;<br />
+                      }<br />
+                      }
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Method #3: Use NgModel and 2 way data binding
+            <ul>
+              <li>
+                Use the NgModel directive in your Template
+                <ul>
+                  <li>
+                    This will bind to a property named selectedTeam on your
+                    component
+                  </li>
+                </ul>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;select &#91;(ngModel)&#93;="selectedTeam"&gt;&#10;
+                      <br />
+                      &lt;option default&gt;Pick a team&lt;/option&gt;<br />
+                      &lt;option&gt;Lakers&lt;/option&gt;<br />
+                      &lt;option&gt;Miami&lt;/option&gt;<br />
+                      &lt;option&gt;Cleveland&lt;/option&gt;<br />
+                      &lt;/select&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </section>
 
       <h2>Select Control Directives</h2>
@@ -183,11 +197,12 @@
                   <div class="card">
                     <div class="card-body">
                       <code>
-                        &lt;select [(ngModel)]="myModel"&gt; <br/>
-                        &lt;option *ngFor="let book of myBooks" [ngValue]="book"&gt; <br/>
-                            {{book.title}} <br/>
-                            &lt;/option&gt; <br/>
-                            &lt;/select&gt; <br/>
+                        &lt;select [(ngModel)]="myModel"&gt; <br />
+                        &lt;option *ngFor="let book of myBooks"
+                        [ngValue]="book"&gt; <br />
+                        {{book.title}} <br />
+                        &lt;/option&gt; <br />
+                        &lt;/select&gt; <br />
                       </code>
                     </div>
                   </div>
@@ -198,13 +213,13 @@
                   <div class="card">
                     <div class="card-body">
                       <code>
-                        &lt;select [(ngModel)]="selectedBook"&gt; <br/>
-                        &lt;option <br/>
-                            *ngFor="let book of myBooks" <br/>
-                            [ngValue]="book.id"&gt; <br/>
-                            {{book.title}} <br/>
-                            &lt;/option&gt; <br/>
-                            &lt;/select&gt; <br/>
+                        &lt;select [(ngModel)]="selectedBook"&gt; <br />
+                        &lt;option <br />
+                        *ngFor="let book of myBooks" <br />
+                        [ngValue]="book.id"&gt; <br />
+                        {{book.title}} <br />
+                        &lt;/option&gt; <br />
+                        &lt;/select&gt; <br />
                       </code>
                     </div>
                   </div>
@@ -227,11 +242,12 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      <select [(ngModel)]="myModel">
-                        <option *ngFor="let i of items" [ngValue]="i">
-                          {{i.value}}
-                        </option>
-                      </select>
+                      &lt;select [(ngModel)]="myModel"&gt; <br />
+                      &lt;option *ngFor="let i of items" [ngValue]="i"&gt;
+                      <br />
+                      {{i.value}} <br />
+                      &lt;/option&gt; <br />
+                      &lt;/select&gt; <br />
                     </code>
                   </div>
                 </div>
@@ -329,6 +345,6 @@
         </div>
       </section>
     </div>
-    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>
