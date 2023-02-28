@@ -50,138 +50,33 @@
               </li>
             </ul>
           </li>
-          <li>
-            Simple example
-            <ul>
-              <li>
-                Template is rendered in both the div and ngContainer tagged with
-                the NgTemplateOutlet directive
-              </li>
-              <li>The text within the NgContainer is not displayed</li>
-              <li>The div tag is not rendered</li>
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    &lt;ng-template #template1&gt; &#10; This is a sample
-                    template&#10;&lt;/ng-template&gt;&#10; &#10;<br />
-                    &lt;ng-container
-                    *ngTemplateOutlet=&quot;template1&quot;&gt;This text is not
-                    displayed&lt;/ng-container&gt;<br />
-                    &lt;div *ngTemplateOutlet=&quot;template1&quot;&gt;<br />
-                    &lt;/div&gt;
-                  </code>
-                </div>
-              </div>
-            </ul>
-          </li>
         </ul>
       </section>
 
-      <h2>Use Cases</h2>
+      <h2>Simple Example</h2>
       <section>
         <ul>
           <li>
-            Useful when you have a block of code that you want to repeatedly
-            display
-
-            <ul>
-              <li>
-                Define a ng-template containing the code that you want to
-                replicate
-              </li>
-              <li>Assign a template reference variable to this template</li>
-              <li>
-                Add ng-containers to all points where the code needs to display
-              </li>
-              <li>
-                Tag the ng-containers with the *ngTemplateOutput attribute. This
-                should have the template reference variable on the right side of
-                the equals sign
-              </li>
-            </ul>
+            Template is rendered in both the div and ngContainer tagged with
+            the NgTemplateOutlet directive
           </li>
-          <li>
-            You can create a component that accepts outside templates as input
-            properties.
-            <ul>
-              <li>
-                Use template reference variables in the parent component to pass
-                templates as inputs
-              </li>
-              <li>
-                Example of a parent template passing a template to a child
-                component
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;ng-template #parentTemplate&gt; <br />
-                      &lt;p&gt;This template is defined in Parent, but passed to
-                      the child component.&lt;/p&gt;<br />
-                      &#10;&lt;/ng-template&gt;&#10;<br />
-                      &lt;child-component
-                      &#91;customTemplate&#93;=&quot;parentTemplate&quot;&gt;&lt;/child-component&gt;
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Child component that will receive the template
-                <ul>
-                  <li>
-                    Assign this as a property on your component of type
-                    TemplateRef
-                  </li>
-                </ul>
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      @Component({&#10; selector: 'child-component',
-                      template:<br />
-                      `&lt;h2&gt;Child Component&lt;/h2&gt;<br />
-                      &lt;ng-container
-                      *ngTemplateOutlet=&quot;customTemplate&quot;&gt;<br />
-                      &lt;/ng-container&gt; &#10; `<br />
-                      })<br />
-                      export class<br />
-                      ChildComponent {&#10; @Input() customTemplate:
-                      TemplateRef&lt;HTMLElement&gt;;&#10;}
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                You can define a default template (if one is not supplied)to use
-                using the following syntax. If a match for optionTemplate cannot
-                be found, defaultTemplate is used.
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      ... &#91;ngTemplateOutlet&#93;=&quot;optionTemplate ||
-                      defaultTemplate&quot; ...
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Use ViewChild to get access to the template from within the
-                parent component
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      export class ParentComponent implements OnInit,
-                      AfterViewInit
-                      <br />
-                      {<br />
-                      @ViewChild('parentTemplate',null)myTemplate:TemplateRef&lt;HTMLElement&gt;<br />
-                      ngAfterViewInit() { ... }<br />
-                      }
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
+          <li>The text within the NgContainer is not displayed</li>
+          <li>The div tag is not rendered</li>
         </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-template #template1&gt; &#10; This is a sample
+                template&#10;&lt;/ng-template&gt;&#10; &#10;<br />
+                &lt;ng-container
+                *ngTemplateOutlet=&quot;template1&quot;&gt;This text is not
+                displayed&lt;/ng-container&gt;<br />
+                &lt;div *ngTemplateOutlet=&quot;template1&quot;&gt;<br />
+                &lt;/div&gt;
+              </code>
+            </div>
+          </div>
+
       </section>
 
 
@@ -189,8 +84,22 @@
       <section>
         <ul>
           <li>
-            <a href="./ngtemplateoutletContext">NgTemplateOutletContext</a>
+            Topics
+            <ul>
+              <li>
+                <a href="./ngtemplateoutletContext">NgTemplateOutletContext</a>
+              </li>
+            </ul>
           </li>
+          <li>
+            Cookbook
+            <ul>
+              <li>
+                <a href="../cookbook/templates/repeatBlock.html">Repeatedly Display a Block of Code</a>
+              </li>
+            </ul>
+          </li>
+
         </ul>
       </section>
     </div>

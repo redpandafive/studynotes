@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Component that Accepts Outside Templates as Input Properties
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Component that Accepts Outside Templates as Input Properties</h1>
+      <section>
+        <ul>
+          <li>
+            Use template reference variables in the parent component to pass
+            templates as inputs
+          </li>
+          <li>
+            Example of a parent template passing a template to a child
+            component
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-template #parentTemplate&gt; <br />
+                  &lt;p&gt;This template is defined in Parent, but passed to
+                  the child component.&lt;/p&gt;<br />
+                  &#10;&lt;/ng-template&gt;&#10;<br />
+                  &lt;child-component
+                  &#91;customTemplate&#93;=&quot;parentTemplate&quot;&gt;&lt;/child-component&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Child component that will receive the template
+            <ul>
+              <li>
+                Assign this as a property on your component of type
+                TemplateRef
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  @Component({&#10; selector: 'child-component',
+                  template:<br />
+                  `&lt;h2&gt;Child Component&lt;/h2&gt;<br />
+                  &lt;ng-container
+                  *ngTemplateOutlet=&quot;customTemplate&quot;&gt;<br />
+                  &lt;/ng-container&gt; &#10; `<br />
+                  })<br />
+                  export class<br />
+                  ChildComponent {&#10; @Input() customTemplate:
+                  TemplateRef&lt;HTMLElement&gt;;&#10;}
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can define a default template (if one is not supplied)to use
+            using the following syntax. If a match for optionTemplate cannot
+            be found, defaultTemplate is used.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ... &#91;ngTemplateOutlet&#93;=&quot;optionTemplate ||
+                  defaultTemplate&quot; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use ViewChild to get access to the template from within the
+            parent component
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  export class ParentComponent implements OnInit,
+                  AfterViewInit
+                  <br />
+                  {<br />
+                  @ViewChild('parentTemplate',null)myTemplate:TemplateRef&lt;HTMLElement&gt;<br />
+                  ngAfterViewInit() { ... }<br />
+                  }
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+    
+    </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
