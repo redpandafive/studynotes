@@ -37,6 +37,13 @@
 
       <h1>Repeatedly/Recursively Display a Block of Code</h1>
 
+
+      <h2>Using a Child Component</h2>
+      <section>
+        
+      </section>
+
+      <h2>Using NgTemplateOutput, NgContainer, and NgTemplate</h2>
       <section>
         <ul>
           <li>
@@ -44,12 +51,172 @@
           </li>
           <li>Assign a template reference variable to this template</li>
           <li>
-            Add ng-containers to all points where the code needs to display
+            <a href="repeatBlock.html#container">
+              Add ng-containers where the template needs to display
+            </a>
           </li>
           <li>
-            Tag the ng-containers with the *ngTemplateOutput attribute. This
-            should have the template reference variable on the right side of the
-            equals sign
+            Tag the ng-containers with the *ngTemplateOutput directive.
+            <ul>
+              <li>
+                This should have the template reference variable on the right
+                side of the equals sign
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="repeatBlock.html#passdata">
+              Pass data to the template by supplying a context
+            </a>
+          </li>
+          <li>
+            <a href="repeatBlock.html#recursion">
+              See example for recursion
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="container">
+        Add Ng-Container Where the Template Needs to Display
+      </h2>
+      <section>
+        <div>
+          Default templates can be specified to use. This is useful if no
+          template is provided by the user.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-container [ngTemplateOutlet]="optionTemplate ||
+                defaultTemplate" [ngTemplateOutletContext]="{ $implicit: option,
+                index: i}" &gt; &lt;ng-container&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="passdata">Pass Data to the Template</h2>
+      <section>
+        <div>
+          Set the ngTemplateOutletContext input property with the object you
+          wish to pass
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-container
+                &#91;ngTemplateOutlet&#93;=&quot;optionTemplate&quot;
+                &#91;ngTemplateOutletContext=&quot;{ prop1: val1, prop2:
+                val2}&quot;&gt; ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Alternatively, this can shorthanded to
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-container
+                &#91;ngTemplateOutlet&#93;=&quot;optionTemplate;context: {
+                prop1: val1, prop2: val2}&quot;&gt; ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can pass individual values or an object if you need to pass
+          several values
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-container <br />
+                &#91;ngTemplateOutlet&#93;="templates" &#10; <br />
+                &#91;ngTemplateOutletContext&#93; =&quot;{
+                person:{name:&apos;Guest&apos;,message:&apos;Welcome&apos;}
+                }&quot;&gt;&#10;<br />
+                &lt;/ng-container&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Context can be accessed in the template using the let-*syntax to
+          define template input variables
+          <ul>
+            <li>
+              The let-* syntax creates a local variable in the template with the
+              name *
+            </li>
+            <li>
+              To use the same name as the property on the context object, no
+              assignment is needed
+            </li>
+            <li>
+              The string on the right side of the assignment is the property
+              name on the context object (if you are renaming the property)
+            </li>
+            <li>
+              Any let-* declarations that do not match a propety name in the
+              context will take the value assigned to $implicit property
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-template #optionTemplate let-prop1
+                let-prop3=&quot;prop2&quot;&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Access the values using prop1 and prop3 syntax
+          <div class="card">
+            <div class="card-body">
+              <code> {+{ prop1 }} {+{ prop3 }}</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="recursion">Recursive Example</h2>
+      <section>
+        <div>
+          Access the values using prop1 and prop3 syntax
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-container *ngTemplateOutlet="replyThread; context: { $implicit: replies }" &gt;
+                &lt;/ng-container&gt; 
+                &lt;ng-template #replyThread let-childReplies&gt; 
+                &lt;ul&gt; 
+                &lt;li *ngFor="let reply of childReplies"&gt; 
+                {{ reply.id }}:
+                {{ reply.value }} 
+                &lt;ng-container *ngIf="reply.children"&gt;
+                &lt;ng-container *ngTemplateOutlet=" replyThread; context: { $implicit: reply.children } " &gt;
+                &lt;/ng-container&gt;
+                &lt;/ng-container&gt; 
+                &lt;/li&gt; 
+                &lt;/ul&gt;
+                &lt;/ng-template&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://indepth.dev/posts/1405/ngtemplateoutlet"
+              target="_blank"
+            >
+              https://indepth.dev/posts/1405/ngtemplateoutlet
+            </a>
           </li>
         </ul>
       </section>
