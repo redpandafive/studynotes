@@ -57,49 +57,210 @@
       <section>
         <ul>
           <li>
-            Template is rendered in both the div and ngContainer tagged with
-            the NgTemplateOutlet directive
+            Template is rendered in both the div and ngContainer tagged with the
+            NgTemplateOutlet directive
           </li>
           <li>The text within the NgContainer is not displayed</li>
           <li>The div tag is not rendered</li>
         </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                &lt;ng-template #template1&gt; &#10; This is a sample
-                template&#10;&lt;/ng-template&gt;&#10; &#10;<br />
-                &lt;ng-container
-                *ngTemplateOutlet=&quot;template1&quot;&gt;This text is not
-                displayed&lt;/ng-container&gt;<br />
-                &lt;div *ngTemplateOutlet=&quot;template1&quot;&gt;<br />
-                &lt;/div&gt;
-              </code>
-            </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;ng-template #template1&gt; &#10; This is a sample
+              template&#10;&lt;/ng-template&gt;&#10; &#10;<br />
+              &lt;ng-container *ngTemplateOutlet=&quot;template1&quot;&gt;This
+              text is not displayed&lt;/ng-container&gt;<br />
+              &lt;div *ngTemplateOutlet=&quot;template1&quot;&gt;<br />
+              &lt;/div&gt;
+            </code>
           </div>
-
+        </div>
       </section>
 
+      <h2>Passing Data</h2>
+      <section>
+        <ul>
+          <li>
+            Data can be passed by settting the ngTemplateOutletContext input
+            property of the NgTemplateOutlet element
+            <ul>
+              <li>
+                This should be an object, such as:
+                <ul>
+                  <li>An object in a componet</li>
+                  <li>An inline object</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Object keys will be available for binding by the local template let
+            declarations
+          </li>
+          <li>
+            Using the key $implicit in the context object to set a default value
+            for any let parameters that do not have a match in the context
+            object
+          </li>
+        </ul>
+      </section>
+
+      <h2>Syntax</h2>
+      <section>
+        <ul>
+          <li>
+            Define with the directive
+            <ul>
+              <li>
+                In the template
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;ng-container
+                      *ngTemplateOutlet="greet"&gt;&lt;/ng-container&gt;
+                      &lt;ng-container *ngTemplateOutlet="eng; context:
+                      myContext"&gt;&lt;/ng-container&gt; &lt;ng-container
+                      *ngTemplateOutlet="svk; context:
+                      myContext"&gt;&lt;/ng-container&gt; &lt;ng-template
+                      #greet&gt;&lt;span&gt;Hello&lt;/span&gt;&lt;/ng-template&gt;
+                      &lt;ng-template #eng let-name&gt;&lt;span&gt;Hello
+                      {{name}}!&lt;/span&gt;&lt;/ng-template&gt; &lt;ng-template
+                      #svk let-person="localSk"&gt;&lt;span&gt;Ahoj
+                      {{person}}!&lt;/span&gt;&lt;/ng-template&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                In the component
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      myContext = {$implicit: 'World', localSk: 'Svet'};
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can be used to pass data to a template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container
+                  &#91;ngTemplateOutlet&#93;=&quot;optionTemplate&quot;
+                  &#91;ngTemplateOutletContext=&quot;{ prop1: val1, prop2:
+                  val2}&quot;&gt; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can pass individual values or an object if you need to pass
+            several
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-template let-person=&quot;person&quot; #template4&gt;
+                  <br />
+                  &lt;p&gt;{+{person.name}}, {+{person.message}}&lt;/p&gt;<br />
+                  &#10;&lt;/ng-template&gt;&#10; <br />
+                  &lt;ng-container <br />
+                  &#91;ngTemplateOutlet&#93;="templates" &#10; <br />
+                  &#91;ngTemplateOutletContext&#93; =&quot;{<br />
+                  person:{name:&apos;Guest&apos;,message:&apos;Welcome&apos;}<br />
+                  }&quot;&gt;&#10;&lt;/ng-container&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This can be shorthanded as
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container *ngTemplateOutlet=&quot;optionTemplate;
+                  context: { prop1 val1, prop2:
+                  val2}&quot;&gt;&lt;/ng-container&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Context can be accessed in the template using the let-*syntax to
+            defined template input variables
+            <ul>
+              <li>
+                The let-* syntax creates a local variable in the template with
+                the name *
+              </li>
+              <li>
+                The string on the right side of the assignment is the name you
+                would pass in on your object
+              </li>
+              <li></li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ng-template #optionTemplate let-prop1
+                  let-prop3=&quot;prop2&quot;&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Access the values using prop1 and prop3 syntax
+            <div class="card">
+              <div class="card-body">
+                <code> {+{ prop1 }} {+{ prop3 }}</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Passing the context allows you to use templates outside of the
+            selector component
+            <ul>
+              <li>
+                Allows you to combine state from where you define the template
+                with the context provided to you where the template is
+                instantiated
+              </li>
+              <li>
+                Can put the template anywhere, such as the very bottom of the
+                page outside of the other HTML
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://indepth.dev/posts/1405/ngtemplateoutlet"
+              target="_blank"
+            >
+              https://indepth.dev/posts/1405/ngtemplateoutlet
+            </a>
+          </li>
+        </ul>
+      </section>
 
       <h2>See Also</h2>
       <section>
         <ul>
           <li>
             Topics
-            <ul>
-              <li>
-                <a href="./ngtemplateoutletContext">NgTemplateOutletContext</a>
-              </li>
-            </ul>
+            <ul></ul>
           </li>
           <li>
             Cookbook
             <ul>
               <li>
-                <a href="../cookbook/templates/repeatBlock.html">Repeatedly Display a Block of Code</a>
+                <a href="../cookbook/templates/repeatBlock.html"
+                  >Repeatedly Display a Block of Code</a
+                >
               </li>
             </ul>
           </li>
-
         </ul>
       </section>
     </div>
