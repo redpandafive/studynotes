@@ -125,17 +125,16 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      &lt;ng-container
-                      *ngTemplateOutlet="greet"&gt;&lt;/ng-container&gt;
-                      &lt;ng-container *ngTemplateOutlet="eng; context:
-                      myContext"&gt;&lt;/ng-container&gt; &lt;ng-container
-                      *ngTemplateOutlet="svk; context:
-                      myContext"&gt;&lt;/ng-container&gt; &lt;ng-template
-                      #greet&gt;&lt;span&gt;Hello&lt;/span&gt;&lt;/ng-template&gt;
-                      &lt;ng-template #eng let-name&gt;&lt;span&gt;Hello
-                      {{name}}!&lt;/span&gt;&lt;/ng-template&gt; &lt;ng-template
-                      #svk let-person="localSk"&gt;&lt;span&gt;Ahoj
-                      {{person}}!&lt;/span&gt;&lt;/ng-template&gt;
+                      &lt;ng-container *ngTemplateOutlet="greet"&gt;&lt;/ng-container&gt; <br />
+                      &lt;ng-container *ngTemplateOutlet="eng; context: myContext"&gt;&lt;/ng-container&gt; <br />
+                      &lt;ng-container *ngTemplateOutlet="svk; context: myContext"&gt;&lt;/ng-container&gt; <br />
+                      &lt;ng-template #greet&gt;&lt;span&gt;Hello&lt;/span&gt;&lt;/ng-template&gt; <br />
+                      &lt;ng-template #eng let-name&gt; <br />
+                      &lt;span&gt;Hello {{name}}!&lt;/span&gt; <br />
+                      &lt;/ng-template&gt; <br />
+                      &lt;ng-template #svk let-person="localSk"&gt; <br />
+                      &lt;span&gt;Ahoj {{person}}!&lt;/span&gt; <br />
+                      &lt;/ng-template&gt; <br />
                     </code>
                   </div>
                 </div>

@@ -40,7 +40,7 @@
 
       <h2>Using a Child Component</h2>
       <section>
-        
+
       </section>
 
       <h2>Using NgTemplateOutput, NgContainer, and NgTemplate</h2>
@@ -77,9 +77,9 @@
         </ul>
       </section>
 
-      <h2 id="container">
+      <h3 id="container">
         Add Ng-Container Where the Template Needs to Display
-      </h2>
+      </h3>
       <section>
         <div>
           Default templates can be specified to use. This is useful if no
@@ -88,15 +88,15 @@
             <div class="card-body">
               <code>
                 &lt;ng-container [ngTemplateOutlet]="optionTemplate ||
-                defaultTemplate" [ngTemplateOutletContext]="{ $implicit: option,
-                index: i}" &gt; &lt;ng-container&gt;
+                defaultTemplate" [ngTemplateOutletContext]="{ $implicit: option, index: i}" &gt; <br/>
+                &lt;ng-container&gt;
               </code>
             </div>
           </div>
         </div>
       </section>
 
-      <h2 id="passdata">Pass Data to the Template</h2>
+      <h3 id="passdata">Pass Data to the Template</h3>
       <section>
         <div>
           Set the ngTemplateOutletContext input property with the object you
@@ -130,12 +130,12 @@
           <div class="card">
             <div class="card-body">
               <code>
-                &lt;ng-container <br />
-                &#91;ngTemplateOutlet&#93;="templates" &#10; <br />
+                &lt;ng-container 
+                &#91;ngTemplateOutlet&#93;="templates" &#10; 
                 &#91;ngTemplateOutletContext&#93; =&quot;{
                 person:{name:&apos;Guest&apos;,message:&apos;Welcome&apos;}
                 }&quot;&gt;&#10;<br />
-                &lt;/ng-container&gt;
+                &lt;/ng-container&gt; <br />
               </code>
             </div>
           </div>
@@ -180,27 +180,27 @@
         </div>
       </section>
 
-      <h2 id="recursion">Recursive Example</h2>
+      <h3 id="recursion">Recursive Example</h3>
       <section>
         <div>
           Access the values using prop1 and prop3 syntax
           <div class="card">
             <div class="card-body">
               <code>
-                &lt;ng-container *ngTemplateOutlet="replyThread; context: { $implicit: replies }" &gt;
-                &lt;/ng-container&gt; 
-                &lt;ng-template #replyThread let-childReplies&gt; 
-                &lt;ul&gt; 
-                &lt;li *ngFor="let reply of childReplies"&gt; 
-                {{ reply.id }}:
-                {{ reply.value }} 
-                &lt;ng-container *ngIf="reply.children"&gt;
-                &lt;ng-container *ngTemplateOutlet=" replyThread; context: { $implicit: reply.children } " &gt;
-                &lt;/ng-container&gt;
-                &lt;/ng-container&gt; 
-                &lt;/li&gt; 
-                &lt;/ul&gt;
-                &lt;/ng-template&gt;
+                &lt;ng-container *ngTemplateOutlet="replyThread; context: { $implicit: replies }" &gt; <br />
+                &lt;/ng-container&gt; <br />
+                &lt;ng-template #replyThread let-childReplies&gt;  <br />
+                &lt;ul&gt; <br />
+                &lt;li *ngFor="let reply of childReplies"&gt; <br />
+                {{ reply.id }}:<br />
+                {{ reply.value }} <br />
+                &lt;ng-container *ngIf="reply.children"&gt; <br />
+                &lt;ng-container *ngTemplateOutlet=" replyThread; context: { $implicit: reply.children } " &gt; <br />
+                &lt;/ng-container&gt; <br />
+                &lt;/ng-container&gt; <br />
+                &lt;/li&gt; <br />
+                &lt;/ul&gt; <br />
+                &lt;/ng-template&gt; <br />
               </code>
             </div>
           </div>
@@ -216,6 +216,11 @@
               target="_blank"
             >
               https://indepth.dev/posts/1405/ngtemplateoutlet
+            </a>
+          </li>
+          <li>
+            <a href="https://blog.shhdharmen.me/handle-recursive-inner-child-elements-in-angular" target="_blank">
+              https://blog.shhdharmen.me/handle-recursive-inner-child-elements-in-angular
             </a>
           </li>
         </ul>
