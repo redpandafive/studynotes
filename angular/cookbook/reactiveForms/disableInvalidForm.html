@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Disable the Submit Button on an Invalid Form
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Disable the Submit Button on an Invalid Reactive Form</h1>
+
+      <section>
+        <ul>
+          <li>
+            Setup a FormGroup property in the component and setup validators
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  reactiveForm: FormGroup;<br />
+                  ....<br />
+                  ngOnInit() {<br />
+                  this.reactiveForm = this.builder.group({<br />
+                  age: [null, Validators.required]<br />
+                  });<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Associate the FormGroup to the form element in the template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;form [formGroup]="reactiveForm"&gt;&lt;/form&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Bind the disabled attribute on the button to the state of the
+            FormGroup (uses same states as template version)
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;button type="submit"
+                  [disabled]="reactiveForm.invalid"&gt;Submit&lt;/button&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Both forms and controls have additional state properties you can
+            reference if needed
+            <ul>
+              <li><code>myVar.valid</code></li>
+              <li><code>myVar.invalid</code></li>
+              <li><code>myVar.status</code></li>
+              <li><code>myVar.disabled</code></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            NgTemplateOutletContext
+          </li>
+        </ol>
+      </nav>
+
+      <h1>NgTemplateOutletContext</h1>
+
+      <section>
+        <ul>
+          <li>
+            Attaches a context object
+            <ul>
+              <li>Should be an object</li>
+              <li>
+                Object keys will be available for binding by the local template
+                let declarations
+              </li>
+              <li>
+                Using the key $implicit in the context object to set a default
+                value for any let parameters that do not have a match in the
+                context object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can be used to pass data to a template
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container
+                  &#91;ngTemplateOutlet&#93;=&quot;optionTemplate&quot;
+                  &#91;ngTemplateOutletContext=&quot;{ prop1: val1, prop2:
+                  val2}&quot;&gt; ...
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            You can pass individual values or an object if you need to pass
+            several
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-template let-person=&quot;person&quot; #template4&gt;
+                  <br />
+                  &lt;p&gt;{+{person.name}}, {+{person.message}}&lt;/p&gt;<br />
+                  &#10;&lt;/ng-template&gt;&#10; <br />
+                  &lt;ng-container <br />
+                  &#91;ngTemplateOutlet&#93;="templates" &#10; <br />
+                  &#91;ngTemplateOutletContext&#93; =&quot;{<br />
+                  person:{name:&apos;Guest&apos;,message:&apos;Welcome&apos;}<br />
+                  }&quot;&gt;&#10;&lt;/ng-container&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This can be shorthanded as
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container *ngTemplateOutlet=&quot;optionTemplate;
+                  context: { prop1 val1, prop2:
+                  val2}&quot;&gt;&lt;/ng-container&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Context can be accessed in the template using the let-*syntax to
+            defined template input variables
+            <ul>
+              <li>
+                The let-* syntax creates a local variable in the template with
+                the name *
+              </li>
+              <li>
+                The string on the right side of the assignment is the name you
+                would pass in on your object
+              </li>
+              <li></li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ng-template #optionTemplate let-prop1
+                  let-prop3=&quot;prop2&quot;&gt;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Access the values using prop1 and prop3 syntax
+            <div class="card">
+              <div class="card-body">
+                <code> {+{ prop1 }} {+{ prop3 }}</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Passing the context allows you to use templates outside of the
+            selector component
+            <ul>
+              <li>
+                Allows you to combine state from where you define the template
+                with the context provided to you where the template is
+                instantiated
+              </li>
+              <li>
+                Can put the template anywhere, such as the very bottom of the
+                page outside of the other HTML
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://indepth.dev/posts/1405/ngtemplateoutlet"
+              target="_blank"
+            >
+              https://indepth.dev/posts/1405/ngtemplateoutlet
+            </a>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="./ngtemplateoutlet">NgTemplateOutlet</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
