@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Pass Template Variable to Component
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Pass Template Variable to Component</h1>
+
+      <section>
+        <div>
+          Add a ViewChild decorator to a property on the component
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Component({...}) <br />
+                export class AppComponent { <br />
+                @ViewChild('username') input; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The ViewChild can be typed to an ElementRef in Typescript
+          <ul>
+            <li>
+              Typescript considers this a generic, so you can specify it to an
+              input element as follows
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Component({...}) <br />
+                export class AppComponent { <br />
+                @ViewChild('username') input: ElementRef&lt;HTMLInputElement&gt;
+                ; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To access the value,
+          <ul>
+            <li>You must wait till the NgAfterViewInit event is called</li>
+            <li>
+              The ViewChild has a nativeElement property to get a handle on the
+              DOM element. This is not the recommended way to do this.
+            </li>
+            <li>
+              Use Render2 to Access the value. This abstracts your code so it is
+              not directly manipulating the DOM
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Component({...}) <br />
+                export class AppComponent { <br />
+                @ViewChild('username') input:
+                ElementRef&lt;HTMLInputElement&gt;; <br />
+                } <br />
+                constructor(private renderer: Renderer2) {} <br />
+                <br />
+                ngAfterViewInit() { <br />
+                // ElementRef: { nativeElement: &lt;input&gt; } <br />
+                console.log(this.input); <br />
+
+                // Access the input object or DOM node <br />
+                console.dir(this.input.nativeElement); <br />
+
+                // Manipulate via Renderer2 <br />
+                this.renderer.setStyle(this.input.nativeElement, 'background',
+                '#d515a0'); <br />
+                } }
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Sources</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://ultimatecourses.com/blog/element-refs-in-angular-templates"
+              target="_blank"
+            >
+              https://ultimatecourses.com/blog/element-refs-in-angular-templates
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
