@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Building Forms with FormGroup, FormArray, and FormBuilder
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Building Forms with FormGroup, FormArray, and FormBuilder</h1>
+
+
+      <h2 id="noformgroup">Basic Form with No FormGroup</h2>
+      <section>
+        <div>
+          Register the reactive forms module to include the reactive form
+          directives needed
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { ReactiveFormsModule } from '@angular/forms';
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add a <code>FormControl</code> instance to the component
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export class NameEditorComponent { <br />
+                name = new FormControl(''); <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Register the <code>FormControl</code> in the template
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;input id="name" type="text" [formControl]="name"&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="withformgroup">Form Using a FormGroup</h2>
+      <section>
+        <div>
+          Create a FormGroup instance on the component
+          <ul>
+            <li>
+              Provide the constructor with an object of named keys mapped to
+              their control
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                profileForm = new FormGroup({ <br />
+                firstName: new FormControl(''), <br />
+                lastName: new FormControl(''), <br />
+                }); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Associate the FormGroup model and view.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form [formGroup]="profileForm"&gt; &lt;label <br />
+                for="first-name"&gt;First Name: &lt;/label&gt; &lt;input <br />
+                id="first-name" type="text" formControlName="firstName"&gt;
+                <br />
+                &lt;label for="last-name"&gt;Last Name: &lt;/label&gt; &lt;input
+                <br />
+                id="last-name" type="text" formControlName="lastName"&gt; <br />
+                &lt;/form&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The FormGroup directive listens for the submit event emitted by the
+          form element and emits an ngSubmit event that you can bind to a
+          callback function. Add an ngSubmit event listener to the form tag with
+          the onSubmit() callback method.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form [formGroup]="profileForm" (ngSubmit)="onSubmit()"&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
