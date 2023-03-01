@@ -20,10 +20,12 @@
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../../index.html">Angular</a>
-          </li>       
+          </li>
           <li class="breadcrumb-item" aria-current="page">
             <a href="index.html">Reactive Forms Cookbook</a>
           </li>
@@ -46,7 +48,19 @@
             >
           </li>
           <li>
-            <a href="selectControls.html#reactive">Using a Select Control in a Reactive Form</a>
+            <a href="selectControls.html#trackby"
+              >Improve Performance with TrackBy</a
+            >
+          </li>
+          <li>
+            <a href="selectControls.html#collection"
+              >Bind a Select Control to a Collection</a
+            >
+          </li>
+          <li>
+            <a href="selectControls.html#reactive"
+              >Using a Select Control in a Reactive Driven Form</a
+            >
           </li>
           <li>
             <a href="selectControls.html#template"
@@ -168,91 +182,155 @@
         </ul>
       </section>
 
-      <h2>Select Control Directives</h2>
+      <h2 id="trackby">Improve Performance with TrackBy</h2>
       <section>
         <ul>
           <li>
-            There are three directives used when working with dynamic options in
-            a select control
+            TrackBy can be used to improve performance when populating a select
+            control
             <ul>
               <li>
-                ngFor
-                <ul>
-                  <li>Use to iterate over every element in the array</li>
-                </ul>
+                Default behavior is to use object references in change detection
+                to see if something has changed
               </li>
               <li>
-                ngValue
+                Even if the select control is loaded from a static list, the
+                entire control must be removed and redrawn if the object
+                references to the list objects change
                 <ul>
-                  <li>Use to bind an object to an option HTML element</li>
-                  <li>Can bind to the full object or just a property</li>
                   <li>
-                    This will not perform string conversions like binding to the
-                    value attribute will
+                    If the array is reloaded (resulting in new object
+                    references), this will occur even if the properties of the
+                    objects do not change
                   </li>
                 </ul>
-                <div>
-                  This binds to the a property on the object, so the value of
-                  myModel the value of the bound property
-                  <div class="card">
-                    <div class="card-body">
-                      <code>
-                        &lt;select [(ngModel)]="myModel"&gt; <br />
-                        &lt;option *ngFor="let book of myBooks"
-                        [ngValue]="book"&gt; <br />
-                        {{book.title}} <br />
-                        &lt;/option&gt; <br />
-                        &lt;/select&gt; <br />
-                      </code>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  This binds to the entire object, so the value of myModel will
-                  be the selected object
-                  <div class="card">
-                    <div class="card-body">
-                      <code>
-                        &lt;select [(ngModel)]="selectedBook"&gt; <br />
-                        &lt;option <br />
-                        *ngFor="let book of myBooks" <br />
-                        [ngValue]="book.id"&gt; <br />
-                        {{book.title}} <br />
-                        &lt;/option&gt; <br />
-                        &lt;/select&gt; <br />
-                      </code>
-                    </div>
-                  </div>
-                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            To add it
+            <ul>
+              <li>
+                Identify a unique field on the array of items, such as an id
+                field
               </li>
               <li>
-                value
-                <ul>
-                  <li>Binds to the value attribute</li>
-                  <li>This always binds to a string</li>
-                  <li>
-                    If you bind to a property, its value will be converted to a
-                    string
-                  </li>
-                  <li>
-                    Use this if you are binding to strings - you can end up with
-                    conversion problems if you use a non-string
-                  </li>
-                </ul>
+                Add a method on the component that will take an item and return
+                the unique identifier
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      &lt;select [(ngModel)]="myModel"&gt; <br />
-                      &lt;option *ngFor="let i of items" [ngValue]="i"&gt;
-                      <br />
-                      {{i.value}} <br />
-                      &lt;/option&gt; <br />
-                      &lt;/select&gt; <br />
+                      getEmployeeId(index : number, employee : any) { <br />
+                      return employee.id;<br />
+                      }<br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Add trackBy to the ngFor loop
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;tr *ngFor="let employee of employees;trackBy:getEmployeeId"&gt;
+                      &lt;td [attr.data-id]="employee.id"&gt;{{employee.name}}&lt;/td&gt;
+                        &lt;/tr&gt;
                     </code>
                   </div>
                 </div>
               </li>
             </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="collection">Bind a Select Control to a Collection</h2>
+      <section>
+        <ul>
+          <li>Use [ngFor] to iterate over every element in the array</li>
+          <li>
+            Use [value] to bind to the value attribute
+            <ul>
+              <li>Binds to the value attribute</li>
+              <li>This always binds to a string</li>
+              <li>
+                If you bind to a property, its value will be converted to a
+                string
+              </li>
+              <li>
+                Use this if you are binding to strings - you can end up with
+                conversion problems if you use a non-string
+                <ul>
+                  <li>
+                    This can cause problem in Typescript with strict typing
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;select (ngModel)="selectedBook"&gt; &lt;option *ngFor="let
+                  book of myBooks"
+                  [value]="book.id"&gt;{{book.title}}&lt;/option&gt; <br />
+                  &lt;/select&gt; <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use [ngValue] to bind to an object or object properties
+            <ul>
+              <li>Can bind to the full object or just a property</li>
+              <li>
+                This will not perform string conversions like binding to the
+                value attribute will
+                <ul>
+                  <li>This preserves the data type of the original value</li>
+                  <li>
+                    Allows other data types than just strings to be returned,
+                    including objects
+                  </li>
+                </ul>
+              </li>
+              <li>
+                This may be an issue if you use a brower automation tool such as
+                Selenium
+              </li>
+            </ul>
+            <div>
+              This binds to the a property on the object, so the value of
+              myModel the value of the bound property
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;select [(ngModel)]="myModel"&gt; <br />
+                    &lt;option *ngFor="let book of myBooks" [ngValue]="book"&gt;
+                    <br />
+                    {{book.title}} <br />
+                    &lt;/option&gt; <br />
+                    &lt;/select&gt; <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+            <div>
+              This binds to the entire object, so the value of myModel will be
+              the selected object
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;select [(ngModel)]="selectedBook"&gt; <br />
+                    &lt;option <br />
+                    *ngFor="let book of myBooks" <br />
+                    [ngValue]="book.id"&gt; <br />
+                    {{book.title}} <br />
+                    &lt;/option&gt; <br />
+                    &lt;/select&gt; <br />
+                  </code>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
         <div>

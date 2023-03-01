@@ -37,11 +37,8 @@
 
       <h1>Repeatedly/Recursively Display a Block of Code</h1>
 
-
       <h2>Using a Child Component</h2>
-      <section>
-
-      </section>
+      <section></section>
 
       <h2>Using NgTemplateOutput, NgContainer, and NgTemplate</h2>
       <section>
@@ -70,9 +67,7 @@
             </a>
           </li>
           <li>
-            <a href="repeatBlock.html#recursion">
-              See example for recursion
-            </a>
+            <a href="repeatBlock.html#recursion"> See example for recursion </a>
           </li>
         </ul>
       </section>
@@ -88,7 +83,8 @@
             <div class="card-body">
               <code>
                 &lt;ng-container [ngTemplateOutlet]="optionTemplate ||
-                defaultTemplate" [ngTemplateOutletContext]="{ $implicit: option, index: i}" &gt; <br/>
+                defaultTemplate" [ngTemplateOutletContext]="{ $implicit: option,
+                index: i}" &gt; <br />
                 &lt;ng-container&gt;
               </code>
             </div>
@@ -130,8 +126,7 @@
           <div class="card">
             <div class="card-body">
               <code>
-                &lt;ng-container 
-                &#91;ngTemplateOutlet&#93;="templates" &#10; 
+                &lt;ng-container &#91;ngTemplateOutlet&#93;="templates" &#10;
                 &#91;ngTemplateOutletContext&#93; =&quot;{
                 person:{name:&apos;Guest&apos;,message:&apos;Welcome&apos;}
                 }&quot;&gt;&#10;<br />
@@ -154,11 +149,17 @@
             </li>
             <li>
               The string on the right side of the assignment is the property
-              name on the context object (if you are renaming the property)
+              name on the context object
             </li>
             <li>
               Any let-* declarations that do not match a propety name in the
               context will take the value assigned to $implicit property
+              <ul>
+                <li>
+                  You can also eliminate the right assignment value if you want
+                  the let variable to take the $implicit value
+                </li>
+              </ul>
             </li>
           </ul>
           <div class="card">
@@ -187,15 +188,18 @@
           <div class="card">
             <div class="card-body">
               <code>
-                &lt;ng-container *ngTemplateOutlet="replyThread; context: { $implicit: replies }" &gt; <br />
+                &lt;ng-container *ngTemplateOutlet="replyThread; context: {
+                $implicit: replies }" &gt; <br />
                 &lt;/ng-container&gt; <br />
-                &lt;ng-template #replyThread let-childReplies&gt;  <br />
+                &lt;ng-template #replyThread let-childReplies="childReplies"&gt;
+                <br />
                 &lt;ul&gt; <br />
                 &lt;li *ngFor="let reply of childReplies"&gt; <br />
                 {{ reply.id }}:<br />
                 {{ reply.value }} <br />
                 &lt;ng-container *ngIf="reply.children"&gt; <br />
-                &lt;ng-container *ngTemplateOutlet=" replyThread; context: { $implicit: reply.children } " &gt; <br />
+                &lt;ng-container *ngTemplateOutlet=" replyThread; context: {
+                $implicit: reply.children } " &gt; <br />
                 &lt;/ng-container&gt; <br />
                 &lt;/ng-container&gt; <br />
                 &lt;/li&gt; <br />
@@ -219,7 +223,10 @@
             </a>
           </li>
           <li>
-            <a href="https://blog.shhdharmen.me/handle-recursive-inner-child-elements-in-angular" target="_blank">
+            <a
+              href="https://blog.shhdharmen.me/handle-recursive-inner-child-elements-in-angular"
+              target="_blank"
+            >
               https://blog.shhdharmen.me/handle-recursive-inner-child-elements-in-angular
             </a>
           </li>

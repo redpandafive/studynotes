@@ -167,6 +167,24 @@
               </li>
             </ul>
           </li>
+          <li>
+            This is a shorthand version (desugars into the form below)
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container *ngTemplateOutlet="tierTemplate; context: { $implicit: reason, idx: 5 }"&gt;&lt;/ng-container&gt;
+                </code>
+              </div>
+          </li>
+          <li>
+            This is an alternative longer format.  It is equivalent to the above.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;ng-container [ngTemplateOutlet]="tierTemplate" [ngTemplateOutletContext]="{ $implicit: reason, idx: 5  }"&gt;&lt;/ng-container&gt;                
+                </code>
+              </div>
+          </li>
           </ul>
           </section>
 

@@ -285,7 +285,16 @@
       <h3>forkJoin</h3>
       <section>
         <ul>
-          <li>Takes a group of observables that are called simulataneously</li>
+          <li>
+            Takes a group of observables that are called simulataneously
+            <ul>
+              <li>These can either be an array or keyed object</li>
+              <li>
+                When an array is used, results ordered to match the associated
+                observable
+              </li>
+            </ul>
+          </li>
           <li>Values are emitted when all observables complete</li>
           <li>
             Common use case is issuing multiple requests on page load and only
@@ -307,8 +316,8 @@
             <div class="card-body">
               <code>
                 const obs = [<br />
-                exampleServiceClass1.getData(), exampleServiceCLass2.getData()
-                ];<br />
+                exampleServiceClass1.getData(), <br />
+                exampleServiceCLass2.getData() ];<br />
                 forkJoin(obs).subscribe(d => {<br />
                 console.log(d[0]]);<br />
                 console.log(d[1]);<br />
@@ -323,8 +332,8 @@
             <div class="card-body">
               <code>
                 const obs = {<br />
-                di1: exampleServiceClass1.getData(), <br/>
-                di2: exampleServiceCLass2.getData() <br/>
+                di1: exampleServiceClass1.getData(), <br />
+                di2: exampleServiceCLass2.getData() <br />
                 };<br />
                 forkJoin(obs).subscribe(d => {<br />
                 console.log(d.di1);<br />
@@ -343,8 +352,80 @@
             Pass a function that returns a value that performs some sort of
             transformation
           </li>
-          <li>This transformation is applied to all items in the dataset</li>
+          <li>
+            This transformation is applied to each value emitted by the source
+            Observable
+          </li>
+          <li>Resulting values are emitted as Observables</li>
+          <li>
+            Example
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  //emit (1,2,3,4,5) <br />
+                  const source = from([1, 2, 3, 4, 5]); <br />
+                  //add 10 to each value <br />
+                  const example = source.pipe(map(val => val + 10)); <br />
+                  //output: 11,12,13,14,15 <br />
+                  const subscribe = example.subscribe(val => console.log(val));
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Links
+            <ul>
+              <li>
+                <a
+                  href="https://www.learnrxjs.io/learn-rxjs/operators/transformation/map"
+                >
+                  https://www.learnrxjs.io/learn-rxjs/operators/transformation/map
+                </a>
+              </li>
+              <li>
+                <a href="https://rxjs.dev/api/index/function/map">
+                  https://rxjs.dev/api/index/function/map
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
+      </section>
+
+      <h3>Merge</h3>
+      <section>
+        <ul>
+          <li>Turns multiple observables into a single observable</li>
+        </ul>
+        <div>
+          Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                //emit every 2.5 seconds <br/>
+                const first = interval(2500); <br/>
+                //emit every 2 seconds <br/>
+                const second = interval(2000); <br/>
+                //emit every 1.5 seconds <br/>
+                const third = interval(1500); <br/>
+                //emit every 1 second <br/>
+                const fourth = interval(1000); <br/>
+                <br/>
+                //emit outputs from one observable <br/>
+                const example = merge( <br/>
+                  first.pipe(mapTo('FIRST!')), <br/>
+                  second.pipe(mapTo('SECOND!')), <br/>
+                  third.pipe(mapTo('THIRD')), <br/>
+                  fourth.pipe(mapTo('FOURTH')) <br/>
+                );<br/>
+                //output: "FOURTH", "THIRD", "SECOND!", "FOURTH", "FIRST!", "THIRD", "FOURTH" <br/>
+                const subscribe = example.subscribe(val => console.log(val)); <br/>
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h3>Of</h3>
@@ -364,13 +445,58 @@
       <h3>Pipe</h3>
       <section>
         <ul>
-          <li>Method on an Observable used for composing operators</li>
-          <li>Sends the output</li>
           <li>
-            Parameter is a comma seperated list of operators that you would like
-            to apply to the data
+            Combines multiple RxJS operators to compose asynchronous operations
+          </li>
+          <li>
+            Takes one or more operators and returns an RxJS Operator
+            <ul>
+              <li>This could be operators such as filter, map, mergeMap</li>
+              <li>Operators are executed in the order they are added</li>
+              <li>
+                The output of the first method becomes the input for the second
+                method (and so on until all operators are called)
+              </li>
+            </ul>
           </li>
         </ul>
+        <div>
+          Example:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                //emit (1,2,3,4,5) <br />
+                const source = from([1, 2, 3, 4, 5]); <br />
+                //add 10 to each value <br />
+                const example = source.pipe(map(val => val + 10)); <br />
+                //output: 11,12,13,14,15 <br />
+                const subscribe = example.subscribe(val => console.log(val));
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example: First calls filter, then calls map in the results of the
+          filter. This outputs [6,8,10]
+          <div class="card">
+            <div class="card-body">
+              <code>
+                obs = new Observable((observer) => { <br />
+                observer.next(1) <br />
+                observer.next(2) <br />
+                observer.next(3) <br />
+                observer.next(4) <br />
+                observer.next(5) <br />
+                observer.complete() <br />
+                }).pipe( <br />
+                filter(data => data > 2), <br />
+                map((val) => {return val as number * 2}) <br />
+                ).subscribe(console.log) <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h3>Retry</h3>
@@ -490,20 +616,6 @@
       </section>
 
       <h2>Cookbook</h2>
-      <section>
-        <ul>
-          <li>
-            To call a group of Observables simulataneously and only trigger when
-            all results are returned:
-            <ul>
-              <li>Use the <code>forkJoin</code> operator</li>
-              <li>
-                A common use case is issuing multiple requests on page load.
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
