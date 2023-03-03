@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Transition</li>
+        </ol>
+      </nav>
+
+      <h1>Transition</h1>
+
+      <section>
+        <ul>
+          <li>
+            Instead of having changes show immediately, you can define
+            transitions so changes are animated over time intervals and folow an
+            acceleration curve
+          </li>
+          <li>
+            Called an implicit transition
+            <ul>
+              <li>It is a transition between two states</li>
+              <li>The Web author defines the first and last states</li>
+              <li>The browser calculates the in-between states</li>
+            </ul>
+          </li>
+          <li>
+            These are also useful to make JavaScript functionality smoother
+          </li>
+          <li>
+            Properties can be set to deterime how the transition is performed
+            <ul>
+              <li>When the animation will start</li>
+              <li>How long the transition will last</li>
+              <li>
+                How the transition will run (linearly, quick at beginning and
+                slow at start, etc)
+              </li>
+            </ul>
+          </li>
+          <li>
+            Not all properties can be animated: see
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+            </a>
+          </li>
+          <li>
+            Properties
+            <ul>
+              <li>
+                transition
+                <ul>
+                  <li>A shorthand property for all transition properties</li>
+                </ul>
+                <div>
+                  Here are the order constituent properties are defined
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        div { <br />
+                        transition: &lt;property&gt; &lt;duration&gt;
+                        &lt;timing-function&gt; &lt;delay&gt; <br />
+                        } <br />
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                transition-property
+                <ul>
+                  <li>
+                    The name or names of the CSS properties to which transitions
+                    should be applied
+                  </li>
+                  <li>Changes not listed here are instantaneous</li>
+                  <li>
+                    <code>transition-property: margin-right, color;</code>
+                    specifies only the two specified properties
+                  </li>
+                  <li>
+                    <code>transition-property: all;</code> specifies all
+                    properties to transition
+                  </li>
+                  <li>
+                    <code>transition-property: none;</code> specifies no
+                    properties will transition
+                  </li>
+                </ul>
+              </li>
+              <li>
+                transition-duration
+                <ul>
+                  <li>The duration over which transitions should occur</li>
+                  <li>
+                    Can specify a single duration that applies to all properties
+                    during the transition or multiple so properties can have
+                    different durations
+                  </li>
+                  <li>
+                    Defined using a zero or positive integer followed by s or ms
+                    <ul>
+                      <li>Zero values begin immediately</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Multiple durations can be added; each will be applied to the
+                    corresponding property as defined in the transition-property
+                    property
+                  </li>
+                </ul>
+              </li>
+              <li>
+                transition-timing-function
+                <ul>
+                  <li>
+                    Specifies a function to define how intermediate values for
+                    properties are computed
+                  </li>
+                  <li>
+                    <a
+                      href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions"
+                    >
+                      Cheat sheet
+                    </a>
+                    for easing function definitions
+                  </li>
+                </ul>
+              </li>
+              <li>
+                transition-delay
+                <ul>
+                  <li>
+                    How long to wait between the time a property is changes and
+                    the transition actually begins
+                  </li>
+                  <li>
+                    Defined using a zero, positive, or negative integer followed
+                    by s or ms
+                    <ul>
+                      <li>Zero values begin immediately</li>
+                      <li>
+                        Negative values begin immediately, but partway through
+                        the effect (as if it had already been running for the
+                        given length of time)
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Muliple dealys can be specified to transiition multiple
+                    properties at different rates
+                  </li>
+                  <li>
+                    Examples
+                    <ul>
+                      <li>
+                        <code>transition-delay: 3s;</code> waits 3 seconds to
+                        begin
+                      </li>
+                      <li>
+                        <code>transition-delay: 2s, 4ms;</code> delays 2 seconds
+                        for the first property to transition and 4 milliseconds
+                        for the second property to transition
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions#examples" target="_blank">
+              https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions#examples
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>See also</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

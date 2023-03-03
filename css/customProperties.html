@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            CSS Variables (Custom Properties)
+          </li>
+        </ol>
+      </nav>
+
+      <h1>CSS Variables (Custom Properties)</h1>
+
+      <section>
+        <ul>
+          <li>
+            Defined by CSS authors that contain specific values to be reused
+            throughout a document
+            <ul>
+              <li>
+                Allow you to define a value to be stored in one place, then
+                reference it multiple other places
+              </li>
+              <li>
+                Also allows semantic identifiers so you can identify a value
+                easier
+              </li>
+              <li>
+                These are not actual variables like other languages, so values
+                are computed where it is needed, not stored for use in other
+                rules
+              </li>
+            </ul>
+          </li>
+          <li>
+            These are subject to cascade and inherit their value from their
+            parent
+          </li>
+          <li>
+            Defined using the custom property notation
+            <ul>
+              <li>Prefix with <code>--</code></li>
+              <li>
+                Define within a ruleset. Common best practice is to define them
+                on the :root pseudo-class so it can be applied globally across
+                the HTML document
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  :root { <br />
+                  --main-bg-color: brown; <br />
+                  } <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Access the value using the var() function
+            <ul>
+              <li>
+                This can also take a second value (or more) to use as a fallback
+                if the specified custom property cannot be found
+              </li>
+            </ul>
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    .five { <br />
+                    background-color: var(--main-bg-color); <br />
+                    } <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+            <div>
+              Example that includes fallbacks
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    .three { <br />
+                    background-color: var(--my-var, var(--my-background, pink));
+                    <br />
+                    } <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>See also</h2>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

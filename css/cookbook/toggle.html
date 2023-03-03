@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active">Toggle Button Examples</li>
+        </ol>
+      </nav>
+
+      <h1>Toggle Button Examples</h1>
+
+      <style>
+        :root {
+          --button-side-length: 50px;
+          --button-gutter: 3px;
+          --on-color: green;
+          --off-color: #efefef;
+          --slider-color: white;
+          --border-color: #ccc;
+        }
+
+        #example1 input[type="checkbox"] {
+          height: 0;
+          width: 0;
+          visibility: hidden;
+        }
+
+        #example1 label {
+          background: var(--off-color);
+          border-radius: var(--button-side-length);
+          cursor: pointer;
+          display: block;
+          height: var(--button-side-length);
+          position: relative;
+          width: calc(var(--button-side-length) * 2);
+        }
+
+        #example1 label:after {
+          background: var(--slider-color);
+          content: "";
+          position: absolute;
+          top: var(--button-gutter);
+          left: var(--button-gutter);
+          height: calc(
+            var(--button-side-length) - var(--button-gutter) -
+              var(--button-gutter)
+          );
+          width: calc(
+            var(--button-side-length) - var(--button-gutter) -
+              var(--button-gutter)
+          );
+          border-radius: calc(
+            var(--button-side-length) - var(--button-gutter) -
+              var(--button-gutter)
+          );
+          transition: 0.3s;
+        }
+
+        #example1 label,
+        #example1 label:after {
+          border: 1px solid var(--border-color);
+        }
+
+        #example1 input:checked + label {
+          background: var(--on-color);
+        }
+
+        #example1 input:checked + label:after {
+          left: calc(100% - var(--button-gutter));
+          transform: translateX(-100%);
+        }
+      </style>
+
+      <section id="example1">
+        <input type="checkbox" id="switch" />
+        <label for="switch"></label>
+      </section>
+
+      <!-- <h2>Basic Example</h2>
+      <section>
+        <ul>
+          <li>The following creates a 3 x 3 grid</li>
+          <li>
+            The direct children of the grid-container element will be the cells
+          </li>
+          <li>
+            If the child elements did not contain content and no height/width
+            specifications, the grid would be empty
+            <ul>
+              <li>
+                Adding width and/or height to the child elements would show the
+                grid
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                .grid-container {<br />
+                display: grid;<br />
+                grid-template-columns: auto auto auto;<br />
+                }<br />
+                ...<br />
+                ...<br />
+                &lt;div class="grid-container"&gt; &lt;div
+                class="grid-item"&gt;1&lt;/div&gt; &lt;div
+                class="grid-item"&gt;2&lt;/div&gt; &lt;div
+                class="grid-item"&gt;3&lt;/div&gt; &lt;div
+                class="grid-item"&gt;4&lt;/div&gt; &lt;div
+                class="grid-item"&gt;5&lt;/div&gt; &lt;div
+                class="grid-item"&gt;6&lt;/div&gt; &lt;div
+                class="grid-item"&gt;7&lt;/div&gt; &lt;div
+                class="grid-item"&gt;8&lt;/div&gt; &lt;div
+                class="grid-item"&gt;9&lt;/div&gt; &lt;/div&gt;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section> -->
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -8,24 +8,24 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
+      href="../assets/bootstrap/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../../">Home</a>
+        <a class="navbar-brand" href="../index.html">Home</a>
       </div>
     </nav>
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a>
+            <a href="../index.html">Home</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="../index.html">HTML</a>
+            <a href="./index.html">HTML</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Basics</li>
         </ol>
@@ -207,10 +207,64 @@
       <h3>fieldset</h3>
       <section>
         <ul>
-          <li>Use to group form elements together visually</li>
-          <li>Usually renders as a rectangle around enclosed form elements</li>
-          <li>Add a legend tag to add caption to it</li>
+          <li>Use to group several controls as well as labels (&lt;label&gt;) together visually</li>
+          <li>Provides groupings within a HTML form</li>
+          <li>Add a legend tag as a child to add a caption</li>
+          <li>
+            Attributes
+            <ul>
+              <li>disabled
+                <ul>
+                  <li>Boolean attribute</li>
+                  <li>All controls in the fieldset will be 
+                    <ul>
+                      <li>Cannot be edited or submitted</li>
+                      <li>Will not receive any browsing events</li>
+                      <li>Will be grayed out by default</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                form
+                <ul>
+                  <li>Specify the id of the form element this fieldset is associated to.  This allows you to define the fieldset outside of the form.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
         </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form&gt; <br/>
+                  &lt;fieldset&gt; <br/>
+                    &lt;legend&gt;Choose your favorite monster&lt;/legend&gt; <br/>                
+                    &lt;input type="radio" id="kraken" name="monster" value="K"&gt; <br/>
+                    &lt;label for="kraken"&gt;Kraken&lt;/label&gt;&lt;br&gt; <br/>                
+                    &lt;input type="radio" id="sasquatch" name="monster" value="S"&gt; <br/>
+                    &lt;label for="sasquatch"&gt;Sasquatch&lt;/label&gt;&lt;br&gt; <br/>                
+                    &lt;input type="radio" id="mothman" name="monster" value="M" /&gt; <br/>
+                    &lt;label for="mothman"&gt;Mothman&lt;/label&gt; <br/>
+                    &lt;/fieldset&gt; <br/>
+                  &lt;/form&gt; <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <fieldset>
+            <legend>Choose your favorite monster</legend>        
+            <input type="radio" id="kraken" name="monster" value="K">
+            <label for="kraken">Kraken</label><br>        
+            <input type="radio" id="sasquatch" name="monster" value="S">
+            <label for="sasquatch">Sasquatch</label><br>        
+            <input type="radio" id="mothman" name="monster" value="M" />
+            <label for="mothman">Mothman</label>
+          </fieldset>
+        </div>
       </section>
 
       <h3>form</h3>

@@ -10,12 +10,12 @@
       rel="stylesheet"
       href="../../assets/bootstrap/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../assets/styles/site.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../../">Home</a>
+        <a class="navbar-brand" href="../../index.html">Home</a>
       </div>
     </nav>
     <div class="container">
@@ -70,13 +70,19 @@
         </ul>
       </section>
 
+      <h2>Input Pseudo Classes</h2>
+
       <h2>Functional Pseudo Classes</h2>
       <section>
         <ul>
           <li>
             :has()
             <ul>
-              <li>Matches an element if any of the relative selectors that are passed as an argument match at least one element when anchored against this element</li>
+              <li>
+                Matches an element if any of the relative selectors that are
+                passed as an argument match at least one element when anchored
+                against this element
+              </li>
             </ul>
           </li>
           <li>
@@ -133,6 +139,52 @@
         </ul>
       </section>
 
+      <h2>Tree-Structural Pseudo Classes</h2>
+      <section>
+        <ul>
+          <li>
+            :root
+            <ul>
+              <li>
+                Matches the root element of a tree representing the document
+              </li>
+              <li>This is the HTML element in HTML</li>
+              <li>
+                Identical to the <code>html</code>selector, but has a higher
+                specificity
+              </li>
+              <li>Good place to put global CSS variables</li>
+            </ul>
+          </li>
+          <li>
+            :empty
+            <ul>
+              <li>
+                An element with no children other than white space characters
+              </li>
+            </ul>
+          </li>
+          <li>
+            :first-child
+            <ul>
+              <li>Matches an element that is the first of its siblings</li>
+            </ul>
+          </li>
+          <li>
+            :last-child
+            <ul>
+              <li>Matches an element that is the last of its siblings</li>
+            </ul>
+          </li>
+          <li>
+            :only-child
+            <ul>
+              <li>Matches an elment that has no siblings</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
       <h2>User Action Pseudo Clases</h2>
       <section>
         <ul>
@@ -153,7 +205,21 @@
           </ul>
         </ul>
       </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>

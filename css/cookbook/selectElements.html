@@ -7,27 +7,27 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       rel="stylesheet"
-      href="../../../assets/bootstrap/css/bootstrap.min.css"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../../../">Home</a>
+        <a class="navbar-brand" href="../../">Home</a>
       </div>
     </nav>
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../../index.html">Home</a>
+            <a href="../../index.html">Home</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="../../index.html">Angular</a>
+            <a href="../index.html">CSS</a>
           </li>
           <li class="breadcrumb-item" aria-current="page">
-            <a href="index.html">Reactive Forms Cookbook</a>
+            <a href="index.html">Cookbook</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             Selecting Elements
@@ -37,24 +37,29 @@
 
       <h1>Selecting Elements</h1>
 
+      <h2>By Attribute</h2>
       <section>
-        <ul>
-          <li>
-            Filter by attribute
-            <ul>
-              <li>
-                Selects the summary element that is a direct decendant of a details element that has an open attribute
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      .tree details[open] &gt; summary::before { ... } <br />
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <div>
+          Selects the summary element that is a direct decendant of a details
+          element that has an open attribute
+          <div class="card">
+            <div class="card-body">
+              <code>
+                .tree details[open] &gt; summary::before { ... } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Selects inputs based on their type
+          <div class="card">
+            <div class="card-body">
+              <code>
+                #example1 input[type=checkbox] { <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>

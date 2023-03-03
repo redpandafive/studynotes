@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active">Selectors</li>
+        </ol>
+      </nav>
+
+      <h1>Selectors</h1>
+
+      <h2>Basic</h2>
+      <section>
+        <ul>
+          <li>
+            Universal selector
+            <ul>
+              <li>*</li>
+              <li>Selectes all elements</li>
+            </ul>
+          </li>
+          <li>Type selector = such as input</li>
+          <li>
+            Class selector
+            <ul>
+              <li>Select elements with the given class attribute</li>
+              <li>
+                <code>.index</code> matches any element that has class="index"
+              </li>
+            </ul>
+          </li>
+          <li>
+            ID selectors
+            <ul>
+              <li>Finds the element with the given id</li>
+              <li>IDs should be unique among elements</li>
+              <li><code>#idname</code> will match id="idname"</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Attribute</h2>
+      <section>
+        <ul>
+          <li>Finds elements that have the given attribute</li>
+          <li>Can optionally add a value expresion to filter by value</li>
+          <li>Matches are case sensitive</li>
+          <li>
+            The following find all elements that have the attr attribute that
+            has a value that:
+            <ul>
+              <li>[attr] - contains any value or no value</li>
+              <li>[attr="value"] - exactly matches "value"</li>
+              <li>
+                [attr~="value"] - is contained in the specified whitespace
+                serated list of words
+              </li>
+              <li>
+                [attr|="value"] - exactly matches "value" OR begins with "value"
+                immediately followed by a hyphen
+              </li>
+              <li>[attr^="value"] - begins with "value"</li>
+              <li>[attr$="value"] - ends with "value"</li>
+              <li>
+                [attr*="value"] - contains "value" anywhere in it (substring)
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Grouping</h2>
+      <section>
+        <ul>
+          <li>
+            Selector list
+            <ul>
+              <li>
+                Selector is a grouping method that selects all the matching
+                nodes
+              </li>
+              <li><code>div, span</code> finds all span and div elements</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Combinators</h2>
+      <section>
+        <ul>
+          <li>
+            Descendant combinator
+            <ul>
+              <li>
+                Select all nodes that are descendants of the first element
+              </li>
+              <li>
+                Represented as a space
+              </li>
+              <li>
+                <code>div span</code> will match all span elements that are
+                inside of a div element
+              </li>
+            </ul>
+          </li>
+          <li>
+            Child combinator
+            <ul>
+              <li>Selects nodes that are direct children of the first element</li>
+              <li>Represented by &gt;</li>
+              <li>
+                <code>ul &gt; li</code> will match all li elements that are nested directly inside a ul element
+              </li>
+            </ul>
+          </li>
+          <li>General Sibling combinator
+            <ul>
+              <li>
+                Second element follows the first and both share the same parent
+              </li>
+              <li>
+                Do not have to be adjacent to match
+              </li>
+              <li>
+                Represented by ~
+              </li>
+              <li>
+                <code>p ~ span</code> will match all span elements that follow a p, immediately or not
+              </li>
+            </ul>
+          </li>
+          <li>Adjacent Sibling combinator
+            <ul>
+              <li>
+                Matches the second element only if it immediately follows the first element
+              </li>
+              <li>
+                Must be adjacent and have the same parent to match
+              </li>
+              <li>
+                Represented by +
+              </li>
+              <li>
+                <code>p + span</code> will match the first span element taht immeidately follows a p element
+              </li>
+            </ul>
+          </li>
+          <li>Column combinator
+            <ul>
+              <li>Selects nodes that belong to a column</li>
+              <li>
+                col || td will match all td elements that belong to the scope of the col
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank">
+              https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
