@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="./../assets/styles/site.css" />
   </head>
   <body>
@@ -27,24 +30,18 @@
       </nav>
 
       <h1>NgForOf</h1>
-      
+
       <section class="navlinks">
         <ul>
           <li><a href="directives.html#basics">Basics</a></li>
           <li>
-            <a href="directives.html#custom"
-              >Custom Attribute Directives</a
-            >
+            <a href="directives.html#custom">Custom Attribute Directives</a>
           </li>
           <li>
-            <a href="directives.html#builtin"
-              >Built In Attribute Directives</a
-            >
+            <a href="directives.html#builtin">Built In Attribute Directives</a>
           </li>
           <li>
-            <a href="directives.html#structural"
-              >Structural Directives</a
-            >
+            <a href="directives.html#structural">Structural Directives</a>
           </li>
           <li>
             <a href="#ngforof">NgForOf</a>
@@ -54,7 +51,6 @@
           </li>
         </ul>
       </section>
-
 
       <h2 id="ngforof">NgForOf</h2>
       <section>
@@ -120,36 +116,6 @@
             </ul>
           </li>
           <li>
-            You can capture the current index of the iteration using the index
-            property of the NgForOf directive
-            <div>this is desugared into an attribute called let-i</div>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  ... *ngFor=&quot;let hero of heroes; let i=index&quot; ...
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            You can determine if the current iteration is an odd or event number
-            using the odd property of the NgForOf directive
-            <ul>
-              <li>Useful for doing color coding on rows</li>
-              <li>This is desugared into the let-odd attribute</li>
-              <li>
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      ... *ngFor=&quot;let hero of heroes; let i=index; let
-                      odd=odd&quot; ...
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li>
             The microsyntax used on the right side of the equal sign is
             translated by the parser
             <ul>
@@ -180,7 +146,156 @@
         </ul>
       </section>
 
-      <h3 id="trackby">NgForOf - TrackBy</h3>
+      <h2>Index Property</h2>
+      <section>
+        <ul>
+          <li>
+            You can capture the current index of the iteration using the index
+            property of the NgForOf directive
+          </li>
+          <li>This is desugared into an attribute called let-i</li>
+        </ul>
+
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... *ngFor=&quot;let hero of heroes; let i=index&quot; ...
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>First Property</h2>
+      <section>
+        <ul>
+          <li>
+            Returns true for the first item in the collection, matches when the
+            index is zero
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... *ngFor=&quot;let hero of heroes; let i=index; let
+                first=first&quot; ... <br />
+                ... <br />
+                Is first row? {{ first }}
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Last Property</h2>
+      <section>
+        <ul>
+          <li>
+            Returns true for the last item in the collection, matches when the
+            index is the length minus 1
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... *ngFor=&quot;let hero of heroes; let i=index; let
+                last=last&quot; ... <br />
+                ... <br />
+                Is last row? {{ last }}
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Last Property</h2>
+      <section>
+        <ul>
+          <li>
+            You can determine if the current iteration is an odd or even number
+            using the even property of the NgForOf directive
+          </li>
+          <li>Useful for doing color coding on rows</li>
+          <li>This is desugared into the let-even attribute</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... *ngFor=&quot;let hero of heroes; let i=index; let
+                even=even&quot; ...
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Even Property</h2>
+      <section>
+        <ul>
+          <li>
+            You can determine if the current iteration is an odd or even number
+            using the even property of the NgForOf directive
+          </li>
+          <li>Useful for doing color coding on rows</li>
+          <li>This is desugared into the let-even attribute</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... *ngFor=&quot;let hero of heroes; let i=index; let
+                even=even&quot; ...
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Odd Property</h2>
+      <section>
+        <ul>
+          <li>
+            You can determine if the current iteration is an odd or even number
+            using the odd property of the NgForOf directive
+          </li>
+          <li>Useful for doing color coding on rows</li>
+          <li>This is desugared into the let-odd attribute</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... *ngFor=&quot;let hero of heroes; let i=index; let
+                odd=odd&quot; ...
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Count Property</h2>
+      <section>
+        <ul>
+          <li>Returns a live collection length, equivalent to heroes.length</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... *ngFor=&quot;let hero of heroes; count as c ... <br />
+                ... <br />
+                Count: {{ c }}
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3 id="trackby">TrackBy Property</h3>
       <section>
         <ul>
           <li>Object uniqueness is determined by reference by default</li>
@@ -237,7 +352,6 @@
           </li>
         </ul>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

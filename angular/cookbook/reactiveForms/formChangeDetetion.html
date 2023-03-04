@@ -20,7 +20,9 @@
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../../index.html">Angular</a>
           </li>
@@ -38,24 +40,98 @@
       <section>
         <ul>
           <li>
-            FormGroups and FormControls have a <code>valueChanges</code> method
-            that returns an observable
+            FormGroups, FormArrays, and FormControls extend the AbstractControl
+            base class
+          </li>
+          <li>
+            This means they have a <code>valueChanges</code> method that returns
+            an observable
           </li>
           <li>You can subscribe to it to respond when values change</li>
           <li>
-            Given a FormGroup parentForm, add the following to listen for form
-            changes
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  this.parentForm.valueChanges.subscribe(newVal =&gt;
-                  console.log(newVal));
-                </code>
-              </div>
-            </div>
+            This event is triggered immediately after the new values are
+            updated, but before the change is bubbled up to its parent
+            <ul>
+              <li>
+                <code>this.formGroup.value</code> will still show the previous
+                value
+              </li>
+            </ul>
           </li>
-          <li></li>
+          <li>
+            For ForGroups and FormArrays, the event is fired any time a child
+            control value changes
+          </li>
         </ul>
+      </section>
+
+      <h2>Setups</h2>
+      <section>
+        <div>
+          Given a FormGroup parentForm with a control firstname, add the
+          following to listen for control changes
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.parentForm.get("firstname").valueChanges.subscribe(x =&gt;
+                { <br />
+                console.log('firstname value changed'); <br />
+                console.log(x); <br />
+                })
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Given a FormGroup parentForm, add the following to listen for form
+          changes
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.parentForm.valueChanges.subscribe(newVal =&gt; { <br />
+                console.log(newVal)); <br />
+                })
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The event is raised even if the value is changed programmatically.
+          Sometimes you want to supress the event (suchs as changing it
+          programmatically):
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.parentForm.get("firstname").setValue("", { emitEvent: false
+                }); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Events usually will bubble from a FormConntrol up to its parent
+          FormGorup. You can isolate the event to just the control and prevent
+          bubbling with the following:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.parentForm.get("firstname").setValue("", { onlySelf: true
+                })); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Template driven forms use the same syntax in the component, but need a
+          reference to the Form Model with the following:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @ViewChild('templateForm',null) templateForm: NgForm; <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
