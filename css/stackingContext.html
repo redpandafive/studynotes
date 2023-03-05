@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Stacking Context
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Stacking Context</h1>
+
+      <section>
+        <ul>
+          <li>
+            3D conceptualizatoin of HTML elements along an imaginary z-index
+            relative to the user's perspective
+          </li>
+          <li>
+            Overlapping elements are stacked in priority order based on element
+            attributes
+          </li>
+          <li>
+            Use the z-index property on a positioned element to create a custom
+            stacking order
+          </li>
+          <li>
+            Layer description (X is an arbitraty integer)
+            <ul>
+              <li>
+                Bottom Layer
+                <ul>
+                  <li>Layer farthest from the observer</li>
+                </ul>
+              </li>
+              <li>
+                Layer -X
+                <ul>
+                  <li>Layers with negative z-index values</li>
+                </ul>
+              </li>
+              Layer 0
+              <li>
+                <ul>
+                  <li>Default rendering layer</li>
+                </ul>
+              </li>
+              Layer X
+              <li>
+                <ul>
+                  <li>Layers with positive z-index values</li>
+                </ul>
+              </li>
+              Top Layer
+              <li>
+                <ul>
+                  <li>Layer closets to the user</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Sources / See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Adding_z-index" target="_blank">
+              https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Adding_z-index
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

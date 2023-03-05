@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Properties</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Display Property
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Display Property</h1>
+
+      <section>
+        <ul>
+          <li>
+            Sets whether an element is treated as a block or inline element and
+            the layout used for its children
+            <ul>
+              <li>
+                Specificaly, it sets an element's inner and outer display types
+              </li>
+            </ul>
+          </li>
+          <li>
+            CSS Level 3 supports setting inner and outer display types
+            seperately, but it is not well supported right now
+            <ul>
+              <li>
+                I excluded all notes related to this: see
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS/display"
+                  target="_blank"
+                >
+                  https://developer.mozilla.org/en-US/docs/Web/CSS/display
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Outer display type
+            <ul>
+              <li>Sets an element's participation in flow layout</li>
+              <li>
+                Possible valueChanges
+                <ul>
+                  <li>
+                    block
+                    <ul>
+                      <li>The element generates a block element box</li>
+                      <li>
+                        Generates line breaks both before and after the element
+                        when in the normal flow
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    inline
+                    <ul>
+                      <li>
+                        The element generates one or more inline element boxes
+                        that do not generate line breaks before or after
+                        themselves
+                      </li>
+                      <li>
+                        In normal flow, the next element will be on the same
+                        line if there is space
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Inner display type
+            <ul>
+              <li>Sets the layout of children</li>
+              <li>
+                Possible values
+                <ul>
+                  <li>table - behaves like a table element</li>
+                  <li>
+                    flex - behaves like a block element and uses flexbox model
+                  </li>
+                  <li>
+                    grid - behaves like a block element and uses grid model
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Box display type
+            <ul>
+              <li>
+                Possible values
+                <ul>
+                  <li>
+                    contents
+                    <ul>
+                      <li>
+                        Element doesnt produce a specific box by themselves
+                      </li>
+                      <li>Element is replaced by their pseudo-box</li>
+                    </ul>
+                  </li>
+                  <li>
+                    none
+                    <ul>
+                      <li>Turns off display of element and all its children</li>
+                      <li>
+                        Element has not effect on layout (unlike visibility)
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

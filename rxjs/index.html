@@ -40,7 +40,7 @@
         <li>Can deal with time, which promises do not</li>
         <li>You can manipulate the data stream using map operations</li>
         <li>
-          Observables to not actually start processing until there is a
+          Observables do not actually start processing until there is a
           subscriber
           <ul>
             <li>
@@ -57,7 +57,7 @@
           </ul>
         </li>
         <li>
-          Example is observice mouse clicks over time
+          Example is observing mouse clicks over time
           <ul>
             <li>
               Think of it as a timeline with multiple points where the value
@@ -95,6 +95,156 @@
           </ul>
         </li>
       </ul>
+
+      <h3>Observable Methods</h3>
+      <section>
+        <ul>
+          <li>
+            complete()
+            <ul>
+              <li>Signals the end of of the Observable sequence</li>
+            </ul>
+          </li>
+          <li>
+            next()
+            <ul>
+              <li>Emits values to code subscribed to the Observable</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { Observable } from 'rxjs'; const myObservable = new
+                Observable((observer) => { <br />
+                observer.next('Hello'); observer.next('World'); <br />
+                observer.complete(); });<br />
+                myObservable.subscribe({ <br />
+                next: (value) => console.log(value), <br />
+                complete: () => console.log('Finished!') });<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Subscriptions</h3>
+      <section>
+        <ul>
+          <li>
+            Methods
+            <ul>
+              <li>
+                subscribe()
+                <ul>
+                  <li>NEED THIS - detail methods used as inputs</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Unsubscribing</h2>
+      <section>
+        <ul>
+          <li>
+            Short lived observables that have a limited amoutn of values and
+            complete on their own do not need a call to unsubscribe
+            <ul>
+              <li>
+                Subscriptions will be automatically be unsubscribed when
+                .complete() is called
+              </li>
+              <li>
+                The Angular HttpClient library do NOT require a call to
+                unsubscribe
+                <ul>
+                  <li>They only return 1 value and then complete</li>
+                </ul>
+              </li>
+              <li>This also includes of() observables</li>
+            </ul>
+          </li>
+          <li>
+            You should unsubscribe to long lived obserables that have an
+            undefined amound values and do not call complete() on their own
+            <ul>
+              <li>Subscriptions to valueChanges on Angular forms</li>
+              <li>Subscribing to Angular route changes</li>
+            </ul>
+          </li>
+          <li>
+            To manually track subscriptions in Angular
+            <ul>
+              <li>
+                Keep an array of observable subscriptions in your component
+              </li>
+              <li>
+                In OnDestroy, forEach over the array and call unsubscribe on
+                each
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can also use the takeUntil operator
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    export class SomeComponent implements OnInit, OnDestroy {
+                    <br />
+                    private componentIsDestroyed$ = new
+                    Subject&lt;boolean&gt;();<br />
+                    <br />
+                    constructor() {}<br />
+                    <br />
+                    ngOnInit() {<br />
+                    const timer1 = timer(500, 500);<br />
+                    const timer2 = timer(1000, 1000);<br />
+                    <br />
+                    timer1.pipe(takeUntil(this.componentIsDestroyed$))<br />
+                    .subscribe(() =&gt; console.log('timer1'));<br />
+                    <br />
+                    timer2.pipe(takeUntil(this.componentIsDestroyed$))<br />
+                    .subscribe(() =&gt; console.log('timer2'));<br />
+                    }<br />
+                    <br />
+                    ngOnDestroy() {<br />
+                    this.componentIsDestroyed$.next(true);<br />
+                    this.componentIsDestroyed$.complete();<br />
+                    }<br />
+                    }<br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            See also
+            <ul>
+              <li>
+                <a
+                  href="https://www.thisdot.co/blog/best-practices-for-managing-rxjs-subscriptions"
+                  target="_blank"
+                >
+                  https://www.thisdot.co/blog/best-practices-for-managing-rxjs-subscriptions
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://blog.jcore.com/2020/10/rxjs-when-and-how-to-unsubscribe/"
+                  target="_blank"
+                >
+                  https://blog.jcore.com/2020/10/rxjs-when-and-how-to-unsubscribe/
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
 
       <h3>Subject</h3>
       <section>
@@ -229,412 +379,36 @@
         </ul>
       </section>
 
-      <h2>Operators</h2>
+      <h2>Subject vs BehaviorSubject vs ReplaySubject</h2>
       <section>
         <ul>
           <li>
-            These operate on an Observable and return an Observable
+            Subject
+            <ul></ul>
+          </li>
+          <li>
+            BehaviorSubject
             <ul>
-              <li>
-                This allows you to chain operators together to perform complete
-                transformations
-              </li>
-            </ul>
-          </li>
-          <li>These allow you to shape the data being returned</li>
-          <li>
-            These need to be imported into your component before you use them
-          </li>
-        </ul>
-      </section>
-
-      <h3>Catch</h3>
-      <section>
-        <ul>
-          <li>Intercepts a failed call</li>
-        </ul>
-      </section>
-
-      <h3>CatchError</h3>
-      <section>
-        <ul>
-          <li>Operator that intercepts an Observable that failed.</li>
-          <li>
-            It passes the error an error handler function that can do what it
-            wants with the error
-          </li>
-        </ul>
-      </section>
-
-      <h3>DebounceTime</h3>
-      <section>
-        <ul>
-          <li>Wait the specified number of milliseconds</li>
-          <li>Useful if you are changing content based on keystrokes</li>
-        </ul>
-      </section>
-
-      <h3>DistinctUntilChanged</h3>
-      <section>
-        <ul>
-          <li>Only take action if the contents send changed</li>
-          <li>Useful for search terms</li>
-        </ul>
-      </section>
-
-      <h3>forkJoin</h3>
-      <section>
-        <ul>
-          <li>
-            Takes a group of observables that are execute simulataneously
-            <ul>
-              <li>These can either be an array or keyed object</li>
-              <li>
-                When an array is used, results ordered to match the associated
-                observable
-              </li>
-              <li>
-                An error on one observable will cause all to fail
-              </li>
-              <li>
-                Similar to <code>Promise.all</code>
-              </li>
-            </ul>
-          </li>
-          <li>Values are emitted when all observables complete
-            <ul>
-              <li>
-                forJoin collects the last emitted value from each and emits them as an array
-              </li>
-              <li>
-                It will preserve the order of inner observables regardless of when they complete
-              </li>
-              <li>
-                If any of the inner obsevables never complete, then the forkJOin will never complete either
-              </li>
+              <li>Requires an initial value</li>
+              <li>Emits its current value whenever it is subscribed to</li>
             </ul>
           </li>
           <li>
-            Common use case is issuing multiple requests on page load and only
-            want to take action when a response has been received for all
-          </li>
-
-
-
-          <li>
-            <a
-              href="https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin"
-            >
-              https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin
-            </a>
-          </li>
-        </ul>
-        <div>
-          Example using an array of Observables
-          <div class="card">
-            <div class="card-body">
-              <code>
-                const obs = [<br />
-                exampleServiceClass1.getData(), <br />
-                exampleServiceCLass2.getData() ];<br />
-                forkJoin(obs).subscribe(d => {<br />
-                console.log(d[0]]);<br />
-                console.log(d[1]);<br />
-                });
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Example using an dictionary of Observables
-          <div class="card">
-            <div class="card-body">
-              <code>
-                const obs = {<br />
-                di1: exampleServiceClass1.getData(), <br />
-                di2: exampleServiceCLass2.getData() <br />
-                };<br />
-                forkJoin(obs).subscribe(d => {<br />
-                console.log(d.di1);<br />
-                console.log(d.di2);<br />
-                });
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Map</h3>
-      <section>
-        <ul>
-          <li>
-            Pass a function that returns a value that performs some sort of
-            transformation
-          </li>
-          <li>
-            This transformation is applied to each value emitted by the source
-            Observable
-          </li>
-          <li>Resulting values are emitted as Observables</li>
-          <li>
-            Example
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  //emit (1,2,3,4,5) <br />
-                  const source = from([1, 2, 3, 4, 5]); <br />
-                  //add 10 to each value <br />
-                  const example = source.pipe(map(val => val + 10)); <br />
-                  //output: 11,12,13,14,15 <br />
-                  const subscribe = example.subscribe(val => console.log(val));
-                  <br />
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Links
+            ReplaySubject
             <ul>
+              <li>Emits old values to subscribers</li>
+              <li>It buffers a set number of values</li>
               <li>
-                <a
-                  href="https://www.learnrxjs.io/learn-rxjs/operators/transformation/map"
-                >
-                  https://www.learnrxjs.io/learn-rxjs/operators/transformation/map
-                </a>
+                All buffered values are emitted immediately to new subscribers
+                as well as emitting new values to existing subscribers
               </li>
               <li>
-                <a href="https://rxjs.dev/api/index/function/map">
-                  https://rxjs.dev/api/index/function/map
-                </a>
+                It continues to do this even after complete() is called
               </li>
             </ul>
           </li>
         </ul>
       </section>
-
-      <h3>Merge</h3>
-      <section>
-        <ul>
-          <li>Turns multiple observables into a single observable</li>
-        </ul>
-        <div>
-          Example
-          <div class="card">
-            <div class="card-body">
-              <code>
-                //emit every 2.5 seconds <br/>
-                const first = interval(2500); <br/>
-                //emit every 2 seconds <br/>
-                const second = interval(2000); <br/>
-                //emit every 1.5 seconds <br/>
-                const third = interval(1500); <br/>
-                //emit every 1 second <br/>
-                const fourth = interval(1000); <br/>
-                <br/>
-                //emit outputs from one observable <br/>
-                const example = merge( <br/>
-                  first.pipe(mapTo('FIRST!')), <br/>
-                  second.pipe(mapTo('SECOND!')), <br/>
-                  third.pipe(mapTo('THIRD')), <br/>
-                  fourth.pipe(mapTo('FOURTH')) <br/>
-                );<br/>
-                //output: "FOURTH", "THIRD", "SECOND!", "FOURTH", "FIRST!", "THIRD", "FOURTH" <br/>
-                const subscribe = example.subscribe(val => console.log(val)); <br/>
-                <br />
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Of</h3>
-      <section>
-        <ul>
-          <li>
-            Returns an observable that emits a single value, such as an array of
-            objects
-          </li>
-          <li>Import from 'rxjs'</li>
-          <li>
-            Creates an observable object wrapped around the object you pass in
-          </li>
-        </ul>
-      </section>
-
-      <h3>Pipe</h3>
-      <section>
-        <ul>
-          <li>
-            Combines multiple RxJS operators to compose asynchronous operations
-          </li>
-          <li>
-            Takes one or more operators and returns an RxJS Operator
-            <ul>
-              <li>This could be operators such as filter, map, mergeMap</li>
-              <li>Operators are executed in the order they are added</li>
-              <li>
-                The output of the first method becomes the input for the second
-                method (and so on until all operators are called)
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div>
-          Example:
-          <div class="card">
-            <div class="card-body">
-              <code>
-                //emit (1,2,3,4,5) <br />
-                const source = from([1, 2, 3, 4, 5]); <br />
-                //add 10 to each value <br />
-                const example = source.pipe(map(val => val + 10)); <br />
-                //output: 11,12,13,14,15 <br />
-                const subscribe = example.subscribe(val => console.log(val));
-                <br />
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Example: First calls filter, then calls map in the results of the
-          filter. This outputs [6,8,10]
-          <div class="card">
-            <div class="card-body">
-              <code>
-                obs = new Observable((observer) => { <br />
-                observer.next(1) <br />
-                observer.next(2) <br />
-                observer.next(3) <br />
-                observer.next(4) <br />
-                observer.next(5) <br />
-                observer.complete() <br />
-                }).pipe( <br />
-                filter(data => data > 2), <br />
-                map((val) => {return val as number * 2}) <br />
-                ).subscribe(console.log) <br />
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Retry</h3>
-      <section>
-        <ul>
-          <li>
-            Automatically resubscribes to a failed Observable a specified number
-            of times
-          </li>
-          <li>
-            Use this to retry a failed connection – has the effect of reissuing
-            a HTTP request
-          </li>
-        </ul>
-      </section>
-
-      <h3>Share Replay</h3>
-      <section>
-        <ul>
-          <li>
-            You may run into situations where you end up with multiple
-            subscriptions to the same observable
-          </li>
-          <li>
-            Example would be using async pipe in a template, but adding a
-            separate subscription in the component to handle errors
-          </li>
-          <li>
-            This results in multiple calls to the server since each subscription
-            would trigger a call
-          </li>
-          <li>
-            The ShareReplay operator ensures that only one HTTP request will be
-            made to the backend in the first subscription
-          </li>
-          <li>
-            The result of that request will be served from memory to any other
-            subsequent subscribers
-          </li>
-          <li>Example</li>
-          <li>
-            Given a method on a service class called loadLessons
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  this.lessons$ =
-                  this.lessonsService.loadLessons().pipe(shareReplay());"
-                </code>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <h3>switchMap</h3>
-      <section>
-        <ul>
-          <li>Takes a function argument that returns an Observable</li>
-          <li>
-            If the previous search request is still in flight, it cancels that
-            request and sends a new one
-            <ul>
-              <li>
-                Cancels and discards previous observables, returning only the
-                latest observable
-              </li>
-            </ul>
-          </li>
-          <li>
-            Useful since it preserves the original request order while only
-            returning the observable from the most recent HTTP call
-            <ul>
-              <li>Previous ones are canceled discarded</li>
-              <li>
-                Useful for something like a search box where the user can type a
-                search term
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h3>Take</h3>
-      <section>
-        <ul>
-          
-        </ul>
-      </section>
-
-      <h3>Tap</h3>
-      <section>
-        <ul>
-          <li>
-            Looks at the observable values, does something with those values,
-            and passes them along
-          </li>
-          <li>It doesn't touch the values themselves</li>
-          <li>Useful for logging functions</li>
-        </ul>
-      </section>
-
-      <h3>ThrowError</h3>
-      <section>
-        <ul>
-          <li></li>
-        </ul>
-      </section>
-
-      <h3>ToPromise</h3>
-      <section>
-        <ul>
-          <li>
-            Observables can be converted to promises using the
-            <code>toPromise()</code> method
-          </li>
-        </ul>
-      </section>
-
-      <h2>Cookbook</h2>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

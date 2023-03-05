@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Use a Fallback Observable on Error
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Use a Fallback Observable on Error</h1>
+      <section>
+        <div>
+          The following code:
+          <ul>
+            <li>Creates two observables from static values</li>
+            <li>
+              Uses the throwError operator to creae an observable that
+              immediately emits an error notification
+            </li>
+            <li>
+              Pipes the value emitted by observableWithError into the catchError
+              operator
+              <ul>
+                <li>This returns the fallbackObservable observable</li>
+              </ul>
+            </li>
+            <li>
+              Since catchError has intercepted the error, the error method on subscribe is not called
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { throwError, of } from 'rxjs'; <br />
+                import { catchError } from 'rxjs/operators'; <br />
+                <br />
+                const observableWithError = throwError('Oops! Something went
+                wrong!'); <br />
+                const fallbackObservable = of('Fallback value'); <br />
+                <br />
+                observableWithError.pipe(catchError((error) =>
+                fallbackObservable)).subscribe( <br />
+                (value) => console.log(`Received value: ${value}`), <br />
+                (error) => console.log(`Received error: ${error}`) <br />
+                ); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Sources / See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://guillaume-ferber.medium.com/the-rxjs-error-handling-survival-guide-stay-calm-and-observable-on-2f0da7f37079"
+              target="_blank"
+            >
+              https://guillaume-ferber.medium.com/the-rxjs-error-handling-survival-guide-stay-calm-and-observable-on-2f0da7f37079
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

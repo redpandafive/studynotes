@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Properties</li>
+        </ol>
+      </nav>
+
+      <h1>Properties</h1>
+
+      <h2>Animation</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="./transition.html">transition</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Decoration</h2>
+      <section>
+        <ul>
+          <li>
+            box-shadow
+            <ul>
+              <li>Adds shadow effects around an elements frame</li>
+              <li>
+                Described by
+                <ul>
+                  <li>X and Y offsets relative to the element</li>
+                  <li>Blur</li>
+                  <li>Spread radius</li>
+                  <li>Color</li>
+                  <li>
+                    <a
+                      href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow"
+                    >
+                      https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Display</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="./display.html">display</a>
+          </li>
+          <li>
+            visibility
+            <ul>
+              <li>
+                Shows and hides the element without changing the layout of a
+                document
+              </li>
+              <li>
+                Use display instad to remove the element and remove it from the
+                document layout
+              </li>
+              <li>
+                Possible values
+                <ul>
+                  <li>visible</li>
+
+                  <li>hidden</li>
+                  <li>collapse - ???</li>
+                </ul>
+              </li>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS/visibility"
+                  target="_blank"
+                >
+                  https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Layout</h2>
+      <section>
+        <ul>
+          <li>
+            position
+            <ul>
+              <li>Sets how an element is positioned in the document</li>
+              <li>
+                Final position is determined by combination of top, right,
+                bottom, and left properties
+              </li>
+              <li>
+                Terminology
+                <ul>
+                  <li>
+                    Positioned element = element whose computed position value
+                    is anything other than static
+
+                  </li>
+                  <li>
+                    Absolutely positioned element = element whose computed
+                    position value is absolute or fixed
+                    <ul>
+                      <li>Usually leave hight and wdith on auto and using top, right, bottom, and left</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Possible values
+                <ul>
+                  <li>
+                    absolute
+                    <ul>
+                      <li>Element is removed from the normal document flow</li>
+                      <li>
+                        No space is creted for the elment in the page layout
+                      </li>
+                      <li>
+                        If it has a positioned ancestor, it is positioned
+                        relative to that element
+                      </li>
+                      <li>
+                        If it does not have a positioned ancestor, it is placed
+                        relative to the initial containing block
+                      </li>
+                      <li>
+                        The top, riht, bottom, and left properties specify
+                        offsets from the edges of the element's containing block
+                      </li>
+                      <li>Creates a new stacking context</li>
+                    </ul>
+                  </li>
+                  <li>
+                    fixed
+                    <ul>
+                      <li>Element is removed from the normal document flow</li>
+                      <li>
+                        No space is creted for the element in the page layout
+                      </li>
+                      <li>
+                        Positioned relative to the initial containing block
+                        established by the viewport
+                      </li>
+                      <li>
+                        The top, riht, bottom, and left properties specify
+                        offsets from the edges of the element's containing block
+                      </li>
+                      <li>Always creates a new stacking context</li>
+                    </ul>
+                  </li>
+                  <li>
+                    relative
+                    <ul>
+                      <li>
+                        Element is position ed according to the normal flow of
+                        the document
+                      </li>
+                      <li>
+                        Properties top, right, botton, and left offset the
+                        element relative to itself
+                        <ul>
+                          <li>
+                            The top and bottom properties specify the vertical
+                            offset from its normal position
+                          </li>
+                          <li>
+                            The left and right properties specify the horizontal
+                            offset
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        Offsets do no affect the position of any other elements
+                      </li>
+                      <li>Creates a new stacking context</li>
+                    </ul>
+                  </li>
+                  <li>
+                    static
+                    <ul>
+                      <li>This is the default value</li>
+                      <li>
+                        Element is positioned according to normal flow of the
+                        document
+                      </li>
+                      <li>
+                        Properties top, right, left, and z-index have no effect
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    sticky
+                    <ul>
+                      <li>
+                        Positioned according to the normal flow of the document
+                        until its containing block crosses a specified
+                        threshhold within its flow root
+                      </li>
+                      <li>
+                        Offset relative to it nearest scrolling ancestor and
+                        containing block
+                      </li>
+                      <li>
+                        Offsets do not affect the position of any other elements
+                      </li>
+
+                      <li>Creates a new stacking context</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank">
+                  https://developer.mozilla.org/en-US/docs/Web/CSS/position
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Lists</h2>
+      <section>
+        <ul>
+          <li>
+            list-style-type
+            <ul>
+              <li>Specifies the marker of a list item element</li>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type"
+                  target="_blank"
+                >
+                  https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>
+        <a href="pseudoselectors.html">Pseudo Selectors </a>
+      </h2>
+
+      <h2>Sizing</h2>
+      <section>
+        <ul>
+          <li>
+            height
+            <ul>
+              <li>
+                Note, this rule cannot be set on an element with
+                <code>display: inline</code>
+              </li>
+              <li>
+                Usually do not set ths on absolutely positioned elements (default to auto)
+              </li>
+            </ul>
+          </li>
+          <li>
+            width
+            <ul>
+              <li>
+                Note, this rule cannot be set on an element with
+                <code>display: inline</code>
+              </li>
+              <li>
+                Usually do not set ths on absolutely positioned elements (default to auto)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Text</h2>
+      <section>
+        <ul>
+          <li>
+            white-space
+            <ul>
+              <li>Sets how white space inside an element is handled</li>
+              <li>
+                Specifies if and how white space is collapsed and whether lines
+                may wrap at soft wrap opportunities
+              </li>
+              <li>
+                https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
