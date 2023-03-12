@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Build a Custom Validator
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Build a Custom Validator</h1>
+
+      <section>
+        <div>
+          Check if the control contains the word foo. Define a validator
+          function in the component
+          <div class="card">
+            <div class="card-body">
+              <code>
+                private restrictedWords(control: formControl):<br />
+                {&#91;key: string&#93;: any} {<br />
+                return control.value.includes('foo') ?<br />
+                {'restrictedWords': 'foo'} : null; <br />
+                }
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add this to the validator array for the target FormControl
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br />
+                new FormControl('', &#91;Validators.required,<br />
+                this.restrictedWords&#93;) <br />
+                ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can reference the errors in the returned object using
+          <ul>
+            <li>This assumes a control named abstract</li>
+            <li>
+              You can use this in your error messages that you report back to
+              the user
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ...<br />
+                { abstract.errors.restrictedWords }<br />
+                ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can take this one step further and specify an array of words to
+          check for on the FormControl
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br />
+                new FormControl('', &#91;Validators.required,<br />
+                this.restrictedWords('foo', 'bar')&#93;)<br />
+                ...
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The validator function should now be a function that returns a
+          function. To make this reusable, put this function into a file (such
+          as restricted-words.validator.ts) and export it.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                <pre>
+private restrictedWords(words)
+{
+return (control: formControl): ): {[key: string]: any} => {
+if(!words) {
+return null;
+}
+var invalidWords = words.map(w => control.value.includes(w) ? w: null)
+.filter(w => w != null);
+return invalidWords && invalidWords.length > 0 ? {'restrictedWords': invalidWords.join(',')} : null
+}}
+</pre
+                >
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Example To Fail on Only Whitespace</h2>
+      <section>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { AbstractControl, ValidationErrors } from
+                '@angular/forms'; <br />
+                export class NoWhiteSpaceValidator { <br />
+                static noWhiteSpace(control: AbstractControl) : ValidationErrors <br />
+                | null { <br />
+                if((control.value as string).indexOf(' ') &gt;= 0) { <br />
+                return {cannotContainSpace: true} <br />
+                } <br />
+                return null; <br />
+                } <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Change vs NgModelChange
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Change vs NgModelChange</h1>
+      <section>
+        <ul>
+          <li>
+            (change)
+            <ul>
+              <li>
+                This is a DOM event - listens for a DOM event called change
+              </li>
+              <li>
+                Only fires when the user has blurred the input
+                <ul>
+                  <li>
+                    This means it fires after the value bound to NgModel has
+                    changed
+                  </li>
+                </ul>
+              </li>
+              <li>
+                A regular Event object is passed to the handler when called
+                <ul>
+                  <li>This is a plain DOM Event object</li>
+                  <li>
+                    Need to use <code>e.target.value</code> to get the value
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            (ngModelChange)
+            <ul>
+              <li>
+                This is an Angular event, so it is inside the Angular system
+              </li>
+              <li>
+                This fires when ngModel changes
+                <ul>
+                  <li>Actually an event emitter on teh NgModel directive</li>
+                  <li>This means you cannot it without ngModel</li>
+                </ul>
+              </li>
+              <li>
+                This will be fired when the model is intended to be updated (not
+                waiting for a blur event, for example)
+                <ul>
+                  <li>
+                    Means it will fire before teh value bound to NgModel has
+                    changed
+                  </li>
+                </ul>
+              </li>
+              <li>
+                The event handler will be passed just the value emitted, not the
+                value wrapped in a DOM event object (you can name this whatever
+                you want in the template)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://ultimatecourses.com/blog/difference-change-ngmodelchange-angular"
+              target="_blank"
+            >
+              https://ultimatecourses.com/blog/difference-change-ngmodelchange-angular
+            </a>
+          </li>
+        </ul>
+      </section>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
