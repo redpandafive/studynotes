@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="./../assets/styles/site.css" />
   </head>
   <body>
@@ -27,13 +30,13 @@
       </nav>
 
       <h1>NgIf</h1>
-      
+
       <section class="navlinks">
         <ul>
           <li><a href="#ngif">NgIf</a></li>
         </ul>
       </section>
-      
+
       <section id="ngif">
         <ul>
           <li>Built in structural directive</li>
@@ -99,34 +102,85 @@
             </ul>
           </li>
         </ul>
-        <p>Here is the code that you write...</p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              &lt;div *ngIf=&quot;lessons else loading&quot;&gt;&#10; ... <br />
-              &#10;&lt;/div&gt;&#10;&#10;&lt;ng-template #loading&gt;&#10;<br />
-              &lt;div&gt;Loading...&lt;/div&gt;&#10;&lt;/ng-template&gt;&#10;
-            </code>
+        <div>
+          Here is the code that you write
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div *ngIf=&quot;lessons else loading&quot;&gt;&#10; ...
+                <br />
+                &#10;&lt;/div&gt;&#10;&#10;&lt;ng-template #loading&gt;&#10;<br />
+                &lt;div&gt;Loading...&lt;/div&gt;&#10;&lt;/ng-template&gt;&#10;
+              </code>
+            </div>
           </div>
         </div>
-        <p>Here is the desugared version of the above code...</p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              &lt;ng-template [ngIf]=&quot;lessons&quot;
-              [ngIfElse]=&quot;loading&quot;><br />
-              &lt;div><br />
-              ...<br />
-              &lt;/div><br />
-              &lt;/ng-template><br />
-              &lt;ng-template #loading><br />
-              &lt;div>Loading...&lt;/div><br />
-              &lt;/ng-template>
-            </code>
+        <div>
+          Here is the desugared version of the above code
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-template [ngIf]=&quot;lessons&quot; 
+                [ngIfElse]=&quot;loading&quot;><br />
+                &lt;div><br />
+                ...<br />
+                &lt;/div><br />
+                &lt;/ng-template><br />
+                &lt;ng-template #loading><br />
+                &lt;div>Loading...&lt;/div><br />
+                &lt;/ng-template>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can do an if/else with the following (requires a ng-template for the else case):
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div *ngIf="isValid;else other_content"&gt; <br />
+                  content here ... <br />
+                  &lt;/div&gt; <br />
+                  &lt;ng-template #other_content&gt;other content here...&lt;/ng-template&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can specify a template for the if case with the following
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div *ngIf="isValid;then content"&gt;&lt;/div&gt; <br />
+                &lt;ng-template #content>content here...&lt;/ng-template&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can specify a template for the if case and another for the else case
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div *ngIf="isValid;then content else other_content"&gt;here is ignored&lt;/div&gt; <br />
+                &lt;ng-template #content&gt;content here...</ng-template> <br />
+                &lt;ng-template #other_content&gt;other content here...&lt;/ng-template> <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          If you need to pass data to the template, use a ngTemplateOutlet instead
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-container *ngTemplateOutlet="condition ? template1 : template2; context: {$implicit: 'World'}"&gt;
+                &lt;/ng-container&gt;
+              </code>
+            </div>
           </div>
         </div>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

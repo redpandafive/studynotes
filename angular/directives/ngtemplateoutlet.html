@@ -188,7 +188,20 @@
           </ul>
           </section>
 
-
+          <h2>Conditional Template Example</h2>
+          <section>
+            <div>
+              If you need to pass data to the template, use a ngTemplateOutlet instead
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;ng-container *ngTemplateOutlet="condition ? template1 : template2; context: {$implicit: 'World'}"&gt;
+                    &lt;/ng-container&gt;
+                  </code>
+                </div>
+              </div>
+            </div>
+          </section>
 
       <h2>See Also</h2>
       <section>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Form Validation Tips
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Form Validation Tips</h1>
+
+      <section>
+        <div>
+          Disable the submit button on a form until all FormControls in the
+          FormGroup are valid
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;button type="submit"
+                [disabled]="myForm.invalid"&gt;Submit&lt;/button&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add a check in teh submission function since it is easy to string out
+          the attribute on the button
+          <div class="card">
+            <div class="card-body">
+              <code>
+                submitMyForm() { if (this.fg.invalid) { // here potentially add
+                some visual feedback for a user return; } .... }
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To perform a full recalculation and validation status of form
+          controls, you can do something like the following in the submit
+          function
+          <div class="card">
+            <div class="card-body">
+              <code>
+                Object.keys(this.activityFormGroup.controls).forEach(field =&gt; {
+                  let control = this.activityFormGroup.get(field);
+                  control.updateValueAndValidity();
+                });
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Sources
+          <ul>
+            <li>
+              <a href="https://careydevelopment.us/blog/angular-use-updatevalueandvalidity-to-validate-your-forms-programmatically" target="_blank">
+                https://careydevelopment.us/blog/angular-use-updatevalueandvalidity-to-validate-your-forms-programmatically
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

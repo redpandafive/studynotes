@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">HTML</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Disable Autocomplete on a Form Control
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Disable Autocomplete on a Form Control</h1>
+
+      <section>
+        <ul>
+          <li>
+            Browsers remember information that the user smites through input
+            fields on websites
+            <ul>
+              <li>
+                This allows autocompletion (suggest possible completetions) or
+                autofill (pre-populate fields on load)
+              </li>
+            </ul>
+          </li>
+          <li>
+            This attribute allows the author to indicate the field will not be
+            useful in the future (such as a one time pin) or contains sensitve
+            information
+          </li>
+          <li>
+            This has two effects
+            <ul>
+              <li>
+                Tells the browser not to save data inputted for later use on
+                similar forms
+                <ul>
+                  <li>
+                    However, browser standards do not require this behavior
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Stops the browser from caching form data in the session history
+              </li>
+            </ul>
+          </li>
+          <li>
+            Modern browsers do not support <code>autocomplete="off"</code> for
+            login fields
+            <ul>
+              <li>
+                This is done to allow account managers to store user credentials
+              </li>
+            </ul>
+          </li>
+          <li>
+            For something like a user management page where you aer specifying a
+            password, you can use <code>autocomplete="new-password"</code> to
+            tell the browser not to autofill the password value
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div>
+          To disable at the control level
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;input type="text" id="cc" name="cc" autocomplete="off" /&gt;
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To disable at the form level
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form method="post" action="/form" autocomplete="off"&gt;
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also / Sources</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion" target="_blank">
+              https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -40,6 +40,21 @@
       <section class="navlinks">
         <ul>
           <li>
+            <a href="selectControls.html#nullOption"
+              >Provide a Null Option</a
+            >
+          </li>
+          <li>
+            <a href="selectControls.html#multiple"
+              >Multiple Select Options</a
+            >
+          </li>
+          <li>
+            <a href="selectControls.html#collection"
+              >Bind a Select Control to a Collection</a
+            >
+          </li>
+          <li>
             <a href="selectControls.html#currentValue"
               >Get the Current Value of a Select Control</a
             >
@@ -47,11 +62,6 @@
           <li>
             <a href="selectControls.html#trackby"
               >Improve Performance with TrackBy</a
-            >
-          </li>
-          <li>
-            <a href="selectControls.html#collection"
-              >Bind a Select Control to a Collection</a
             >
           </li>
           <li>
@@ -65,6 +75,149 @@
             >
           </li>
         </ul>
+      </section>
+
+
+      <h2 id="nullOption">Provide a Null Option</h2>
+      <section>
+        <div>
+          This adds a "-Select-" option to the drop down that is initially set if there is no bound value (or one outside of the possible option values).
+          <ul>
+            <li>Setting the disabled attribute prevents the user from re-selecting this</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;select formControlName="profile"&gt; <br />
+                  &lt;option [ngValue]="null" disabled&gt;Choose your profile&lt;/option&gt; <br />
+                  &lt;option *ngFor="let prf of allProfiles" [ngValue]="prf"&gt; <br />
+                   {{ prf.prName }} <br />
+                  &lt;/option&gt; <br />
+                &lt;/select&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="multiple">Multiple Select Options</h2>
+      <section>
+        <div>
+          Allows multiple options to be selected
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;select multiple formControlName="profile"&gt; <br />
+                  &lt;option *ngFor="let prf of allProfiles" [ngValue]="prf"&gt; <br />
+                   {{ prf.prName }} <br />
+                  &lt;/option&gt; <br />
+                &lt;/select&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="collection">Bind a Select Control to a Collection</h2>
+      <section>
+        <ul>
+          <li>Use [ngFor] to iterate over every element in the array</li>
+          <li>
+            Use [value] to bind to the value DOM attribute
+            <ul>
+              <li>This always binds as a string</li>
+              <li>
+                If you bind to a property, its value will be converted to a
+                string
+              </li>
+              <li>
+                Use this if you are binding to strings - you can end up with
+                conversion problems if you use a non-string
+                <ul>
+                  <li>
+                    This can cause problem in Typescript with strict typing
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;select (ngModel)="selectedBook"&gt; &lt;option *ngFor="let
+                  book of myBooks"
+                  [value]="book.id"&gt;{{book.title}}&lt;/option&gt; <br />
+                  &lt;/select&gt; <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use [ngValue] to bind to an object or object properties
+            <ul>
+              <li>Can bind to the full object or just a property</li>
+              <li>
+                This will not perform string conversions like binding to the
+                value attribute will
+                <ul>
+                  <li>This preserves the data type of the original value</li>
+                  <li>
+                    Allows other data types than just strings to be returned,
+                    including objects
+                  </li>
+                </ul>
+              </li>
+              <li>
+                This may be an issue if you use a brower automation tool such as
+                Selenium
+              </li>
+            </ul>
+            <div>
+              This binds to the a property on the object, so the value of
+              myModel the value of the bound property
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;select [(ngModel)]="myModel"&gt; <br />
+                    &lt;option *ngFor="let book of myBooks" [ngValue]="book"&gt;
+                    <br />
+                    {{book.title}} <br />
+                    &lt;/option&gt; <br />
+                    &lt;/select&gt; <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+            <div>
+              This binds to the entire object, so the value of myModel will be
+              the selected object
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;select [(ngModel)]="selectedBook"&gt; <br />
+                    &lt;option <br />
+                    *ngFor="let book of myBooks" <br />
+                    [ngValue]="book.id"&gt; <br />
+                    {{book.title}} <br />
+                    &lt;/option&gt; <br />
+                    &lt;/select&gt; <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div>
+          <ul>
+            <li>
+              <a
+                href="https://upmostly.com/angular/using-value-vs-ngvalue-in-angular"
+                target="_blank"
+              >
+                https://upmostly.com/angular/using-value-vs-ngvalue-in-angular
+              </a>
+            </li>
+          </ul>
+        </div>
       </section>
 
       <h2 id="currentValue">Get the Current Value of a Select Control</h2>
@@ -229,9 +382,10 @@
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      &lt;tr *ngFor="let employee of employees;trackBy:getEmployeeId"&gt;
-                      &lt;td [attr.data-id]="employee.id"&gt;{{employee.name}}&lt;/td&gt;
-                        &lt;/tr&gt;
+                      &lt;tr *ngFor="let employee of
+                      employees;trackBy:getEmployeeId"&gt; &lt;td
+                      [attr.data-id]="employee.id"&gt;{{employee.name}}&lt;/td&gt;
+                      &lt;/tr&gt;
                     </code>
                   </div>
                 </div>
@@ -239,108 +393,6 @@
             </ul>
           </li>
         </ul>
-      </section>
-
-      <h2 id="collection">Bind a Select Control to a Collection</h2>
-      <section>
-        <ul>
-          <li>Use [ngFor] to iterate over every element in the array</li>
-          <li>
-            Use [value] to bind to the value DOM attribute
-            <ul>
-              <li>This always binds as a string</li>
-              <li>
-                If you bind to a property, its value will be converted to a
-                string
-              </li>
-              <li>
-                Use this if you are binding to strings - you can end up with
-                conversion problems if you use a non-string
-                <ul>
-                  <li>
-                    This can cause problem in Typescript with strict typing
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;select (ngModel)="selectedBook"&gt; &lt;option *ngFor="let
-                  book of myBooks"
-                  [value]="book.id"&gt;{{book.title}}&lt;/option&gt; <br />
-                  &lt;/select&gt; <br />
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Use [ngValue] to bind to an object or object properties
-            <ul>
-              <li>Can bind to the full object or just a property</li>
-              <li>
-                This will not perform string conversions like binding to the
-                value attribute will
-                <ul>
-                  <li>This preserves the data type of the original value</li>
-                  <li>
-                    Allows other data types than just strings to be returned,
-                    including objects
-                  </li>
-                </ul>
-              </li>
-              <li>
-                This may be an issue if you use a brower automation tool such as
-                Selenium
-              </li>
-            </ul>
-            <div>
-              This binds to the a property on the object, so the value of
-              myModel the value of the bound property
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    &lt;select [(ngModel)]="myModel"&gt; <br />
-                    &lt;option *ngFor="let book of myBooks" [ngValue]="book"&gt;
-                    <br />
-                    {{book.title}} <br />
-                    &lt;/option&gt; <br />
-                    &lt;/select&gt; <br />
-                  </code>
-                </div>
-              </div>
-            </div>
-            <div>
-              This binds to the entire object, so the value of myModel will be
-              the selected object
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    &lt;select [(ngModel)]="selectedBook"&gt; <br />
-                    &lt;option <br />
-                    *ngFor="let book of myBooks" <br />
-                    [ngValue]="book.id"&gt; <br />
-                    {{book.title}} <br />
-                    &lt;/option&gt; <br />
-                    &lt;/select&gt; <br />
-                  </code>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <div>
-          <ul>
-            <li>
-              <a
-                href="https://upmostly.com/angular/using-value-vs-ngvalue-in-angular"
-                target="_blank"
-              >
-                https://upmostly.com/angular/using-value-vs-ngvalue-in-angular
-              </a>
-            </li>
-          </ul>
-        </div>
       </section>
 
       <h3 id="reactive">Using a Select Control in a Reactive Form</h3>

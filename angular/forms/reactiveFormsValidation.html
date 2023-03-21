@@ -83,6 +83,10 @@
                   </li>
                 </ul>
               </li>
+              <li>
+                Validators are triggered every time the user tabs away from a
+                field
+              </li>
             </ul>
           </li>
           <li>
@@ -131,6 +135,22 @@
         </ul>
       </section>
 
+      <h2>updateValueAndValidity</h2>
+      <section>
+        <ul>
+          <li>Method on the AbstractControl class</li>
+          <li>
+            This recalcuates the value and the validation status of the control
+          </li>
+          <li>
+            Useful for dynamic validators and final checks to verify form
+            validitiy
+          </li>
+        </ul>
+        <div>          
+        </div>
+      </section>
+
       <h2>Built-In Validators</h2>
       <section>
         <ul>
@@ -148,20 +168,21 @@
       <h3>Required Fields</h3>
       <section>
         <ul>
-          <li>Validators.required
+          <li>
+            Validators.required
             <ul>
               <li>Add the HTML 5 required attribute to the form element</li>
               <li>Requires the control have a non empty value</li>
               <li>firstName: ['', Validators.required]</li>
             </ul>
           </li>
-<li>
-  Validators.requiredTrue
-  <ul>
-    <li>Requires the controls value be true</li>
-    <li>Commonly used for required checkbox</li>
-  </ul>
-</li>
+          <li>
+            Validators.requiredTrue
+            <ul>
+              <li>Requires the controls value be true</li>
+              <li>Commonly used for required checkbox</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
@@ -188,7 +209,8 @@
       <h3>Data Type</h3>
       <section>
         <ul>
-          <li>email
+          <li>
+            email
             <ul>
               <li>Requires the controls value pass an email validation test</li>
             </ul>
@@ -199,16 +221,17 @@
       <h3>Pattern Matching</h3>
       <section>
         <ul>
-          <li>Validators.pattern
+          <li>
+            Validators.pattern
             <ul>
               <li>Use for regular expression pattern matching</li>
               <li>Validators.pattern('[a-zA-Z.*]')</li>
               <li>
-                Does this exist as an HTML 5 attribute????? Demo seems to suggest so
+                Does this exist as an HTML 5 attribute????? Demo seems to
+                suggest so
               </li>
             </ul>
           </li>
-
         </ul>
       </section>
 
@@ -285,7 +308,7 @@
         </div>
       </section>
 
-<h2>Custom Validators</h2>
+      <h2>Custom Validators</h2>
       <section>
         <ul>
           <li>
@@ -359,7 +382,6 @@
         </ul>
       </section>
 
-
       <h2>Examples</h2>
 
       <h3>Input Validation</h3>
@@ -392,6 +414,16 @@
         </div>
       </section>
 
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="../cookbook/forms/formValidation.html" target="_blank">
+              Form Validation Tips
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

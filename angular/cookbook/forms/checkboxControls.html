@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Checkbox Controls
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Checkbox Controls</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="selectControls.html#nullOption"
+              >Provide a Null Option</a
+            >
+          </li>
+        </ul>
+      </section>
+
+
+      <h2 id="tempalte">Binding in a Template Form</h2>
+      <section>
+        <div>
+          The template, define the following
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;input [(ngModel)]="isAccepted" type="checkbox" name="isAccepted" /&gt;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          In the component, add the following
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                constructor() {}<br />
+                isAccepted = true;<br />
+                ... <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This example binds to a list of objects (each containing properties of id, name, and checked)
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ul&gt; <br />
+                  &lt;li *ngFor="let role of roles"&gt; <br />
+                    &lt;input type="checkbox" [(ngModel)]="role.checked" /&gt; <br />
+                    &lt;label&gt;{{role.name}}&lt;/label&gt; <br />
+                  </li>
+                </ul>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
