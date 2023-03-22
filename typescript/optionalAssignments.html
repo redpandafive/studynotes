@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Enums</li>
+        </ol>
+      </nav>
+
+      <h1>Optional Assignments - Definite Assignment Assertions</h1>
+      <section>
+        <ul>
+          <li>
+            Tells TypeScript that an instance property or variable declaration
+            will be assigned to, even if it cannot detect that it will be
+          </li>
+          <li>
+            With it, TypeScript will not throw an error that the variable has
+            not been initialized
+          </li>
+        </ul>
+        <div>
+          The following will cause an error: Variable 'x' is used before being
+          assigned.
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let x: number;&#10;initialize();&#10;console.log(x +
+              x);&#10;&#10;function initialize() {&#10; x = 10;&#10;}"
+            </code>
+          </div>
+        </div>
+        <div>
+          Adding the ! operator will prevent TypeScript from triggering the
+          error
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let x: number;&#10;initialize();&#10;console.log(x! +
+              x!);&#10;&#10;function initialize() {&#10; x = 10;&#10;}"
+            </code>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

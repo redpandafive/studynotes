@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Enums</li>
+        </ol>
+      </nav>
+
+      <h1>Enums</h1>
+      <section>
+        <div>
+          Situations where enums should be used:
+          <ul>
+            <li>You need a user defined constants system</li>
+            <li>
+              When there are distinct values that can be seen as constants
+            </li>
+            <li>
+              In places where strings or constants need to be represented in a
+              variable
+            </li>
+          </ul>
+          Situations where enums should not be used:
+          <ul>
+            <li>If you plan on reassinging or chinig the enum member values</li>
+            <li>Good for finite items, not so good for dynamic values</li>
+            <li>Cannot be used for variables</li>
+          </ul>
+        </div>
+        <div>
+          Enums can be reverse mapped, so you can access the enum name as well
+          as the enum value
+          <div class="card">
+            <div class="card-body">
+              <code>
+                code='enum Weekend {&#10; Friday = 1,&#10; Saturday,&#10;
+                Sunday&#10;}&#10;Weekend.Saturday // returns
+                2&#10;Weekend&#91;"Saturday"&#93;; // returns
+                2&#10;Weekend&#91;2&#93;; // returns Saturday'
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          There are three types:
+          <div>
+            Numeric
+            <ul>
+              <li>This is the default.</li>
+              <li>Items in the enum are interpretted as numbers.</li>
+              <li>These can be implicitly or explicitly defined.</li>
+              <li>
+                Enums can be declared as constant for a performance boost.
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const enum Weekend1 {&#10; Friday,&#10; Saturday,&#10;
+                  Sunday&#10;}&#10;&#10;enum Weekend2 {&#10; Friday = 1,&#10;
+                  Saturday,&#10; Sunday&#10;}&#10;&#10;enum Weekend3 {&#10;
+                  Friday = 1,&#10; Saturday = 13,&#10; Sunday =
+                  5&#10;}&#10;&#10;enum Weekend {&#10; Friday = 1,&#10; Saturday
+                  = getDate('TGIF'),&#10; Sunday = Saturday *
+                  40&#10;}&#10;&#10;function getDate(day : string): number
+                  {&#10; if (day === 'TGIF') {&#10; return 3;&#10; }&#10;}"
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            String
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday =
+                  'SATURDAY',&#10; Sunday = 'SUNDAY'&#10;}"
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Heterogeneous
+            <ul>
+              <li>Consist of a mixture of strings and numbers.</li>
+              <li>Limited ue cases and generally not recommended to use.</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday = 1,&#10;
+                  Sunday = 2&#10;}"
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

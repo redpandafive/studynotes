@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Contextual Typing</li>
+        </ol>
+      </nav>
+
+      <h1>Contextual Typing</h1>
+      <section>
+        <ul>
+          <li>
+            TypeScript can often infer types that are missing
+            <ul>
+              <li>
+                It can figure out that <code>msg</code> is a string from
+                <code>let msg = "hello there"</code>
+              </li>
+              <li>
+                You can skip type annotations when TypeScript can correctly
+                infer them
+              </li>
+            </ul>
+          </li>
+          <li>
+            Types can be explicity assigned like these examples
+            <ul>
+              <li>
+                Function with typed parameters and return type
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      " function greet(person: string, date: Date): string { ...
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Contextual typing occurs when the context that the function occured
+            within informs what types should be used
+            <ul>
+              <li>
+                This pops up in places like annonymous functions and arrow
+                functions
+              </li>
+            </ul>
+            <img src="../assets/images/typescript-types-1.png" />
+          </li>
+          <li>
+            Function return types can be configured to return more than one type
+          </li>
+          <li>
+            This is useful if you want to either return a data object or an
+            custom error object (in the event of an error)
+          </li>
+
+        </ul>
+      </section>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

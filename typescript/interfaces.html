@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Interfaces</li>
+        </ol>
+      </nav>
+
+      <h1>Interfaces</h1>
+      <section>
+        <ul>
+          <li>
+            Another way to name an object type (in addition to aliases)
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  interface Point {&#10; x: number;&#10; y: number;&#10;}"
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>Interfaces can extend other interfaces</li>
+          <li>
+            May only be used to declare the shapes of objects, not rename
+            primitives
+          </li>
+          <li>
+            Very similar to aliases. The main difference is that a type cannot
+            be re-opened to add new properties, while an interface is always
+            extendable
+            <img src="../../assets//typescript-interfaces-1.png" />
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

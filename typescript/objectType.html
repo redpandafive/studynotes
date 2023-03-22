@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Object Types</li>
+        </ol>
+      </nav>
+
+      <h1>Object Types</h1>
+      <section>
+        <li>
+          There are three ways to create an object in TypeScript
+          <ul>
+            <li>
+              Can be annonymous
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    function greet(person: { name: string, age: number }) {<br/>
+                      return "Hello " + person.name;&#10; <br/>
+                    } <br/>
+                  </code>
+                </div>
+              </div>
+            </li>
+            <li>
+              Can use an interface
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    interface Person { <br/>
+                      name: string, <br/>
+                      age: number <br/>
+                    } <br/>
+                    ... <br/>
+                    function greet(person: Person) {<br/>
+                    return "Hello " + person.name; <br/>
+                  }<br/>
+                  </code>
+                </div>
+              </div>
+            </li>
+            <li>
+              Can use a type aliases
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    type Person = { <br/>
+                      name: string, 
+                      age: number <br/>
+                    }<br/>
+                    ... <br/>
+                    function greet(person: Person) { <br/>
+                    return "Hello " + person.name; <br/>
+                  }<br/>
+                  </code>
+                </div>
+              </div>
+            </li>
+            <li>
+              In each of the three styles written above, the parameter object
+              must have a string property named name and a number property named
+              age
+            </li>
+          </ul>
+        </li>
+        <li>
+          Properties can be marked as optional using a question mark
+          <ul>
+            <ul>
+              If you attempt to read from this property, TypeScript will warn
+              you it is potentially undefined
+            </ul>
+            <li>
+              Basically says if the property is set, it better have a specific
+              type
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    interface PaintOptions {&#10; shape: Shape;&#10; xPos?:
+                    number;&#10; yPos?: number;&#10;}"
+                  </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Properties can be marked as readonly
+          <ul>
+            <li>No effect at runtime</li>
+            <li>Cannot be written to during type checking</li>
+            <li>
+              You can still modify internal contents (like adding items to a
+              readonly array), not it is not totally immutable
+            </li>
+          </ul>
+        </li>
+      </section>
+        </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

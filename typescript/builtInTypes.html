@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Built-In Types
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Built-In Types</h1>
+      <section>
+        <ul>
+          <li>
+            Any
+            <ul>
+              <li>
+                TS special type when you dont want a particular value to trigger
+                typechecking errors
+              </li>
+              <li>
+                Allows anythign syntactically legal - can access any properties,
+                function, assign to and from any other item typed as any
+              </li>
+            </ul>
+          </li>
+          <li>
+            JS Primitives
+            <ul>
+              <li>
+                TS contains commonly used primitives in JS, string, number, and
+                Boolean
+              </li>
+              <li>
+                There are upper case versions of these, but you should not use
+                them when typing
+              </li>
+            </ul>
+          </li>
+          <li>
+            Arrays
+            <ul>
+              <li>
+                Can be typed using <code>string[]</code> or
+                <code>Array&gt;string&lt;</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Object types
+            <ul>
+              <li>
+                To define an object type, list the properties and their types
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      function printName(obj: { first: string; last?: string })
+                      {"
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Optional properties can be marked with a ?. Make sure to check
+                for undefined or use a safe navigation operatior when using
+                these.
+                <div class="card">
+                  <div class="card-body">
+                    <code> console.log(obj.last?.toUpperCase());" </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            null
+            <ul>
+              <li>Signals absent value</li>
+              <li>
+                When stringNullChecks is on, you must test thse values before
+                using methods or properties on the value
+              </li>
+              <li>
+                Can use the non-null assertion operator to tell the compiler
+                that a value cannot be null. TS will not check this when
+                applied.
+                <div class="card">
+                  <div class="card-body">
+                    <code> console.log(x!.toFixed());" </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            undefined
+            <ul>
+              <li>Signals uninitialized value</li>
+              <li>
+                Can use the non-null assertion operator to tell the compiler
+                that a value cannot be null. TS will not check this when
+                applied.
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

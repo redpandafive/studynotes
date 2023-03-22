@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Type Assertions</li>
+        </ol>
+      </nav>
+
+      <h1>Type Assertions</h1>
+      <section>
+        <ul>
+          <li>
+            Use this to give TypeScript information about a type of a value
+            that the compiler cannot know about
+          </li>
+          <li>
+            This gives a more specific HTMLElement type (TS figures out it is a
+            HTMLElement, but you know it is a HTMLCanvasElement by the id)
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  code='const myCanvas = document.getElementById("main_canvas")
+                  as HTMLCanvasElement;'
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Allows type assertions which convert to a more specific or less
+            specific version of a type
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

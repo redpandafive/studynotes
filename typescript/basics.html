@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Basics</li>
+        </ol>
+      </nav>
+
+      <h1>Basics</h1>
+
+      <section>
+        <ul>
+          <li>
+            Adds static typing to JavaScript/ECMAScript
+            <ul>
+              <li>Checks your code as you write it for errors</li>
+              <li>
+                Makes suggestions and provides intellisense, code completion,
+                and quick fixes
+              </li>
+              <li>
+                Allows refactoring and navigation features to jump to
+                definitions or finding references
+              </li>
+              <li>
+                It is a structurally typed type system since it only cares that
+                an object has the expected properties and methods
+              </li>
+            </ul>
+          </li>
+          <li>
+            JS uses dynamic typing - types are assigned at runtime, so certain
+            errors only show themselves at runtime
+            <ul>
+              <li>
+                This shifts error checking from runtime (when JS usually detects
+                errors) to design time
+              </li>
+              <li>
+                JS relies on things like the <code>typeof</code> operator to
+                verify type
+              </li>
+            </ul>
+          </li>
+          <li>
+            This prevents such as
+            <ul>
+              <li>
+                Calling methods or using properties on an object that do not
+                exist
+              </li>
+              <li>Calling methods on objects that don't exist</li>
+              <li>Attempting operations on variables of the wrong type</li>
+              <li>Incorrectly spelling a method call</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

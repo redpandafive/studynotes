@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Type Declaration Files
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Type Declaration Files</h1>
+
+      <section>
+        <ul>
+          <li>TypeScript file that ends with a .d.ts extension</li>
+          <li>
+            Only contain type related code, not logical code
+            <ul>
+              <li>Do not produce .js outputs</li>
+              <li>
+                Only purpose is to provide type information to the developer
+              </li>
+              <li>Only useful during development for typechecking</li>
+            </ul>
+          </li>
+          <li>
+            TypeScript includes declaration files for all of the standardized
+            built in APIs available in JavaScript runtimes
+            <ul>
+              <li>
+                This includes things such as
+                <ul>
+                  <li>
+                    Methods and properties of built in types like string or
+                    function
+                  </li>
+                  <li>Top level names like Math and Object</li>
+                  <li>
+                    DOM APIs = things available when running inside the browser
+                    such as window and documents
+                  </li>
+                </ul>
+              </li>
+              <li>
+                These files are named with the pattern lib.[something].d.ts
+              </li>
+              <li>
+                The target compilation setting determines which are available to
+                use
+              </li>
+            </ul>
+          </li>
+          <li>
+            Extenal definitions are useful when working with non-standard APIs
+            <ul>
+              <li>
+                Bundled types - type declarations are frequently bundled into
+                npm packages
+              </li>
+              <li>
+                DefinatelyTyped repository
+                <ul>
+                  <li>
+                    Massive repository containing declaration files for
+                    thousands of libraries
+                  </li>
+                  <li>
+                    These are automatically published to npm under the @types
+                    scope
+                  </li>
+                  <li>
+                    Name is alwasy the same as the associated package -
+                    @types/react
+                  </li>
+                </ul>
+              </li>
+              <li>If no typing files exists, you can write your own</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
