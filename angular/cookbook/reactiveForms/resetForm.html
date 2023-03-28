@@ -36,9 +36,47 @@
       </nav>
 
       <h1>Reset a Form</h1>
-
       <section>
-        RESEARCH
+        <div>
+          Reset method on a FormGroup will
+          <ul>
+            <li>Clear bound FormControl values</li>
+            <li>Reset the FormGroup</li>
+            <li>Mark all descendants pristine and untouched</li>
+            <li>
+              Set the value of ALL descendants to their default values (or null
+              if no defaults were provided)
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code> this.fg.reset(); <br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Pass an object with FormConrol keys mapped to values to reset to a
+          specific form State
+          <ul>
+            <li>This could be values that were used to seed the form</li>
+            <li>Could also be a subset of the FormControls if desired</li>
+          </ul>
+          The following creates a common object of values that is used to seed
+          the form and reset it back to those values
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const profile = {firstname: 'first name'}; <br />
+                ... <br />
+                this.profileForm = this.formBuilder.group({ <br />
+                firstname: [this.profile.firstname], <br />
+                }); <br />
+                ... <br />
+                this.profileForm.reset(this.profile); <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>

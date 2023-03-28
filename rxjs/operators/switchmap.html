@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">SwitchMap</li>
+        </ol>
+      </nav>
+
+      <h1>SwitchMap</h1>
+
+      <section>
+        <ul>
+          <li>Takes a function argument that returns an Observable</li>
+          <li>
+            If the previous search request is still in flight, it cancels that
+            request and sends a new one
+            <ul>
+              <li>
+                Cancels and discards previous observables, returning only the
+                latest observable
+              </li>
+            </ul>
+          </li>
+          <li>
+            Useful since it preserves the original request order while only
+            returning the observable from the most recent HTTP call
+            <ul>
+              <li>Previous ones are canceled discarded</li>
+              <li>
+                Useful for something like a search box where the user can type a
+                search term
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

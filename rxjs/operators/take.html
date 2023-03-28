@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Take</li>
+        </ol>
+      </nav>
+
+      <h1>Take</h1>
+
+      <section>
+        <ul>
+          <li>
+            Emits the specified number of values before calling complete()
+          </li>
+          <li>
+            Import from rxjs/operators
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                //emit value every 1s<br />
+                const interval$ = interval(1000);<br />
+                //take the first 5 emitted values<br />
+                const example = interval$.pipe(take(5));<br />
+                //output: 0,1,2,3,4<br />
+                const subscribe = example.subscribe(val => console.log(val));<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+
+  </body>
+</html>

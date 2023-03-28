@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Show / Hide UI Elements
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Show / Hide UI Elements</h1>
+
+      <section>
+        <div>
+            Method 1: Using the hidden directive to show or hide an element
+            <ul>
+              <li></li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code> 
+                  &lt;div [hidden]="!edited"  
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Method 2: Using ngIf directive to add or remove the element
+            <ul>
+              <li>Actully adds / removes the element from the DOM</li>
+              <li>
+                Unsaved data is localhost, which makes it a good choice if you need to offere cancelling changes
+                /li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code> 
+                  &lt;div [hidden]="!edited"  
+                </code>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

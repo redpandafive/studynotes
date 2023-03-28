@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Subjects</li>
+        </ol>
+      </nav>
+
+      <h1>Subjects</h1>
+
+      <section>
+        <ul>
+          <li>
+            Implement both Observer and Observable interfaces
+            <ul>
+              <li>
+                Means they can be used to both emit values and register
+                subscribers
+              </li>
+              <li>
+                Can be used as both a source of observable values and an
+                Observable itself
+              </li>
+            </ul>
+          </li>
+          <li>
+            To Subscribe
+            <ul>
+              <li>Use the same syntax you would use with an Observable</li>
+            </ul>
+          </li>
+          <li>
+            To emit a value
+            <ul>
+              <li>Call the next() function and pass a value</li>
+            </ul>
+          </li>
+          <li>
+            Will not be able to get the current value when subscribing
+            <ul>
+              <li>It will not show up until the next call to next()</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Subject vs Observable</h2>
+      <section>
+        <ul>
+          <li>
+            Observables
+            <ul>
+              <li>
+                Only behaves as an observer
+                <ul>
+                  <li>
+                    Can only be used to subscribe to a value; you can't emit
+                    value
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Cold - an observable only emits a value when there is a
+                subscriber
+              </li>
+              <li>
+                Single casting - the observable will emit a value for each
+                subscriber
+              </li>
+            </ul>
+          </li>
+          <li>
+            Subjects
+            <ul>
+              <li>
+                Can act as an observable and an observer
+                <ul>
+                  <li>
+                    Can be used to emit a value as well as subscribe to a value
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Hot - always emits a value; it doesn't matter if there is a
+                subscriber or not
+              </li>
+              <li>
+                Multi Casting - when subjet emits a value, all subscribers get
+                teh same value
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Subject vs BehaviorSubject vs ReplaySubject</h2>
+      <section>
+        <ul>
+          <li>
+            Subject
+            <ul></ul>
+          </li>
+          <li>
+            BehaviorSubject
+            <ul>
+              <li>Requires an initial value</li>
+              <li>Emits its current value whenever it is subscribed to</li>
+            </ul>
+          </li>
+          <li>
+            ReplaySubject
+            <ul>
+              <li>Emits old values to subscribers</li>
+              <li>It buffers a set number of values</li>
+              <li>
+                All buffered values are emitted immediately to new subscribers
+                as well as emitting new values to existing subscribers
+              </li>
+              <li>It continues to do this even after complete() is called</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

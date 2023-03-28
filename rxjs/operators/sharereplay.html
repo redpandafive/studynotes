@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            ShareReplay
+          </li>
+        </ol>
+      </nav>
+
+      <h1>ShareReplay</h1>
+
+      <section>
+        <ul>
+          <li>
+            You may run into situations where you end up with multiple
+            subscriptions to the same observable
+          </li>
+          <li>
+            Example would be using async pipe in a template, but adding a
+            separate subscription in the component to handle errors
+          </li>
+          <li>
+            This results in multiple calls to the server since each subscription
+            would trigger a call
+          </li>
+          <li>
+            The ShareReplay operator ensures that only one HTTP request will be
+            made to the backend in the first subscription
+          </li>
+          <li>
+            The result of that request will be served from memory to any other
+            subsequent subscribers
+          </li>
+          <li>Example</li>
+          <li>
+            Given a method on a service class called loadLessons
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.lessons$ =
+                  this.lessonsService.loadLessons().pipe(shareReplay());"
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

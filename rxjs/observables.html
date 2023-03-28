@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Observables
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Observables</h1>
+
+      <h2>Observables</h2>
+      <ul>
+        <li>
+          An observable object represents zero or more values that will be
+          returned now or in the future
+        </li>
+        <li>
+          Represents a stream of observable data; it is a value that changes
+          over time
+        </li>
+        <li>Are not limited to only one value</li>
+        <li>Can be syncronous or asynchronous</li>
+        <li>Offer improved error handling over promises</li>
+        <li>They can be closed independently of returning a value</li>
+        <li>Can deal with time, which promises do not</li>
+        <li>You can manipulate the data stream using map operations</li>
+        <li>
+          Observables do not actually start processing until there is a
+          subscriber
+          <ul>
+            <li>
+              Think of it like defining a function
+              <ul>
+                <li>
+                  You must declare a function, but the function will not do
+                  anything until you call it
+                </li>
+                <li>Observables must be subscribed to for it to do anything</li>
+                <li>This can be done directly or via the async pipe</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Example is observing mouse clicks over time
+          <ul>
+            <li>
+              Think of it as a timeline with multiple points where the value
+              changes
+            </li>
+            <li>
+              You can manipulate this stream of data points by using a map
+              operation, such as only observice the x value of a x,y pair
+              returned by the observable
+            </li>
+          </ul>
+        </li>
+        <li>
+          Angular's HTTP library uses observables as return values. However,
+          that doesn't mean you should abandon promises.
+          <ul>
+            <li>
+              These are great, but HTTP's request/response communication model
+              doesn't really fit in with the idea of a steady stream of data
+              (unless using sockets)
+            </li>
+            <li>
+              HTTP doesn't return streams of responses, just a discrete request
+              and data return
+            </li>
+            <li>
+              Promises are simpler to understand than observables and they fit
+              the HTTP communication model better
+            </li>
+            <li>
+              If you want, you can use the toPromise() method on Angular
+              observables and treat then as promises instead
+            </li>
+            <li>Use the approach that works best for you</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Observable Methods</h3>
+      <section>
+        <ul>
+          <li>
+            complete()
+            <ul>
+              <li>Signals the end of of the Observable sequence</li>
+            </ul>
+          </li>
+          <li>
+            next()
+            <ul>
+              <li>Emits values to code subscribed to the Observable</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { Observable } from 'rxjs'; const myObservable = new
+                Observable((observer) => { <br />
+                observer.next('Hello'); observer.next('World'); <br />
+                observer.complete(); });<br />
+                myObservable.subscribe({ <br />
+                next: (value) => console.log(value), <br />
+                complete: () => console.log('Finished!') });<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Subscriptions</h3>
+      <section>
+        <ul>
+          <li>
+            Methods
+            <ul>
+              <li>
+                subscribe()
+                <ul>
+                  <li>NEED THIS - detail methods used as inputs</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Unsubscribing</h2>
+      <section>
+        <ul>
+          <li>
+            Short lived observables that have a limited amoutn of values and
+            complete on their own do not need a call to unsubscribe
+            <ul>
+              <li>
+                Subscriptions will be automatically be unsubscribed when
+                .complete() is called
+              </li>
+              <li>
+                The Angular HttpClient library do NOT require a call to
+                unsubscribe
+                <ul>
+                  <li>They only return 1 value and then complete</li>
+                </ul>
+              </li>
+              <li>This also includes of() observables</li>
+            </ul>
+          </li>
+          <li>
+            You should unsubscribe to long lived obserables that have an
+            undefined amound values and do not call complete() on their own
+            <ul>
+              <li>Subscriptions to valueChanges on Angular forms</li>
+              <li>Subscribing to Angular route changes</li>
+            </ul>
+          </li>
+          <li>
+            To manually track subscriptions in Angular
+            <ul>
+              <li>
+                Keep an array of observable subscriptions in your component
+              </li>
+              <li>
+                In OnDestroy, forEach over the array and call unsubscribe on
+                each
+              </li>
+            </ul>
+          </li>
+          <li>
+            Can also use the takeUntil operator
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    export class SomeComponent implements OnInit, OnDestroy {
+                    <br />
+                    private componentIsDestroyed$ = new
+                    Subject&lt;boolean&gt;();<br />
+                    <br />
+                    constructor() {}<br />
+                    <br />
+                    ngOnInit() {<br />
+                    const timer1 = timer(500, 500);<br />
+                    const timer2 = timer(1000, 1000);<br />
+                    <br />
+                    timer1.pipe(takeUntil(this.componentIsDestroyed$))<br />
+                    .subscribe(() =&gt; console.log('timer1'));<br />
+                    <br />
+                    timer2.pipe(takeUntil(this.componentIsDestroyed$))<br />
+                    .subscribe(() =&gt; console.log('timer2'));<br />
+                    }<br />
+                    <br />
+                    ngOnDestroy() {<br />
+                    this.componentIsDestroyed$.next(true);<br />
+                    this.componentIsDestroyed$.complete();<br />
+                    }<br />
+                    }<br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            See also
+            <ul>
+              <li>
+                <a
+                  href="https://www.thisdot.co/blog/best-practices-for-managing-rxjs-subscriptions"
+                  target="_blank"
+                >
+                  https://www.thisdot.co/blog/best-practices-for-managing-rxjs-subscriptions
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://blog.jcore.com/2020/10/rxjs-when-and-how-to-unsubscribe/"
+                  target="_blank"
+                >
+                  https://blog.jcore.com/2020/10/rxjs-when-and-how-to-unsubscribe/
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Observables vs Promises</h2>
+      <ul>
+        <li>
+          Promises
+          <ul>
+            <li>
+              Calling the <em>then</em> function both triggers the call and
+              handles the result at once
+            </li>
+            <li>
+              A promise object represents a single value that will be returned
+              in the future
+            </li>
+            <li>Limited to a single value</li>
+            <li>Asynchronous</li>
+          </ul>
+        </li>
+        <li>
+          Observables
+          <ul>
+            <li>
+              Observables are lazy
+              <ul>
+                <li>Describe how the data should be handled</li>
+                <li>
+                  Asynchronous call is not triggered until you explicitly use
+                  the subscribe method
+                </li>
+                <li>
+                  Basically, making the call and handling results are separate
+                  operations
+                </li>
+              </ul>
+            </li>
+            <li>
+              An observable object represents zero or more values that will be
+              returned now or in the future
+            </li>
+            <li>
+              Represents a stream of observable data; it is a value that changes
+              over time
+            </li>
+            <li>Can be syncronous or asynchronous</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

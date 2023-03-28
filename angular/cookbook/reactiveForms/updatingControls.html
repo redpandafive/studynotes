@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Updating Reactive Form Controls
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Updating Reactive Form Controls</h1>
+
+      <section>
+        <ul>
+          <li>
+            FormControl, FormGroup, and FormArray all have two methods to update
+            the values in a FormControl
+            <ul>
+              <li>
+                setValue
+                <ul>
+                  <li>
+                    When used with a FormGroup or FormArray, the supplied object
+                    must match the structure of the FormGroup or FormArray
+                    exactly
+                  </li>
+                  <li>
+                    Can be called on a nested FormGroup without updating the parent FormGroup
+                  </li>
+                </ul>
+              </li>
+              <li>
+                patchValue
+                <ul>
+                  <li>
+                    Will only update a subset of the elements of a FormGroup or
+                    FormArray
+                  </li>
+                  <li>Items that are not matched are ignored</li>
+                </ul>
+              </li>
+              <li>
+                These behave differently depending on which class it is invoked
+                upon
+              </li>
+            </ul>
+          </li>
+          <li>
+            Validation is performed when the value is changed; this starts from
+            the control whose value was changed and propagates to the top level
+            FormGroup
+            <ul>
+              <li>
+                This default behavior can be altered using the onlySelf option
+              </li>
+            </ul>
+          </li>
+          <li>
+            Two events are emitted when the value of a form is changed
+            <ul>
+              <li>ValueChanges</li>
+              <li>StatusChanges</li>
+            </ul>
+          </li>
+          <li>
+            This default behavior can be altered using the emitEvent option
+          </li>
+        </ul>
+      </section>
+
+      <h2>Replacing a FomControl Value</h2>
+      <section>
+        <div>
+          FormControl has a <code>setValue()</code> method to update the value
+          without user interaction.
+          <ul>
+            <li>Updates the value of the control and validates ot</li>
+          </ul>
+        </div>
+        <div>
+          If part of a FormGroup, fetch the FormControl by key. The example code
+          contains two different ways to do this.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const ctrl = this.fg.controls["key"]; <br />
+                // alternatively, you do this <br />
+                const ctrl = this.fg.get("key"); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Replace the value using the setValue method
+          <div class="card">
+            <div class="card-body">
+              <code> ctrl.setValue('new value goes here'); </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Replacing all FormControl Values in a FormGroup</h2>
+      <section>
+        <div>
+          All keys must be defined in the newVal object (including nested FormGroups)
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const newVal = { <br />
+                  firstname: "NewFirstName", <br />
+                  lastname: "NewLastName", <br />
+                  email: "newemail@zdfsf.com", <br />
+                  address: "New Address", <br />
+                  city: "NewCity", <br />
+                  state: "NewState" <br />
+                } <br />
+                this.fg.setValue(newVal); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Replacing a Subset of FormControl Values in a FormGroup</h2>
+      <section>
+        <div>
+          This will update only firstname and lastname.  All others will be ignored
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const newVal = { <br />
+                  firstname: "NewFirstName", <br />
+                  lastname: "NewLastName", <br />
+                } <br />
+                this.fg.setValue(newVal); <br />
+              </code>
+            </div>
+          </div>
+        </div>    
+      </section>
+
+
+      <h2>Sources / See Also</h2>
+      <section>
+        <ul>
+          <a href="https://www.tektutorialshub.com/angular/setvalue-patchvalue-in-angular/" target="_blank">
+            https://www.tektutorialshub.com/angular/setvalue-patchvalue-in-angular/
+          </a>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

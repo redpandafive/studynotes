@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Merge</li>
+        </ol>
+      </nav>
+
+      <h1>Merge</h1>
+      <section>
+        <ul>
+          <li>Turns multiple observables into a single observable</li>
+        </ul>
+        <div>
+          Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                //emit every 2.5 seconds <br />
+                const first = interval(2500); <br />
+                //emit every 2 seconds <br />
+                const second = interval(2000); <br />
+                //emit every 1.5 seconds <br />
+                const third = interval(1500); <br />
+                //emit every 1 second <br />
+                const fourth = interval(1000); <br />
+                <br />
+                //emit outputs from one observable <br />
+                const example = merge( <br />
+                first.pipe(mapTo('FIRST!')), <br />
+                second.pipe(mapTo('SECOND!')), <br />
+                third.pipe(mapTo('THIRD')), <br />
+                fourth.pipe(mapTo('FOURTH')) <br />
+                );<br />
+                //output: "FOURTH", "THIRD", "SECOND!", "FOURTH", "FIRST!",
+                "THIRD", "FOURTH" <br />
+                const subscribe = example.subscribe(val => console.log(val));
+                <br />
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

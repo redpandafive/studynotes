@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Pipe</li>
+        </ol>
+      </nav>
+
+      <h1>Pipe</h1>
+
+      <section>
+        <ul>
+          <li>
+            Combines multiple RxJS operators to compose asynchronous operations
+          </li>
+          <li>
+            Takes one or more operators and returns an RxJS Operator
+            <ul>
+              <li>This could be operators such as filter, map, mergeMap</li>
+              <li>Operators are executed in the order they are added</li>
+              <li>
+                The output of the first method becomes the input for the second
+                method (and so on until all operators are called)
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Example:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                //emit (1,2,3,4,5) <br />
+                const source = from([1, 2, 3, 4, 5]); <br />
+                //add 10 to each value <br />
+                const example = source.pipe(map(val => val + 10)); <br />
+                //output: 11,12,13,14,15 <br />
+                const subscribe = example.subscribe(val => console.log(val));
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example: First calls filter, then calls map in the results of the
+          filter. This outputs [6,8,10]
+          <div class="card">
+            <div class="card-body">
+              <code>
+                obs = new Observable((observer) => { <br />
+                observer.next(1) <br />
+                observer.next(2) <br />
+                observer.next(3) <br />
+                observer.next(4) <br />
+                observer.next(5) <br />
+                observer.complete() <br />
+                }).pipe( <br />
+                filter(data => data > 2), <br />
+                map((val) => {return val as number * 2}) <br />
+                ).subscribe(console.log) <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

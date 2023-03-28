@@ -24,11 +24,42 @@
           <li class="breadcrumb-item">
             <a href="./index.html">TypeScript</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Enums</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Optional Assignments / Definite Assignment Assertions
+          </li>
         </ol>
       </nav>
 
-      <h1>Optional Assignments - Definite Assignment Assertions</h1>
+      <h1>Optional Assignments / Definite Assignment Assertions</h1>
+
+      <h2>Optional Properties</h2>
+      <section>
+        <ul>
+          <li>
+            Properties can be marked as optional using a question mark
+            <ul>
+              <ul>
+                If you attempt to read from this property, TypeScript will warn
+                you it is potentially undefined
+              </ul>
+              <li>
+                Basically says if the property is set, it better have a specific
+                type
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      interface PaintOptions {&#10; shape: Shape;&#10; xPos?:
+                      number;&#10; yPos?: number;&#10;}"
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Definite Assignment Assertions</h2>
       <section>
         <ul>
           <li>
@@ -65,7 +96,6 @@
           </div>
         </div>
       </section>
-
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

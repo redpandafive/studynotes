@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Proxy to Fix CORS Problems in Development
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Proxy to Fix CORS Problems in Development</h1>
+
+      <section id="ieStatements">
+        <ul>
+          <li>
+            While the Angular app and backend may be running on the same domain
+            in production, they may be running on seperate domains locally
+            during Development
+          </li>
+          <li>
+            This can cause CORS policy violations that prevent HTTP
+            comminication
+          </li>
+          <li>
+            A proxy can be used to fix this in development so modifications do
+            not need to be made to the backend code to allow communication
+          </li>
+        </ul>
+        >
+      </section>
+
+      <h2>Steps to Implement</h2>
+      <section>
+        <div>
+          In the src folder, create a file called
+          <code>proxy.conf.json</code> with the following contents:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                { <br/>
+                  "/api": { <br/>
+                    "target": "http://localhost:3001", <br/>
+                    "secure": false <br/>
+                  } <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          In angular.json file for the project, add a refrence to the proxy config
+          file.  This should go under: 
+          <ul>
+            <li>projects</li>
+            <li>project_name</li>
+            <li>architect</li>
+            <li>serve</li>
+            <li>options (may need to add this item)</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                .. <br/>
+                "options": { <br/>
+                  "proxyConfig": "src/proxy.conf.json"  <br/>
+                } <br/> 
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+
+        </div>
+        <div>
+          Restart the server and client for this to take effect.  The following is an example URL that you would reference when calling the backend:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                /api/Reasons/GetByReasonSet/5
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Make sure to check the mapping on server side for a route that begins in "api"
+        </div>
+      </section>
+
+      <h2>See Also / Sources</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://egghead.io/lessons/angular-use-a-proxy-with-the-angular-cli-to-fix-cors-development-problems" target="_blank">
+              https://egghead.io/lessons/angular-use-a-proxy-with-the-angular-cli-to-fix-cors-development-problems
+            </a>
+          </li>
+          <li>
+            <a href="https://angular.io/guide/build#proxying-to-a-backend-server" target="_blank">
+              https://angular.io/guide/build#proxying-to-a-backend-server
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
