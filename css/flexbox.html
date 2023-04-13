@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active">Flexbox</li>
+        </ol>
+      </nav>
+
+      <h1>Flexbox</h1>
+
+      <h2 id="vsgrid">Vs Grid</h2>
+      <section>
+        <ul>
+          <li>
+            There is a lot of disagreement over when to use Flexbox vs when to use Grid
+            </li>
+            <li>
+              One mode of thinking is use 
+              <ul>
+                <li>Flexbox for smaller stuff like aligning text to an icon</li>
+                <li>Grid for larger stuff like page layouts</li>
+              </ul>
+            </li>
+            <li>
+              However, this is not always the case.  Sometimes you can accomplish the same goal with both, but the syntax may be shorter in one
+              <ul>
+                <li>You may limit your possibilities if you restrict yourself to this thought process</li>
+              </ul>
+            </li>
+              <li>
+                One dimension (Flexbox) vs Two dimension (Grid)
+                <ul>
+                  <li>Flexbox will layout elements in one direction (either vertical or horizontal)
+                    <ul>
+                      <li>Allows a row based OR column based layout</li>
+                    </ul>
+                  </li>
+                  <li>Grid works along both horizontal and vertical axis
+                    <ul>
+                      <li>Allows precise placement into cells defined by rows and columns</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Another way to think about which is the better choice is:
+                <ul>
+                  <li>
+                    Should content shape the layout? Use Flexbox 
+                    <ul>
+                      <li>Layout will adjust based on the content you are working with</li>
+                      <li>
+                        Sometimes its hard to predice behavior at certain viewports, so use Grid if you need precision
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Should layout shape content? Use Grid
+                    <ul>
+                      <li>
+                        For instance, the grid cells will not adapt to accomodate longer content
+                      </li>
+                      <li>
+                        Grid focuses on precise content placement, so you if accuracy is important, use it
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                You do not have to always choose one or the other - they can be combined
+              </li>
+            </ul>
+          </li>
+      </section>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
