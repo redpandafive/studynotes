@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Cookbook</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Chaining Obserables
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Chaining Obserables</h1>
+
+
+
+      <h2>Combine SwitchMap and ForkJoin</h2>
+      <section>
+        <div>
+          Example 1
+          <ul>
+            <li>
+                The first operator limits the observable to just one emission
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const itemCode$ = this.route.queryParams.pipe(map(params => params.ItemCode)); <br/>
+                const itemDetails$ = (itemCode) => this.dataService.getItemDetails(itemCode).pipe(first());<br/>
+                const secureData$ = (itemCode) => this.dataService.getSecureData(itemCode).pipe(first());<br/>
+                <br/>
+                const value$ = itemCode$.pipe(<br/>
+                   switchMap(itemCode => forkJoin({<br/>
+                       itemCode: of(itemCode),<br/>
+                       itemDetails: itemDetails$(itemCode),<br/>
+                       secureData: secureData$(itemCode)<br/>
+                   }))<br/>
+               );<br/>
+               <br/>
+               value$.subscribe(value => console.log(value)); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+            Example 2
+            <ul>
+                <li>This code does the following
+                    <ol>
+                        <li>Grabs an array of Mitem objects from the formServices class (and backend)</li>
+                        <li>Initializes the mitemDataManagerService with the report id</li>
+                        <li>Passes the value from step 1 into the reasonSetCollectionService for additional processing</li>
+                        <li>Fetches EventSet information from the backend and sends those results as well as mitem data to the parseMitems method for processing </li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="card">
+                <div class="card-body">
+                  <code>
+                    const reportId = this.route.snapshot.params["id"];<br/>
+                    this.formServices.getMeasuredItems().pipe(<br/>
+                        switchMap(mitems => forkJoin(<br/>
+                            {<br/>
+                                mitemData: this.mitemDataManagerServices.initialize(reportId),<br/>
+                                reasonSet: this.reasonSetCollectionService.load(mitems),<br/>
+                                eventSets: this.formServices.getEventSets().pipe(<br/>
+                                    map(es => {<br/>
+                                        this.tiers = this.parseMitems(es, mitems);<br/>
+                                    })<br/>
+                                )<br/>
+                            }<br/>
+                        ))<br/>
+                    ).subscribe(d => this.isLoading = false);<br/>
+                  </code>
+                </div>
+              </div>
+        </div>
+      </section>
+
+      <h2>Sources / See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="../operators/switchmap.html" target="_blank">ConcatMap, MergeMap, and SwitchMap
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

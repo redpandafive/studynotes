@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -24,39 +27,27 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Take</li>
+          <li class="breadcrumb-item active" aria-current="page">CombineLatest</li>
         </ol>
       </nav>
 
-      <h1>Take</h1>
+      <h1>CombineLatest</h1>
 
       <section>
         <ul>
           <li>
-            Emits the specified number of values before automatically calling complete on the observable, regardless if the source completes
-          </li>
-          <li>
-            Import from rxjs/operators
+            Processes latest emitted item from each observable anytime an observable emits a new value
           </li>
         </ul>
         <div>
           <div class="card">
             <div class="card-body">
-              <code>
-                //emit value every 1s<br />
-                const interval$ = interval(1000);<br />
-                //take the first 5 emitted values<br />
-                const example = interval$.pipe(take(5));<br />
-                //output: 0,1,2,3,4<br />
-                const subscribe = example.subscribe(val => console.log(val));<br />
-              </code>
+              <code> </code>
             </div>
           </div>
         </div>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
-
   </body>
 </html>

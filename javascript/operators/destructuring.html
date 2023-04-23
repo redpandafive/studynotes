@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -57,6 +60,95 @@
             the value on the right and store into the variables on the left
           </li>
         </ul>
+      </section>
+
+      <h2>Destructuring Objects</h2>
+      <section>
+        <div>
+          Can be used to simplify extracting properties from an object
+          <div class="card">
+            <div class="card-body">
+              <code>
+                var hero = { <br />
+                name: 'Batman', <br />
+                realName: 'Bruce Wayne' <br />
+                }; <br />
+                const { name, realName } = hero;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          A default value can be added for properties that may not be in the object
+          <div class="card">
+            <div class="card-body">
+              <code>
+                var hero = { <br />
+                name: 'Batman', <br />
+                realName: 'Bruce Wayne' <br />
+                }; <br />
+                const { name, realName, canBatusi = true } = hero;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div>
+        To alias the realName property to alterEgo, do the following
+        <div class="card">
+          <div class="card-body">
+            <code>
+              var hero = { <br />
+              name: 'Batman', <br />
+              realName: 'Bruce Wayne' <br />
+              }; <br />
+              const { name, realName: alterEgo } = hero;<br />
+            </code>
+          </div>
+        </div>
+      </div>
+
+      
+      <div>
+        To extract values from nested objects
+        <div class="card">
+          <div class="card-body">
+            <code>
+              const hero = { <br />
+                name: 'Batman', <br />
+                realName: 'Bruce Wayne', <br />
+                address: { <br />
+                  city: 'Gotham' <br />
+                } <br />
+              }; <br />
+              const { address: { city } } = hero; <br />
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        Unreferenced proprties can be collected using rest syntax
+        <div class="card">
+          <div class="card-body">
+            <code>
+              const hero = { <br />
+                name: 'Batman', <br />
+                realName: 'Bruce Wayne',  <br />
+                company: 'WayneCorp' <br />
+              }; <br />
+              const { name, ...rest } = hero; <br />
+              console.log(rest); // => { realName: 'Bruce Wayne', company: 'WayneCorp' } <br />
+            </code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <h2>Destructuring Arrays</h2>
+      <section>
         <div>
           Simple Examples
           <div class="card">

@@ -24,39 +24,19 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Take</li>
+          <li class="breadcrumb-item active" aria-current="page">First</li>
         </ol>
       </nav>
 
-      <h1>Take</h1>
+      <h1>First</h1>
 
       <section>
         <ul>
-          <li>
-            Emits the specified number of values before automatically calling complete on the observable, regardless if the source completes
-          </li>
-          <li>
-            Import from rxjs/operators
-          </li>
+          <li>Emits only the first value emitted by the source observable</li>
+          <li>This automatically calls complete on the observable, regardless if it has more items to emit or not</li>
         </ul>
-        <div>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                //emit value every 1s<br />
-                const interval$ = interval(1000);<br />
-                //take the first 5 emitted values<br />
-                const example = interval$.pipe(take(5));<br />
-                //output: 0,1,2,3,4<br />
-                const subscribe = example.subscribe(val => console.log(val));<br />
-              </code>
-            </div>
-          </div>
-        </div>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
-
   </body>
 </html>

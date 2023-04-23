@@ -38,23 +38,45 @@
       <section>
         <ul>
           <li>
-            Takes an array and expands it into individual elements
+            Not a true operator in the sense that it cannot be evaluated to
+            produce a value.
+          </li>
+          <li>
+            Can destructure an array and expands it into individual elements
             <ul>
               <li>
                 Unpacks (or spreads out) the elements of an array in a context
                 where individual values are expected
               </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const originalArray = [1, 2, 3, 4, 5];
+                  const newArray = [...originalArray.slice(0,3), 6, ...originalArray.slice(3)]]
+                  console.log(newArray); // outputs [1, 2, 3, 6, 4, 5]
+                </code>
+              </div>
+            </div>       
+          </li>
+          <li>
+            Can be used with an object to create a new object with a subset of properties from another object
+            <ul>
               <li>
-                Not a true operator in the sense that it cannot be evaluated to
-                produce a value.
-              </li>
-              <li>
-                It is a special case syntax available only within object literals
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      const originalObject = {a: 1, b: 2, c: 3};
+                      const newObject = {...originalObject, b: 4};
+                      console.log(newObject); // outputs {a: 1, b: 4, c: 3}
+                    </code>
+                  </div>
+                </div>     
               </li>
             </ul>
           </li>
           <li>
-            Can be used to
+            Other applications
             <ul>
               <li>Make shallow copies of JS objects</li>
               <li>Append one array to another</li>

@@ -24,57 +24,126 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Map</li>
+          <li class="breadcrumb-item active" aria-current="page">Map, Pluck, and MapTo</li>
         </ol>
       </nav>
 
-      <h1>Map</h1>
+      <h1>Map, Pluck, and MapTo</h1>
 
+      <h2>Map</h2>
       <section>
         <ul>
           <li>
-            Pass a function that returns a value that performs some sort of
-            transformation
-          </li>
-          <li>
-            This transformation is applied to each value emitted by the source
-            Observable
-          </li>
-          <li>Resulting values are emitted as Observables</li>
-          <li>
-            Example
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  //emit (1,2,3,4,5) <br />
-                  const source = from([1, 2, 3, 4, 5]); <br />
-                  //add 10 to each value <br />
-                  const example = source.pipe(map(val => val + 10)); <br />
-                  //output: 11,12,13,14,15 <br />
-                  const subscribe = example.subscribe(val => console.log(val));
-                  <br />
-                </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Links
+            Transforms values emitted from the source observable based on a provided projection function
             <ul>
               <li>
-                <a
-                  href="https://www.learnrxjs.io/learn-rxjs/operators/transformation/map"
-                >
-                  https://www.learnrxjs.io/learn-rxjs/operators/transformation/map
-                </a>
+                This transformation is applied to each value emitted by the source
+                Observable
               </li>
               <li>
-                <a href="https://rxjs.dev/api/index/function/map">
-                  https://rxjs.dev/api/index/function/map
-                </a>
+                Think of this as similar to the JavaScript Array.map function
               </li>
             </ul>
           </li>
+          <li>Resulting values are emitted as Observables</li>
+          <li>
+            Use cases
+            <ul>
+              <li>Transform each item emitted by the observable</li>
+            </ul>
+          </li>
         </ul>
+        Example
+        <div class="card">
+          <div class="card-body">
+            <code>
+              //emit (1,2,3,4,5) <br />
+              const source = from([1, 2, 3, 4, 5]); <br />
+              //add 10 to each value <br />
+              const example = source.pipe(map(val => val + 10)); <br />
+              //output: 11,12,13,14,15 <br />
+              const subscribe = example.subscribe(val => console.log(val));
+              <br />
+            </code>
+          </div>
+        </div>
+        </section>
+
+
+        <h2>Pluck</h2>
+        <section>
+          <ul>
+            <li>
+              Alternative operator to map for when you want to get the value of a single property from the emitted object
+            </li>
+            <li>
+              Uses map under the hood, so these two are very similar
+            </li>
+            <li>
+              
+            </li>
+          </ul>
+          Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const keyup$ = fromEvent(document, 'keyup'); <br/>                
+                keyup$ <br/>
+                  .pipe(pluck('code')) <br/>
+                  .subscribe(console.log); <br/>
+                <br />
+              </code>
+            </div>
+          </div>
+        </section>
+
+
+        <h2>MapTo</h2>
+        <section>
+          <ul>
+            <li>
+              Alternative operator to map for when you want to map to the same static value on each item emitted from the observable
+            </li>
+            <li>
+              No real advantage over Map, but it does convery intention a little bit better
+            </li>
+          </ul>
+          Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const click$ = fromEvent(document, 'click'); <br/>
+                click$ <br/>
+                  .pipe(mapTo('You clicked!')) <br/>
+                  .subscribe(console.log); <br/>
+                <br />
+              </code>
+            </div>
+          </div>
+        </section>
+
+        <h2>See Also</h2>
+        <section>
+        <ul>
+          <li>
+            <a href="https://www.learnrxjs.io/learn-rxjs/concepts/get-started-transforming" target="_blank">
+              https://www.learnrxjs.io/learn-rxjs/concepts/get-started-transforming
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.learnrxjs.io/learn-rxjs/operators/transformation/map"
+            >
+              https://www.learnrxjs.io/learn-rxjs/operators/transformation/map
+            </a>
+          </li>
+          <li>
+            <a href="https://rxjs.dev/api/index/function/map">
+              https://rxjs.dev/api/index/function/map
+            </a>
+          </li>
+        </ul>
+
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

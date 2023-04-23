@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
   <body>
@@ -52,6 +49,27 @@
         <ul>
           <li>The following creates a 3 x 3 grid</li>
           <li>
+            The number of parameters in the
+            <code>grid-template-columns</code> rule will determine the number of
+            columns in grid
+            <ul>
+              <li>
+                Child nodes are automatically assigned to cell in the order they
+                are written
+                <ul>
+                  <li>1 is assigned to column 1, row 1</li>
+                  <li>2 is assigned to column 2, row 1</li>
+                  <li>3 is assigned to column 3, row 1</li>
+                  <li>4 is assigned to column 1, row 2</li>
+                  <li>...</li>
+                </ul>
+              </li>
+              <li>
+                Setting all columns to auto evenly distributes the column width
+              </li>
+            </ul>
+          </li>
+          <li>
             The direct children of the grid-container element will be the cells
           </li>
           <li>
@@ -69,25 +87,56 @@
           <div class="card">
             <div class="card-body">
               <code>
-                .grid-container {<br />
-                display: grid;<br />
-                grid-template-columns: auto auto auto;<br />
-                }<br />
+                .grid-container { <br />
+                display: grid; <br />
+                grid-template-columns: auto auto auto; <br />
+                gap: 10px; <br />
+                } <br />
+                .grid-item { <br />
+                height: 50px; <br />
+                width: 50px; <br />
+                background-color: green; <br />
+                } <br />
                 ...<br />
                 ...<br />
-                &lt;div class="grid-container"&gt; <br/>
-                &lt;div class="grid-item"&gt;1&lt;/div&gt; <br/>
-                &lt;div class="grid-item"&gt;2&lt;/div&gt; <br/>
-                &lt;div class="grid-item"&gt;3&lt;/div&gt; <br/> 
-                &lt;div class="grid-item"&gt;4&lt;/div&gt; <br/>
-                &lt;div class="grid-item"&gt;5&lt;/div&gt; <br/>
-                &lt;div class="grid-item"&gt;6&lt;/div&gt; <br/>
-                &lt;div class="grid-item"&gt;7&lt;/div&gt; <br/>
-                &lt;div class="grid-item"&gt;8&lt;/div&gt; <br/>
-                &lt;div class="grid-item"&gt;9&lt;/div&gt; <br/>
+                &lt;div class="grid-container"&gt; <br />
+                &lt;div id="1" class="grid-item"&gt;&lt;/div&gt; <br />
+                &lt;div id="2" class="grid-item"&gt;&lt;/div&gt; <br />
+                &lt;div id="3" class="grid-item"&gt;&lt;/div&gt; <br />
+                &lt;div id="4" class="grid-item"&gt;&lt;/div&gt; <br />
+                &lt;div id="5" class="grid-item"&gt;&lt;/div&gt; <br />
+                &lt;div id="6" class="grid-item"&gt;&lt;/div&gt; <br />
+                &lt;div id="7" class="grid-item"&gt;&lt;/div&gt; <br />
+                &lt;div id="8" class="grid-item"&gt;&lt;/div&gt; <br />
+                &lt;div id="9" class="grid-item"&gt;&lt;/div&gt; <br />
                 &lt;/div&gt;<br />
               </code>
             </div>
+          </div>
+        </div>
+        <div>
+          <style>
+            .grid-container {
+              display: grid;
+              grid-template-columns: auto auto auto;
+              gap: 10px;
+            }
+            .grid-item {
+              height: 50px;
+              width: 50px;
+              background-color: green;
+            }
+          </style>
+          <div class="grid-container">
+            <div id="1" class="grid-item"></div>
+            <div id="2" class="grid-item"></div>
+            <div id="3" class="grid-item"></div>
+            <div id="4" class="grid-item"></div>
+            <div id="5" class="grid-item"></div>
+            <div id="6" class="grid-item"></div>
+            <div id="7" class="grid-item"></div>
+            <div id="8" class="grid-item"></div>
+            <div id="9" class="grid-item"></div>
           </div>
         </div>
       </section>
@@ -99,14 +148,17 @@
             Container
             <ul>
               <li>
-                The element that establishes teh grid and wraps the grid items
+                The element that establishes the grid and wraps the grid items
               </li>
             </ul>
           </li>
           <li>
             Grid Item
             <ul>
-              <li>Child elements inside a grid container</li>
+              <li>
+                Child elements inside a grid container (first generation
+                children)
+              </li>
             </ul>
           </li>
           <li>
@@ -155,17 +207,21 @@
             <ul>
               <li>Flexible length value</li>
               <li>
-                Useful on <code>grid-template-rows</code> and
-                <code>grid-template-columns</code>
-              </li>
-              <li>
                 Represents a fraction of any space left over in a grid container
               </li>
               <li>
                 Calculated based on available space left over after any other
                 layout factors that take priority
               </li>
+              <li>
+                Useful on <code>grid-template-rows</code> and
+                <code>grid-template-columns</code>
+              </li>
             </ul>
+          </li>
+          <li>
+            <code>auto</code>
+            <ul></ul>
           </li>
           <li>
             <code>repeat(3, auto)</code>
@@ -182,7 +238,7 @@
 
       <h2>Grid Container Level Rules</h2>
 
-      <h3>Initializing Grid</h3>
+      <h3>Initializing the Grid</h3>
       <section>
         <ul>
           <li>
@@ -222,12 +278,53 @@
         </ul>
       </section>
 
-      <h3>Column / Row Definitions</h3>
+      <h3>Row Definitions</h3>
       <section>
         <ul>
-          <li>Use to define track size</li>
           <li>
-            Use the <code>repeat(n, p)</code> to repeat measurement p for n times
+            <code>grid-template-rows: 100px 100px 100px</code>
+            <ul>
+              <li>Specifies the track height and number of row grid tracks</li>
+              <li>
+                Specifies the grid should have three rows, each 100px wide
+              </li>
+            </ul>
+          </li>
+          <li>
+            These accept
+            <ul>
+              <li>Measurement values</li>
+              <li><code>none</code> keyword (default)</li>
+              <li><code>auto</code> keyword</li>
+              <li><code>fit-content()</code> function</li>
+              <li><code>minmax(min, max)</code> function</li>
+              <li><code>maxcontent</code> keyword</li>
+              <li><code>mincontent</code> keyword</li>
+            </ul>
+          </li>
+          <li>
+            Examples
+            <ul></ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Column Definitions</h3>
+      <section>
+        <ul>
+          <li>
+            <code>grid-template-columns: 100px 100px 100px</code>
+            <ul>
+              <li>Specifies the size and number of column grid tracks</li>
+              <li>
+                Specifies the grid should have three columns, each 100px wide
+              </li>
+            </ul>
+          </li>
+          <li>Use to define column count size</li>
+          <li>
+            Use the <code>repeat(n, p)</code> to repeat measurement p for n
+            times
           </li>
           <li>
             These accept
@@ -264,15 +361,6 @@
             Examples
             <ul>
               <li>
-                <code>grid-template-columns: 100px 200px 100px</code>
-                <ul>
-                  <li>
-                    Specifies the grid should have three columns, the first
-                    100px wide, the second 200px wide, and the third 100px wide
-                  </li>
-                </ul>
-              </li>
-              <li>
                 <code>grid-template-columns: auto auto auto</code>
                 <ul>
                   <li>
@@ -299,21 +387,21 @@
       <section>
         <ul>
           <li>
-            grid-column-gap: 5px
+            <code>grid-column-gap: 5px</code>
             <ul>
               <li>Sets the size of the gap between an element's columns</li>
               <li>Above adds a 5px gap between columns</li>
             </ul>
           </li>
           <li>
-            grid-row-gap: 5px
+            <code>grid-row-gap: 5px</code>
             <ul>
               <li>Sets the size of the gap between an element's rows</li>
               <li>Above adds a 5px gap between rows</li>
             </ul>
           </li>
           <li>
-            gap
+            <code>gap</code>
             <ul>
               <li>Shorthand for the row-gap and column-gap properties</li>
               <li>
@@ -326,17 +414,19 @@
         </ul>
       </section>
 
-      <h2>Cell Container Level Rules</h2>
+      <h2>Cell Level Rules</h2>
 
       <h3>Column Placement Rules</h3>
       <section>
         <ul>
           <li>
             These allow you to specify the number of columns a cell should span
+            <ul>
+              <li>Parameters are NOT zero based</li>
+            </ul>
           </li>
-          <li>Parameters are NOT zero based</li>
           <li>
-            grid-column-start
+            <code>grid-column-start</code>
             <ul>
               <li>Specifies which column and item in the grid should start</li>
               <li>Parameter is an integer representing the column to start</li>
@@ -347,7 +437,7 @@
             </ul>
           </li>
           <li>
-            grid-column-end
+            <code>grid-column-end</code>
             <ul>
               <li>Specifies at which column the item in the grid should end</li>
               <li>
@@ -367,10 +457,12 @@
         <ul>
           <li>
             These allow you to specify the number of rows a cell should span
+            <ul>
+              <li>Parameters are NOT zero based</li>
+            </ul>
           </li>
-          <li>Parameters are NOT zero based</li>
           <li>
-            grid-row-start
+            <code>grid-row-start</code>
             <ul>
               <li>
                 Specifies a grid item's start position within the grid row
@@ -383,7 +475,7 @@
             </ul>
           </li>
           <li>
-            grid-row-end
+            <code>grid-row-end</code>
             <ul>
               <li>Specifies which row and item in the grid should end</li>
               <li>
@@ -395,109 +487,298 @@
               </li>
             </ul>
           </li>
-          <li>
-            Examples
-            <ul>
-              <li>
-                Example 1: Sets an element to span two rows
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      .my-target { <br />
-                      grid-row-start: 1;<br />
-                      grid-row-end: 3;<br />
-                      }<br />
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Example 2: Sets an element to span two rows using span syntax
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      .my-target {<br />
-                      grid-row-start: span 2;<br />
-                      }<br />
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
         </ul>
+        <div>
+          Examples
+          <div>
+            Example 1: Sets an element to span two rows
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  .my-target { <br />
+                  grid-row-start: 1;<br />
+                  grid-row-end: 3;<br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Example 2: Sets an element to span two rows using span syntax
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  .my-target {<br />
+                  grid-row-start: span 2;<br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h2>Grid Areas</h2>
       <section>
         <ul>
-          <li>Alternative to controlling a grid as columns and rows</li>
+          <li>Alternative syntax to setting up a grid as columns and rows</li>
         </ul>
       </section>
 
       <h3>Setting up Areas</h3>
       <section>
-        <ol>
-          <li>
-            Start by assigning area names to elements using
-            <code>grid-area</code>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  .content {<br />
-                  grid-area: Content;<br />
-                  }<br />
-                  <br />
-                  .header {<br />
-                  grid-area: Header;<br />
-                  }<br />
-                  <br />
-                  .sidebar {<br />
-                  grid-area: Sidebar;<br />
-                  }<br />
-                </code>
-              </div>
+        <div>
+          Start by assigning area names to elements using
+          <code>grid-area</code> CSS rule
+          <div class="card">
+            <div class="card-body">
+              <code>
+                .item1 { <br />
+                grid-area: header; <br />
+                }<br />
+                .item2 { <br />
+                grid-area: menu; <br />
+                }<br />
+                .item3 { <br />
+                grid-area: main; <br />
+                }<br />
+                .item4 { <br />
+                grid-area: right; <br />
+                }<br />
+                .item5 { <br />
+                grid-area: footer; <br />
+                }<br />
+              </code>
             </div>
-          </li>
+          </div>
+        </div>
+        <div>
+          Use the <code>grid</code> rule on the grid container to describe how
+          the areas should be distributed
+          <ul>
+            <li>
+              Takes a parameter of n string values, where n is the nubmer of
+              rows in the grid layout you are creating
+            </li>
+            <li>
+              Each string will contain the name of the areas seperated by spaces
+            </li>
+            <li>Each area name is a column</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                .grid-container { <br />
+                display: grid; <br />
+                grid: <br />
+                'header header header header header header' <br />
+                'menu main main main right right' <br />
+                'menu footer footer footer footer footer'; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <style>
+            .item1 {
+              grid-area: header;
+              background-color: red;
+              color: #fff;
+            }
+            .item2 {
+              grid-area: menu;
+              background-color: blue;
+              color: #fff;
+            }
+            .item3 {
+              grid-area: main;
+              background-color: green;
+              color: #fff;
+            }
+            .item4 {
+              grid-area: right;
+              background-color: yellow;
+              color: #000;
+            }
+            .item5 {
+              grid-area: footer;
+              background-color: aqua;
+              color: #000;
+            }
+            #grid-area-example-1 {
+              display: grid;
+              grid:
+                "header header header header header header"
+                "menu main main main right right"
+                "menu footer footer footer footer footer";
+              grid-gap: 10px;
+              background-color: #000;
+              padding: 10px;
+            }
+          </style>
+          <div id="grid-area-example-1">
+            <div class="item1">Header</div>
+            <div class="item2">Menu</div>
+            <div class="item3">Main</div>
+            <div class="item4">Right</div>
+            <div class="item5">Footer</div>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li>
+              Examples
+              <ul>
+                <li>
+                  <code
+                    >grid-template-areas: "Header Header Header" "Content
+                    Content Sidebar";</code
+                  >
+                  <ul>
+                    <li>Creates a 3 column by 2 row grid</li>
+                    <li>
+                      First row spans 3 columns and is the element tagged with
+                      the <code>header</code> class
+                    </li>
+                    <li>
+                      Second row has <code>content</code> spanning 2 columns,
+                      then <code>sidebar</code> spanning 1 column
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Grid Justify and Align Rules</h2>
+      <section>
+        <ul>
+          <li>By default, items will start at the top left of the container</li>
           <li>
-            Use the <code>grid-template-areas</code> property on the grid
-            container elements to describe how the areas should be distributed
+            Properties that are applied to the entire grid container level
             <ul>
               <li>
-                Takes a parameter of n string values, where n is the nubmer of
-                rows in the grid layout you are creating
-              </li>
-              <li>
-                Each string will contain the name of the areas seperated by
-                spaces
-              </li>
-              <li>Each area name is a column</li>
-              <li>
-                Examples
+                <code>justify-items</code>
                 <ul>
+                  <li>Aligns grid items along the row axis</li>
                   <li>
-                    <code
-                      >grid-template-areas: "Header Header Header" "Content
-                      Content Sidebar";</code
-                    >
+                    Possible values
                     <ul>
-                      <li>Creates a 3 column by 2 row grid</li>
+                      <li>start</li>
                       <li>
-                        First row spans 3 columns and is the element tagged with
-                        the <code>header</code> class
+                        end - grid item is positioned to the top right of its
+                        containing column
                       </li>
                       <li>
-                        Second row has <code>content</code> spanning 2 columns,
-                        then <code>sidebar</code> spanning 1 column
+                        center - grid item is positioned to the top center of
+                        its containg column
+                      </li>
+                      <li>stretch</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <code>align-items</code>
+                <ul>
+                  <li>Aligns grid items along the column axis</li>
+                  <li>
+                    Possible values
+                    <ul>
+                      <li>
+                        center - aligns grid items vertically to the middle of
+                        the columns
                       </li>
                     </ul>
                   </li>
                 </ul>
               </li>
+              <li>
+                <code>justify-content</code>
+                <ul>
+                  <li>
+                    When the grid is smaller than the space for the grid
+                    container, this is used to justify the grid along the row
+                    axis
+                  </li>
+                  <li>
+                    <ul>
+                      <li>start</li>
+                      <li>
+                        end - entire grid is aligned horizaonally to the far
+                        edge of the container element
+                      </li>
+                      <li>center</li>
+                      <li>stretch</li>
+                      <li>space-around</li>
+                      <li>space-between</li>
+                      <li>
+                        space-evenly - grid is spaced evently horizaontally
+                        within the container element
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <code>align-content</code>
+                <ul>
+                  <li>
+                    When the grid is smaller than the space for the grid
+                    container, this aligns grid content along the column axis
+                    <ul>
+                      <li>
+                        end - bottom border of the grid aligns on the bottom
+                        border of the container
+                      </li>
+                      <li>
+                        space-evenly - rows are spaced evenly in the container
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li>Used to align the grid content along the column axis</li>
+                </ul>
+              </li>
             </ul>
           </li>
-        </ol>
+          <li>
+            The following are used for items within the grid cells themselves
+            (applied to grid item, not grid)
+            <ul>
+              <li>
+                <code>justify-self</code>
+                <ul>
+                  <li>Used to align a grid item along the row axis</li>
+                </ul>
+              </li>
+              <li>
+                <code>align-self</code>
+                <ul>
+                  <li>Used to align a grid item along the column axis</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </section>
+
+      <h2>Centering Grid Cell Content</h2>
+      <div>
+        <ul>
+          <li>
+            <a
+              href="https://www.digitalocean.com/community/tutorials/css-align-justify"
+              target="_blank"
+            >
+              https://www.digitalocean.com/community/tutorials/css-align-justify
+            </a>
+          </li>
+        </ul>
+      </div>
 
       <h2>Vs Flexbox</h2>
       <section>
@@ -507,6 +788,20 @@
           </li>
         </ul>
       </section>
+
+      <h2>Sources</h2>
+      <div>
+        <ul>
+          <li>
+            <a
+              href="https://www.w3schools.com/cssref/pr_grid.php"
+              target="_blank"
+            >
+              https://www.w3schools.com/cssref/pr_grid.php
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

@@ -34,10 +34,33 @@
         <ul>
           <li>
             Looks at the observable values, does something with those values,
-            and passes them along
+            and passes them along unmodifed to operators that follow it
+            <ul>
+              <li>
+                Returns an observable that is identical to the source observable
+              </li>
+            </ul>
           </li>
-          <li>It doesn't touch the values themselves</li>
-          <li>Useful for logging functions</li>
+          <li>
+            Useful when you need to "jump out of the stream" - use cases include
+            <ul>
+              <li>
+                Actions that can be considered a "side effect" for your stream
+              </li>
+              <li>
+                Logging
+              </li>
+              <li>
+                Writing to console for debugging
+              </li>
+              <li>
+                State management to set / update the store
+              </li>
+            </ul>
+          </li>
+          <li>
+            Useful for logging functions or any side effects
+          </li>
         </ul>
       </section>
 

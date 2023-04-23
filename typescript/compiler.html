@@ -75,25 +75,36 @@
               </li>
             </ul>
           </li>
-          <li>
-            Strictness of the compiler can be adjusted in the tsconfig.ts files
-            <ul>
-              <li>
-                <code>"strict": true</code> toggles all checks on
-                simulataneously (but others can be adjusted individually)
-              </li>
-              <li>
-                <code>noImplicitAny</code> - issues errors on variables whose
-                type is implicity typed as any
-              </li>
-              <li>
-                <code>strictNullChecks</code> - prevents null and undefined
-                variable assignments, such as default value assignments
-              </li>
-            </ul>
-          </li>
+
         </ul>
       </section>
+
+<h2>Tsconfig File</h2>
+<section>
+  <ul>
+    <li>
+      Strictness of the compiler can be adjusted in the tsconfig.ts files
+      <ul>
+        <li>
+          <code>"strict": true</code> toggles all checks on
+          simulataneously (but others can be adjusted individually)
+          <ul>
+            <li>Recommded to keep this on to future proof the code</li>
+          </ul>
+        </li>
+        <li>
+          <code>noImplicitAny</code> - issues errors on variables whose
+          type is implicity typed as any
+        </li>
+        <li>
+          <code>strictNullChecks</code> - prevents null and undefined
+          variable assignments, such as default value assignments
+        </li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

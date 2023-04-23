@@ -24,35 +24,153 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">SwitchMap</li>
+          <li class="breadcrumb-item active" aria-current="page">ConcatMap, MergeMap, and SwitchMap and Higher Order Mapping</li>
         </ol>
       </nav>
 
-      <h1>SwitchMap</h1>
+      <h1>ConcatMap, MergeMap, and SwitchMap and Higher Order Mapping</h1>
 
+      <h2>Inner Observables</h2>
       <section>
         <ul>
-          <li>Takes a function argument that returns an Observable</li>
           <li>
-            If the previous search request is still in flight, it cancels that
-            request and sends a new one
+            An outer observable is the observable we are acting on
+          </li>
+          <li>
+            The outer observable's emitted items can be passed through a popline of operations using the pipe method
+          </li>
+          <li>
+            If any of those operations return an observable, that returned observalbe is the inner observable
+          </li>
+        </ul>
+        <div>
+          <ul>
+            <li>In the following code FormServices.getMeasuredItems returns an obserable - this is the outer observable</li>
+            <li>This.reasonSetCollectionService.load and this.formServices.getEventSets are inner observables</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const reportId = this.route.snapshot.params["id"];<br/>
+                this.formServices.getMeasuredItems().pipe(<br/>
+                    switchMap(mitems => forkJoin(<br/>
+                        {<br/>
+                            reasonSet: this.reasonSetCollectionService.load(mitems),<br/>
+                            eventSets: this.formServices.getEventSets().pipe(<br/>
+                                map(es => {<br/>
+                                    this.tiers = this.parseMitems(es, mitems);<br/>
+                                })<br/>
+                            )<br/>
+                        }<br/>
+                    ))<br/>
+                ).subscribe(d => this.isLoading = false);<br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Subscribing to Inner Observables</h2>
+      <section>
+        <ul>
+          <li>
+            Subscribing to an outer observable does not automatically subscribe to an inner observable
+          </li>
+          <li>
+            Higher order mapping operators can be used to
             <ul>
+              <li>Automatically subscribe to inner Observable(s)</li>
+              <li>Flatten the resulting Observable
+                <ul>
+                  <li>Returns Observable&gt;T&lt;, not Observable&gt;Observable&gt;T&lt;&lt;</li>
+                </ul>
+              </li>
               <li>
-                Cancels and discards previous observables, returning only the
-                latest observable
+                Automatically unsubscribes from the inner Observable
               </li>
             </ul>
           </li>
-          <li>
-            Useful since it preserves the original request order while only
-            returning the observable from the most recent HTTP call
+        </ul>
+      </section>
+
+      <h2>ConcatMap</h2>
+      <section>
+<ul>
+  <li>Processes each emitted value by the outer Observable in order</li>
+  <li>Waits for its inner Observable to complete before processing the next item
+    <ul>
+      <li>Future values emitted by the outer Observable cannot start processing until the inner Observable completes</li>
+      <li>Ensures items cannot be processed out of sequence</li>
+    </ul>
+  </li>
+  <li>Use when
+    <ul>
+      <li>Operations like updates or deletes where you want to ensure that each request completes before the next begins</li>
+    </ul>
+    <li>Request / response order matters</li>
+  </li>
+  <li>Do not use when
+    <ul>
+      <li>The item processed in the inner Observable can be changed by the user</li>
+      <li>Think of a drop down where the user can change their mind about a selected item.  The request must complete before the next drop down item can be processed</li>
+    </ul>
+  </li>
+</ul>
+      </section>
+
+      <h2>MergeMap</h2>
+      <section>
+        <ul>
+          <li>Processes each emitted values as it is emitted
             <ul>
-              <li>Previous ones are canceled discarded</li>
-              <li>
-                Useful for something like a search box where the user can type a
-                search term
-              </li>
+              <li>If overlapping values are emitted by the outer Observable, the inner Observable is performed concurently</li>
             </ul>
+          </li>
+          <li>Returns the results as soon as they are available</li>
+          <li>
+            Use when order doesn't necessarily matter
+          </li>
+          <li>
+            Inner observables can be processed concurrently
+          </li>
+          <li>
+            Example would be a set of ids emitted by the outer observable and an inner observable that fetches detail information
+          </li>
+          <li>
+            Do not use when
+            <ul>
+              Order matters
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>SwitchMap</h2>
+      <section>
+        <ul>
+          <li>Processes an emitted value, but will cancel that processing if a new value is emitted
+            <ul>
+          <li>It will then switch over and process the new value</li>
+            </ul>
+          </li>
+          <li>
+            Use when
+            <ul>
+              <li>Typeahead functionality</li>
+              <li>Responding to drop down changes from the UI</li>
+            </ul>
+          </li>
+        </ul>        
+      </section>
+
+
+      <h2>Sources / See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://dev.to/deborahk/inner-observables-and-higher-order-mapping-hhe" target="_blank">
+              https://dev.to/deborahk/inner-observables-and-higher-order-mapping-hhe
+            </a>
           </li>
         </ul>
       </section>

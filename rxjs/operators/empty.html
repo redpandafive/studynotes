@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            EMPTY and NEVER
+          </li>
+        </ol>
+      </nav>
+
+      <h1>EMPTY and NEVER</h1>
+
+      <h2>EMPTY</h2>
+      <section>
+        <ul>
+          <li>
+            A simple observable that emits no items to the Observer and
+            immediately emits a complete notification
+          </li>
+        </ul>
+        <div>
+          Example - this prints Complete!
+          <div class="card">
+            <div class="card-body">
+              <code>
+                EMPTY.subscribe({ <br />
+                next: () => console.log('Next'),<br />
+                complete: () => console.log('Complete!')<br />
+                });<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>NEVER</h2>
+      <section>
+        <ul>
+          <li>
+            An Observable that emits no items to the Observer and never
+            completes
+          </li>
+        </ul>
+        <div>
+          Example - never prints anything and never completes
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const result = NEVER.pipe(startWith(7));<br />
+                result.subscribe({<br />
+                next: x => console.log(x),<br />
+                error: x => console.log("error"),<br />
+                complete: x => console.log("complete")<br />
+                });<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
