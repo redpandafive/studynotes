@@ -136,6 +136,83 @@
         </ul>
       </section>
 
+
+
+      <h2 id="files">File Name Recommendations</h2>
+      <section>
+        <ul>
+          <li>One component, service, directive per file</li>
+          <li>Limit files to 400 lines of code</li>
+          <li>
+            Keep filename conventions consistent
+            <ul>
+              <li>Feature.type.ts</li>
+              <li>
+                Type should be
+                <ul>
+                  <li>Service</li>
+                  <li>Component</li>
+                  <li>Pipe</li>
+                  <li>Module</li>
+                  <li>Directive</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="classes">Class Recommendations</h2>
+      <section>
+        <ul>
+          <li>Keep functions small, no more than 75 lines</li>
+          <li>
+            Class names
+            <ul>
+              <li>Match name of class to the name of the file</li>
+              <li>Append the type</li>
+              <li>
+                Examples
+                <ul>
+                  <li>
+                    App.component.ts should contain the class AppComponent
+                  </li>
+                  <li>
+                    Hero-list.component.ts should contain the class
+                    HeroListComponent
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="projectStructure">Project Structure Recommendations</h2>
+      <section>
+        <ul>
+          <li>
+            Keep all source code in src folder
+            <ul>
+              <li>Keep 3rd party libraries out of it</li>
+            </ul>
+          </li>
+          <li>
+            All feature areas should have their own folder with own NgModule
+          </li>
+          <li>
+            Keep folder structure flat for as long as possible
+            <ul>
+              <li>Consider subfolders when you hit 7 or more files</li>
+            </ul>
+          </li>
+          <li>
+            Consider crating a folder for a component when it has multiple
+            accompanying files
+          </li>
+        </ul>
+      </section>
+
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

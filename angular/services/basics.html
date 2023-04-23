@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Service Basics</li>
+        </ol>
+      </nav>
+
+      <h1>Service Basics</h1>
+      <section>
+        <ul>
+          <li>
+            Can be anything, but typically is a class with a narrow well-defined
+            purpose
+            <ul>
+              <li>
+                Could be any value, function, or feature that your application
+                needs
+              </li>
+            </ul>
+          </li>
+          <li>
+            These provide specific functionality not directly related to views
+            <ul>
+              <li>
+                Components should limit its functionality to 
+                <ul>
+                  <li>Present properties and methods for data binding</li>
+                  <li>Mediate between the view and application logic</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Injected into components as dependencies to provide separation of
+            logic
+            <ul>
+              <li>This is logic that can be shared across components</li>
+              <li>Promotes modularity, keeping components lean and efficient</li>
+              <li>
+                Services can depend on other services, so you keep them focused
+                and specialized
+              </li>
+            </ul>
+          </li>
+          <li>Services are singletons</li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
