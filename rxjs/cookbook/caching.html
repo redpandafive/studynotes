@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Caching an Observable
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Caching an Observable</h1>
+
+      <section>
+        <ul>
+          <li>
+            Useful in a service to cut down on API calls for values that do not
+            change
+          </li>
+          <li>
+            Use the shareReplay() operator to cache the result of the HTTP
+            request
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div>
+          Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Injectable({ <br />
+                providedIn: 'root' <br />
+                }) <br />
+                export class ApiService { <br />
+                private baseUrl = 'http://example.com/api'; <br />
+                private cachedData: Observable&lt;any&gt;; <br />
+                <br />
+                constructor(private http: HttpClient) { } <br />
+                <br />
+                get(): Observable&lt;any&gt; { if (!this.cachedData) {
+                this.cachedData = this.http.get(`${this.baseUrl}/data`).pipe( //
+                Use the shareReplay() operator to cache the result of the HTTP
+                request shareReplay() ); } // Return the cached data return
+                this.cachedData; } }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

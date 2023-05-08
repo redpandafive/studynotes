@@ -33,9 +33,7 @@
         </ol>
       </nav>
 
-      <h1>Chaining Obserables</h1>
-
-
+      <h1>Chaining Observables</h1>
 
       <h2>Combine SwitchMap and ForkJoin</h2>
       <section>
@@ -43,61 +41,78 @@
           Example 1
           <ul>
             <li>
-                The first operator limits the observable to just one emission
+              The first operator limits the observable to just one emission
             </li>
           </ul>
           <div class="card">
             <div class="card-body">
               <code>
-                const itemCode$ = this.route.queryParams.pipe(map(params => params.ItemCode)); <br/>
-                const itemDetails$ = (itemCode) => this.dataService.getItemDetails(itemCode).pipe(first());<br/>
-                const secureData$ = (itemCode) => this.dataService.getSecureData(itemCode).pipe(first());<br/>
-                <br/>
-                const value$ = itemCode$.pipe(<br/>
-                   switchMap(itemCode => forkJoin({<br/>
-                       itemCode: of(itemCode),<br/>
-                       itemDetails: itemDetails$(itemCode),<br/>
-                       secureData: secureData$(itemCode)<br/>
-                   }))<br/>
-               );<br/>
-               <br/>
-               value$.subscribe(value => console.log(value)); <br/>
+                const itemCode$ = this.route.queryParams.pipe(map(params =>
+                params.ItemCode)); <br />
+                const itemDetails$ = (itemCode) =>
+                this.dataService.getItemDetails(itemCode).pipe(first());<br />
+                const secureData$ = (itemCode) =>
+                this.dataService.getSecureData(itemCode).pipe(first());<br />
+                <br />
+                const value$ = itemCode$.pipe(<br />
+                switchMap(itemCode => forkJoin({<br />
+                itemCode: of(itemCode),<br />
+                itemDetails: itemDetails$(itemCode),<br />
+                secureData: secureData$(itemCode)<br />
+                }))<br />
+                );<br />
+                <br />
+                value$.subscribe(value => console.log(value)); <br />
               </code>
             </div>
           </div>
         </div>
         <div>
-            Example 2
-            <ul>
-                <li>This code does the following
-                    <ol>
-                        <li>Grabs an array of Mitem objects from the formServices class (and backend)</li>
-                        <li>Initializes the mitemDataManagerService with the report id</li>
-                        <li>Passes the value from step 1 into the reasonSetCollectionService for additional processing</li>
-                        <li>Fetches EventSet information from the backend and sends those results as well as mitem data to the parseMitems method for processing </li>
-                    </ol>
+          Example 2
+          <ul>
+            <li>
+              This code does the following
+              <ol>
+                <li>
+                  Grabs an array of Mitem objects from the formServices class
+                  (and backend)
                 </li>
-            </ul>
-            <div class="card">
-                <div class="card-body">
-                  <code>
-                    const reportId = this.route.snapshot.params["id"];<br/>
-                    this.formServices.getMeasuredItems().pipe(<br/>
-                        switchMap(mitems => forkJoin(<br/>
-                            {<br/>
-                                mitemData: this.mitemDataManagerServices.initialize(reportId),<br/>
-                                reasonSet: this.reasonSetCollectionService.load(mitems),<br/>
-                                eventSets: this.formServices.getEventSets().pipe(<br/>
-                                    map(es => {<br/>
-                                        this.tiers = this.parseMitems(es, mitems);<br/>
-                                    })<br/>
-                                )<br/>
-                            }<br/>
-                        ))<br/>
-                    ).subscribe(d => this.isLoading = false);<br/>
-                  </code>
-                </div>
-              </div>
+                <li>
+                  Initializes the mitemDataManagerService with the report id
+                </li>
+                <li>
+                  Passes the value from step 1 into the
+                  reasonSetCollectionService for additional processing
+                </li>
+                <li>
+                  Fetches EventSet information from the backend and sends those
+                  results as well as mitem data to the parseMitems method for
+                  processing
+                </li>
+              </ol>
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const reportId = this.route.snapshot.params["id"];<br />
+                this.formServices.getMeasuredItems().pipe(<br />
+                switchMap(mitems => forkJoin(<br />
+                {<br />
+                mitemData:
+                this.mitemDataManagerServices.initialize(reportId),<br />
+                reasonSet: this.reasonSetCollectionService.load(mitems),<br />
+                eventSets: this.formServices.getEventSets().pipe(<br />
+                map(es => {<br />
+                this.tiers = this.parseMitems(es, mitems);<br />
+                })<br />
+                )<br />
+                }<br />
+                ))<br />
+                ).subscribe(d => this.isLoading = false);<br />
+              </code>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -105,7 +120,8 @@
       <section>
         <ul>
           <li>
-            <a href="../operators/switchmap.html" target="_blank">ConcatMap, MergeMap, and SwitchMap
+            <a href="../operators/switchmap.html" target="_blank"
+              >ConcatMap, MergeMap, and SwitchMap
             </a>
           </li>
         </ul>
