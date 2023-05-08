@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            ValueChanges Events
+          </li>
+        </ol>
+      </nav>
+
+      <h1>ValueChanges Events</h1>
+
+      <section>
+        <ul>
+          <li>
+            An event raised whenever the value of one class that implements AbstractControl changes, including:
+            <ul>
+              <li>FormControl</li>
+              <li>FromGroup</li>
+              <li>FormArray</li>
+            </ul>
+          </li>
+          <li>
+            Allows us to track chagnes made to the value in real time and respond to them
+            <ul>
+              <li>Can validate a value</li>
+              <li>Calculcate a computed field</li>
+            </ul>
+          </li>
+          <li>
+            Returns an observable that you can subscribe to and get the latest
+            value of the control
+            <ul>
+              <li>This gets the latest value of the control</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+
+      <h2>Event Bubbling</h2>
+      <section>
+        <ul>
+      <li>
+        ValueChanges events are fired immediately after new values are updated, but before the change is bubbled up to its parent
+        <ul>
+          <li>An event listener on a specific control will fire before an event listener on its containing form</li>
+        </ul>
+      </li>
+      <li>ValueChanges event of a FormGroup or FormArray is fired when the value of any of its child control values changes</li>
+      <li>
+        To prevent event bubbling, use the emitEvent option
+        <div>
+
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.fg.get("firstname").setValue("", { emitEvent: false }); <br/>
+              </code>
+            </div>
+          </div>
+        </div> 
+        
+      </li>
+    </ul>
+  </section>
+
+      <h2>Setting Up</h2>
+      <section>
+        <ul>
+          <li>To subscribe to changes in a form, subscribe to the top level FormGroup
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    this.fg.valueChanges.subscribe(x => { <br/>
+                      console.log(x); <br/>
+                  })   <br/>
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            To subscribe to a specific control
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    this.fg.get("firstname").valueChanges.subscribe(selectedValue => {  <br/>
+                      // log the latest value of firstName <br/>
+                      console.log(selectedValue) <br/>
+                      // log out the latest value <br/>
+                      console.log(this.reactiveForm.get("firstname").value) <br/>
+                    })
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Entity Framework</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Basics</li>
+        </ol>
+      </nav>
+
+      <h1>Basics</h1>
+
+
+
+      <section>
+        <ul>
+          <li>
+            These are three possible approaches to get started with EF
+            <ul>
+              <li>Database First
+                <ul>
+                  <li>Use when you have an existing database to map to</li>
+                  <li>Generates a EDMX (Entity Data model XML) file that will contain all the data models</li>
+                </ul>
+              </li>
+              <li>
+                Model First
+                <ul>
+                  <li>Create a EDMX file with models in the designer, then generate a database from the EDMX file</li>
+                </ul>
+              </li>
+              <li>
+                Code First
+                <ul>
+                  <li>Create data models first, then generate or update the database with incremental migrations</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

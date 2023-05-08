@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Tuples</li>
+        </ol>
+      </nav>
+
+      <h1>Tuples</h1>
+      <section>
+        <ul>
+          <li>
+            A typed array with a pre-defined length and types for each index
+          </li>
+          <li>
+            All items in the Tuple do not need to have the same type
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let tup: [number, boolean, string]; <br />
+                  tup = [5, false, 'some string value']; <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Tuples can be made readonly for safety
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const tup: readonly [number, boolean, string] = [5, false,
+                  'some string value'];<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Tuples can be named to describe values at each index
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const graph: [x: number, y: number] = [55.2, 41.3]; <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Tuples can be destructured since they are arrays
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const graph: [number, number] = [55.2, 41.3]; <br />
+                  const [x, y] = graph; <br />
+                </code>
+              </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

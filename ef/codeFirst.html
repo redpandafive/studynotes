@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Entity Framework</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Code First</li>
+        </ol>
+      </nav>
+
+      <h1>Code First</h1>
+
+      <section>
+        <ul>
+          <li>
+            Model is defined in code using C# classes. From this, EF will create
+            database objects and automatically provide the mapping between the
+            two
+            <ul>
+              <li>
+                Additional options can be configured using attributes on the
+                classes
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Setting Up with No Database</h2>
+      <section>
+        <ul>
+          <li>
+            Create a new context class that derives from the
+            System.Data.Entity.DbContext class
+            <div class="card">
+              <div class="card-body">
+                <code> public class BloggingContext : DbContext </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            For each entity, expose a DbSet object in the context
+            <div class="card">
+              <div class="card-body">
+                <code> public DbSet&lt;Post&gt; Posts { get; set; } </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Data annotations can be added to the model
+            <div>
+              The following sets the Username property to be the primary key of the User table
+              <div class="card">
+                <div class="card-body">
+                  <code> 
+                    public class User <br/>
+                    { <br/>
+                        [Key] <br/>
+                        public string Username { get; set; } <br/>
+                    } <br/>
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+
+
+
+
+      https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/
+      https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-6.0
+      https://learn.microsoft.com/en-us/dotnet/core/extensions/options
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Console Applications</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Configuration Settings</li>
+        </ol>
+      </nav>
+
+      <h1>Configuration Settings</h1>
+
+      <section>
+        <ul>
+          <li>
+            Allow changing the behavior of the application without changing and recompiling code
+          </li>
+        </ul>
+      </section>
+
+      <h2>.NET</h2>
+      <section>
+        <ul>
+          <li>
+            Done with an app.config file
+          </li>
+          <li>
+            Drawbacks
+            <ul>
+              <li>Loosely typed - values must be parsed, usually by a TryParse function</li>
+              <li>Since all configurations are stored in a single file, this can lead to bloat</li>
+              <li>
+                No configuration hierarchy that allows for overrides
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      
+      <h2>.NET Core</h2>
+      <section>
+        <ul>
+          <li>
+            Settings are defined in a appsettings.json file
+          </li>
+          <li>
+            Requires the following extension packages, which you can install via NuGet
+            <ul>
+              <li>
+                Microsoft.Extensions.Configuration
+              </li>
+              <li>
+                Microsoft.Extensions.Configuration.FileExtensions
+              </li>
+              <li>
+                Microsoft.Extensions.Configuration.Json
+              </li>
+              <li>
+                Microsoft.Extensions.Configuration.Binder
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Appsettings.json Example</h2>
+      <section>
+        <div>
+          Define an appsetting.json file with desired settings
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                {  <br/>
+                  "character": { <br/>
+                      "firstName": "Harvey", <br/>
+                      "lastName": "Birdman" <br/>
+                  } <br/>
+              } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Define a class to represent the configuration values in code
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                public class Person <br/>
+                { <br/>
+                    public string FirstName { get; set; } <br/>
+                    public string LastName { get; set; } <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                var builder = new ConfigurationBuilder()  <br/>
+                .SetBasePath(Directory.GetCurrentDirectory())  <br/>
+                .AddJsonFile("appsettings.json");  <br/>
+                <br/>
+               var config = builder.Build();  <br/>
+               var author = config.GetSection("character").Get<Person>()  <br/>
+              </code>
+            </div>
+          </div> 
+        </div>
+      </section>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

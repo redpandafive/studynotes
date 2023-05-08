@@ -24,29 +24,48 @@
         </ul>
       </section>
 
-      <h2>JSON in SQL Server</h2>
       <section>
-<ul>
-  <li>
-    To format query results as JSON, add <code>FOR JSON</code> to the <code>SELECT</code> statement
-  </li>
-  <li>
-    To maintain control over teh JSON output, use <code>FOR JSON PATH</code>
-  </li>
-  <li>
-    To format JSON output automatically based on the structure of the SELECT statement, use <code>FOR JSON AUTO</code>
-  </li>
-  <li>
-    <a href="https://learn.microsoft.com/en-us/sql/relational-databases/json/format-query-results-as-json-with-for-json-sql-server?view=sql-server-ver16" target="_blank">
-      https://learn.microsoft.com/en-us/sql/relational-databases/json/format-query-results-as-json-with-for-json-sql-server?view=sql-server-ver16
-    </a>
-  </li>
-  <li>
-    Example: <code>SELECT .... FROM TableName FOR JSON PATH, ROOT('order');</code>
-  </li>
-</ul>
+        <ul>
+          <li>Microsoft SQL Server builds two files to represent a database
+            <ul>
+              <li>LDF = Log Database File</li>
+              <li>MDF = Master Database File</li>
+            </ul>
+          </li>
+        </ul>
       </section>
 
+      <h2>JSON in SQL Server</h2>
+      <section>
+        <ul>
+          <li>
+            To format query results as JSON, add <code>FOR JSON</code> to the
+            <code>SELECT</code> statement
+          </li>
+          <li>
+            To maintain control over teh JSON output, use
+            <code>FOR JSON PATH</code>
+          </li>
+          <li>
+            To format JSON output automatically based on the structure of the
+            SELECT statement, use <code>FOR JSON AUTO</code>
+          </li>
+          <li>
+            <a
+              href="https://learn.microsoft.com/en-us/sql/relational-databases/json/format-query-results-as-json-with-for-json-sql-server?view=sql-server-ver16"
+              target="_blank"
+            >
+              https://learn.microsoft.com/en-us/sql/relational-databases/json/format-query-results-as-json-with-for-json-sql-server?view=sql-server-ver16
+            </a>
+          </li>
+          <li>
+            Example:
+            <code
+              >SELECT .... FROM TableName FOR JSON PATH, ROOT('order');</code
+            >
+          </li>
+        </ul>
+      </section>
 
       <section>
         <ul>

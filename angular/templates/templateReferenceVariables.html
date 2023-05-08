@@ -106,6 +106,46 @@
         </div>
       </section>
 
+
+      <h2>How Tos</h2>
+
+      <h3>Bind a Template Reference to a Control Within the Template</h3>
+
+      <section>
+        <ul>
+          <li>
+            Add the ngModel directive to the control
+            <ul>
+              <li>Do not the [(ngModel)] syntax</li>
+              <li>Only want Angular to set a local model and update on change</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code> 
+                  &lt;input ngModelp&gt; 
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Add a template reference to the element where you want to bind to
+            <ul>
+              <li>This gets a direct reference to the DOM element</li>
+              <li>The value from the input will be rebound each type you type</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code> 
+                  &lt;input ngModelp&gt; 
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+
+
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

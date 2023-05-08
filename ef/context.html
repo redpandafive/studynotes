@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Entity Framework</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Context Object</li>
+        </ol>
+      </nav>
+
+      <h1>Context Object</h1>
+
+      <section>
+        <ul>
+          <li>
+            Represents the session with the database, allowing querying and
+            saving data
+          </li>
+          <li>
+            Defined by deriving from System.Data.Entity.DbContext
+            <ul>
+              <li>
+                This exposes a typed DbSet&lt;TEntity&gt; for each class in our
+                model.
+              </li>
+            </ul>
+          </li>
+          <li>
+            This derived class controls how the base constructors
+            <ul>
+                <li>How the context will connect to a database — that is, how a connection string is found/used</li>
+                <li>Whether the context will use calculate a model using Code First or load a model created with the EF Designer</li>
+            </ul>
+          </li>
+          <li>
+            With no parameters called in the context constructor, EF will
+            <ul>
+                <li>Run in Code First mode</li>
+                <li>Use a database connection created by convention using either SQL Express or LocalDB</li>
+                <ul>
+                    <li>Visual Studio 2012 and later includes LocalDB - previous versions use SQL Express</li>
+                    <li>
+                        If SQL Express is running, it will be used. If SQL Express is not available then LocalDB will be registered as the default instead
+                    </li>
+                </ul>
+            </ul>
+          </li>
+          <li>
+            When a string is passed to the constructor containing the database name
+            <ul>
+                <li>EF will run in code first mode</li>
+                <li>A connection string to the specified name will be used to connect to SQL Express or LocalDB</li>
+            </ul>
+          </li>
+          <li>
+            Alternatively, a connection can be stored in a web.config or app.config file
+            <ul>
+                <li>This is an easy way to tell DbContext to use a database server other than SQL Express or LocalDB</li>
+                <li>If the name of the connection string matches the name of your context then it will be found by DbContext when the parameterless constructor is used.</li>
+                <li>If the connection string name is different from the name of your context then you can tell DbContext to use this connection in Code First mode by passing the connection string name to the DbContext constructor</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
