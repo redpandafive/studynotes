@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Animations</li>
+        </ol>
+      </nav>
+
+      <h1>Animations</h1>
+
+      <section>
+        <ul>
+          <li>
+            Built on CSS functionality, which means you can animate any property
+            that the browser considers animatable
+          </li>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2>Setup</h2>
+      <section>
+        <div>
+          Must import the animation capabilities into root Angular application
+          modules
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { BrowserAnimationsModule } from
+                '@angular/platform-browser/animations';<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Import functions into components that will use specific animation
+          functions
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { trigger, state, style, animate, transition } from
+                '@angular/animations';
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          In the component file, add a metadata property called
+          <code>animations</code> within the component decorator
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Component({ <br />
+                selector: 'app-root', <br />
+                templateUrl: 'app.component.html', <br />
+                styleUrls: ['app.component.css'], <br />
+                animations: [ <br />
+                // animation triggers go here <br />
+                ] <br />
+                }) <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Create a component to contain states of the animation
+          <ul>
+            <li>
+              Use the state function to define different states to call at the
+              end of each transition. This takes the following parameters:
+              <ul>
+                <li>A unique string name</li>
+                <li>
+                  A style function that defines a set of styles to associate
+                  with the name
+                </li>
+                <li>
+                  Unlike CSS, style properties should use camel casing for
+                  styles that contain dashes (or quotes)
+                </li>
+              </ul>
+              <div>
+                Examples
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      state('open', style({ <br />
+                      height: '200px', <br />
+                      opacity: 1, <br />
+                      backgroundColor: 'yellow' <br />
+                      })), <br />
+                      state('closed', style({ <br />
+                      height: '100px', <br />
+                      opacity: 0.8, <br />
+                      backgroundColor: 'blue' <br />
+                      })) <br />
+                    </code>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          Transitions are defined to specify changes that occur between one
+          state and another over a period of time
+          <ul>
+            <li>
+              The transition function accepts two arguments
+              <ul>
+                <li>
+                  An expression that defines the direction between two
+                  transition states
+                </li>
+                <li>
+                  One or a series of animate() steps
+                  <ul></ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              The animate() function
+              <ul>
+                <li>
+                  Defines the length, delay, and easing of a transition
+                  <ul>
+                    <li>This is the first parameter, the timing parameter</li>
+                  </ul>
+                </li>
+                <li>
+                  Designates the style function for defining styles while
+                  transitions are taking place
+                  <ul>
+                    <li>
+                      This is the second parameter, the Styles input paraemter
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <h2>Timing Parameters</h2>
+      <section>
+        <ul>
+          <li>
+            Timing parameters can either be
+            <ul>
+              <li>
+                A number (representing milliseconds) representing duration
+              </li>
+              <li>
+                A string containing three items
+                <ul>
+                  <li>duration - in milliseconds or seconds</li>
+                  <li>delay - in milliseconds or seconds</li>
+                  <li>
+                    easing - how the animation accelerates and decelerates
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Examples
+            <ul>
+              <li>
+                Run for 200ms, with no delay. Use a standard curve to start
+                slow, accelerate in the middle, and then decelerate slowly at
+                the end: '0.2s ease-in-out'
+              </li>
+              <li>
+                Start immediately, run for 200ms. Use an acceleration curve to
+                start slow and end at full velocity: '0.2s ease-in'
+              </li>
+              <li>
+                Wait for 100ms, run for 200ms. Use a deceleration curve to start
+                out fast and slowly decelerate to a resting point: '0.2s 100ms
+                ease-out'
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    https://angular.io/guide/animations
+
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

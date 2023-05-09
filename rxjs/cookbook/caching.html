@@ -52,19 +52,23 @@
             <div class="card-body">
               <code>
                 @Injectable({ <br />
-                providedIn: 'root' <br />
+                  providedIn: 'root' <br />
                 }) <br />
                 export class ApiService { <br />
-                private baseUrl = 'http://example.com/api'; <br />
-                private cachedData: Observable&lt;any&gt;; <br />
-                <br />
-                constructor(private http: HttpClient) { } <br />
-                <br />
-                get(): Observable&lt;any&gt; { if (!this.cachedData) {
-                this.cachedData = this.http.get(`${this.baseUrl}/data`).pipe( //
-                Use the shareReplay() operator to cache the result of the HTTP
-                request shareReplay() ); } // Return the cached data return
-                this.cachedData; } }<br />
+                  private baseUrl = 'http://example.com/api'; <br />
+                   private cachedData: Observable&lt;any&gt;; <br />
+                  <br />
+                  constructor(private http: HttpClient) { } <br />
+                  <br />
+                  get(): Observable&lt;any&gt; { <br/>
+                    if (!this.cachedData) { <br/>
+                      this.cachedData = this.http.get(`${this.baseUrl}/data`).pipe( <br/>
+                        shareReplay() <br/>  
+                      ); <br/>
+                    } <br/>
+                    this.cachedData; <br/>
+                } <br/>
+              }<br />
               </code>
             </div>
           </div>

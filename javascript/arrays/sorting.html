@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Sorting</li>
+        </ol>
+      </nav>
+
+      <h1>Sorting</h1>
+
+      <section>
+        <ul>
+          <li>Sorts elements of an array in place</li>
+          <li>
+            If no parameters are passed, it sorts alphabetically into ascending
+            order (converting elements to strings, if necessary)
+          </li>
+          <li>
+            To sort any other way, pass a comparison function as an argument
+            <ul>
+              <li>Comparison function takes two parameters</li>
+              <li>
+                Returns negative number if first should appear before the second
+              </li>
+              <li>
+                Returns positive number if first should appear after the second
+              </li>
+              <li>If they are equivalent, zero is returned</li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Boosting Performance and Pitfalls</h2>
+      <section>
+        <ul>
+          <li>
+            Avoid mutating objects while you are sorting them, this can lead to
+            bugs or unexpecetd results
+          </li>
+          <li>
+            NaN values will always be sorted to the end of the array, so handle
+            these in your sort function if working with arrays that contain them
+            <ul>
+              <li>Use <code>isNaN(val)</code> function to do this</li>
+            </ul>
+          </li>
+          <li>
+            This method may not work well with large arrays. See this
+            <a
+              href="https://marketsplash.com/tutorials/javascript/javascript-sort/#link5"
+              >article</a
+            >
+            to use caching to improve performance
+          </li>
+        </ul>
+      </section>
+
+      <h2>Examples that Sort Numbers</h2>
+      <section>
+        <div>
+          To sort by numerical values...
+          <div class="card">
+            <div class="card-body">
+              <code>
+                a.sort(function(a,b) { <br />
+                return a-b; <br />
+                }); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To sort by numerical values in descending order...
+          <div class="card">
+            <div class="card-body">
+              <code>
+                a.sort(function(a,b) { <br />
+                return b-a; <br />
+                }); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Examples that Sort Strings</h2>
+      <section>
+        <div>
+          To sort alphabetically, but case insensitive...
+          <div class="card">
+            <div class="card-body">
+              <code>
+                a.sort(function(s,t) { <br />
+                let a = s.toLowerCase(); <br />
+                let b = t.toLowerCase(); <br />
+                if (a &lt; b) return -1; <br />
+                if (a &gt; b) return 1; <br />
+                return 0; <br />
+                }); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Examples that Sort Objects</h2>
+      <section>
+        <div>
+          Sorting by a numeric property
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const users = [ <br />
+                { name: 'Tim', age: 25 },<br />
+                { name: 'Frank', age: 30 },<br />
+                { name: 'Kevin', age: 20 }<br />
+                ];<br />
+                <br />
+                users.sort((a, b) => a.age - b.age);<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Sorting by a text property
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const users = [ <br />
+                { name: 'Tim', age: 25 },<br />
+                { name: 'Frank', age: 30 },<br />
+                { name: 'Kevin', age: 20 }<br />
+                ];<br />
+                <br />
+                users.sort((a, b) => a.name.localeCompare(b.name));<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Sorting by multiple properties
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const users = [ <br />
+                { name: 'Tim', age: 25 },<br />
+                { name: 'Frank', age: 30 },<br />
+                { name: 'Kevin', age: 20 }<br />
+                ];<br />
+                <br />
+                users.sort((a, b) => {<br />
+                if (a.age !== b.age) {<br />
+                return a.age - b.age;<br />
+                }<br />
+                return a.name.localeCompare(b.name);<br />
+                }); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

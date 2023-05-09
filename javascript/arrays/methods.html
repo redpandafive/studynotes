@@ -1024,71 +1024,7 @@
 
       <h4>sort()</h4>
       <section>
-        <ul>
-          <li>
-            Sorts elements of an array in place
-            <ul>
-              <li>Does return the sorted array</li>
-            </ul>
-          </li>
-          <li>
-            If no parameters are passed, it sorts alphabetically (converting
-            elements to strings, if necessary)
-          </li>
-          <li>
-            To sort any other way, pass a comparison function as an argument
-            <ul>
-              <li>Takes two parameters</li>
-              <li>
-                Returns negative number if first should appear before the second
-              </li>
-              <li>
-                Returns positive number if first should appear after the second
-              </li>
-              <li>If they are equivalent, zero is returned</li>
-            </ul>
-          </li>
-        </ul>
-        <div>
-          To sort by numerical values...
-          <div class="card">
-            <div class="card-body">
-              <code>
-                a.sort(function(a,b) { <br />
-                return a-b; <br />
-                }); <br />
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          To sort alphabetically, but case insensitive...
-          <div class="card">
-            <div class="card-body">
-              <code>
-                a.sort(function(s,t) { <br />
-                let a = s.toLowerCase(); <br />
-                let b = t.toLowerCase(); <br />
-                if (a &lt; b) return -1; <br />
-                if (a &gt; b) return 1; <br />
-                return 0; <br />
-                }); <br />
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          <ul>
-            <li>
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"
-                target="_blank"
-              >
-                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-              </a>
-            </li>
-          </ul>
-        </div>
+        <a href="sorting.html">See Sorting</a>
       </section>
 
       <h4>reverse()</h4>

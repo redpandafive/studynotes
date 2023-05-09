@@ -48,22 +48,87 @@
           <li>
             box-shadow
             <ul>
-              <li>Adds shadow effects around an elements frame</li>
+              <li>
+                This creates a rectangular shadow behind an element's entire box
+              </li>
+              <li>
+                Different from drop-shadow on applies to the box of the element
+              </li>
               <li>
                 Described by
                 <ul>
-                  <li>X and Y offsets relative to the element</li>
-                  <li>Blur</li>
-                  <li>Spread radius</li>
-                  <li>Color</li>
                   <li>
-                    <a
-                      href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow"
-                    >
-                      https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
-                    </a>
+                    X and Y offsets relative to the origin of the element (top
+                    left)
+                    <ul>
+                      <li>Positive x-offset moves the shadow to the right</li>
+                      <li>Positive y-offset moves the shadow downwards</li>
+                    </ul>
                   </li>
+                  <li>Blur - radius of the blur</li>
+                  <li>Spread radius - how much a shadow grows or sinks</li>
+                  <li>Color</li>
                 </ul>
+              </li>
+            </ul>
+            <div>
+              Example
+              <div class="card">
+                <div class="card-body">
+                  <code> box-shadow: 6px 12px yellow; </code>
+                </div>
+              </div>
+            </div>
+            <div>
+              This example adds multiple shadows to a single property
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    box-shadow: 6px 12px 2px 2px blue, -6px -12px 2px 2px green;
+                  </code>
+                </div>
+              </div>
+            </div>
+            <ul>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow"
+                >
+                  https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            drop-shadow
+            <ul>
+              <li>Part of the filter property</li>
+              <li>
+               THis applies the shadow to the entire element, including any content or background images 
+              </li>
+              <li>Useful for
+                <ul>
+                  <li>Conturing an image with a shadow (not just its containing box)</li>
+                </ul>
+              </li>
+            </ul>
+            <div>
+              Uses the following syntax
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    drop-shadow(offset-x offset-y blur-radius color)
+                  </code>
+                </div>
+              </div>
+            </div>
+            <ul>
+              <li>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/drop-shadow"
+                >
+                https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/drop-shadow
+                </a>
               </li>
             </ul>
           </li>
@@ -126,13 +191,15 @@
                   <li>
                     Positioned element = element whose computed position value
                     is anything other than static
-
                   </li>
                   <li>
                     Absolutely positioned element = element whose computed
                     position value is absolute or fixed
                     <ul>
-                      <li>Usually leave hight and wdith on auto and using top, right, bottom, and left</li>
+                      <li>
+                        Usually leave hight and wdith on auto and using top,
+                        right, bottom, and left
+                      </li>
                     </ul>
                   </li>
                 </ul>
@@ -242,7 +309,10 @@
                 </ul>
               </li>
               <li>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank">
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS/position"
+                  target="_blank"
+                >
                   https://developer.mozilla.org/en-US/docs/Web/CSS/position
                 </a>
               </li>
@@ -286,7 +356,8 @@
                 <code>display: inline</code>
               </li>
               <li>
-                Usually do not set ths on absolutely positioned elements (default to auto)
+                Usually do not set ths on absolutely positioned elements
+                (default to auto)
               </li>
             </ul>
           </li>
@@ -298,7 +369,8 @@
                 <code>display: inline</code>
               </li>
               <li>
-                Usually do not set ths on absolutely positioned elements (default to auto)
+                Usually do not set ths on absolutely positioned elements
+                (default to auto)
               </li>
             </ul>
           </li>
