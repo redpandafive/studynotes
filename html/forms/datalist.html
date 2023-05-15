@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">HTML</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Data List Element
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Data List Element</h1>
+
+      <section>
+        <ul>
+          <li>
+            Contains a set of option elements that represent the permissible or
+            recommended options availabe to choose from within other controls
+          </li>
+          <li>
+            To bind it to a control
+            <ul>
+              <li>
+                Give the data list a unique identifier in the id attribute
+              </li>
+              <li>
+                Add the list attribute to the input element with the same
+                identifier as value
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <div>
+          <label for="ice-cream-choice">Choose a flavor:</label>
+          <input class="form-control"
+            list="ice-cream-flavors"
+            id="ice-cream-choice"
+            name="ice-cream-choice" 
+          />
+          <datalist id="ice-cream-flavors">
+            <option value="Chocolate"></option>
+            <option value="Coconut"></option>
+            <option value="Mint"></option>
+            <option value="Strawberry"></option>
+            <option value="Vanilla"></option>
+          </datalist>
+          <br/>
+
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;label for="ice-cream-choice"&gt;Choose a flavor:&lt;/label&gt; <br/> 
+                &lt;input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice"&gt; <br/>
+                &lt;datalist id="ice-cream-flavors"&gt; <br/>
+                &lt;option value="Chocolate"&gt; <br/>
+                &lt;option value="Coconut"&gt; <br/>
+                &lt;option value="Mint"&gt; <br/>
+                &lt;option value="Strawberry"&gt; <br/> 
+                &lt;option value="Vanilla"&gt; <br/>
+                &lt;/datalist&gt; <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also / Sources</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
