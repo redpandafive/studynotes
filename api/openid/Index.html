@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">APIs</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Open ID Connect
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Open ID Connect</h1>
+
+      <section>
+        <ul>
+          <li>
+            A simple identity layer on top of the OAuth2 protocol (extends the
+            protocol)
+            <ul>
+              <li>Like OAuth 2, it is a set of rules or guidelines</li>
+              <li>The standard does not include an implemenation</li>
+              <li>Identity providers implement this standard - you dont want to code it yourself</li>
+            </ul>
+          </li>
+          <li>
+            A client application can request an identity token (next to an
+            access token)
+            <ul>
+              <li>
+                The identity token can be used to sign in to an application
+              </li>
+              <li>The access token is used to access the API</li>
+            </ul>
+          </li>
+          <li>
+            It supersedes OAuth2
+            <ul>
+              <li>Makes obsolete the less-good parts of OAuth2</li>
+            </ul>
+          </li>
+          <li>Can be used to secure web applications as well as APIs</li>
+          <li>
+            Security ASP.NET Core 6 with OAuth2 and OpenID Connect course
+            recommendations
+            <ul>
+              <li>
+                Open ID Connect is the superior protocol; it extends and
+                supersedes OAuth2
+              </li>
+              <li>Once you deal with users, use Open ID Connect</li>
+            </ul>
+          </li>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2>How It Works - Very High Level</h2>
+      <section>
+        <ul>
+          <li>
+            The details of this communication can vary depending on the flow
+            <ul>
+              <li>The access token is determined by the flow that is used</li>
+            </ul>
+          </li>
+          <li>
+            Client application (also called relying party) creates a request
+            that redirects the user to the identity provider
+          </li>
+          <li>
+            At the level of the identity provider, the user proves who they are
+            <ul>
+              <li>Usually by providing a username and password</li>
+            </ul>
+          </li>
+          <li>
+            If approved, the identity provider creates an identity token, signs
+            it, and returns it to the client application
+            <ul>
+              <li>This token provides the user's verifyable identity</li>
+            </ul>
+          </li>
+          <li>Client validates the token and now has proof of identity</li>
+          <li>
+            In ASP.NET Core, this identity token is used to create a
+            ClaimsIdentity
+            <ul>
+              <li>
+                In most cases, this is an authentication ticket stored in an
+                encrypted cookie
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Client Types</h2>
+      <section>
+        <ul>
+          <li>
+            Client credentials are typically a client id and a client secret
+            <ul>
+              <li>These are not the same as user credentials</li>
+            </ul>
+          </li>
+          <li>There are two categories of clients</li>
+          <li>
+            Confidential
+            <ul>
+              <li>
+                Client capable of maintaining the confidentiality of their
+                credentials (client id and client secret)
+              </li>
+              <li>
+                Client credientials can be stored at the level of the client
+                application
+                <ul>
+                  <li>
+                    An example of this is a web app that runs on a web server,
+                    such as an ASP.NET Core web application
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Credentials are stored on the server and not exposed to or
+                accessable by user
+              </li>
+            </ul>
+          </li>
+          <li>
+            Public
+            <ul>
+              <li>Clients not capable to maintaining confidentiality</li>
+              <li>
+                Example would be an application that executing in a browser on
+                the client, such as JavaScript applications or Web Assembly apps
+              </li>
+              <li>
+                Secrets cannot be stored in the client application since the
+                user has access to it
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Open ID Connect Flow</h2>
+      <section>
+        <ul>
+          <li>
+            A flow is a set of HTTP requests and responses that determine how
+            code(s) and/or tokens are safely delivered to clients
+          </li>
+          <li>
+            Very simple cases are a single request and response, but it usually
+            more complicated than that
+          </li>
+          <li>
+            Different flows will be used, depending on:
+            <ul>
+              <li>The client type being used</li>
+              <li>Lifetime requirements</li>
+            </ul>
+          </li>
+          <li>
+            TLS is required for OIDC
+            <ul>
+              <li>Traffic must always be encrypted</li>
+              <li>
+                Tokens are not encrypted out of the box since OIDC relies on
+                transport layer to care care of encryption
+              </li>
+              <li>
+                Without it, you are vulnerable to man in the middle attacks
+              </li>
+            </ul>
+          </li>
+          <li>
+            Flows talk to different endpoints
+            <ul>
+              <li>
+                Authorization endpoint (IDP level)
+                <ul>
+                  <li>
+                    Used by the client applicaiton to obtain authentication for
+                    identity tokens and/or authorizaiton for access token
+                  </li>
+                  <li>
+                    This is done by redirecting the client to the identtiy
+                    provider
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Redirection endpoint (client level)
+                <ul>
+                  <li>Also called callback endpoint</li>
+                  <li>
+                    This is the URI that the identity provider redirects the
+                    client back to
+                  </li>
+                  <li>
+                    Used by the identity provider to return code & token(s) to
+                    the client application
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Token endpoint (IDP level)
+                <ul>
+                  <li>
+                    Client applications can programatically request tokens
+                  </li>
+                  <li>
+                    Used by client applications to request tokens without
+                    redirection
+                    <ul>
+                      <li>Typically done via HTTP POST without redirection</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Requests can be authenticated (for confidential clients) or
+                    not (for public clients)
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are three OpenID Connect flows
+            <ul>
+              <li>
+                Authorization Code
+                <ul>
+                  <li>
+                    Recommended for both Condidential clients and Public clients
+                    <ul>
+                      <li>Use along with PKCE protection</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Returns an authorizaiton code from the authorization
+                    endpoint
+                    <ul>
+                      <li>This is a short lived, single use credential</li>
+                      <li>
+                        Used to verify that the user logged in at the level of the IDP is the same one
+                        who started the flow at the client application level
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    For confidential clients
+                    <ul>
+                      <li>Request to the token endpoint should be authenticated</li>
+                      <li>Allows the use of long lived tokens through the user of a refresh token</li>
+                    </ul>
+                  </li>
+                  <li>For public clients
+                    <ul>
+                      <li>Long lived accss is restricted since public clients cannot store their authentication informaiton</li>
+                      <li>Current consensus is move away from handling security at level of the client in favor of the server</li>
+                      <li>Let the site that hosts your use agent based app (Angular, Blazor, React) handle the Open ID connect flow
+                        <ul>
+                          <li>This could be an ASP.NET Core application</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Implicit
+                <ul>
+                  <li>
+                    Can currently be considered obsolete due to current OAuth2
+                    recommendations
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Hybrid
+                <ul>
+                  <li>
+                    Can currently be considered obsolete due to current OAuth2
+                    recommendations
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Choosing the correct flow is critical so you do not open a security hole in your application
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

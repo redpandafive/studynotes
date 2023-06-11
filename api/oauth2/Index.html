@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">APIs</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">OAuth 2</li>
+        </ol>
+      </nav>
+
+      <h1>OAuth 2</h1>
+
+      <section>
+        <ul>
+          <li>
+            An open protocol to allow secure authorization in a simple and
+            standard method from web, mobile, and desktop applications
+            <ul>
+              <li>Authorizes an application</li>
+              <li>Client applications can request an access token to gain access to an API</li>
+              <li>Token is passed to the API to gain access</li>
+            </ul>
+          </li>
+          <li>
+            The standard defines how to use endpoints for different types of client applications
+            <ul>
+              <li>Identity providers should implement this standard</li>
+            </ul>
+          </li>
+          <li>
+            By itself, it does not provide authentication
+          </li>
+          <li>
+            There are four players
+            <ul>
+              <li>Protected resource (HTTP API)</li>
+              <li>
+                Client application (requesting application) that wants to access
+                the protected resource
+              </li>
+              <li>Resource owner (the user) who owns the protected resource</li>
+              <li>
+                The authorization server
+                <ul>
+                  <li>Handles authorization requests</li>
+                  <li>Trusted by all parties involved</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Criticisms and Misconceptions</h2>
+      <ul>
+        <li>
+          OAuth is not authentication
+          <ul>
+            <li>
+              Access tokens do not represent the user (or the client
+              application)
+              <ul>
+                <li>Intended audience is the protected resource</li>
+                <li>
+                  Client applications should have no need to look inside the
+                  validation token or try to validate it
+                </li>
+                <li>
+                  Client applications just request the token and then pass it on
+                  to the protected resource
+                </li>
+                <li>Client cannot reliably verify the access token</li>
+              </ul>
+            </li>
+            <li>
+              The authorization server has no obligation to clients regarding
+              acces stoken, format, or scheme
+              <ul>
+                <li>
+                  Do not try to extract information from the token to use within
+                  the client to process authentication
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

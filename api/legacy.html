@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">APIs</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Legacy Solutions
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Legacy Solutions</h1>
+
+      <h2>Legacy Technologies</h2>
+      <section>
+        <ul>
+          <li>
+            Applications used be restricted to an internal network or a single domain 
+            <ul>
+              <li>For instance, a service side web application that uses internal APIs</li>
+            </ul>
+            <ul>
+              <li>One protocol used was WS-Security
+                <ul>
+                  <li>Microsoft impelemntation was WCF</li>
+                </ul>
+              </li>
+              <li>
+                Most used SAML 2.0 = standard for exchanging authentication and
+                authorization data between security domains
+              </li>
+            </ul>
+          </li>
+          <li>
+            The landscape eventually evolved to using Web APIs or Rest applications (Service based applications)
+            <ul>
+              <li>No longer nessarily lived in the same domain and possibly were not under developer control</li>
+              <li>Client applications could use its own API and other APIs as well, such as Google Map</li>
+            </ul>
+          </li>
+          <li>
+            Client applications now often require public APIs
+          </li>
+        </ul>
+      </section>
+
+      <h2>Legacy API Security</h2>
+      <section>
+        <ul>
+          <li>
+            Credential Sharing
+            <ul>
+              <li>No way for the API to tell the user and application apart</li>
+              <li>
+                The application is impersonating a user (using the username and
+                password)
+              </li>
+              <li>
+                No way to restrict single users from having access, permissions
+              </li>
+              <li>
+                No real way to revocate credentials without impacting all
+                applications using the credentials
+              </li>
+              <li>Does not allow federation</li>
+            </ul>
+          </li>
+          <li>
+            Cookies
+            <ul>
+              <li>
+                Unsuitable for API security due to Cross-Site Request Forgery
+                attacks (CSRF or XSRF)
+              </li>
+            </ul>
+          </li>
+          <li>
+            API Keys
+            <ul>
+              <li>User uses a given API key so connec to the API</li>
+              <li>No longer expose user credentials</li>
+              <li>
+                Still struggle with application tha cannot keep a secret, such
+                as a single page app that does not have backend storage
+              </li>
+              <li>No standard for creating keys</li>
+              <li>
+                Are long lived, which can be a problem if it the key is stolen
+                and the theft is not noticed
+                <ul>
+                  <li>
+                    Short key lifetimes can cause frustrations with consumers of
+                    the API
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Token Based Security</h2>
+      <ul>
+        <li>Alternative to sending usename and passwords with each request</li>
+        <li>Tokens are passed instead from the client to the server to grant access to resources
+          <ul>
+            <li>Tokens are granted on succesful login</li>
+            <li>Tokens are vlidated on the server on each request</li>
+          </ul>
+        </li>
+        <li>
+          Home grown token services emerged
+          <ul>
+            <li>Typically started with a login page where you entered your username and password</li>
+            <li>
+              This would return a JSON Web Token
+            </li>
+            <li>
+              This still requires sharing your username and password with the api
+              <ul>
+                <li>That may be ok for your own trusted application, but not a good idead for 3rd part applications</li>
+              </ul>
+            </li>
+            <li>
+              End up reinventing the wheel each time implemented, including the following concerns:
+              <ul>
+                <li>Token expiration</li>
+                <li>Token signing and validatin</li>
+                <li>Token format</li>
+                <li>Authentication and authorization</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

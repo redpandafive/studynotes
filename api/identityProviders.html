@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">APIs</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Identity Providers
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Identity Providers</h1>
+
+      <section>
+        <ul>
+          <li>
+            Identify Providers has the responsibility to authentiate users and,
+            if needed, safely provide proof of identity to an application
+          </li>
+          <li>
+            Handle identity and acces management related tasks, such as:
+            <ul>
+              <li>User registration and management</li>
+              <li>Locking out users</li>
+              <li>Password policies, strengths and resets</li>
+            </ul>
+          </li>
+          <li>
+            Better to handle this in one cental location and resuse them accross
+            applications
+            <ul>
+              <li>Use accounts can be reused across applications</li>
+              <li>
+                Users will no longer prove who they are in the application
+                itself, but to the Identity Provider instead
+              </li>
+            </ul>
+          </li>
+          <li>Also known as
+            <ul>
+              <li>
+                Authentication servers
+              </li>
+              <li>
+                Security token services
+              </li>
+            </ul>
+          </li>
+          <li>
+            Examples include
+            <ul>
+              <li>Duende Identity server</li>
+              <li>Azure AD</li>
+              <li>Ping</li>
+              <li>Auth0</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Duende IdentiyServer</h2>
+      <section>
+        <ul>
+          <li>Open ID Connect and OAuth 2 framework for ASP.NET Core</li>
+          <li>Developed by Duende Software
+            <ul>
+              <li>There is a paid version</li>
+              <li>There is a community license that allows for free usage under certain conditions</li>
+            </ul>
+          </li>
+          <li>Completely open source</li>
+          <li>Certified by the Open ID Foundation</li>
+          <li>Part of .NET Foundation
+            <ul>
+              <li>Even used in some of the Visual Studio starter templates, such as Angular or Blazor</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
