@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+
+      <h1>Data-Tier Application (DAC)</h1>
+      <section>
+        <ul>
+          <li>
+            Self contained unit of the entire database model - defines all of
+            the SQL Server objects, including
+            <ul>
+              <li>Tables</li>
+              <li>Views</li>
+              <li>Instance objects, such as logins</li>
+            </ul>
+          </li>
+          <li>Can be ported into an artifact called a DAC package (DACPAC)
+            <ul>
+              <li>This is a compressed folder with a .dacpac extension</li>
+              <li>This can be unpacked to view the underlying XML that contains information about the origin, the objects in the database, and other characteristics</li>
+              <li>This requires renaming the extension to .zip</li>
+            </ul>
+          </li>
+          <li>
+            Tooling can be used to deploy dacpacs to new or existing databases
+            <ul>
+              <li>
+                Allows updates to the database model of existing database states
+                to match the contents of the dacpac
+              </li>
+            </ul>
+          </li>
+          <li>
+            DACs are build from SQL databse projects and can also be generated
+            form an exsting database
+          </li>
+          <li>
+            Supported by the following applications
+            <ul>
+              <li>SqlPackage CLI</li>
+              <li>SQL Server Management Studio</li>
+              <li>Azure Data Studio</li>
+              <li>SQL Server Data Tools in Visual Studio</li>
+              <li>Visual Studio Code</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>DACPAC Operations</h2>
+      <section>
+        <ul>
+          <li>
+            Extract
+            <ul>
+              <li>Extract a database into a .dacpac file</li>
+            </ul>
+          </li>
+          <li>
+            Deploy / Publish
+            <ul>
+              <li>
+                When deployed to an existing database, the difference between
+                the database and the DAC is applied to the database as an object
+                update operation
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>BACPAC</h2>
+      <section>
+        <ul>
+          <li>
+            Encapsulates the database schmea and the data stored in the databse
+          </li>
+          <li>
+            Primary use cases are
+            <ul>
+              <li>Move databases from one server to another</li>
+              <li>Archive an existing database in an open format</li>
+            </ul>
+          </li>
+          <li>
+            Supports the following Operations
+            <ul>
+              <li>Export
+                <ul>
+                  <li>Export the schema and the data of a databast to a .bacpac file</li>
+                </ul>
+              </li>
+              <li>Import
+                <ul>
+                  <li>Import the schema and data into a new database</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>SQL Database Projects</h2>
+      <section>
+        <ul>
+          <li>
+            Support the following Operations
+            <ul>
+              <li>Build - build into a .dacpac file</li>
+              <li>Publish - publish a SQL database project to a host server</li>
+              <li>Extract - extract a database into a SQL database project</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://learn.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver16">
+              https://learn.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver16
+            </a>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

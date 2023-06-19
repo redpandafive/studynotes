@@ -7,78 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">Home</a>
+        <a class="navbar-brand" href="../../index.html">Home</a>
       </div>
     </nav>
     <div class="container">
-      <h1>SQL</h1>
+      <h1>SQL and MS SQL Server</h1>
 
-      <section>
-        <ul>
-          <li>Window</li>
-        </ul>
-      </section>
-
-      <section>
-        <ul>
-          <li>Microsoft SQL Server builds two files to represent a database
-            <ul>
-              <li>LDF = Log Database File</li>
-              <li>MDF = Master Database File</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2>JSON in SQL Server</h2>
-      <section>
-        <ul>
-          <li>
-            To format query results as JSON, add <code>FOR JSON</code> to the
-            <code>SELECT</code> statement
-          </li>
-          <li>
-            To maintain control over teh JSON output, use
-            <code>FOR JSON PATH</code>
-          </li>
-          <li>
-            To format JSON output automatically based on the structure of the
-            SELECT statement, use <code>FOR JSON AUTO</code>
-          </li>
-          <li>
-            <a
-              href="https://learn.microsoft.com/en-us/sql/relational-databases/json/format-query-results-as-json-with-for-json-sql-server?view=sql-server-ver16"
-              target="_blank"
-            >
-              https://learn.microsoft.com/en-us/sql/relational-databases/json/format-query-results-as-json-with-for-json-sql-server?view=sql-server-ver16
-            </a>
-          </li>
-          <li>
-            Example:
-            <code
-              >SELECT .... FROM TableName FOR JSON PATH, ROOT('order');</code
-            >
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <ul>
-          <li>
-            <a
-              href="https://help.tableau.com/current/api/hyper_api/en-us/"
-              target="_blank"
-            >
-              https://help.tableau.com/current/api/hyper_api/en-us/
-            </a>
-          </li>
-        </ul>
-      </section>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">General</h5>
+          <a href="./sql/basics.html">Basics</a><br />
+          <a href="./sql/dac.html">Data-Tier Application (DAC)</a><br />
+        </div>
+      </div>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
