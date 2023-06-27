@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Custom Asynchronous Validators
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Custom Asynchronous Validators</h1>
+
+      <section>
+        <ul>
+          <li>
+            Similar to synchronous counterparts, except
+            <ul>
+              <li>Implement <code>AsyncValidator</code></li>
+              <li>The validate function must return a Promise or an Observable</li>
+              <li>If Observable is returned, it must be finiite (must complete at some point)</li>
+            </ul>
+          </li>
+          <li>
+            Implement AsyncValidatorFn and AsyncValidator
+          </li>
+          <li>
+            These are performed after synchronous validation and only if synchronous validation passes 
+          </li>
+          <li>
+            After validation begins, the form control enters a pending state
+            <ul>
+              <li>
+                Inspect the controls <code>pending</code> property and use it to give visual feedback about the ongoing validation operation
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;input [(ngModel)]="name" #model="ngModel" appSomeAsyncValidator&gt;
+                      &lt;app-spinner *ngIf="model.pending"&gt;&lt;/app-spinner&gt;
+                      
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div>
+          The following code sets up a custom validator:
+          <ul>
+            <li></li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Injectable({ providedIn: 'root' }) <br/>
+                export class UniqueUserNameValidator implements AsyncValidator { <br/>
+                  constructor(private usernameService: UserNameService) {} <br/>
+                  <br/>
+                  validate(control: AbstractControl): Observable<ValidationErrors | null> { <br/>
+                    return this.usernameService.isUnique(control.value).pipe( <br/>
+                      map(isTaken => (isTaken ? { uniqueAlterEgo: true } : null)), <br/>
+                      catchError(() => of(null)) <br/>
+                    ); <br/>
+                  } <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+
+          <div class="card">
+            <div class="card-body">
+              <code>
+                interface UserNameService { <br/>
+                  isUnique: (username: string) => Observable&lt;boolean&gt;; <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <b>CONTINUE https://angular.io/guide/form-validation#creating-asynchronous-validators</b>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://angular.io/guide/form-validation#creating-asynchronous-validators">
+              https://angular.io/guide/form-validation#creating-asynchronous-validators
+            </a>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

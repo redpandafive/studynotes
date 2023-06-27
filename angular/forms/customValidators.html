@@ -26,18 +26,88 @@
             <a href="../../../index.html">Home</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="../../index.html">Angular</a>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="../index.html">Cookbook</a>
+            <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Build a Custom Validator
+            Custom Validators
           </li>
         </ol>
       </nav>
 
-      <h1>Build a Custom Validator</h1>
+      <h1>Custom Validators</h1>
+
+      <section>
+        <ul>
+          <li>
+            Custom validators can be implemented as classes
+            <ul>
+              <li>
+                Use the Directive decorator on this class
+                <ul>
+                  <li>This should contain a selector</li>
+                </ul>
+              </li>
+              <li>The class name should end in a Validator suffix</li>
+              <li>The class should implement Validator class</li>
+              <li>
+                Contains a single method, validate
+                <ul>
+                  <li>Takes a FormGroup object as a parameter</li>
+                  <li>Returns { [key: string]: any }</li>
+                </ul>
+              </li>
+              <li>
+                To access a control named address in the FormGroup
+                <ul>
+                  <li>formGroup.controls['address']</li>
+                </ul>
+              </li>
+              <li>
+                You can navigate up the FormGroup hierarchy by accessing
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      (&lt;FormGroup&gt;formGroup.root).controls&#91;'controlInParentFormGroup'&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>Returning null means validation is passed</li>
+            </ul>
+          </li>
+
+          <li>
+            Custom validator classes must be added to Angular's validator
+            'service'
+            <ul>
+              <li>
+                Import NG_VALIDATORS from @angular/forms - this is essentially a
+                service
+              </li>
+              <li>
+                In the directive config object add
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      Providers: &#91;{provide: NG_VALIDATORS, useExisting:
+                      LocationValidator, multi: true }&#93;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Without the multi: true parameter, this would break built in
+            validators since LocationValidator is being configured to be
+            injected
+          </li>
+          <li>
+            The 3rd parameter adds the new validator to the collection of
+            services provided by NG_VALIDATORS that are built in by Angular
+          </li>
+        </ul>
+      </section>
 
       <section>
         <div>
@@ -136,7 +206,8 @@ return invalidWords && invalidWords.length > 0 ? {'restrictedWords': invalidWord
                 import { AbstractControl, ValidationErrors } from
                 '@angular/forms'; <br />
                 export class NoWhiteSpaceValidator { <br />
-                static noWhiteSpace(control: AbstractControl) : ValidationErrors <br />
+                static noWhiteSpace(control: AbstractControl) : ValidationErrors
+                <br />
                 | null { <br />
                 if((control.value as string).indexOf(' ') &gt;= 0) { <br />
                 return {cannotContainSpace: true} <br />

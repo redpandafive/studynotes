@@ -111,7 +111,7 @@
       <section>
         <ul>
           <li>
-            Factory method for creating a new array
+            Factory method for creating a new shallowed copied Array instance from  an iterable or array like object
             <ul>
               <li>
                 Expects an iterable or array like object as its first argument
@@ -150,6 +150,31 @@
             </ul>
           </li>
         </ul>
+
+        <div>
+          The following uses an arrow function to manipulate elements
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                Array.from([1, 2, 3], (x) =&gt; x + x); <br /> 
+                // [2, 4, 6] <br /> 
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The following converts a Map to an array of objects, each with a key and value property
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                let map = new Map().set('a', 1).set('b', 2); <br/>
+                array = Array.from(map, ([name, value]) =&gt; ({ name, value })); <br /> 
+              </code>
+            </div>
+          </div>
+        </div>
+
+
       </section>
 
       <h3>Array.of()</h3>
