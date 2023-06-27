@@ -37,22 +37,21 @@
       <section>
         <ul>
           <li>Extension of the AbstractControl class</li>
+          <li>Corresponds to an individual control inside of an HTML form</li>
           <li>
             This is the basic building block class that represents a single
             control on the form
             <ul>
               <li>
-                In Reactive forms, this is one of the main building blocks you work
-                with directly
-                </li>
-                <li>
-                    These are used in Template Driven forms, but they are under the
-                    hood
-                  </li>
+                In Reactive forms, this is one of the main building blocks you
+                work with directly
+              </li>
+              <li>
+                These are used in Template Driven forms, but they are under the
+                hood
+              </li>
             </ul>
           </li>
-
-          
 
           <li>You will define one instance for each of your form elements</li>
           <li>
@@ -81,6 +80,36 @@
             </ul>
           </li>
         </ul>
+      </section>
+
+      <h2>Constructor</h2>
+      <section>
+        <ul>
+          <li>Takes three parameters:
+            <ul>
+              <li>
+                Initial data value, including null
+              </li>
+              <li>
+                Optional array of synchronous validators
+              </li>
+              <li>
+                Optional array of asynchronous validators
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          call this to replace the old value of the control entirely
+          <div class="card">
+            <div class="card-body">
+              <code>
+                emailControl : FormControl; <br />
+                this.emailControl = new FormControl(myDefaultEmailValue,[Validators.required]);<br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h2>SetValue Method</h2>

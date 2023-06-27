@@ -34,6 +34,8 @@
 
       <section>
         <ul>
+          <li>Simply a group of FormControl objects</li>
+          <li>Corresponds to an HTML form</li>
           <li>Extension of the AbstractControl class</li>
 
           <li>
@@ -122,7 +124,7 @@
               <div class="card-body">
                 <code>
                   profileForm = new FormGroup({ <br />
-                  firstName: new FormControl(''),<br />
+                  firstName: new FormControl('', [Validators.required]),<br />
                   lastName: new FormControl(''),<br />
                   });
                 </code>
