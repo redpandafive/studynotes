@@ -38,8 +38,14 @@
       <section>
         <ul>
           <li>
-            Manages a collection of AbstractControl objects
+            Allows you to manage any number of AbstractControl controls as an
+            array
             <ul>
+              <li>Opposed to FormGroup, which stores controls as properties</li>
+              <li>
+                This is a good option if you do not know the number of child
+                values in advance
+              </li>
               <li>
                 Can contain a FormGroup, FormControl, or another FormArray
               </li>
@@ -50,23 +56,13 @@
             </ul>
           </li>
           <li>
-            Extension of the AbstractControl class. Therefore, it contains
-            properties that it has in common with them, such as
+            This is an extension of the AbstractControl class. Therefore, it
+            contains properties that it has in common with them, such as
             <ul>
               <li>valid</li>
               <li>dirty</li>
               <li>disabled</li>
               <li>controls</li>
-            </ul>
-          </li>
-          <li>
-            Allows you to manage any number of unnamed controls as an array
-            <ul>
-              <li>Opposed to FormGroup, which stores controls as properties</li>
-              <li>
-                This is a good option if you do not know the number of child
-                values in advance
-              </li>
             </ul>
           </li>
 
@@ -95,10 +91,153 @@
         </ul>
       </section>
 
+      <h2>Fetching a FormArray from a FormGroup</h2>
+      <section>
+        <ul>
+          <li>
+            Retrieving a FormArray from a FormGroup uses a similar syntax as
+            fetching a FormControl
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                fetchArray():FormArray { <br />
+                return &lt;FormArray&gt; this.myFormGroup.get('tickets'); <br />
+                }
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <h2>Validation</h2>
       <section>
         <ul>
-          <li>The validity of a FormArray is determined by its AbstractControls validity</li>
+          <li>
+            The validity of a FormArray is determined by the validity of its
+            contained AbstractControls
+            <ul>
+              <li>
+                If at least one child is invalid, the whole array will be
+                invalid
+              </li>
+            </ul>
+          </li>
+          <li>
+            Array level validators (sync and async) can be specified that
+            considers all children of the FormArray
+          </li>
+        </ul>
+        <div>
+          Example of using FormArray level validators
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const arr = new FormArray([ <br />
+                new FormControl('Jim'), <br />
+                new FormControl('Bob') <br />
+                ], {validators: mySyncValidators, asyncValidators:
+                myAsyncValidators}); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>UpdateOn</h2>
+      <section>
+        <ul>
+          <li>
+            An options object can be included to set a default value for each
+            child controls updaetOnProperty
+          </li>
+          <li>
+            For example, setting updateOn to blur at the array will update all
+            children (unless configured otherwise on the child control)
+          </li>
+        </ul>
+        <div>
+          Example of applying the updateOn option to all children in the array
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const arr = new FormArray([ <br />
+                new FormControl() <br />
+                ], {updateOn: 'blur'}); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Methods</h2>
+      <section>
+        <ul>
+          <li>
+            controls
+            <ul>
+              <li>
+                An array containing all the controls that are part of the array
+              </li>
+            </ul>
+          </li>
+          <li>
+            insert(index)
+            <ul>
+              <li>
+                Inserts a new AbstractControl at the given index in the array
+              </li>
+            </ul>
+          </li>
+          <li>
+            length
+            <ul>
+              <li>Total length of the array</li>
+            </ul>
+          </li>
+          <li>
+            at(index)
+            <ul>
+              <li>returns the form control at the given array position</li>
+            </ul>
+          </li>
+          <li>
+            push(AbstractControl)
+            <ul>
+              <li>Adds a new control to the end of the array</li>
+              <li>These are added to the controls property</li>
+              <li>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      skills = new FormArray([]); <br />
+                      ... <br />
+                      addSkill() { <br />
+                      this.skills.push(new FormControl('')); <br />
+                      } <br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            removeAt(index)
+            <ul>
+              <li>Removes a control at a given index number of the array</li>
+            </ul>
+          </li>
+          <li>
+            getRawValue()
+            <ul>
+              <li>
+                Gets the values of all form controls via the
+                <code>control.value</code> property for each control
+              </li>
+            </ul>
+          </li>
         </ul>
       </section>
 
@@ -191,7 +330,9 @@
             </div>
           </li>
           <li>
-            <a href="https://netbasal.com/angular-reactive-forms-the-ultimate-guide-to-formarray-3adbe6b0b61a">
+            <a
+              href="https://netbasal.com/angular-reactive-forms-the-ultimate-guide-to-formarray-3adbe6b0b61a"
+            >
               https://netbasal.com/angular-reactive-forms-the-ultimate-guide-to-formarray-3adbe6b0b61a
             </a>
           </li>
@@ -301,100 +442,40 @@
               <div class="card-body">
                 <code>
                   export class UserComponent {<br />
-                    user = new FormGroup({<br />
-                      name: new FormControl(''),<br />
-                      skills: new FormArray([<br />
-                        new FormGroup({<br />
-                          name: new FormControl(''),<br />
-                          level: new FormControl('')<br />
-                        })<br />
-                      ])<br />
-                    });<br />                  
-                    skills = this.user.get('skills') as FormArray;<br />
+                  user = new FormGroup({<br />
+                  name: new FormControl(''),<br />
+                  skills: new FormArray([<br />
+                  new FormGroup({<br />
+                  name: new FormControl(''),<br />
+                  level: new FormControl('')<br />
+                  })<br />
+                  ])<br />
+                  });<br />
+                  skills = this.user.get('skills') as FormArray;<br />
                   }<br />
                 </code>
               </div>
             </div>
           </li>
           <li>
-            Since the FormArray now contains FormGroups, we must use the FormGroupName directive
+            Since the FormArray now contains FormGroups, we must use the
+            FormGroupName directive
             <div class="card">
               <div class="card-body">
                 <code>
                   &lt;form [formGroup]="user"&gt; <br />
                   &lt;input formControlName="name" /&gt; <br />
                   &lt;ng-container formArrayName="skills"&gt; <br />
-                  &lt;div *ngFor="let _ of skills.controls; index as i"&gt; <br />                  
+                  &lt;div *ngFor="let _ of skills.controls; index as i"&gt;
+                  <br />
                   &lt;ng-container [formGroupName]="i"&gt; <br />
                   &lt;input formControlName="name" /&gt; <br />
-                  &lt;/ng-container&gt;     
-                  &lt;/div&gt; <br />
+                  &lt;/ng-container&gt; &lt;/div&gt; <br />
                   &lt;/ng-container&gt; <br />
                   &lt;/form&gt; <br />
                 </code>
               </div>
             </div>
-          </li>
-        </ul>
-      </section>
-
-      <h2>Methods</h2>
-      <section>
-        <ul>
-          <li>
-            controls
-            <ul>
-              <li>
-                An array containing all the controls that are part of the array
-              </li>
-            </ul>
-          </li>
-          <li>
-            length
-            <ul>
-              <li>Total length of the array</li>
-            </ul>
-          </li>
-          <li>
-            at(index)
-            <ul>
-              <li>returns the form control at the given array position</li>
-            </ul>
-          </li>
-          <li>
-            push(AbstractControl)
-            <ul>
-              <li>Adds a new control to the end of the array</li>
-              <li>These are added to the controls property</li>
-              <li>
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      skills = new FormArray([]); <br />
-                      ... <br />
-                      addSkill() { <br />
-                      this.skills.push(new FormControl('')); <br />
-                      } <br />
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li>
-            removeAt(index)
-            <ul>
-              <li>Removes a control at a given index number of the array</li>
-            </ul>
-          </li>
-          <li>
-            getRawValue()
-            <ul>
-              <li>
-                Gets the values of all form controls via the
-                <code>control.value</code> property fo each control
-              </li>
-            </ul>
           </li>
         </ul>
       </section>

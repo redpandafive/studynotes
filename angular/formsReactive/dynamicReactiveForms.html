@@ -22,7 +22,9 @@
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
           <li class="breadcrumb-item">
             <a href="../../index.html">Angular</a>
           </li>
@@ -37,7 +39,16 @@
 
       <h1>Dynamic Reactive Forms</h1>
 
-
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            Usually involve a FormArray instance, so see that section for more
+            details
+            <a href="../formClasses/formArray.html">FormArray</a>
+          </li>
+        </ul>
+      </section>
 
       <h2>Basic Dynamic Form</h2>
       <section>
@@ -98,25 +109,26 @@
           </div>
         </div>
         <div>
-          Define the tempalte
+          Define the template
           <div class="card">
             <div class="card-body">
               <code>
                 &lt;div formArrayName="aliases"&gt; <br />
-                  &lt;h2&gt;Aliases&lt;/h2&gt; <br />
-                  &lt;button type="button" (click)="addAlias()"&gt; <br />
-                    + Add another alias <br />
-                  &lt;/button&gt; <br />
+                &lt;h2&gt;Aliases&lt;/h2&gt; <br />
+                &lt;button type="button" (click)="addAlias()"&gt; <br />
+                + Add another alias <br />
+                &lt;/button&gt; <br />
 
-                  &lt;div *ngFor="let alias of aliases.controls; let i=index"&gt; <br />
-                    &lt;!-- The repeated alias template --&gt; <br />
-                    &lt;label for="alias-{{ i }}"&gt;Alias:&lt;/label&gt; <br />
-                    &lt;input <br />
-                      id="alias-{{ i }}" <br />
-                      type="text" <br />
-                      [formControlName]="i" <br />
-                    /&gt; <br />
-                  &lt;/div&gt; <br />
+                &lt;div *ngFor="let alias of aliases.controls; let i=index"&gt;
+                <br />
+                &lt;!-- The repeated alias template --&gt; <br />
+                &lt;label for="alias-{{ i }}"&gt;Alias:&lt;/label&gt; <br />
+                &lt;input <br />
+                id="alias-{{ i }}" <br />
+                type="text" <br />
+                [formControlName]="i" <br />
+                /&gt; <br />
+                &lt;/div&gt; <br />
                 &lt;/div&gt; <br />
               </code>
             </div>
