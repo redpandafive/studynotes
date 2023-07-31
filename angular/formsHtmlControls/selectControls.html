@@ -7,27 +7,24 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       rel="stylesheet"
-      href="../../../assets/bootstrap/css/bootstrap.min.css"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../../../index.html">Home</a>
+        <a class="navbar-brand" href="../../index.html">Home</a>
       </div>
     </nav>
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../../index.html">Home</a>
+            <a href="../../index.html">Home</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="../../index.html">Angular</a>
-          </li>
-          <li class="breadcrumb-item" aria-current="page">
-            <a href="../index.html">Cookbook</a>
+            <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             Select Controls
@@ -40,14 +37,10 @@
       <section class="navlinks">
         <ul>
           <li>
-            <a href="selectControls.html#nullOption"
-              >Provide a Null Option</a
-            >
+            <a href="selectControls.html#nullOption">Provide a Null Option</a>
           </li>
           <li>
-            <a href="selectControls.html#multiple"
-              >Multiple Select Options</a
-            >
+            <a href="selectControls.html#multiple">Multiple Select Options</a>
           </li>
           <li>
             <a href="selectControls.html#collection"
@@ -58,6 +51,9 @@
             <a href="selectControls.html#currentValue"
               >Get the Current Value of a Select Control</a
             >
+          </li>
+          <li>
+            <a href="selectControls.html#changeEvent">Capture Change Event</a>
           </li>
           <li>
             <a href="selectControls.html#trackby"
@@ -77,22 +73,38 @@
         </ul>
       </section>
 
+      <h2>See Also</h2>
+      
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="../formsReactive/formChangeDetetion.html">Form Change Detection</a>
+          </li>
+        </ul>
+      </section>
 
       <h2 id="nullOption">Provide a Null Option</h2>
       <section>
         <div>
-          This adds a "-Select-" option to the drop down that is initially set if there is no bound value (or one outside of the possible option values).
+          This adds a "-Select-" option to the drop down that is initially set
+          if there is no bound value (or one outside of the possible option
+          values).
           <ul>
-            <li>Setting the disabled attribute prevents the user from re-selecting this</li>
+            <li>
+              Setting the disabled attribute prevents the user from re-selecting
+              this
+            </li>
           </ul>
           <div class="card">
             <div class="card-body">
               <code>
                 &lt;select formControlName="profile"&gt; <br />
-                  &lt;option [ngValue]="null" disabled&gt;Choose your profile&lt;/option&gt; <br />
-                  &lt;option *ngFor="let prf of allProfiles" [ngValue]="prf"&gt; <br />
-                   {{ prf.prName }} <br />
-                  &lt;/option&gt; <br />
+                &lt;option [ngValue]="null" disabled&gt;Choose your
+                profile&lt;/option&gt; <br />
+                &lt;option *ngFor="let prf of allProfiles" [ngValue]="prf"&gt;
+                <br />
+                {{ prf.prName }} <br />
+                &lt;/option&gt; <br />
                 &lt;/select&gt; <br />
               </code>
             </div>
@@ -108,9 +120,10 @@
             <div class="card-body">
               <code>
                 &lt;select multiple formControlName="profile"&gt; <br />
-                  &lt;option *ngFor="let prf of allProfiles" [ngValue]="prf"&gt; <br />
-                   {{ prf.prName }} <br />
-                  &lt;/option&gt; <br />
+                &lt;option *ngFor="let prf of allProfiles" [ngValue]="prf"&gt;
+                <br />
+                {{ prf.prName }} <br />
+                &lt;/option&gt; <br />
                 &lt;/select&gt; <br />
               </code>
             </div>
@@ -219,6 +232,7 @@
           </ul>
         </div>
       </section>
+
 
       <h2 id="currentValue">Get the Current Value of a Select Control</h2>
       <section>

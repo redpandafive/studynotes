@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Typed Reactive Forms
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Typed Reactive Forms</h1>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>Starting with Angular 14, reactive forms are strictly typed by default
+            <ul>
+              <li>This does not apply to template forms</li>
+            </ul>
+          </li>
+          <li>
+            One approach is to use inference of the initial value define typing
+            <ul>
+              <li>
+                The following FormControl is typed to string | null
+                <ul>
+                  <li>It is typed to null since that is the value it will go to when reset</li>
+                </ul>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      const email = new FormControl('myEmail@gmail.com'); <br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                A non-nullable version of the above declaration would be:
+              <ul>
+                <li>When reset, its value will be myEmail@gmail.com</li>
+              </ul>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      const email = new FormControl('myEmail@gmail.com', {nonNullable: true}); <br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            To set an explicit type
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const email = new FormControl<string|null>(null); <br />
+                </code>
+              </div>
+            </div> 
+          </li>
+        </ul>
+      </section>
+
+      <h2>FormArray</h2>
+      <section>
+        <ul>
+          <li>
+            FormArray type parameters correspond to the type of each inner control
+          </li>
+          <li>
+          If you wnat a mixture of types within the same FormArray you must use UntypedFormArray
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Migration</h2>
+      <section>
+        <ul>
+          <li>
+            To migrate, Untyped versions of the controls were added, such as UntypedFormGroup and UntypedFormControl
+            <ul>
+              <li>These are compatible with previous Angular versions</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

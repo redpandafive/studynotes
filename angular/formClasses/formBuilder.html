@@ -43,6 +43,33 @@
         </ul>
       </section>
 
+      <h2>NonNullableFormBuilder</h2>
+      <section>
+        <ul>
+          <li>
+            A new version of FormBuilder added with Typed Forms
+          </li>
+          <li>
+            It automatically adds {nonNullable: true} to each control without having to explicitly add it
+          </li>
+          <li>
+            Access it using the nonNullable proprety on the FormBuilder object
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              const fb = new FormBuilder(); <br />
+              const login = fb.nonNullable.group({ <br />
+                  email: '', <br />
+                  password: '',<br />
+              }); <br />
+            </code>
+          </div>
+        </div> 
+
+      </section>
+
       <h2>Setup</h2>
       <section>
         <ul>

@@ -26,7 +26,9 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Reactive Forms - FormGroup</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Reactive Forms - FormGroup
+          </li>
         </ol>
       </nav>
 
@@ -34,92 +36,41 @@
 
       <section>
         <ul>
-          <li>Simply a group of FormControl objects</li>
-          <li>Corresponds to an HTML form</li>
-          <li>Extension of the AbstractControl class</li>
-
-          <li>
-            Create a new instance of this class and set it as a property on the
-            component
-          </li>
-          <li>This takes an object for each of your FormControls</li>
-          <li>
-            You can access the value of a FormControl object using the following
-            <ul>
-              <li>
-                The value property - gives a snapshot of the current value
-              </li>
-              <li>
-                Using the valueChanges observable
-                <ul>
-                  <li>
-                    can listen for changes in the:
-                    <ul>
-                      <li>template using the AsyncPipe</li>
-                      <li>component using the subscribe method</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Example just uses interpolation to display the value, which is
-                updated on each change, so not really sure there the above come
-                from
-              </li>
-            </ul>
-          </li>
-          <li>
-            SetValue method
-            <ul>
-              <li>
-                call this to replace the old value of the control entirely
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      updateName() { <br />
-                      this.name.setValue('Nancy');<br />
-                      }<br />
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="formGroups">FormGroups</h2>
-      <section>
-        <ul>
           <li>
             Defines a form with a fixed set of controls that you can manage
             together
             <ul>
+              <li>Corresponds to an HTML form</li>
               <li>
-                This tracks the form state of a group of form control instances
+                It tracks the status and changes for each of its child
+                FormControls, so it one control changes, the parent control also
+                emits a new status or value change
+              </li>
+              <li>
+                Intended for use cases where the keys are known ahead of time
               </li>
               <li>This becomes the source of truth for the model value</li>
             </ul>
           </li>
           <li>Each control is tracked by name when creating the form group</li>
           <li>
-            FormGroup has the same properties and methods as a form control
-            instance
-          </li>
-          <li>
-            It tracks the status and changes for each of its controls, so it one
-            control changes, the parent control also emits a new status or value
-            change
+            Extension of the AbstractControl class
+            <ul>
+              <li>
+                Since it inherits from AbstractControl, FormGroup has the same
+                properties and methods as a form control instance
+              </li>
+            </ul>
           </li>
         </ul>
       </section>
 
-      <h2>To Create</h2>
+      <h2>Creating</h2>
       <section>
         <ul>
           <li>
-            Create a new FormGroup and provide the constructor with an object of
-            named keys mapped to their FormControl
+            In the component, create a new FormGroup and provide the constructor
+            with an object of named keys mapped to their FormControl
             <div class="card">
               <div class="card-body">
                 <code>
@@ -179,9 +130,34 @@
         </ul>
       </section>
 
-      <h2>Working Data</h2>
+      <h2>Working with Data</h2>
       <section>
         <ul>
+          <li>
+            You can access the value of a FormControl object using the following
+            <ul>
+              <li>
+                The value property - gives a snapshot of the current value
+              </li>
+              <li>
+                Using the valueChanges observable
+                <ul>
+                  <li>
+                    can listen for changes in the:
+                    <ul>
+                      <li>template using the AsyncPipe</li>
+                      <li>component using the subscribe method</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Example just uses interpolation to display the value, which is
+                updated on each change, so not really sure there the above come
+                from
+              </li>
+            </ul>
+          </li>
           <li>
             The FormGroup directive listens for the submit event emitted by the
             form element
@@ -209,15 +185,6 @@
         </ul>
       </section>
 
-      <h2>Retriving Data</h2>
-      <section>
-        <ul>
-          <li>
-            Use <code>getRawValue()</code> to get all values, including disabled controls
-          </li>
-        </ul>
-      </section>
-
       <h2>Nested Form Groups</h2>
       <section>
         <ul>
@@ -229,7 +196,10 @@
                 This makes working with complex forms more manageable by
                 breaking large form groups into smaller, more manageable ones
               </li>
-              <li>Examples of this are a name section and a separate address section</li>
+              <li>
+                Examples of this are a name section and a separate address
+                section
+              </li>
             </ul>
           </li>
           <li>
@@ -237,19 +207,19 @@
             the parent form group
           </li>
           <li>
-Create a nested group in the component as follows.
+            Create a nested group in the component as follows.
             <div class="card">
               <div class="card-body">
                 <code>
-                  profileForm = new FormGroup({ <br/>
-                    firstName: new FormControl(''), <br/>
-                    lastName: new FormControl(''),<br/>
-                    address: new FormGroup({<br/>
-                      street: new FormControl(''),<br/>
-                      city: new FormControl(''),<br/>
-                      state: new FormControl(''),<br/>
-                      zip: new FormControl('')<br/>
-                    })<br/>
+                  profileForm = new FormGroup({ <br />
+                  firstName: new FormControl(''), <br />
+                  lastName: new FormControl(''),<br />
+                  address: new FormGroup({<br />
+                  street: new FormControl(''),<br />
+                  city: new FormControl(''),<br />
+                  state: new FormControl(''),<br />
+                  zip: new FormControl('')<br />
+                  })<br />
                   });
                 </code>
               </div>
@@ -261,17 +231,21 @@ Create a nested group in the component as follows.
             <div class="card">
               <div class="card-body">
                 <code>
-                  &lt;div formGroupName=&quot;formGroupName&quot; <br/>
-                  &lt;div formGroupName="address"&gt;<br/>
-                  &lt;h2&gt;Address&lt;/h2&gt;<br/>                  
-                  &lt;label for="street"&gt;Street: &lt;/label&gt; <br/>
-                  &lt;input id="street" type="text" formControlName="street"&gt; <br/>                  
-                  &lt;label for="city"&gt;City: &lt;/label&gt; <br/>
-                  &lt;input id="city" type="text" formControlName="city"&gt; <br/>                  
-                  &lt;label for="state"&gt;State: &lt;/label&gt; <br/>
-                  &lt;input id="state" type="text" formControlName="state"&gt; <br/>                  
-                  &lt;label for="zip"&gt;Zip Code: &lt;/label&gt; <br/>
-                  &lt;input id="zip" type="text" formControlName="zip"&gt; <br/>
+                  &lt;div formGroupName=&quot;formGroupName&quot; <br />
+                  &lt;div formGroupName="address"&gt;<br />
+                  &lt;h2&gt;Address&lt;/h2&gt;<br />
+                  &lt;label for="street"&gt;Street: &lt;/label&gt; <br />
+                  &lt;input id="street" type="text" formControlName="street"&gt;
+                  <br />
+                  &lt;label for="city"&gt;City: &lt;/label&gt; <br />
+                  &lt;input id="city" type="text" formControlName="city"&gt;
+                  <br />
+                  &lt;label for="state"&gt;State: &lt;/label&gt; <br />
+                  &lt;input id="state" type="text" formControlName="state"&gt;
+                  <br />
+                  &lt;label for="zip"&gt;Zip Code: &lt;/label&gt; <br />
+                  &lt;input id="zip" type="text" formControlName="zip"&gt;
+                  <br />
                 </code>
               </div>
             </div>
@@ -283,6 +257,66 @@ Create a nested group in the component as follows.
                 <code>this.profileForm.get('aliases') as FormArray</code>
               </div>
             </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Properties</h2>
+      <section>
+        <ul>
+          <li>
+            <code>value</code>
+            <ul>
+              <li>Gets the curren values for all contained controls</li>
+              <li>
+                For an enabled FormGroup, returns the values of enabled controls
+                as an object with a key-value pair for each member of the group.
+              </li>
+              <li>
+                For a disabled FormGroup, returns the values of all controls as
+                an object with a key-value pair for each member of the group.
+              </li>
+              <li>This will not include disabled controls</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Methods</h2>
+      <section>
+        <ul>
+          <li>
+            <code>getRawValue()</code>
+            <ul>
+              <li>Gets all values, including disabled controls</li>
+            </ul>
+          </li>
+          <li>
+            <code>setValue()</code>
+            <ul>
+              <li>
+                Call this to replace the old value of the control entirely
+              </li>
+              <li>
+                  When called on a FormGroup, it requires that the object must match the structure exactly
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  updateName() { <br />
+                  this.name.setValue('Nancy');<br />
+                  }<br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            <code>patchValue()</code>
+            <ul>
+              <li>Use to update a subset of the elements in the FormGroup</li>
+              <li>It will only update the matching objects and ignore the rest</li>
+            </ul>
           </li>
         </ul>
       </section>

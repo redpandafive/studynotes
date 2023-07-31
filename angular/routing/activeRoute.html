@@ -1,398 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Index</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="./../assets/styles/site.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../../index.html">Home</a>
-      </div>
+<head>
+  <meta charset="utf-8" />
+  <title>Index</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./../assets/styles/site.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../../index.html">Home</a>
+    </div>
+  </nav>
+  <div class="container">
+    <nav class="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="../../index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="../index.html">Angular</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Active Route Information
+        </li>
+      </ol>
     </nav>
-    <div class="container">
-      <nav class="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="../index.html">Angular</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Active Route Information
-          </li>
-        </ol>
-      </nav>
 
-      <h1>Active Route Information</h1>
+    <h1>Active Route Information</h1>
 
-      <section>
-        <ul>
-          <li>
-            Service provided to each route component that contains route
-            specific information
-            <ul>
-              <li>
-                Has to do with the currently activated route in your application
-                and holds a conglomerate of information pertaining to the router
-              </li>
-              <li>
-                Includes route parameters, static data, resolve data, global
-                query params and the global fragment
-              </li>
-              <li>
-                Use this to handle route specific logic, use route specific
-                state and retrieve the route fragments of the current URL
-              </li>
-            </ul>
-          </li>
-          <li>
-            Values from URLs will always be strings
-            <ul>
-              <li>can use the + operator to convert the string to a float</li>
-            </ul>
-          </li>
-          <li>
-            To access this in a component
-            <ul>
-              <li>Import ActivedRoute from @angular/router</li>
-              <li>
-                Inject this into the constructor … private route: ActivatedRoute
-                ….
-              </li>
-            </ul>
-          </li>
-          <li>
-            Shares many of the same properties as Activated Route Snapshot, but
-            the versions of the objects are asynchronous observables
-            <ul>
-              <li>
-                You must subscribe to a specific observable property on the
-                object to access to the data in it
-              </li>
-            </ul>
-          </li>
-          <li>
-            Properties
-            <ul>
-              <li>
-                snapshot
-                <ul>
-                  <li>Gives an equivalent ActivatedRouteSnapshot object</li>
-                  <li>
-                    This is a capture of data at the time the component loads,
-                    so it is static
-                  </li>
-                  <li>This is available right away</li>
-                  <li>
-                    If you update the URL during the component lifecycle, the
-                    changes will not be reflected here
-                  </li>
-                  <li>
-                    However, this is not an observable, so no risk of a memory
-                    leak if you don't clean it up
-                  </li>
-                </ul>
-              </li>
+    <h2>
+      WARNING: Angular 16+ added  <a href="./routeParameterMapping.html">automatic route parameter mapping using the Input decorators</a>. This is a shorter syntax
+      that reading parameters from the URL.
+    </h2>
 
-              <li>
-                data
-                <ul>
-                  <li>
-                    observable containing the data object provided for the
-                    router
-                  </li>
-                  <li>usually from the resolver or routeGuard</li>
-                  <li>
-                    typed as Data
-                    <div class="card">
-                      <div class="card-body">
-                        <code> route.data.subscribe((data) =&gt; { … })" </code>
-                      </div>
+    <section>
+      <ul>
+        <li>
+          Service provided to each route component that contains route
+          specific information
+          <ul>
+            <li>
+              Has to do with the currently activated route in your application
+              and holds a conglomerate of information pertaining to the router
+            </li>
+            <li>
+              Includes route parameters, static data, resolve data, global
+              query params and the global fragment
+            </li>
+            <li>
+              Use this to handle route specific logic, use route specific
+              state and retrieve the route fragments of the current URL
+            </li>
+          </ul>
+        </li>
+        <li>
+          Values from URLs will always be strings
+          <ul>
+            <li>can use the + operator to convert the string to a float</li>
+          </ul>
+        </li>
+        <li>
+          To access this in a component
+          <ul>
+            <li>Import ActivedRoute from @angular/router</li>
+            <li>
+              Inject this into the constructor … private route: ActivatedRoute
+              ….
+            </li>
+          </ul>
+        </li>
+        <li>
+          Shares many of the same properties as Activated Route Snapshot, but
+          the versions of the objects are asynchronous observables
+          <ul>
+            <li>
+              You must subscribe to a specific observable property on the
+              object to access to the data in it
+            </li>
+          </ul>
+        </li>
+        <li>
+          Properties
+          <ul>
+            <li>
+              snapshot
+              <ul>
+                <li>Gives an equivalent ActivatedRouteSnapshot object</li>
+                <li>
+                  This is a capture of data at the time the component loads,
+                  so it is static
+                </li>
+                <li>This is available right away</li>
+                <li>
+                  If you update the URL during the component lifecycle, the
+                  changes will not be reflected here
+                </li>
+                <li>
+                  However, this is not an observable, so no risk of a memory
+                  leak if you don't clean it up
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              data
+              <ul>
+                <li>
+                  observable containing the data object provided for the
+                  router
+                </li>
+                <li>usually from the resolver or routeGuard</li>
+                <li>
+                  typed as Data
+                  <div class="card">
+                    <div class="card-body">
+                      <code> route.data.subscribe((data) =&gt; { … })" </code>
                     </div>
-                  </li>
-                </ul>
-              </li>
+                  </div>
+                </li>
+              </ul>
+            </li>
 
-              <li>
-                Route tree properties – composed of components that are loaded
-                in the route
-                <ul>
-                  <li>Component</li>
-                  <li>Root</li>
-                  <li>Parent</li>
-                  <li>firstChild</li>
-                  <li>children</li>
-                  <li>pathFromRoot</li>
-                </ul>
-              </li>
+            <li>
+              Route tree properties – composed of components that are loaded
+              in the route
+              <ul>
+                <li>Component</li>
+                <li>Root</li>
+                <li>Parent</li>
+                <li>firstChild</li>
+                <li>children</li>
+                <li>pathFromRoot</li>
+              </ul>
+            </li>
 
-              <li>
-                URL information
-                <ul>
-                  <li>fragment</li>
-                  <li>
-                    paramMap
-                    <ul>
-                      <li>
-                        Observable that contains a map of the required and
-                        optional parameters specific to the route
-                      </li>
-                      <li>
-                        Values within the URL
-                        <ul>
-                          <li>Example: user/:id</li>
-                          <li>Id param belongs only to this route</li>
-                        </ul>
-                      </li>
-                      <li>
-                        ParamMap object has methods built in accesss values
-                        <ul>
-                          <li>
-                            Has()
-                            <ul>
-                              <li>
-                                Checks for the existence of a parameter name
-                              </li>
-                              <li>Returns Boolean value</li>
-                            </ul>
-                          </li>
-                          <li>
-                            Get()
-                            <ul>
-                              <li>Method to return a single value</li>
-                              <li>Returns string</li>
-                              <li>
-                                If there are multiple values, this only returns
-                                the first
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            getAll()
-                            <ul>
-                              <li>method to return multiple values</li>
-                              <li>returns string[]</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    params
-                    <ul>
-                      <li>
-                        Was deprecated, but Angular team now says there is no
-                        benefit to advising against their use
-                      </li>
-                      <li>This is the older way to reference values</li>
-                      <li>Alternative is to use paramMap instead</li>
-                      <li>
-                        This is an array of parameter values indexed by
-                        parameter name
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    queryParamMap
-                    <ul>
-                      <li>
-                        Observable that contains a map of the query parameters
-                        available to all routes
-                      </li>
-                      <li>
-                        Can be read by the current component and any of its
-                        ancestors
-                      </li>
-                      <li>
-                        These are the optional query string parameters in the
-                        URL (Values in the URL after the ?)
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    queryParams
-                    <ul>
-                      <li>
-                        Was deprecated, but Angular team now says there is no
-                        benefit to advising against their use
-                      </li>
-                      <li>Alternative is to use queryParamMap instead</li>
-                    </ul>
-                  </li>
-                  <li>
-                    url
-                    <ul>
-                      <li>
-                        observable of the URL segments matched by this route
-                      </li>
-                      <li>array of strings for each part of the route path</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            URL parameters can be accessed using one of two methods
-            <ul>
-              <li>
-                route.snapshot.params
-                <ul>
-                  <li>one time event, usually when the component loads</li>
-                  <li>
-                    this is not an observable, so Angular does not watch for
-                    changes in the URL
-                  </li>
-                  <li>route.snapshot.params['id']</li>
-                  <li>Alternative syntax is route.snapshot.params.id</li>
-                </ul>
-              </li>
-              <li>
-                .route.paramMap.subscribe
-                <ul>
-                  <li>
-                    this will continue to update if the parameters change for a
-                    specific route
-                  </li>
-                  <li>
-                    if the parameters change, the callback function will be
-                    called again
-                  </li>
-                  <li>Do not need to unsubscribe</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+            <li>
+              URL information
+              <ul>
+                <li>fragment</li>
+                <li>
+                  paramMap
+                  <ul>
+                    <li>
+                      Observable that contains a map of the required and
+                      optional parameters specific to the route
+                    </li>
+                    <li>
+                      Values within the URL
+                      <ul>
+                        <li>Example: user/:id</li>
+                        <li>Id param belongs only to this route</li>
+                      </ul>
+                    </li>
+                    <li>
+                      ParamMap object has methods built in accesss values
+                      <ul>
+                        <li>
+                          Has()
+                          <ul>
+                            <li>
+                              Checks for the existence of a parameter name
+                            </li>
+                            <li>Returns Boolean value</li>
+                          </ul>
+                        </li>
+                        <li>
+                          Get()
+                          <ul>
+                            <li>Method to return a single value</li>
+                            <li>Returns string</li>
+                            <li>
+                              If there are multiple values, this only returns
+                              the first
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          getAll()
+                          <ul>
+                            <li>method to return multiple values</li>
+                            <li>returns string[]</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  params
+                  <ul>
+                    <li>
+                      Was deprecated, but Angular team now says there is no
+                      benefit to advising against their use
+                    </li>
+                    <li>This is the older way to reference values</li>
+                    <li>Alternative is to use paramMap instead</li>
+                    <li>
+                      This is an array of parameter values indexed by
+                      parameter name
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  queryParamMap
+                  <ul>
+                    <li>
+                      Observable that contains a map of the query parameters
+                      available to all routes
+                    </li>
+                    <li>
+                      Can be read by the current component and any of its
+                      ancestors
+                    </li>
+                    <li>
+                      These are the optional query string parameters in the
+                      URL (Values in the URL after the ?)
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  queryParams
+                  <ul>
+                    <li>
+                      Was deprecated, but Angular team now says there is no
+                      benefit to advising against their use
+                    </li>
+                    <li>Alternative is to use queryParamMap instead</li>
+                  </ul>
+                </li>
+                <li>
+                  url
+                  <ul>
+                    <li>
+                      observable of the URL segments matched by this route
+                    </li>
+                    <li>array of strings for each part of the route path</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          URL parameters can be accessed using one of two methods
+          <ul>
+            <li>
+              route.snapshot.params
+              <ul>
+                <li>one time event, usually when the component loads</li>
+                <li>
+                  this is not an observable, so Angular does not watch for
+                  changes in the URL
+                </li>
+                <li>route.snapshot.params['id']</li>
+                <li>Alternative syntax is route.snapshot.params.id</li>
+              </ul>
+            </li>
+            <li>
+              .route.paramMap.subscribe
+              <ul>
+                <li>
+                  this will continue to update if the parameters change for a
+                  specific route
+                </li>
+                <li>
+                  if the parameters change, the callback function will be
+                  called again
+                </li>
+                <li>Do not need to unsubscribe</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <h2 id="routeSnapshot">Activated Route Snapshot</h2>
-      <section>
-        <ul>
-          <li>
-            Contains information about a route associated with a component
-            loaded in an outlet at a particular moment in time
-          </li>
-          <li>
-            This is synchronous information that you can access right away
-          </li>
-          <li>
-            Data is static, so it will not be updated within the component after
-            initialization
-          </li>
-          <li>Is not an observable, so no risk of memory leaks</li>
-          <li>
-            Values from URLs will always be strings
-            <ul>
-              <li>can use the + operator to convert the string to a float</li>
-            </ul>
-          </li>
-          <li>
-            Navigation properties
-            <ul>
-              <li>component - the component of the route</li>
-              <li>root - the root of the router state</li>
-              <li>
-                parent - the parent of this route in the router state tree
-              </li>
-              <li>
-                routeConfig
-                <ul>
-                  <li>
-                    information about the route used to map to this component
-                  </li>
-                  <li>
-                    route information will be split into separate objects for
-                    children
-                  </li>
-                </ul>
-              </li>
-              <li>
-                firstChild - the first child of this route in the router state
-                tree
-              </li>
-              <li>
-                children - the children of this route in the router state tree
-              </li>
-              <li>
-                pathFromRoot - the path from the root of the router state tree
-                to this route
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+    <h2 id="routeSnapshot">Activated Route Snapshot</h2>
+    <section>
+      <ul>
+        <li>
+          Contains information about a route associated with a component
+          loaded in an outlet at a particular moment in time
+        </li>
+        <li>
+          This is synchronous information that you can access right away
+        </li>
+        <li>
+          Data is static, so it will not be updated within the component after
+          initialization
+        </li>
+        <li>Is not an observable, so no risk of memory leaks</li>
+        <li>
+          Values from URLs will always be strings
+          <ul>
+            <li>can use the + operator to convert the string to a float</li>
+          </ul>
+        </li>
+        <li>
+          Navigation properties
+          <ul>
+            <li>component - the component of the route</li>
+            <li>root - the root of the router state</li>
+            <li>
+              parent - the parent of this route in the router state tree
+            </li>
+            <li>
+              routeConfig
+              <ul>
+                <li>
+                  information about the route used to map to this component
+                </li>
+                <li>
+                  route information will be split into separate objects for
+                  children
+                </li>
+              </ul>
+            </li>
+            <li>
+              firstChild - the first child of this route in the router state
+              tree
+            </li>
+            <li>
+              children - the children of this route in the router state tree
+            </li>
+            <li>
+              pathFromRoot - the path from the root of the router state tree
+              to this route
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-      <h2>Examples</h2>
+    <h2>Examples</h2>
 
-      <h3>Setup</h3>
-      <section>
-        <div>
-          Import ActivatedRoute and ParamMap
-          <div class="card">
-            <div class="card-body">
-              <code>
+    <h3>Setup</h3>
+    <section>
+      <div>
+        Import ActivatedRoute and ParamMap
+        <div class="card">
+          <div class="card-body">
+            <code>
                 import { Router, ActivatedRoute, ParamMap } from
                 '@angular/router';
               </code>
-            </div>
           </div>
         </div>
+      </div>
 
-        <div>
-          Inject an instance of ActivatedRoute by adding it to your
-          application's constructor:
-          <div class="card">
-            <div class="card-body">
-              <code>
+      <div>
+        Inject an instance of ActivatedRoute by adding it to your
+        application's constructor:
+        <div class="card">
+          <div class="card-body">
+            <code>
                 constructor(private route: ActivatedRoute) {} <br />
               </code>
-            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <h3>Get Path Fragment From Snapshot</h3>
-      <section>
-        <div>
-          This gets the right most part of the URL. This is the
-          <code>path</code> value of the current active ActivatedRoute
-          <div class="card">
-            <div class="card-body">
+    <h3>Get Path Fragment From Snapshot</h3>
+    <section>
+      <div>
+        This gets the right most part of the URL. This is the
+        <code>path</code> value of the current active ActivatedRoute
+        <div class="card">
+          <div class="card-body">
             <code>
               ngOnInit() { <br />
               this.searchMethod = this.route.snapshot.routeConfig.path; <br />
               } <br />
             </code>
           </div>
-        </div>        
+        </div>
       </div>
-      </section>
+    </section>
 
-      <section>
-        <div>
-          Get the id parameter from the URL
-          <div class="card-body">
-            <code>
+    <section>
+      <div>
+        Get the id parameter from the URL
+        <div class="card-body">
+          <code>
               const id = this.route.snapshot.params["id"];
             </code>
-          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      
-    </div>
-    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
-  </body>
+
+  </div>
+  <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
 </html>

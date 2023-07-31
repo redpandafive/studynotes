@@ -41,16 +41,14 @@
             module
             <ul>
               <li>
-                Ex app.module.ts should have a app-routing.module.ts file paired
-                with it
+                Ex app.module.ts should use app-routing.module.ts 
               </li>
               <li>
-                feature.module.ts should have a feature-routing.module.ts file
-                paired with it
+                feature.module.ts should use feature-routing.module.ts
               </li>
             </ul>
           </li>
-          <li>Module must import RouterModule (@angular/router)</li>
+          <li>Routing module must import RouterModule (@angular/router)</li>
           <li>
             Import the RouterModule and configure it to include routes
             definition
@@ -73,7 +71,7 @@
             <ul>
               <li>Import the required routing services</li>
               <li>Define the routes in a variable</li>
-              <li>Import this routing module into the associated module</li>
+              <li>Import this routing module into the associated module in the Imports array</li>
 
               <li>
                 Call the forRoot (or forChild) on the imports section of the

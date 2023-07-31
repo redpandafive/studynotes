@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
@@ -14,7 +15,7 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">Home</a>
+        <a class="navbar-brand" href="../../index.html">Home</a>
       </div>
     </nav>
     <div class="container">
@@ -24,44 +25,31 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            AbstractControl Class
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Modernizing Code Cheat Sheet</li>
         </ol>
       </nav>
 
-      <h1>AbstractControl Class</h1>
+      <h1>Modernizing Code Cheat Sheet</h1>
 
       <section>
         <ul>
-          <li>The base class for FormControl, FormGroup, and FormArray.</li>
-          <li> 
-            <a href="https://angular.io/api/forms/AbstractControl" target="_blank">
-              Angular documentation
-            </a>
+          <li>
+            Use <a href="../routing/routeParameterMapping.html">Route Parameter / Input Mapping</a> instead of ActiveRoute service
+          </li>
+          <li>
+            Use self closing HTML tags for Angular components, including:
+            <ul>
+              <li>Custom components</li>
+              <li>RouterOutlet</li>
+            </ul>
+          </li>
+          <li>
+            Use the <a href="../dependencyinjection/injectFunction.html">Injector Function</a> as a cleaner alternative to constructor injection
           </li>
         </ul>
+
+
       </section>
-
-
-      <h2>Properties</h2>
-      <section>
-        <li>
-          <code>value</code>
-          <ul>
-            <li>Gets the curren values associated with the AbstractControl instance</li>
-            <li>Output will vary depending on the implementation</li>
-            <li>This will not include disabled controls</li>
-          </ul>
-        </li>
-      </section>
-
-
-<h2>Methods</h2>
-<section>
-
-</section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

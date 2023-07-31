@@ -7,27 +7,24 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       rel="stylesheet"
-      href="../../../assets/bootstrap/css/bootstrap.min.css"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../../../index.html">Home</a>
+        <a class="navbar-brand" href="../../index.html">Home</a>
       </div>
     </nav>
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../../../index.html">Home</a>
+            <a href="../../index.html">Home</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="../../index.html">Angular</a>
-          </li>
-          <li class="breadcrumb-item" aria-current="page">
-            <a href="../index.html">Cookbook</a>
+            <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             Form Change Detection
@@ -89,7 +86,7 @@
             <div class="card-body">
               <code>
                 this.parentForm.valueChanges.subscribe(newVal =&gt; { <br />
-                console.log(newVal)); <br />
+                console.log(newVal); <br />
                 })
               </code>
             </div>
@@ -116,7 +113,7 @@
             <div class="card-body">
               <code>
                 this.parentForm.get("firstname").setValue("", { onlySelf: true
-                })); <br />
+                }); <br />
               </code>
             </div>
           </div>

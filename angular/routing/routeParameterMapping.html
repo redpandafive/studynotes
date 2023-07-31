@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Index</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./../assets/styles/site.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../../index.html">Home</a>
+    </div>
+  </nav>
+  <div class="container">
+    <nav class="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="../../index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="../index.html">Angular</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Route Parameter / Input Mapping
+        </li>
+      </ol>
+    </nav>
+
+    <h1>Route Parameter / Input Mapping</h1>
+
+    <h2>
+      WARNING: Requires Angular 16+
+    </h2>
+
+    <section>
+      <ul>
+        <li>
+          Previous way to read route parameters involved something like this
+          <div class="card">
+            <div class="card-body">
+              <code>
+                  constructor(private route: ActivatedRoute) {} <br />
+                  ... <br/>
+                  ngOnInit() { <br />
+                    const id = this.route.snapshot.paramMap.get('id'); <br />
+                    } <br />
+                </code>
+            </div>
+          </div>
+        </li>
+        <li>
+          Route parameters can now be mapped to input properties on components
+          <ul>
+            <li>
+              First, enable Input decorators mapping
+              <div>
+                This uses standalone bootstrapping
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                          const appRoutes: Routes = []; <br/>
+                          bootstrapApplication(AppComponent, { <br/>
+                            providers: [ <br/>
+                              provideRouter(appRoutes, withComponentInputBinding()) <br/>
+                            ]<br/>
+                          })<br/>
+                        </code>
+                  </div>
+                </div>
+              </div>
+              <div>
+                This uses classic bootstrapping
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      const routes: Routes = []; <br/>
+                      <br/>
+                      @NgModule({ <br/>
+                        imports: [RouterModule.forRoot( <br/>
+                          routes, <br/>
+                          { bindToComponentInputs: true } <br/>
+                        )], <br/>
+                        exports: [RouterModule] <br/>
+                      }) <br/>
+                      export class AppRoutingModule { } <br/>
+                        </code>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              Add an input to the component that will receive the paramter value
+              <div>
+                This imports a route paramter named id
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                     @Input() id = '';
+                    </code>
+                  </div>
+                </div>
+              </div>
+              <div>
+                This imports a route paramter named id, but renames it to productId
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                     @Input('id') productId = '';
+                    </code>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Route input paramters will be type string
+        </li>
+      </ul>
+    </section>
+
+    <h2>See Also</h2>
+    <section>
+      <ul>
+        <li>
+          <a href="https://www.youtube.com/watch?v=Nuwn5uY8ETw" target="_blank">
+            https://www.youtube.com/watch?v=Nuwn5uY8ETw
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

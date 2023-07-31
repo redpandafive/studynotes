@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       rel="stylesheet"
@@ -25,43 +27,51 @@
             <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            AbstractControl Class
+            Reactive Forms - FormRecord
           </li>
         </ol>
       </nav>
 
-      <h1>AbstractControl Class</h1>
+      <h1>Reactive Forms - FormRecord</h1>
 
       <section>
         <ul>
-          <li>The base class for FormControl, FormGroup, and FormArray.</li>
-          <li> 
-            <a href="https://angular.io/api/forms/AbstractControl" target="_blank">
-              Angular documentation
+          <li>
+            Tracks the value and validity state of a collection of FormControl
+            instances, each of which has the same value type.
+          </li>
+          <li>
+            Useful when keys are not known ahead of time
+          </li>
+          <li>
+            Similar to FormGroup, except it can be used with a dynamic keys,
+            with controls added and removed as needed.
+            <ul>
+              <li>Controls can be
+                <ul>
+                  <li>Added</li>
+                  <li>Replaced</li>
+                  <li>Removed</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Takes one generic argument, the type of the control it contains</li>
+        </ul>
+      </section>
+
+      <h2>
+        See Also
+      </h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://angular.io/api/forms/FormRecord#contains">
+              https://angular.io/api/forms/FormRecord#contains
             </a>
           </li>
         </ul>
       </section>
-
-
-      <h2>Properties</h2>
-      <section>
-        <li>
-          <code>value</code>
-          <ul>
-            <li>Gets the curren values associated with the AbstractControl instance</li>
-            <li>Output will vary depending on the implementation</li>
-            <li>This will not include disabled controls</li>
-          </ul>
-        </li>
-      </section>
-
-
-<h2>Methods</h2>
-<section>
-
-</section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

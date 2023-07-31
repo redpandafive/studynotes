@@ -135,6 +135,29 @@
         </ul>
       </section>
 
+      <h2>Cross Field Validation</h2>
+      <ul>
+        <li>Validating one form control based on the value of another</li>
+        <li>One technique is to move validation up to an ancestor FormGroup
+          <ul>
+            <li>Create a custom validator that gets the values from the necessary controls and determines if they are valid</li>
+            <li>Apply the validator to a FormGroup that contains the two</li>
+          </ul>
+        </li>
+        <li>An example would be a range control
+          <ul>
+            <li>The range start control value could be compared to the range end control value in the custom validator</li>
+            <li>The custom validator is then applied to the containing FormGroup</li>
+          </ul>
+        </li>
+        <li>
+          See this for more details: <a href="https://medium.com/@realTomaszKula/angular-cross-field-validation-d94e0d063b61" target="_blank">
+            https://medium.com/@realTomaszKula/angular-cross-field-validation-d94e0d063b61
+          </a>
+
+        </li>
+      </ul>
+
       <h2>updateValueAndValidity</h2>
       <section>
         <ul>

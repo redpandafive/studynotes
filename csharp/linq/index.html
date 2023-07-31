@@ -78,6 +78,22 @@
           <ul>
             <li>Operates on a single IEnumerable</li>
             <li>Returns the distinct elements from the collection</li>
+            <li>
+              To eliminate duplicate objects from a collection based on a property value, use the following workaraound:
+
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    List bookList = GetBooks().GroupBy(book => book.Author).Select(x => x.First()).ToList();                      </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          DistinctBy
+          <ul>
+            <li></li>
           </ul>
         </div>
         <div>
@@ -212,6 +228,15 @@
           </li>
         </ul>
       </section>
+
+      <h2>See Also</h2>
+      <ul>
+        <li>
+          <a href="'https://www.chubbydeveloper.com/linq-distinct/" target="_blank">
+            https://www.chubbydeveloper.com/linq-distinct/
+          </a>
+        </li>
+      </ul>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
