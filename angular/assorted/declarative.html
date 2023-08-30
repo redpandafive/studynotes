@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Declarative Coding in Angular</li>
+        </ol>
+      </nav>
+
+      <h1>Declarative Coding in Angular</h1>
+      <section>
+        <ul>
+          <li>Writing declarative and reactive code in Angular can simplify and reduce component code</li>
+          <li>Benefits to declarative coding really shine the more complex your Angular code becomes</li>
+          <li>There are times when an imperative solution is easier to understand</li>
+        </ul>
+      </section>
+
+      <h2>Minimize Subscribe Calls</h2>
+      <section>
+        <ul>
+          <li>Work with streams in your component, not necessarily the data results that are emitted from Observables</li>
+          <li>
+            For instance, the following approach in the component is more of an imperative approach
+            <ul>
+              <li>In ngOnInit, manually subscribe to an observable that is returned by a service</li>
+              <li>When the values arrive from the service, manually set properties on the component with the new values</li>
+              <li>Templates directly reference this property</li>
+              <li>Must manually unsubscribe from the observable</li>
+              <li>Burden on updating the properties in the component that the tempalte uses to display data will be on the component</li>
+            </ul>
+          </li>
+          <li>
+            A more declarative approach would
+            <ul>
+              <li>Assign the observable from the service as a property on the component</li>
+              <li>If you need to calculate a value from the above Observable, you can create a second Observable property on the component that uses RxJS operators to manipulate the values</li>
+              <li>
+                In the template
+                <ul>
+                  <li>Use the async pipe to bind to the observable</li>
+                  <li>This will automatically handle subscriptions</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Ideally, Angular would be handling the subscribe / unsubscribe automatically for you with the async pipe in the temaplate
+            <ul>
+              <li>Focus on working with streams themselves, not necessarily the data that they produce</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Use Async Data Pipe in Templates</h2>
+      <section>
+        <ul>
+          <li>Eliminates subscribes and unsubscribes in the component</li>
+        </ul>
+        <div>
+          The following snippet will disable the button until the observable emits a true value
+          <div class="card">
+            <div class="card-body">
+              <code>&lt;button *ngIf="canPurchage$ | async as canPurchase" [disabled]="!canPurchase"&gt; Buy Now &lt;/button&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Most Used Operators</h2>
+      <section>
+        <ul>
+          <li>Important thing to remember operators operate on stream emissions, not values of stream emissions</li>
+          <li>
+            CombineLatest
+            <ul>
+              <li>A creation operator</li>
+              <li>Not piped, it creates a new stream </li>
+              <li>Waits until all streams have emitted at least one value</li>
+            </ul>
+          </li>
+          <li>
+            ConcatMap
+            <ul>
+              <li>If a new value is emitted from the outer observable, concatMap waits for any inner observables to complete before processing the new value</li>
+              <li>Proecsses things in order</li>
+              <li>
+                Contrast with switchMap that will cancel the inner observable
+              </li>
+            </ul>
+          </li>
+          <li>
+            Filter
+            <ul>
+              <li>Takes each emission from a stream and applies a filter function to each</li>
+              <li>Emission is emitted again if it satisfies the filter function</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>filter(x => x > 10)</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Map
+            <ul>
+              <li>Takes each emission from a stream and applies a function transformation to it</li>
+            </ul>
+          </li>
+          <li>
+            SwitchMap
+            <ul>
+              <li>Use to combine streams</li>
+              <li>Switch from one stream to another stream</li>
+              <li>Allows you to take the values from the first stream and use them in the second stream</li>
+              <li>If the first stream emits before the second stream completes, switchMap will cancel the second and being again with the new value</li>
+            </ul>
+          </li>
+          <li>
+            Tap
+            <ul>
+              <li>Does not actually have any effect on the stream</li>
+              <li>Allows you to observe values in the stream at a particular point</li>
+              <li>
+                Good for debugging or createting a side effect, including
+                <ul>
+                  <li>Adding data to local storage</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

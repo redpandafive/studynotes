@@ -1,113 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Index</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="../../assets/styles/site.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../../index.html">Home</a>
-      </div>
+<head>
+  <meta charset="utf-8" />
+  <title>Index</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../assets/styles/site.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../../index.html">Home</a>
+    </div>
+  </nav>
+  <div class="container">
+    <nav class="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+        <li class="breadcrumb-item">
+          <a href="../index.html">Angular</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Signals</li>
+      </ol>
     </nav>
-    <div class="container">
-      <nav class="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
-          <li class="breadcrumb-item">
-            <a href="../index.html">Angular</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">Signals</li>
-        </ol>
-      </nav>
 
-      <h1>Signals</h1>
+    <h1>Signals</h1>
 
-      <section>
-        <ul>
-          <li>
-            Zero argument functions. When executed, they return the current
-            value of the signal
-          </li>
-          <li>
-            When the signal is updated, anything that depends on it will also be
-            updated
-            <ul>
-              <li>Kind of like a BehviorSubject in RxJS, but you do not have to subscribe to get a value out</li>
-            </ul>
-          </li>
-          <li>
-            These can replace Observables
-            <ul>
-              <li>Simpler since you do not have to subscribe to them</li>
-              <li>
-                Handle synchronous reactivity well (value is known and can be set immediately)
-              </li>
-              <li>
-                Does not handle asynchronous reactivity well (need to wait some time, such as a HTTP request)
-              </li>
-            </ul>
-          </li>
-          <li>
-            Signals may be able to be converted to an Observables
-            <ul>
-              <li>Allows you to start with Signals, but convert to an Observable if you need to</li>
-            </ul>
-          </li>
-          <li>
-            One area this may change Angular is change ChangeDetection
-            <ul>
-              <li>
-                Before
-                <ul>
-                  <li>Zone.js detects that something might have changed
-                    <ul>
-                      <li>Zone.js patches browser APIs so that anytime anything that could possibly change the template, it will notify Angular that something changed </li>
-                      <li>These could be DOM events, settimeout occured, etc</li>
-                    </ul>
-                  </li>
-                  <li>This triggers Angular change detection</li>
-                  <li>Entire component tree is checked for changes
-                    <ul>
-                      <li>Sounds inefficient, but Angular handles it efficently</li>
-                      <li>Still a heavy handed approach to change detection</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                After
-                <ul>
-                  <li>Change is detected on a specific item (no Zone.js)</li>
-                  <li>Angular change detection is run</li>
-                  <li>Views are updated for anything that was changed</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
+    <section>
+      <ul>
+        <li>
+          Wrapper around a value that can notify interested onsumers when that value changes
+        </li>
+        <li>
+          Can contain nay value, from simple primitives to complex data struture
+        </li>
+        <li>
+          When the signal is updated, anything that depends on it will also be
+          updated
+          <ul>
+            <li>Kind of like a BehviorSubject in RxJS, but you do not have to subscribe to get a value out</li>
+          </ul>
+        </li>
+        <li>
+          These can replace Observables
+          <ul>
+            <li>Simpler since you do not have to subscribe to them</li>
+            <li>
+              Handle synchronous reactivity well (value is known and can be set immediately)
+            </li>
+            <li>
+              Does not handle asynchronous reactivity well (need to wait some time, such as a HTTP request)
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-        <div>
-          <div class="card">
-            <div class="card-body">
-              <code>
+
+    <h2>Writable Signals</h2>
+    <section>
+      <ul>
+        <li>signal()
+          <ul>
+            <li>
+              Use to create a writable signal (creates a WriteableSignal object)
+            </li>
+            <li>
+              These are getter functions, so calling them reads thier value
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                        const count = signal(0);<br/>
+                        console.log('The count is: ' + count());<br/>
+                      </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Set()
+          <ul>
+            <li>
+              Use to change the value of a writable signal
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                        count.set(3);
+                      </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Update()
+          <ul>
+            <li>
+              Use to compute a new value from the previous one
+              <div class="card">
+                <div class="card-body">
+                  <code>
+            count.update(value => value + 1);
+          </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Mutate()
+          <ul>
+            <li>
+              When a signal contains an object, use this to mutate the object directly
+            </li>
+            <li>
+              The following changes the first object in the array to 'done: true' without replacing it.
+              <div class="card">
+                <div class="card-body">
+                  <code>
+            const todos = signal([{title: 'Learn signals', done: false}]);<br/>
+            todos.mutate(value => { <br/>              
+              value[0].done = true;<br/>
+            });          </code>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+
+    <h2>Computed Signals</h2>
+    <section>
+
+    </section>
+
+
+    <h2>Effects</h2>
+    <section>
+<ul>
+  <li>An operation that runs whenver one or more singal values change</li>
+  <li>Run at least once</li>
+</ul>
+
+    </section>
+    <h2></h2>
+    <section>
+      <div>
+        <div class="card">
+          <div class="card-body">
+            <code>
                 &lt;label attr.for=&quot;{+{someId}}&quot;&gt;<br />
                 &lt;label &#91;attr.for&#93;=&quot;someId&quot;&gt;<br />
                 &lt;label &#91;htmlFor&#93;=&quot;someId&quot;&gt;
               </code>
-            </div>
           </div>
         </div>
-      </section>
-    </div>
-    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
-  </body>
+      </div>
+    </section>
+  </div>
+  <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
 </html>

@@ -1,99 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Index</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/styles/site.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">Home</a>
-      </div>
+<head>
+  <meta charset="utf-8" />
+  <title>Index</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../assets/styles/site.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../index.html">Home</a>
+    </div>
+  </nav>
+  <div class="container">
+    <nav class="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="../index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="./index.html">TypeScript</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Interfaces</li>
+      </ol>
     </nav>
-    <div class="container">
-      <nav class="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="../index.html">Home</a>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="./index.html">TypeScript</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">Interfaces</li>
-        </ol>
-      </nav>
 
-      <h1>Interfaces</h1>
-      <section>
-        <ul>
-          <li>
-            Another way to name an object type (in addition to aliases)
-            <div class="card">
-              <div class="card-body">
-                <code>
+    <h1>Interfaces</h1>
+    <section>
+      <ul>
+        <li>
+          Defines a contract that an object must adhere to.
+        </li>
+        <li>
+          Another way to name an object type (in addition to type aliases)
+          <div class="card">
+            <div class="card-body">
+              <code>
                   interface Point {&#10; x: number;&#10; y: number;&#10;}"
                 </code>
-              </div>
             </div>
-          </li>
-          <li>Interfaces can extend other interfaces</li>
-          <li>
-            May only be used to declare the shapes of objects, not rename
-            primitives
-          </li>
-          <li>
-            Very similar to aliases. The main difference is that a type cannot
-            be re-opened to add new properties, while an interface is always
-            extendable
-            <img src="../../assets//typescript-interfaces-1.png" />
-          </li>
-        </ul>
-      </section>
+          </div>
+        </li>
+        <li>Interfaces can extend other interfaces</li>
+        <li>
+          May only be used to declare the shapes of objects, not rename
+          primitives
+        </li>
+        <li>
+          Very similar to aliases. The main difference is that a type cannot
+          be re-opened to add new properties, while an interface is always
+          extendable
+          <img src="../../assets//typescript-interfaces-1.png" />
+        </li>
+      </ul>
+    </section>
 
-<h2>vs Type Aliases</h2>
-<section>
-  <ul>
-    <li>Almost all features of an interface are available in Type, so in many cases you can choose between them freely</li>
-    <li>Key diffrence is a Type cannot be extended to add new properties, while an interface is always extendable</li>
-  </ul>
-</section>
-
-      <h2>Properties</h2>
-      <section>
-        <ul>
-          <li>Optional properties can be identified by using the question mark
-            <ul>
-              <li>This tells the TypeScript compiler to just trust that a value will be assigned to the property as some point</li>
-              <li>Useful for
-                <ul>
-                  <li>Computed properties</li>
-                </ul>
-              </li>
-              <div>
-                The following sets the Username property to be the primary key of
-                the User table
-                <div class="card">
-                  <div class="card-body">
-                    <code>
+    <h2>Properties</h2>
+    <section>
+      <ul>
+        <li>Optional properties can be identified by using the question mark
+          <ul>
+            <li>This tells the TypeScript compiler to just trust that a value will be assigned to the property as some
+              point</li>
+            <li>Useful for
+              <ul>
+                <li>Computed properties</li>
+              </ul>
+            </li>
+            <div>
+              The following sets the Username property to be the primary key of
+              the User table
+              <div class="card">
+                <div class="card-body">
+                  <code>
                       interface MyObject { <br/>
                         optionalParam?: number<br/>
                       }<br/>
                     </code>
-                  </div>
                 </div>
               </div>
-            </ul>
-          </li>
+            </div>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
-        </ul>
+    <h2>Declarative Merging</h2>
+    <section>
+      <ul>
+        <li>Exclusive to interfaces</li>
+        <li>When an interface is declared multiple types, the TypeScript compiler will automatically merge the definitions into a single interface definition</li>
+        <li>One use cases is to extend a third party library's type definition to fit your requirements</li>
+      </ul>
+      <div class="card">
+        <div class="card-body">
+          <code>
+              interface Client { <br/>
+                name: string; <br/>
+            }<br/>
+            <br/>
+            interface Client {<br/>
+                age: number;<br/>
+            }<br/>
+            <br/>
+            const harry: Client = {<br/>
+                name: 'Harry',<br/>
+                age: 41<br/>
+            }<br/>            
+          </code>
+        </div>
+      </div>
+    </section>
 
-      </section>
-    </div>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
-  </body>
+    <h2>Extending</h2>
+    <section>
+      <ul>
+        <li>Interfaces can extend one or multiple interfaces</li>
+        <li>The new interface inherits all the properties and methods of an existing interface while also adding new properties</li>
+        <li>Use the <code>extends</code> keyword</li>
+        <li>When extending interfaces, duplicated property keys are not allowed</li>
+        <li>Interfaces can extend a type alias with statically known members (not union types)</li>
+      </ul>
+      <div class="card">
+        <div class="card-body">
+          <code>
+            type Client = {<br/>
+              name: string;<br/>
+          };<br/>
+          <br/>
+          interface VIPClient extends Client {<br/>
+              benefits: string[]<br/>
+          }<br/>            
+          </code>
+        </div>
+      </div>
+    </section>
+
+
+    <h2>Function Types</h2>
+    <section>
+      <ul>
+        <li>Represents a function's type signature</li>
+        <li>
+          Interfaces use the following syntax to present the parameters and return type
+          <div class="card">
+            <div class="card-body">
+              <code>
+                interface IAdd {
+                <br />
+                (num1: number, num2:number): number;
+                <br />
+                }
+                <br />
+              </code>
+            </div>
+          </div>
+        </li>
+        <li>This can be done with either type aliases or interfaces</li>
+
+      </ul>
+    </section>
+
+
+    <h2>See Also</h2>
+    <section>
+      <ul>
+        <li>
+          <a href="./typeAliasesvsInterfaces.html">Type Aliases vs Interfaces</a>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
 </html>

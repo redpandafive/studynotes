@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Scrolling</li>
+        </ol>
+      </nav>
+
+      <h1>Scrolling</h1>
+
+      <section>
+        <ul>
+          <li>
+            Uses the ViewportScroller service as a scroll position manager
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Methods</h2>
+      <section>
+        <ul>
+          <li>scrollToAnchor()
+            <ul>
+              <li>Use to scroll to an anchor element</li>
+              <li>Parameter is the ID of the anchor element to scroll to</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Additional Settings</h2>
+      <section>
+        <ul>
+          <li>
+            Set the scrolling method on the root HTML, Body tag to use native browser smooth scrolling 
+          </li>
+          <li>
+            Make sure you set this in the root stylesheet, not one of the component stylesheets
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                html, body {
+                  height: 100%;
+                  scroll-behavior: smooth;
+              }
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://angular.io/api/common/ViewportScroller" target="_blank">
+              https://angular.io/api/common/ViewportScroller
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

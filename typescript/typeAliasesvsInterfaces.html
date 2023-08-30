@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/styles/site.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a
+          class="navbar-brand"
+          href="../index.html">
+          Home
+        </a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li
+            class="breadcrumb-item active"
+            aria-current="page">
+            Interfaces vs Type Aliases
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Interfaces vs Type Aliases</h1>
+
+      <section>
+        <ul>
+          <li>Almost all features of an interface are available in Type, so in many cases you can choose between them freely</li>
+          <li>
+            There are cases when you should use a type alias over an interface, including
+            <ul>
+              <li>To create a new name for a primitive type</li>
+              <li>To define a union type, tuple type, function type, or another more complex type</li>
+              <li>To overload functions</li>
+              <li>To use mapped types, conditional types, type guards, or other advanced type features</li>
+            </ul>
+          </li>
+          <li>
+            Type aliases are generally more expressive and do allow for more advnaced features
+          </li>
+        </ul>
+      </section>
+
+      <h2>Differences</h2>
+      <section>
+        <ul>
+          <li>Interfaces can only be used with object type, but type aliases can be used to alias primitives and union types</li>
+          <li>
+            Union types can be used with type aliases, but not interfaces
+            <ul>
+              <li>
+                Interfaces can be used to create union types using a type alias
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      interface CarBattery {
+                      <br />
+                      power: number;
+                      <br />
+                      }
+                      <br />
+                      interface Engine {
+                      <br />
+                      type: string;
+                      <br />
+                      }
+                      <br />
+                      type HybridCar = Engine | CarBattery;
+                      <br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>Declarative merging can only be used with interfaces</li>
+          <li>Function types can be declared with either interfaces or type aliases, but type aliases usualy end up more readable</li>
+          <li>Both can be extended, but the syntax is different for each</li>
+        </ul>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://blog.logrocket.com/types-vs-interfaces-typescript/" target="_blank">
+              https://blog.logrocket.com/types-vs-interfaces-typescript/
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

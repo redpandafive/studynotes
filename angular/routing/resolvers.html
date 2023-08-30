@@ -1,181 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Index</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="../../assets/styles/site.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">Home</a>
-      </div>
-    </nav>
-    <div class="container">
 
-      <nav class="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
-          <li class="breadcrumb-item">
-            <a href="../index.html">Angular</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Resolvers and Pre-fetching Data
-          </li>
-        </ol>
-      </nav>
+<head>
+  <meta charset="utf-8" />
+  <title>Index</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../assets/styles/site.css" />
+</head>
 
-      <h1>Resolvers and Pre-fetching Data</h1>
-
-      <section>
-        <ul>
-          <li>These can be used to fetch data before navigating</li>
-          <li>
-            Benefits to using resolvers to pre-fetch data
-            <ul>
-              <li>Prevent presentation of an empty component</li>
-              <li>
-                Prevent routing to components with errors, such as empty data
-                sections
-              </li>
-              <li>Can potentially provide a better user experience</li>
-              <li>Can be useful if you have a slower HTTP call to get data</li>
-            </ul>
-          </li>
-          <li>
-            You have to make a judgment call as to which approach is better
-            <ul>
-              <li>
-                If you have a single HTTP call to get all the data, the resolver
-                may be better
-              </li>
-              <li>
-                Its not so clear with multiple HTTP calls in the target
-                component, so the resolver may not be the better approach
-              </li>
-            </ul>
-          </li>
-          <li>
-            Sequence of route transitions without a resolver
-            <ul>
-              <li>
-                Example would be moving from a summary view component to a
-                detail view component
-              </li>
-              <li>
-                Once the route is activated (such as clicking a button to
-                display the detail data), the detail component is displayed
-              </li>
-              <li>
-                The HTTP data request fires to request the data for the detail
-                view component
-              </li>
-              <li>
-                Once the data returns from the server, the detail view will
-                display the data
-              </li>
-            </ul>
-          </li>
-          <li>
-            Sequence of route transitions with a resolver
-            <ul>
-              <li>
-                When the button is pressed to display the detail data, the HTTP
-                call to the server will be executed before the route is
-                activated and the detail component is loaded
-              </li>
-              <li>
-                When the HTTP request returns, the route activates and the
-                detail component is shown
-              </li>
-              <li>
-                The detail component is displayed with all the expected data
-              </li>
-            </ul>
-          </li>
-          <li>
-            Resolvers are implemented as services
-            <ul>
-              <li>Should have an Injectable tag</li>
-              <li>
-                Class must implement the Resolve class from @angular/router
-              </li>
-              <li>Must implement a method named resolve</li>
-            </ul>
-          </li>
-          <li>
-            You do not explicitly need to subscribe to your data service within
-            the resolver – Angular does it automatically
-          </li>
-        </ul>
-
-        <div>
-          <p>
-            dataService is our custom service class – you do not need to
-            explicitly subscribe to it, Angular handles that for you
-          </p>
-          <p>
-            The of call creates an observable to wrap around the error object
-          </p>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              export class BooksResolverService implements
-              Resolve&lt;Book&#91;&#93; | BookTrackerError&gt; {<br />
-              constructor(private dataService: DataService) {}<br />
-              resolve(route: ActivatedRouteSnap, state:
-              RouterStateSnapshot):Observable&lt;Book&#91;&#93; |
-              BookTrackerError&gt; {<br />
-              return this.dataService.getAllBooks()<br />
-              .pipe(<br />
-              catchError(err =&gt; of(err)<br />
-              )<br />
-              }<br />
-              }
-            </code>
-          </div>
-        </div>
-        <div>
-          To use this resolver, add a resolve property to the route where you
-          want this to trigger. The resolve property takes an object literal –
-          it contains the name of the resolved data as well as the resolver
-          class that should be used to fetch it.
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              { path: 'dashboard', component: DashboardComponent, resolve: {<br />
-              resolvedBooks: BooksResolverService }<br />
-              }
-            </code>
-          </div>
-        </div>
-        <div>
-          In the component, Angular will handle subscribing and making the call
-          to the service through the router – you don’t need to add any code to
-          do this. You will need to inject the ActivatedRoute object from
-          router. Finally, assign the data to a property on your component using
-          the name you configured on the route. Since you could get a data
-          object or an error, check the type of the property to perform the
-          appropriate action
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              let resolvedData: Book&#91;&#93; | BookTrackerError =
-              this.route.snapshot.data&#91;'resolvedBooks'&#93;;
-            </code>
-          </div>
-        </div>
-      </section>
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../index.html">Home</a>
     </div>
-    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
-  </body>
+  </nav>
+  <div class="container">
+
+    <nav class="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+        <li class="breadcrumb-item">
+          <a href="../index.html">Angular</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Resolvers and Pre-fetching Data
+        </li>
+      </ol>
+    </nav>
+
+    <h1>Resolvers and Pre-fetching Data</h1>
+
+    <section>
+      <ul>
+        <li>These can be used to fetch data before navigating</li>
+        <li>
+          Benefits to using resolvers to pre-fetch data
+          <ul>
+            <li>Prevent presentation of an empty component</li>
+            <li>
+              Prevent routing to components with errors, such as empty data
+              sections
+            </li>
+            <li>Can potentially provide a better user experience</li>
+            <li>Can be useful if you have a slower HTTP call to get data</li>
+          </ul>
+        </li>
+        <li>
+          You have to make a judgment call as to which approach is better
+          <ul>
+            <li>
+              If you have a single HTTP call to get all the data, the resolver
+              may be better
+            </li>
+            <li>
+              Its not so clear with multiple HTTP calls in the target
+              component, so the resolver may not be the better approach
+            </li>
+          </ul>
+        </li>
+        <li>
+          Sequence of route transitions without a resolver
+          <ul>
+            <li>
+              Example would be moving from a summary view component to a
+              detail view component
+            </li>
+            <li>
+              Once the route is activated (such as clicking a button to
+              display the detail data), the detail component is displayed
+            </li>
+            <li>
+              The HTTP data request fires to request the data for the detail
+              view component
+            </li>
+            <li>
+              Once the data returns from the server, the detail view will
+              display the data
+            </li>
+          </ul>
+        </li>
+        <li>
+          Sequence of route transitions with a resolver
+          <ul>
+            <li>
+              When the button is pressed to display the detail data, the HTTP
+              call to the server will be executed before the route is
+              activated and the detail component is loaded
+            </li>
+            <li>
+              When the HTTP request returns, the route activates and the
+              detail component is shown
+            </li>
+            <li>
+              The detail component is displayed with all the expected data
+            </li>
+          </ul>
+        </li>
+        <li>
+          Resolvers are implemented as functions that implement ResolveFn&lt;T&gt;
+        </li>
+        <li>
+          You do not explicitly need to subscribe to your data service within
+          the resolver – Angular does it automatically
+        </li>
+      </ul>
+    </section>
+
+    <h2>Example</h2>
+    <section>
+      <div>
+        Given a type Hero that is retrieved with the following service.
+        <div class="card">
+          <div class="card-body">
+            <code>
+                @Injectable() <br/>
+                export class HeroService { <br/>
+                  getHero(id: string) { <br/>
+                    return {name: `Superman-${id}`}; <br/>
+                  } <br/>
+                }<br/>
+              </code>
+          </div>
+        </div>
+      </div>
+      <div>
+        Implement the resolver as follows.
+        <div class="card">
+          <div class="card-body">
+            <code>
+              export const heroResolver: ResolveFn&lt;Hero&gt; =  <br/>
+              (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {  <br/>
+                return inject(HeroService).getHero(route.paramMap.get('id')!);  <br/>
+              }; <br/>
+            </code>
+          </div>
+        </div>
+      </div>
+      <div>
+        To use this resolver, add a resolve property to the route where you
+        want this to trigger.
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <code>
+              {<br/>
+                path: 'detail/:id', <br/>
+                component: HeroDetailComponent, <br/>
+                resolve: {hero: heroResolver} <br/>
+              } <br/>
+            </code>
+        </div>
+      </div>
+      <div>
+        Access the data in the component using the following:
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <code>
+            @Component({template: ''}) <br/>
+            export class HeroDetailComponent { <br/>
+              constructor(private activatedRoute: ActivatedRoute) {} <br/>            
+              ngOnInit() {  <br/>
+                this.activatedRoute.data.subscribe(  <br/>
+                    ({hero}) => {  <br/>
+                        // do something with your resolved data ...  <br/>
+                    });  <br/>
+              }  <br/>
+            }  <br/>
+            </code>
+        </div>
+      </div>
+    </section>
+
+    <h2>See Also</h2>
+    <section>
+      <ul>
+        <li>
+          <a href="https://angular.io/api/router/ResolveFn" target="_blank">
+            https://angular.io/api/router/ResolveFn
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+
 </html>

@@ -39,72 +39,71 @@
           <li>
             <code>tsc hello.tsc</code>
             <ul>
-              <li>
-                This will generate a hello.js file beside the TypeScript file
-              </li>
-              <li>
-                This will attempt to preserve comments, tabbing, and generally
-                try to look like something a human wrote
-              </li>
+              <li>This will generate a hello.js file beside the TypeScript file</li>
+              <li>This will attempt to preserve comments, tabbing, and generally try to look like something a human wrote</li>
             </ul>
           </li>
           <li>
-            TypeScript is flexible enough with its error checking to not get in
-            the way
+            TypeScript is flexible enough with its error checking to not get in the way
             <ul>
-              <li>
-                For instance, if you port an existing JavaScript file to a
-                TypeScript file, the compiler will not enforce aggressive type
-                checks
-              </li>
-              <li>
-                You can adjust the compiler behavior in the tsconfig.ts file
-              </li>
+              <li>For instance, if you port an existing JavaScript file to a TypeScript file, the compiler will not enforce aggressive type checks</li>
+              <li>You can adjust the compiler behavior in the tsconfig.ts file</li>
             </ul>
           </li>
           <li>
             Performs the following transformations
             <ul>
-              <li>
-                Strips out TypeScript specific items such as type annotations
-              </li>
-              <li>
-                Downlevels features that are not available in the targetted
-                version of ECMAScript (such as swapping string interpolation for
-                concatentation)
-              </li>
+              <li>Strips out TypeScript specific items such as type annotations</li>
+              <li>Downlevels features that are not available in the targetted version of ECMAScript (such as swapping string interpolation for concatentation)</li>
             </ul>
           </li>
-
         </ul>
       </section>
 
-<h2>Tsconfig File</h2>
-<section>
-  <ul>
-    <li>
-      Strictness of the compiler can be adjusted in the tsconfig.ts files
-      <ul>
-        <li>
-          <code>"strict": true</code> toggles all checks on
-          simulataneously (but others can be adjusted individually)
-          <ul>
-            <li>Recommded to keep this on to future proof the code</li>
-          </ul>
-        </li>
-        <li>
-          <code>noImplicitAny</code> - issues errors on variables whose
-          type is implicity typed as any
-        </li>
-        <li>
-          <code>strictNullChecks</code> - prevents null and undefined
-          variable assignments, such as default value assignments
-        </li>
-      </ul>
-    </li>
-  </ul>
-</section>
+      <h2>Tsconfig File</h2>
+      <section>
+        <ul>
+          <li>
+            Strictness of the compiler can be adjusted in the tsconfig.ts files
+            <ul>
+              <li>
+                <code>"strict": true</code>
+                toggles all checks on simulataneously (but others can be adjusted individually)
+                <ul>
+                  <li>Recommded to keep this on to future proof the code</li>
+                </ul>
+              </li>
+              <li>
+                <code>noImplicitAny</code>
+                - issues errors on variables whose type is implicity typed as any
+              </li>
+              <li>
+                <code>strictNullChecks</code>
+                - prevents null and undefined variable assignments, such as default value assignments
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
 
+      <h2>Running TypeScript Files from Windows Command line</h2>
+      <section>
+        <ul>
+          <li>
+            Install TypeScript globally with
+            <code>npm install -g typescript</code>
+          </li>
+          <li>Create a .ts file</li>
+          <li>
+            Open command promp and run
+            <code>tsc myfile.ts</code>
+          </li>
+          <li>
+            Run the command in Node with
+            <code>node myfile.ts</code>
+          </li>
+        </ul>
+      </section>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

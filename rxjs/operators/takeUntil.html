@@ -27,28 +27,49 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">CombineLatest</li>
+          <li class="breadcrumb-item active" aria-current="page">TakeUntil</li>
         </ol>
       </nav>
 
-      <h1>CombineLatest</h1>
+      <h1>TakeUntil</h1>
 
       <section>
         <ul>
           <li>
-            Processes latest emitted item from each observable anytime an observable emits a new value
-          </li>
-          <li>
-            Will always emit the latest value from any of the streams provided
-          </li>
-          <li>
-            Will not emit a value until all provided streams emit at least one value
+            One common pattern is to use this to automatically unsubscribe from an observable when a component is destroyed
           </li>
         </ul>
         <div>
+          Add a class property for Subject
           <div class="card">
             <div class="card-body">
-              <code> </code>
+              <code>
+              private destroy$: Subject&lt;boolean&gt; = new Subject&lt;boolean&gt;(); 
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Setup the observable in the component
+          <div class="card">
+            <div class="card-body">
+              <code>
+              this.searchFieldControl.valueChanges.pipe(
+                takeUntil(this.destroy$)).
+                subscribe(....do more stuff here...)
+              )  
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          In the ngOnDestroy method
+          <div class="card">
+            <div class="card-body">
+              <code>
+              this.destroy$.next(true);
+              this.destroy$.unsubscribe(); 
+              </code>
             </div>
           </div>
         </div>

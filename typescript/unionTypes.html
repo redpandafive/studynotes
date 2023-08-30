@@ -35,7 +35,7 @@
         <ul>
           <li>A type formed from two or more other types</li>
           <li>Values may be any one of those types</li>
-          <li>Constiuant types are called members</li>
+          <li>Constituent types are called members</li>
           <li>
             Operations are only allowed if it is valid for every member of the
             union
@@ -73,11 +73,15 @@
           <div class="card">
             <div class="card-body">
               <code>
-                function printId(id: number | string) {&#10; if (typeof id ===
-                &quot;string&quot;) {&#10; // In this branch, id is of type
-                'string'&#10; console.log(id.toUpperCase());&#10; } else {&#10;
-                // Here, id is of type 'number'&#10; console.log(id);&#10;
-                }&#10;}"
+                function printId(id: number | string) { <br/> 
+                  if (typeof id === &quot;string&quot;) { <br/> 
+                    // In this branch, id is of type 'string' <br/> 
+                    console.log(id.toUpperCase()); <br/> 
+                  } else { <br/>
+                // Here, id is of type 'number' <br/> 
+                console.log(id); <br/>
+                } <br/>
+              }
               </code>
             </div>
           </div>

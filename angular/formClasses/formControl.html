@@ -104,10 +104,17 @@
                 Initial data value, including null
               </li>
               <li>
-                Optional array of synchronous validators
+                Optional single or array of synchronous validators 
+                <ul>
+                  <li>Validators are functions that return a ValidatorFn</li>
+                </ul>
               </li>
               <li>
-                Optional array of asynchronous validators
+                Optional single or array of asynchronous validators
+                <ul>
+                  <li>These are of type AsyncValidatorFn</li>
+                  <li>These will not run if a synchronous validator fails</li>
+                </ul>
               </li>
             </ul>
           </li>

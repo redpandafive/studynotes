@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Types</li>
+        </ol>
+      </nav>
+
+      <h1>Types</h1>
+      <section>
+        <ul>
+          <li>
+            JS Primitives
+            <ul>
+              <li>TS contains commonly used primitives in JS = string, number, and Boolean</li>
+              <li>There are upper case versions of these, but you should not use them when typing</li>
+            </ul>
+          </li>
+          <li>
+            Arrays
+            <ul>
+              <li>
+                Can be typed using
+                <code>string[]</code>
+                or
+                <code>Array&gt;string&lt;</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Object type
+            <ul>
+              <li>Refers to any value that is not a primitive</li>
+              <li>Not the same thing as an empty object type ({})</li>
+              <li>Not the same thing as global type Object (avoid using this)</li>
+              <li>
+                To define an object type, list the properties and their types
+                <div class="card">
+                  <div class="card-body">
+                    <code>function printName(obj: { first: string; last?: string }) ...</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Optional properties can be marked with a ?. Make sure to check for undefined or use a safe navigation operatior when using these.
+                <div class="card">
+                  <div class="card-body">
+                    <code>console.log(obj.last?.toUpperCase());"</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            null
+            <ul>
+              <li>Signals absent value</li>
+              <li>When stringNullChecks is on, you must test thse values before using methods or properties on the value</li>
+              <li>
+                Can use the non-null assertion operator to tell the compiler that a value cannot be null. TS will not check this when applied.
+                <div class="card">
+                  <div class="card-body">
+                    <code>console.log(x!.toFixed());"</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            undefined
+            <ul>
+              <li>Signals uninitialized value</li>
+              <li>Can use the non-null assertion operator to tell the compiler that a value cannot be null. TS will not check this when applied.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Any</h2>
+      <section>
+        <ul>
+          <li>Special Typescript type you can use when you don't want a particular value to cause typechecking errors</li>
+          <li>Allows anything syntactically legal - can access any properties, function, assign to and from any other item typed as any</li>
+          <li>Try to limit using this since it prevents type checking on the item
+            <ul>
+              <li>It will pretend to be any type imaginable and effectively turn off type checking</li>
+              <li>Interogating its type will not help you narrow down what type it actually is</li>
+            </ul>
+          </li>
+          <li>
+            When a type is not specified or the compiler cannot infer a type, the TypeScript compiler will default to this type
+            <ul>
+              <li>
+                Disable this behavior using the
+                <code>noImplicitAny</code>
+                flag
+              </li>
+            </ul>
+          </li>
+          <li>
+            Prefer <code>unknown</code> over this where you can.
+            <ul>
+              <li>Types of <code>any</code> have a way of creeping into other code when type interrence is used.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      
+      <h2>Unknown</h2>
+      <section>
+        <ul>
+          <li>Represents any value, but is more type safe than the <code>any</code> type</li>
+          <li>
+            Similar to the
+            <code>any</code>
+            type, but is safer since it is not legal to do anything with an
+            <code>unknown</code>
+            value
+            <ul>
+              <li>It forces you to prove that a value is a certain type before TypeScript will treat it like that type</li>
+              <li>Must assert or restrict it down to a more precise type</li>
+                        </ul>
+          </li>
+
+          <li>
+            You can assign any value to unknown that you like
+            <ul>
+              <li>That value will be returned when referencing the variable</li>
+              <li>Cannot access properties on unknown values, call them, or call a constructor on them</li>
+            </ul>
+          </li>
+          <li>Unknown types variables can only be assinged to other unknown variables or type any variables</li>
+          <li>
+            Prefer this over using type
+            <code>any</code>
+            since
+            <code>any</code>
+            effectively turns off all type checking
+          </li>
+        </ul>
+      </section>
+
+      <h2>Void</h2>
+      <section>
+        <ul>
+          <li>Represents the return value of functions which do not return a value</li>
+          <li>Any function without a return statement is assocued to return void</li>
+          <li>
+            This is not the same as thing as undefined
+            <ul>
+              <li>JS assumes functions without a return statement will return undefined</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Never</h2>
+      <section>
+        <ul>
+          <li>Returned by functions to represent values which are never observed</li>
+          <li>Example would be a fuction that throws an exception or ends execution of the program</li>
+          <li>This is also when TypeScript determines that there is nothing left in a union type to consider</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              function fail(msg: string): never { <br/>
+                throw new Error(msg); <br/>
+              } <br/>
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://peteranderson.me/articles/typescripts-unknown-type-and-why-you-should-use-it" target="_blank">
+              https://peteranderson.me/articles/typescripts-unknown-type-and-why-you-should-use-it
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Type Narrowing</li>
+        </ol>
+      </nav>
+
+      <h1>Type Narrowing</h1>
+      <section>
+        <ul>
+          <li>Much like TypeScript analyzes runtime values using static types, it also overlays type analysis on JS's runtime flow control constructs which can affect those types</li>
+          <li>
+            Here is an example:
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function padLeft(padding: number | string, input: string) {
+                  <br />
+                  if (typeof padding === "number") {
+                  <br />
+                  return " ".repeat(padding) + input;
+                  <br />
+                  }
+                  <br />
+                  return padding + input;
+                  <br />
+                  }
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>The padding parameter is a union type with either a number or string allowed</li>
+          <li>Since it could be either, we have to code the function body to only execute code that corresponds to the type of the parameter supplied</li>
+          <li>
+            The
+            <code>typeof padding ===</code>
+            line is called a Type Guard. This prevents applying number methods and operations to a string
+          </li>
+          <li>Static analysis is able to interpret the type guard when it is performing type checking</li>
+          <li>Narrowing is the process of refining types to more specific types than declared</li>
+          <li>There are several different constructs that TypeScript understands for narrowing</li>
+        </ul>
+      </section>
+
+      <h2>Typeof Type Guards</h2>
+      <section>
+        <ul>
+          <li>These are setup the same way as you would in JS</li>
+          <li>
+            TypeScript expects a value from one of the following on the equality checking
+            <ul>
+              <li>"string"</li>
+              <li>"number"</li>
+              <li>"bigint"</li>
+              <li>"boolean"</li>
+              <li>"symbol"</li>
+              <li>"undefined"</li>
+              <li>"object"</li>
+              <li>"function"</li>
+            </ul>
+          </li>
+          <li>
+            Unlike JS, TypeScript is aware of some of the JS quirks that can occur in this construct, such as
+            <code>typeof null</code>
+            returning "object"
+            <ul>
+              <li>In this case, TypeScript will warn that typeof has not excluded null from being a possibilty</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Truthiness Narrowing</h2>
+      <section>
+        <ul>
+          <li>In JavaScript, you can use any expression in conditions</li>
+          <li>Type coercion forces the expression into a boolean value</li>
+          <li>0, NaN, "", null, undefined are all coherced into false</li>
+          <li>
+            You can force cohercion using either
+            <code>Boolean("hello")</code>
+            or
+            <code>!!"world"</code>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Equity Narrowing</h2>
+      <section>
+        <ul>
+          <li>
+            TypeScript can also use
+            <code>switch</code>
+            statements and equality checks like
+            <code>===</code>
+            ,
+            <code>!==</code>
+            ,
+            <code>==</code>
+            , and
+            <code>!=</code>
+            to narrow types
+          </li>
+          <li>Using the triple equality operator ensures that both sides must also be the same type (since type cohercion can lead to false true results)</li>
+          <li>
+            The example below uses the triple equality operator to ensure both x and y are the same type. The only combination where they both have the same type is when both are strings. TypeScript is able to figure this out.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function example(x: string | number, y: string | boolean) {
+                  <br />
+                  if (x === y) {
+                  <br />
+                  x.toUpperCase();
+                  <br />
+                  y.toLowerCase();
+                  <br />
+                  } else {
+                  <br />
+                  console.log(x);
+                  <br />
+                  console.log(y);
+                  <br />
+                  } }
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>In Operator Narrowing</h2>
+      <section>
+        <ul>
+          <li>Determines if an object or its prototype chain has a property with a specified name</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                type Fish = { swim: () => void };
+                <br />
+                type Bird = { fly: () => void };
+                <br />
+                <br />
+                function move(animal: Fish | Bird) {
+                <br />
+                if ("swim" in animal) {
+                <br />
+                return animal.swim();
+                <br />
+                }
+                <br />
+                <br />
+                return animal.fly();
+                <br />
+                }
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Instanceof Narrowing</h2>
+      <section>
+        <ul>
+          <li>
+            Checks if a value is an "instance" of another value
+            <ul>
+              <li>Checks if the prototype chain contains the specified object</li>
+              <li>
+                <code>x instanceof Foo</code>
+                checks if the prototype chain of x contains Foo.prototype
+              </li>
+            </ul>
+          </li>
+          <li>
+            This can be used as a type guard
+          </li>
+        </ul>
+      </section>
+
+      <h2>User Defined Type Guards</h2>
+      <section>
+        <ul>
+          <li>Use when you want more direct control over how types change in your code</li>
+          <li>To define one, dfine a function whose return type is a type predicate</li>
+          <li>A type predicate takes the form of <code>parameterName is Type</code> where parameterName is the name of a paraemter from teh current function signature</li>
+        </ul>
+        <div>
+          This example checks if the pet parameter is a Fish type.  TypeScript can also figure out that if false is returned, the parameter must be a Bird
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function isFish(pet: Fish | Bird): pet is Fish { <br/>
+                  return (pet as Fish).swim !== undefined; <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h2>Pick up at https://www.typescriptlang.org/docs/handbook/2/narrowing.html</h2>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

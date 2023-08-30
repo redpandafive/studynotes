@@ -4,15 +4,28 @@
     <meta charset="utf-8" />
     <title>Index</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/styles/site.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">Home</a>
+        <a
+          class="navbar-brand"
+          href="../index.html">
+          Home
+        </a>
       </div>
     </nav>
     <div class="container">
@@ -24,7 +37,9 @@
           <li class="breadcrumb-item">
             <a href="./index.html">TypeScript</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li
+            class="breadcrumb-item active"
+            aria-current="page">
             Type Aliases
           </li>
         </ol>
@@ -33,13 +48,73 @@
       <h1>Type Aliases</h1>
       <section>
         <ul>
-          <li>A name for a type</li>
           <li>
-            Example
+            Type aliases are a name for any type
+            <ul>
+              <li>Provide a way of creating new names for existing types</li>
+              <li>Don't define new types, but provide an alternate name for an existing type</li>
+              <li>Can refer to any valid TypeScript type, including primitive types</li>
+            </ul>
+          </li>
+          <li>
+            Created using the
+            <code>type</code>
+            keyword
+          </li>
+          <li>
+            Examples
             <div class="card">
               <div class="card-body">
                 <code>
+                  type MyNumber = number;
+                  <br />
+                  type User = {
+                  <br />
+                  id: number;
+                  <br />
+                  name: string;
+                  <br />
+                  email: string;
+                  <br />
+                  }
+                  <br />
                   type Point = {&#10; x: number;&#10; y: number;&#10;};"
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Primitive Aliases</h2>
+      <section>
+        <ul>
+          <li>
+            Primitve types (string, number, boolean, etc.) can be aliased using type aliases for readability
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  type Address = string;
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Union Types</h2>
+      <section>
+        <ul>
+          <li>These allow us to describe values that can be one of several types and create unions of various primitive, literal, or complex types</li>
+          <li>
+            Primitve union types can be aliases using type aliased for readability.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  type NullOrUndefined = null | undefined;
+                  <br />
+                  type Transport = 'Bus' | 'Car' | 'Bike' | 'Walk';
                 </code>
               </div>
             </div>
@@ -49,22 +124,60 @@
           A type alias for a union type
           <div class="card">
             <div class="card-body">
-              <code> type ID = number | string;" </code>
+              <code>type ID = number | string;"</code>
             </div>
           </div>
         </div>
       </section>
 
-      <h2>vs Type Aliases</h2>
+      <h2>Function Types</h2>
+      <section>
+        <ul>
+          <li>Represents a function's type signature</li>
+          <li>
+            Type aliases use => to specify the parameters and the return Type
+            <ul>
+              <li>Usually results in a shorter and easier to read format that using interfaces</li>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    type AddFn = (num1: number, num2:number) => number;
+                    <br />
+                  </code>
+                </div>
+              </div>
+            </ul>
+          </li>
+          <li>This can be done with either type aliases or interfaces</li>
+        </ul>
+      </section>
+
+      <h2>Extending</h2>
+      <section>
+        <ul>
+          <li>Type aliases can be extended, but it uses the intersection operator to do so</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              interface Client {
+              <br />
+              name: string;
+              <br />
+              }
+              <br />
+              Type VIPClient = Client & { benefits: string[]};
+              <br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also</h2>
       <section>
         <ul>
           <li>
-            Almost all features of an interface are available in Type, so in
-            many cases you can choose between them freely
-          </li>
-          <li>
-            Key diffrence is a Type cannot be extended to add new properties,
-            while an interface is always extendable
+            <a href="./typeAliasesvsInterfaces.html">Type Aliases vs Interfaces</a>
           </li>
         </ul>
       </section>

@@ -36,16 +36,16 @@
       <section class="navlinks">
         <ul>
           <li>
-            <a href="angularcli.html#properties">Input / Output Properties</a>
+            <a href="inputOutput.html#properties">Input / Output Properties</a>
           </li>
           <li>
-            <a href="angularcli.html#input">Input Properties</a>
+            <a href="inputOutput.html#input">Input Properties</a>
           </li>
           <li>
-            <a href="angularcli.html#output">Output Properties</a>
+            <a href="inputOutput.html#output">Output Properties</a>
           </li>
           <li>
-            <a href="angularcli.html#aliases">Import / Export Aliases</a>
+            <a href="inputOutput.html#aliases">Import / Export Aliases</a>
           </li>
         </ul>
       </section>
@@ -101,6 +101,60 @@
                 consider using the @Attribute decorator over @Input
               </li>
             </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h4>Input Property Options</h4>
+      <section>
+        <ul>
+          <li>
+            alias
+            <ul>
+              <li>Name of the DOM property to which the input property is bound.</li>
+              <li>Use this when you want to work on a different name inside the directive / component</li>
+              <li>See <a href="inputOutput.html#aliases">Import / Export Aliases</a></li>
+            </ul>
+          </li>
+          <li>
+            required
+            <ul>
+              <li>The input is required for the directive to function</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  @Input({ required: true }) userId: number = 0;
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            transform
+            <ul>
+              <li>Function to transform the input value before assigning it to the directive instance.</li>
+              <li>This is useful on route parameter / input mapping since it provodes a point to cast the string value from the url to somthing else.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              function toInteger(val: string) { <br/>
+                return +val; <br/>
+              } <br/>
+              ... <br/>
+              @Input({ transform: toInteger }) userId: number = 0;
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h4>Route Parameter / Input Mapping</h4>
+      <section>
+        <ul>
+          <li>
+            <a href="../routing/routeParameterMapping.html">See this</a>
           </li>
         </ul>
       </section>
