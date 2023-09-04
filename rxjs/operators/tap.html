@@ -33,37 +33,23 @@
       <section>
         <ul>
           <li>
-            Looks at the observable values, does something with those values,
-            and passes them along unmodifed to operators that follow it
+            Looks at the observable values, does something with those values, and passes them along unmodifed to operators that follow it
             <ul>
-              <li>
-                Returns an observable that is identical to the source observable
-              </li>
+              <li>Returns an observable that is identical to the source observable</li>
             </ul>
           </li>
           <li>
-            Useful when you need to "jump out of the stream" - use cases include
+            Useful when you need to "jump out of the stream" and observe values in the stream at a particular point. Use cases include:
             <ul>
-              <li>
-                Actions that can be considered a "side effect" for your stream
-              </li>
-              <li>
-                Logging
-              </li>
-              <li>
-                Writing to console for debugging
-              </li>
-              <li>
-                State management to set / update the store
-              </li>
+              <li>Actions that can be considered a "side effect" for your stream</li>
+              <li>Logging</li>
+              <li>Writing to console for debugging</li>
+              <li>State management to set / update the store</li>
+              <li>Adding data to local storage</li>
             </ul>
-          </li>
-          <li>
-            Useful for logging functions or any side effects
           </li>
         </ul>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

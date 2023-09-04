@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -35,23 +32,27 @@
 
       <section>
         <ul>
+          <li>A creation operator</li>
+          <li>Not piped, it creates a new stream from scratch</li>
+          <li>Processes latest emitted item from each observable anytime an observable emits a new value</li>
           <li>
-            Processes latest emitted item from each observable anytime an observable emits a new value
+            Takes in multiple streams contained in an array
+            <ul>
+              <li>Will always emit the latest value from any of the streams provided</li>
+              <li>Will not emit a value until all provided streams emit at least one value</li>
+            </ul>
           </li>
+
+          <li>Useful in view models</li>
           <li>
-            Will always emit the latest value from any of the streams provided
-          </li>
-          <li>
-            Will not emit a value until all provided streams emit at least one value
-          </li>
-        </ul>
-        <div>
-          <div class="card">
-            <div class="card-body">
-              <code> </code>
+            Use the descrtucturing syntax in the final map to split them apart into a format that is more convenient to work with
+            <div class="card">
+              <div class="card-body">
+                <code>combineLatest([...]).map( ([checklist, items, forMalIsOpen, checkIfItemBeingEdited]) => ({....}));</code>
+              </div>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>        
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

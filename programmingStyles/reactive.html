@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Programming Styles</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Reactive</li>        </ol>
+      </nav>
+
+      <h1>Reactive</h1>
+ 
+      <section>
+        <ul>
+          <li>
+            A type of declarative programming paradign focused on
+            <ul>
+              <li>Useage of data streams</li>
+              <li>Change propagation</li>
+            </ul>
+          </li>
+          <li>
+            Idea that everything is a stream
+            <ul>
+              <li>A sequence of data elements made available over time</li>
+              <li>Think of as items on a conveyor belt being processed one at a time reather than in large batches</li>
+              <li>
+                Data and events can be represented as streams of data over time
+                <ul>
+                  <li>Your program reacts to changes in these streams</li>
+                </ul>
+              </li>
+              <li>When something changes upstream, everything downstream updates as well</li>
+            </ul>
+          </li>
+          <li>
+            Examples
+            <ul>
+              <li>Registering an event listener on a DOM element</li>
+              <li>RxJS</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

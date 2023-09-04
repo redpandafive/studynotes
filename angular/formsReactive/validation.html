@@ -5,10 +5,7 @@
     <title>Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -24,9 +21,7 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Reactive Forms - Validation
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Reactive Forms - Validation</li>
         </ol>
       </nav>
 
@@ -34,18 +29,15 @@
 
       <section>
         <ul>
-<li>A validator in Angular is of type ValidatorFn
-  <ul>
-    <li>It takes an AbstractControl as a parameter</li>
-    <li>It returns either a map of ValidationErrors or null</li>
-  </ul>
-</li>
           <li>
-            Angular includes a set of built-in set of common validators
+            A validator in Angular is of type ValidatorFn
+            <ul>
+              <li>It takes an AbstractControl as a parameter</li>
+              <li>It returns either a map of ValidationErrors or null</li>
+            </ul>
           </li>
-          <li>
-            Validation is defined in the component where it can be unit tested
-          </li>
+          <li>Angular includes a set of built-in set of common validators</li>
+          <li>Validation is defined in the component where it can be unit tested</li>
         </ul>
       </section>
 
@@ -53,8 +45,7 @@
       <section>
         <ul>
           <li>
-            FormControl and FormGroup classes have properties to give you an
-            idea about the current state of the form
+            FormControl and FormGroup classes have properties to give you an idea about the current state of the form
             <ul>
               <li>
                 Given a FormGroup named loginForm
@@ -69,9 +60,7 @@
                 </ul>
               </li>
               <li>
-                You can check the states of its individual FormControl elements
-                through it. Given a FormControl username assigned to FormGroup
-                loginForm
+                You can check the states of its individual FormControl elements through it. Given a FormControl username assigned to FormGroup loginForm
                 <ul>
                   <li>loginForm.controls.userName.valid</li>
                   <li>loginForm.controls.userName.invalid</li>
@@ -86,51 +75,43 @@
                 You can use these to do things like
                 <ul>
                   <li>Disable a Submit button for invalid forms</li>
-                  <li>
-                    Highlight inputs that have not been touched and are invalid
-                  </li>
+                  <li>Highlight inputs that have not been touched and are invalid</li>
                 </ul>
               </li>
-              <li>
-                Validators are triggered every time the user tabs away from a
-                field
-              </li>
+              <li>Validators are triggered every time the user tabs away from a field</li>
             </ul>
           </li>
+          <li>Combine these with CSS to style inputs to give feedback to the user about invalid values</li>
           <li>
-            Combine these with CSS to style inputs to give feedback to the user
-            about invalid values
-          </li>
-          <li>
-            In the template, you can define multiple error message to give
-            feedback to the use
+            In the template, you can define multiple error message to give feedback to the use
             <ul>
               <li>Use a ngIf directive to show or hide them as appropriate</li>
               <li>
-                Examples (given FormGroup profileForm with a FormControl of
-                firstName)
+                Examples (given FormGroup profileForm with a FormControl of firstName)
                 <ul>
                   <li>
-                    To show/hide a message telling the user the field is
-                    required and missing a value
+                    To show/hide a message telling the user the field is required and missing a value
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          ...<br />
-                          *ngIf=&quot;profileForm.controls.firstName.errors.required&quot;<br />
+                          ...
+                          <br />
+                          *ngIf=&quot;profileForm.controls.firstName.errors.required&quot;
+                          <br />
                           ...
                         </code>
                       </div>
                     </div>
                   </li>
                   <li>
-                    To show/hide a message telling the user the value does not
-                    match the required pattern
+                    To show/hide a message telling the user the value does not match the required pattern
                     <div class="card">
                       <div class="card-body">
                         <code>
-                          ...<br />
-                          *ngIf=&quot;profileForm.controls.firstName.errors.pattern&quot;<br />
+                          ...
+                          <br />
+                          *ngIf=&quot;profileForm.controls.firstName.errors.pattern&quot;
+                          <br />
                           ...
                         </code>
                       </div>
@@ -146,23 +127,23 @@
       <h2>Cross Field Validation</h2>
       <ul>
         <li>Validating one form control based on the value of another</li>
-        <li>One technique is to move validation up to an ancestor FormGroup
+        <li>
+          One technique is to move validation up to an ancestor FormGroup
           <ul>
             <li>Create a custom validator that gets the values from the necessary controls and determines if they are valid</li>
             <li>Apply the validator to a FormGroup that contains the two</li>
           </ul>
         </li>
-        <li>An example would be a range control
+        <li>
+          An example would be a range control
           <ul>
             <li>The range start control value could be compared to the range end control value in the custom validator</li>
             <li>The custom validator is then applied to the containing FormGroup</li>
           </ul>
         </li>
         <li>
-          See this for more details: <a href="https://medium.com/@realTomaszKula/angular-cross-field-validation-d94e0d063b61" target="_blank">
-            https://medium.com/@realTomaszKula/angular-cross-field-validation-d94e0d063b61
-          </a>
-
+          See this for more details:
+          <a href="https://medium.com/@realTomaszKula/angular-cross-field-validation-d94e0d063b61" target="_blank">https://medium.com/@realTomaszKula/angular-cross-field-validation-d94e0d063b61</a>
         </li>
       </ul>
 
@@ -170,29 +151,17 @@
       <section>
         <ul>
           <li>Method on the AbstractControl class</li>
-          <li>
-            This recalcuates the value and the validation status of the control
-          </li>
-          <li>
-            Useful for dynamic validators and final checks to verify form
-            validitiy
-          </li>
+          <li>This recalcuates the value and the validation status of the control</li>
+          <li>Useful for dynamic validators and final checks to verify form validitiy</li>
         </ul>
-        <div>          
-        </div>
+        <div></div>
       </section>
 
       <h2>Built-In Validators</h2>
       <section>
         <ul>
-          <li>
-            These are static methods added to the second parameter of the
-            FormsControl constructor
-          </li>
-          <li>
-            Check the documentation for more built-in validators (search for
-            validators in docs)
-          </li>
+          <li>These are static methods added to the second parameter of the FormsControl constructor</li>
+          <li>Check the documentation for more built-in validators (search for validators in docs)</li>
         </ul>
       </section>
 
@@ -225,13 +194,8 @@
           <li>
             MinLength and maxLength for strings
             <ul>
-              <li>
-                Validators.maxLength(x) - String cannot contain more than x
-                characters
-              </li>
-              <li>
-                Validators.minLength(x) - String must contain x characters
-              </li>
+              <li>Validators.maxLength(x) - String cannot contain more than x characters</li>
+              <li>Validators.minLength(x) - String must contain x characters</li>
             </ul>
           </li>
         </ul>
@@ -257,10 +221,7 @@
             <ul>
               <li>Use for regular expression pattern matching</li>
               <li>Validators.pattern('[a-zA-Z.*]')</li>
-              <li>
-                Does this exist as an HTML 5 attribute????? Demo seems to
-                suggest so
-              </li>
+              <li>Does this exist as an HTML 5 attribute????? Demo seems to suggest so</li>
             </ul>
           </li>
         </ul>
@@ -269,10 +230,7 @@
       <h2>Custom Validators</h2>
       <section>
         <ul>
-          <li>
-            When there are no built-in validators to match your needs, you can
-            define your own
-          </li>
+          <li>When there are no built-in validators to match your needs, you can define your own</li>
           <li>
             It is essentially just a function
             <ul>
@@ -303,34 +261,24 @@
           Need to import Validators from @angular/forms
           <div class="card">
             <div class="card-body">
-              <code> import { Validators } from '@angular/forms'; </code>
+              <code>import { Validators } from '@angular/forms';</code>
             </div>
           </div>
         </div>
         <div>
           Add the validator as a second parameter when declaring a FormControl
           <ul>
-            <li>
-              The validators field can also take an array of validators if you
-              need more than one on an array
-            </li>
-            <li>
-              These are just functions – see custom validators section for more
-              details
-            </li>
+            <li>The validators field can also take an array of validators if you need more than one on an array</li>
+            <li>These are just functions – see custom validators section for more details</li>
           </ul>
           <div class="card">
             <div class="card-body">
-              <code>
-                let firstName = new FormControl(initial_value,
-                Validators.required)
-              </code>
+              <code>let firstName = new FormControl(initial_value, Validators.required)</code>
             </div>
           </div>
         </div>
         <div>
-          To test if the entire for is valid, check the valid property on the
-          FormGroup
+          To test if the entire for is valid, check the valid property on the FormGroup
           <div class="card">
             <div class="card-body">
               <code>if(this.profileForm.valid) ...</code>
@@ -344,40 +292,48 @@
       <h3>Input Validation</h3>
       <section>
         <div>
-          For a cleaner presentation, error messages can be hidden until the
-          user has touched the control and left an invalid value
+          For a cleaner presentation, error messages can be hidden until the user has touched the control and left an invalid value
           <div class="card">
             <div class="card-body">
               <code>
-                &lt;input type="text" id="name" name="name"
-                formControlName="name" required [class.has-error]="name.invalid
-                && (name.dirty || name.touched)"&gt;<br />
-                &lt;div *ngIf="name.invalid && (name.dirty ||
-                name.touched)"&gt;<br />
-                &lt;div *ngIf="name.errors?.['required']"&gt;<br />
-                This field is required.<br />
-                &lt;/div&gt;<br />
-                &lt;div *ngIf="name.errors?.['minlength']"&gt;<br />
-                This field must have at least 1 character.<br />
-                &lt;/div&gt;<br />
-                &lt;div *ngIf="name.errors?.['maxlength']"&gt;<br />
-                This field must have at most 250 characters.<br />
-                &lt;/div&gt;<br />
-                &lt;/div&gt;<br />
-                &lt;/div&gt;<br />
+                &lt;input type="text" id="name" name="name" formControlName="name" required [class.has-error]="name.invalid && (name.dirty || name.touched)"&gt;
+                <br />
+                &lt;div *ngIf="name.invalid && (name.dirty || name.touched)"&gt;
+                <br />
+                &lt;div *ngIf="name.errors?.['required']"&gt;
+                <br />
+                This field is required.
+                <br />
+                &lt;/div&gt;
+                <br />
+                &lt;div *ngIf="name.errors?.['minlength']"&gt;
+                <br />
+                This field must have at least 1 character.
+                <br />
+                &lt;/div&gt;
+                <br />
+                &lt;div *ngIf="name.errors?.['maxlength']"&gt;
+                <br />
+                This field must have at most 250 characters.
+                <br />
+                &lt;/div&gt;
+                <br />
+                &lt;/div&gt;
+                <br />
+                &lt;/div&gt;
+                <br />
               </code>
             </div>
           </div>
         </div>
       </section>
 
+
       <h2>See Also</h2>
       <section>
         <ul>
           <li>
-            <a href="../cookbook/forms/formValidation.html" target="_blank">
-              Form Validation Tips
-            </a>
+            <a href="../cookbook/forms/formValidation.html" target="_blank">Form Validation Tips</a>
           </li>
         </ul>
       </section>

@@ -6,11 +6,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="./../assets/styles/site.css" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -25,9 +22,7 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            NgTemplateOutlet
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">NgTemplateOutlet</li>
         </ol>
       </nav>
 
@@ -36,27 +31,36 @@
       <section>
         <ul>
           <li>
-            Structural directive to dynamically insert a template in various
-            sections of our DOM
-          </li>
-          <li>Provides more flexibilty than the ng-content</li>
-          <li>
-            Since ngTemplates do not render themselves, this directive inserts
-            the specified templated into the DOM does
+            A structural directive to dynamically insert a ngTemplate in various sections of the DOM
             <ul>
-              <li>
-                The element containing the directive is "replaced" with the
-                template contents
+              <li>Since ngTemplates do not render themselves, this directive inserts the specified template into the DOM</li>
+              <li>The element containing the directive is "replaced" with the template contents</li>
+            </ul>
+          </li>
+          <li>NgTemplateOutlet also has a context object that allows you to pass in data or configurations into the instance of the template</li>
+        </ul>
+      </section>
+
+      <h2>Use Cases</h2>
+      <section>
+        <ul>
+          <li>Allows defining a template in a parent component and pass it to a child component
+            <ul>
+              <li>See <a href="../templates/templateInputVariables.html">Pass a Template as an Input Parameter</a>
               </li>
             </ul>
           </li>
           <li>
-            Useful scenario
+            Pass data and a template from outside the component and render it within the component
             <ul>
-              <li>Allows you to define a component that accepts an input containing data and an input containing a reference to a template</li>
-              <li>This allows you to pass in a template from outside the component to use</li>
+              <li>Define a component that accepts an input containing data and an input containing a reference to a template</li>
+              <li>Pass in a template from outside of the component to use</li>
               <li>Good idea to supply a default template if one is not set</li>
-              <li>See <a href="https://indepth.dev/posts/1405/ngtemplateoutlet">this page</a> for more details</li>
+              <li>
+                See
+                <a href="https://indepth.dev/posts/1405/ngtemplateoutlet">this page</a>
+                for more details
+              </li>
             </ul>
           </li>
         </ul>
@@ -65,22 +69,18 @@
       <h2>Simple Example</h2>
       <section>
         <ul>
-          <li>
-            Template is rendered in both the div and ngContainer tagged with the
-            NgTemplateOutlet directive
-          </li>
+          <li>This template is rendered in both the div and ngContainer tagged with the NgTemplateOutlet directive</li>
           <li>The text within the NgContainer is not displayed</li>
-          <li>The div tag is not rendered</li>
+          <li>The div tag with the ngTemplateOutlet directive is not rendered, just its contents</li>
         </ul>
         <div class="card">
           <div class="card-body">
             <code>
-              &lt;ng-template #template1&gt; &#10; This is a sample
-              template&#10;&lt;/ng-template&gt;&#10; &#10;<br />
-              &lt;ng-container *ngTemplateOutlet=&quot;template1&quot;&gt;This
-              text is not displayed&lt;/ng-container&gt;<br />
-              &lt;div *ngTemplateOutlet=&quot;template1&quot;&gt;<br />
-              &lt;/div&gt;
+              &lt;ng-template #template1&gt; &#10; This is a sample template&#10;&lt;/ng-template&gt;&#10; &#10;
+              <br />
+              &lt;ng-container *ngTemplateOutlet=&quot;template1&quot;&gt;This text is not displayed&lt;/ng-container&gt;
+              <br />
+              &lt;div *ngTemplateOutlet=&quot;template1&quot;&gt;&lt;/div&gt;
             </code>
           </div>
         </div>
@@ -90,133 +90,120 @@
       <section>
         <ul>
           <li>
-            Data can be passed by settting the ngTemplateOutletContext input
-            property of the NgTemplateOutlet element
+            Data can be passed by settting the ngTemplateOutletContext input property of the NgTemplateOutlet element
             <ul>
-              <li>
-                This should be an object, such as:
-                <ul>
-                  <li>An object in a componet</li>
-                  <li>An inline object</li>
-                </ul>
-              </li>
+              <li>This can either be an object on the component properties or inline</li>
             </ul>
           </li>
           <li>
-            Object keys will be available for binding by the local template let
+            Object keys are available for binding using template
+            <code>let-*</code>
             declarations
+            <ul>
+              <li>The * is the key in the context object to match</li>
+            </ul>
           </li>
           <li>
-            Using the key $implicit in the context object to set a default value
-            for any let parameters that do not have a match in the context
-            object
+            The $implicit key in the context object sets a default value for any
+            <code>let-*</code>
+            parameters that do not have a match in the context object
           </li>
         </ul>
       </section>
 
-      <h2>Syntax</h2>
+      <h2>Passing Data Examples</h2>
       <section>
-        <ul>
-          <li>
-            The context input can be set within the NgTemplateOutput expression
-            <ul>
-              <li>
-                In the template
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;ng-container *ngTemplateOutlet="greet"&gt;&lt;/ng-container&gt; <br />
-                      &lt;ng-container *ngTemplateOutlet="eng; context: myContext"&gt;&lt;/ng-container&gt; <br />
-                      &lt;ng-container *ngTemplateOutlet="svk; context: myContext"&gt;&lt;/ng-container&gt; <br />
-                      &lt;ng-template #greet&gt;&lt;span&gt;Hello&lt;/span&gt;&lt;/ng-template&gt; <br />
-                      &lt;ng-template #eng let-name&gt; <br />
-                      &lt;span&gt;Hello {{name}}!&lt;/span&gt; <br />
-                      &lt;/ng-template&gt; <br />
-                      &lt;ng-template #svk let-person="localSk"&gt; <br />
-                      &lt;span&gt;Ahoj {{person}}!&lt;/span&gt; <br />
-                      &lt;/ng-template&gt; <br />
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                In the component
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      myContext = {$implicit: 'World', localSk: 'Svet'};
-                    </code>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li>
-            The context input can also be set seperately on the element<ul>
-              <li>
-                In the template
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;ng-container
-                      &#91;ngTemplateOutlet&#93;=&quot;optionTemplate&quot;
-                      &#91;ngTemplateOutletContext=&quot;{ prop1: val1, prop2:
-                      val2}&quot;&gt; ...
-                    </code>
-                  </div>
-              </li>
-            </ul>
-          </li>
-          <li>
-            This is a shorthand version (desugars into the form below)
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;ng-container *ngTemplateOutlet="tierTemplate; context: { $implicit: reason, idx: 5 }"&gt;&lt;/ng-container&gt;
-                </code>
-              </div>
-          </li>
-          <li>
-            This is an alternative longer format.  It is equivalent to the above.
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;ng-container [ngTemplateOutlet]="tierTemplate" [ngTemplateOutletContext]="{ $implicit: reason, idx: 5  }"&gt;&lt;/ng-container&gt;                
-                </code>
-              </div>
-          </li>
-          </ul>
-          </section>
-
-          <h2>Conditional Template Example</h2>
-          <section>
-            <div>
-              If you need to pass data to the template, use a ngTemplateOutlet instead
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    &lt;ng-container *ngTemplateOutlet="condition ? template1 : template2; context: {$implicit: 'World'}"&gt;
-                    &lt;/ng-container&gt;
-                  </code>
-                </div>
-              </div>
+        <div>
+          To use an object on the component properties as the context...
+          <div class="card">
+            <div class="card-body">
+              <code>myContext = {$implicit: 'World', localSk: 'Svet'};</code>
             </div>
-          </section>
+          </div>
+        </div>
+        <div>
+          Refrence this in the template using the following...
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-container *ngTemplateOutlet="greet"&gt;&lt;/ng-container&gt;
+                <br />
+                &lt;ng-container *ngTemplateOutlet="eng; context: myContext"&gt;&lt;/ng-container&gt;
+                <br />
+                &lt;ng-container *ngTemplateOutlet="svk; context: myContext"&gt;&lt;/ng-container&gt;
+                <br />
+                &lt;ng-template #greet&gt;&lt;span&gt;Hello&lt;/span&gt;&lt;/ng-template&gt;
+                <br />
+                &lt;ng-template #eng let-name&gt;
+                <br />
+                Hello {{name}}!
+                <br />
+                &lt;/ng-template&gt;
+                <br />
+                &lt;ng-template #svk let-person="localSk"&gt;
+                <br />
+                Ahoj {{person}}!
+                <br />
+                &lt;/ng-template&gt;
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The context object can also be defined inline using this format
+          <div class="card">
+            <div class="card-body">
+              <code>&lt;ng-container &#91;ngTemplateOutlet&#93;=&quot;optionTemplate&quot; &#91;ngTemplateOutletContext=&quot;{ prop1: val1, prop2: val2}&quot;&gt; ...</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This is an alternative longer format. It is equivalent to the above.
+          <div class="card">
+            <div class="card-body">
+              <code>&lt;ng-container [ngTemplateOutlet]="tierTemplate" [ngTemplateOutletContext]="{ $implicit: reason, idx: 5 }"&gt;&lt;/ng-container&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          This is a shorthand version (desugars into the form below)
+          <div class="card">
+            <div class="card-body">
+              <code>&lt;ng-container *ngTemplateOutlet="tierTemplate; context: { $implicit: reason, idx: 5 }"&gt;&lt;/ng-container&gt;</code>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </section>
+
+      <h2>Conditional Template Example</h2>
+      <section>
+        <div>
+          If you need to pass data to the template, use a ngTemplateOutlet instead
+          <div class="card">
+            <div class="card-body">
+              <code>&lt;ng-container *ngTemplateOutlet="condition ? template1 : template2; context: {$implicit: 'World'}"&gt; &lt;/ng-container&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <h2>See Also</h2>
       <section>
         <ul>
           <li>
-            Topics
-            <ul></ul>
+            <a href="https://www.youtube.com/watch?v=2SnVxPeJdwE" target="_blank">https://www.youtube.com/watch?v=2SnVxPeJdwE</a>
           </li>
           <li>
             Cookbook
             <ul>
               <li>
-                <a href="../cookbook/templates/repeatBlock.html"
-                  >Repeatedly/Recursively Display a Block of Code</a
-                >
+                <a href="../templates/templateInputVariables.html">Pass a Template as an Input Parameter</a>
+              </li>
+              <li>
+                <a href="../templates/repeatBlock.html">Repeatedly/Recursively Display a Block of Code</a>
               </li>
             </ul>
           </li>

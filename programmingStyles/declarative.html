@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Programming Styles</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Declarative</li>
+        </ol>
+      </nav>
+
+
+
+      <h2 id="declarative">Declarative</h2>
+      <section>
+        <ul>
+          <li>Code that describes what you need to do, not necessarily how to do it</li>
+          <li>Example language is SQL - you tell the database WHAT you want, not HOW to fetch it</li>
+          <li>Most declarative solutions are an abstraction over some imperative impelmeation</li>
+        </ul>
+      </section>
+
+      <h2 id="imperativeVsdeclarative">Imperative vs Declarative Examples</h2>
+      <section>
+        <div>
+          A non-programming example would be "How do I get to your house from downtown?" (from https://ui.dev/imperative-vs-declarative-programming)
+          <div>
+            Imperative (explicit step by step instructions for how to do it)
+            <ul>
+              <li>Go out of the north exit of the parking lot and take a left.</li>
+              <li>Get on I-15 going North until you get to the 12th street exit.</li>
+              <li>Take a right off the exit like you’re going to Ikea.</li>
+              <li>Go straight and take a right at the first light.</li>
+              <li>Continue through the next light then take your next left.</li>
+              <li>My house is #298.</li>
+            </ul>
+          </div>
+          <div>
+            Declarative (gives the end result, but not how to do it)
+            <ul>
+              <li>My address is 298 West Immutable Alley, Eden, Utah 84310</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          Choose the odd numbers from a collection in C#
+          <div>
+            Imperative
+            <ul>
+              <li>Create a result collection</li>
+              <li>Step through each number in the collection</li>
+              <li>Check the number, if it's odd, add it to the results</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  List&lt;int&gt; results = new List&lt;int&gt;();
+                  <br />
+                  foreach(var num in collection)
+                  <br />
+                  {
+                  <br />
+                  if (num % 2 != 0)
+                  <br />
+                  {
+                  <br />
+                  results.Add(num);
+                  <br />
+                  }
+                  <br />
+                  }
+                  <br />
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>Declarative
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  var results = collection.Where( num =&gt; num % 2 != 0);
+                  <br />
+                </code>
+              </div>
+            </div>        
+          </div>
+        </div>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://ui.dev/imperative-vs-declarative-programming" target="_blank">https://ui.dev/imperative-vs-declarative-programming</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

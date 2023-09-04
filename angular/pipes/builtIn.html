@@ -311,58 +311,18 @@
             AsyncPipe
             <ul>
               <li>
-                Unwraps a value from an asynchronous primitive from inside the
-                template syntax
-              </li>
-              <li>
-                Subscribes to an Observable or Promise automatically so you
-                don't have to do so in the component class
-                <ul>
-                  <li>Automatically subscribes to an observable</li>
-                  <li>
-                    Will automatically unsubscribe when the component is
-                    destroyed to prevent memory leaks
-                  </li>
-                  <li>Helps eliminate boilerplate code</li>
-                </ul>
-              </li>
-              <li>
-                Stateful
-                <ul>
-                  <li>Maintains a subscription to an input observable</li>
-                  <li>Delivers values are they arrive</li>
-                  <li>Returns the last value that was emitted</li>
-                </ul>
-              </li>
-              <li>This is an impure pipe</li>
-              <li>
-                Allows you to use an observable in a for loop, saving
-                boilerplate code
-              </li>
-              <li>
-                Example
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;li *ngFor=&quot;let hero of heros$ | async&quot;&gt;
-                    </code>
-                  </div>
-                </div>
-                <ul>
-                  <li>
-                    $ is a convention indicating that the source is an
-                    observable (the observable should be named this)
-                  </li>
-                  <li>
-                    The component class would have an observable property
-                    declared named heros$
-                  </li>
-                </ul>
+               <a href="async.html">AsyncPipe</a>
               </li>
             </ul>
           </li>
+          </ul>
+      </section>
+
+      <h2>Deprecated Pipes</h2>
+      <section>
+        <ul>
           <li>
-            Deprecated pipes
+            
             <ul>
               <li>FilterPipe</li>
               <li>OrderByPipe</li>
@@ -370,6 +330,7 @@
           </li>
         </ul>
       </section>
+
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

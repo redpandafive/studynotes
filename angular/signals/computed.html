@@ -6,51 +6,53 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
+
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">Home</a>
+        <a class="navbar-brand" href="../../index.html">Home</a>
       </div>
     </nav>
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
           <li class="breadcrumb-item">
-            <a href="../../index.html">Home</a>
+            <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item">
-            <a href="../index.html">RxJS</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">StartsWith</li>
+          <li class="breadcrumb-item active" aria-current="page">Computed Signals</li>
         </ol>
       </nav>
 
-      <h1>StartsWith</h1>
+      <h1>Computed Signals</h1>
 
       <section>
         <ul>
-          <li>Starts the stream by emitting the specified value</li>
-          <li>Useful with the valueChanges stream from Reactive Forms
+          <li>A computed signal recomputes when its dependent signal(s) change.</li>
+          <li>These are readonly; cannot be updated with set, mutate, update</li>
+          <li>The computed value is memoized, meaning it stores the computed result
             <ul>
-              <li>This is a good way to provide a default value before the user actually starts typing in the control</li>
+              <li>This computed value is reused next time the computed value is read, so it does not recalcuate on each read</li>
             </ul>
           </li>
+          
         </ul>
         <div>
+          This example is computed from two other signals and updates whenever one of them updates
           <div class="card">
             <div class="card-body">
               <code>
+                exPrice = computed(() => this.selectedVehicle().price * this.quantity())<br/>
               </code>
             </div>
           </div>
         </div>
+
       </section>
+
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

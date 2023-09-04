@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">State Basics</li>
+        </ol>
+      </nav>
+
+      <h1>State Basics</h1>
+
+      <h2>Terminology</h2>
+      <section>
+        <ul>
+          <li>
+            State
+            <ul>
+              <li>Data retained in out code</li>
+            </ul>
+          </li>
+          <li>
+            Component State
+            <ul>
+              <li>Data stored on components, often as class properties</li>
+              <li>Could be things like current sort order or selected item</li>
+            </ul>
+          </li>
+          <li>
+            Service State
+            <ul>
+              <li>Data retained throughout the application</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+      <h2>Example Using Signals</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://github.com/DeborahK/Angular-Signals" target="_blank">
+              https://github.com/DeborahK/Angular-Signals
+            </a>
+          </li>
+          <li>
+            This example uses a service (CartService) to represent a shopping card
+          </li>
+          <li>
+            Includes a signal that holds items (an array of CartItem class) that are currently in the shopping cart
+          </li>
+          <li>
+            Includes computed signals for subtotal, delivery fee, tax, and total price
+            <ul>
+              <li>Each of these is a computed signal</li>
+              <li>They reference the CartItem signal as well as each other to automatically update their values the CartItem signal changes</li>
+            </ul>
+          </li>
+          <li>
+            CRUD methods to add, remove and update items in the CartItem signals.  Prices will update since they respond to changes in the signal.
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

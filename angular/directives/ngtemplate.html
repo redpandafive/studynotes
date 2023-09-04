@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
@@ -27,130 +27,58 @@
       </nav>
 
       <h1>NgTemplate</h1>
-      
-      <section class="navlinks">
-        <ul>
-          <li><a href="#ngtemplate">NgTemplate</a></li>
-          </ul>
-      </section>
 
-
-      <h2 id="ngtemplate">NgTemplate</h2>
       <section>
         <ul>
           <li>
-            Angular element for rendering HTML but is never rendered itself.
+            Angular element for rendering HTML but is never rendered to the DOM.
             <ul>
               <li>Its contents are replaced with a comment on rendering</li>
-              <li>
-                Usually apply a structural directive to the ng-template element,
-                otherwise it doesn’t do anything
-              </li>
+              <li>Usually apply a structural directive to the ng-template element, otherwise it doesn’t do anything</li>
             </ul>
           </li>
+          <li>These only work in the presence of structural directives, such as NgIf, NgFor, NgSwitch, NgTemplateOutlet</li>
           <li>
-            These only work in the presence of structural directives
-            <ul>
-              <li>
-                Template element that Angular uses with structural directives
-                (*ngIf, *ngFor, [ngSwitch])
-              </li>
-            </ul>
-          </li>
-          <li>
-            <p>
-              To reference it, add a name to the type using the # identifier
-            </p>
+            <p>To reference it, add a name to the type using the # identifier</p>
             <p>This can be referenced in code – it is of type TemplateRef</p>
             <div class="card">
               <div class="card-body">
-                <code>
-                  &lt;ng-template #myTemplate&gt;...&lt;/ng-template&gt;
-                </code>
+                <code>&lt;ng-template #myTemplate&gt;...&lt;/ng-template&gt;</code>
               </div>
             </div>
           </li>
-          <li>
-            The * can be used to shorthand a structural directive into a
-            ngTemplate element that surrounds the host element and its
-            descendants
-            <ul>
-              <li>This is just syntax sugar</li>
-              <li>
-                <p>This</p>
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;div *ngIf="hero"
-                      class=&quot;name&quot;&gt;{+{hero.name}}&lt;/div&gt;
-                    </code>
-                  </div>
-                </div>
-                <p>Is desugared to</p>
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      &lt;ng-template &#91;ngIf&#93;=&quot;hero&quot;&gt;&#10;
-                      &lt;div
-                      class="name"&gt;{+{hero.name}}&lt;/div&gt;&#10;&lt;/ng-template&gt;
-                    </code>
-                  </div>
-                </div>
-                <p>Angular actually renders</p>
-                <div class="card">
-                  <div class="card-body">
-                    <code> &lt;div _ngcontent-co&gt;Mr Nice&lt;/div&gt;</code>
-                  </div>
-                </div>
-              </li>
-              <li>*ngIf and *ngFor follow this same convention</li>
-            </ul>
-          </li>
+        </ul>
+      </section>
 
+      <h2>Use Cases</h2>
+      <section>
+        <ul>
           <li>
-            This is also useful if you wish to reuse a block of HTML throughout
-            the template
+            This is also useful if you wish to reuse a block of HTML throughout the template
             <ul>
               <li>Define a ngTemplate block with a template variable</li>
-              <li>
-                Use ngContainer at each point you want to duplicate the contents
-                of the template
-              </li>
-              <li>
-                Use a ngTemplateOutlet attribute that contains the template
-                variable
-              </li>
+              <li>Use ngContainer at each point you want to duplicate the contents of the template</li>
+              <li>Use a ngTemplateOutlet attribute that contains the template variable</li>
             </ul>
           </li>
           <li>
-            Each template can define its own set of input variables
+            Individual instance can be customized with input variables
             <ul>
-              <li>
-                Use the let-*** syntax as an attribute on a template to pass a
-                value to it
-              </li>
+              <li>Use the let-*** syntax as an attribute on a template to pass a value to it</li>
             </ul>
           </li>
         </ul>
-        <div>
-          Define the template (there could be more than one input variables)
-        </div>
+        <div>Define the template (there could be more than one input variables)</div>
         <div class="card">
           <div class="card-body">
-            <code>
-              &lt;ng-template #estimateTemplate
-              let-lessonsCounter=&quot;estimate&quot;&gt;...
-            </code>
+            <code>&lt;ng-template #estimateTemplate let-lessonsCounter=&quot;estimate&quot;&gt;...</code>
           </div>
         </div>
 
         <div>Pass the context when referring to the template</div>
         <div class="card">
           <div class="card-body">
-            <code>
-              &lt;ng-container
-              *ngTemplateOutlet=&quot;estimateTemplate;context:ctx&quot;&gt;...
-            </code>
+            <code>&lt;ng-container *ngTemplateOutlet=&quot;estimateTemplate;context:ctx&quot;&gt;...</code>
           </div>
         </div>
 
@@ -162,6 +90,38 @@
         </div>
       </section>
 
+      <h2>Relationship to Structural Directives</h2>
+      <section>
+        <ul>
+          <li>
+            The * can be used to shorthand a structural directive into a ngTemplate element that surrounds the host element and its descendants
+            <ul>
+              <li>This is just syntax sugar</li>
+              <li>
+                <p>This</p>
+                <div class="card">
+                  <div class="card-body">
+                    <code>&lt;div *ngIf="hero" class=&quot;name&quot;&gt;{{hero.name}}&lt;/div&gt;</code>
+                  </div>
+                </div>
+                <p>Is desugared to</p>
+                <div class="card">
+                  <div class="card-body">
+                    <code>&lt;ng-template &#91;ngIf&#93;=&quot;hero&quot;&gt;&#10; &lt;div class="name"&gt;{{hero.name}}&lt;/div&gt;&#10;&lt;/ng-template&gt;</code>
+                  </div>
+                </div>
+                <p>Angular actually renders</p>
+                <div class="card">
+                  <div class="card-body">
+                    <code>&lt;div _ngcontent-co&gt;Mr Nice&lt;/div&gt;</code>
+                  </div>
+                </div>
+              </li>
+              <li>*ngIf and *ngFor follow this same convention</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

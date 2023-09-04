@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -24,43 +27,23 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">CatchError</li>
+          <li class="breadcrumb-item active" aria-current="page">Filter</li>
         </ol>
       </nav>
 
-      <h1>CatchError</h1>
+      <h1>Filter</h1>
 
       <section>
         <ul>
-          <li>Operator that intercepts an Observable that failed.</li>
-          <li>
-            If you dont catch and handle an error, the entire stream will be destroyed
-          </li>
-          <li>
-            It passes the error an error handler function that can do what it
-            wants with the error
-          </li>
-        </ul>
-      </section>
-
-      <div>
-        Simple example
-        <ul>
-          <li>This will return EMPTY values when the stream fails</li>
-          <li>This will fix the broken stream by substituting and EMPTY observable</li>
+          <li>Takes each emission from a stream and applies a filter function to each</li>
+          <li>Emission is emitted again if it satisfies the filter function</li>
         </ul>
         <div class="card">
           <div class="card-body">
-            <code>
-              this.http.get&lt;DataObject&gt;("http://mytargeturl").pipe(<br />
-              catchError(() => EMPTY)<br />
-              )<br />
-              
-            </code>
+            <code>filter(x => x > 10)</code>
           </div>
         </div>
-      </div>
-
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

@@ -25,157 +25,16 @@
         </ol>
       </nav>
 
-      <h1>Programming Styles</h1>
-      <section>
-        <ul>
-          <li>
-            <a href="./index.html#imperative">Imperative Programming</a>
-          </li>
-          <li>
-            <a href="./index.html#declarative">Declarative Programming</a>
-          </li>
-          <li>
-            <a href="./index.html#imperativeVsdeclarative">Imperative vs Declarative Examples</a>
-          </li>
-          <li>
-            <a href="./index.html#reactive">Reactive Programming</a>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="imperative">Imperative</h2>
-      <section>
-        <ul>
-          <li>Imperative code is step by step instructions to the compiler about how to perform a task</li>
-          <li>It explains exactly how it needs to occur</li>
-          <li>You usually have to look in other parts of the code to get a full picture about what a chunk of code actually does
-            <ul>
-              <li>A variable can have a value returned by a service.</li>
-              <li>If it is modified later on in the code, you have to have a wider view of the code to see the role of the variable.</li>
-              <li>This is where immutable data can be a benefit.  </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="declarative">Declarative</h2>
-      <section>
-        <ul>
-          <li>Code that describes what you need to do, not necessarily how to do it</li>
-          <li>Example language is SQL - you tell the database WHAT you want, not HOW to fetch it</li>
-          <li>Most declarative solutions are an abstraction over some imperative impelmeation</li>
-        </ul>
-      </section>
-
-      <h2 id="imperativeVsdeclarative">Imperative vs Declarative Examples</h2>
-      <section>
-        <div>
-          A non-programming example would be "How do I get to your house from downtown?" (from https://ui.dev/imperative-vs-declarative-programming)
-          <div>
-            Imperative (explicit step by step instructions for how to do it)
-            <ul>
-              <li>Go out of the north exit of the parking lot and take a left.</li>
-              <li>Get on I-15 going North until you get to the 12th street exit.</li>
-              <li>Take a right off the exit like you’re going to Ikea.</li>
-              <li>Go straight and take a right at the first light.</li>
-              <li>Continue through the next light then take your next left.</li>
-              <li>My house is #298.</li>
-            </ul>
-          </div>
-          <div>
-            Declarative (gives the end result, but not how to do it)
-            <ul>
-              <li>My address is 298 West Immutable Alley, Eden, Utah 84310</li>
-            </ul>
-          </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Programming Styles</h5>
+          <a class="card-link" href="./declarative.html">Declarative</a>
+          <a class="card-link" href="./imperative.html">Imperative</a><br />
+          <a class="card-link" href="./oo.html">Object Oriented</a><br />
+          <a class="card-link" href="./reactive.html">Reactive</a><br />
         </div>
-        <div>
-          Choose the odd numbers from a collection in C#
-          <div>
-            Imperative
-            <ul>
-              <li>Create a result collection</li>
-              <li>Step through each number in the collection</li>
-              <li>Check the number, if it's odd, add it to the results</li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  List&lt;int&gt; results = new List&lt;int&gt;();
-                  <br />
-                  foreach(var num in collection)
-                  <br />
-                  {
-                  <br />
-                  if (num % 2 != 0)
-                  <br />
-                  {
-                  <br />
-                  results.Add(num);
-                  <br />
-                  }
-                  <br />
-                  }
-                  <br />
-                </code>
-              </div>
-            </div>
-          </div>
-          <div>Declarative
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  var results = collection.Where( num =&gt; num % 2 != 0);
-                  <br />
-                </code>
-              </div>
-            </div>        
-          </div>
-        </div>
-      </section>
+      </div>
 
-      <h2 id="reactive">Reactive</h2>
-      <section>
-        <ul>
-          <li>
-            A type of declarative programming paradign focused on
-            <ul>
-              <li>Useage of data streams</li>
-              <li>Change propagation</li>
-            </ul>
-          </li>
-          <li>
-            Idea that everything is a stream
-            <ul>
-              <li>A sequence of data elements made available over time</li>
-              <li>Think of as items on a conveyor belt being processed one at a time reather than in large batches</li>
-              <li>
-                Data and events can be represented as streams of data over time
-                <ul>
-                  <li>Your program reacts to changes in these streams</li>
-                </ul>
-              </li>
-              <li>When something changes upstream, everything downstream updates as well</li>
-            </ul>
-          </li>
-          <li>
-            Examples
-            <ul>
-              <li>Registering an event listener on a DOM element</li>
-              <li>RxJS</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2>See Also</h2>
-      <section>
-        <ul>
-          <li>
-            <a href="https://ui.dev/imperative-vs-declarative-programming" target="_blank">https://ui.dev/imperative-vs-declarative-programming</a>
-          </li>
-        </ul>
-      </section>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

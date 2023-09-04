@@ -29,9 +29,20 @@
       <h1>Declarative Coding in Angular</h1>
       <section>
         <ul>
-          <li>Writing declarative and reactive code in Angular can simplify and reduce component code</li>
+          <li>
+            Writing declarative and reactive code in Angular can simplify and reduce component code
+            <ul></ul>
+          </li>
           <li>Benefits to declarative coding really shine the more complex your Angular code becomes</li>
           <li>There are times when an imperative solution is easier to understand</li>
+          <li>
+            Angular uses RxJS extensively; it is intended to be used reactively.
+            <ul>
+              <li>If you are using it imperatively, it is going against the grain.</li>
+              <li>With RxJS, as soon as you subscribe to something to pull data out of a stream, you are coding imperatively</li>
+              <li>The flow of a stream, and merging streams together into new streams that create new results, is the key concept behind reactive/declarative programming with RxJS.</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
@@ -39,6 +50,8 @@
       <section>
         <ul>
           <li>Work with streams in your component, not necessarily the data results that are emitted from Observables</li>
+          <li>Once you subscribe you are manually pulling data out of the stream, rather than composing streams together to get the results you want automatically.</li>
+          <li>This doesn't mean you should never use subscribe, but first ask yourself if you really need to subscribe at that point in the code</li>
           <li>
             For instance, the following approach in the component is more of an imperative approach
             <ul>
@@ -87,67 +100,15 @@
         </div>
       </section>
 
-      <h2>Most Used Operators</h2>
+
+
+      <h2>See Also</h2>
       <section>
         <ul>
-          <li>Important thing to remember operators operate on stream emissions, not values of stream emissions</li>
           <li>
-            CombineLatest
-            <ul>
-              <li>A creation operator</li>
-              <li>Not piped, it creates a new stream </li>
-              <li>Waits until all streams have emitted at least one value</li>
-            </ul>
-          </li>
-          <li>
-            ConcatMap
-            <ul>
-              <li>If a new value is emitted from the outer observable, concatMap waits for any inner observables to complete before processing the new value</li>
-              <li>Proecsses things in order</li>
-              <li>
-                Contrast with switchMap that will cancel the inner observable
-              </li>
-            </ul>
-          </li>
-          <li>
-            Filter
-            <ul>
-              <li>Takes each emission from a stream and applies a filter function to each</li>
-              <li>Emission is emitted again if it satisfies the filter function</li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>filter(x => x > 10)</code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Map
-            <ul>
-              <li>Takes each emission from a stream and applies a function transformation to it</li>
-            </ul>
-          </li>
-          <li>
-            SwitchMap
-            <ul>
-              <li>Use to combine streams</li>
-              <li>Switch from one stream to another stream</li>
-              <li>Allows you to take the values from the first stream and use them in the second stream</li>
-              <li>If the first stream emits before the second stream completes, switchMap will cancel the second and being again with the new value</li>
-            </ul>
-          </li>
-          <li>
-            Tap
-            <ul>
-              <li>Does not actually have any effect on the stream</li>
-              <li>Allows you to observe values in the stream at a particular point</li>
-              <li>
-                Good for debugging or createting a side effect, including
-                <ul>
-                  <li>Adding data to local storage</li>
-                </ul>
-              </li>
-            </ul>
+            <a href="https://eliteionic.com/tutorials/imperative-vs-declarative-programming-with-rxjs-search-filter/" target="_blank">
+              https://eliteionic.com/tutorials/imperative-vs-declarative-programming-with-rxjs-search-filter/
+            </a>
           </li>
         </ul>
       </section>

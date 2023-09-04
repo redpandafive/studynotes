@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">FormGroupDirective</li>
+        </ol>
+      </nav>
+
+      <h1>FormGroupDirective</h1>
+
+      <section>
+        <ul>
+          <li>
+            Provides the following functionality:
+            <ul>
+              <li>
+                Allows us to supply a FormGroup class to the template
+              </li>
+              <li>
+                Keeps track of when the form has been submitted
+              </li>
+            </ul>
+          </li>
+          <li>
+            The selector for this directive is
+            <code>[formGroup]</code>
+          </li>
+          <li>
+            It is exported as <code>ngForm</code>, so that is what you would use to get a reference to it in the template (see Example usage)
+            <ul>
+              <li>You can assign this to a template variable to get a reference to the FormGroupDirective in the template</li>
+              <li>This is useful if you want to want to display some content when the form is submitted</li>
+            </ul>
+          </li>
+
+
+          <li>
+            Example usage:
+            <ul>
+              <li>This example adds a template reference variable</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  &lt;form [formGroup]="myFormGroup" #form="ngForm"&gt;
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

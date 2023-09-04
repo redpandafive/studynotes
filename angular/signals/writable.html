@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Writable Signals</li>
+        </ol>
+      </nav>
+
+      <h1>Writable Signals</h1>
+      <section>
+        <ul>
+          Constructor
+
+
+
+          <h2>Constructor</h2>
+          <section>
+            <ul>
+              <li>
+                signal()
+                <ul>
+                  <li>Use to create a writable signal (creates a WriteableSignal object)</li>
+                  <li>You must supply a default starting value</li>
+
+                </ul>
+              </li>
+              <li>
+                signal<T>()
+                  <ul>
+                    <li>Use to specify the type that should go into the signal</li>
+                    <li>Type is optional when the default value can provide the type</li>
+                  </ul>
+              </li>
+            </ul>
+          </section>
+
+          <h2>Reading a Signal</h2>
+          <section>
+            <ul>
+              <li>
+                Signals have a getter function, so calling it reads thier value
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      const count = signal(0);
+                      <br />
+                      console.log('The count is: ' + count());
+                      <br />
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+
+          <h2>Methods</h2>
+          <section>
+          <ul>
+          <li>
+            Set()
+            <ul>
+              <li>
+                Use to change the value of a writable signal
+              </li>
+              <li>This replaces the value contained in the Signal.  Consumers are then notified that the contents have changed.</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>count.set(3);</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Update()
+            <ul>
+              <li>
+                Use to compute a new value based on the current value
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      count.update(value => value + 1);<br/>
+                      quantity.update(qty => qty * 2);<br/>
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Mutate()
+            <ul>
+              <li>When a signal contains an object or array, use this to mutate the object directly</li>
+              <li>This mutates the content in place, not the value itself</li>
+              <li>
+                The following changes the first object in the array to 'done: true' without replacing it.
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      const todos = signal([{title: 'Learn signals', done: false}]);
+                      <br />
+                      todos.mutate(value => {
+                      <br />
+                      value[0].done = true;
+                      <br />
+                      });
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

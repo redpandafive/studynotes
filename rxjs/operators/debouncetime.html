@@ -30,15 +30,21 @@
 
       <h1>DebounceTime</h1>
 
-
-
       <section>
         <ul>
-          <li>Wait the specified number of milliseconds</li>
-          <li>Useful if you are changing content based on keystrokes</li>
+          <li>Wait the specified number of milliseconds before emitting each value
+            <ul>
+              <li>Even if values are emitted rapidly, there will always be at least the specified number of milliseconds between each emission</li>
+              <li>If a new value is emitted before the specified time, the previous value is cancelled and the new value is processed </li>
+            </ul>
+          </li>
+          <li>Useful if you are changing content based on keystrokes or querying an api
+            <ul>
+              <li>You probably dont want to hit the API with every keystroke, so using a debounceTime adds a buffer for the user to type</li>
+            </ul>
+          </li>
         </ul>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
