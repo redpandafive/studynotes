@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Dependency Injection Basics</li>
+        </ol>
+      </nav>
+
+      <h1>Dependency Injection Basics</h1>
+
+      <section>
+        <ul>
+          <li>
+            A coding pattern in which a class asks for dependencies from external sources rather than creating them itself
+            <ul>
+              <li>Avoids hard dependencies between classes</li>
+              <li>Allows you to swap out dependencies without changin the class which is using them</li>
+            </ul>
+          </li>
+          <li>In Angular, DI is wired into the framework and allows classes with Angular decorators, such as Components, Directives, Pipes, and Injectables, to configure dependencies they need
+            <ul>
+              <li>Dependencies are typically services, but they can also be values such as strings or functions</li>
+            </ul>
+          </li>
+          <li>
+            There are two roles in the Angular DI system
+            <ul>
+              <li>Dependency Consumers</li>
+              <li>Dependency Providers</li>
+            </ul>
+          </li>
+          <li>
+            Injectors facilitate interaction between Dependency Consumers and Dependency Providers
+            <ul>
+              <li>An injector maintains a registry of instances that have already been created
+                <ul>
+                  <li>If a dependency is requested, it checks it registry to see if it is already available</li>
+                  <li>If not, a nrew instance is created and stored in the registry</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            When a component requests a dependency (through a constructor or inject() function), it delegates object creation to an Injector
+            <ul></ul>
+          </li>
+          <li>Injectors instantiate dependencies using a configured provider of the service or value</li>
+        </ul>
+      </section>
+
+
+      <h2>Dependency Consumers</h2>
+      <section>
+        <ul>
+          <li>One of two roles in the Angular DI system (the other being Dependency Provider)</li>
+        </ul>
+      </section>
+
+
+      <h2>Dependency Providers</h2>
+      <section>
+        <ul>
+          <li>One of two roles in the Angular DI system (the other being Dependency Provider)</li>
+        </ul>
+      </section>
+
+
+      <h2>Resolution Modifiers</h2>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

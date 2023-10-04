@@ -34,8 +34,67 @@
 
       <h1>Splitting Forms Across Subcomponents</h1>
 
-      <h2>Using FormGroupDirective</h2>
+      <h2>The Problem</h2>
       <section>
+        <ul>
+          <li>You can make your forms more reusable by using child components to create reusable subparts of the form</li>
+          <li>The challenge is the FormGroupName directive in Reactive forms must be used in the same view as a FormGroup directive
+            <ul>
+              <li>When the FromGroupName directive initializes, it must register itself into its parent ControlContainer</li>
+              <li>The ControlContainer is the DI token that points to other instances that have the ability to group form controls
+                <ul>
+                  <li>For Reactive Forms, this is:
+                    <ul>
+                      <li>FormGroupName</li>
+                      <li>FormGroup</li>
+                      <li>FormArrayName</li>
+                    </ul>
+                  </li>
+                  <li>For Template Forms, this is:
+                    <ul>
+                      <li>NgModelGroup</li>
+                    </ul>
+                  </li>
+                  <li>If you examine the source code of FormGroupName, you can see an entry in providers that links DI token ControlContainer to FormGroup</li>
+                  <li>In the FormGroupName contructor, there is the following entry <code>@Optional @Host() @SkipSelf parentL COntrolContrainer</code>
+                  <ul>
+                    <li>The @SkipSelf instructs Angular to start looking in the ElementInjector on the parent elelemt, not itself (which is the default starting point)</li>
+                    <li>The @Host instructs Angular to only look within the same view for the injector
+                      <ul>
+                        <li>It cannot look for it in the parent component's view</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Approach 1: Using Input Properties</h2>
+      <section>
+        <ul>
+          <li>You can pass the FormGroup to a child component from the parent as an Input property</li>
+          <li>This works, but you end up with extra boilerplate code</li>
+        </ul>
+      </section>
+
+      <h2>Approach 2: Using FormGroupDirective</h2>
+      <section>
+        <ul>
+          <li>When you split a form accorss subcomponents, you will need a provide a FormGroup to to the child component 
+            <ul>
+              <li>Otherwise, an error will be thrown when you reference the FormGroupName on the control</li>
+              <li>One approach is to pass the FormGroup directive as an input parameter on the child component and assign it to a ng-container element in the child
+                <ul>
+                  <li>You end up adding quite a bit of code to do this</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
         <div>
           Define the FormGroup in the parent component
           <div class="card">
@@ -132,13 +191,30 @@
         </div>
       </section>
 
-
-      <h2>Using Inputs</h2>
+      <h2>Approach 3: </h2>
       <section>
-        <ul>
-          <li></li>
-        </ul>
+        <div>
+
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // in the parent template <br />
+                &lt;app-basic-info
+                formGroupName="basicInfo"&gt;&lt;/app-basic-info&gt; <br />
+                .. <br />
+                // in the child component <br />
+                @Input() formGroupName: string; <br />
+                ... <br />
+                ngOnInit(): void { <br />
+                this.form = this.rootFormGroup.control.get(this.formGroupName)
+                as FormGroup; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
+
 
       <h2>See Also</h2>
       <section>

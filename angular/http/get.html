@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
@@ -27,22 +27,16 @@
       </nav>
 
       <h1>Getting Data</h1>
-      
-      <section id="gettingData"></section>
+
+      <section id="gettingData">
         <ul>
-          <li>Uses the HttpClient.get method</li>
+          <li>Uses the HttpClient Get method</li>
           <li>
-            The HTTPClient get method is a generic method that requiress a type
-            - this is the type that will be returned
+            Has a generic version that requires a type - this is the type that will be returned
             <ul>
               <li>Expects JSON data from the server</li>
-              <li>
-                This method returns an Observable typed to the supplied type
-              </li>
-              <li>
-                The returned data will automatically be deserialized to the
-                specified type
-              </li>
+              <li>This method returns an Observable typed to the supplied type</li>
+              <li>The returned data will automatically be deserialized to the specified type</li>
             </ul>
           </li>
           <li>
@@ -52,109 +46,199 @@
             </ul>
             <div class="card">
               <div class="card-body">
-                <code>
-                  this.http.get&lt;MyType&gt;(targetUrl, { responseType:
-                  'json'});
-                </code>
+                <code>this.http.get&lt;MyType&gt;(targetUrl, { responseType: 'json'});</code>
+              </div>
+            </div>
+          </li>
+          <li>Parameter #1 = the URL string where the request should be sent</li>
+          <li>
+            Parameter #2 = options object
+            <ul>
+              <li>
+                Can include a response type (this is optional if server defaults to JSON as a return type)
+                <div class="card">
+                  <div class="card-body">
+                    <code>this.http.get(targetUrl, {responseType: 'json'});</code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Can be a HttpParams object to represent a search parameter
+                <div class="card">
+                  <div class="card-body">
+                    <code>{ params: new HttpParams().set('name', value )}</code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>Parameters can also just be concatenated onto the URL string</li>
+          <li>
+            This is an Observable
+            <ul>
+              <li>You must subscribe to this return value to actually start the query to the server</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Query Parameters</h2>
+      <section>
+        <ul>
+          <li>
+            Query parameters can be passed to a URL by
+            <ul>
+              <li>Appending directly to the end of the URL</li>
+              <li>
+                Using a HttpParams object
+                <ul>
+                  <li>You can buildup the HttpParams object manually or use</li>
+                </ul>
+              </li>
+              <li>Pass a simple JSON object to the params property</li>
+            </ul>
+          </li>
+          <li>
+            One approach to using HttpParams object uses the append method to attach values
+            <ul>
+              <li>HttpParams objects are immutable, so you must re-assign the resulting object back to the varaible when calling append</li>
+              <li>The resulting objet is passed to the options argument object of the HttpClient get method</li>
+            </ul>
+            <div>
+              Example
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    let queryParams = new HttpParams();
+                    <br />
+                    queryParams = queryParams.append("firstName","myFirstName");
+                    <br />
+                    queryParams = queryParams.append("lastName","myLastName");
+                    <br />
+                    return this.http.get&lt;User&gt;("https://mydomain.com/api/users", {params:queryParams});
+                  </code>
+                </div>
+              </div>
+            </div>
+            <div>
+              Calls can be chained as such
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    let queryParams = new HttpParams();
+                    <br />
+                    queryParams = queryParams.append("firstName","myFirstName")
+                    <br />
+                    .append("lastName","myLastName");
+                    <br />
+                    return this.http.get&lt;User&gt;("https://mydomain.com/api/users", {params:queryParams});
+                  </code>
+                </div>
               </div>
             </div>
           </li>
           <li>
-            Parameters
+            A simple JSON object which contains desired parameters can be passed to the params option of the configuration object
             <ul>
-              <li>
-                Parameter #1 is the URL string where the request should be sent
-              </li>
-              <li>
-                Second parameter is an options object
-                <ul>
-                  <li>
-                    Can include a repose type to specify json (optional if
-                    server defaults to JSON return type)
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          this.http.get(targetUrl, {responseType: 'json'});
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    Can be a HttpParams object to represent a search parameter
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          { params: new HttpParams().set('name', value )}
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Parameters can also just be concatenated onto the URL string
-              </li>
+              <li>Under the hood, this creates a HttpParams object. You can do this manually, but it is not required</li>
             </ul>
-          </li>
-          <li>
-            You must subscribe to this return value to actually start the query
-            to the server
-          </li>
-          <li>
-            One method is to call subscribe on the Observable. This takes
-            callback functions as parameters. It can take up to three optional
-            callbacks
-            <ul>
-              <li>#1 - How to handle data if the call was successful</li>
-              <li>#2 - Handles errors -</li>
-              <li>
-                #3 - Completion handler
-                <ul>
-                  <li>
-                    This fires when the observable has returned all of its data
-                  </li>
-                  <li>
-                    Allows you to perform any wrap up work that should be done
-                    after the call
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            <div>
+              This is the full method
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    let params = {"firstName": "myFirstName", "lastName": "myLastName"};
+                    <br />
+                    let httpParams = new HttpParams({ fromObject: params });
+                    <br />
+                    return this.http.get&lt;User&gt;("https://mydomain.com/api/users", {params:httpParams});
+                    <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+            <div>
+              This is the shortcut method
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    let queryParams = {"firstName": "myFirstName", "lastName": "myLastName"};
+                    <br />
+                    return this.http.get&lt;User&gt;("https://mydomain.com/api/users", {params:queryParams});
+                    <br />
+                  </code>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
-        <p>
-          For HttpClient injected as http, this calls retrieves all the book
-          resources and returns an array of Book objects
-        </p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              getAllBooks(): Observable&lt;Book&#91;&#93;&gt; {<br />
-              return this.http.get&lt;Book&#91;&#93;&gt;('./api/books');<br />
-              }
-            </code>
-          </div>
-        </div>
-        <p>
-          This example uses a service class method getAllBooks that returns an
-          Observable and subscribes to it. subscribes to it. A successful method
-          assigns the returned data to the allBooks property on the component. A
-          failing method call logs the error to console. The finalizer method
-          prints a message to the console.log.
-        </p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              this.dataService.getAllBooks().subscribe(<br />
-              (data: Book&#91;&#93;) =&gt; this.allBooks = data,<br />
-              (err: any) =&gt; console.log(err),<br />
-              () =&gt; console.log('All done getting books';)<br />
-              );
-            </code>
+        <div>
+          Example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const params = {
+                <br />
+                firstName: "myFirstName",
+                <br />
+                lastName: "myLastName",
+                <br />
+                birthdate: "1980-01-01"
+                <br />
+                }
+                <br />
+                <br />
+                this.httpClient.get&lt;User[]&gt;("./People/Search", { params: new HttpParams({ fromObject: params }) });
+                <br />
+                }
+                <br />
+              </code>
+            </div>
           </div>
         </div>
       </section>
 
+      <h2>Examples</h2>
+      <section>
+        <div>
+          Assuming HttpClient injected as http, this calls retrieves all the book resources and returns an array of Book objects
+          <div class="card">
+            <div class="card-body">
+              <code>
+                getAllBooks(): Observable&lt;Book&#91;&#93;&gt; {
+                <br />
+                return this.http.get&lt;Book&#91;&#93;&gt;('./api/books');
+                <br />
+                }
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          * Warning - may be deprecated * This example uses a service class method getAllBooks that returns an Observable and subscribes to it.
+          <ul>
+            <li>A successful method assigns the returned data to the allBooks property on the component.</li>
+            <li>A failing method call logs the error to console.</li>
+            <li>The finalizer method prints a message to the console.log.</li>
+          </ul>
+
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.dataService.getAllBooks().subscribe(
+                <br />
+                (data: Book&#91;&#93;) =&gt; this.allBooks = data,
+                <br />
+                (err: any) =&gt; console.log(err),
+                <br />
+                () =&gt; console.log('All done getting books';)
+                <br />
+                );
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
