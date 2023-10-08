@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Standalone Components</li>
+        </ol>
+      </nav>
+
+      <h1>Standalone Components</h1>
+
+      <section>
+        <ul>
+          <li>Reduces the need for NgModules</li>
+          <li>Specify their dependencies directly instead of getting them through NgMoudles</li>
+        </ul>
+      </section>
+
+      <h2>Syntax</h2>
+      <section>
+        <ul>
+          <li>
+            Standalone components have several additional properties on the Component decorator
+            <ul>
+              <li>
+                standalone
+                <ul>
+                  <li>Boolean value that indicates if this component is standalone</li>
+                </ul>
+              </li>
+              <li>
+                imports
+                <ul>
+                  <li>Array of components, directives, pipes</li>
+                  <li>This can also include Module names when you need items that are not standalone (such as ReactiveFormsModule, MatButtonModule)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Migration</h2>
+      <section>
+        <ul>
+          <li>Angular CLI includes a migration schematic to convert an existing application to standalone</li>
+          <li>Start with <kbd>ng generate @angular/core:standalone</kbd></li>
+          <li>This includes three modes
+            <ul>
+              <li>convert-to-standalone: converts all your components to standalone components, except the ones declared in your main module.</li>
+              <li>prune-ng-modules: removes all the modules that aren’t necessary anymore.</li>
+              <li>standalone-bootstrap: converts your main.ts to use the bootstrapApplication function
+                <ul>
+                  <li>Where it can, it will use the appropriate provide-prefix function to import providers, such as <code>provideRouter()</code> for the RouterModule and provideHttpClient() for the HttpClientModule</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>A complete migration would require 
+            <ul>
+              <li>Running each of three modes consecutively (testing builds between each step)</li>
+              <li>Cleaning up any remaining NgModules</li>
+            </ul></li>
+        </ul>
+      </section>
+
+      <h2>Scenarios</h2>
+      <section>
+        <ul>
+          <li>
+            You need to include a component that is not standalone
+            <ul>
+              <li>Include the Module name in the imports array</li>
+            </ul>
+          </li>
+          <li>
+            You need to import a standalone module into NgModule based applications
+            <ul>
+              <li>Include the component into the imports array of the existing NgModule decorator</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="../assorted/bootstraping.html#standalone">Bootstrapping</a>
+          </li>
+          <li>
+            <a href="https://angular.io/guide/standalone-migration" target="_blank">
+              https://angular.io/guide/standalone-migration
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

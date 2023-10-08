@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Index</title>    
+    <title>Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
@@ -24,48 +24,32 @@
           <li class="breadcrumb-item active" aria-current="page">Bootstrapping</li>
         </ol>
       </nav>
+
       <h1>Bootstrapping</h1>
+
+      <h2>Non-Standalone</h2>
       <section id="bootstrap">
         <ul>
           <li>
             Loads main.ts file
             <ul>
-              <li>
-                This is referenced by the main property of angular.json to
-                identify the startup
-              </li>
+              <li>This is referenced by the main property of angular.json to identify the startup</li>
               <li>Enables Prod mode if that is enabled</li>
-              <li>
-                Bootstraps AppModule with a call to
-                platformBrowserDynamic().boostrapModule(AppModule)
-              </li>
+              <li>Bootstraps AppModule with a call to platformBrowserDynamic().boostrapModule(AppModule)</li>
             </ul>
           </li>
           <li>
             AppModule bootstraps AppComponent
             <ul>
-              <li>
-                This is defined as a property on the NgModule decorator under
-                the boostrap configuration property
-              </li>
-              <li>
-                Foundation component for an Angular project, so all applications
-                require one and only one
-              </li>
+              <li>This is defined as a property on the NgModule decorator under the boostrap configuration property</li>
+              <li>Foundation component for an Angular project, so all applications require one and only one</li>
             </ul>
           </li>
           <li>
             App component
             <ul>
-              <li>
-                When you bootstrap with the AppComponent class (in main.ts),
-                Angular looks for a app-root in the index.html, instantiates an
-                instance of AppComponent, and renders it inside the app-root tag
-              </li>
-              <li>
-                The app-root tag will be in the Index.html file included in the
-                root of the Src folder
-              </li>
+              <li>When you bootstrap with the AppComponent class (in main.ts), Angular looks for a app-root in the index.html, instantiates an instance of AppComponent, and renders it inside the app-root tag</li>
+              <li>The app-root tag will be in the Index.html file included in the root of the Src folder</li>
             </ul>
           </li>
           <li>
@@ -76,6 +60,97 @@
             </ul>
           </li>
         </ul>
+      </section>
+
+      <h2 id="standalone">Standalone</h2>
+      <section>
+        <ul>
+          <li>Angular applications can be bootstrapped without any NgModule by using a standalone component as the application't root component</li>
+        </ul>
+
+        <div>
+          Use the bootstrapApplication API in the main.ts file
+          <ul>
+            <li>my-app.app.component is a standalone app module that hooks into the rest of the application</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import {bootstrapApplication} from '@angular/platform-browser';
+                <br />
+                import {MyAppComponent} from './app/my-app.app.component';
+                <br />
+                bootstrapApplication(MyAppComponent);
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can pass a list of providers to the bootstrapApplication to configure providers for dependency injection
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import {bootstrapApplication} from '@angular/platform-browser';
+                <br />
+                import {MyAppComponent} from './app/my-app.app.component';
+                <br />
+                bootstrapApplication(MyAppComponent, {
+                <br />
+                providers: [
+                <br />
+                { provide: BACKEND_URL, useValue: 'https://myapp.mydomain.com/api' }
+                <br />
+                ]
+                <br />
+                });
+                <br />
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Angular includes a set of provide- prefixed functions to configure the app without needing to import NgModules.
+          <ul>
+            <li>Add router module and configure routes = provideRouter([arrayOfRouteObject])</li>
+            <li>Add HTTP Client module = provideHttpClient()</li>
+            <li>Many 3rd libraries include this configuration option - see Angular documentation if one does not</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import {bootstrapApplication} from '@angular/platform-browser';
+                <br />
+                import {MyAppComponent} from './app/my-app.app.component';
+                <br />
+                bootstrapApplication(MyAppComponent, {
+                <br />
+                providers: [
+                <br />
+                { provide: BACKEND_URL, useValue: 'https://myapp.mydomain.com/api' },
+                <br />
+                provideRouter([/* app routes */]),
+                <br />
+                ]
+                <br />
+                });
+                <br />
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://angular.io/guide/standalone-components" target="_blank">https://angular.io/guide/standalone-components</a>
+          </li>
+        </ul>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
