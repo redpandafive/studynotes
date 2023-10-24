@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
@@ -22,9 +22,7 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            HTTP Interceptors
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">HTTP Interceptors</li>
         </ol>
       </nav>
 
@@ -40,9 +38,7 @@
           <li><a href="interceptors.html#providing">Providing</a></li>
           <li><a href="interceptors.html#context">Context</a></li>
           <li>
-            <a href="interceptors.html#clientCaching"
-              >Client Side Caching</a
-            >
+            <a href="interceptors.html#clientCaching">Client Side Caching</a>
           </li>
           <li><a href="interceptors.html#examples">Examples</a></li>
         </ul>
@@ -51,54 +47,27 @@
       <h2 id="basics">Basics</h2>
       <section>
         <ul>
-          <li>Angular services that implement the HttpInterceptor interface</li>
           <li>
-            Allows you to write a small bit of code, apply it in one place, and
-            have it be applied to every HTTP request and response
+            Allows you to write a small bit of code, apply it in one place, and have it be applied to every HTTP request and response
             <ul>
-              <li>
-                Without interception, you would have to implement tasks
-                explicitly for each HttpClient method call
-              </li>
+              <li>Without interception, you would have to implement tasks explicitly for each HttpClient method call</li>
             </ul>
           </li>
           <li>
             Allow you to
             <ul>
-              <li>
-                Manipulate HTTP responses before the are sent to the server
-              </li>
-              <li>
-                Manipulate HTTP responses before they are returned to your app
-              </li>
+              <li>Manipulate HTTP responses before the are sent to the server</li>
+              <li>Manipulate HTTP responses before they are returned to your app</li>
               <li>Allows you to process the request and response together</li>
-              <li>
-                Can be used for a variety of implicit tasks, from authentication
-                to logging
-              </li>
+              <li>Can be used for a variety of implicit tasks, from authentication to logging</li>
             </ul>
           </li>
+          <li>Effectively sits between the client and the server, grabs HTTP requests and replies, and manipulates them in some way</li>
           <li>
-            Effectively sits between the client and the server, grabs HTTP
-            requests and replys, and can manipulate it in some way
-          </li>
-          <li>
-            Although interceptors are capable of mutating requests and
-            responses, the HttpRequest and HttpResponse instance properties are
-            read only, making them immutable
+            Although interceptors are capable of mutating requests and responses, the HttpRequest and HttpResponse instance properties are read only, making them immutable
             <ul>
-              <li>
-                Before modifying one of these, you must clone it within the
-                interecept method of the interceptor
-              </li>
-              <li>
-                This is some since you may want to retry a request if it does
-                not succeed at first
-              </li>
-              <li>
-                Immutability ensures that the interceptor chain can re-process
-                the same request multiple times
-              </li>
+              <li>Before modifying one of these, you must clone it within the intercept method of the interceptor</li>
+              <li>Immutability ensures that the interceptor chain can re-process the same request multiple times</li>
             </ul>
           </li>
         </ul>
@@ -108,20 +77,55 @@
       <section>
         <ul>
           <li>
-            Adding headers to all requests (without having to add it to all
-            requests individually)
+            Adding headers to all requests (without having to add it to each request individually)
+            <ul>
+              <li>Useful in XSRF protection</li>
+              <li>In ASP.NET, this is useful to grab an anti-forgery token from the DOM and include it in each POST request</li>
+              <li>This example uses a separate service to grab the token from the DOM</li>
+            </ul>
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    @Injectable({
+                    <br />
+                    })
+                    <br />
+                    export class AddAntiForgeryInterceptor implements HttpInterceptor {
+                    <br />
+                    constructor(private antiForgeryTokenService: AntiForgeryTokenService) {}
+                    <br />
+                    public intercept(request: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
+                    <br />
+                    request = request.clone({
+                    <br />
+                    headers: request.headers.set("__RequestVerificationToken", this.antiForgeryTokenService.getToken()),
+                    <br />
+                    });
+                    <br />
+                    return next.handle(request);
+                    <br />
+                    }
+                    <br />
+                    }
+                    <br />
+                  </code>
+                </div>
+              </div>
+            </div>
           </li>
           <li>
-            Useful for
+            Configure a retry strategy to use before throwing and error
             <ul>
-              <li>Authentication/authorization</li>
-              <li>XSRF protection</li>
+              <li>
+                The
+                <a href="../../rxjs/operators/retry.html">retry</a>
+                operator from RxJS can be used to do this
+              </li>
             </ul>
           </li>
-          <li>
-            Logging, such as development or debugging to dump requests and
-            status codes
-          </li>
+          <li>Authentication / Authorization</li>
+          <li>Logging, such as development or debugging to dump requests and status codes</li>
           <li>Client-side caching</li>
           <li>Reporting progress events</li>
           <li>
@@ -129,12 +133,14 @@
             <div class="card">
               <div class="card-body">
                 <code>
-                  // clone request and replace 'http://' with 'https://' at the
-                  same time<br />
-                  const httpsReq = req.clone({<br />
-                  url:
-                  req.url.replace(&quot;http://&quot;,&quot;https://&quot;)<br />
-                  });<br />
+                  // clone request and replace 'http://' with 'https://' at the same time
+                  <br />
+                  const httpsReq = req.clone({
+                  <br />
+                  url: req.url.replace(&quot;http://&quot;,&quot;https://&quot;)
+                  <br />
+                  });
+                  <br />
                   return next.handle(httpsReq);
                 </code>
               </div>
@@ -145,10 +151,14 @@
             <div class="card">
               <div class="card-body">
                 <code>
-                  const loaderService = this.injector.get(LoaderService);<br />
-                  loaderService.show();<br />
-                  return next.handle(req).pipe(<br />
-                  finalize(() =&gt; loaderService.hide())<br />
+                  const loaderService = this.injector.get(LoaderService);
+                  <br />
+                  loaderService.show();
+                  <br />
+                  return next.handle(req).pipe(
+                  <br />
+                  finalize(() =&gt; loaderService.hide())
+                  <br />
                   );
                 </code>
               </div>
@@ -158,16 +168,7 @@
           <li>
             Error handling
             <ul>
-              <li>
-                Can be used to
-                <ul>
-                  <li>
-                    Retry the call using the retry operation from RxJS to
-                    resubscribe to the observable. This has the effect of
-                    re-issuing the HTTP request
-                  </li>
-                </ul>
-              </li>
+              <li>Can be used to retry the call using the retry operation from RxJS to resubscribe to the observable. This re-issues the HTTP request</li>
             </ul>
           </li>
         </ul>
@@ -176,29 +177,24 @@
       <h2 id="definition">Definition</h2>
       <section>
         <ul>
-          <li>Create a class that implements HttpInterceptor class</li>
           <li>
-            Must impelment the intercept method
+            Create a class that implements HttpInterceptor class
             <ul>
-              <li>Manipulations are performed within this method</li>
-              <li>the req parameter is the incoming request</li>
-              <li>
-                The next parameter is the next interceptor in the pipeline of
-                interceptor
-              </li>
-              <li>
-                Returns an observable wrapping an HttpEvent object - most of the
-                time, this is the HTTP response
-              </li>
+              <li>Must be injectable (include the injectable decorator)</li>
             </ul>
           </li>
           <li>
-            First, make a copy of the request object since it is immutable
+            Must implement the intercept method
+            <ul>
+              <li>Manipulations on the HTTP call are performed within this method</li>
+              <li>The first parameter is the incoming request</li>
+              <li>The second parameter is the next interceptor in the pipeline of interceptors (where the request goes next)</li>
+              <li>Returns an observable wrapping an HttpEvent object - most of the time, this is the HTTP response</li>
+            </ul>
           </li>
+          <li>First, make a copy of the request object since it is immutable</li>
           <li>
-            The clone method has an overload that takes a configuration
-            parameter that allows you read several properties and to set fields,
-            including
+            The clone method on the request object has an overload that takes a configuration parameter that allows you read several properties and to set fields, including
             <ul>
               <li>setHeaders method</li>
               <li>setParams method</li>
@@ -206,19 +202,20 @@
             <div class="card">
               <div class="card-body">
                 <code>
-                  let jsonReq: HttpRequest&lt;any&gt; = req.clone({<br />
-                  setHeaders: {'Content-Type': 'application/json' } <br />
+                  let jsonReq: HttpRequest&lt;any&gt; = req.clone({
+                  <br />
+                  setHeaders: {'Content-Type': 'application/json' }
+                  <br />
                   });
                 </code>
               </div>
             </div>
           </li>
           <li>
-            Should return the result of the handle method of the next
-            interceptor
+            Should return the result of the handle method of the next interceptor
             <div class="card">
               <div class="card-body">
-                <code> return next.handle(modifiedRequest)</code>
+                <code>return next.handle(modifiedRequest)</code>
               </div>
             </div>
           </li>
@@ -227,17 +224,33 @@
             <div class="card">
               <div class="card-body">
                 <code>
-                  return next.handle(modifiedRequest)<br />
-                  .pipe(<br />
-                  .tap(event =&gt; {<br />
-                  if(event instanceof HttpResponse) {<br />
-                  // modify the HttpResponse here<br />
-                  }<br />
-                  })<br />
+                  return next.handle(modifiedRequest)
+                  <br />
+                  .pipe(
+                  <br />
+                  .tap(event =&gt; {
+                  <br />
+                  if(event instanceof HttpResponse) {
+                  <br />
+                  // modify the HttpResponse here
+                  <br />
+                  }
+                  <br />
+                  })
+                  <br />
                   );
                 </code>
               </div>
             </div>
+          </li>
+          <li>
+            Angular CLI can generate interceptors
+            <ul>
+              <li>
+                Create one called GlobalHttpErrorHandler by using the command
+                <kbd>ng g interceptor global-http-error-handler</kbd>
+              </li>
+            </ul>
           </li>
         </ul>
       </section>
@@ -248,82 +261,73 @@
           <li>
             Since interceptors are services, they must be provided
             <ul>
-              <li>
-                The order interceptors are listed in the providers array
-                determines the order they are called
-              </li>
-              <li>
-                HTTP_INTERCEPTORS is an Angular token imported from
-                HttpClientModule
-              </li>
+              <li>The order interceptors are listed in the providers array determines the order they are called</li>
+              <li>HTTP_INTERCEPTORS is an Angular token imported from HttpClientModule</li>
               <li>This same token is used for all interceptors</li>
               <li>
-                Multi parameter should always be configured as true. This
-                configures the provide token to be injected as an array of
-                values
+                The Multi parameter should always be configured as true
+                <ul>
+                  <li>This configures the provide token to be injected as an array of values</li>
+                  <li>You could have multiple interceptors, so the MULTI must be true</li>
+                </ul>
               </li>
               <li>
-                You cannot chagne the order or remove interceptors later. If you
-                need to enable or disable an interceptor dynamically, you will
-                have to build that capability into the interceptor itself
-              </li>
-              <li>See Example 1 for configuration</li>
-            </ul>
-          </li>
-          <li>
-            Interceptors can be configured by including an optional context
-            object
-            <ul>
-              <li>
-                This is passed to the interceptor along with the rest of the
-                request
-              </li>
-              <li>
-                The interceptor can then use the context to make decisions on
-                how to alter a request that is sent to a server
-              </li>
-              <li>
-                Is not sent in the final request, only sent to the interceptor,
-                then stripped out
+                You cannot change the order or remove interceptors later.
+                <ul>
+                  <li>If you need to enable or disable an interceptor dynamically, you will have to build that capability into the interceptor itself</li>
+                </ul>
               </li>
             </ul>
           </li>
         </ul>
+        <div>
+          For standalone components, add the following to main.ts
+          <div class="card">
+            <div class="card-body">
+              <code>                
+                bootstrapApplication(AppComponent, { <br/>
+                  providers: [ <br/>
+                    importProvidersFrom( <br/>
+                      BrowserAnimationsModule, <br/>
+                      HttpClientModule, <br/>
+                    ), <br/>
+                    { <br/>
+                      provide: HTTP_INTERCEPTORS, <br/>
+                      useClass: GlobalHttpErrorHandler, <br/>
+                      multi: true <br/>
+                    } <br/> 
+                  ] <br/>
+              }) <br/>
+              </code>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       <h2 id="context">Context</h2>
       <section>
         <ul>
           <li>
+            Interceptors can be configured by adding an optional context object
+            <ul>
+              <li>This is passed to the interceptor along with the rest of the request</li>
+              <li>The interceptor can then use the context to make decisions on how to alter a request that is sent to a server</li>
+              <li>It is not sent in the final request, only sent to the interceptor, then stripped out</li>
+            </ul>
+          </li>
+          <li>
             HttpContextToken
             <ul>
-              <li>
-                Token class that stores the data that you will pass to the
-                interceptor
-              </li>
-              <li>
-                You can create it anywhere, but it makes sense to put it in the
-                same file as the interceptor
-              </li>
-              <li>
-                Constructor parameter for this class is an arrow function that
-                returns the default value
-              </li>
-              <li>
-                Must be exported so it can be used in services to send a value
-                different than the default
-              </li>
-              <li>
-                You specify a type parameter, but the TypeScript compiler can
-                also infer it
-              </li>
+              <li>Token class that stores the data that you will pass to the interceptor</li>
+              <li>You can create it anywhere, but it makes sense to put it in the same file as the interceptor</li>
+              <li>Constructor parameter for this class is an arrow function that returns the default value</li>
+              <li>Must be exported so it can be used in services to send a value different than the default</li>
+              <li>You specify a type parameter, but the TypeScript compiler can also infer it</li>
               <li>
                 <div class="card">
                   <div class="card-body">
-                    <code>
-                      export const OPTION_1 = new
-                      HttpContextToken&lt;number&gt;(() =&gt; 42);
-                    </code>
+                    <code>export const OPTION_1 = new HttpContextToken&lt;number&gt;(() =&gt; 42);</code>
                   </div>
                 </div>
               </li>
@@ -336,9 +340,7 @@
                 Instantiate a new instance of this is your service
                 <div class="card">
                   <div class="card-body">
-                    <code>
-                      let my_context: HttpContext = new HttpContext();
-                    </code>
+                    <code>let my_context: HttpContext = new HttpContext();</code>
                   </div>
                 </div>
               </li>
@@ -346,32 +348,29 @@
                 You can change the default value by calling the set method
                 <div class="card">
                   <div class="card-body">
-                    <code> my_context.set(OPTION_1, 13);</code>
+                    <code>my_context.set(OPTION_1, 13);</code>
                   </div>
                 </div>
               </li>
               <li>
-                Attach the context to a request by using one of overload methos
-                that accepts an options object
+                Attach the context to a request by using one of overload methos that accepts an options object
                 <div class="card">
                   <div class="card-body">
                     <code>
-                      this.http.get('/api/books', {<br />
-                      context: my_context<br />
+                      this.http.get('/api/books', {
+                      <br />
+                      context: my_context
+                      <br />
                       });
                     </code>
                   </div>
                 </div>
               </li>
               <li>
-                Within the interceptor, you retrieve this value using the
-                following:
+                Within the interceptor, you retrieve this value using the following:
                 <div class="card">
                   <div class="card-body">
-                    <code>
-                      let first_option: number =
-                      req.context.get&lt;number&gt;(OPTION_1);
-                    </code>
+                    <code>let first_option: number = req.context.get&lt;number&gt;(OPTION_1);</code>
                   </div>
                 </div>
               </li>
@@ -383,6 +382,7 @@
       <h2 id="clientCaching">Client Side Caching</h2>
       <section>
         <ul>
+          <li>Caching can be done on the client (saves calls to server) or the server (still requires calls to server)</li>
           <li>
             Interceptors can be used to create simple client side caching to
             <ul>
@@ -392,141 +392,137 @@
             </ul>
           </li>
           <li>
-            Caching can be done on the client (saves calls to server) or the
-            server (still requires calls to server)
-          </li>
-          <li>
-            Caches can be implemented as an Angular service that the interceptor
-            access to
+            Caches can be implemented as an Angular service. Interceptors can access this service to check for a value cached in the service before sending the request.
             <ul>
-              <li>
-                When sending a request, the interceptor first checks the cache
-                service
-              </li>
-              <li>
-                If it finds a value, it returns it to the caller and completes
-                the operation without calling the server
-              </li>
-              <li>
-                If it does not find a value, it makes the call to the server to
-                fectch the value, stores the reply in the cache, then returns
-                the value to the caller
-              </li>
+              <li>If it finds a value, it returns it to the caller and completes the operation without calling the server</li>
+              <li>If it does not find a value, it makes the call to the server to fetch the value, stores the reply in the cache, then returns the value to the caller</li>
             </ul>
           </li>
           <li>
-            Simple client side cache servies have
+            A simple client side cache service would have:
             <ul>
               <li>A data structure to store cached items</li>
               <li>Method to add items to the cache</li>
               <li>Method to retrieve items from the cache</li>
-              <li>
-                Method(s) to remove items from the cache (also known as Cache
-                Invalidation)
-              </li>
+              <li>Method(s) to remove items from the cache (also known as Cache Invalidation)</li>
             </ul>
           </li>
           <li>
-            Cache invalidation strategies with application requirements
+            Cache invalidation strategies can be added per application requirements to decide when to remove a cached entry and fetch a new copy from the server
             <ul>
-              <li>
-                This is deciding when to remove a cached entry and fetch a new
-                copy from the server
-              </li>
               <li>These can be as simple or complex as needed</li>
-              <li>
-                One strategy may be to invalidate an entry when a POST, PUT, or
-                DELETE call is made since that changes the data on the server
-              </li>
+              <li>One strategy could be invalidating an entry when a POST, PUT, or DELETE call is made since that changes the data on the server</li>
             </ul>
           </li>
         </ul>
-        <div></div>
       </section>
 
       <h2 id="examples">Examples</h2>
       <section>
-        This sample makes a call to a remote JSON API. Open the console to see
-        the output.
-        <ul>
-          <li>
-            Order matters when assigning the interceptors to the provider array
-          </li>
-          <li>
-            FakeBackendInterceptor is used to simulate a response from a server
-          </li>
-        </ul>
-        <p>Provider configuration from angular.module.ts</p>
-        <div class="card">
-          <div class="card-body"><code> "</code></div>
-        </div>
-        <p>AddHeaderInterceptor</p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              export const CONTENT_TYPE = new HttpContextToken(()
-              =&gt;'application/json');<br />
-              @Injectable()<br />
-              export class AddHeaderInterceptor implements HttpInterceptor {<br />
-              intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler):
-              Observable&lt;HttpEvent&lt;any&gt;&gt; {<br />
-              console.log(`Firing AddHeaderInterceptor - ${req.url}`);<br />
-              // request objects are immutable<br />
-              let newRequest: HttpRequest&lt;any&gt; = req.clone({<br />
-              setHeaders: { 'Content-Type': req.context.get(CONTENT_TYPE) },<br />
-              });<br />
-              return next.handle(newRequest);<br />
-              }<br />
-              }
-            </code>
+        <div>
+          This adds a custom header to each http request
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export const CONTENT_TYPE = new HttpContextToken(() =&gt;'application/json');
+                <br />
+                @Injectable()
+                <br />
+                export class AddHeaderInterceptor implements HttpInterceptor {
+                <br />
+                intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
+                <br />
+                console.log(`Firing AddHeaderInterceptor - ${req.url}`);
+                <br />
+                // request objects are immutable
+                <br />
+                let newRequest: HttpRequest&lt;any&gt; = req.clone({
+                <br />
+                setHeaders: { 'Content-Type': req.context.get(CONTENT_TYPE) },
+                <br />
+                });
+                <br />
+                return next.handle(newRequest);
+                <br />
+                }
+                <br />
+                }
+              </code>
+            </div>
           </div>
         </div>
-        <p>LogResponseInterceptor</p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              @Injectable()<br />
-              export class LogResponseInterceptor implements HttpInterceptor
-              {<br />
-              intercept(<br />
-              req: HttpRequest&lt;any&gt;,<br />
-              next: HttpHandler<br />
-              ):Observable&lt;HttpEvent&lt;any&gt;&gt; {<br />
-              console.log(`Firing LogResponseInterceptor - ${req.url}`);<br />
-              return next.handle(req).pipe(<br />
-              tap((event) =&gt; {<br />
-              if (event.type === HttpEventType.Response) {<br />
-              console.log(event.body);<br />
-              }<br />
-              })<br />
-              );<br />
-              }<br />
-              }
-            </code>
+        <div>
+          This example logs each time a response is received
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Injectable()
+                <br />
+                export class LogResponseInterceptor implements HttpInterceptor {
+                <br />
+                intercept(
+                <br />
+                req: HttpRequest&lt;any&gt;,
+                <br />
+                next: HttpHandler
+                <br />
+                ):Observable&lt;HttpEvent&lt;any&gt;&gt; {
+                <br />
+                console.log(`Firing LogResponseInterceptor - ${req.url}`);
+                <br />
+                return next.handle(req).pipe(
+                <br />
+                tap((event) =&gt; {
+                <br />
+                if (event.type === HttpEventType.Response) {
+                <br />
+                console.log(event.body);
+                <br />
+                }
+                <br />
+                })
+                <br />
+                );
+                <br />
+                }
+                <br />
+                }
+              </code>
+            </div>
           </div>
         </div>
-        <p>FakeBackendInterceptor</p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              @Injectable()<br />
-              export class FakeBackendInterceptor implements HttpInterceptor
-              {<br />
-              intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler):
-              Observable&lt;HttpEvent&lt;any&gt;&gt; {<br />
-              console.log(`FakeBackendInterceptor received request -
-              ${JSON.stringify(req)}`);<br />
-              const response = new HttpResponse({<br />
-              status: 200,<br />
-              statusText: "OK",<br />
-              body: "Here is the data payload"<br />
-              });<br />
-              console.log(`Sending response: ${ JSON.stringify(response)
-              }}`);<br />
-              return of(response);<br />
-              }<br />
-              }
-            </code>
+        <div>
+          This uses a fake backend service to return a HttpResponse object to each request without sending a call to the server
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Injectable()
+                <br />
+                export class FakeBackendInterceptor implements HttpInterceptor {
+                <br />
+                intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
+                <br />
+                console.log(`FakeBackendInterceptor received request - ${JSON.stringify(req)}`);
+                <br />
+                const response = new HttpResponse({
+                <br />
+                status: 200,
+                <br />
+                statusText: "OK",
+                <br />
+                body: "Here is the data payload"
+                <br />
+                });
+                <br />
+                console.log(`Sending response: ${ JSON.stringify(response) }}`);
+                <br />
+                return of(response);
+                <br />
+                }
+                <br />
+                }
+              </code>
+            </div>
           </div>
         </div>
       </section>
@@ -535,10 +531,7 @@
         <div>
           This is a simple example of a client side caching service
           <ul>
-            <li>
-              There are several ways to do this - this version is designed for
-              minimal code
-            </li>
+            <li>There are several ways to do this - this version is designed for minimal code</li>
             <li>GET methods will be the only HTTP actions that use this</li>
             <li>Inject this into the constructor of the interceptor</li>
           </ul>
@@ -546,42 +539,51 @@
         <div class="card">
           <div class="card-body">
             <code>
-              @Injectable({<br />
+              @Injectable({
+              <br />
               providedIn: 'root'
               <br />
-              })<br />
-              export class HttpCacheService {<br />
-              private requests: any = {};<br />
-              put(url: string, response: HttpResponse&lt;any&gt;): void {<br />
-              this.requests&#91;url&#93; = response;<br />
-              }<br />
-              get(url: string): HttpResponse&lt;any&gt; | undefined {<br />
-              return this.request&#91;url&#93;; <br />
-              }<br />
-              // supports removing a single item from the cache<br/
-              >invalidate(url: string): void {<br />
-              this.requests&#91;url&#93; = undefined;<br />
-              }<br />
-              // removes all items from the cache<br />
-              invalidateCache(): void {<br />
-              this.requests = {};<br />
-              }<br />
+              })
+              <br />
+              export class HttpCacheService {
+              <br />
+              private requests: any = {};
+              <br />
+              put(url: string, response: HttpResponse&lt;any&gt;): void {
+              <br />
+              this.requests&#91;url&#93; = response;
+              <br />
+              }
+              <br />
+              get(url: string): HttpResponse&lt;any&gt; | undefined {
+              <br />
+              return this.request&#91;url&#93;;
+              <br />
+              }
+              <br />
+              // supports removing a single item from the cache<br/ >invalidate(url: string): void {
+              <br />
+              this.requests&#91;url&#93; = undefined;
+              <br />
+              }
+              <br />
+              // removes all items from the cache
+              <br />
+              invalidateCache(): void {
+              <br />
+              this.requests = {};
+              <br />
+              }
+              <br />
               }
             </code>
           </div>
         </div>
         <div>
-          This is a very simple example of an interceptor that uses the cache
-          service
+          This is a very simple example of an interceptor that uses the cache service:
           <ul>
-            <li>
-              This flushes the entire cache after each non-GET request (probably
-              more aggresive that is desired)
-            </li>
-            <li>
-              A context is used to turn caching on or off per request -
-              configure this on the caller
-            </li>
+            <li>This flushes the entire cache after each non-GET request (probably more aggressive that is desired)</li>
+            <li>A context is used to turn caching on or off per request - configure this on the caller</li>
           </ul>
         </div>
         <div class="card">
@@ -623,8 +625,45 @@
                 }
               ))
           }
-  }</pre>
+  }</pre
+              >
             </code>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li>This example adds a retry mechanism that increases the amount of time betweeen retries (1 second, then 2 seconds, then 3 seconds)</li>
+            <li>
+              Credit to
+              <a href="https://www.youtube.com/watch?v=e03EHZIVJtM">https://www.youtube.com/watch?v=e03EHZIVJtM</a>
+            </li>
+          </ul>
+
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Injectable() <br/>
+                export class GlobalHttpErrorHandler implements HttpInterceptor { <br/>                
+                  constructor() {}<br/>
+                  <br/>
+                  intercept(request: HttpRequest&lt;unknown>, next: HttpHandler): Observable&lt;HttpEvent&lt;unknown&gt;&gt; {<br/>
+                    return next.handle(request).pipe(<br/>
+                      retry({<br/>
+                        count: 3,<br/>
+                        delay: (_, retryCount) => timer(retryCount * 1000),<br/>
+                      }),<br/>
+                      catchError(err => {<br/>
+                        console.log('Error handled by HTTP interceptor...');<br/>
+                        return throwError(() => {<br/>
+                          console.log('Error rethrown by HTTP interceptor');<br/>
+                          return err;<br/>
+                        });<br/>
+                      })<br/>
+                    );<br/>
+                  }<br/>
+                }
+              </code>
+            </div>
           </div>
         </div>
       </section>

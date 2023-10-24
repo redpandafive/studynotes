@@ -32,25 +32,79 @@
 
       <section>
         <ul>
-          <li>
-            Sets the maximum number of times the observale should retry before
-            throwing an erorr
-          </li>
-          <li>
-            When an error is thrown, it will catch the error and resubscribe to
-            the observable
-          </li>
-          <li>
-            Use this to retry a failed connection – has the effect of reissuing
-            a HTTP request
-          </li>
-          <li>
-            Use caution so you do not create an infinite loop if errors keep
-            occuring
-          </li>
+          <li>Sets the maximum number of times the observable should retry before throwing an erorr</li>
+          <li>When an error is thrown, it will catch the error and resubscribe to the observable</li>
+          <li>Use this to retry a failed connection – has the effect of reissuing a HTTP request</li>
+          <li>Use caution so you do not create an infinite loop if errors keep occuring</li>
         </ul>
       </section>
 
+      <h2>Configuration</h2>
+      <section>
+        <ul>
+          <li>Configure this oeprator by passing in a configuration object</li>
+          <li>
+            Properties
+            <ul>
+              <li>count = number of times to retry</li>
+              <li>
+                delay = can be a static or dynamic value to wait (in milliseconds) before retrying an observable
+                <ul>
+                  <li>Static value = just assign a number of milliseconds</li>
+                  <li>
+                    Variable = takes a function that returns an observable
+                    <ul>
+                      <li>Accepts the error and the current retry count as parameters</li>
+                      <li>Returns an observable that returns a calculated time to wait</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          This will retry the observable 3 times and increase the wait time between each retry (1 second, then 2 seconds, then 3 seconds)
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ...
+                <br />
+                return next.handle(request).pipe(
+                <br />
+                retry({
+                <br />
+                count: 3,
+                <br />
+                delay: (_, retryCount) => timer(retryCount * 1000),
+                <br />
+                }),
+                <br />
+                catchError(err => {
+                <br />
+                console.log('Error handled by HTTP interceptor...');
+                <br />
+                return throwError(() => {
+                <br />
+                console.log('Error rethrown by HTTP interceptor');
+                <br />
+                return err;
+                <br />
+                });
+                <br />
+                })
+                <br />
+                );
+                <br />
+                ...
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2></h2>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
