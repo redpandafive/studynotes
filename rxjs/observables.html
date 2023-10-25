@@ -72,6 +72,43 @@
         </li>
       </ul>
 
+      <h3>Observable&lt;never&gt;</h3>
+      <section>
+        <ul>
+          <li>A never observable
+            <ul>
+              <li>Emits no values</li>
+              <li>Never completes, so no completion notificaiton</li>
+            </ul>
+          </li>
+          <li>
+            Good for returning an Observable when an error occurs to keep typing strong
+            <ul>
+              <li>This observable would only ever emit an error notification</li>
+              <li>Better than using null, undefined, or void</li> 
+              <li>If one of those is used, the overall typing on the outside observable would have to changes
+                <ul>
+                  <li>The return type of the outside observable would have to union onto these types</li>
+                </ul> 
+              </li>
+              <li>
+                Using Observable of never in the error handler means the outer observable does not need to account for it with its return type
+              </li>
+            </ul>
+          </li>
+          <li></li>
+        </ul>
+      </section>
+
+      <h3>EMPTY Observable</h3>
+      <section>
+        <ul>
+          <li>An observable that emits no items and immediately completes</li>
+          <li>This is a constant</li>
+          <li>Great for error handling when we don't have an item to emit</li>
+        </ul>
+      </section>
+
       <h3>Observable Methods</h3>
       <section>
         <ul>
@@ -256,6 +293,7 @@
             </ul>
           </li>
           <li>If no error occurs, then error handling operators are ignored</li>
+          <li>When an observable generates an error, it stops and will not emit any more</li>
         </ul>
       </section>
 

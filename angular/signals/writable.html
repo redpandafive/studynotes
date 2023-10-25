@@ -28,63 +28,54 @@
       </nav>
 
       <h1>Writable Signals</h1>
+
+      <h2>Constructor</h2>
       <section>
         <ul>
-          Constructor
-
-
-
-          <h2>Constructor</h2>
-          <section>
+          <li>
+            signal()
             <ul>
-              <li>
-                signal()
-                <ul>
-                  <li>Use to create a writable signal (creates a WriteableSignal object)</li>
-                  <li>You must supply a default starting value</li>
-
-                </ul>
-              </li>
-              <li>
-                signal<T>()
-                  <ul>
-                    <li>Use to specify the type that should go into the signal</li>
-                    <li>Type is optional when the default value can provide the type</li>
-                  </ul>
-              </li>
+              <li>Use to create a writable signal (creates a WriteableSignal object)</li>
+              <li>You must supply a default starting value</li>
             </ul>
-          </section>
-
-          <h2>Reading a Signal</h2>
-          <section>
+          </li>
+          <li>
+            signal&lt;T&gt;()
             <ul>
-              <li>
-                Signals have a getter function, so calling it reads thier value
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      const count = signal(0);
-                      <br />
-                      console.log('The count is: ' + count());
-                      <br />
-                    </code>
-                  </div>
-                </div>
-              </li>
+              <li>Use to specify the type that should go into the signal</li>
+              <li>Type is optional when the default value can provide the type</li>
             </ul>
-          </section>
+          </li>
+        </ul>
+      </section>
 
+      <h2>Reading a Signal</h2>
+      <section>
+        <ul>
+          <li>
+            Signals have a getter function, so calling it reads thier value
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const count = signal(0);
+                  <br />
+                  console.log('The count is: ' + count());
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
 
-          <h2>Methods</h2>
-          <section>
-          <ul>
+      <h2>Methods</h2>
+      <section>
+        <ul>
           <li>
             Set()
             <ul>
-              <li>
-                Use to change the value of a writable signal
-              </li>
-              <li>This replaces the value contained in the Signal.  Consumers are then notified that the contents have changed.</li>
+              <li>Use to change the value of a writable signal</li>
+              <li>This replaces the value contained in the Signal. Consumers are then notified that the contents have changed.</li>
             </ul>
             <div class="card">
               <div class="card-body">
@@ -95,41 +86,47 @@
           <li>
             Update()
             <ul>
-              <li>
-                Use to compute a new value based on the current value
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      count.update(value => value + 1);<br/>
-                      quantity.update(qty => qty * 2);<br/>
-                    </code>
-                  </div>
-                </div>
-              </li>
+              <li>Use to compute a new value based on the current value</li>
+              <li>Take the exiting state and returns a new state</li>
             </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  count.update(value => value + 1);
+                  <br />
+                  quantity.update(qty => qty * 2);
+                  <br />
+                </code>
+              </div>
+            </div>
           </li>
           <li>
             Mutate()
             <ul>
               <li>When a signal contains an object or array, use this to mutate the object directly</li>
-              <li>This mutates the content in place, not the value itself</li>
               <li>
-                The following changes the first object in the array to 'done: true' without replacing it.
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      const todos = signal([{title: 'Learn signals', done: false}]);
-                      <br />
-                      todos.mutate(value => {
-                      <br />
-                      value[0].done = true;
-                      <br />
-                      });
-                    </code>
-                  </div>
-                </div>
+                This mutates the content in place, not the value itself
+                <ul>
+                  <li>This mutates the previous state and does not return any value</li>
+                </ul>
               </li>
             </ul>
+            <div>
+              The following changes the first object in the array to 'done: true' without replacing it.
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    const todos = signal([{title: 'Learn signals', done: false}]);
+                    <br />
+                    todos.mutate(value => {
+                    <br />
+                    value[0].done = true;
+                    <br />
+                    });
+                  </code>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
       </section>

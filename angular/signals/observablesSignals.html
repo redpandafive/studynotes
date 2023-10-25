@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Observables & Signals</li>
+        </ol>
+      </nav>
+
+      <h1>Observables & Signals</h1>
+
+      <h2>ToSignal</h2>
+      <section>
+        <ul>
+          <li>
+            Wraps an observable inside a signal
+            <ul>
+              <li>This will automatically subscribe to the observable at creation time</li>
+              <li>This will automatically unsubscribe to the observable on destruction</li>
+            </ul>
+          </li>
+          <li>
+            This allows you to use the obsrvable via the signal in your template without an async pipe
+          </li>
+          <li>
+            Import from
+            <code>@angular/core/rxjs-interop</code>
+          </li>
+          <li>
+            Converts an observable to a signal
+            <ul>
+              <li>The signals created using this method are readonly (typed as Signal, not WritableSignal)</li>
+            </ul>
+          </li>
+          <li>
+            It must be called in an injection context
+            <ul>
+              <li>
+                This means you can use it only when the
+                <code>inject()</code>
+                function is available
+              </li>
+              <li>The reason for this is that Angular will auto-unsubscribe when the wrapping context is destroyed. It does this using the new OnDestroy hook that it obtains from using the inject() function</li>
+            </ul>
+          </li>
+          <li>
+            Takes an observable as a parameter
+            <ul>
+              <li>This will automatically subscribe and unsubscribe to the observable</li>
+              <li>It subscribes to the observable immediately</li>
+            </ul>
+          </li>
+          <li>
+            This will type the signal as a union type with undefined since the data from the observable is not immediately available
+            <ul>
+              <li>
+                There are two ways to avoid this
+                <ul>
+                  <li>Pass an ToSignalOptions object as a second parameter that will be supplied as an initial value until the Observable emits a value.</li>
+                  <li>
+                    Pass a ToSignalOptions obejct with the requireSync property set to true.
+                    <ul>
+                      <li>Limit this to observables that immediately emit, or Angular will throw an error</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Even when supplying an empty value, Angular creaets a signal that is a union type with never (seems to happen when using empty arrays as the default value)
+                <ul>
+                  <li>
+                    To avoid this, type the initial value
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          private myData = toSignal(this.myObservable$, { initialValue: [] as SignalType[]});
+                          <br />
+                        </code>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://angular.io/api/core/rxjs-interop/toSignal" target="_blank">https://angular.io/api/core/rxjs-interop/toSignal</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>ToObservable</h2>
+      <section>
+        <ul>
+          <li>Converts a signal to an Observable</li>
+          <li>This allows you to use RxJS operators</li>
+          <li>
+            Example would be
+            <ul>
+              <li>Start with a userId signal</li>
+              <li>Convert this signal to an Observable using the ToObservable method</li>
+              <li>Pipe this observable into a switchMap.</li>
+              <li>Use the value sent to the switchMap to make an HTTP call to the server to retrieve detailed data.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2></h2>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

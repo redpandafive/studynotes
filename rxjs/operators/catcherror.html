@@ -32,13 +32,33 @@
 
       <section>
         <ul>
-          <li>Operator that intercepts an Observable that failed.</li>
+          <li>Operator that intercepts an Observable that failed.
+            <ul>
+              <li>
+                If you don't catch and handle an error, the entire stream will be destroyed
+              </li>
+            </ul>
+          </li>          
           <li>
-            If you dont catch and handle an error, the entire stream will be destroyed
+            If this operator is used and an error does not occur, it outputs the inputted observable (no effect)
           </li>
           <li>
-            It passes the error an error handler function that can do what it
-            wants with the error
+            If an error does occur:
+            <ul>
+              <li>
+                It passes the error to an error handler function that can do what it
+                wants with the error
+              </li>
+              <li>
+                The handler returns a replacement observable so the stream can continue
+              </li>
+              <li>
+                The handler can optionally throw an error
+              </li>
+            </ul>
+          </li>
+          <li>
+            The handler function takes a parameter of a HttpErrorReponse object
           </li>
         </ul>
       </section>

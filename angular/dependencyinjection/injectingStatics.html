@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Injecting Static Values</li>
+        </ol>
+      </nav>
+
+      <h1>Injecting Static Values</h1>
+
+      <h2>Injecting a Boolean Value</h2>
+      <section>
+        <div>
+          Define an InjectionToken and store it in a providers.ts file
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { InjectionToken } from "@angular/core"; <br/>
+                <br/>
+                export const IS_PUBLIC= new InjectionToken<boolean>(''); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @NgModule({  <br/>
+                  ...   <br/>
+                  providers: [  <br/>
+                    {provide:IS_PUBLIC, useValue: true }  <br/>
+                  ],  <br/>
+                  bootstrap: [AppComponent]  <br/>
+                })  <br/>
+                export class AppModule {}  <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Injecting a String Value</h2>
+      <section>
+        <div>
+          Define an InjectorToken to represent the string value in the DI system
+          <div class="card">
+            <div class="card-body">
+              import { InjectionToken } from "@angular/core";
+              <br />
+              export const SampleInjectionToken = new InjectionToken&lt;string&gt;("");
+              <br />
+            </div>
+          </div>
+        </div>
+        <div>In the Providers array of the appropriate injector level, configure the token to use the string value.</div>
+        <div>
+          This uses the AppModule
+          <ul>
+            <li>This puts the token into the root injector so the entire application should have access</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              @NgModule({
+              <br />
+              declarations: [],
+              <br />
+              imports: [
+              <br />
+              ...
+              <br />
+              ],
+              <br />
+              providers: [
+              <br />
+              {
+              <br />
+              provide: SampleInjectionToken,
+              <br />
+              useValue: "my string to inject"
+              <br />
+              }
+              <br />
+              ],
+              <br />
+              bootstrap: [AppComponent]
+              <br />
+              })
+              <br />
+            </div>
+          </div>
+        </div>
+        <div>
+          Inject the token into the component that needs the string value
+          <div class="card">
+            <div class="card-body">
+              private sample = inject(SampleInjectionToken);
+              <br />
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h2>Injecting a JSON Object</h2>
+      <section>
+        <div>
+          Define an object - make sure to call Object.freeze to make it immutable
+          <ul>
+            <li>A type definition would be a good addition</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const USER_CONFIG =  Object.freeze({ <br/>
+                  isAdmin: true, <br/>
+                  profileImage: './assets/images/profile/', <br/>
+                  age:21 <br/>
+                }); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add this object to a providers array:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @NgModule({  <br/>
+                  ...  <br/>
+                  providers: [  <br/>
+                    {provide:'USER_CONFIG', useValue: USER_CONFIG }  <br/>
+                  ], <br/>
+                  bootstrap: [AppComponent] <br/>
+                }) <br/>
+                export class AppModule { } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Inject the token and access properties as follows:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                constructor(  <br/>
+                  @Inject('USER_CONFIG') private userConfig){  <br/>
+                     this.isAdmin = this.userConfig.isAdmin; <br/>
+                   } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

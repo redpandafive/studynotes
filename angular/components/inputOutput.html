@@ -46,7 +46,7 @@
             <a href="inputOutput.html#routePaams">Route Parameter / Input Mapping</a>
           </li>
           <li>
-            <a href="inputOutput.html#propertySetters">Property Setters/a>
+            <a href="inputOutput.html#propertySetters">Property Setters</a>
           </li>
           <li>
             <a href="inputOutput.html#output">Output Properties</a>
@@ -87,61 +87,95 @@
               <li>This will give you the old and new values of the inputs</li>
             </ul>
           </li>
-          <li>
-            Performance considerations
-            <ul>
-              <li>If you are passing a static value from a parent to a child, consider using the @Attribute decorator over @Input</li>
-            </ul>
-          </li>
         </ul>
       </section>
 
       <h4 id="inputPropertyOptions">Input Property Options</h4>
+
+      <h5>alias</h5>
       <section>
         <ul>
+          <li>Name of the DOM property to which the input property is bound.</li>
+          <li>Use this when you want to work on a different name inside the directive / component</li>
           <li>
-            alias
-            <ul>
-              <li>Name of the DOM property to which the input property is bound.</li>
-              <li>Use this when you want to work on a different name inside the directive / component</li>
-              <li>
-                See
-                <a href="inputOutput.html#aliases">Import / Export Aliases</a>
-              </li>
-            </ul>
+            See
+            <a href="inputOutput.html#aliases">Import / Export Aliases</a>
           </li>
-          <li>
-            required
-            <ul>
-              <li>The input is required for the directive to function</li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>@Input({ required: true }) userId: number = 0;</code>
-              </div>
-            </div>
-          </li>
-          <li>
-            transform
-            <ul>
-              <li>Function to transform the input value before assigning it to the directive instance.</li>
-              <li>This is useful on route parameter / input mapping since it provodes a point to cast the string value from the url to somthing else.</li>
-            </ul>
-          </li>
+        </ul>
+      </section>
+
+      <h5>required</h5>
+      <section>
+        <ul>
+          <li>The input is required for the directive to function</li>
         </ul>
         <div class="card">
           <div class="card-body">
-            <code>
-              function toInteger(val: string) {
-              <br />
-              return +val;
-              <br />
-              }
-              <br />
-              ...
-              <br />
-              @Input({ transform: toInteger }) userId: number = 0;
-            </code>
+            <code>@Input({ required: true }) userId: number = 0;</code>
+          </div>
+        </div>
+      </section>
+
+      <h5>transform</h5>
+      <section>
+        <ul>
+          <li>
+            Function to transform the input value before assigning it to the directive instance.
+            <ul>
+              <li>This can potentially eliminate the need to getter and setter methods</li>
+              <li>Angular treats all static attributes as strings, so these provide a way to safely type incoming values</li>
+              <li>Any values set through teh template will be passed through the specified function before being assigned to the directive instance</li>
+            </ul>
+          </li>
+          <li>
+            The HTML standard treats:
+            <ul>
+              <li>All attribute values as strings</li>
+              <li>Boolean attributes as true if they are present on the DOM node, false if not</li>
+            </ul>
+          </li>
+          <li>
+            Angular provides several built in utility methods that can be used as the transform function on an input
+            <ul>
+              <li>booleanAttribute - converts a value (usually a string) to a boolean</li>
+              <li>numberAttribute - converts a value (usually a string) to a number</li>
+            </ul>
+          </li>
+          <li>This is useful on route parameter / input mapping since it provodes a point to cast the string value from the url to somthing else.</li>
+        </ul>
+        <div>
+          Example syntax
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Input({ transform: numberAttribute }) id!: number;
+                <br />
+                @Input({ transform: booleanAttribute }) disabled!: boolean;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The following will be transformed to type boolean on the disabled Input
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // this will be transformed to value of true
+                <br />
+                &lt;app-checkbox disabled /&gt;
+                <br />
+                // this will be transfomred to value of false
+                <br />
+                &lt;app-checkbox /&gt;
+                <br />
+                ...
+                <br />
+                // input property definition in component
+                <br />
+                @Input({ transform: booleanAttribute }) disabled!: boolean;
+                <br />
+              </code>
+            </div>
           </div>
         </div>
       </section>
@@ -155,44 +189,24 @@
         </ul>
       </section>
 
-
       <h4 id="propertySetters">Property Setters</h4>
       <section>
-        <li>
-          See Input Property Options for the transform option instead of this
-        </li>
+        <li>See Input Property Options for the transform option instead of this</li>
         <li>Intercept input property changes can be done with a setter</li>
+        <li>This is useful if you need to do some sort of validation or standardization on inputs</li>
         <li>
-          This is useful if you need to do some sort of validation or
-          standardization on inputs
-        </li>
-        <li>
-          Angular Fundamentals class uses this to create a derived value from an
-          input property
+          Angular Fundamentals class uses this to create a derived value from an input property
           <ul>
-            <li>
-              Uses this to set the color of a voting icon to set or not set
-            </li>
-            <li>
-              The setting on an input property toggles the color of the icon
-            </li>
+            <li>Uses this to set the color of a voting icon to set or not set</li>
+            <li>The setting on an input property toggles the color of the icon</li>
             <li>Eliminates the need for a conditional on the icon</li>
           </ul>
         </li>
-        <li>
-          Parent components can bind to output event properties on children and
-          react to those events
-        </li>
-        <p>
-          Example of an input setter. This can then be used to reference an
-          internal variable _name
-        </p>
+        <li>Parent components can bind to output event properties on children and react to those events</li>
+        <p>Example of an input setter. This can then be used to reference an internal variable _name</p>
         <div class="card">
           <div class="card-body">
-            <code>
-              @Input()&#10;set name(name: string) {...}&#10;get name(name:
-              string) { ... }
-            </code>
+            <code>@Input()&#10;set name(name: string) {...}&#10;get name(name: string) { ... }</code>
           </div>
         </div>
       </section>

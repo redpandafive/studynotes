@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Injecting an External Library</li>
+        </ol>
+      </nav>
+
+      <h1>Injecting an External Library</h1>
+
+      <h2>Injecting Toastr</h2>
+      <section>
+        <div>
+          First create a token that you can use in dependency injection without creating a class. In a file (toastr.service.ts)...
+          <ul>
+            <li>Import InjectionToken from @angular/core</li>
+            <li>
+              Create an instance of the InjectionToken
+              <div class="card">
+                <div class="card-body">
+                  <code>export let TOASTR_TOKEN = new InjectionToken&lt;Toastr&gt;(&quot;toastr&quot;)</code>
+                </div>
+              </div>
+              <ul>
+                <li>Convention is to name in all caps</li>
+                <li>TOASTR_TOKEN is a JavaScript object</li>
+                <li>String in the parameter is a description used in debugging</li>
+              </ul>
+            </li>
+            <li>Define a Toastr interface within this file and provide the methods that should be available on it. This is just for type safety</li>
+          </ul>
+        </li>
+        <li>
+          In module
+          <ul>
+            <li>
+              Import the InjectionToken
+              <div class="card">
+                <div class="card-body">
+                  <code>import {TOASTR_TOKEN } from &quot;toaster.service&quot;</code>
+                </div>
+              </div>
+            </li>
+            <li>
+              Declare the global object for toastr in the module
+              <div class="card">
+                <div class="card-body">
+                  <code>let toastr: Toastr = window&#91;&quot;toastr&quot;&#93;</code>
+                </div>
+              </div>
+              <ul>
+                <li>This tells TypeScript that there will be a toastr object in the global namespace that it is not aware of</li>
+                <li>It will be of type Toastr, the interface defined previously</li>
+              </ul>
+            </li>
+            <li>
+              Register the injection token in the providers section of the module
+              <div class="card">
+                <div class="card-body">
+                  <code>{ provide: TOASTR_TOKEN, useValue: toastr }</code>
+                </div>
+              </div>
+              <ul>
+                <li>This tells registration that whenever anyone requests a dependency using the TOASTR_TOKEN token, give them the toastr object from the global space</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          In the component you want to use it in, add the following as a parameter to the constructor
+          <div class="card">
+            <div class="card-body">
+              <code>@Inject(TOASTR_TOKEN) private toastr: Toaster</code>
+            </div>
+          </div>
+          <ul>
+            <li>Need to import Inject from @angular/core</li>
+          </ul>
+        </li>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

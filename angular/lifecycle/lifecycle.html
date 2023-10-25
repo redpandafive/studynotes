@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
@@ -22,9 +22,7 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Lifecycle Hooks
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Lifecycle Hooks</li>
         </ol>
       </nav>
 
@@ -34,19 +32,13 @@
         <ul>
           <li><a href="lifecycle.html#basics">Basics</a></li>
           <li>
-            <a href="lifecycle.html#core"
-              >Angular Core Library Events</a
-            >
+            <a href="lifecycle.html#core">Angular Core Library Events</a>
           </li>
           <li>
-            <a href="lifecycle.html#component"
-              >Component Only Events</a
-            >
+            <a href="lifecycle.html#component">Component Only Events</a>
           </li>
           <li>
-            <a href="lifecycle.html#childEvents"
-              >Post Child Creating Events</a
-            >
+            <a href="lifecycle.html#childEvents">Post Child Creating Events</a>
           </li>
         </ul>
       </section>
@@ -57,32 +49,22 @@
           <li>
             Angular components have a life cycle that Angular manages.
             <ul>
-              <li>
-                It is created, rendered, creates and renders its children,
-              </li>
+              <li>It is created, rendered, creates and renders its children,</li>
               <li>checks it when its data bound properties changes</li>
               <li>destroys it before removing it from the DOM</li>
             </ul>
           </li>
 
           <li>These are called for directives as well as components</li>
-          <li>
-            Hooks allows you to tap into these key life moments and act when
-            they occur
-          </li>
+          <li>Hooks allows you to tap into these key life moments and act when they occur</li>
           <li>
             These are in the core library
             <ul>
-              <li>
-                technically, you don't have to declare the interface. These are
-                event methods are called if they are defined, but it is good
-                practice to declare them.
-              </li>
+              <li>technically, you don't have to declare the interface. These are event methods are called if they are defined, but it is good practice to declare them.</li>
             </ul>
           </li>
           <li>
-            Don't do complex logic in the constructor, use a life cycle hook
-            instead
+            Don't do complex logic in the constructor, use a life cycle hook instead
             <ul>
               <li>Only use simple initialization in constructors</li>
               <li>Do heavy initialization in the ngOnInit method</li>
@@ -92,105 +74,79 @@
       </section>
 
       <h2 id="core">Angular Core Library Events</h2>
+
+      <h3>ngOnChanges</h3>
       <section>
         <ul>
+          <li>import as OnChanges</li>
+          <li>called before ngOnInit and when one or more data bound input properties change</li>
+          <li>receives a SimpleChanges object of current and previous property values</li>
+          <li>if an object is referenced, then it will not fire if a property on the object is changed, only if the reference to the object changes</li>
+          <li>This occurs frequently, so you can get performance bottlenecks doing too much work here</li>
+          <li>If there are no inputs or you use the component without providing inputs, the framework will not call this.</li>
+        </ul>
+      </section>
+
+      <h3>ngOnInit</h3>
+      <section>
+        <ul>
+          <li>import as OnInit</li>
+          <li>called once when the component is initialized, after first displaying the data bound properties and setting input properties</li>
           <li>
-            ngOnChanges
+            Called once after the first ngOnChanges
             <ul>
-              <li>import as OnChanges</li>
-              <li>
-                called before ngOnInit and when one or more data bound input
-                properties change
-              </li>
-              <li>
-                receives a SimpleChanges object of current and previous property
-                values
-              </li>
-              <li>
-                if an object is referenced, then it will not fire if a property
-                on the object is changed, only if the reference to the object
-                changes
-              </li>
-              <li>
-                This occurs frequently, so you can get performance bottlenecks
-                doing too much work here
-              </li>
-              <li>
-                If there are no inputs or you use the component without
-                providing inputs, the framework will not call this.
-              </li>
+              <li>Still called even if ngOnChanges is not called due to no inputs</li>
             </ul>
           </li>
           <li>
-            ngOnInit
+            use to
             <ul>
-              <li>import as OnInit</li>
-              <li>
-                called once when the component is initialized, after first
-                displaying the data bound properties and setting input
-                properties
-              </li>
-              <li>
-                Called once after the first ngOnChanges
-                <ul>
-                  <li>
-                    Still called even if ngOnChanges is not called due to no
-                    inputs
-                  </li>
-                </ul>
-              </li>
-              <li>
-                use to
-                <ul>
-                  <li>
-                    perform complex initializations shortly after construction -
-                    do this instead of complex logic in the constructor
-                  </li>
-                  <li>fetch initial data</li>
-                  <li>
-                    to set up the component after Angular sets the input
-                    properties
-                  </li>
-                </ul>
-              </li>
+              <li>perform complex initializations shortly after construction - do this instead of complex logic in the constructor</li>
+              <li>fetch initial data</li>
+              <li>to set up the component after Angular sets the input properties</li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h3>ngDoCheck</h3>
+      <section>
+        <ul>
+          <li>use to detect and act on changes that Angular doesn’t catch on its own</li>
+          <li>this has a high cost since it is called with enormous frequency = after every change detection cycle</li>
+          <li>make this very lightweight since things like mousing into another input can trigger it</li>
+          <li>Called after each ngOnChanges() and ngOnInit()</li>
+        </ul>
+      </section>
+
+      <h3>ngOnDestroy</h3>
+      <section>
+        <ul>
+          <li>import as OnDestroy</li>
+          <li>called just before the component is destroyed</li>
           <li>
-            ngDoCheck
+            use this to
             <ul>
-              <li>
-                use to detect and act on changes that Angular doesn’t catch on
-                its own
-              </li>
-              <li>
-                this has a high cost since it is called with enormous frequency
-                = after every change detection cycle
-              </li>
-              <li>
-                make this very lightweight since things like mousing into
-                another input can trigger it
-              </li>
-              <li>Called after each ngOnChanges() and ngOnInit()</li>
+              <li>unsubscribe observables and detach event handlers</li>
+              <li>stop interval timers</li>
+              <li>Unsubscribe callbacks that this directive registered with global or application services</li>
             </ul>
           </li>
-          <li>
-            ngOnDestroy
-            <ul>
-              <li>import as OnDestroy</li>
-              <li>called just before the component is destroyed</li>
-              <li>
-                use this to
-                <ul>
-                  <li>unsubscribe observables and detach event handlers</li>
-                  <li>stop interval timers</li>
-                  <li>
-                    Unsubscribe callbacks that this directive registered with
-                    global or application services
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+        </ul>
+      </section>
+
+      <h3>afterNextRender</h3>
+      <section>
+        <ul>
+          <li>Executes once and is similar to ngAfterViewInit</li>
+          <li>Does not execute in server side rendering</li>
+        </ul>
+      </section>
+
+      <h3>afterRender</h3>
+      <section>
+        <ul>
+          <li>Executes after every change detection</li>
         </ul>
       </section>
 
@@ -201,9 +157,7 @@
           <li>
             ngAfterContentInit
             <ul>
-              <li>
-                after Angular projects external content into the component view
-              </li>
+              <li>after Angular projects external content into the component view</li>
               <li>called once after the first ngDoCheck()</li>
             </ul>
           </li>
@@ -211,13 +165,8 @@
           <li>
             ngAfterContentChecked
             <ul>
-              <li>
-                after Angular checks the content projected into the component
-              </li>
-              <li>
-                called after ngAfterContentInit() and every subsequent
-                ngDoCheck()
-              </li>
+              <li>after Angular checks the content projected into the component</li>
+              <li>called after ngAfterContentInit() and every subsequent ngDoCheck()</li>
             </ul>
           </li>
         </ul>
@@ -230,22 +179,15 @@
           <li>
             ngAfterViewInit
             <ul>
-              <li>
-                after Angular initializes the component view and child views
-              </li>
+              <li>after Angular initializes the component view and child views</li>
               <li>called once after the first ngAfterContentChecked()</li>
             </ul>
           </li>
           <li>
             ngAfterViewChecked
             <ul>
-              <li>
-                called after Angular checks component views and child views
-              </li>
-              <li>
-                called after the ngAfterViewInit and every subsequence
-                ngAfterContentChecked
-              </li>
+              <li>called after Angular checks component views and child views</li>
+              <li>called after the ngAfterViewInit and every subsequence ngAfterContentChecked</li>
             </ul>
           </li>
         </ul>

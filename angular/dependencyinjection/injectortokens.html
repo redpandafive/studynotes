@@ -81,6 +81,11 @@
               <li>Assigns myService to that private variable</li>
               <li>The myService service will be injected into the component by Angular</li>
             </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>Constructor(private myService: MyService) ...</code>
+              </div>
+            </div>
           </li>
           <li>
             You can specify an optional dependency in the constructor
@@ -94,9 +99,115 @@
             </div>
           </li>
         </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>Constructor(private myService: MyService) ...</code>
+      </section>
+
+      <h2>Token Types</h2>
+
+      <h3>Type token</h3>
+      <section></section>
+
+      <h3>String Token</h3>
+      <section>
+        <ul>
+          <li>String literal that can be used to register a dependency</li>
+          <li>
+            Useful in the case of
+            <code>useValue</code>
+            when the dependency is a value not represented by a class
+          </li>
+          <li>
+            These can be risky since duplicates can overwrite each other
+            <ul>
+              <li>3rd party apps may also use a string key that will overwrite the one in your application</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @NgModule({
+                <br />
+                ....
+                <br />
+                providers: [
+                <br />
+                {provide:'IFRAME_URL', useValue: './assets/car/dash' },
+                <br />
+                ],
+                <br />
+                bootstrap: [AppComponent]
+                <br />
+                })
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Use @Inject in the constructor to inject the dependency
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export class AppComponent {
+                <br />
+                constructor(@Inject('IFRAME_URL') private iframeUrl:string) {}
+                <br />
+                ...
+                <br />
+                }
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Injection Token</h3>
+      <section>
+        <ul>
+          <li>These are safer than strings since these can be used to create unique tokens each time</li>
+        </ul>
+        <div>
+          Define an InjectionToken and store it in a providers.ts file
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { InjectionToken } from "@angular/core";
+                <br />
+                <br />
+                export const IFRAME_URL = new InjectionToken&lt;string&gt;('');
+                <br />
+                export const IS_PUBLIC= new InjectionToken&lt;boolean&gt;('');
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @NgModule({
+                <br />
+                ...
+                <br />
+                providers: [
+                <br />
+                {provide:IFRAME_URL, useValue: './assets/car/dash' },
+                <br />
+                {provide:IS_PUBLIC, useValue: true }
+                <br />
+                ],
+                <br />
+                bootstrap: [AppComponent]
+                <br />
+                })
+                <br />
+                export class AppModule {}
+                <br />
+              </code>
+            </div>
           </div>
         </div>
       </section>
@@ -116,73 +227,6 @@
             An example of this would be using Toastr
             <ul>
               <li>Instead of wrapping a custom service class around the global Toastr object, you can create an injection token so the Toastr object is injected into components</li>
-            </ul>
-          </li>
-          <li>
-            First create a token that you can use in dependency injection without creating a class. In a file (toastr..service.ts)...
-            <ul>
-              <li>Import InjectionToken from @angular/core</li>
-              <li>
-                Create an instance of the InjectionToken
-                <div class="card">
-                  <div class="card-body">
-                    <code>export let TOASTR_TOKEN = new InjectionToken&lt;Toastr&gt;(&quot;toastr&quot;)</code>
-                  </div>
-                </div>
-                <ul>
-                  <li>Convention is to name in all caps</li>
-                  <li>TOASTR_TOKEN is a JavaScript object</li>
-                  <li>String in the parameter is a description used in debugging</li>
-                </ul>
-              </li>
-              <li>Define a Toastr interface within this file and provide the methods that should be available on it. This is just for type safety</li>
-            </ul>
-          </li>
-          <li>
-            In module
-            <ul>
-              <li>
-                Import the InjectionToken
-                <div class="card">
-                  <div class="card-body">
-                    <code>import {TOASTR_TOKEN } from &quot;toaster.service&quot;</code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                Declare the global object for toastr in the module
-                <div class="card">
-                  <div class="card-body">
-                    <code>let toastr: Toastr = window&#91;&quot;toastr&quot;&#93;</code>
-                  </div>
-                </div>
-                <ul>
-                  <li>This tells TypeScript that there will be a toastr object in the global namespace that it is not aware of</li>
-                  <li>It will be of type Toastr, the interface defined previously</li>
-                </ul>
-              </li>
-              <li>
-                Register the injection token in the providers section of the module
-                <div class="card">
-                  <div class="card-body">
-                    <code>{ provide: TOASTR_TOKEN, useValue: toastr }</code>
-                  </div>
-                </div>
-                <ul>
-                  <li>This tells registration that whenever anyone requests a dependency using the TOASTR_TOKEN token, give them the toastr object from the global space</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            In the component you want to use it in, add the following as a parameter to the constructor
-            <div class="card">
-              <div class="card-body">
-                <code>@Inject(TOASTR_TOKEN) private toastr: Toaster</code>
-              </div>
-            </div>
-            <ul>
-              <li>Need to import Inject from @angular/core</li>
             </ul>
           </li>
         </ul>

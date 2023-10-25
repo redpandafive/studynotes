@@ -259,6 +259,22 @@
         </div>
       </section>
 
+      <h3>Object.freeze()</h3>
+      <section>
+        <ul>
+          <li>Prevents extensions and makes existing properties non-writable and non-configurable
+            <ul>
+              <li>New properties cannot be added</li>
+              <li>Existing properties cannot be removed</li>
+              <li>Their enumerability, configurability, writability, or value cannot be changed</li>
+              <li>The object's prototype cannot be re-assigned</li>
+            </ul>
+          </li>
+          <li>Freezing an object is the highest integrity level that JavaScript provides.</li>
+          <li>Calling freeze() on it again returns the same object</li>
+        </ul>
+        </section>
+
       <h3>Object.keys()</h3>
       <section>
         <ul>

@@ -31,20 +31,22 @@
       <section>
         <ul>
           <li>
-            A provider tells an injector how to obtain or create a dependency
+            An instruction for how the object is created when a certain token is sent to the DI
             <ul>
-              <li>You must configure an injector with a provider before that injector can create an instance of a dependency</li>
+              <li>Used to register classes, functions, or values as dependencies using Angular’s Dependency Injection (DI) system.</li>
+              <li>A provider tells an injector how to obtain or create a dependency</li>
             </ul>
           </li>
+
           <li>
-            A dependency provider configures an injector with a DI Tokens, which that injector uses to provide a concrete, runtime version of a dependency value
+            A dependency provider configures an injector with DI tokens, which that injector uses to provide a concrete, runtime version of a dependency value
             <ul>
               <li>When you configure an injector with a provider, you associate that provider with a DI token</li>
               <li>The injector maintains an internal token provider map that it references when asked for a dependency</li>
               <li>
                 Usually, the dependency value is an instance and the class type serves as its own lookup key
                 <ul>
-                  <li>Default behavior is of the injector to instantiate the class with new</li>
+                  <li>Default behavior is for the injector to instantiate the class with new keyword</li>
                   <li>It doesn't have to be a service, it could be a function or a value</li>
                 </ul>
               </li>
@@ -55,32 +57,238 @@
             <ul>
               <li>Interfaces are a TypeScript design time artifact and are not transpiled to the final JavaScript</li>
               <li>Since there is not runtime equivalent, interfaces cannot be a token, nor can they be injected</li>
-            </ul> 
+            </ul>
           </li>
-          <li>Angular CLI will by default register the provider with the root injector</li>
+          <li>Provider scope can be used to register a dependency  with different injectors
+            <ul>
+              <li>Angular CLI will by default register the provider with the root injector</li>
+            </ul>
+          </li>
+          <li>Angular will not throw an error if the same token is registered mulitple time
+            <ul>
+              <li>If this is done at the same provider scope, the last to register will be used</li>
+              <li>If this is done in different provider scopes, the injector closest to the component / service will provide its copy of the dependency</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
       <h2>Providing a Dependency</h2>
       <section>
         <ul>
-          <li>Decorate a dependency class with the @Injectable decorator to show that it can be injected</li>
-
+          <li>A dependency class should be deocrated with the @Injectable decorator to show that it can be injected</li>
           <li>
-            A dependency can be provided in multiple places, making it available in the DI
+            The dependency class itself can be the provider, allowing the associated injector to use
+            <code>new</code>
+            to create an instance
+          </li>
+          <li>
+            The recommened way to register a service with DI is to use the Injectable decorator
+            <ul>
+              <li>This provides the service to the root injector</li>
+              <li>This means a single instance of the service will be shared through the application</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  @Injectable({
+                  <br />
+                  providedIn: 'root',
+                  <br />
+                  })
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            A dependency can also be provided at other points if needed by using the providers array:
             <ul>
               <li>At the component level</li>
               <li>At the NgModule level</li>
               <li>At the application root level</li>
             </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  @Component({
+                  <br />
+                  selector: 'app-root',
+                  <br />
+                  templateUrl: './app.component.html',
+                  <br />
+                  providers:[LoggerService]
+                  <br />
+                  })
+                  <br />
+                  export class AppComponent {
+                  <br />
+                  .....
+                  <br />
+                  }
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Under the hood, this is converted to the longhand version:
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  ...
+                  <br />
+                  providers:[{
+                  <br />
+                  provide : LoggerService,
+                  <br />
+                  useClass : LoggerService
+                  <br />
+                  }]
+                  <br />
+                  .....
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            The longhand version can be explicity used to tell Angular how to create the depenency instance:
+            <ul>
+              <li>
+                The first parameter (provide) holds the token that serves as the key for both locating a dependency value and configuring the injector
+                <ul>
+                  <li>This is used to locate providers in the Providers array of the associated injector</li>
+                  <li>
+                    There are several different types of tokens that can be used - see
+                    <a href="injectortokens.html">Injector Tokens</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                The second property is a provider definition object, which tells the injector how to create the dependency value
+                <ul>
+                  <li>UseClass</li>
+                  <li>UseExisting</li>
+                  <li>UseFactory</li>
+                  <li>UseValue</li>
+                </ul>
+              </li>
+            </ul>
           </li>
         </ul>
       </section>
 
+      <h3>Provider Definition Option: UseClass</h3>
+      <section>
+        <ul>
+          <li>
+            Lets you create and return a new instance of the specified class.
+            <ul>
+              <li>You can configure a DI to use a different class or any other different value to associate with the token</li>
+            </ul>
+          </li>
+          <li>
+            Use this type of provider to substitute an alternative implementation for a common or default class
+            <ul>
+              <li>Useful for something like testing a component that requires localstorage</li>
+            </ul>
+          </li>
+          <li>
+            This is the default. The following two configurations are equivalent:
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  providers:[ LoggerService ]
+                  <br />
+                  ...
+                  <br />
+                  providers:[{ provide : LoggerService, useClass : LoggerService }]
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            This will provide an instance of BetterLogger when Logger is requested
+            <div class="card">
+              <div class="card-body">
+                <code>&#91;{ provide: Logger, useClass: BetterLogger }&#93;</code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Provider Definition Option: UseExisting</h3>
+      <section>
+        <ul>
+          <li>Lets you map one token to another, creating two tokens that access the same service object.</li>
+          <li>Probably will never need this</li>
+          <li>Also known as the alias provider</li>
+          <li>
+            Situations where you would want to use this to minimize an API
+            <ul>
+              <li>They would get the full class, but Intellisense would only be able to see the methods defined on OldLogger</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          This will create an instance and provide a NewLogger instance whenever OldLogger is requested
+          <ul>
+            <li>OldLogger is a class, but it is never instantiated</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>&#91;{ provide: OldLogger, useExisting: NewLogger }&#93;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Provider Definition Option: UseFactory</h3>
+      <section>
+        <ul>
+          <li>Allows you to define a factory function that constructs a dependency.</li>
+          <li>This allows you to create a dynamic value based on information available in the DI and elsewhere in the app</li>
+          <li>
+            <a href="https://angular.io/guide/dependency-injection-providers#factory-providers-usefactory" target="_blank">https://angular.io/guide/dependency-injection-providers#factory-providers-usefactory</a>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Provider Definition Option: UseValue</h3>
+      <section>
+        <ul>
+          <li>Provides a static value that should be used as a dependency</li>
+          <li>You can use this to pass in a function via injection</li>
+          <li>Use this technique to provide runtime configuration constants such as website base addresses and feature flag</li>
+          <li>
+            Use this to pass in JSON objects (see
+            <a href="injectingStatics.html">Injecting Static Values</a>
+            )
+          </li>
+          <li>
+            <a href="injectortokens.html#injectionToken">Combine with a custom InjectionToken class to choosing a provider token for non-class dependencies</a>
+          </li>
+        </ul>
+        <div>
+          The following provides the object held in variable silentLogger whenever Logger is requested
+          <div class="card">
+            <div class="card-body">
+              <code>&#91;{ provide: Logger, useValue: silentLogger }&#93;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Provider Scope</h2>
+
+
       <h3>Component Level</h3>
       <section>
         <ul>
-          <li>Use the providers field of the @Component decorator</li>
+          <li>Uses the providers field of the @Component decorator</li>
           <li>You get a new instance of the dependency with each new instance of the component</li>
           <li>Dependency will be available to all instances of this component and other components and directives used in the tempalte</li>
           <li>
@@ -156,122 +364,6 @@
           <div class="card-body">
             @Injectable({ providedIn: 'root' }) class HeroService {}
             <br />
-          </div>
-        </div>
-      </section>
-
-      <h3>Registering a Class as a Provider</h3>
-      <section>
-        <ul>
-          <li>
-            The dependency class itself can be the provider, allowing the associated injector to use
-            <code>new</code>
-            to create an instance
-          </li>
-          <li>DI is easiest when a provider token is a class that is also the type of returned dependency object, or services</li>
-          <li>Most of the time, you will use the the shorthand syntax = just the class name</li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>providers: [Logger]</code>
-          </div>
-        </div>
-      </section>
-
-      <h2>Registering a Class as a Provider When the Token Is Different</h2>
-      <section>
-        <ul>
-          <li>You can configure a DI to use a different class or any other different value to associate with the token</li>
-          <li>Useful for something like testing a component that requires localstorage</li>
-          <li>
-            There is a longhand version to register a class as a provider
-            <ul>
-              <li>provide – holds the token that serves as the key for both locating a dependency value and configuring the injector</li>
-              <li>
-                The second property is a provider definition object, which tells the injector how to create the dependency value
-                <ul>
-                  <li>UseClass</li>
-                  <li>UseExisting</li>
-                  <li>UseFactory</li>
-                  <li>UseValue</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h3>Provider Definition Option: UseClass</h3>
-      <section>
-        <ul>
-          <li>Lets you create and return a new instance of the specified class.</li>
-          <li>Use this type of provider to substitute an alternative implementation for a common or default class</li>
-          <li>
-            This will provide an instance of BetterLogger when Logger is requested
-            <div class="card">
-              <div class="card-body">
-                <code>&#91;{ provide: Logger, useClass: BetterLogger }&#93;</code>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <h3>Provider Definition Option: UseExisting</h3>
-      <section>
-        <ul>
-          <li>Lets you map one token to another, creating two tokens that access the same service object.</li>
-          <li>Probably will never need this</li>
-          <li>Also known as the alias provider</li>
-          <li>
-            Situations where you would want to use this to minimize an API
-            <ul>
-              <li>They would get the full class, but Intellisense would only be able to see the methods defined on OldLogger</li>
-            </ul>
-          </li>
-        </ul>
-        <div>
-          This will create an instance and provide a NewLogger instance whenever OldLogger is requested
-          <ul>
-            <li>OldLogger is a class, but it is never instantiated</li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>&#91;{ provide: OldLogger, useExisting: NewLogger }&#93;</code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Provider Definition Option: UseFactory</h3>
-      <section>
-        <ul>
-          <li>Allows you to define a factory function that constructs a dependency.</li>
-          <li>This allows you to create a dynamic value based on information available in the DI and elsewhere in the app</li>
-          <li>
-            <a href="https://angular.io/guide/dependency-injection-providers#factory-providers-usefactory" target="_blank">https://angular.io/guide/dependency-injection-providers#factory-providers-usefactory</a>
-          </li>
-        </ul>
-      </section>
-
-      <h3>Provider Definition Option: UseValue</h3>
-      <section>
-        <ul>
-          <li>Provides a static value that should be used as a dependency</li>
-          <li>You can use this to pass in a function via injection</li>
-          <li>Use this technique to provide runtime configuration constants such as website base addresses and feature flag</li>
-          <li>
-            <a href="injectortokens.html#injectionToken">
-              Combine with a custom InjecionToken class to choosing a provider token for non-class dependencies
-            </a>
-          </li>
-        </ul>
-        <div>
-          Provides the object held in variable silentLogger whenever Logger is requested
-          <div class="card">
-            <div class="card-body">
-              <code>&#91;{ provide: Logger, useValue: silentLogger }&#93;</code>
-            </div>
           </div>
         </div>
       </section>

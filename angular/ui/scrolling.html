@@ -6,11 +6,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../../assets/bootstrap/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -21,40 +18,62 @@
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
           <li class="breadcrumb-item">
-            <a href="../../../index.html">Home</a>
+            <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item">
-            <a href="../../index.html">Angular</a>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="../index.html">Cookbook</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Scroll to a Page Element
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Scrolling</li>
         </ol>
       </nav>
 
-      <h1 id="scrolling">Scroll to a Page Element</h1>
-      
+      <h1>Scrolling</h1>
+
       <section>
         <ul>
-          <li>Use the built in Angular service ViewportScroller</li>
+          <li>Uses the ViewportScroller service as a scroll position manager</li>
+        </ul>
+      </section>
+
+      <h2>Methods</h2>
+      <section>
+        <ul>
           <li>
-            There are several methods on this service to scrolling
+            scrollToAnchor()
             <ul>
-              <li>
-                scrollToAnchor(idAsString)
-                <ul>
-                  <li>Scrolls to the specified element with id idAsString</li>
-                </ul>
-              </li>
+              <li>Use to scroll to an anchor element</li>
+              <li>Parameter is the ID of the anchor element to scroll to</li>
             </ul>
           </li>
         </ul>
       </section>
+
+      <h2>Additional Settings</h2>
+      <section>
+        <ul>
+          <li>Set the scrolling method on the root HTML, Body tag to use native browser smooth scrolling</li>
+          <li>Make sure you set this in the root stylesheet, not one of the component stylesheets</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>html, body { height: 100%; scroll-behavior: smooth; }</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://angular.io/api/common/ViewportScroller" target="_blank">https://angular.io/api/common/ViewportScroller</a>
+          </li>
+          <li>
+            <a href="https://medium.com/@navyjot/smooth-scroll-in-angular-c3e9942d23a1" target="_blank">https://medium.com/@navyjot/smooth-scroll-in-angular-c3e9942d23a1</a>
+          </li>
+        </ul>
+      </section>
     </div>
-    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
 </html>
