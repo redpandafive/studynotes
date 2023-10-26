@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Basics</li>
+        </ol>
+      </nav>
+
+      <h1>Basics</h1>
+
+      <section>
+      <ul>
+        <li>Reactive Extensions for JavaScript</li>
+        <li>"A library for composing asynchronous an event based programs by using observable sequences"
+          <ul>
+            <li>Provides a way to observe and react to data as it flows through time and the application</li>
+            <li>Data is emitted over time and can be transformed, filtered, modified, combined, and cached</li>
+          </ul>
+        </li>
+        <li>
+          This is one method for handling asynchronous data flow.  Over methods include
+          <ul>
+            <li>Callbacks - a function called when data is returned</li>
+            <li>Promises - an object that will return a single data set from an asynchronous operation.  It is not cancellable.</li>
+            <li>Async / await
+              <ul>
+                <li>Syntax for writing asynchronous code</li>
+                <li>The code looks synchronous</li>
+                <li>Can only handle a single emission</li>
+                <li>Not cancellable</li>
+              </ul></li>
+          </ul>
+        </li>
+        <li>
+          Benefits to RxJS over other asynchronous methods:
+          <ul>
+            <li>The same techniques and operators work with a variety of data sources, including HTTP calls, mouse events, etc</li>
+            <li>Easily allows composition of data from multiple data sources</li>
+            <li>Can product multiple values over time</li>
+            <li>Lazy evalaution - does not start processing data streams until subscription</li>
+            <li>Handles errors with built in operators</li>
+            <li>Asynchronous actions are cancellable</li>
+          </ul>
+        </li>
+        <li>
+          Angular was build aroundRxJS and observables
+          <ul>
+            <li>Many features use observables to watch for changes, including:
+              <ul>
+                <li>
+                  Route changes and updates
+                </li>
+                <li>
+                  Reactive forms and changes
+                </li>
+                <li>
+                  HttpClient for HTTP communication
+                </li>
+                <li>
+                  Allows a more reactive style programming (see <a href="../programmingStyles/reactive.html">Rective Programming</a>)
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+
+    <h2>Vocabulary</h2>
+    <section>
+      <ul>
+        <li>
+          <a href="observables.html">Observables</a>
+        </li>
+      </ul>
+    </section>
+
+
+
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

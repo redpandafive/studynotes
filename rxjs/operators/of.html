@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -27,27 +24,108 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Of</li>
+          <li class="breadcrumb-item active" aria-current="page">Of, From, FromEvent Operators</li>
         </ol>
       </nav>
 
-      <h1>Of</h1>
+      <h1>Of, From, FromEvent Operators</h1>
+
+      <h2>Of and From</h2>
 
       <section>
         <ul>
-          <li>Import from 'rxjs'</li>
-
-          <li>
-            Returns an observable that emits a single value, such as an array of
-            objects
+          <li>These operators
             <ul>
-              <li>
-                Creates an observable object wrapped around the object you pass
-                in
-              </li>
+              <li>Create an observable object around the values passed in</li>
+              <li>Emit each object one at a time</li>
+              <li>Once all items have been emitted, the complete method is called automatically</li>
+              <li>DO NOT NEED TO UNSUBSCRIBE FROM THESE - the complete method handles this</li>
             </ul>
           </li>
-          <li>The returned observable immediately completes</li>
+        </ul>
+      </section>
+
+      <h3 id="of">Of</h3>
+      <section>
+        <ul>
+          <li>Returns an observable that emits a single value</li>
+          <li>If you pass in an single array with 5 items, you will get 1 emission (the entire array)
+            <ul>
+              <li>You would have to use the spread operator (...) to get an equivalent output as the <code>from</code> operator</li>
+            </ul>
+          </li>
+          <li>You can pass in a comma separated list and you get one emission for each item in the comma separated list</li>
+        </ul>
+        <div>
+          Emits 1 value , [2, 4, 6, 8].  The parameter to the subscribe method is the next() function.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                of([2, 4, 6, 8]).subscribe(item => console.log(item))<br/>
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>        
+        <div>
+          Emits 4 values separately, 2, 4, 6, 8
+          <div class="card">
+            <div class="card-body">
+              <code>
+                of(...[2, 4, 6, 8]).subscribe(item => console.log(item))<br/>
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3 id="from">From</h3>
+      <section>
+        <ul>
+          <li>returns an observable that will emit each item in the provided collection</li>
+          <li>If you pass in an array with 5 items, you will get 5 emissions (one for each item in the array)</li>
+        </ul>
+        <div>
+          Emits 4 values separately, 2, 4, 6, 8
+          <div class="card">
+            <div class="card-body">
+              <code>
+                from([2, 4, 6, 8]).subscribe(item => console.log(item))<br/>
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>FromEvent</h2>
+      <section>
+        <ul>
+          <li>Creates an Observable from any DOM event</li>
+          <li>It is easier to work with event binding in Angular to do this</li>
+        </ul>
+        <div>
+          This logs an event whenever a click event fires on the ViewChild element
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @ViewChild('para') par: ElementRef; <br/>
+                const parStream = fromEvent(this.par.nativeElement, 'click').subscribe(console.log); <br/>
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Interval</h2>
+      <section>
+        <ul>
+          <li>A creation operator that creates an Observable that emits a sequential number at a defined interval</li>
+          <li>This can be used to create an asynchronous set of numbers for testing</li>
+          <li>Parameter is the number of milliseconds between emissions</li>
+          <li>This will continue to emit values until the Observable is stopped</li>
         </ul>
       </section>
     </div>

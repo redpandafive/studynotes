@@ -39,10 +39,32 @@
             </ul>
           </li>
           <li>
+            Code is reactive when an input change leads to an automatic change in output
+            <ul>
+              <li>Changes are emitted and the application reacts to those changes appropriately</li>
+              <li>Code can react to 
+                <ul>
+                  <li>User actions</li>
+                  <li>State changes (instead of procedurally calling methods)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Data streams can be combined to compose data from multiple sources
+          </li>
+          <li>
+            vs Imperative programming
+            <ul>
+              <li>In imperative programming, variables are assigned whent an expression is first evaluated</li>
+              <li>In reactive programming, variables observe and react to changes</li>
+            </ul>
+          </li>
+          <li>
             Idea that everything is a stream
             <ul>
               <li>A sequence of data elements made available over time</li>
-              <li>Think of as items on a conveyor belt being processed one at a time reather than in large batches</li>
+              <li>Think of it as items on a conveyor belt being processed one at a time reather than in large batches</li>
               <li>
                 Data and events can be represented as streams of data over time
                 <ul>
