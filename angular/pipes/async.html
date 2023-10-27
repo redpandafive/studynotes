@@ -30,7 +30,21 @@
 
       <section>
         <ul>
-          <li>Unwraps a value from an asynchronous primitive from inside the template syntax</li>
+          <li>
+            Unwraps a value from an asynchronous primitive from inside the template syntax
+            <ul>
+              <li>Allows you to use an observable in a for loop, saving boilerplate code</li>
+            </ul>
+          </li>
+          <li>
+            Allows access to an observable directly in a template
+            <ul>
+              <li>Automatically subscribes to the Observable when a component is initialized</li>
+              <li>Each emitted value is returned</li>
+              <li>When a new item is emitted, the component is makred to be checked for change detection</li>
+              <li>Automatically unsubscribes when component is destroyed</li>
+            </ul>
+          </li>
           <li>
             Subscribes to an Observable or Promise automatically so you don't have to do so in the component class
             <ul>
@@ -48,7 +62,6 @@
             </ul>
           </li>
           <li>This is an impure pipe</li>
-          <li>Allows you to use an observable in a for loop, saving boilerplate code</li>
           <li>
             Handling errors can be tricky, but here is one approach from
             <a href="https://www.youtube.com/watch?v=kb9CBd2c4uA" target="_blank">https://www.youtube.com/watch?v=kb9CBd2c4uA</a>
@@ -61,12 +74,38 @@
         </ul>
       </section>
 
+      <h2>Syntax</h2>
+      <section>
+        <ul>
+          <li>$ is a convention indicating that the source is an observable (the observable should be named this)</li>
+          <li>
+            In the tempalte, define a variable on the first call to the observable. This way you can reference the value later in the template without using the pipe.
+            <div class="card">
+              <div class="card-body">
+                <code>&lt;li *ngIf=&quot;products$ | async as products&gt;</code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Error Handling</h2>
+      <section>
+        <ul>
+          <li>Any error will stop an observable stream, so errors must be handled to prevent the stream from crashing
+            <ul>
+              <li>Typically replace the errored Observable with a new Observable</li>
+            </ul>
+          </li>
+          <li>Errors can be rethrown</li>
+        </ul>
+      </section>
+
       <h2>Examples</h2>
       <section>
         <div>
           Example 1
           <ul>
-            <li>$ is a convention indicating that the source is an observable (the observable should be named this)</li>
             <li>The component class would have an observable property declared named heros$</li>
           </ul>
           <div class="card">
@@ -83,10 +122,7 @@
           </ul>
           <div class="card">
             <div class="card-body">
-              <code>
-                &lt;li *ngIf=&quot;users$ | async as user; else loading&quot;&gt; ...
-                &lt;ng-template #loading>... display something indicating a load is going on ...&lt;/ng-template>
-              </code>
+              <code>&lt;li *ngIf=&quot;users$ | async as user; else loading&quot;&gt; ... &lt;ng-template #loading>... display something indicating a load is going on ...&lt;/ng-template></code>
             </div>
           </div>
         </div>
@@ -102,9 +138,10 @@
             <div class="card">
               <div class="card-body">
                 <code>
-                  return this.http.get&lt;DataObject&gt;("http://mytargeturl.com").pipe(<br/>
-                  shareReplay(1)
-                  )<br/>
+                  return this.http.get&lt;DataObject&gt;("http://mytargeturl.com").pipe(
+                  <br />
+                  shareReplay(1) )
+                  <br />
                 </code>
               </div>
             </div>
@@ -119,10 +156,14 @@
             <div class="card">
               <div class="card-body">
                 <code>
-                  do$ = this.dataObjectService.getDataObject();<br/>
-                  doError$ = this.do$.pipe(<br/>
-                    ignoreElements(),<br/>
-                    catchError((err) => of(err))<br/>
+                  do$ = this.dataObjectService.getDataObject();
+                  <br />
+                  doError$ = this.do$.pipe(
+                  <br />
+                  ignoreElements(),
+                  <br />
+                  catchError((err) => of(err))
+                  <br />
                   );
                 </code>
               </div>
@@ -132,33 +173,48 @@
             In the template...
             <ul>
               <li>
-                One optimization is to create a dumb component to handle this.  See here <a href="https://www.youtube.com/watch?v=ydZK53Vmzf0">https://www.youtube.com/watch?v=ydZK53Vmzf0</a>
+                One optimization is to create a dumb component to handle this. See here
+                <a href="https://www.youtube.com/watch?v=ydZK53Vmzf0">https://www.youtube.com/watch?v=ydZK53Vmzf0</a>
               </li>
             </ul>
             <div class="card">
               <div class="card-body">
                 <code>
-                  &lt;ng-container *ngIf="{user: user$ | async, userError: userError$ | async} as vm"&gt; <br/>
-                  &lt;div *ngIf="!vm.userError && vm.user as user; else loading"&gt; <br/>
-                  &lt;div&gt; <br/>
-                      {{ user }} <br/>
-                  &lt;/div&gt; <br/>
-                  &lt;/div&gt; <br/>
-                  &lt;div *ngIf="vm.userError as error"&gt; <br/> 
-                  {{ error }} &lt; <br/>
-                  /div&gt; <br/>              
-                  &lt;ng-template #loading&gt; <br/>
-                  &lt;div *ngIf="!vm.userError"&gt; <br/>
-                        Loading... <br/>
-                      &lt;/div&gt; <br/>
-                  &lt;/ng-template&gt; <br/>
-                  &lt;/ng-container&gt; <br/>
+                  &lt;ng-container *ngIf="{user: user$ | async, userError: userError$ | async} as vm"&gt;
+                  <br />
+                  &lt;div *ngIf="!vm.userError && vm.user as user; else loading"&gt;
+                  <br />
+                  &lt;div&gt;
+                  <br />
+                  {{ user }}
+                  <br />
+                  &lt;/div&gt;
+                  <br />
+                  &lt;/div&gt;
+                  <br />
+                  &lt;div *ngIf="vm.userError as error"&gt;
+                  <br />
+                  {{ error }} &lt;
+                  <br />
+                  /div&gt;
+                  <br />
+                  &lt;ng-template #loading&gt;
+                  <br />
+                  &lt;div *ngIf="!vm.userError"&gt;
+                  <br />
+                  Loading...
+                  <br />
+                  &lt;/div&gt;
+                  <br />
+                  &lt;/ng-template&gt;
+                  <br />
+                  &lt;/ng-container&gt;
+                  <br />
                 </code>
               </div>
             </div>
           </div>
         </div>
-
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

@@ -32,39 +32,34 @@
 
       <section>
         <ul>
-          <li>Operator that intercepts an Observable that failed.
-            <ul>
-              <li>
-                If you don't catch and handle an error, the entire stream will be destroyed
-              </li>
-            </ul>
-          </li>          
           <li>
-            If this operator is used and an error does not occur, it outputs the inputted observable (no effect)
+            Operator that intercepts an Observable that failed.
+            <ul>
+              <li>If you don't catch and handle an error, the entire stream will be destroyed</li>
+            </ul>
           </li>
+          <li>If this operator is used and an error does not occur, it outputs the inputted observable (no effect)</li>
           <li>
             If an error does occur:
             <ul>
-              <li>
-                It passes the error to an error handler function that can do what it
-                wants with the error
-              </li>
-              <li>
-                The handler returns a replacement observable so the stream can continue
-              </li>
-              <li>
-                The handler can optionally throw an error
-              </li>
+              <li>It passes the error to an error handler function that can do what it wants with the error</li>
+              <li>The handler returns a replacement observable so the stream can continue</li>
+              <li>The handler can optionally throw an error</li>
             </ul>
           </li>
+          <li>This operator must be after any operator that could generate an error to work correctly</li>
           <li>
-            The handler function takes a parameter of a HttpErrorReponse object
+            Pass a handler function as a paraemter
+            <ul>
+              <li>The handler function takes a parameter of a HttpErrorReponse object</li>
+              <li>This hander can optionally rethrow the error or replace the error Observable to continue after an error occurs</li>
+            </ul>
           </li>
         </ul>
       </section>
 
-      <div>
-        Simple example
+      <h2>Simple Example</h2>
+      <section>
         <ul>
           <li>This will return EMPTY values when the stream fails</li>
           <li>This will fix the broken stream by substituting and EMPTY observable</li>
@@ -72,15 +67,16 @@
         <div class="card">
           <div class="card-body">
             <code>
-              this.http.get&lt;DataObject&gt;("http://mytargeturl").pipe(<br />
-              catchError(() => EMPTY)<br />
-              )<br />
-              
+              this.http.get&lt;DataObject&gt;("http://mytargeturl").pipe(
+              <br />
+              catchError(() => EMPTY)
+              <br />
+              )
+              <br />
             </code>
           </div>
         </div>
-      </div>
-
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

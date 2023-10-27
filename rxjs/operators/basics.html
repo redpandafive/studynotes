@@ -33,26 +33,56 @@
       <section>
         <ul>
           <li>
-            These operate on an Observable and return an Observable
+            Operators are functions used to transform and manipulate emitted items
             <ul>
-              <li>This allows you to chain operators together to perform complete transformations</li>
+              <li>For each item emitted, the value passed through a set of operators in sequence using the Observable's pipe method</li>
+              <li>Often, these take an arrow function as a parameter</li>
+              <li>For each emitted item, the value from the last operator in the pipeline is emitted by the Observable's next method</li>
             </ul>
           </li>
-          <li>Important thing to remember operators operate on stream emissions, not values of stream emissions</li>
-          <li>These allow you to shape the data being returned</li>
-          <li>These need to be imported into your component before you use them</li>
+          <li>These were fashioned after LINQ in .NET</li>
+          <li>
+            These take an Observable and return an Observable
+            <ul>
+              <li>This allows you to chain operators together to perform complete transformations</li>
+              <li>The Input Observable is the observable object passed to an operator</li>
+              <li>Operators will automatically subscribe to their input observable</li>
+              <li>
+                Operators create and return a new observable called an Output Observable
+                <ul>
+                  <li>This is passed to the next operator in the pipeline</li>
+                </ul>
+              </li>
+              <li>This process repeats for each operator in the pipeline</li>
+            </ul>
+          </li>
+          <li>There are around 100 operators in RxJS</li>
         </ul>
       </section>
 
-
+      <h2>Marble Diagrams</h2>
+      <section>
+        <ul>
+          <li>Describes an RxJS operator</li>
+          <li>The lines represent the flow of time
+            <ul>
+              <li>The top line represents the Source Observable to the operator</li>
+              <li>The bottom line represents the Output Observable to the operator</li>
+            </ul>
+          </li>
+          <li>Each emitted item is represented by a marble on the timeline</li>
+          <li>A straight vertical line represents a complete notification (for operators that automatically complete)</li>
+          <li>An x on a line represents an error</li>
+        </ul>
+      </section>
 
       <h2>Most Used Operators</h2>
       <section>
         <ul>
           <li>While there are a lot of operators in RxJS, you will probably only use a subset on a regular basis</li>
           <li>
-            Most Used Operators according to <a href="https://www.youtube.com/watch?v=Byttv3YpjQk" target="_blank">https://www.youtube.com/watch?v=Byttv3YpjQk</a>
-
+            Most Used Operators according to
+            <a href="https://www.youtube.com/watch?v=Byttv3YpjQk" target="_blank">https://www.youtube.com/watch?v=Byttv3YpjQk</a>
           </li>
           <section>
             <ul>
@@ -60,7 +90,7 @@
                 <a href="catcherror.html">CatchError</a>
               </li>
               <li>
-                <a href="combineLatest.html">CombineLatest</a>                
+                <a href="combineLatest.html">CombineLatest</a>
               </li>
               <li>
                 <a href="switchmap.html">ConcatMap</a>
@@ -90,6 +120,16 @@
           </section>
         </ul>
       </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https:://rxjs.dev">https://rxjs.dev</a>
+          </li>
+        </ul>
+      </section>
+      >
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

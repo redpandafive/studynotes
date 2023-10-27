@@ -22,19 +22,21 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Declarative Coding in Angular</li>
+          <li class="breadcrumb-item active" aria-current="page">Declarative / Reactive Coding in Angular</li>
         </ol>
       </nav>
 
-      <h1>Declarative Coding in Angular</h1>
+      <h1>Declarative / Reactive Coding in Angular</h1>
       <section>
         <ul>
           <li>
             Writing declarative and reactive code in Angular can simplify and reduce component code
-            <ul></ul>
+            <ul>
+              <li>Benefits to declarative coding really shines the more complex your Angular code becomes</li>
+              <li>Improved performance, handles state, simplifies code</li>
+            </ul>
           </li>
-          <li>Benefits to declarative coding really shine the more complex your Angular code becomes</li>
-          <li>There are times when an imperative solution is easier to understand</li>
+          <li>Howerver, there are times when an imperative solution is easier to understand</li>
           <li>
             Angular uses RxJS extensively; it is intended to be used reactively.
             <ul>
@@ -46,7 +48,27 @@
         </ul>
       </section>
 
-      <h2>Minimize Subscribe Calls</h2>
+      <h2>Going Reactive</h2>
+      <section>
+        <ul>
+          <li>Work with and bind to Observables directly</li>
+          <li>Setup RxJS pipelines that levereage operators</li>
+          <li>Define reactive streams to react to user actions</li>
+        </ul>
+      </section>
+
+      <h2>Recommendations</h2>
+
+      <h3>Async Pipe in Tempaltes</h3>
+      <section>
+        <ul>
+          <li>
+            See <a href="../pipes/async.html">Async</a>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Minimize Subscribe Calls</h3>
       <section>
         <ul>
           <li>Work with streams in your component, not necessarily the data results that are emitted from Observables</li>
@@ -85,7 +107,7 @@
         </ul>
       </section>
 
-      <h2>Use Async Data Pipe in Templates</h2>
+      <h3>Use Async Data Pipe in Templates</h3>
       <section>
         <ul>
           <li>Eliminates subscribes and unsubscribes in the component</li>

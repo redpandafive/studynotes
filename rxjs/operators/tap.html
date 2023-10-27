@@ -33,15 +33,26 @@
       <section>
         <ul>
           <li>
+            Taps into the emissions without affecting the items
+            <ul>
+              <li>Subscribes to its input Observable</li>
+              <li>Creats an output Observable and emits the item to the output Observable</li>
+            </ul>
+          </li>
+          <li>
             Looks at the observable values, does something with those values, and passes them along unmodifed to operators that follow it
             <ul>
-              <li>Returns an observable that is identical to the source observable</li>
+              <li>Returns an observable that is always identical to the source observable</li>
             </ul>
           </li>
           <li>
             Useful when you need to "jump out of the stream" and observe values in the stream at a particular point. Use cases include:
             <ul>
-              <li>Actions that can be considered a "side effect" for your stream</li>
+              <li>Actions that can be considered a "side effect" for your stream
+                <ul>
+                  <li>These are any changes that do no alter the output of the stream</li>
+                </ul>
+              </li>
               <li>Logging</li>
               <li>Writing to console for debugging</li>
               <li>State management to set / update the store</li>
@@ -49,6 +60,22 @@
             </ul>
           </li>
         </ul>
+        <div>
+          This outputs these to console: 2, 4, 1, 4, 8, 5, 6, 12, 9
+          <div class="card">
+            <div class="card-body">
+              <code>
+              of(2, 4, 6).pipe( <br />
+              .tap(item => console.log(item)), <br />
+              .map(item => item * 2),  <br />
+              .tap(item => console.log(item)), <br />
+              .map(item => item - 3), <br />
+              .tap(item => console.log(item)) <br />
+              ).subscribe(); <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

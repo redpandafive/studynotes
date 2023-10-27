@@ -36,7 +36,15 @@
             Emits the specified number of values before automatically calling complete on the observable, regardless if the source completes
           </li>
           <li>
-            Import from rxjs/operators
+            Useful to limit unlimited observables
+          </li>
+          <li>
+            When an item is emitted, the operators
+            <ul>
+              <li>Counts the item</li>
+              <li>If &lt;= specified number, it emits the item to the output Observable</li>
+              <li>When it equals the specified number, it completes</li>
+            </ul>
           </li>
         </ul>
         <div>
@@ -45,10 +53,12 @@
               <code>
                 //emit value every 1s<br />
                 const interval$ = interval(1000);<br />
-                //take the first 5 emitted values<br />
-                const example = interval$.pipe(take(5));<br />
-                //output: 0,1,2,3,4<br />
-                const subscribe = example.subscribe(val => console.log(val));<br />
+                const example = interval$.pipe( <br/>
+                  take(5), <br />
+                  map(item => mitem * 2) <br />
+                  ); <br />
+                //output: 0,2,4,6,8 <br />
+                example.subscribe(val => console.log(val)); <br />
               </code>
             </div>
           </div>
