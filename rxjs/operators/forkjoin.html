@@ -33,45 +33,49 @@
       <section>
         <ul>
           <li>
-            Takes a group of observables that are execute simulataneously
+            Creates an Observable whose value is is defined
+            <ul>
+              <li>Using the last value from each input Observable</li>
+              <li>Only emits once, when all input Observables complete</li>
+            </ul>
+          </li>
+          <li>A static combination, creation function, not a pipeable operator</li>
+          <li>
+            Takes a group of observables that are executed simulataneously
             <ul>
               <li>These can either be an array or keyed object</li>
-              <li>
-                When an array is used, results ordered to match the associated
-                observable
-              </li>
+              <li>When an array is used, results ordered to match the associated observable</li>
+              <li>When a keyed object is passed, the result object will have identical keys that contain the matching data</li>
               <li>An error on one observable will cause all to fail</li>
-              <li>Similar to <code>Promise.all</code></li>
+              <li>
+                Similar to
+                <code>Promise.all</code>
+              </li>
             </ul>
-          </li>          
+          </li>
           <li>
             Values are emitted when all observables complete
             <ul>
-              <li>
-                forJoin collects the last emitted value from each and emits them
-                as an array
-              </li>
-              <li>
-                It will preserve the order of inner observables regardless of
-                when they complete
-              </li>
-              <li>
-                If any of the inner obsevables never complete, then the forkJOin
-                will never complete either
-              </li>
+              <li>forkJoin collects the last emitted value from each and emits them as an array</li>
+              <li>It will preserve the order of inner observables regardless of when they complete</li>
+              <li>If any of the inner obsevables never complete, then the forkJoin will never complete either</li>
+            </ul>
+          </li>
+          <li>Common use case is issuing multiple requests on page load and only want to take action when a response has been received for all</li>
+          <li>
+            Use cases
+            <ul>
+              <li>There are several HTTP requests and you do not want to process results until all Observables are complete</li>
+              <li>You would like to return all items as a single collection (array or keyed object)</li>
+            </ul>
+          </li>
+          <li>Do not use when working with Observables that do not complete
+            <ul>
+              <li>No values will be emitted if one of the Observables never completes</li>
             </ul>
           </li>
           <li>
-            Common use case is issuing multiple requests on page load and only
-            want to take action when a response has been received for all
-          </li>
-
-          <li>
-            <a
-              href="https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin"
-            >
-              https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin
-            </a>
+            <a href="https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin">https://www.learnrxjs.io/learn-rxjs/operators/combination/forkjoin</a>
           </li>
         </ul>
         <div>
@@ -79,12 +83,18 @@
           <div class="card">
             <div class="card-body">
               <code>
-                const obs = [<br />
-                exampleServiceClass1.getData(), <br />
-                exampleServiceCLass2.getData() ];<br />
-                forkJoin(obs).subscribe(d => {<br />
-                console.log(d[0]]);<br />
-                console.log(d[1]);<br />
+                const obs = [
+                <br />
+                exampleServiceClass1.getData(),
+                <br />
+                exampleServiceCLass2.getData() ];
+                <br />
+                forkJoin(obs).subscribe(d => {
+                <br />
+                console.log(d[0]]);
+                <br />
+                console.log(d[1]);
+                <br />
                 });
               </code>
             </div>
@@ -95,20 +105,26 @@
           <div class="card">
             <div class="card-body">
               <code>
-                const obs = {<br />
-                di1: exampleServiceClass1.getData(), <br />
-                di2: exampleServiceCLass2.getData() <br />
-                };<br />
-                forkJoin(obs).subscribe(d => {<br />
-                console.log(d.di1);<br />
-                console.log(d.di2);<br />
+                const obs = {
+                <br />
+                di1: exampleServiceClass1.getData(),
+                <br />
+                di2: exampleServiceCLass2.getData()
+                <br />
+                };
+                <br />
+                forkJoin(obs).subscribe(d => {
+                <br />
+                console.log(d.di1);
+                <br />
+                console.log(d.di2);
+                <br />
                 });
               </code>
             </div>
           </div>
         </div>
       </section>
-
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

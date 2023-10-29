@@ -32,18 +32,31 @@
 
       <section>
         <ul>
-          <li>A creation operator</li>
-          <li>Not piped, it creates a new stream from scratch</li>
+          <li>This is a static combination, creation function
+            <ul>
+              <li>Not sent through the pipe method</li>
+              <li>This creates a new stream from scratch</li>
+            </ul>
+          </li>
           <li>Processes latest emitted item from each observable anytime an observable emits a new value</li>
           <li>
             Takes in multiple streams contained in an array
             <ul>
-              <li>Will always emit the latest value from any of the streams provided</li>
+              <li>Will always emit the latest values from all of the streams provided</li>
               <li>Will not emit a value until all provided streams emit at least one value</li>
+              <li>Once all streams have a value, an update on any one of them will create a new </li>
             </ul>
           </li>
-
-          <li>Useful in view models</li>
+          <li>
+            This completes when all included observables complete
+          </li>
+          <li>Use cases
+            <ul>
+              <li>View models</li>
+              <li>To work with multiple data sets</li>
+              <li>To re-evaluate state when an action occurs</li>
+            </ul>
+          </li>
           <li>
             Use the descrtucturing syntax in the final map to split them apart into a format that is more convenient to work with
             <div class="card">

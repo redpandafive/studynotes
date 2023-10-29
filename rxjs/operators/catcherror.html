@@ -42,7 +42,7 @@
           <li>
             If an error does occur:
             <ul>
-              <li>It passes the error to an error handler function that can do what it wants with the error</li>
+              <li>It passes the error to an error handler function that can handle with the error</li>
               <li>The handler returns a replacement observable so the stream can continue</li>
               <li>The handler can optionally throw an error</li>
             </ul>
@@ -55,11 +55,13 @@
               <li>This hander can optionally rethrow the error or replace the error Observable to continue after an error occurs</li>
             </ul>
           </li>
+
         </ul>
       </section>
 
-      <h2>Simple Example</h2>
+      <h2>Examples</h2>
       <section>
+        <div>
         <ul>
           <li>This will return EMPTY values when the stream fails</li>
           <li>This will fix the broken stream by substituting and EMPTY observable</li>
@@ -76,6 +78,37 @@
             </code>
           </div>
         </div>
+      </div>
+      <div>
+        The below code will:
+        <ul>
+          <li>Console log 2, then 4</li>
+          <li>Will throw an error when 6 is emitted</li>
+          <li>Since the catchError replaces the broken observable with a new one of value 'six', that is written to the console</li>
+          <li>The error method in the subscription is never fired</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              of(2.4.6).pipe(
+              <br />
+              map(i => {  <br />
+                if(i === 6) {  <br />
+                throw 'Error!';  <br />
+                }  <br />
+                return i;  <br />
+              }),  <br />
+              catchError(err => of('six'))  <br />
+              ).subscribe({  <br />
+                next: x => console.log(x),  <br />
+                error: err => console.log(err)  <br />
+              })  <br />
+              )
+              <br />
+            </code>
+          </div>
+        </div>
+      </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

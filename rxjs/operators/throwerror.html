@@ -35,11 +35,88 @@
           <li>
             Creates an observable that immediately emits an error notification
           </li>
+          <li>It does not emit any items</li>
           <li>
             Useful for testing error handling in observables by creating
             observables that always fail
           </li>
+          <li>Often, it is more useful to use the JS <code>throw</code> statement</li>
         </ul>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <div>
+          <ul>
+            <li>This will return EMPTY values when the stream fails</li>
+            <li>This will fix the broken stream by substituting and EMPTY observable</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.http.get&lt;DataObject&gt;("http://mytargeturl").pipe(
+                <br />
+                catchError(() => EMPTY)
+                <br />
+                )
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This example catches an error, logs it to the console, then throws a new error
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.http.get&lt;DataObject&gt;("http://mytargeturl").pipe(
+                <br />                
+                catchError(err => { <br /> 
+                  console.log(err); <br /> 
+                  return throwError(() => new Error("could not retrieve")); <br /> 
+                }) <br /> 
+                <br />
+                )
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Usually simpler to just use the JS throw function
+          <div class="card">
+            <div class="card-body">
+              <code>
+                this.http.get&lt;DataObject&gt;("http://mytargeturl").pipe(
+                <br />                
+                catchError(err => { <br /> 
+                  console.log(err); <br /> 
+                  throw new Error("could not retrieve"); <br /> 
+                }) <br /> 
+                <br />
+                )
+                <br />
+              </code>
+            </div>
+          </div>
+          <div>
+            Another option is to set a property on the component to display an error message, then return EMPTY
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  this.products$ = this.productService.getProducts().pipe(
+                  <br />                
+                  catchError(err => { <br /> 
+                    this.errorMessage = err; <br /> 
+                    return EMPTY; <br /> 
+                  }) <br /> 
+                  <br />
+                  )
+                  <br />
+                </code>
+              </div>
+            </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

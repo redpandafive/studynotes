@@ -60,9 +60,25 @@
           <li>This will create a shallow copy</li>
           <li>See <a href="../operators/spread.html">Spread Operator</a></li>
         </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>var cloneObj = { ..sourceObj }</code>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>var cloneObj = { ..sourceObj }</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          If you need to copy an object, but need to modify a few properties:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                var cloneObj = { <br/>
+                  ..sourceObj,  <br/>
+                  modifiedField: sourceObj.modifiedField * 2, <br/>
+                  otherModifiedField: sourceObj.modifiedField * 10 <br/>
+                } AS ObjectTypeName; <br/>
+              </code>
+            </div>
           </div>
         </div>
       </section>

@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -27,9 +24,7 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            EMPTY and NEVER
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">EMPTY and NEVER</li>
         </ol>
       </nav>
 
@@ -38,10 +33,7 @@
       <h2>EMPTY</h2>
       <section>
         <ul>
-          <li>
-            A simple observable that emits no items to the Observer and
-            immediately emits a complete notification
-          </li>
+          <li>A simple observable that emits no items to the Observer and immediately emits a complete notification</li>
           <li>An observable that emits no items and immediately completes</li>
           <li>This is a constant</li>
           <li>Great for error handling when we don't have an item to emit</li>
@@ -51,21 +43,25 @@
           <div class="card">
             <div class="card-body">
               <code>
-                EMPTY.subscribe({ <br />
-                next: () => console.log('Next'),<br />
-                complete: () => console.log('Complete!')<br />
-                });<br />
+                EMPTY.subscribe({
+                <br />
+                next: () => console.log('Next'),
+                <br />
+                complete: () => console.log('Complete!')
+                <br />
+                });
+                <br />
               </code>
             </div>
           </div>
         </div>
       </section>
 
-
       <h3>Observable&lt;never&gt;</h3>
       <section>
         <ul>
-          <li>A never observable
+          <li>
+            A never observable
             <ul>
               <li>Emits no values</li>
               <li>Never completes, so no completion notificaiton</li>
@@ -75,15 +71,14 @@
             Good for returning an Observable when an error occurs to keep typing strong
             <ul>
               <li>This observable would only ever emit an error notification</li>
-              <li>Better than using null, undefined, or void</li> 
-              <li>If one of those is used, the overall typing on the outside observable would have to changes
+              <li>Better than using null, undefined, or void</li>
+              <li>
+                If one of those is used, the overall typing on the outside observable would have to changes
                 <ul>
                   <li>The return type of the outside observable would have to union onto these types</li>
-                </ul> 
+                </ul>
               </li>
-              <li>
-                Using Observable of never in the error handler means the outer observable does not need to account for it with its return type
-              </li>
+              <li>Using Observable of never in the error handler means the outer observable does not need to account for it with its return type</li>
             </ul>
           </li>
           <li></li>
@@ -93,22 +88,25 @@
       <h2>NEVER</h2>
       <section>
         <ul>
-          <li>
-            An Observable that emits no items to the Observer and never
-            completes
-          </li>
+          <li>An Observable that emits no items to the Observer and never completes</li>
         </ul>
         <div>
           Example - never prints anything and never completes
           <div class="card">
             <div class="card-body">
               <code>
-                const result = NEVER.pipe(startWith(7));<br />
-                result.subscribe({<br />
-                next: x => console.log(x),<br />
-                error: x => console.log("error"),<br />
-                complete: x => console.log("complete")<br />
-                });<br />
+                const result = NEVER.pipe(startWith(7));
+                <br />
+                result.subscribe({
+                <br />
+                next: x => console.log(x),
+                <br />
+                error: x => console.log("error"),
+                <br />
+                complete: x => console.log("complete")
+                <br />
+                });
+                <br />
               </code>
             </div>
           </div>

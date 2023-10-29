@@ -150,7 +150,7 @@
       <section>
         <ul>
           <li>
-            <a href="./basics.html">EMPTY and NEVER Observables</a>
+            <a href="./empty.html">EMPTY and NEVER Observables</a>
           </li>
         </ul>
       </section>
@@ -441,13 +441,20 @@
             </ul>
           </li>
           <li>If no error occurs, then error handling operators are ignored</li>
-          <li>When an observable generates an error, it stops and will not emit any more</li>
+          <li>When an observable generates an error, it stops and will not emit any more data
+            <ul>
+              <li>Error handler operators generate a new Observable and pass that to the next oprator, allowing the stream to continue</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
       <h3 id="errorhandling">Error Handling</h3>
       <section>
         <ul>
+          <li>
+            The <a href="empty.html">EMPTY</a> constant is useful to return from an errored observable
+          </li>
           <li>
             Method 1: Use the error handler within the subscribe method:
             <div class="card">
