@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Declarative Flow Control Syntax
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Declarative Flow Control Syntax</h1>
+
+      <section>
+        <ul>
+          <li>Requires Angular 17</li>
+          <li>
+            A new template control block syntax and declarative control flow
+            <ul>
+              <li>Added to support zoneless applications with Signals</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Conditional Rendering</h2>
+      <section>
+        <ul>
+          <li>
+            @if
+            <ul>
+              <li>
+                Displays the contents if the evaluated logical expression is
+                truthy
+              </li>
+            </ul>
+          </li>
+          <li>
+            @else
+            <ul>
+              <li>
+                Displays the contents if the evaluated logical expression is
+                falsy
+              </li>
+            </ul>
+          </li>
+          <li>These can be combined to form else...if statements</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @if (myBooleanSignalVal()) { <br />
+                &lt;span&gt;Is True&lt;/span&gt; <br />
+                } <br />
+                @else { <br />
+                &lt;span&gt;Is False&lt;/span&gt; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example using an if..else construct
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @if (a &gt; b) { <br />
+                {{a}} is greater than {{b}} <br />
+                } @else if (b &gt; a) { <br />
+                {{a}} is less than {{b}} <br />
+                } @else { <br />
+                {{a}} is equal to {{b}} <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The conditional syntax supports referencing of expression results
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @if (users$ | async; as users) { <br />
+                {{ users.length }} <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Repeaters</h2>
+
+      <h3>@for</h3>
+      <section>
+        <ul>
+          <li>Use to iterate over a collection</li>
+          <li>
+            This can by any JavaScript iterable, but there are performance
+            advantages to using a regular array
+          </li>
+          <li>
+            The track expression is now required for the @for syntax
+            <ul>
+              <li>
+                Determines a key to associate array items with the views in the
+                DOM
+              </li>
+              <li>
+                Having this explicit indication allows Angular to execute a
+                minimal set of DOM operations as items are added, removed, or
+                moved in a collection
+              </li>
+              <li>
+                Historically, absence of <code>trackBy</code> is one of the most
+                common causes for performance issues
+              </li>
+              <li>
+                Possible selections are:
+                <ul>
+                  <li>This should be a unique property (like an id)</li>
+                  <li>
+                    When a collection of non-objects is used, use the value
+                    itself
+                  </li>
+                  <li>
+                    When in doubt, using <code>track $index</code> is a good
+                    default
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @for (item of items; track item.id) { <br />
+                {{ item.name }} <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Empty Block</h3>
+      <section>
+        <ul>
+          <li>
+            This optional block is rendered if the collection renders when there
+            are no items
+          </li>
+          <li>Include after the @for block content</li>
+        </ul>
+
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ul&gt; @for (item of emptyCollection; track item.id;) {
+                <br />
+                &lt;li&gt;{{ item.name }}&lt;/li&gt; <br />
+                } <br />
+                @empty { <br />
+                &lt;li&gt;The collection is empty&lt;/li&gt; <br />
+                } <br />
+                &lt;/ul&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Contextual Variables</h3>
+      <section>
+        <ul>
+          <li>
+            The following implicit variables are always available in the block:
+            <ul>
+              <li>$count = the number of the items in the collection</li>
+              <li>$even = true when value of the index is even</li>
+              <li>
+                $first = true when the current item is the first in the
+                collection
+              </li>
+              <li>$index = the index of the item</li>
+              <li>
+                $last = true the current item is the last in the collection
+              </li>
+              <li>$odd = true when value of index is odd</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          All options (taken from
+          https://www.angularaddicts.com/p/angular-17-new-control-flow-with-signals)
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @for (item of collection; track item.id; let index = $index,
+                first = $first; let last = $last, even = $even, odd = $odd; let
+                count = $count) { <br />
+                &lt;div&gt;{{item.name}} index={{index}} first={{first}}
+                last={{last}} even={{even}} odd={{odd}}
+                count={{count}}&lt;/li&gt; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Selection</h2>
+
+      <h3>Switch Case</h3>
+      <section>
+        <ul>
+
+          <li>@switch, @case, and @default</li>
+          <li>
+            DOES NOT HAVE FALLTHROUGH - you do not need a break or return
+            statement in each case
+          </li>
+          <li>
+            @default is optional. If there are no @case matching the expression,
+            nothing is shown without a @default
+          </li>
+          <li>
+            Comparisons are done in case expressions using the
+            <code>===</code> operator
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @switch (myVal()) { <br />
+                @case (1) { <br />
+                &lt;div&gt;Case 1&lt;/div&gt; <br />
+                } <br />
+                @case (2) { <br />
+                &lt;div&gt;Case 2&lt;/div&gt; <br />
+                } <br />
+                @default { <br />
+                &lt;div&gt;Default case (not 1 or 2)&lt;/div&gt; <br />
+                } <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Special Characters</h2>
+      <section>
+        <ul>
+          <li>
+            The following characters must be replaced with HTML codes since they
+            are used in the syntax
+            <ul>
+              <li>@ => &#64;</li>
+              <li>{ => &#123;</li>
+              <li>} => &#125;</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Automatic Migration</h2>
+      <section>
+        <ul>
+          <li>
+            Use the following schematic to automatically migrate to the new
+            syntax
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code> ng g @angular/core:control-flow-migration </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

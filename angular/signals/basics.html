@@ -40,7 +40,7 @@
               <li>
                 Helps make code more reactive
                 <ul>
-                  <li>Signals can be refrenced in templates and use Angular's change detection mechanism to update the display with changes</li>
+                  <li>Signals can be referenced in templates and use Angular's change detection mechanism to update the display with changes</li>
                 </ul>
               </li>
             </ul>
@@ -50,7 +50,7 @@
             <ul>
               <li>Components to manage component state</li>
               <li>Directives</li>
-              <li>Services to share state accross components</li>
+              <li>Services to share state across components</li>
               <li>Templates to display a value</li>
               <li>Components that are configured to use ChangeDetectionStrategy.OnPush. These components will rechecked during a change detection cycle without having to manaully configure it.</li>
             </ul>
@@ -88,6 +88,33 @@
             <ul>
               <li>The template and change detection</li>
               <li>The effect function</li>
+            </ul>
+          </li>
+          <li>
+            Ideally, a signal only contains elements that change together
+          </li>
+          <li>
+            Each signal has an equal function defining when its value is considered to be changed
+            <ul>
+              <li>This is called after updating the Signal</li>
+              <li>Consumers are only notified when this function returns false</li>
+            </ul>
+          </li>
+          <li>
+            The default behavior is:
+            <ul>
+              <li>For objects (including arrays), false is always returned</li>
+              <ul>
+                <li>Always performing a deep comparison can be costly, so always returning false may be the most efficient approach when working with mutable data</li>
+                <li>It does lead to more notifications than needed</li>
+                <li>If you are using immutable data, you can pass in a custom equals function to modify this behavior:
+                  <ul>
+                    <li>
+
+                    </li>
+                  </ul>that will detect and trigger notifiations only when the object referenced in the Signal </li>
+              </ul>
+              <li>Otherwise, (strings, numbers, booleans), the result of oldValue === newValue is returned</li>
             </ul>
           </li>
         </ul>

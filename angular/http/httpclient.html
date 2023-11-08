@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -22,7 +25,9 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">HttpClientModule and HttpClient</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            HttpClientModule and HttpClient
+          </li>
         </ol>
       </nav>
 
@@ -64,13 +69,56 @@
             </ul>
           </li>
           <li>
-            You DO NOT NEED to unsubscribe from an Observable retured by HttpClient
+            You DO NOT NEED to unsubscribe from an Observable returned by
+            HttpClient
             <ul>
-              <li>These observables only emit one value and then call complete()</li>
-              <li>Subscribers are automatically unsubscribed when complete() is called</li>
+              <li>
+                These observables only emit one value and then call complete()
+              </li>
+              <li>
+                Subscribers are automatically unsubscribed when complete() is
+                called
+              </li>
             </ul>
           </li>
         </ul>
+      </section>
+
+      <h2>Standalone APIs</h2>
+      <section>
+        <ul>
+          <li>
+            Starting with version 15, the HttpClient can be setup without any
+            reference to the HttpClientModule
+          </li>
+          <li>
+            Optional features of HTTPClient can also be included, including:
+            <ul>
+              <li>Interceptors</li>
+            </ul>
+          </li>
+          <li>
+            You should watch out for function names that begin with
+            <code>provide</code> or <code>with</code> to it does not conflict
+            with this naming convention
+          </li>
+        </ul>
+        <div>
+          The following bootstraps the application and includes HTTP support as
+          well as support for Interceptors
+          <div class="card">
+            <div class="card-body">
+              <code>
+                bootstrapApplication(AppComponent, { <br />
+                providers: [ <br />
+                provideHttpClient( <br />
+                withInterceptors([authInterceptor]), <br />
+                ), <br />
+                });<br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

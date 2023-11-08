@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Design Patterns and Tips</li>
+        </ol>
+      </nav>
+
+      <h1>Design Patterns and Tips</h1>
+
+      <h2>General Tips</h2>
+      <section>
+        <ul>
+          <li>Continue to use event handlers for user actions</li>
+          <li>Use a signal or computed for any state data that could change</li>
+          <li>Put shared signals in services</li>
+          <li>Use Observables for async operations</li>
+        </ul>
+      </section>
+
+      <h2>ChangeDetectionStrategy.OnPush</h2>
+      <section>
+        <ul>
+          <li>You can turn on ChangeDetectionStrategy.OnPush in your component when updating via Signals</li>
+          <li>Angular will check for changes when a bound Signal is updated</li>
+          <li>
+            See also<a href="../changedetection/changeDetectionStrategy.html">ChangeDetectionStrategy</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Waiting for a Signal to have a Valid Value</h2>
+      <section>
+        <div>
+          <ul>
+            <li>Signals must always contain a value, even if it is null or undefined</li>
+            <li>This syntax hides a section of the template until the specified signal has a value (such as waiting for data from the server)</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ng-container *ngIf="vm() as vm"&gt;
+                <br />
+                ... // do work with vm variable <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Using Signals with NgModel</h2>
+      <section>
+        <ul>
+          <li>Direct use is currently not supported, but you can workaround this by manually binding to the event and property
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;input [ngModel]="to()" (ngModelChange)="to.set($event)" name="to" /&gt;                    
+                    <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Readonly Signals</h2>
+      <section>
+        <ul>
+          <li>Useful in a shared service where components should be able to read data, but not set it</li>
+          <li></li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                private _from = signal('Houston');
+                <br />
+                readonly from = this._from.asReadonly();                  
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <h2>State Signal</h2>
+      <section>
+        <ul>
+          <li>An alternative to using readonly signals as it streamlines the code needed</li>
+          <li></li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+
+                private state = signal({ <br/>
+                  from: 'Houston',<br/>
+                  to: 'San Diego',<br/>
+                  flights: [] as Flight[],<br/>
+                  basket: {} as Record<number, boolean>,<br/>
+                });<br/>
+                <br/>
+                readonly flights = computed(() => this.state().flights, { equal });<br/>
+                readonly from = computed(() => this.state().from, { equal });<br/>
+                readonly to = computed(() => this.state().to, { equal });<br/>
+                readonly basket = computed(() => this.state().basket, { equal });<br/>                            
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <h2>Design Options</h2>
+      <section>
+        <ul>
+          <li>Option 1: Use Signals in a Component
+            <ul>
+              <li>Use signals as properties in your component and bind directly to them in the template</li>
+            </ul>
+          </li>
+          <li>
+            Option 2: Signals in services
+            <ul>
+               <li>This allows state to be shared between several components</li>
+               <li>Even if you are not sharing between components, it relieves the component from handling state management
+                <ul>
+                  <li>Data does not have to be stored and reloaded when the component is destroyed</li>
+                </ul>
+               </ul></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

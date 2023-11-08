@@ -30,20 +30,29 @@
       <h1>Change Detection Strategy</h1>
       <section>
         <ul>
+
           <li>
-            Do not perform heavy computations in templates
+            When not using OnPush, Angular checks all components for updates after event handlers run
+          </li>
+          <li>
+            When using OnPush, components are only checked if they have been marked as dirty by a process such as:
+            <ul>
+              <li>A bound input changes its object reference</li>
+              <li>An Observable bound with async</li>
+              <li>A bound Signal emits a new value</li>
+            </ul>
+          </li>
+          <li>Signal based components are expected to alter the current change detection strategy, primarily
             <ul>
               <li>
-                Expressions in templates are re-evaluated every time change
-                detection gets triggered
+                When a component is marked as changed, all ancestors in the component tree are marked as well
               </li>
               <li>
-                It does this after an event, re-evaluates all the expressions in
-                the templates and compares them with their previous values. If
-                there is a change, it will update the DOM
+                Marked components are fully checked for changes, even if an update only modifies a small part
               </li>
             </ul>
           </li>
+
           <li>
             Use OnPush custom change detection strategy for a component when you
             are sure the values will only change when the input values change
@@ -75,7 +84,33 @@
                 of the array
               </li>
               <li>
-                Signals allow a component marked for OnPush to participage in a change detection cycle again.
+                Signals allow a component marked for OnPush to participate in a change detection cycle again.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Do not perform heavy computations in templates
+            <ul>
+              <li>
+                Expressions in templates are re-evaluated every time change
+                detection gets triggered
+              </li>
+              <li>
+                It does this after an event, re-evaluates all the expressions in
+                the templates and compares them with their previous values. If
+                there is a change, it will update the DOM
+              </li>
+            </ul>
+          </li>
+          <li>
+            Caveats:
+            <ul>
+              <li>For primitives, OnPush will detect changes to inputs since the value has changed and the comparison function picks up on it</li>
+              <li>For complex objects (like objects and arrays), the comparison is done by object reference
+                <ul>
+                  <li>If it isn't a new object, no change will be detected (such as only changing a property, but keeping the original object)</li>
+                  <li>It's a good idea to use immutable objects to avoid this since a new object must be created with the changed values</li>
+                </ul>
               </li>
             </ul>
           </li>

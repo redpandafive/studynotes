@@ -417,6 +417,35 @@
         </ul>
       </section>
 
+      <h2 id="functional">Functional Interceptors</h2>
+      <section>
+        <ul>
+          <li>These were added with standalone components</li>
+          <li>Simple functions that take the current HTTP request and a reference called <code>next</code></li>
+        </ul>
+        <div>
+          Example from https://www.angulararchitects.io/en/blog/the-refurbished-httpclient-in-angular-15-standalone-apis-and-functional-interceptors/
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export const authInterceptor: HttpInterceptorFn = (req, next) =&gt; { <br/>      
+                  if (req.url.startsWith('https://mytargeturl.com/')) { <br/>
+                      const headers = req.headers.set('Authorization', 'Bearer Auth-1234567'); <br/>
+                      req = req.clone({ <br/>
+                          headers <br/>
+                      }); <br/>
+                  } <br/>
+                  <br/>
+                  return next(req).pipes( <br/>
+                      tap(resp => console.log('response', resp)) <br/>
+                  ); <br/>
+              } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <h2 id="examples">Examples</h2>
       <section>
         <div>

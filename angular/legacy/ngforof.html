@@ -31,6 +31,26 @@
 
       <h1>NgForOf</h1>
 
+      <h2>Replacement Warning</h2>
+      <section>
+        <ul>
+          <li>In v17, this has been replaced with @for.  This has several advantages
+            <ul>
+              <li>Mandatory <code>track</code> replaces optional <code>trackBy</code>
+                <ul>
+                  <li>Cleaner syntax</li>
+                  <li>Leads to better performance</li>
+                </ul>
+              </li>
+              <li>
+                Adds optional @empty block
+              </li>
+              <li>Faster calculations performed in response to changes in the collection</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
       <section class="navlinks">
         <ul>
           <li><a href="directives.html#basics">Basics</a></li>
