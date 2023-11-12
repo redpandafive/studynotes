@@ -84,7 +84,10 @@
                 of the array
               </li>
               <li>
-                Signals allow a component marked for OnPush to participate in a change detection cycle again.
+                Signals and RxJS observables allow a component marked for OnPush to participate in a change detection cycle again.
+                <ul>
+                  <li>However, updating a property (such as an error message) from an RxJS stream will not trigger change detection</li>
+                </ul>
               </li>
             </ul>
           </li>

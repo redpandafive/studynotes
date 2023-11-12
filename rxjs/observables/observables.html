@@ -41,7 +41,7 @@
             Example is observing mouse clicks over time
             <ul>
               <li>Think of it as a timeline with multiple points where the value changes</li>
-              <li>You can manipulate this stream of data points by using a map operation, such as only observice the x value of a x,y pair returned by the observable</li>
+              <li>You can manipulate this stream of data points by using a map operation, such as only observe the x value of a x,y pair returned by the observable</li>
               <li>Other examples include other user actions, routing events, form events, data from HTTP request</li>
             </ul>
           </li>
@@ -49,7 +49,7 @@
             Each time an Observable receives a new value, it emits the value to any Observers that are subscribed to it
             <ul>
               <li>These can react to the data emission</li>
-              <li>Mulitple Observers can subscribe to the same Observable and react in thier own way</li>
+              <li>Multiple Observers can subscribe to the same Observable and react in their own way</li>
             </ul>
           </li>
           <li>
@@ -90,11 +90,11 @@
         </div>
       </section>
 
-      <h2>Apple Convetor Belt Metaphor</h2>
+      <h2>Apple Convertor Belt Metaphor</h2>
       <section>
         <ul>
           <li>
-            Deborah Kurata's metaphor for desribing them is an apple convetor belt:
+            Deborah Kurata's metaphor for describing them is an apple convetor belt:
             <ul>
               <li>There is a start point when the convetor belt starts moving (subscription)</li>
               <li>Apples are a discrete event the emit over time (emitted items)</li>
@@ -146,23 +146,33 @@
         </ul>
       </section>
 
-      <h2>EMPTY and Never Observables</h2>
-      <section>
-        <ul>
-          <li>
-            <a href="./empty.html">EMPTY and NEVER Observables</a>
-          </li>
-        </ul>
-      </section>
+
 
       <h2>Observers and Observable Methods</h2>
       <section>
         <ul>
-          <li>Observers observe and respond to notificaitons
+          <li>Observers observe and respond to notifications from an observable
             <ul>
               <li>A collection of callbacks that knows how to listen to values delivered by an Observable</li>
-              <li>A comumer of values delivered by an Observable</li>
+              <li>A consumer of values delivered by an Observable</li>
               <li>In RxJS, it is also an interface that contains the three notification methods below</li>
+            </ul>
+          </li>
+          <li>From the point of view of the observer
+            <ul>
+              <li>An observable is read only</li>
+              <li>Observers can react to its notifications</li>
+              <li>Observers cannot emit anything into the stream
+                <ul>
+                  <li>Only the creator of an Observable can emit items into the stream</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Observers are generally unicast, meaning it emits to a single Subscriber
+            <ul>
+              <li>If multiple observers subscribe to the same observable, they each get their on subscription</li>
             </ul>
           </li>
           <li>Observers are notified when one of the following occurs:
@@ -190,14 +200,7 @@
               </li>
             </ul>
           </li>
-          <li>
-            The Subscriber class is one class that implements the Observer interface:
-            <ul>
-              <li>Inside RxJS, each Observer is converted to a Subscriber</li>
-              <li>Basically, a Subscriber is an Observer with additional methods for unsubscribing</li>
-              <li>You usually don't work with a Subscriber directly, it is mostly used internally</li>
-            </ul>
-          </li>
+
         </ul>
         <li>
           Most of the time, you work with Observables that Angular creates for you, not building your own from scratch
@@ -241,6 +244,55 @@
         </div>
       </section>
 
+
+      <h2>Subscribers</h2>
+      <section>
+        <ul>          
+          <li>
+          The Subscriber class is a class that implements the Observer interface and extends the Subscription class:
+          <ul>
+            <li>Basically, a Subscriber is an Observer with additional methods for unsubscribing</li>
+            <li>Inside RxJS, each Observer is converted to a Subscriber
+              <ul>
+            <li>You usually don't work with a Subscriber directly, it is mostly used internally to implement operators</li>
+              </ul>
+            </li>
+          </ul>
+        </li></ul>
+      </section>
+
+      <h2>Data Streams vs Action Streams</h2>
+      <section>
+        <ul>
+          <li>Data Streams
+            <ul>
+              <li>Stream that returns data, but completes after delivering it</li>
+            </ul>
+          </li>
+          <li>Action Streams
+            <ul>
+              <li>Reacts to user actions whenever they occur</li>
+              <li>Keeps emitting observables until the action is stopped</li>
+            </ul>
+          </li>
+          <li>
+            When an action observable and a data observable are combined with combineLatest 
+            <ul>
+              <li>Once the data observable has data, the combineLatest will emit that data each time the action occurs as well as the event information</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>EMPTY and Never Observables</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="./empty.html">EMPTY and NEVER Observables</a>
+          </li>
+        </ul>
+      </section>
+
       <h3>Subscribe Method</h3>
       <section>
         <ul>
@@ -264,14 +316,14 @@
               <li>Takes one or more functions as arguments that are executed whenever the Observable emits a value (subjects are an example)</li>
             </ul>
           </li>
-          <li>The subscribe function relturns a subscription object
+          <li>The subscribe function returns a subscription object
             <ul>
               <li>This represents the context of the subscription</li>
             </ul>
           </li>
         </ul>
         <div>
-          The following isn't how you would code an Obervable setup, but it illustrates the roles of each player:
+          The following isn't how you would code an Observable setup, but it illustrates the roles of each player:
           <div class="card">
             <div class="card-body">
               <code>
@@ -283,7 +335,7 @@
                 <br />
                 const observer = { <br/>
                   next: apple => console.log(`Apple emitted ${apple}`), <br/>
-                  error: err => console.log(`Error occured: ${err}`), <br/>
+                  error: err => console.log(`Error occurred: ${err}`), <br/>
                   complete: () => console.log(`No more apples, go home`) <br/>
                 }; <br/>
                 <br/>
@@ -300,11 +352,11 @@
           <li>Method on the Subscription object to stop notifications
             <ul>
               <li>Not doing so could lead to memory leaks in your application</li>
-              <li>It does not call the complete method on the Observable, just notifies it not to send notificaitons anymore</li>
+              <li>It does not call the complete method on the Observable, just notifies it not to send notifications anymore</li>
             </ul>
           </li>
           <li>
-            Other ways to cancel all subscriptions and stop notificaitons
+            Other ways to cancel all subscriptions and stop notifications
             <ul>
               <li>Call complete() on the subscriber</li>
               <li>Use an operator that automatically completes</li>
@@ -325,7 +377,7 @@
             </ul>
           </li>
           <li>
-            You should unsubscribe to long lived obserables that have an undefined amound values and do not call complete() on their own
+            You should unsubscribe to long lived observables that have an undefined number of values and do not call complete() on their own
             <ul>
               <li>Subscriptions to valueChanges on Angular forms</li>
               <li>Subscribing to Angular route changes</li>
@@ -418,7 +470,7 @@
               </li>
               <li>An observable object represents zero or more values that will be returned now or in the future</li>
               <li>Represents a stream of observable data; it is a value that changes over time</li>
-              <li>Can be syncronous or asynchronous</li>
+              <li>Can be synchronous or asynchronous</li>
             </ul>
           </li>
         </ul>
@@ -430,7 +482,7 @@
           <li>
             Upstream errors that are handled by the closest downstream code that can handle it:
             <ul>
-              <li>This means any operators betweeen the thrower and handler are skipped when an error occurs</li>
+              <li>This means any operators between the thrower and handler are skipped when an error occurs</li>
               <li>
                 Error handling operators include:
                 <ul>
@@ -443,7 +495,7 @@
           <li>If no error occurs, then error handling operators are ignored</li>
           <li>When an observable generates an error, it stops and will not emit any more data
             <ul>
-              <li>Error handler operators generate a new Observable and pass that to the next oprator, allowing the stream to continue</li>
+              <li>Error handler operators generate a new Observable and pass that to the next operator, allowing the stream to continue</li>
             </ul>
           </li>
         </ul>

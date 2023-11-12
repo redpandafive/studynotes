@@ -28,31 +28,85 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Observables</h5>
-          <a class="card-link" href="./observables/observables.html">Observables</a><br />
-          <a class="card-link" href="./observables/combiningStreams.html">Combining Observable Streams</a><br />
-          <a class="card-link" href="./observables/managingObservables.html">Managing Observables</a><br />
+          <a class="card-link" href="./observables/observables.html"
+            >Observables</a
+          ><br />
+          <a class="card-link" href="./observables/combiningStreams.html"
+            >Combining Observable Streams</a
+          ><br />
+          <a class="card-link" href="./observables/managingObservables.html"
+            >Managing Observables</a
+          ><br />
           <a class="card-link" href="./observables/subject.html">Subjects</a>
           <a class="card-link" href="./observables/pipe.html">Pipe</a><br />
-          <a class="card-link" href="./observables/empty.html">EMPTY and NEVER</a>
+          <a class="card-link" href="./observables/empty.html"
+            >EMPTY and NEVER</a
+          >
         </div>
       </div>
 
       <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Creation Operators</h5>
-            <a class="card-link" href="./operators/combineLatest.html">CombineLatest</a><br />
-          <a class="card-link" href="./operators/forkjoin.html">ForkJoin</a><br />
-          <a class="card-link" href="./operators/of.html">Of, From, FromEvent Operators</a><br />
-          <a class="card-link" href="./operators/interval.html">Interval</a><br />
-          <a class="card-link" href="./operators/throwerror.html">ThrowError</a><br />          
+          <h5 class="card-title">Combination Operators</h5>
+          <div>
+            Combine multiple observable emissions to a single Observable with an
+            equivalent number of emissions
+          </div>
+          <a class="card-link" href="./operators/merge.html">Concat</a><br />
+          <a class="card-link" href="./operators/merge.html">Merge</a><br />
+
+          <div>
+            Flattening higher-order observables (reducing arrays to individual
+            items)
+          </div>
+          <a class="card-link" href="./operators/merge.html">MergeAll</a><br />
+
+          <div>
+            Combine values from multiple Observables, emitting emissions with
+            values aggregated into a combined value
+          </div>
+          <a class="card-link" href="./operators/combineLatest.html"
+            >CombineLatest</a
+          ><br />
+          <a class="card-link" href="./operators/forkjoin.html">ForkJoin</a
+          ><br />
+          <a class="card-link" href="./operators/startsWith.html">StartsWith</a
+          ><br />
+          <a class="card-link" href="./operators/withLatestFrom.html"
+            >WithLatestFrom</a
+          ><br />
+
+          <div>Others</div>
+          <a class="card-link" href="./operators/combine.html">Combine</a><br />
+          <a class="card-link" href="./operators/zip.html">Zip</a><br />
         </div>
       </div>
 
       <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Error Handling Operators</h5>
-            <a class="card-link" href="./operators/catcherror.html">CatchError</a><br />
-          <a class="card-link" href="./operators/throwerror.html">ThrowError</a><br />          
+          <h5 class="card-title">Creation Operators</h5>
+          <a class="card-link" href="./operators/combineLatest.html"
+            >CombineLatest</a
+          ><br />
+          <a class="card-link" href="./operators/forkjoin.html">ForkJoin</a
+          ><br />
+          <a class="card-link" href="./operators/of.html"
+            >Of, From, FromEvent Operators</a
+          ><br />
+          <a class="card-link" href="./operators/interval.html">Interval</a
+          ><br />
+          <a class="card-link" href="./operators/throwerror.html">ThrowError</a
+          ><br />
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Error Handling Operators</h5>
+          <a class="card-link" href="./operators/catcherror.html">CatchError</a
+          ><br />
+          <a class="card-link" href="./operators/throwerror.html">ThrowError</a
+          ><br />
         </div>
       </div>
 
@@ -72,45 +126,27 @@
             >DistinctUntilChanged</a
           ><br />
           <a class="card-link" href="./operators/first.html">First</a><br />
-          <a class="card-link" href="./operators/ignoreElements.html">IgnoreElements</a><br />
+          <a class="card-link" href="./operators/ignoreElements.html"
+            >IgnoreElements</a
+          ><br />
 
           <a class="card-link" href="./operators/retry.html">Retry</a><br />
           <a class="card-link" href="./operators/share.html">Share</a><br />
-          <a class="card-link" href="./operators/sharereplay.html"
-            >ShareReplay</a
+
+          <a class="card-link" href="./operators/takeUntil.html">TakeUntil</a
           ><br />
-          <a class="card-link" href="./operators/startsWith.html">StartsWith</a><br />
-
-          <a class="card-link" href="./operators/takeUntil.html">TakeUntil</a><br />
-
 
           <a class="card-link" href="./operators/topromise.html">ToPromise</a
           ><br />
         </div>
       </div>
 
-
-
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Combination Operators</h5>
-          <div>
-            Combine multiple observable emissions to a single Observable with an equivalent number of emissions
-          </div>
-          <a class="card-link" href="./operators/merge.html">Concat</a><br />
-          <a class="card-link" href="./operators/merge.html">Merge</a><br />
-
-          <div>Flattening higher-order observables (reducing arrays to individual items)</div>
-          <a class="card-link" href="./operators/merge.html">MergeAll</a><br />
-
-          <div>Combine values from multiple Observables, emitting emissions with values aggregated into a combined value</div>
-          <a class="card-link" href="./operators/combineLatest.html">CombineLatest</a><br />
-          <a class="card-link" href="./operators/forkjoin.html">ForkJoin</a><br />
-          <a class="card-link" href="./operators/withLatestFrom.html">WithLatestFrom</a><br />
-
-          <div>Others</div>
-          <a class="card-link" href="./operators/combine.html">Combine</a><br />
-          <a class="card-link" href="./operators/zip.html">Zip</a><br />
+          <h5 class="card-title">Multicast Operators</h5>
+          <a class="card-link" href="./operators/sharereplay.html"
+            >ShareReplay</a
+          ><br />
         </div>
       </div>
 
@@ -127,9 +163,11 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Transformation Operators</h5>
+          <a class="card-link" href="./operators/filter.html">Filter</a><br />
           <a class="card-link" href="./operators/map.html"
             >Map, Pluck, and MapTo</a
           ><br />
+          <a class="card-link" href="./operators/scan.html">Scan</a><br />
         </div>
       </div>
 

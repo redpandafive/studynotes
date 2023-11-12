@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Reacting to Actions - Combining Data & Action Streams
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Reacting to Actions - Combining Data & Action Streams</h1>
+
+      <section>
+        <ul>
+          <li>
+            One setup you can do is combine a data stream with an action stream
+            in RxJS
+            <ul>
+              <li>
+                Whenever the action occurs, the data is emitted, possibly
+                updated by the action
+              </li>
+            </ul>
+          </li>
+          <li>
+            One example is a drop down search box so you can filter products by
+            category
+            <ul>
+              <li>
+                The data stream will be the products fetched from a HTTP call
+              </li>
+              <li>
+                The action stream will be wired to a change event method on the
+                category select control
+              </li>
+              <li>
+                When the category is changed, the change event method is called
+                and passed the new value in the component
+              </li>
+              <li>
+                This calls next on a Subject (or BehaviorSubject) for the action
+                that holds the category id value
+                <ul>
+                  <li>
+                    If you encapsulate the Subject into a service, you can
+                    define a method on that service to pass the value into. This
+                    keeps the component from calling the next method - this is
+                    done by the method on the service.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Use a CombineLatest to combine the action Subject observable
+                with the data Observable
+              </li>
+              <li>
+                This stream will filter the products shown based on the category
+                id within the CombineLatest stream
+              </li>
+              <li>
+                If you need a need an initial value, you can either:
+                <ul>
+                  <li>Use a BehaviorSubject instead of a Subject</li>
+                  <li>Use the RxJS startWith operator</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          This is the action observable
+          <div class="card">
+            <div class="card-body">
+              <code>
+                private categorySelectedSubject = new Subject&lt;number&gt;();
+                <br />
+                categorySelectedAction$ =
+                this.categorySelectedSubject.asObservable();
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This is the combineLatest stream that contains the data and action
+          streams.
+          <ul>
+            <li>On each action, the data is filtered and emitted.</li>
+            <li>
+              This uses array destructuring in the map operator to capture:
+              <ul>
+                <li>The data stream value into the products variable</li>
+                <li>
+                  The value from the action stream (value emitted by the change
+                  event) into the categoryId variable
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                products$ = combineLatest([ <br />
+                this.productService.products$, <br />
+                this.categorySelectedAction$ <br />
+                ]) <br />
+                .pipe( <br />
+                map(([products, categoryId]) => <br />
+                products.filter(product => <br />
+                categoryId ? product.categoryId === categoryId : true <br />
+                )) <br />
+                ); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          In the component, wire this event up to the change event on the
+          category select control
+          <div class="card">
+            <div class="card-body">
+              <code>
+                onSelected(categoryId: string): void { <br />
+                this.categorySelectedSubject.next(+categoryId); <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

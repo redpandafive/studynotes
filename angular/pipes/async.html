@@ -41,9 +41,25 @@
             <ul>
               <li>Automatically subscribes to the Observable when a component is initialized</li>
               <li>Each emitted value is returned</li>
-              <li>When a new item is emitted, the component is makred to be checked for change detection</li>
+              <li>When a new item is emitted, the component is marked to be checked for change detection</li>
               <li>Automatically unsubscribes when component is destroyed</li>
             </ul>
+          </li>
+          <li>
+            You can read the result into a variable and reference that later in your Angular template
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    &lt;div class="card" *ngIf="product$ | async as product"&gt; <br/>
+                    ... <br/>
+                    &lt;div&gt;{{ product.description }}&lt;/div&gt; <br/>                    
+                    ... <br/>
+                    &lt;div&gt;{{ product.id }}&lt;/div&gt; <br/>
+                  </code>
+                </div>
+              </div>
+            </div>
           </li>
           <li>
             Subscribes to an Observable or Promise automatically so you don't have to do so in the component class
@@ -79,7 +95,7 @@
         <ul>
           <li>$ is a convention indicating that the source is an observable (the observable should be named this)</li>
           <li>
-            In the tempalte, define a variable on the first call to the observable. This way you can reference the value later in the template without using the pipe.
+            In the template, define a variable on the first call to the observable. This way you can reference the value later in the template without using the pipe.
             <div class="card">
               <div class="card-body">
                 <code>&lt;li *ngIf=&quot;products$ | async as products&gt;</code>
@@ -89,133 +105,6 @@
         </ul>
       </section>
 
-      <h2>Error Handling</h2>
-      <section>
-        <ul>
-          <li>Any error will stop an observable stream, so errors must be handled to prevent the stream from crashing
-            <ul>
-              <li>Typically replace the errored Observable with a new Observable</li>
-            </ul>
-          </li>
-          <li>Errors can be rethrown</li>
-        </ul>
-      </section>
-
-      <h2>Examples</h2>
-      <section>
-        <div>
-          Example 1
-          <ul>
-            <li>The component class would have an observable property declared named heros$</li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>&lt;li *ngFor=&quot;let hero of heros$ | async&quot;&gt;</code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Example 2
-          <ul>
-            <li>This displays a loading template if no value is emitted yet.</li>
-            <li>Only trick is if an error occurs in the stream, the loading temple will be displayed indefinately.</li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>&lt;li *ngIf=&quot;users$ | async as user; else loading&quot;&gt; ... &lt;ng-template #loading>... display something indicating a load is going on ...&lt;/ng-template></code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Example 3
-          <ul>
-            <li>This version uses the catchError operator and gives the template a chance to respond to the error</li>
-            <li>This returns and Of observable containing the error when an error occurs</li>
-            <li>Make sure you use the shareReplay and cache the observable on your service class to prevent multiple subscriptions</li>
-          </ul>
-          <div>
-            In the service to fetch the data...
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  return this.http.get&lt;DataObject&gt;("http://mytargeturl.com").pipe(
-                  <br />
-                  shareReplay(1) )
-                  <br />
-                </code>
-              </div>
-            </div>
-          </div>
-          <div>
-            In the component,
-            <ul>
-              <li>Setup two streams, one to read from the service and one to read from the first stream</li>
-              <li>Use ignoreElements operator in the second stream since you only need to use it if an error occurs and do not want to emit successful values</li>
-              <li>Catch the error and return an Of operator containing the error (which fixes the broken stream)</li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  do$ = this.dataObjectService.getDataObject();
-                  <br />
-                  doError$ = this.do$.pipe(
-                  <br />
-                  ignoreElements(),
-                  <br />
-                  catchError((err) => of(err))
-                  <br />
-                  );
-                </code>
-              </div>
-            </div>
-          </div>
-          <div>
-            In the template...
-            <ul>
-              <li>
-                One optimization is to create a dumb component to handle this. See here
-                <a href="https://www.youtube.com/watch?v=ydZK53Vmzf0">https://www.youtube.com/watch?v=ydZK53Vmzf0</a>
-              </li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  &lt;ng-container *ngIf="{user: user$ | async, userError: userError$ | async} as vm"&gt;
-                  <br />
-                  &lt;div *ngIf="!vm.userError && vm.user as user; else loading"&gt;
-                  <br />
-                  &lt;div&gt;
-                  <br />
-                  {{ user }}
-                  <br />
-                  &lt;/div&gt;
-                  <br />
-                  &lt;/div&gt;
-                  <br />
-                  &lt;div *ngIf="vm.userError as error"&gt;
-                  <br />
-                  {{ error }} &lt;
-                  <br />
-                  /div&gt;
-                  <br />
-                  &lt;ng-template #loading&gt;
-                  <br />
-                  &lt;div *ngIf="!vm.userError"&gt;
-                  <br />
-                  Loading...
-                  <br />
-                  &lt;/div&gt;
-                  <br />
-                  &lt;/ng-template&gt;
-                  <br />
-                  &lt;/ng-container&gt;
-                  <br />
-                </code>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

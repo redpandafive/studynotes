@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Manage State with Merge and Scan Operators
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Manage State with Merge and Scan Operators</h1>
+
+      <h2>Manage State with a Data Source</h2>
+      <section>
+        <ul>
+          <li>
+            One setup for managing state is:
+            <ul>
+              <li>
+                Application displays data from a database using a readonly GET
+                operation
+              </li>
+              <li>
+                When an entity needs to be modified, send a copy of the data
+                back to the database server using a POST, PUT, or DELETE
+                operation
+              </li>
+              <li>
+                Refresh the data on the application using a new GET call to
+                refetch the data
+                <ul>
+                  <li>
+                    This captures any changes that the server may have performed
+                    on the data (generate id, etc)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                THis carries the overhead of constantly fetching fresh data from
+                the server
+              </li>
+            </ul>
+          </li>
+          <li>
+            This allows the database to manage the state of the application.
+          </li>
+          <li>
+            An alternative setup is to manage the state on the client using RxJS
+            operators, accumulate the changes, then send them all back to the
+            server at one time
+          </li>
+        </ul>
+      </section>
+
+      <h2>Using RxJS to Manage State</h2>
+      <section>
+        <ul>
+          <li>By combining a data stream and an action stream with a merge operator and a scan operator, you can:
+            <ul>
+              <li>Populate an initial set of entities from a data source</li>
+              <li>React to a user action (such as clicking an add or delete button)</li>
+              <li>"Modify" the cached values in the scan operator to update the change</li>
+              <li>Emit the new cached values to the UI.  This observable is bound to the UI using the async pipe</li>
+              <li>When the observable emits a new value, it triggers change detection and the displayed list is updated</li>
+            </ul>
+          </li>
+          <li>As long as the observable does not complete, the scan operator will cache the current state of the products in its accumulator</li>
+        </ul>
+        <div>
+          Example implementation
+          <ul>
+            <li>products$ is the data stream that provides a set of products from the server</li>
+            <li>insertAction$ provides notification from the UI that the user has taken some action to add a product</li>
+            <li>Since both streams are run through the merge function, they are flattened to a single stream
+              <ul>
+                <li>This will emit an initial value (from the products$ data stream) and any updates (from the insertAction$ stream)</li>
+              </ul>
+            </li>
+            <li>The scan operator uses the products$ array to buffer as its accumulator
+              <ul>
+                <li>The seed value is set to an empty Product array</li>
+                <li>This initial value may not be used since you are copying the products array, but it is needed to maintain strong typing</li>
+              </ul>
+            </li>
+            <li>
+              The accumulator function always creates a new array when executed.  It can do one of two actions:
+              <ul>
+                <li>If the emitted item is an array, set the accumulator to a copy of that array  = initial values</li>
+                <li>Otherwise, set the accumulator to a copy of the array (with the spread operator) while adding the new value at the end = updated value</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                merge(  <br/>
+                  this.products$, <br/>
+                  this.insertAction$ <br/>
+                ) <br/>
+                .pipe( <br/>
+                  scan((acc, value) =&gt;  <br/>
+                  (value instanceof Array) ? [...value] : [...acc, value], [] as Product[] <br/>
+                  ) <br/>
+                ); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

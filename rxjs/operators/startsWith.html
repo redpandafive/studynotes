@@ -35,7 +35,23 @@
 
       <section>
         <ul>
-          <li>Starts the stream by emitting the specified value</li>
+          <li>
+            A combination operator
+          </li>
+          <li>Creates an output observable
+            <ul>
+              <li>When subscribed to, synchronously emits all provided values</li>
+              <li>When an item is emitted to its input Observable, the item is emitted to its output Observable</li>
+            </ul>
+          </li>
+          <li>Starts the stream by emitting the specified value as an initial value
+            <ul>
+              <li>Any values emitted by the source essentially "pass through" and are emitted</li>
+            </ul>
+          </li>
+          <li>
+            Initial values must be the same type as the input Observable emissions
+          </li>
           <li>Useful with the valueChanges stream from Reactive Forms
             <ul>
               <li>This is a good way to provide a default value before the user actually starts typing in the control</li>
@@ -46,6 +62,20 @@
           <div class="card">
             <div class="card-body">
               <code>
+                startsWith('red') <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The following will emit a, b, c, d
+          <div class="card">
+            <div class="card-body">
+              <code>
+                of('b', 'c', 'd') <br/>
+                .pipe( <br/>
+                  startWith('a') <br/>
+                ).subscribe(x => console.log(x)); <br/>
               </code>
             </div>
           </div>

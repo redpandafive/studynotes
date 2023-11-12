@@ -46,9 +46,12 @@
             </ul>
           </li>
           <li>
-            To Subscribe
+            Subjects are multicast, meaning multiple observers can subscribe to the same Subject and share the same emissions
+          </li>
+          <li>
+            To subscribe to a Subject, Use the same syntax you would use with an Observable
             <ul>
-              <li>Use the same syntax you would use with an Observable</li>
+              <li>When the Subject calls complete, all subscribers are removed</li>
             </ul>
           </li>
           <li>
@@ -61,12 +64,23 @@
             Will not be able to get the current value when subscribing
             <ul>
               <li>It will not show up until the next call to next()</li>
+              <li>Important to pay attention to when you subscribe since you can miss emissions</li>
             </ul>
           </li>
         </ul>
+        <div>
+          Example of creating a subject.  Typing indicates the type of the data emitted.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                actionSubject = new Subject&lt;string&gt;()
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <h2>Subject vs Observable</h2>
+      <h3>Subject vs Observable</h3>
       <section>
         <ul>
           <li>
@@ -107,7 +121,7 @@
                 subscriber or not
               </li>
               <li>
-                Multi Casting - when subjet emits a value, all subscribers get
+                Multi Casting - when subject emits a value, all subscribers get
                 teh same value
               </li>
             </ul>
@@ -115,7 +129,7 @@
         </ul>
       </section>
 
-      <h2>Subject vs BehaviorSubject vs ReplaySubject</h2>
+      <h3>Subject vs BehaviorSubject vs ReplaySubject</h3>
       <section>
         <ul>
           <li>
@@ -125,9 +139,56 @@
           <li>
             BehaviorSubject
             <ul>
-              <li>Requires an initial value</li>
-              <li>Emits its current value whenever it is subscribed to</li>
+              <li>A special type of Subject that
+                <ul>
+                  <li>Buffers its last emitted value</li>
+                  <li>Emits its current value whenever it is subscribed to</li>
+                  <li>Any late subscribers receive that value when they subscribe</li>
+                  <li>If no values have been emitted, the observer receives the default value</li>
+                </ul>
+              </li>
+              <li>
+                Requires an initial value
+              </li>
+              <li>
+                Any setup is to hide the BehaviorSubject in a service
+                <ul>
+                  <li>
+                    Marked is private, so next() cannot be called from outside the service
+                  </li>
+                  <li>
+                    Expose a second parameter, which is the BehaviorSubject with the <code>.asObservable() method</code> called
+                  </li>
+                  <li>
+                    This allows observers to subscribe to the BehaviorSubject while preventing anything outside of the server
+                    from calling next()
+                  </li>
+                </ul>
+              </li>
+              <li>
+                When the BehaviorSubject calls complete(), all subscribers are unsubscribed
+              </li>
             </ul>
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    let behavSub = new BehaviorSubject&lt;0&gt;(0);
+                  </code>
+                </div>
+              </div>
+            </div>
+            <div>
+              The following setups a BehaviorSubject inside of a service which can be subscribed to outside of the service, but next() must be called from within the service
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    private categorySelectedSubject = new Subject&lt;number&gt;();
+                    categorySelectedAction$ = this.categorySelectedSubject.asObservable();
+                  </code>
+                </div>
+              </div>
+            </div>
           </li>
           <li>
             ReplaySubject

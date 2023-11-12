@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Scan</li>
+        </ol>
+      </nav>
+
+      <h1>Scan</h1>
+      <section>
+        <ul>
+          <li>
+            A transformation operator
+          </li>
+          <li></li>
+          <li>Accumulates items in an Observable using a provided function</li>
+          <li>
+            Syntax is <code>scan((accumulator, currentValue) => accumulator + currentValue)</code>
+            <ul>
+              <li>The body of the arrow function (the accumulator function) adds the current value to the accumulator (doesn't have to be plus)</li>
+            </ul>
+          </li>
+          <li>For each emitted item (except the first), the accumulator function is applied
+            <ul>
+              <li>The result is buffered and emitted as state, becoming the accumulator for the next emission</li>
+              <li>
+                The first value is passed through and emitted without being run through the accumulator function
+              </li>
+              <li>
+                The second value (and all other that follow) is passed through the accumulator function
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can pass in second argument to the scan operator to provide a seed value
+            <ul>
+              <li><code>scan((accumulator, currentValue) => accumulator + currentValue, 10)</code></li>
+              <li>If no seed value is provided, the first value from the source is the initial state</li>
+            </ul>
+          </li>
+          <li>
+            Scan will continue to buffer accumulator values until the observable completes
+            <ul>
+              <li>If you are using this as state management, make sure to use an observable that does not complete</li>
+            </ul>
+          </li>
+          <li>Used for
+            <ul>
+              <li>Encapsulating and managing state</li>
+              <li>Totaling amounts</li>
+              <li>Accumulating items into an array</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          The following emits:
+          <ul>
+            <li>2 = 1st value, not passed through accumulator function</li>
+            <li>7 = 2 is accumulator value, add 5, buffer and emit 7</li>
+            <li>16 = 7 is the accumulator value, add 9, buffer and emit 16</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                of(2, 5, 9).pipe( <br/>
+                  scan((acc, currentVal) => acc + currentVal) <br/>
+                ).subscribe(x => console.log(x)); <br/>
+              </code>
+            </div>
+          </div>
+          <div>
+            The following emits:
+            <ul>
+              <li>12 = 10 is the seed value, add 2 in accumulator function, buffer and emit</li>
+              <li>17 = 12 is accumulator value, add 5, buffer and emit 17</li>
+              <li>26 = 17 is the accumulator value, add 9, buffer and emit 26</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  of(2, 5, 9).pipe( <br/>
+                    scan((acc, currentVal) => acc + currentVal, 10) <br/>
+                  ).subscribe(x => console.log(x)); <br/>
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            The following emits:
+            <ul>
+              <li>[2] = empty array is the seed value, add 2 to the array in accumulator function, buffer and emit</li>
+              <li>[2,5] = [2] is accumulator value, add 5 to array, buffer and emit [2,5]</li>
+              <li>[2,5,9] = [2,5] is the accumulator value, add 9 to array, buffer and emit [2,5,9]</li>
+              <li>This creates a new array on each emission, but copies values using the spread operator</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  of(2, 5, 9).pipe( <br/>
+                    scan((acc, currentVal) => [...acc, currentVal], [] as number[]) <br/>
+                  ).subscribe(x => console.log(x)); <br/>
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

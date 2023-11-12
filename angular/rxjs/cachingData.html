@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Caching Data
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Caching Data</h1>
+
+      <section>
+        <ul>
+          <li>
+            Classic caching pattern
+            <ul>
+              <li>
+                This encapsulates the HTTP call and caching mechanism into an
+                Angular service (which can be shared)
+              </li>
+              <li>
+                In the service, add a private property that can hold a cached
+                copy of the retrieved data
+              </li>
+              <li>
+                When the get method on the service is called, first check the
+                cache property:
+                <ul>
+                  <li>
+                    If there is a value there, return it wrapped in a
+                    <code>of</code> Observable
+                  </li>
+                  <li>
+                    Otherwise, return the Observable from the get method on the
+                    HTTP client object
+                    <ul>
+                      <li>
+                        Use the tap operator to save the retrieved value to the
+                        caching property so any requests afterwards will get the
+                        cached value
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    private url = "api/products"; <br />
+                    private products: Product[] = []; <br />
+                    <br />
+                    getProducts(): Observable&lt;Product&gt; { <br />
+                    if(this.products) { <br />
+                    return of(this.products); <br />
+                    } <br />
+                    return this.http.get&lt;Product[]&gt;(this.url).pipe( <br />
+                    tap(data => this.products = data), <br />
+                    catchError(this.handleError) <br />
+                    ) <br />
+                    } <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Declarative caching pattern
+            <ul>
+              <li>
+                This approach caches and shares the value through the shareReplay operator
+              </li>
+              <li>The shareReplay will continue to emit buffered values to late subscribers even if the associated observable has completed
+                <ul>
+                  <li>This allows caching in Angular</li>
+                  <li>The HttpClient.get observable completes after emitting a single value</li>
+                  <li>However, the shareReplay allows late subscribers to get the cached value even if they subscribe after the HttpClient.get observable has compelted</li>
+                </ul>
+              </li>
+            </ul>
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    private url = "api/products"; <br />
+                    <br />
+                    products$ = this.http.get&lt;Product[]&gt;(this.url).pipe(
+                    <br />
+                    shareReplay(1), <br />
+                    catchError(this.handleError) <br />
+                    );<br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code> </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -34,39 +37,127 @@
 
       <section>
         <ul>
+          <li>A multicast operator</li>
           <li>
             You may run into situations where you end up with multiple
             subscriptions to the same observable
+            <ul>
+              <li>
+                Example would be using async pipe in a template, but adding a
+                separate subscription in the component to handle errors
+              </li>
+              <li>
+                This results in multiple calls to the server since each
+                subscription would trigger a call
+              </li>
+              <li>
+                The ShareReplay operator ensures that only one HTTP request will
+                be made to the backend in the first subscription
+              </li>
+              <li>
+                The result of that request will be served from memory to any
+                other subsequent subscribers
+              </li>
+            </ul>
           </li>
           <li>
-            Example would be using async pipe in a template, but adding a
-            separate subscription in the component to handle errors
+            The shareReplay shares its input Observable with other subscribers
+            <ul>
+              <li>
+                On subscription, it replays the defined number of emissions
+                (parameter passed to the operator)
+              </li>
+              <li>
+                Under the hood, it returns a Subject that shares a single subscription to the underlying source
+              </li>
+            </ul>
           </li>
           <li>
-            This results in multiple calls to the server since each subscription
-            would trigger a call
+            The optional parameter is the buffer size
+            <ul>
+              <li>
+                <li>This is the number of items to be cached and replayed</li>
+                <code>shareReplay(1)</code> only replays the last emission
+              </li>
+              <li>
+                On a subscribe, it replays the specified number of emissions
+              </li>
+            </ul>
           </li>
           <li>
-            The ShareReplay operator ensures that only one HTTP request will be
-            made to the backend in the first subscription
+            An important consideration (particularly with caching data) is the
+            shareReplay will continue to emit buffered values to late
+            subscribers even if the associated observable has completed
+            <ul>
+              <li>This allows caching in Angular</li>
+              <li>
+                The HttpClient.get observable completes after emitting a single
+                value
+              </li>
+              <li>
+                However, the shareReplay allows late subscribers to get the
+                cached value even if they subscribe after the HttpClient.get
+                observable has completed
+              </li>
+              <li>
+                Items stay cached forever, even after there aer no more subscribers
+              </li>
+            </ul>
           </li>
           <li>
-            The result of that request will be served from memory to any other
-            subsequent subscribers
-          </li>
-          <li>Example</li>
-          <li>
-            Given a method on a service class called loadLessons
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  this.lessons$ =
-                  this.lessonsService.loadLessons().pipe(shareReplay());"
-                </code>
-              </div>
-            </div>
+            Use cases
+            <ul>
+              <li>Sharing observables</li>
+              <li>Caching data in the application</li>
+              <li>Replaying emissions to late subscribers</li>
+            </ul>
           </li>
         </ul>
+        <div>
+          <div>
+            The following observable
+            <ul>
+              <li>
+                Emits a number starting with zero every 1000 ms (the interval
+                operator)
+              </li>
+              <li>Competes after emitting 3 values (the take operator)</li>
+              <li>
+                Shares the last emitted value with any late subscribers even if
+                they subscribe after it has completed (shareReplay operator)
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>
+                The initial observer subscribing at time 0 will receive 0, 1,
+                and 2. Is is automatically unsubscribed when the observable
+                completes.
+              </li>
+              <li>
+                A second observer that subscribes at the 1500 ms mark will emit
+                1 (from shareReplay cache) and 2 (emitted from observable). Is
+                is automatically unsubscribed when the observable completes.
+              </li>
+              <li>
+                A third observer that subscribes at the 3500ms mark will emit 2
+                (from shareReplay cache). Is is automatically unsubscribed after
+                emitting the cached value.
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                a$ = interval(1000).pipe( <br />
+                take(3), <br />
+                shareReplay(1) <br />
+                ) <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

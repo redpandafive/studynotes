@@ -31,7 +31,19 @@
       <h1>Share</h1>
       <section>
         <ul>
-          
+          <li>Similar to shareReplay, but does not have a buffer
+            <ul>
+              <li>Share takes a configuration object, so it allows for more granular control over its behavior that shareReplay</li>
+            </ul>
+          </li>
+          <li>Since it does not have a buffer, it does not replay a buffer to late subscribers
+            <ul>
+              <li>This can be modified by passing in an optional configuration object</li>
+            </ul>
+          </li>
+          <li>
+            For a simple caching setup, the shareReplay is a sufficient alternative
+          </li>
         </ul>
       </section>
     </div>

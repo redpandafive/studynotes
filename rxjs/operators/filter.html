@@ -35,12 +35,32 @@
 
       <section>
         <ul>
-          <li>Takes each emission from a stream and applies a filter function to each</li>
-          <li>Emission is emitted again if it satisfies the filter function</li>
+          <li>A transformation operator</li>
+          <li>
+            Takes each emission from a stream and applies a filter function to
+            each
+            <ul>
+              <li>Similar to array filter method</li>
+              <li>
+                Use when you only want to emit items that match specific
+                criteria
+              </li>
+            </ul>
+          </li>
+          <li>
+            The the output observable is emitted if it returns true for the
+            filter function
+            <ul>
+              <li>
+                If the function evaluated to false, the new Observable is not
+                emitted
+              </li>
+            </ul>
+          </li>
         </ul>
         <div class="card">
           <div class="card-body">
-            <code>filter(x => x > 10)</code>
+            <code>filter(x =&gt; x &gt; 10)</code>
           </div>
         </div>
       </section>

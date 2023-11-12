@@ -31,7 +31,26 @@
       <h1>Merge</h1>
       <section>
         <ul>
-          <li>Turns multiple observables into a single observable</li>
+          <li>A combination, creation function, not a pipeable operator</li>
+          <li>Takes in a set of observables as parameters, subscribes to each, and creates an output observable
+            <ul>
+              <li>When an item is emitted from any observable, it is emitted to the output observable</li>
+            </ul>
+          </li> 
+          <li>Turns multiple observables into a single output observable
+            <ul>
+              <li>As each item is emitted from any of the merged observables, an output observable is emitted</li>
+              <li>Results in a stream of all values</li>
+            </ul>
+          </li>
+          <li>
+            Completes when all input observables complete
+          </li>
+          <li>Use cases
+            <ul>
+              <li>Combining sequences of similar types to blend their emitted values into one output observable</li>
+            </ul>
+          </li>
         </ul>
         <div>
           Example

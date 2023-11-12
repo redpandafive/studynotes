@@ -133,23 +133,6 @@
         </ul>
       </section>
 
-      <h3>Error Handling in Observables</h3>
-      <section>
-        <ul>
-          <li>While errors can be caught in a global error handler, you could end up with odd side effects in your UI unless you handle errors within your observable streams</li>
-          <li>One approach is to use the error method in the subscribe method</li>
-          <li>
-            However, if you are using the
-            <code>async</code>
-            pipe in the template, you are not able to use this since Angular handles subscriptions automatically
-          </li>
-          <li>
-            See
-            <a href="../../rxjs/observables.html#errorhandling">RxJS Observables - Error Handling</a>
-          </li>
-        </ul>
-      </section>
-
       <h2>Global Handling of HTTP Errors</h2>
       <section>
         <ul>
