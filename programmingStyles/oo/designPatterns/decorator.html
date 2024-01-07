@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Programming Styles</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Object Oriented</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Design Patterns</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Decorator Pattern
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Decorator Pattern</h1>
+      <section>
+        <ul>
+          <li>Adds new behavior to an object dynamically via composition</li>
+          <li>
+            Allows behavior to be added to an individual object (either
+            statically or dynamically) without affecting the behavior of other
+            objects from the same class
+          </li>
+          <li>
+            Basically, wraps an existing class with a class that extends the
+            behavior or state
+          </li>
+          <li>Is an alternative to subclassing for extending functionality</li>
+          <li>
+            Supports SSP since functionality can be divided between classes with
+            unique areas of concern
+            <ul>
+              <li>
+                Each "layer" that you add encapsulates the logic specific to its
+                concerns
+              </li>
+            </ul>
+          </li>
+          <li>
+            Useful to
+            <ul>
+              <li>
+                You want to add extra functionality to existing classes but you
+                do not want to be tied to a specific implementation
+              </li>
+              <li>
+                You want to restrict functionality, such as limiting methods or
+                routines to uses with certain privileges
+              </li>
+              <li>
+                Good for wrapping infrastructure code like logging around method
+                calls without polluting your domain model
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Example 1</h2>
+      <section>
+        Example situation = You are trying to model Starbucks menu in code.
+        <ul>
+          <li>
+            There are many variables (milk, soy milk, etc) and hundreds of
+            combinations, so modling can be tricky
+          </li>
+          <li>
+            A single class would require tons of attributes, many of which you
+            dont necessarily use (think of regular coffee)
+          </li>
+          <li>
+            Have one class that represents plain coffee that has an ICoffee
+            interface
+          </li>
+          <li>
+            For each addition, you would create a new class that accepts an
+            ICoffee instance, such as
+            <ul>
+              <li>Milk Class</li>
+              <li>HalfAndHalf Class</li>
+              <li>Sugar Class</li>
+              <li></li>
+            </ul>
+          </li>
+          <li>
+            Each of these decorator classes would modify the behavior of the
+            ICoffee instance as needed
+            <ul>
+              <li>
+                For instance, Milk Class could add 20 centers to the total cost.
+                Sugar class could add 10 centers;
+              </li>
+              <li>
+                If you ever need to change the pricing of an ingredient, you
+                only have to change it in one place
+              </li>
+              <li>
+                You don't end up with a god tier class that contains a ton of
+                properties it doesnt use
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Example</h2>
+      <section>
+        <div>
+          Base Class
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public interface IPrice <br />
+                { <br />
+                decimal Cost { get; set; } <br />
+                } <br />
+                ... <br />
+                public class BasePrice : IPrice<br />
+                {<br />
+                private decimal _cost;<br />
+                public decimal Cost<br />
+                {<br />
+                get { return _cost; }<br />
+                set { _cost = value; }<br />
+                }<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Decorator Classes
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public class TradeDiscountPriceDecorator : IPrice <br />
+                {<br />
+                private IPrice _basePrice;<br />
+                <br />
+                public TradeDiscountPriceDecorator(IPrice price)<br />
+                {<br />
+                _basePrice = price;<br />
+                }<br />
+                <br />
+                public decimal Cost<br />
+                {<br />
+                get { return _basePrice.Cost * 0.95m; }<br />
+                set { _basePrice.Cost = value; }<br />
+                }<br />
+                }<br />
+                ...<br />
+                public class CurrencyPriceDecorator : IPrice<br />
+                {<br />
+                private IPrice _basePrice;<br />
+                private decimal _exchangeRate;<br />
+                <br />
+                public CurrencyPriceDecorator(IPrice price, decimal
+                exchangeRate)<br />
+                {<br />
+                _basePrice = price;<br />
+                _exchangeRate = exchangeRate;<br />
+                }<br />
+                <br />
+                public decimal Cost<br />
+                {<br />
+                get { return _basePrice.Cost * _exchangeRate; }<br />
+                set { _basePrice.Cost = value; }<br />
+                }<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example Usage
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public void ApplyTradeDiscount(this IEnumerable&lt;Product&gt;
+                products)<br />
+                {<br />
+                foreach (Product p in products)<br />
+                {<br />
+                p.Price = new TradeDiscountPriceDecorator(p.Price);<br />
+                }<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

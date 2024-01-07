@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Programming Styles</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Object Oriented</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Design Patterns</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Factory</li>
+        </ol>
+      </nav>
+
+      <h1>Factory</h1>
+      <section>
+        <ul>
+          <li>Hides the complexity of creating objects</li>
+          <li>
+            The client will receive and code against an interface or abstract
+            class; Factory class creates the concrete type
+            <ul>
+              <li>
+                The actual type returned could vary based on some information
+                provided by the client
+              </li>
+              <li>
+                Clients are completely ignorant of how dependent classes are
+                created
+              </li>
+            </ul>
+          </li>
+          <li>
+            Uses the following actors:
+            <ul>
+              <li>
+                Client - calls the Factory method; it passes some information o
+                the type of subclass but has no idea how to create it
+              </li>
+              <li>
+                Factory - creates the correct subclass based on information
+                supplied via a parameter
+              </li>
+              <li>
+                IType - interface that the Client references in its code routine
+                and is implemented by all concrete types returned by the Factory
+              </li>
+              <li>
+                ConcreteClassA, ConcreteClassB, ... - actual concrete classes
+                that implement the IType interface and are returned by the
+                Factory
+              </li>
+            </ul>
+          </li>
+          <li>
+            Benefits
+            <ul>
+              <li>Follows Dependency Inversion principle</li>
+              <li>Centralizes code for creation of objects</li>
+              <li>
+                Adding a new concrete class means changing the Factory class -
+                service class is not impacted
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Example</h2>
+      <section>
+        <div>
+          Factory
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public static class ShippingCourierFactory<br />
+                {<br />
+                public static IShippingCourier BuildShippingCourier(Order
+                order)<br />
+                {<br />
+                if (order.TotalCost > 100 || order.WeightInKg > 5)<br />
+                {<br />
+                return new Ups();<br />
+                }<br />
+                else<br />
+                {<br />
+                return new Usps();<br />
+                }<br />
+                }<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Client
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public class OrderService <br />
+                { <br />
+                public void Dispatch(Order order) <br />
+                { <br />
+                IShippingCourier courier =
+                ShippingCourierFactory.BuildShippingCourier(order); <br />
+                order.CourierTrackingId =
+                courier.BuildShippingLabelFor(order.DispatchAddress); <br />
+                Console.WriteLine(order.CourierTrackingId); <br />
+                } <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          IType and Concrete Classes
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public interface IShippingCourier <br />
+                { <br />
+                string BuildShippingLabelFor(Address address); <br />
+                } <br />
+                ... <br />
+                public class Ups : IShippingCourier <br />
+                { <br />
+                public string BuildShippingLabelFor(Address address) <br />
+                { <br />
+                return "UPS-XXXX-XXXX"; <br />
+                } <br />
+                } <br />
+                ... <br />
+                public class Usps : IShippingCourier <br />
+                { <br />
+                public string BuildShippingLabelFor(Address address) <br />
+                { <br />
+                return "USPSXXXXX-XXXX-XXX"; <br />
+                } <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

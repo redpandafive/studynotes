@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Programming Styles</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./oo/index.html">Object Oriented</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Solid/li></li>
+        </ol>
+      </nav>
+
+      <h1>Solid</h1>
+      <section>
+        <ul>
+          <li>Single Responsibility Principle (SRP)</li>
+          <li>Open Closed Principle</li>
+          <li>Liskov Substitution Principle</li>
+          <li>Interface Segregation Principle</li>
+          <li>Dependency Inversion Principle</li>
+        </ul>
+      </section>
+
+      <h2>Dependency Injection (DI) vs Inversion of Control (IoC)</h2>
+      <section>
+        <ul>
+          <li>
+            DI is the act of supplying a low level or dependency class via a
+            constructor, method, or property
+            <ul>
+              <li>
+                Dependent classes can be inverted to interfaces or abstract
+                class, leading to loosely coupled systems
+              </li>
+            </ul>
+          </li>
+          <li>
+            IoC
+            <ul>
+              <li>
+                A system's flow of control is inverted compared to procedural
+                programming
+              </li>
+              <li>
+                Example is an IoC container, whose purpose is ot inject services
+                into client code without having the client code specifying the
+                concrete implementation
+              </li>
+              <li>
+                The control in this instance that is being inverted is the act
+                of the client obtaining the service
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Design Patterns</h2>
+
+      <h3>Decorator Pattern</h3>
+      <section>
+        <ul>
+          <li>
+            Allows behavior to be added to an individual object (either
+            statically or dynamically) without affecting the behavior of other
+            objects from the same class
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Programming Styles</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Object Oriented</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Design Patterns</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Null Object Pattern</li>
+        </ol>
+      </nav>
+
+
+      <h1>Null Object Pattern</h1>
+      <section>
+        <ul>
+          <li>Useful when you do not want to specify or cant specify a valid instance of a class, and you dont want to pass around a null reference</li>
+          <li>Replaces a null reference and implements the same interface, but with no behavior</li>
+        </ul>
+      </section>
+
+
+      <h2>Example</h2>
+      <section>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              public class NullObjectCache : ICacheStorage <br/>
+              { <br/>
+                public void Remove(string key) <br/>
+                { <br/>
+                  // do nothing <br/>
+                } <br/>
+                public void Store(string key, object data) <br/>
+                { <br/>
+                  // do nothing <br/>
+                } <br/>
+              } <br/>
+            </code>
+          </div>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
