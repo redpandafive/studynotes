@@ -41,30 +41,35 @@
                   <li>This was previously only supported in Web API</li>
                 </ul>
               </li>
-            </ul>
-          </li>
-          <li>
-            Controller base type
-            <ul>
-              <li>Use this for MVC controllers that need View support</li>
-              <li>These should inherit from Controller</li>
-            </ul>
-          </li>
-          <li>
-            API Controllers
-            <ul>
               <li>
-                Use this for Web API controllers that do not need View support
-              </li>
-              <li>
-                Controller class should
+                In ASP.NET, there were two controller types. In ASP.NET Core,
+                these are merged into a single Controller class.
                 <ul>
-                  <li>Inherit from ControllerBase</li>
-                  <li>Add the [ApiController] attribute</li>
+                  <li>
+                    Controller
+                    <ul>
+                      <li>
+                        Use this for MVC controllers that need View support
+                      </li>
+                      <li>These should inherit from Controller</li>
+                    </ul>
+                  </li>
+                  <li>
+                    APIControllers
+                    <ul>
+                      <li>
+                        Use this for Web API controllers that do not need View
+                        support
+                      </li>
+                      <li>These should inherit from ControllerBase</li>
+                      <li>Use the [ApiController] attribute</li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
             </ul>
           </li>
+
           <li>
             Best practices
             <ul>
@@ -155,9 +160,9 @@
             There are few good reasons to use a base Controller class in MVC
             <ul>
               <li>
-                Dont take the tightest form of coupling (inheritance) unless
-                there is a significant productivity reason, and you dont violate
-                Liskov
+                Don't take the tightest form of coupling (inheritance) unless
+                there is a significant productivity reason, and you don't
+                violate Liskov
               </li>
             </ul>
           </li>

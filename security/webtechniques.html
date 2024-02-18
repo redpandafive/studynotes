@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Security</h1>
+
+      <h2>Spammer Traps ("honey pots")</h2>
+      <section>
+        <ul>
+          <li>
+            One technique to deter spambots without resorting to captchas or
+            other hoops
+          </li>
+          <li>
+            Adds an invisible control to forms
+            <ul>
+              <li>
+                Bots will parse the HTML and see the control and automatically
+                fill in some value
+              </li>
+              <li>
+                Users cannot see it, so they will not submit a value in this
+                form
+              </li>
+              <li>
+                On sever side, check the value of this control. Reject the
+                request if there is a value there since you can assume it is a
+                spambot
+                <ul>
+                  <li>Log it in case span does get through so you can see if additional modifications are needed</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Advanced tips
+            <ul>
+              <li>Use a realistic sounding name on the control that you do not use, like phone or website</li>
+              <li>Use JS to hide the control since CSS can be parsed by bots</li>
+              <li>Use a form timeout to prevent instant posing
+                <ul>
+                  <li>For instance, initially disable the submit button, but enable it after 5 seconds</li>
+                </ul>
+              </li>
+              <li>
+                Disable autocomplete on the control
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

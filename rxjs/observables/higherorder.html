@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Observables
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Higher Order Observables</h1>
+      <section>
+        <ul>
+          <li>
+            Higher Order Observable = an observable that emits another
+            observable
+          </li>
+        </ul>
+      </section>
+
+      <h2>Source / Outer Observable</h2>
+      <section>
+        <ul>
+          <li>An outer observable is the observable we are acting on</li>
+          <li>
+            If you look at the type returned from the of call, it will be of
+            type Observable&lt;Observable&ltSupplier&gt;&gt;
+            <ul>
+              <li>This indicates it is a higher order observable</li>
+              <li>
+                Use higher order mapping operators to flatten higher order
+                observables (Observable&lt;Observable&ltSupplier&gt;&gt; to
+                Observable&ltSupplier&gt;)
+              </li>
+            </ul>
+          </li>
+          <li>Nested subscriptions are not recommended</li>
+          <li>
+            In the below code sample, the of observable is the outer observable
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              of(3,7) <br />
+              .pipe( <br />
+              map(id=> this.http.get&lt;Supplier&gt;(`${this.url}/${id}`)
+              <br />
+              )).subscribe(o => o.subscribe); <br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Inner Observable</h2>
+      <section>
+        <ul>
+          <li>
+            An outer observable's emitted items can be passed through a pipeline
+            of operations using the pipe method
+          </li>
+          <li>
+            If any of those operations return an observable, that returned
+            observable is the inner observable
+          </li>
+          <li>
+            You must subscribe to the inner observable for the outer observable
+            to receive values
+            <ul>
+              <li>
+                Since the HTTP method is called for each item emitted from the
+                of observable, you must subscribe to each of them to get the
+                values
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          In the following, the observable returned from http.get is the inner
+          observable
+          <div class="card">
+            <div class="card-body">
+              <code>
+                of(3,7) <br />
+                .pipe( <br />
+                map(id=> this.http.get&lt;Supplier&gt;(`${this.url}/${id}`)
+                <br />
+                )).subscribe(o => o.subscribe); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li>
+              In the following code FormServices.getMeasuredItems returns an
+              observable - this is the outer observable
+            </li>
+            <li>
+              This.reasonSetCollectionService.load and
+              this.formServices.getEventSets are inner observables
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const reportId = this.route.snapshot.params["id"];
+                <br />
+                this.formServices.getMeasuredItems().pipe(
+                <br />
+                switchMap(mitems => forkJoin(
+                <br />
+                {
+                <br />
+                reasonSet: this.reasonSetCollectionService.load(mitems),
+                <br />
+                eventSets: this.formServices.getEventSets().pipe(
+                <br />
+                map(es => {
+                <br />
+                this.tiers = this.parseMitems(es, mitems);
+                <br />
+                })
+                <br />
+                )
+                <br />
+                }
+                <br />
+                ))
+                <br />
+                ).subscribe(d => this.isLoading = false);
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Higher Order Mapping Operators</h2>
+      <section>
+        <ul>
+          <li>
+            Use to replace manual subscriptions to inner observables
+            <ul>
+              <li>Flatten higher order observables</li>
+              <li>
+                Automatically subscribe / unsubscribe to inner observables
+              </li>
+              <li>Use with async pipe (cannot use inner subscriptions)</li>
+            </ul>
+            , ,
+          </li>
+          <li>
+            <a href="../operators/switchmap.html">concatMap</a>
+          </li>
+          <li>
+            <a href="../operators/switchmap.html">mergeMap</a>
+          </li>
+          <li>
+            <a href="../operators/switchmap.html">switchMap</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul></ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

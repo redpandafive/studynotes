@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="index.html">ASP.NET Core</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Model Binding
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Model Binding</h1>
+
+      <section>
+        <ul>
+          <li>
+            Process where the ASP.NET pipeline takes a raw HTTP request and
+            converts that into arguments for an action method invocation on a
+            controller.
+            <ul>
+              <li>There are several ways that work without configuration</li>
+            </ul>
+          </li>
+          <li>
+            Model data could be sourced from several places:
+            <ul>
+              <li>
+                Route values
+                <ul>
+                  <li>
+                    Navigating to a route such as {controller}/{action}/{id}
+                    will allow binding to an id parameter
+                  </li>
+                  <li>These are always bound</li>
+                </ul>
+              </li>
+              <li>
+                Query strings
+                <ul>
+                  <li>
+                    Values from ?FirstName=Bob can be bound to a FirstName
+                    parameter
+                  </li>
+                  <li>These are always bound</li>
+                </ul>
+              </li>
+              <li>
+                Body
+                <ul>
+                  <li>Body from a post can be bound to an object</li>
+                  <li>Always bound for complex types</li>
+                </ul>
+              </li>
+              <li>
+                Header values
+                <ul>
+                  <li>Not commonly used</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Note, Model Binders will not throw an error if an object is not
+            bound, you will get a default object
+          </li>
+        </ul>
+      </section>
+
+      <h2>ASP.NET 4</h2>
+      <section>
+        <ul>
+          <li>
+            Out of the box, Model Binding could be done for different Content
+            Types
+          </li>
+        </ul>
+      </section>
+
+      <h2>ASP.NET Core</h2>
+      <section>
+        <ul>
+          <li>
+            Use the [FromBody] attribute to tell ASP.NET Core to use the Content
+            Type header of the request to decide which of the configured
+            IInputFormatter to use for model binding
+          </li>
+        </ul>
+        <div>
+          Example usage
+          <div class="card">
+            <div class="card-body">
+              <code>
+                [HttpPost] <br/>
+                public IActionResult Index([FromBody] Person person) <br/>
+                { <br/>
+                    return Json(person); <br/>   
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

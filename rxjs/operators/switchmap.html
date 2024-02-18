@@ -6,7 +6,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -24,63 +27,56 @@
           <li class="breadcrumb-item">
             <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">ConcatMap, MergeMap, and SwitchMap and Higher Order Mapping</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            ConcatMap, MergeMap, and SwitchMap
+          </li>
         </ol>
       </nav>
 
-      <h1>ConcatMap, MergeMap, and SwitchMap and Higher Order Mapping</h1>
+      <h1>ConcatMap, MergeMap, and SwitchMap</h1>
 
-      <h2>Inner Observables</h2>
       <section>
         <ul>
-          <li>An outer observable is the observable we are acting on</li>
-          <li>The outer observable's emitted items can be passed through a popline of operations using the pipe method</li>
-          <li>If any of those operations return an observable, that returned observalbe is the inner observable</li>
+          <li>These are Higher Order Mapping Operators</li>
+          <li>
+            Perform the following:
+            <ul>
+              <li>
+                Map each value
+                <ul>
+                  <li>From a source (outer) Observable</li>
+                  <li>To an new (inner) Observable</li>
+                </ul>
+              </li>
+              <li>
+                Automatically subscribe to / unsubscribe from inner Observables
+              </li>
+              <li>Flatten the result</li>
+              <li>
+                Emit the resulting values to the output Observable
+                <ul>
+                  <li>Different operators emit values differently</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Use these when working with Higher Order Observables</li>
+          <li>
+            See also
+            <a href="../observables/higherorder.html"
+              >Higher Order Observables</a
+            >
+          </li>
         </ul>
-        <div>
-          <ul>
-            <li>In the following code FormServices.getMeasuredItems returns an obserable - this is the outer observable</li>
-            <li>This.reasonSetCollectionService.load and this.formServices.getEventSets are inner observables</li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                const reportId = this.route.snapshot.params["id"];
-                <br />
-                this.formServices.getMeasuredItems().pipe(
-                <br />
-                switchMap(mitems => forkJoin(
-                <br />
-                {
-                <br />
-                reasonSet: this.reasonSetCollectionService.load(mitems),
-                <br />
-                eventSets: this.formServices.getEventSets().pipe(
-                <br />
-                map(es => {
-                <br />
-                this.tiers = this.parseMitems(es, mitems);
-                <br />
-                })
-                <br />
-                )
-                <br />
-                }
-                <br />
-                ))
-                <br />
-                ).subscribe(d => this.isLoading = false);
-                <br />
-              </code>
-            </div>
-          </div>
-        </div>
       </section>
 
       <h2>Subscribing to Inner Observables</h2>
       <section>
         <ul>
-          <li>Subscribing to an outer observable does not automatically subscribe to an inner observable</li>
+          <li>
+            Subscribing to an outer observable does not automatically subscribe
+            to an inner observable
+          </li>
           <li>
             Higher order mapping operators can be used to
             <ul>
@@ -88,7 +84,10 @@
               <li>
                 Flatten the resulting Observable
                 <ul>
-                  <li>Returns Observable&gt;T&lt;, not Observable&gt;Observable&gt;T&lt;&lt;</li>
+                  <li>
+                    Returns Observable&gt;T&lt;, not
+                    Observable&gt;Observable&gt;T&lt;&lt;
+                  </li>
                 </ul>
               </li>
               <li>Automatically unsubscribes from the inner Observable</li>
@@ -100,44 +99,184 @@
       <h2>ConcatMap</h2>
       <section>
         <ul>
+          <li>
+            A transformation operator that
+            <ul>
+              <li>Subscribes to its input Observable</li>
+              <li>Creates an output Observable</li>
+              <li>
+                When an item is emitted by the outer Observable, it is queued
+                and mapped to an inner Observable as specified by the provided
+                function
+              </li>
+              <li>
+                Waits until the inner Observable completes before beginning the
+                next
+              </li>
+              <li>
+                Inner Observable emissions are concatenated to the output
+                observable
+              </li>
+            </ul>
+          </li>
           <li>Processes each emitted value by the outer Observable in order</li>
           <li>
-            Waits for its inner Observable to complete before processing the next item
+            Differs from others in that it waits for each inner Observable to
+            complete before processing the next item (processes serially)
             <ul>
-              <li>Future values emitted by the outer Observable cannot start processing until the inner Observable completes</li>
+              <li>
+                Future values emitted by the outer Observable cannot start
+                processing until the inner Observable completes
+              </li>
               <li>Ensures items cannot be processed out of sequence</li>
+            </ul>
+          </li>
+          <li>
+            Results are concatenated and emitted by the returned Observable
+          </li>
+          <li>
+            Think of as a relay race
+            <ul>
+              <li>Runners are queued</li>
+              <li>Only one runner runs at a time</li>
+              <li>A runner must complete before the next runner can begin</li>
+              <li>Runners retail their order</li>
             </ul>
           </li>
           <li>
             Use when
             <ul>
-              <li>Operations like updates or deletes where you want to ensure that each request completes before the next begins</li>
+              <li>
+                Operations like updates or deletes where you want to ensure that
+                each request completes before the next begins
+              </li>
               <li>Request - response order matters</li>
+              <li>You need to process items in sequence</li>
+              <li>
+                Use cases
+                <ul>
+                  <li>From a set of ids, get data in sequence</li>
+                  <li>From a set of ids, update or delete data in sequence</li>
+                </ul>
+              </li>
             </ul>
           </li>
           <li>
             Do not use when
             <ul>
-              <li>The item processed in the inner Observable can be changed by the user</li>
-              <li>Think of a drop down where the user can change their mind about a selected item. The request must complete before the next drop down item can be processed</li>
+              <li>
+                The item processed in the inner Observable can be changed by the
+                user
+              </li>
+              <li>
+                Think of a drop down where the user can change their mind about
+                a selected item. The request must complete before the next drop
+                down item can be processed
+              </li>
             </ul>
           </li>
         </ul>
+        <div>
+          In the following example
+          <ul>
+            <li>
+              The observable returned from http.get is the inner observable
+            </li>
+            <li>
+              For each item emitted from the source observable (of),
+              <ul>
+                <li>A HTTP call is made</li>
+                <li>
+                  Processing pauses until the response is returned from the HTTP
+                  call
+                </li>
+              </ul>
+            </li>
+            <li>
+              The returned object is an Observable that emits each time a
+              response from the HTTP call is returned
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                of(3,7) <br />
+                .pipe( <br />
+                concatMap(id=>
+                this.http.get&lt;Supplier&gt;(`${this.url}/${id}`)
+                <br />
+                )).subscribe(o => o.subscribe); <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h2>MergeMap</h2>
       <section>
         <ul>
+          <li>Aka flatMap</li>
           <li>
-            Processes each emitted values as it is emitted
+            A transformation operator that
             <ul>
-              <li>If overlapping values are emitted by the outer Observable, the inner Observable is performed concurently</li>
+              <li>Subscribes to its input Observable</li>
+              <li>Creates an output observable</li>
+              <li>
+                When each item is emitted from the source observable, it is
+                <ul>
+                  <li>
+                    Mapped to an inner Observable as specified by a provided
+                    function
+                  </li>
+                  <li>
+                    The function passed to the MergeMap operator must return an
+                    Observable or a structure that RxJS knows how to create an
+                    observable from, such as an array
+                  </li>
+                  <li>Subscribes to the inner Observable</li>
+                  <li>
+                    Inner Observable emissions are merged to the output
+                    Observable
+                  </li>
+                </ul>
+              </li>
             </ul>
           </li>
-          <li>Returns the results as soon as they are available</li>
-          <li>Use when order doesn't necessarily matter</li>
-          <li>Inner observables can be processed concurrently</li>
-          <li>Example would be a set of ids emitted by the outer observable and an inner observable that fetches detail information</li>
+          <li>
+            Processes each emitted values as it is emitted from the source
+            observable
+            <ul>
+              <li>
+                If overlapping values are emitted by the outer Observable, the
+                inner Observable is performed concurrently
+              </li>
+            </ul>
+          </li>
+          <li>
+            Differs from other higher order observables in that it:
+            <ul>
+              <li>
+                Executes inner Observables in parallel, then merges the results
+              </li>
+              <li>Inner observables can be processed concurrently</li>
+              <li>
+                Emits results in the output Observable as soon as they are
+                available
+              </li>
+              <li>Order is not guaranteed</li>
+            </ul>
+          </li>
+          <li>
+            Use when
+            <ul>
+              <li>To process in parallel</li>
+              <li>Order doesn't necessarily matter</li>
+              <li>
+                Example would be a set of ids emitted by the outer observable
+                and an inner observable that fetches detail information
+              </li>
+            </ul>
+          </li>
           <li>
             Do not use when
             <ul>
@@ -150,19 +289,115 @@
       <h2>SwitchMap</h2>
       <section>
         <ul>
-          <li>Switches from one stream to another stream</li>
-          <li>Allows you to take the values from the first stream and use them in the second stream</li>
-          <li>If the first stream emits before the second stream completes, switchMap will cancel the second and being again with the new value</li>
+          <li>
+            A transformation operator that
+            <ul>
+              <li>Subscribes to its input Observable</li>
+              <li>Creates an output Observable</li>
+              <li>
+                When an item is emitted from the source Observable
+                <ul>
+                  <li>
+                    The item is mapped to an inner Observable as specified by
+                    the provided function
+                  </li>
+                  <li>
+                    The function must return an observable or something that
+                    RxJS knows how to turn into one, like an array
+                  </li>
+                  <li>Unsubscribes from any prior inner Observables</li>
+                  <li>Subscribes to the new inner Observable</li>
+                  <li>
+                    Any completed inner Observable emissions are merged to the
+                    output Observable
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            If the first stream emits before the second stream completes,
+            switchMap will cancel the second and being again with the new value
             <ul>
               <li>It will then switch over and process the new value</li>
             </ul>
+          </li>
+          <li>
+            Differs from the other Higher Order mapping operators in that it
+            <ul>
+              <li>Only subscribes to one inner observable at a time</li>
+              <li>
+                Unsubscribes the prior inner Observable and switches to the new
+                inner Observable if the prior inner observable has not completed
+              </li>
+              <li>
+                You may or may not have more than one emission in the output
+                observable
+                <ul>
+                  <li>
+                    The number of items emitted in the output observable depends
+                    on how many of the output observable emissions will overlap
+                  </li>
+                  <li>
+                    If two inner observables are in sequence, but the first is
+                    able to complete before the second is emitted from the
+                    source observable, there will be two items in the output
+                    observable
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
           <li>
             Use when
             <ul>
-              <li>Typeahead functionality</li>
-              <li>Responding to drop down changes from the UI</li>
+              <li>
+                You need to stop any prior Observable before switching to the
+                next one
+              </li>
+              <li>
+                Examples include
+                <ul>
+                  <li>Type ahead functionality</li>
+                  <li>Responding to drop down changes from the UI</li>
+                </ul>
+              </li>
             </ul>
           </li>
+          <div>
+            In the following example
+            <ul>
+              <li>Each item emitted is mapped to the http.get method</li>
+              <li>
+                Since it is using switchMap, each time an item is emitted from
+                the source observable
+                <ul>
+                  <li>
+                    The subscription to the previous (if not the first) http.get
+                    operator is cancelled
+                  </li>
+                  <li>The new http.get call will be subscribed to</li>
+                </ul>
+              </li>
+              <li>
+                Since you will have overlapping emissions from the source
+                observable, only the last source observable emission will be
+                emitted in the result
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  of(3,7) <br />
+                  .pipe( <br />
+                  concatMap(id=>
+                  this.http.get&lt;Supplier&gt;(`${this.url}/${id}`)
+                  <br />
+                  )).subscribe(o => o.subscribe); <br />
+                </code>
+              </div>
+            </div>
+          </div>
         </ul>
       </section>
 
@@ -170,7 +405,11 @@
       <section>
         <ul>
           <li>
-            <a href="https://dev.to/deborahk/inner-observables-and-higher-order-mapping-hhe" target="_blank">https://dev.to/deborahk/inner-observables-and-higher-order-mapping-hhe</a>
+            <a
+              href="https://dev.to/deborahk/inner-observables-and-higher-order-mapping-hhe"
+              target="_blank"
+              >https://dev.to/deborahk/inner-observables-and-higher-order-mapping-hhe</a
+            >
           </li>
         </ul>
       </section>

@@ -37,51 +37,56 @@
       <h2 id="basics">Basics</h2>
       <section>
         <ul>
-          <li>Starting with Angular 14, reactive forms are strictly typed by default
+          <li>
+            Starting with Angular 14, Reactive forms are strictly typed by
+            default
             <ul>
               <li>This does not apply to template forms</li>
+              <li>
+                Previous versions did not type values, so you could not write
+                something like the following to reference the domain property of
+                the email FormControl in the FormGroups
+                <div>
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        const emailDomain = login.value.email.domain; <br />
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                In addition to type safety, it also adds better autocomplete in
+                IDEs
+              </li>
             </ul>
           </li>
           <li>
-            One approach is to use inference of the initial value define typing
+            With Reactive Forms, you explicitly specify a form model, which is
+            composed of FormArrays, FormGroups, and FormControls
+          </li>
+          <li>
+            Type inference of the initial value assigned to a FormControl is
+            used to type define typing for the FormControl
+          </li>
+          <li>You can explicitly set the type as well (see Examples)</li>
+        </ul>
+      </section>
+
+      <h2>Untyped Form Migration</h2>
+      <section>
+        <ul>
+          <li>
+            To migrate, Untyped versions of the controls were added, such as:
             <ul>
-              <li>
-                The following FormControl is typed to string | null
-                <ul>
-                  <li>It is typed to null since that is the value it will go to when reset</li>
-                </ul>
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      const email = new FormControl('myEmail@gmail.com'); <br />
-                    </code>
-                  </div>
-                </div>
-              </li>
-              <li>
-                A non-nullable version of the above declaration would be:
-              <ul>
-                <li>When reset, its value will be myEmail@gmail.com</li>
-              </ul>
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      const email = new FormControl('myEmail@gmail.com', {nonNullable: true}); <br />
-                    </code>
-                  </div>
-                </div>
-              </li>
+              <li>UntypedFormGroup</li>
+              <li>UntypedFormControl</li>
             </ul>
           </li>
           <li>
-            To set an explicit type
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  const email = new FormControl<string|null>(null); <br />
-                </code>
-              </div>
-            </div> 
+            These behave the same way as previous Angular versions and are
+            intended for gradual migration to types
           </li>
         </ul>
       </section>
@@ -90,27 +95,102 @@
       <section>
         <ul>
           <li>
-            FormArray type parameters correspond to the type of each inner control
+            FormArray type parameters correspond to the type of each inner
+            control
           </li>
           <li>
-          If you wnat a mixture of types within the same FormArray you must use UntypedFormArray
+            If you want a mixture of types within the same FormArray, you must
+            use UntypedFormArray
           </li>
         </ul>
       </section>
 
-
-      <h2>Migration</h2>
+      <h2>Disabled FormControls</h2>
       <section>
         <ul>
+          <li>Disabled FormControls will not appear in a FormGroup's value</li>
           <li>
-            To migrate, Untyped versions of the controls were added, such as UntypedFormGroup and UntypedFormControl
+            Because of this, the type of the value from a FormGroup is Partial
+          </li>
+          <li>
+            Given a FormGroup that contains two non-nullable string
+            FormControls:
             <ul>
-              <li>These are compatible with previous Angular versions</li>
+              <li>
+                The value of that FormGroup is Partial&lt;{email: string,
+                password: string&gt;}
+              </li>
+              <li>
+                The type of each control is <code>string | undefined</code>
+              </li>
+            </ul>
+          </li>
+          <li>
+            To bypass possible undefined fields and include values form any
+            disabled controls, use the FormGroup.getRawValue() command
+          </li>
+        </ul>
+      </section>
+
+      <h2>FormBuilder</h2>
+      <section>
+        <ul>
+          <li>FormBuilder also supports typed forms</li>
+          <li>NonNullableFormBuilder has been added to support FormGroups where every control is non-nullable
+            <ul>
+              <li>This cuts down on boilerplate since you do not need to add <code>{ nonNullable: true }</code> to each control</li>
             </ul>
           </li>
         </ul>
       </section>
 
+      <h2>Examples</h2>
+      <section>
+        <div>
+          The following FormControl is typed to string | null
+          <ul>
+            <li>
+              It is typed to null since that is the value it will revert to if
+              the FormControl is reset
+            </li>
+            <li>TypeScript will force you to handle a null value</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const email = new FormControl('myEmail@gmail.com'); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          A non-nullable version of the above declaration would be:
+          <ul>
+            <li>
+              When reset, its value will be myEmail@gmail.com (its initial
+              value)
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const email = new FormControl('myEmail@gmail.com', {nonNullable:
+                true}); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To set an explicit type, use the following syntax:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const email = new FormControl&lt;string|null&gt;(null); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

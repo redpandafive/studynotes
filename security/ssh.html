@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Secure Shell (SSH)</h1>
+
+      <h2>Basics</h2>
+      <section>
+        <ul>
+          <li>
+            A protocol for securely logging into a remote host and executing
+            commands on that host.
+          </li>
+          <li>
+            Offers security features such as secure user and device
+            authentication and transmission encryption
+            <ul>
+              <li>
+                Replaces earlier administration protocols, such as telnet,
+                remote shell (rsh), remote login (rlogin), and remote copy (rcp)
+              </li>
+            </ul>
+          </li>
+          <li>
+            SSH software is
+            <ul>
+              <li>
+                Used as the primary remote administration mechanism for many
+                operating systems and devices (Linux, Unix, routers, firewalls,
+                network appliances, etc)
+              </li>
+              <li>
+                Embedded into a variety of IT, including file transfer, systems
+                management, identity management, and privileged access
+                management
+              </li>
+              <li>Integrating hosts and automating their operation</li>
+            </ul>
+          </li>
+          <li>Current version is 2.0</li>
+        </ul>
+      </section>
+
+      <h2>Architecture</h2>
+      <section>
+        <ul>
+          <li>Typical client / server architecture</li>
+          <li>
+            Session setup
+            <ul>
+              <li>
+                Host A initiates a connection to an SSH server application on
+                host B
+              </li>
+              <li>
+                The two hosts
+                <ul>
+                  <li>
+                    Negotiate encryption algorithms for their transmissions
+                  </li>
+                  <li>
+                    Establish a session key and perform device authentication
+                    for the server (host B)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Host A sends client authentication credentials (such as username
+                or password) to the server
+              </li>
+            </ul>
+          </li>
+          <li>
+            Once all this is done, a SSH connection is said to be established
+            between the hosts
+          </li>
+        </ul>
+      </section>
+
+      <h2>Use Cases</h2>
+      <section>
+        <ul>
+          <li>
+            Interactive Use
+            <ul>
+              <li>
+                Used for managing Unix and Linux computers, networking
+                equipment, and other types of hosts remotely
+              </li>
+              <li>Used for running applications remotely</li>
+            </ul>
+          </li>
+          <li>
+            File transfers
+            <ul>
+              <li>
+                The foundation of Secure Copy (scp) and Secure File Transfer
+                Protocol (SFTP) protocols
+              </li>
+              <li>
+                Used to transfer files between hosts while leveraging the
+                security capabilities built into SSH
+              </li>
+            </ul>
+          </li>
+          <li>
+            Point to Point Tunneling
+            <ul>
+              <li>
+                Used to implement a virtual private network (VPN) to protect
+                data transmitted between hosts
+              </li>
+              <li>
+                One host may be acting as a gateway for other hosts behind it
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Server Authentication</h2>
+      <section>
+        <ul>
+          <li>
+            Clients perform authentication of a SSH server using public key
+            cryptography using either
+            <ul>
+              <li>Public keys explicity trusted by the client</li>
+              <li>Certificates issued by a certification authority</li>
+            </ul>
+          </li>
+          <li>
+            An initial trust must be established by the client for the server's
+            public key - for automated processes, this usually reviewed by an
+            administrator for the automated process
+          </li>
+          <li>
+            Once trust is established, the client adds the server's public key
+            to it known hosts file
+          </li>
+          <li>
+            Steps to setup initial trust to a server (Host B)
+            <ul>
+              <li>User initiates its first login to Host B</li>
+              <li>Host A connected to Host B</li>
+              <li>Host A sends its public key to Host A</li>
+              <li>
+                User verifies the correct public key for Host B by comparing it
+                against the value received via a different communication channel
+              </li>
+              <li>
+                Host A stores Host B's public key in known hosts file so future
+                connections will not need the public key to be verified
+              </li>
+              <li>
+                Host A authenticates Host B's public key and establishes an
+                encrypted connection with Host B
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Client Authentication</h2>
+      <section>
+        <ul>
+          <li>SSH supports several mechanisms for authenticating users</li>
+          <li>
+            Password Authentication
+            <ul>
+              <li>
+                Keyboard interactive authentication - user sends username and
+                password over an encrypted connection
+              </li>
+              <li>
+                Most commonly used for interactive users, less for automated
+                processes since passwords must be hard coded in scripts and
+                management systems
+              </li>
+              <li>
+                Public key authentication is usually recommended over this for
+                automated processes
+              </li>
+              <li>
+                Steps to password authentication process
+                <ul>
+                  <li>User initiates login to Host B (server)</li>
+                  <li>
+                    Host A authenticates Host B using the Host B public key
+                    stored in users known hosts fie and established an encrypted
+                    connection with Host B
+                  </li>
+                  <li>User is prompted for username and password</li>
+                  <li>
+                    Credentials are send to Host B over encrypted connection
+                  </li>
+                  <li>
+                    Host B authenticates user by verifying the supplied
+                    credentials
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Host Based Authentication
+            <ul>
+              <li>
+                Uses a host key that is sent by a client a server to vouch for
+                the identity of the user
+              </li>
+              <li>
+                A configuration file (.shosts) can be used with any user account
+                on the destination server to specify which users on which hosts
+                can log into that account without further authentication
+              </li>
+              <li>
+                Not recommended for automated access since it does not allow
+                command restrictions (what can be once once the destination
+                server is accessed)
+              </li>
+              <li>
+                Not recommended for interactive users since it does not present
+                an interactive login (which is considered best practice)
+              </li>
+              <li>
+                Session initiation
+                <ul>
+                  <li>
+                    Administrator for Host B (client) places the public key for
+                    Host A (server) in the known hosts file on Host B
+                  </li>
+                  <li>
+                    Administrator configures the shosts file to allow user to
+                    authenticate form Host A
+                  </li>
+                  <li>User starts to login to Host B</li>
+                  <li>
+                    Host A authenticates to Host B using the host key for Host A
+                  </li>
+                  <li>
+                    Host B confirms in the shosts configuration that user is
+                    authorized to access the target account on Host B from Host
+                    A
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Kerberos
+            <ul>
+              <li></li>
+            </ul>
+          </li>
+          <li>
+            Public Key Authentication
+            <ul>
+              <li>
+                Can be configured for both interactive users and automated
+                processes
+              </li>
+              <li>
+                Uses keys and certificates to authenticate a connection
+                <ul>
+                  <li>User keys are the most commonly used method</li>
+                  <li>
+                    User or process on an SSH Client has a user key called an
+                    identity key
+                  </li>
+                  <li>
+                    The server must have the corresponding public key configured
+                    as an authorized key for a user account to which access will
+                    be provided
+                  </li>
+                  <li>
+                    Any user in possession of the identity key is allowed to log
+                    into that user account on the server and perform actions
+                    under the privileges configured for the account
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Advantages
+                <ul>
+                <li>Does not create implicit trust relationships, only expressly defined trust relationships</li>
+                <li>Can restrict authentication based on IP address and authorization by limiting what can be done once connected</li>
+                </ul>
+                
+              </li>
+              <li>
+                Key types
+                <ul>
+                  <li>Identity keys = public and private keys for user stored on client</li>
+                  <li>Host keys = public and private keys for client stored on server</li>
+                  <li>Authorized keys = public key for user stored on server
+                    <ul>
+                      <li>Server administrator can restrict this to only allow authentication from a particular IP address and which commands can be run</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Steps for authentication
+                <ul>
+                  <li>User or an administrator generates an identify key (and corresponding public key) for user</li>
+                  <li>The Host B administrator (server) stores user's public key as an authorization key in the user account on Host B (server)</li>
+                  <li>User starts to login to Host B</li>
+                  <li>Host A (client) connects to Host B and attempts to authenticate user to Host B using user's identity key</li>
+                  <li>Host B authenticates user using the authorized key stored in users's account on Host B</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Key Pairs</h2>
+      <section>
+        <ul>
+          <li>Public and private key files that are used by certain authentication protocols
+            <ul>
+              <li>Generated using asymmetric cryptographic algorithms</li>
+            </ul>
+          </li>
+          <li>
+            Private keys
+            <ul>
+              <li>Equivalent to a password</li>
+              <li>Should stay protected under all circumstances as someone can sign in to any SSH server you have access to</li>
+            </ul>
+          </li>
+          <li>
+            Public keys
+            <ul>
+              <li>What is placed on the server and and may be shared without compromising the private key</li>
+            </ul>
+          </li>
+          <li>
+            If a server side public key cannot be validated against the client side private key, authentication fails
+          </li>
+          <li>
+            Multi factor authentication can be implemented with key pairs by entering a passphrase when the key pair is Generated
+            <ul>
+              <li>User will be prompted for the passphrase during authentication</li>
+              <li>The passphrase is used along with the presence of the private key on the SSH client to authenticate the user</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://nvlpubs.nist.gov/nistpubs/ir/2015/NIST.IR.7966.pdf" target="_blank">
+              https://nvlpubs.nist.gov/nistpubs/ir/2015/NIST.IR.7966.pdf
+            </a>
+          </li>
+          <li>
+            <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement?source=recommendations" target="_blank">
+              https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement?source=recommendations
+            </a>
+          </li>
+          <li>
+            <a href="https://woshub.com/connect-to-windows-via-ssh/" target="_blank">
+              https://woshub.com/connect-to-windows-via-ssh/
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Units of Measurement
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Units of Measurement</h1>
+
+      <section>
+        <ul>
+          <li>
+            Font size is a cascading property, meaning it will just flow down
+            the chain of elements until it is re-defined
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2>Relative Units</h2>
+      <section>
+        <ul>
+          <li></li>
+          <li>
+            Em
+            <ul>
+              <li>
+                These tend to not work as well in Angular components since you
+                may not be able to predict the size of the host where the
+                component will be used
+              </li>
+            </ul>
+          </li>
+          <li>Rem
+            <ul>
+              <li>
+                In Angular, this measurement presents a good opportunity to have the component be consistently rendered the same size, no matter the size of the host
+              </li>
+            </ul>
+            <div>
+              Add this to the stylesheet of each component
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    :host { <br/>
+                    font-size: 1rem; <br/>
+                    } <br/>
+                  </code>
+                </div>
+              </div>
+            </div>            
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

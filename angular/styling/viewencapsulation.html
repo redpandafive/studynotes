@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            View Encapsulation
+          </li>
+        </ol>
+      </nav>
+
+      <h1>View Encapsulation</h1>
+
+      <section>
+        <ul>
+          <li>
+            Use to isolate CSS rules to within the component template
+            <ul>
+              <li>
+                Will not be inherited by any components nested within the
+                template nor by any content projected into the components
+              </li>
+              <li>
+                By default, component CSS styles are encapsulated into the
+                components view and don’t affect the rest of the application
+              </li>
+            </ul>
+          </li>
+          <li>
+            To control how CSS encapsulation works on a component level, you can
+            set the view encapsulation mode (encapsulation tag)
+            <ul>
+              <li>
+                This is configured in the component metadata
+                <div class="card">
+                  <div class="card-body">
+                    <code> ... encapsulation: ViewEncapsulation.None ... </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                ViewEncapsulation.ShadowDom
+                <ul>
+                  <li>
+                    Uses browser's native shadow DOM implementation. The
+                    component styles are included within the shadow DOM
+                  </li>
+                  <li>
+                    This shuts off Angular's emulated scope and encapsulation,
+                    so it is not emulated
+                  </li>
+                  <li>
+                    Only works on browsers that have native support for shadow
+                    DOM, which is limited
+                  </li>
+                </ul>
+              </li>
+              <li>
+                ViewEncapsulation.Emulated
+                <ul>
+                  <li>Default mode</li>
+                  <li>Provides emulated scope and encapsulation</li>
+                  <li>
+                    Emulated the behavior of shadow DOM by preprocessing the CSS
+                    code to effective scope the CSS to the component's view
+                  </li>
+                  <li>
+                    Angular dynamically adds a custom scoping attribute to all
+                    nodes in the component
+                    <ul>
+                      <li>These are unique to a component</li>
+                      <li>
+                        These are different each time Angular renders the
+                        component, so don't try to directly reference them
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Component stylesheets are inserted as style blocks in the
+                    head of the page
+                    <ul>
+                      <li>
+                        Style rules are rewritten to add the custom attributes
+                        that Angular generated
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                ViewEncapsulation.None
+                <ul>
+                  <li>
+                    This shuts off Angular's emulated scope and encapsulation
+                  </li>
+                  <li>
+                    No view encapsulation. This behaves the same as pasting the
+                    component's styles into the HTML
+                  </li>
+                  <li>
+                    Component styles are still inserted into the head element as
+                    written, but do not use any scoping to restrict their effect
+                    to a single component
+                  </li>
+                  <li>
+                    Does have some use cases
+                    <ul>
+                      <li>
+                        Set global styling on the app component so they are
+                        applied to all children
+                        <ul>
+                          <li>
+                            This is inserted first, so all component stylesheets
+                            will follow and override the rules
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

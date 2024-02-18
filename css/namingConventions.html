@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">CSS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Naming Conventions</li>
+        </ol>
+      </nav>
+
+      <h1>Naming Conventions</h1>
+    
+      <section>
+        <ul>
+          <li>There have been several CSS naming conventions developed over the years to give a consistent naming convention for CSS</li>
+          <li>
+            One approach is B.E.M
+            <ul>
+              <li>This stands for class="block__element--modifier"</li>
+            </ul>
+          </li>
+          <li>
+            Block is just a related chunk of HTML elements
+          </li>
+          <li>
+            Element is a single element within a block
+          </li>
+          <li>
+            Modifier modifies the element
+          </li>
+        </ul>
+        <div>
+          Simple example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;ul class="nav"&gt;
+                &lt;li class="nav__item"&gt;
+                Home
+                &lt;/li&gt;
+                &lt;li class="nav__item nav__item--active"&gt;
+                About
+                &lt;/li&gt;
+                &lt;/ul&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section> 
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

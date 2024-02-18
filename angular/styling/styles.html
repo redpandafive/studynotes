@@ -33,175 +33,306 @@
 
       <h1>Styling Components</h1>
 
+      <h2>Styles and StyleUrls Property</h2>
       <section>
         <ul>
           <li>
-            Use to isolate CSS rules to within the component template
-            <ul>
-              <li>
-                Will not be inherited by any components nested within the
-                template nor by any content projected into the components
-              </li>
-              <li>
-                By default, component CSS styles are encapsulated into the
-                components view and don’t affect the rest of the application
-              </li>
-            </ul>
+            This is setting styles or styleUrls properties of the Component
+            decorator
+          </li>
+          <li>These are arrays or strings</li>
+          <li>
+            If you are using the CLI to build, you can add sass, less, or stylus
+            files into the styleUrls metadata with the appropriate extensions
+          </li>
+          <li>Angular CLI build process runs the pertinent CSS preprocessor</li>
+          <li>These are converted to Angular's emulated view encapsulation</li>
+        </ul>
+      </section>
+
+      <h2>Inline in the template HTML</h2>
+      <section>
+        <ul>
+          <li>
+            Embed a style tag into the template or a link tag to reference an
+            external stylesheet
           </li>
           <li>
-            Best practices
-            <ul>
-              <li>
-                Do not override the styles of a component – consider then
-                private implementation details for that component
-              </li>
-              <li>
-                If you are authoring a component that others will use, you can
-                accept customization from consumers in a number of ways (see
-                https://angular.io/guide/component-styles#authoring-a-component-to-support-customization)
-              </li>
-            </ul>
+            These are converted to Angular's emulated view encapsulation, just
+            as when using the styles or styleUrls component metadata properties
           </li>
           <li>
-            Special selectors from the world of shadow DOM style scoping
-            <ul>
-              <li>
-                :host
-                <ul>
-                  <li>
-                    Host element – element that matches the components selector
-                    into which the template is rendered
-                  </li>
-                  <li>This selector targets that host element</li>
-                  <li>
-                    Rules will affect the host element and all its descendants
-                  </li>
-                  <li>
-                    You can add selectors after the host selector to target
-                    elements within the component
-                  </li>
-                </ul>
-              </li>
-              <li>
-                :host(.active)
-                <ul>
-                  <li>Function form of the host selector</li>
-                  <li>Applies host styles conditionally</li>
-                  <li>
-                    Includes another selector inside parentheses after :host
-                  </li>
-                  <li>
-                    Example above targets the host element but only when it also
-                    has the active CSS class applied to it
-                  </li>
-                </ul>
-              </li>
-              <li>
-                :host-context
-                <ul>
-                  <li>
-                    Use to apply styles based on some condition outside of a
-                    component’s view
-                  </li>
-                  <li>
-                    :host-context(.theme-light) h2 would apply rules to all h2
-                    elements inside the component only if some ancestor element
-                    has the CSS class theme-light
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            If a link tag is used, that will be removed and the CSS rules will
+            be added as a style tag in the head element
           </li>
           <li>
-            Ways to add styles for a component
-            <ul>
-              <li>
-                By setting styles or styleUrls properties of the Component
-                decorator
-                <ul>
-                  <li>These are arrays or strings</li>
-                  <li>
-                    If you are using the CLI to build, you can add sass, less,
-                    or stylus files into the styleUrls metadata with the
-                    appropriate extensions
-                  </li>
-                  <li>
-                    Angular CLI build process runs the pertinent CSS
-                    preprocessor
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Inline in the template HTML
-                <ul>
-                  <li>
-                    Embed a style tag into the template or a link tag to
-                    reference an external stylesheet
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            If styles are used as an attribute on a HTML element within the
+            component, Angular will not perform any conversion
+          </li>
+        </ul>
+      </section>
+
+      <h2>With CSS Imports</h2>
+      <section>
+        <ul>
+          <li>Use to import CSS sheets into other CSS sheets</li>
+          <li>
+            You can import multiple style sheets into a single CSS style sheet,
+            then reference this in Angular as a link tag or in the component
+            metadata
           </li>
           <li>
-            With CSS imports
-            <ul>
-              <li>use to import CSS sheets into other CSS sheets</li>
-              <li>
-                the URL is relative to the CSS file into which you are importing
-              </li>
-            </ul>
+            The URL is relative to the CSS file into which you are importing
           </li>
-          <li>
-            To control how CSS encapsulation works on a component level, you can
-            set the view encapsulation mode in the component metadata
-            (encapsulation tag)
-            <ul>
-              <li>
-                ViewEncapsulation.ShadowDom
-                <ul>
-                  <li>
-                    Uses browser's native shadow DOM implementation. The
-                    component styles are included within the shadow DOM
-                  </li>
-                  <li>
-                    Only works on browsers that have native support for shadow
-                    DOM, which is limited
-                  </li>
-                </ul>
-              </li>
-              <li>
-                ViewEncapsulation.Emulated
-                <ul>
-                  <li>Default</li>
-                  <li>
-                    Emulated the behavior of shadow DOM by preprocessing the CSS
-                    code to effective scope the CSS to the component's view
-                  </li>
-                </ul>
-              </li>
-              <li>
-                ViewEncapsulation.None
-                <ul>
-                  <li>
-                    no view encapsulation. This behaves the same as pasting the
-                    component's styles into the HTML
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+          <li>These are converted to Angular's emulated view encapsulation</li>
           <li>
             If you need to apply styles across the entire page, add the rules to
             the site.CSS file
+            <div class="card">
+              <div class="card-body">
+                <code> @import './hero-details-box.css'" </code>
+              </div>
+            </div>
           </li>
         </ul>
-        <p>Example</p>
-        <div class="card">
-          <div class="card-body">
-            <code> @import './hero-details-box.css'" </code>
+        <div>
+          In a app-nav.component.css file that you would reference in Angular,
+          add the following to import all three stylesheets:
+          <div class="card">
+            <div class="card-body">
+              <code> @import './app-nav.component.global.css';</code>
+              <code> @import './app-nav.component.list.css';</code>
+              <code> @import './app-nav.component.links.css'; </code>
+            </div>
           </div>
         </div>
       </section>
+
+      <h2>Globally</h2>
+      <section>
+        <ul>
+          <li>
+            This is not the recommended approach for all styling
+            <ul>
+              <li>
+                It becomes more difficult to manage as the application grows
+              </li>
+              <li>
+                Tougher to see how a change will impact the rest of the
+                application
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are some style exceptions that can be in the global space
+            <ul>
+              <li>Browser resets</li>
+              <li>Colors</li>
+              <li>Typography</li>
+              <li>Layout</li>
+              <li>Media queries</li>
+              <li>Utilities</li>
+            </ul>
+          </li>
+          <li>
+            Generated Angular projects will include a styles.css file for global
+            styles
+            <ul>
+              <li>
+                One way is to use import statements for each external stylesheet
+                in this styles.css file
+                <ul>
+                  <li>
+                    All stylesheets will be imported globally - there is no
+                    style encapsulation
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Additional stylesheets can be included using the styles array
+                for the project in angular.json
+              </li>
+            </ul>
+          </li>
+          <li>
+            Another approach is at the App Component level
+            <ul>
+              <li>
+                Set the encapsulation property on the AppComponent to
+                ViewEncapsulation.None
+                <ul>
+                  <li>
+                    This will turn off style encapsulation, so styles are
+                    available globally
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Point the styleUrls to a stylesheet with contains imports for
+                all other stylesheets
+              </li>
+              <li>
+                This differs form the previous approach in that the style rules
+                are added to the head of the document
+                <ul>
+                  <li>
+                    Styling will not be available until Angular completed setup
+                    processing
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Combination Global + Component Organization</h3>
+      <section>
+        <ul>
+          <li>
+            One method for stylesheet organization is to split style rules in
+            either
+            <ul>
+              <li>Global stylesheets</li>
+              <li>Component stylesheets</li>
+            </ul>
+          </li>
+          <li>
+            Global stylesheets can be further split apart to prevent monolithic
+            stylesheets that cut across multiple
+            component-styles#authoring-a-component-to-support-customization
+            <ul>
+              <li>
+                One example of a global stylesheet hierarchy would be
+                <ul>
+                  <li>
+                    layout
+                    <ul>
+                      <li>_app-footer.css</li>
+                      <li>_app-header.css</li>
+                      <li>_layout.css</li>
+                    </ul>
+                  </li>
+                  <li>
+                    root
+                    <ul>
+                      <li>_colors.css</li>
+                      <li>_links.css</li>
+                      <li>_normalize.css</li>
+                      <li>_root.css</li>
+                    </ul>
+                  </li>
+                  <li>
+                    typography
+                    <ul>
+                      <li>_headers.css</li>
+                      <li>_paragraphs.css</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Within a stylesheet, you can use class names that include a prefix
+            that gives you an indication of where it is found
+            <ul>
+              <li>
+                For example, the _layout.css stylesheet has elements related to
+                layout. Class names can be prefixed with 1-
+              </li>
+              <li>These prevent style contamination and conflict</li>
+              <li>
+                The specific convention is not important (.l- vs .layout-) as
+                long as you are consistent
+              </li>
+              <li>
+                Example rule sets
+                <ul>
+                  <li>.l-grid { ... }</li>
+                  <li>.l-container { ... }</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            To include these global styles, you can either
+            <ul>
+              <li>Link to them within the styles.css file</li>
+              <li>
+                Turn off view encapsulation in the AppComponent and add them
+                there in the styles property
+              </li>
+            </ul>
+          </li>
+          <li>
+            If you are using an approach that uses view encapsulation, you can
+            use simpler class names in your components
+          </li>
+        </ul>
+      </section>
+
+      <h2>Angular.json To Simplify File Paths</h2>
+      <section>
+        <ul>
+          <li>
+            Since you end up with long file paths in your components to link to
+            global styles, one approach you can do to simplify this is to add
+            default file paths
+          </li>
+          <li>
+            Doing so allows you to shorted file paths since it will look in the
+            specified directories to find files
+          </li>
+          <li>
+            Under the "styles" element of the "build" section add
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    "stylePreprocessorOptions": { <br />
+                    "includePaths": [ <br />
+                    "src/app/shared/css/layout", <br />
+                    "src/app/shared/css/typography" <br />
+                    ] <br />
+                    } <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Best Practices</h2>
+      <section>
+        <ul>
+          <li>
+            Do not override the styles of a component – consider them private
+            implementation details for that component
+          </li>
+          <li>
+            If you are authoring a component that others will use, you can
+            accept customization from consumers in a number of ways (see
+            https://angular.io/guide/component-styles#authoring-a-component-to-support-customization)
+          </li>
+          <li>
+            To set consistent sizing for components, add the following to each
+            stylesheet of each component.  This will size everything in the component based off the root font size.  This leads to more predictably sizing, no matter where it is placed.
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  :host { <br />
+                  font-size: 1rem; <br />
+                  } <br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

@@ -53,20 +53,24 @@
             It automatically adds {nonNullable: true} to each control without having to explicitly add it
           </li>
           <li>
-            Access it using the nonNullable proprety on the FormBuilder object
+            Access it using the nonNullable property on the FormBuilder object or injecting the NonNullableFormBuilder class
           </li>
         </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              const fb = new FormBuilder(); <br />
-              const login = fb.nonNullable.group({ <br />
-                  email: '', <br />
-                  password: '',<br />
-              }); <br />
-            </code>
+        <div>
+          Accessing it through the property
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const fb = new FormBuilder(); <br />
+                const login = fb.nonNullable.group({ <br />
+                    email: '', <br />
+                    password: '',<br />
+                }); <br />
+              </code>
+            </div>
           </div>
-        </div> 
+        </div>
+ 
 
       </section>
 

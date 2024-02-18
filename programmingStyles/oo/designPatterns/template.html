@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Programming Styles</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Object Oriented</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Design Patterns</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Template Pattern
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Template Pattern</h1>
+      <section>
+        <ul>
+          <li>
+            Defines the skeleton structure of an algorithm but defers certain
+            steps and details to subclasses
+            <ul>
+              <li>
+                Structure and flow of the algorithm remains static, but details
+                are deferred to subclasses
+              </li>
+            </ul>
+          </li>
+          <li>
+            Useful when you want to centralize code common to a series of
+            subclasses
+            <ul>
+              <li>Separate the code that varies from code that is similar</li>
+            </ul>
+          </li>
+          <li>
+            Helps avoid duplication and enables better maintenance of your code
+            base
+          </li>
+        </ul>
+      </section>
+
+      <h2>Example</h2>
+      <section>
+        <div>This example uses an abstract C# class to contain common code</div>
+        <div>
+          Abstract class that contains common code
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public abstract class ReturnProcessTemplate <br />
+                { <br />
+                protected abstract void GenerateReturnTransactionFor(ReturnOrder
+                returnOrder); <br />
+                <br />
+                protected abstract void CalculateRefundFor(ReturnOrder
+                returnOrder); <br />
+                <br />
+                public void Process(ReturnOrder returnOrder) <br />
+                { <br />
+                GenerateReturnTransactionFor(returnOrder); <br />
+                CalculateRefundFor(returnOrder); <br />
+                } <br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Class that handles case where return should not include shipping costs
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public class NoQuibblesReturnProcess : ReturnProcessTemplate
+                <br />
+                { <br />
+                protected override void CalculateRefundFor(ReturnOrder
+                returnOrder) <br />
+                { <br />
+                // code to return to stock <br />
+                } <br />
+                <br />
+                protected override void GenerateReturnTransactionFor(ReturnOrder
+                returnOrder) <br />
+                { <br />
+                returnOrder.AmountToRefund = returnOrder.PricePaid; <br />
+                } <br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Class that handles case where shipping costs should be refunded
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public class FaultyReturnProcess : ReturnProcessTemplate <br />
+                { <br />
+                protected override void CalculateRefundFor(ReturnOrder
+                returnOrder) <br />
+                { <br />
+                // Code to send generate order that sends faulty items back to
+                manufacturer <br />
+                } <br />
+                <br />
+                protected override void GenerateReturnTransactionFor(ReturnOrder
+                returnOrder) <br />
+                { <br />
+                returnOrder.AmountToRefund = returnOrder.PricePaid +
+                returnOrder.PostageCost; <br />
+                } <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

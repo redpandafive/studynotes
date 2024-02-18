@@ -52,7 +52,11 @@
               <li>This becomes the source of truth for the model value</li>
             </ul>
           </li>
-          <li>Each control is tracked by name when creating the form group</li>
+          <li>Each control is tracked by name when creating the form group
+            <ul>
+              <li>This is an enumerated set of keys</li>
+            </ul>
+          </li>
           <li>
             Extension of the AbstractControl class
             <ul>
@@ -265,6 +269,12 @@
       <section>
         <ul>
           <li>
+            <code>disabled</code>
+            <ul>
+              <li></li>
+            </ul>
+          </li>
+          <li>
             <code>value</code>
             <ul>
               <li>Gets the curren values for all contained controls</li>
@@ -273,7 +283,7 @@
                 as an object with a key-value pair for each member of the group.
               </li>
               <li>
-                For a disabled FormGroup, returns the values of all controls as
+                For a disabled FormGroup, this returns the values of all controls as
                 an object with a key-value pair for each member of the group.
               </li>
               <li>This will not include disabled controls</li>

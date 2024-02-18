@@ -58,9 +58,19 @@
             </ul>
           </li>
         </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>filter(x =&gt; x &gt; 10)</code>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>filter(x =&gt; x &gt; 10)</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The following filters out emissions where the value is null
+          <div class="card">
+            <div class="card-body">
+              <code>filter(product => Boolean(product))</code>
+            </div>
           </div>
         </div>
       </section>

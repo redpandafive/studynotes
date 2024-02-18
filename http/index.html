@@ -84,14 +84,14 @@
             HTTP communication is an asynchronous communication pattern
             <ul>
               <li>Client sends a request</li>
-              <li>Servier sends a response</li>
+              <li>Server sends a response</li>
             </ul>
           </li>
           <li>
-            Evolution of asynchronous communictions in web development
+            Evolution of asynchronous communications in web development
             <ul>
               <li>
-                Callbacks - function that is executed when the reponse returns
+                Callbacks - function that is executed when the response returns
                 from a server
               </li>
               <li>
@@ -153,6 +153,25 @@
           </li>
           <li>Sends the new resource in the body of the request</li>
           <li>
+            Data can be send in one of several ways
+            <ul>
+              <li>
+                THis is indicated on the Content-Type section of the HTTP request
+              </li>
+              <li>x-www-form-urlencoded
+                <ul>
+                  <li>Data in the body is ampersand separated key value pairs (FirstName=Bob&LastName=Smith&Age=25)</li>
+                  <li>This is hte default method when send form data via POST </li>
+                </ul>
+              </li>
+              <li>application/json; charset=utf-8
+                <ul>
+<li>Sends data as JSON</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
             If successful, returns
             <ul>
               <li>HTTP 201 Created status code</li>
@@ -165,7 +184,7 @@
         </ul>
       </section>
 
-      <h3>REST Services - Read Opearations</h3>
+      <h3>REST Services - Read Operations</h3>
       <section>
         <ul>
           <li>Reads resources from a data service</li>
@@ -186,7 +205,7 @@
         <div class="card"><div class="card-body"><code> "</code></div></div>
       </section>
 
-      <h3>REST Services - Update Opearations</h3>
+      <h3>REST Services - Update Operations</h3>
       <section>
         <ul>
           <li>Updates a resource from a data service</li>
@@ -202,13 +221,13 @@
         <div class="card"><div class="card-body"><code> "</code></div></div>
       </section>
 
-      <h3>REST Services - Delete Opearations</h3>
+      <h3>REST Services - Delete Operations</h3>
       <section>
         <ul>
           <li>Deletes a resource from a data service</li>
           <li>Uses the HTTP verb DELETE</li>
           <li>
-            The URL should indicate the specific resouce you are deleting
+            The URL should indicate the specific resource you are deleting
             (includes id) - http://localhost/api/books/5
           </li>
           <li>If successful, returns HTTP 204 No Content status code</li>

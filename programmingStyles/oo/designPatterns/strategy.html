@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Programming Styles</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Object Oriented</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Design Patterns</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Strategy Pattern
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Strategy Pattern</h1>
+      <section>
+        <ul>
+          <li>
+            Enables the ability to swap algorithms dynamically at run time
+            <ul>
+              <li>Encapsulates algorithms as objects</li>
+              <li>Clients reference algorithms by an abstract or interface, which enables them to be interchangeable</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Example</h2>
+      <section>
+        <div>
+          Interface for the Strategy classes
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public interface IBasketDiscountStrategy <br/>
+                { <br/>
+                    decimal GetTotalCostAfterApplyingDiscountTo(Basket basket); <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          A Strategy class that does not change the price
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public class NoBasketDiscount : IBasketDiscountStrategy <br/>
+                { <br/>
+                    public decimal GetTotalCostAfterApplyingDiscountTo(Basket basket) <br/>
+                    { <br/>
+                        return basket.TotalCost; <br/>
+                    } <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          A Strategy class applies a discount based on a percentage
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public class BasketDiscountPercentageOff : IBasketDiscountStrategy <br/>
+                { <br/>
+                    public decimal GetTotalCostAfterApplyingDiscountTo(Basket basket) <br/>
+                    { <br/>
+                        return basket.TotalCost * .85m; <br/>
+                    } <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          A Strategy class applies a dollar based discount
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public class BasketDiscountMoneyOff : IBasketDiscountStrategy <br/>
+                { <br/>
+                    public decimal GetTotalCostAfterApplyingDiscountTo(Basket basket) <br/>
+                    { <br/>
+                        if (basket.TotalCost > 100) <br/>
+                        { <br/>
+                            return basket.TotalCost - 10m; <br/>
+                        } <br/>
+                        <br/>
+                        if (basket.TotalCost > 50) <br/>
+                        { <br/>
+                            return basket.TotalCost - 5m; <br/>
+                        } <br/>
+                        <br/>
+                        return basket.TotalCost; <br/>
+                    } <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Client that uses the Strategy classes
+          <div class="card">
+            <div class="card-body">
+              <code>
+                public class Basket <br/>
+                { <br/>
+                    private IBasketDiscountStrategy _basketDiscount; <br/>
+                    <br/>
+                    public decimal TotalCost { get; set; } <br/>
+                    <br/>
+                    public Basket(DiscountType discountType) <br/>
+                    { <br/>
+                        _basketDiscount = BasketDiscountFactory.GetDiscount(discountType);   <br/>
+                    } <br/>
+                    <br/>
+                    public decimal GetTotalCostAfterDiscount() <br/>
+                    { <br/>
+                        return _basketDiscount.GetTotalCostAfterApplyingDiscountTo(this); <br/>
+                    } <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Sample code that creates the Basket object and applies one of the Strategy classes
+          <div class="card">
+            <div class="card-body">
+              <code>
+                Basket basket1 = new(DiscountType.PercentageOff) <br/>
+                { <br/>
+                    TotalCost = 100 <br/>
+                }; <br/>
+                <br/>
+                Console.WriteLine(basket1.GetTotalCostAfterDiscount()); <br/>
+                <br/>
+                Basket basket2 = new(DiscountType.MoneyOff) <br/>
+                { <br/>
+                    TotalCost = 100 <br/>
+                }; <br/>
+                <br/>
+                Console.WriteLine(basket2.GetTotalCostAfterDiscount()); <br/>
+                <br/>
+                Basket basket3 = new(DiscountType.NoDiscount) <br/>
+                { <br/>
+                    TotalCost = 100 <br/>
+                }; <br/>
+                <br/>
+                Console.WriteLine(basket3.GetTotalCostAfterDiscount()); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="../index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="./index.html">Linux</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Commands</li>
+      </ol>
+    </nav>
+    <div class="container">
+      <h1>Commands</h1>
+
+      <h2>Commands</h2>
+
+      <h3>alias</h3>
+      <section>
+        <ul>
+          <li>Creates an alias of a command</li>
+          <li>Allows you to create shortcuts for longer commands</li>
+          <li>
+            <kbd>alias .3="cd ../.."</kbd> = you can now use <kbd>.3</kbd> to execute <kbd>cd ../../..</kbd>
+          </li>
+          <li>
+            To make the aliases consistent across reboots of your computer, you must add them to your .bashrc or .bash_aliases file.
+          </li>
+        </ul>
+      </section>
+
+      <h3>cat</h3>
+      <section>
+        <ul>
+          <li>
+            Reads one or more files and prints their contents to standard output
+          </li>
+          <li>
+            If multiple files are listed, they are read and output in the order
+            they appearing the command line arguments
+          </li>
+          <li>
+            <kbd>cat xxxx yyyy</kbd> will read and print the output for xxxx and
+            then yyyy
+          </li>
+        </ul>
+      </section>
+
+
+      <h3>cd</h3>
+      <section>
+        <ul>
+          <li>Change the current working directory</li>
+          <li>You can supply absolute or relative filepaths</li>
+            <li>
+              <kbd>cd ..</kbd> = move to the parent directory of the current working directory
+            </li>
+            <li>
+              <kbd>cd ../..</kbd> = move to the grandparent directory of the current working directory
+              <ul>
+                <li>You can add on as many additional ../ as you work to move up higher</li>
+              </ul>
+            </li>
+          <li>
+            <kbd>cd ~</kbd> = go to the home directory from anywhere in the filesystem
+          </li>
+          <li>
+            <kbd>cd -</kbd> = changes the current working directory back to the one you just came from
+            <ul>
+              <li>This allows you to go back and forth between two directories</li>
+            </ul>
+          </li>
+          <li>
+            <kbd>cd dev/mobile/android</kbd> = change the current working directory to the specified path starting with dev as a subfolder
+          </li>
+        </ul>
+      </section>
+
+      <h3>clear</h3>
+      <section>
+        <ul>
+          <li>Clears the output from the CLI</li>
+        </ul>
+      </section>
+
+      <h3>echo</h3>
+      <section>
+        <ul>
+          <li>Prints test back to the console</li>
+          <li>
+            Can redirect the output to a file instead:
+            <kbd>echo "Some Test" >> newfile.txt</kbd>
+          </li>
+        </ul>
+      </section>
+
+
+      <h3>ls</h3>
+      <section>
+        <ul>
+          <li>
+            Lists the contents of a directory
+          </li>
+          <li>
+            <kbd>ls</kbd> = Lists the content of the current working directory
+          </li>
+          <li>
+            <kbd>ls Help gc_help</kbd> = Lists the contents of the Help directory first, then the contents of the gc_help directory
+
+          </li>
+          <li>
+            Use -l for a long listing
+            <ul>
+              <li>
+                <kbd>ls -1</kbd> = Lists the content of the current directory with all output in a single column
+              </li>
+              <li>
+                Breakdown of output
+                <ul>
+                  <li>Line 1 = total size of all files in the listing</li>
+                  <li>Line 2 = = each file or directory is on a line by itself</li>
+                  <li>For each line
+                    <ul>
+                      <li>1st character is the file type
+                        <ul>
+                          <li>- = regular file</li>
+                          <li>b = block special file</li>
+                          <li>c = character special file</li>
+                          <li>d = directory</li>
+                          <li>l = symbolic link</li>
+                          <li>n = network file</li>
+                          <li>p = named pipe</li>
+                          <li>s = socket</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Next 9 characters are 3 groups of permissions
+                        <ul>
+                          <li>Permissions for file owner (1-3)</li>
+                          <li>Permissions for group (4-6)</li>
+                          <li>Permissions for others (7-9)</li>
+                          <li>Within each group, there will be three columns
+                            <ul>
+                              <li>1st column = Read permission column
+                                <ul>
+                                  <li>Will contain r or -</li>
+                                </ul>
+                              </li>
+                              <li>2nd column = Write permission column
+                                <ul>
+                                  <li>Will contain w or -</li>
+                                </ul>
+                              </li>
+                              <li>3rd column = Execute permission column
+                                <ul>
+                                  <li>Will contain x or -</li>
+                                </ul>
+                                </li>
+                              </ul>
+
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        Number of hard links to the file or directory
+                        <ul>
+                          <li>Files are usually 1, unless other hard links are created</li>
+                          <li>Directories usually have at least 2, one is the link itself and the other is its entry in the parent directory</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Name of the owner
+                      </li>
+                      <li>
+                        Group 
+                      </li>
+                      <li>
+                        File size
+                      </li>
+                      <li>
+                        Date of last modification
+                      </li>
+                      <li>
+                        Filename
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <kbd>ls -a</kbd> = use to see all files, including hidden ones
+          </li>
+          <li>
+            <kbd>ls -A</kbd> = almost all option, displays the same as all output files, but with the "." and ".." entries
+          </li>
+          <li>
+            <kbd>ls -d = look at a directory</kbd>
+          </li>
+          <li>
+            <kbd>ls -h</kbd> = human readable format that gives file sizes in most appropriate units
+          </li>
+          <li>
+            <kbd>ls -l</kbd> = long listed
+          </li>
+          <li>
+            <kbd>ls -hl</kbd>
+          </li>
+          <li>
+            Pattern matching can be done to selectively lists a set of files
+            <ul>
+              <li>
+                <kbd>?</kbd> represents any single character
+              </li>
+              <li>
+                <kbd>*</kbd> represents any string of characters
+              </li>
+              <li>
+                <kbd>ls *.c</kbd> = find all files with .c extensions
+              </li>
+              <li>
+                <kbd>ls ip_*</kbd> = list any files or directories that have names starting with "ip_"
+              </li>
+            </ul>
+          </li>
+          <li>
+            Use the hide option to omit certain files form a listing
+            <ul>
+              <li>
+                <kbd>ls --hide=*.bak</kbd> = removes all files with a .bak extension from the listing
+              </li>
+          </li>
+        </ul>
+      </section>
+
+      <h3>pwd</h3>
+      <section>
+        <ul>
+          <li>Print working directory</li>
+          <li>See which folder you currently are in</li>
+        </ul>
+      </section>
+
+      <h3>tree</h3>
+      <section>
+        <ul>
+          <li>Print the directory tree from inside the current working directory</li>
+          <li>This will display all descendant file and folders</li>
+        </ul>
+      </section>
+
+      <h3>touch</h3>
+      <section>
+        <ul>
+          <li>Use to create an empty file</li>
+        </ul>
+      </section>
+
+      <h2>Other</h2>
+
+      <h3>Absolute vs Relative Filepaths</h3>
+      <section>
+        <ul>
+          <li>Absolute paths are:
+            <ul>
+              <li>Prefixed with a / character</li>
+              <li>Start at the root</li>
+              <li>
+                For example, <kbd>ls -d /dev</kbd> will start at the root directory and look for a "dev" there
+              </li>
+            </ul>
+          </li>
+          <li>Relative paths are
+            <ul>
+              <li>
+                The current working directory is the "root" or base directory for relative paths
+              </li>
+              <li>
+                For example, <kbd>ls -d dev</kbd> will start at the current working directory and look for a "dev" there
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Output Redirect</h3>
+      <section>
+        <ul>
+          <li>
+            <kbd>echo "SomeTestOutput" >> filename.txt</kbd>
+            <ul>
+              <li>Prints the output "SomeTestOutput"</li>
+              <li>Output is directed to a filename called filename.txt</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

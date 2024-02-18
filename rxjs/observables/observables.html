@@ -6,25 +6,27 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html">Home</a>
+        <a class="navbar-brand" href="../../index.html">Home</a>
       </div>
     </nav>
     <div class="container">
       <nav class="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="../index.html">Home</a>
+            <a href="../../index.html">Home</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="./index.html">RxJS</a>
+            <a href="../index.html">RxJS</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Observables</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Observables
+          </li>
         </ol>
       </nav>
 
@@ -32,24 +34,42 @@
       <section>
         <ul>
           <li>
-            Represents a stream of observable data; it is a value that changes and is emitted over time
+            Represents a stream of observable data; it is a value that changes
+            and is emitted over time
             <ul>
-              <li>An observable object represents zero or more values that will be returned now or in the future</li>
+              <li>
+                An observable object represents zero or more values that will be
+                returned now or in the future
+              </li>
             </ul>
           </li>
           <li>
             Example is observing mouse clicks over time
             <ul>
-              <li>Think of it as a timeline with multiple points where the value changes</li>
-              <li>You can manipulate this stream of data points by using a map operation, such as only observe the x value of a x,y pair returned by the observable</li>
-              <li>Other examples include other user actions, routing events, form events, data from HTTP request</li>
+              <li>
+                Think of it as a timeline with multiple points where the value
+                changes
+              </li>
+              <li>
+                You can manipulate this stream of data points by using a map
+                operation, such as only observe the x value of a x,y pair
+                returned by the observable
+              </li>
+              <li>
+                Other examples include other user actions, routing events, form
+                events, data from HTTP request
+              </li>
             </ul>
           </li>
           <li>
-            Each time an Observable receives a new value, it emits the value to any Observers that are subscribed to it
+            Each time an Observable receives a new value, it emits the value to
+            any Observers that are subscribed to it
             <ul>
               <li>These can react to the data emission</li>
-              <li>Multiple Observers can subscribe to the same Observable and react in their own way</li>
+              <li>
+                Multiple Observers can subscribe to the same Observable and
+                react in their own way
+              </li>
             </ul>
           </li>
           <li>
@@ -67,7 +87,10 @@
             Can be synchronous or asynchronous
             <ul>
               <li>All items can be emitted at once (such as an array)</li>
-              <li>Can be emitted when they are delivered over time from the provider</li>
+              <li>
+                Can be emitted when they are delivered over time from the
+                provider
+              </li>
             </ul>
           </li>
           <li>
@@ -75,39 +98,123 @@
           </li>
         </ul>
         <div>
-          Example of an Observable object in code (usually don't write in this longhand syntax)
+          Example of an Observable object in code (usually don't write in this
+          longhand syntax)
           <div class="card">
             <div class="card-body">
               <code>
-                const apply$ = new Observable(appleSubscriber => { <br/>
-                  appleSubscriber.next("Apple 1"); <br/>
-                  appleSubscriber.next("Apple 2"); <br/>
-                  appleSubscriber.complete(); <br/>
-                }) <br/>
+                const apply$ = new Observable(appleSubscriber => { <br />
+                appleSubscriber.next("Apple 1"); <br />
+                appleSubscriber.next("Apple 2"); <br />
+                appleSubscriber.complete(); <br />
+                }) <br />
               </code>
             </div>
-          </div>        
+          </div>
         </div>
+      </section>
+
+      <h2>Assorted Terminology</h2>
+      <section>
+        <ul>
+          <li>
+            Source / Outer Observable
+            <ul>
+              <li>
+                In the following, the of observable is the outer observable
+              </li>
+              <li>
+                You must subscribe to the inner observable for the outer
+                observable to receive values
+                <ul>
+                  <li>
+                    Since the HTTP method is called for each item emitted from
+                    the of observable, you must subscribe to each of them to get
+                    the values
+                  </li>
+                </ul>
+              </li>
+              <li>If you look at the type returned from the of call, it will be of type Observable&lt;Observable&ltSupplier&gt;&gt;
+                <ul>
+                  <li>This indicates it is a higher order observable</li>
+                  <li>Use higher order mapping operators to flatten higher order observables (Observable&lt;Observable&ltSupplier&gt;&gt; to Observable&ltSupplier&gt;)
+                    </li>
+                </ul>
+              </li>
+              <li>
+                Nested subscriptions are not recommended
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  of(3,7) <br />
+                  .pipe( <br />
+                  map(id=> this.http.get&lt;Supplier&gt;(`${this.url}/${id}`)
+                  <br />
+                  )).subscribe(o => o.subscribe); <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Inner Observable = In the following, the observable returned from
+            http.get is the inner observable
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  of(3,7) <br />
+                  .pipe( <br />
+                  map(id=> this.http.get&lt;Supplier&gt;(`${this.url}/${id}`)
+                  <br />
+                  )).subscribe(o => o.subscribe); <br />
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Higher Order Observable = an observable that emits another
+            observable/li>
+          </li>
+        </ul>
       </section>
 
       <h2>Apple Convertor Belt Metaphor</h2>
       <section>
         <ul>
           <li>
-            Deborah Kurata's metaphor for describing them is an apple convetor belt:
+            Deborah Kurata's metaphor for describing them is an apple convetor
+            belt:
             <ul>
-              <li>There is a start point when the convetor belt starts moving (subscription)</li>
-              <li>Apples are a discrete event the emit over time (emitted items)</li>
-              <li>Apples pass through a set of operations, such as cleaning, labelling, etc (pipe() through operators)</li>
+              <li>
+                There is a start point when the convetor belt starts moving
+                (subscription)
+              </li>
+              <li>
+                Apples are a discrete event the emit over time (emitted items)
+              </li>
+              <li>
+                Apples pass through a set of operations, such as cleaning,
+                labelling, etc (pipe() through operators)
+              </li>
               <li>
                 You (as the observer) are notified when
                 <ul>
                   <li>The next apple arrives (next())</li>
-                  <li>An error (such as a machine jam) occurs so you can handle it (error())</li>
-                  <li>When all apples have been sent over the convetor belt (complete())</li>
+                  <li>
+                    An error (such as a machine jam) occurs so you can handle it
+                    (error())
+                  </li>
+                  <li>
+                    When all apples have been sent over the convetor belt
+                    (complete())
+                  </li>
                 </ul>
               </li>
-              <li>You can stop the convetor belt manually if you need to leave before processing is done (unsubscribe())</li>
+              <li>
+                You can stop the convetor belt manually if you need to leave
+                before processing is done (unsubscribe())
+              </li>
             </ul>
           </li>
         </ul>
@@ -121,68 +228,106 @@
           <li>Can deal with time (which promises do not)</li>
           <li>You can manipulate the data stream using map operations</li>
           <li>
-            Observables do not actually start processing until there is a subscriber
+            Observables do not actually start processing until there is a
+            subscriber
             <ul>
               <li>
                 Think of it like defining a function
                 <ul>
-                  <li>You must declare a function, but the function will not do anything until you call it</li>
-                  <li>Observables must be subscribed to for it to do anything</li>
+                  <li>
+                    You must declare a function, but the function will not do
+                    anything until you call it
+                  </li>
+                  <li>
+                    Observables must be subscribed to for it to do anything
+                  </li>
                   <li>This can be done directly or via the async pipe</li>
                 </ul>
               </li>
             </ul>
           </li>
           <li>
-            Angular's HTTP library uses observables as return values. However, that doesn't mean you should abandon promises.
+            Angular's HTTP library uses observables as return values. However,
+            that doesn't mean you should abandon promises.
             <ul>
-              <li>These are great, but HTTP's request/response communication model doesn't really fit in with the idea of a steady stream of data (unless using sockets)</li>
-              <li>HTTP doesn't return streams of responses, just a discrete request and data return</li>
-              <li>Promises are simpler to understand than observables and they fit the HTTP communication model better</li>
-              <li>If you want, you can use the toPromise() method on Angular observables and treat then as promises instead</li>
+              <li>
+                These are great, but HTTP's request/response communication model
+                doesn't really fit in with the idea of a steady stream of data
+                (unless using sockets)
+              </li>
+              <li>
+                HTTP doesn't return streams of responses, just a discrete
+                request and data return
+              </li>
+              <li>
+                Promises are simpler to understand than observables and they fit
+                the HTTP communication model better
+              </li>
+              <li>
+                If you want, you can use the toPromise() method on Angular
+                observables and treat then as promises instead
+              </li>
               <li>Use the approach that works best for you</li>
             </ul>
           </li>
         </ul>
       </section>
 
-
-
       <h2>Observers and Observable Methods</h2>
       <section>
         <ul>
-          <li>Observers observe and respond to notifications from an observable
+          <li>
+            Observers observe and respond to notifications from an observable
             <ul>
-              <li>A collection of callbacks that knows how to listen to values delivered by an Observable</li>
+              <li>
+                A collection of callbacks that knows how to listen to values
+                delivered by an Observable
+              </li>
               <li>A consumer of values delivered by an Observable</li>
-              <li>In RxJS, it is also an interface that contains the three notification methods below</li>
+              <li>
+                In RxJS, it is also an interface that contains the three
+                notification methods below
+              </li>
             </ul>
           </li>
-          <li>From the point of view of the observer
+          <li>
+            From the point of view of the observer
             <ul>
               <li>An observable is read only</li>
               <li>Observers can react to its notifications</li>
-              <li>Observers cannot emit anything into the stream
+              <li>
+                Observers cannot emit anything into the stream
                 <ul>
-                  <li>Only the creator of an Observable can emit items into the stream</li>
+                  <li>
+                    Only the creator of an Observable can emit items into the
+                    stream
+                  </li>
                 </ul>
               </li>
             </ul>
           </li>
           <li>
-            Observers are generally unicast, meaning it emits to a single Subscriber
+            Observers are generally unicast, meaning it emits to a single
+            Subscriber
             <ul>
-              <li>If multiple observers subscribe to the same observable, they each get their on subscription</li>
+              <li>
+                If multiple observers subscribe to the same observable, they
+                each get their on subscription
+              </li>
             </ul>
           </li>
-          <li>Observers are notified when one of the following occurs:
+          <li>
+            Observers are notified when one of the following occurs:
             <ul>
               <li>
                 complete()
                 <ul>
                   <li>Signals the end of of the Observable sequence</li>
                   <li>No parameter is passed to this method</li>
-                  <li>Calling complete will <em>automatically cancel all subscriptions</em></li>
+                  <li>
+                    Calling complete will
+                    <em>automatically cancel all subscriptions</em>
+                  </li>
                 </ul>
               </li>
               <li>
@@ -200,22 +345,27 @@
               </li>
             </ul>
           </li>
-
         </ul>
         <li>
-          Most of the time, you work with Observables that Angular creates for you, not building your own from scratch
+          Most of the time, you work with Observables that Angular creates for
+          you, not building your own from scratch
         </li>
-        <li>If you are building your own:
+        <li>
+          If you are building your own:
           <ul>
-            <li>You generally do not use the Observable constructor (as examples on this page do)</li>
-            <li>There are creation functions that you usually use instead:
+            <li>
+              You generally do not use the Observable constructor (as examples
+              on this page do)
+            </li>
+            <li>
+              There are creation functions that you usually use instead:
               <ul>
                 <li>
                   <a href="./operators/of.html#of">of</a>
                 </li>
                 <li>
                   <a href="./operators/of.html#from">from</a>
-                </li>              
+                </li>
               </ul>
             </li>
           </ul>
@@ -225,9 +375,10 @@
           <div class="card">
             <div class="card-body">
               <code>
-                import { Observable } from 'rxjs'; const myObservable = new Observable((observer) => {
+                import { Observable } from 'rxjs'; const myObservable = new
+                Observable((observer) => {
                 <br />
-                observer.next('Hello'); <br/>
+                observer.next('Hello'); <br />
                 observer.next('World');
                 <br />
                 observer.complete(); });
@@ -244,41 +395,58 @@
         </div>
       </section>
 
-
       <h2>Subscribers</h2>
       <section>
-        <ul>          
+        <ul>
           <li>
-          The Subscriber class is a class that implements the Observer interface and extends the Subscription class:
-          <ul>
-            <li>Basically, a Subscriber is an Observer with additional methods for unsubscribing</li>
-            <li>Inside RxJS, each Observer is converted to a Subscriber
-              <ul>
-            <li>You usually don't work with a Subscriber directly, it is mostly used internally to implement operators</li>
-              </ul>
-            </li>
-          </ul>
-        </li></ul>
+            The Subscriber class is a class that implements the Observer
+            interface and extends the Subscription class:
+            <ul>
+              <li>
+                Basically, a Subscriber is an Observer with additional methods
+                for unsubscribing
+              </li>
+              <li>
+                Inside RxJS, each Observer is converted to a Subscriber
+                <ul>
+                  <li>
+                    You usually don't work with a Subscriber directly, it is
+                    mostly used internally to implement operators
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </section>
 
       <h2>Data Streams vs Action Streams</h2>
       <section>
         <ul>
-          <li>Data Streams
+          <li>
+            Data Streams
             <ul>
-              <li>Stream that returns data, but completes after delivering it</li>
+              <li>
+                Stream that returns data, but completes after delivering it
+              </li>
             </ul>
           </li>
-          <li>Action Streams
+          <li>
+            Action Streams
             <ul>
               <li>Reacts to user actions whenever they occur</li>
               <li>Keeps emitting observables until the action is stopped</li>
             </ul>
           </li>
           <li>
-            When an action observable and a data observable are combined with combineLatest 
+            When an action observable and a data observable are combined with
+            combineLatest
             <ul>
-              <li>Once the data observable has data, the combineLatest will emit that data each time the action occurs as well as the event information</li>
+              <li>
+                Once the data observable has data, the combineLatest will emit
+                that data each time the action occurs as well as the event
+                information
+              </li>
             </ul>
           </li>
         </ul>
@@ -300,10 +468,16 @@
             You must subscribe to an observable to start receiving notifications
           </li>
           <li>
-            What happens on subscription depends on the type of Observable you are using:
+            What happens on subscription depends on the type of Observable you
+            are using:
             <ul>
-              <li>Hot observables will emit values even if there are no subscribers</li>
-              <li>Cold observables only start emitting when there is at least one subscription (array, HttpClient are example)
+              <li>
+                Hot observables will emit values even if there are no
+                subscribers
+              </li>
+              <li>
+                Cold observables only start emitting when there is at least one
+                subscription (array, HttpClient are example)
                 <ul>
                   <li>Each subscriber gets its own emissions</li>
                 </ul>
@@ -313,46 +487,57 @@
           <li>
             subscribe()
             <ul>
-              <li>Takes one or more functions as arguments that are executed whenever the Observable emits a value (subjects are an example)</li>
+              <li>
+                Takes one or more functions as arguments that are executed
+                whenever the Observable emits a value (subjects are an example)
+              </li>
             </ul>
           </li>
-          <li>The subscribe function returns a subscription object
+          <li>
+            The subscribe function returns a subscription object
             <ul>
               <li>This represents the context of the subscription</li>
             </ul>
           </li>
         </ul>
         <div>
-          The following isn't how you would code an Observable setup, but it illustrates the roles of each player:
+          The following isn't how you would code an Observable setup, but it
+          illustrates the roles of each player:
           <div class="card">
             <div class="card-body">
               <code>
-                const apples$ = new Observable(appleSubscriber => { <br/>
-                  appleSubscriber.next("Apple 1"); <br/>
-                  appleSubscriber.next("Apple 2"); <br/>
-                  appleSubscriber.complete(); <br/>
-                }); <br/>
+                const apples$ = new Observable(appleSubscriber => { <br />
+                appleSubscriber.next("Apple 1"); <br />
+                appleSubscriber.next("Apple 2"); <br />
+                appleSubscriber.complete(); <br />
+                }); <br />
                 <br />
-                const observer = { <br/>
-                  next: apple => console.log(`Apple emitted ${apple}`), <br/>
-                  error: err => console.log(`Error occurred: ${err}`), <br/>
-                  complete: () => console.log(`No more apples, go home`) <br/>
-                }; <br/>
-                <br/>
-                const sub = apples$.subscribe(observer); <br/>
+                const observer = { <br />
+                next: apple => console.log(`Apple emitted ${apple}`), <br />
+                error: err => console.log(`Error occurred: ${err}`), <br />
+                complete: () => console.log(`No more apples, go home`) <br />
+                }; <br />
+                <br />
+                const sub = apples$.subscribe(observer); <br />
               </code>
             </div>
-          </div>     
+          </div>
         </div>
       </section>
 
       <h2>Unsubscribing</h2>
       <section>
         <ul>
-          <li>Method on the Subscription object to stop notifications
+          <li>
+            Method on the Subscription object to stop notifications
             <ul>
-              <li>Not doing so could lead to memory leaks in your application</li>
-              <li>It does not call the complete method on the Observable, just notifies it not to send notifications anymore</li>
+              <li>
+                Not doing so could lead to memory leaks in your application
+              </li>
+              <li>
+                It does not call the complete method on the Observable, just
+                notifies it not to send notifications anymore
+              </li>
             </ul>
           </li>
           <li>
@@ -364,11 +549,16 @@
             </ul>
           </li>
           <li>
-            Short lived observables that have a limited amount of values and complete on their own do not need a call to unsubscribe
+            Short lived observables that have a limited amount of values and
+            complete on their own do not need a call to unsubscribe
             <ul>
-              <li>Subscriptions will be automatically be unsubscribed when .complete() is called</li>
               <li>
-                The Angular HttpClient library do NOT require a call to unsubscribe
+                Subscriptions will be automatically be unsubscribed when
+                .complete() is called
+              </li>
+              <li>
+                The Angular HttpClient library do NOT require a call to
+                unsubscribe
                 <ul>
                   <li>They only return 1 value and then complete</li>
                 </ul>
@@ -377,7 +567,8 @@
             </ul>
           </li>
           <li>
-            You should unsubscribe to long lived observables that have an undefined number of values and do not call complete() on their own
+            You should unsubscribe to long lived observables that have an
+            undefined number of values and do not call complete() on their own
             <ul>
               <li>Subscriptions to valueChanges on Angular forms</li>
               <li>Subscribing to Angular route changes</li>
@@ -386,8 +577,13 @@
           <li>
             To manually track subscriptions in Angular
             <ul>
-              <li>Keep an array of observable subscriptions in your component</li>
-              <li>In OnDestroy, forEach over the array and call unsubscribe on each</li>
+              <li>
+                Keep an array of observable subscriptions in your component
+              </li>
+              <li>
+                In OnDestroy, forEach over the array and call unsubscribe on
+                each
+              </li>
             </ul>
           </li>
           <li>
@@ -398,7 +594,8 @@
                   <code>
                     export class SomeComponent implements OnInit, OnDestroy {
                     <br />
-                    private componentIsDestroyed$ = new Subject&lt;boolean&gt;();
+                    private componentIsDestroyed$ = new
+                    Subject&lt;boolean&gt;();
                     <br />
                     <br />
                     constructor() {}
@@ -452,7 +649,10 @@
                 <em>then</em>
                 function both triggers the call and handles the result at once
               </li>
-              <li>A promise object represents a single value that will be returned in the future</li>
+              <li>
+                A promise object represents a single value that will be returned
+                in the future
+              </li>
               <li>Limited to a single value</li>
               <li>Asynchronous</li>
             </ul>
@@ -464,12 +664,24 @@
                 Observables are lazy
                 <ul>
                   <li>Describe how the data should be handled</li>
-                  <li>Asynchronous call is not triggered until you explicitly use the subscribe method</li>
-                  <li>Basically, making the call and handling results are separate operations</li>
+                  <li>
+                    Asynchronous call is not triggered until you explicitly use
+                    the subscribe method
+                  </li>
+                  <li>
+                    Basically, making the call and handling results are separate
+                    operations
+                  </li>
                 </ul>
               </li>
-              <li>An observable object represents zero or more values that will be returned now or in the future</li>
-              <li>Represents a stream of observable data; it is a value that changes over time</li>
+              <li>
+                An observable object represents zero or more values that will be
+                returned now or in the future
+              </li>
+              <li>
+                Represents a stream of observable data; it is a value that
+                changes over time
+              </li>
               <li>Can be synchronous or asynchronous</li>
             </ul>
           </li>
@@ -480,9 +692,13 @@
       <section>
         <ul>
           <li>
-            Upstream errors that are handled by the closest downstream code that can handle it:
+            Upstream errors that are handled by the closest downstream code that
+            can handle it:
             <ul>
-              <li>This means any operators between the thrower and handler are skipped when an error occurs</li>
+              <li>
+                This means any operators between the thrower and handler are
+                skipped when an error occurs
+              </li>
               <li>
                 Error handling operators include:
                 <ul>
@@ -493,9 +709,14 @@
             </ul>
           </li>
           <li>If no error occurs, then error handling operators are ignored</li>
-          <li>When an observable generates an error, it stops and will not emit any more data
+          <li>
+            When an observable generates an error, it stops and will not emit
+            any more data
             <ul>
-              <li>Error handler operators generate a new Observable and pass that to the next operator, allowing the stream to continue</li>
+              <li>
+                Error handler operators generate a new Observable and pass that
+                to the next operator, allowing the stream to continue
+              </li>
             </ul>
           </li>
         </ul>
@@ -505,7 +726,8 @@
       <section>
         <ul>
           <li>
-            The <a href="empty.html">EMPTY</a> constant is useful to return from an errored observable
+            The <a href="empty.html">EMPTY</a> constant is useful to return from
+            an errored observable
           </li>
           <li>
             Method 1: Use the error handler within the subscribe method:
@@ -545,11 +767,27 @@
             <code>catchError</code>
             operator to catch and replace an error
             <ul>
-              <li>Do this when you want to handle the error at that point in the application</li>
-              <li>This allows you to catch an error that occurs in the stream and replace it with something else, like another observable that returns an empty data set</li>
-              <li>This allows your UI elements that have been automatically subscribed to the stream to handle the case gracefully</li>
-              <li>This operator accepts and error object and returns an observable</li>
-              <li>Since it is replacing the error with an observable, any downstream or global error handlers will not receive notificaiton of the error</li>
+              <li>
+                Do this when you want to handle the error at that point in the
+                application
+              </li>
+              <li>
+                This allows you to catch an error that occurs in the stream and
+                replace it with something else, like another observable that
+                returns an empty data set
+              </li>
+              <li>
+                This allows your UI elements that have been automatically
+                subscribed to the stream to handle the case gracefully
+              </li>
+              <li>
+                This operator accepts and error object and returns an observable
+              </li>
+              <li>
+                Since it is replacing the error with an observable, any
+                downstream or global error handlers will not receive
+                notificaiton of the error
+              </li>
             </ul>
             <div class="card">
               <div class="card-body">
@@ -562,10 +800,20 @@
               </div>
             </div>
           </li>
-          <li>Like try catch blocks in synchronous code, you can rethrow an error in an RxJS stream so any downstream handlers will get notification that the error occured</li>
+          <li>
+            Like try catch blocks in synchronous code, you can rethrow an error
+            in an RxJS stream so any downstream handlers will get notification
+            that the error occured
+          </li>
           <ul>
-            <li>This will allow the error to propagate to any downstream error handlers while still handling it at the current point in the stream (not replacing it)</li>
-            <li>You can rethrow the original error or replace with a new one</li>
+            <li>
+              This will allow the error to propagate to any downstream error
+              handlers while still handling it at the current point in the
+              stream (not replacing it)
+            </li>
+            <li>
+              You can rethrow the original error or replace with a new one
+            </li>
           </ul>
           <div class="card">
             <div class="card-body">
@@ -600,10 +848,18 @@
       <section>
         <ul>
           <li>
-            <a href="https://www.thisdot.co/blog/best-practices-for-managing-rxjs-subscriptions" target="_blank">https://www.thisdot.co/blog/best-practices-for-managing-rxjs-subscriptions</a>
+            <a
+              href="https://www.thisdot.co/blog/best-practices-for-managing-rxjs-subscriptions"
+              target="_blank"
+              >https://www.thisdot.co/blog/best-practices-for-managing-rxjs-subscriptions</a
+            >
           </li>
           <li>
-            <a href="https://blog.jcore.com/2020/10/rxjs-when-and-how-to-unsubscribe/" target="_blank">https://blog.jcore.com/2020/10/rxjs-when-and-how-to-unsubscribe/</a>
+            <a
+              href="https://blog.jcore.com/2020/10/rxjs-when-and-how-to-unsubscribe/"
+              target="_blank"
+              >https://blog.jcore.com/2020/10/rxjs-when-and-how-to-unsubscribe/</a
+            >
           </li>
         </ul>
       </section>

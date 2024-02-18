@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Shadow DOM Style Scoping Selectors
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Shadow DOM Style Scoping Selectors</h1>
+      <section>
+        <ul>
+          <li>
+            Angular emulates a handful of CSS selectors from the CSS scoping
+            module
+          </li>
+          <li>
+            :host pseudo-class
+            <ul>
+              <li>
+                Host element = element that matches the component's selector
+                <ul>
+                  <li>Component's template is rendered within this element</li>
+                </ul>
+              </li>
+              <li>This selector targets that host element</li>
+              <li>
+                Rules will affect the host element and all its descendants
+              </li>
+              <li>
+                You can add selectors after the host selector to target elements
+                within the component
+              </li>
+              <li>
+                This behavior is from Angular, so it can be used in older
+                browsers that do not support this pseudo class
+              </li>
+            </ul>
+          </li>
+          <li>
+            :host(.active)
+            <ul>
+              <li>Function form of the host selector</li>
+              <li>
+                Applies host styles conditionally by:
+                <ul>
+                  <li>
+                    Includes another selector inside parentheses after :host
+                  </li>
+                  <li>
+                    This checks the host element for the condition
+                    <ul>
+                      <li>
+                        Example above targets the host element but only when it
+                        also has the active CSS class applied to it
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Use this when you want to keep the search confined to the host element
+              </li>
+            </ul>
+          </li>
+          <li>
+            :host-context
+            <ul>
+              <li>
+                Use to apply styles based on some condition outside of a
+                component’s view
+              </li>
+              <li>
+                This will check any parent element from the host all the way up
+                to the document root to check for a match (as well as the host itself)
+              </li>
+              <li>
+                :host-context(.theme-light) h2 would apply rules to all h2
+                elements inside the component only if some ancestor element has
+                the CSS class theme-light
+              </li>
+              <li>
+                Under the hood, it does this by adding two selectors to cover two cases
+                <ul>
+                  <li>One to check if the class is added directly on the host</li>
+                  <li>One to check if the host is nested within an element that has this class</li>
+                </ul>
+              </li>
+              <li>
+                Use this when you want to search up through the ancestry tree, which may not be desireable in some situations
+              </li>
+            </ul>
+          </li>
+          <li>
+            ::ng-deep
+            <ul>
+              <li>
+                Note, this has been deprecated in favor of native CSS
+              </li>
+              <li>
+                Allows you to pierce through the boundaries of the shadow DOM in
+                child components (projected content)
+              </li>
+              <li>
+                Under the hood, it emulates this selector by just removing the ::ng-deep
+                <ul>
+                  <li>This means they become global styles, so use with care</li>
+                  <li>Probably better to use <code>::host ::ng-deep a</code> to confine the styles to just the component and its children </li>
+                </ul>
+              </li>
+              <li>
+                Examples
+                <ul>
+                  <li>::ng-deep a
+                    <ul>
+                      <li>Checks child components an applies the CSS rules to any link tags</li>
+                    </ul>
+                  </li>
+                  <li>::ng-deep a:hover
+                    <ul>
+                      <li>Checks child components an applies the CSS rules to any link tags when hovering over them</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
