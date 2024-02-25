@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Generators</li>
+        </ol>
+      </nav>
+
+      <h1>Generators</h1>
+
+      <h2>Basics</h2>
+      <section>
+        <ul>
+          <li>
+            A Generator object is returned by a generator function. When the
+            function is called, a generator object is returned.
+            <ul>
+              <li>
+                At this point, none of the code inside the generator function is
+                run.
+              </li>
+            </ul>
+          </li>
+          <li>
+            The generator object has a <code>next()</code> method available.
+            When the caller calls this method:
+            <ul>
+              <li>
+                The code inside the generator function will run until it hits a
+                <code>yield</code> keyword.
+              </li>
+              <li>
+                When the yield statement is hit, the specified value is returned
+                to the caller.
+              </li>
+              <li>Execution pauses at this point</li>
+              <li>
+                When the caller calls <code>next()</code> again, the generator
+                pick up running code where it left off and run to the next
+                <code>yield</code> statement, returning the specified value and
+                pausing execution.
+              </li>
+              <li>This continues until there are no more yield statements</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Syntax of a Generator Function</h2>
+      <section>
+        <ul>
+          <li>
+            Generator functions consist of:
+            <ul>
+              <li>
+                The function keyword with an asterisk (*) after the keyword
+                <ul>
+                  <li>This tells JS that this is a generator function</li>
+                </ul>
+              </li>
+              <li>A name</li>
+              <li>
+                A function body that contains <code>yield</code> statements at
+                points where values should be returned
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can pass values into the generator function, such as an array
+          </li>
+        </ul>
+        <div>
+          A very simple generator function example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function* simpleGenerator() { <br />
+                yield 1 <br />
+                yield 2 <br />
+                yield 3 <br />
+                }<br />
+                <br />
+                const generatorObject = simpleGenerator(); <br />
+                const obj1 = generatorObject.next(); <br />
+                console.log(obj1) // outputs { value: 1, done: false } <br />
+                const obj2 = generatorObject.next(); <br />
+                console.log(obj2) // outputs { value: 2, done: false } <br />
+                const obj3 = generatorObject.next(); <br />
+                console.log(obj3) // outputs { value: 3, done: false } <br />
+                const obj4 = generatorObject.next(); <br />
+                console.log(obj4) // outputs { value: undefined, done: true }
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Generator Object</h2>
+      <section>
+        <ul>
+          <li>
+            The generator object contains three methods:
+            <ul>
+              <li>
+                next
+                <ul>
+                  <li>
+                    Allows execution of the code inside the generator function
+                    to the next yield statement
+                  </li>
+                  <li>
+                    Returns an object with two properties
+                    <ul>
+                      <li>value = the value returned by the yield statement</li>
+                      <li>
+                        done = true if the generator function has returned all
+                        yield statement values, false if otherwise
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    You can pass a value as a parameter to the next function.
+                    This is returned by the yield within the generator function.
+                    (See examples)
+                  </li>
+                </ul>
+              </li>
+              <li>
+                return
+                <ul>
+                  <li>
+                    Allows you to exit out of a generator, no matter what is
+                    remaining
+                  </li>
+                  <li>
+                    Any value you pass to the return method is the final value
+                    returned by the generator
+                  </li>
+                </ul>
+              </li>
+              <li>
+                throw
+                <ul>
+                  <li>Throws a new error from within the generator</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Generator objects run independently, even if they are created from
+            the same generator function.
+            <ul>
+              <li>Does not matter if they are running concurrently</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Use Cases</h2>
+      <section>
+        <div>
+          An infinite loop
+          <ul>
+            <li>
+              Will not cause memory problems since you are only executing it one
+              step at a time
+            </li>
+            <li>An example of this would be a unique id generator</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function* generateId() { <br />
+                let id = 1; <br />
+                while(true) { <br />
+                yield id; <br />
+                id++; <br />
+                } <br />
+                }<br />
+                <br />
+                const generatorObject = generateId(); <br />
+                console.log(generatorObject.next()); // outputs { value: 1,
+                done: false } <br />
+                console.log(generatorObject.next()); // outputs { value: 2,
+                done: false } <br />
+                console.log(generatorObject.next()); // outputs { value: 3,
+                done: false } <br />
+                console.log(generatorObject.next()); // outputs { value: 4,
+                done: false } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Define an iterator
+          <ul>
+            <li></li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function* generateId(array) { <br />
+                let id = 1; <br />
+                while(id &lt;= 5) { <br />
+                yield id; <br />
+                id++; <br />
+                } <br />
+                }<br />
+                <br />
+                const generatorObject = generateId(); <br />
+                while(generatorObject.next().done !=== false) { ...... }
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <div>
+          Define an iterator and pass an array so array items are returned one
+          at a time.
+          <ul>
+            <li></li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function* generator(array) { <br />
+                for(let i = 0; i &lt; array.length; i++) { <br />
+                yield array[i]; <br />
+                } <br />
+                }<br />
+                <br />
+                const generatorObject = generator([1,3,5]); <br />
+                console.log(generatorObject.next()); // outputs { value: 1,
+                done: false } <br />
+                console.log(generatorObject.next()); // outputs { value: 3,
+                done: false } <br />
+                console.log(generatorObject.next()); // outputs { value: 5,
+                done: false } <br />
+                console.log(generatorObject.next()); // outputs { value:
+                undefined, done: true } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Above example, but allow an increment value to be passed into the next
+          call to increase by.
+          <ul>
+            <li>This will do nothing on the first call to next</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function* generator(array) { <br />
+                let id = 1; <br />
+                while(true) { <br />
+                const increment = yield id; if(increment != null) { id +=
+                increment; } else { ++id; } } <br />
+                }<br />
+                <br />
+                const generatorObject = generator(); <br />
+                console.log(generatorObject.next()); // outputs { value: 1,
+                done: false } <br />
+                console.log(generatorObject.next()); // outputs { value: 2,
+                done: false } <br />
+                console.log(generatorObject.next(4)); // outputs { value: 6,
+                done: false } <br />
+                console.log(generatorObject.next()); // outputs { value: 7,
+                done: false } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

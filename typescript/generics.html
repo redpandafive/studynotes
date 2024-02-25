@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Generics</li>
+        </ol>
+      </nav>
+
+      <h1>Generics</h1>
+
+      <h2>Generic Functions</h2>
+
+      <section>
+        <ul>
+          <li>
+            Used when you want to describe a correspondence between two values
+          </li>
+          <li>
+            This is done by declaring a type parameter in the function signature
+          </li>
+          <li>
+            Aid in creating components that are reusable
+            <ul>
+              <li>
+                Components that can work over a variety of types rather than a
+                single one
+              </li>
+              <li>
+                Consumers can use their own types with a generic component
+              </li>
+            </ul>
+          </li>
+          <li>
+            Without generics, you may have to resort to using
+            <code>any</code> types, which is not ideal
+          </li>
+          <li>
+            The compiler will force you to treat type variables as if they could
+            be any and all types
+            <ul>
+              <li>
+                For example, you cannot call <code>.length</code> property on a
+                Generic Type variable, even if the consumer passes in a string
+              </li>
+            </ul>
+          </li>
+          <li>
+            Generics can be used as a type within a larger type, such as a typed
+            arrays
+            <div>
+              The following is permitted, The arg refers to an array type, so
+              you can call the length property safely
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    function identity&lt;Type&gt;(arg: Array&lt;Type&gt;):
+                    Array&lt;Type&gt; { <br />
+                    console.log(arg.length) <br />
+                    return arg; <br />
+                    } <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Recommendations
+            <ul>
+              <li>
+                When possible, use then type parameter itself rather than
+                constraining it
+              </li>
+              <li>Always use as few type parameters as possible</li>
+              <li>
+                Remember you are relating two or more values, so reconsider if
+                your code doesn't do this
+              </li>
+              <li>
+                Reconsider if a type parameter only appears in one location. You
+                may not actually need it.
+              </li>
+            </ul>
+          </li>
+          <li>
+            For example, the following creates a link between the input of the
+            function and the return value
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function firstElement&lt;Type&gt;(arr: Type[]): Type |
+                  undefined {
+                  <br />
+                  return arr[0];
+                  <br />
+                  }
+                  <br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Syntax of Generic Functions</h2>
+      <section>
+        <ul>
+          <li>
+            To identify which type a generic will use, we use type variables, a
+            special kind of variable that works on types rather than values
+            <ul>
+              <li>
+                This captures the type the user provides so we can use that
+                information later
+              </li>
+            </ul>
+            <div>
+              In the following, <code>Type</code> is the type variable (but this
+              could be anything)
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    function identity&lt;Type&gt;(arg: Type): Type { <br />
+                    return arg; <br />
+                    } <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            The generic identify function written above call be called in two
+            ways:
+            <ul>
+              <li>
+                <code>let output = identity&lt;string&gt;("my_string")</code>
+                <ul>
+                  <li>This explicitly sets the Type to be string</li>
+                  <li>
+                    Use this when the compiler fails to correctly infer the type
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <code>let output = identity&lt;string&gt;("my_string")</code>
+                <ul>
+                  <li>
+                    This uses type argument inference - the compiler will set
+                    the value of Type automatically based on the type of the
+                    argument passed in
+                  </li>
+                  <li>This is the more common approach</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Generic Function Examples</h2>
+      <section>
+        <div>
+          Simple example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function identity&lt;Type&gt;(arg: Type): Type { <br />
+                return arg; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This function can be typed as follows:
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let myIdentity: &lt;Type&gt;(arg: Type) => Type = identity;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Constraints</h2>
+      <section>
+        <ul>
+          <li>
+            Use when you want to relate two values, but only operate on a
+            certain subset of values
+          </li>
+          <li>
+            Constraints limit the kinds of types that a type parameter can
+            accept
+          </li>
+        </ul>
+        <div>
+          The following constrain requires the type to have a length property
+          <ul>
+            <li>
+              Without this, you would not be allowed to access the length
+              property in the function
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function longest&lt;Type extends { length: number }&gt;(a: Type,
+                b: Type) {
+                <br />
+                if (a.length >= b.length) {
+                <br />
+                return a;
+                <br />
+                } else {
+                <br />
+                return b;
+                <br />
+                }
+                <br />
+                }
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

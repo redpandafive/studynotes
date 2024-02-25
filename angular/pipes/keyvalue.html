@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            KeyValuePipe
+          </li>
+        </ol>
+      </nav>
+
+      <h1>KeyValuePipe</h1>
+
+      <section>
+        <ul>
+          <li>Transforms an Object or Map into an array of key-value pairs
+            <ul>
+              <li>This allows you to iterate over an Object or Map within your template using a NgFor</li>
+            </ul>
+          </li>
+          <li>
+            Use when you need to:
+            <ul>
+              <li>Bind and iterate over a Map in a template</li>
+              <li>Bind to a NgFor loop to loop through an object's keys</li>
+            </ul>
+          </li>
+          <li>
+            Items are ordered by the key's datatype:
+            <ul>
+              <li>If strings, they are sorted in lexicographic order</li>
+              <li>If numbers, they are sorted in numeric order</li>
+            </ul>
+          </li>
+          <li>
+            Accepts one argument <code>compareFn</code>, which can be used to
+            set the custom sort to the pipe
+          </li>
+          <li>
+            Result is an array of objects with two properties:
+            <ul>
+              <li>key</li>
+              <li>value</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Syntax</h2>
+      <section>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div *ngFor=&quot;let item of obj | keyvalue&quot;&gt;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">HTML</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Picture
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Picture</h1>
+
+      <section>
+        <ul>
+          <li>
+            Allows you to have multiple versions of an image and display one of
+            them based on a condition, such as screen width
+            <ul>
+              <li>
+                This is good to use when you have a full size image to display
+                for desktops and a smaller logo to display for mobile screens
+              </li>
+            </ul>
+          </li>
+          <li>
+            Image tag should be the very last element within the picture element
+            <ul>
+              <li>
+                It is only loaded and displayed if the source elements before it
+                do not have a matching condition
+              </li>
+            </ul>
+          </li>
+          <li>
+            Source tags can be used to specify conditional images
+            <ul>
+              <li>
+                Attributes includes
+                <ul>
+                  <li>
+                    type attribute = matches if the browser supports an image
+                    type (such as image/webp)
+                  </li>
+                  <li>
+                    media attribute = matches if the supplied media query
+                    matches
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Multiple source tags can be supplied. The first match is the
+                only one selected.
+              </li>
+              <li>If none match, the img tag is selected by default</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          The following will display the Logo-Grey.png when the screen width is
+          at least 900px. Otherwise, it will show the logo.png image.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;picture&gt; <br />
+                &lt;source srcset="Logo-Grey.png" media="(min-width: 900px)"
+                &gt; <br />
+                &lt;img src="logo.png" style="width: 700px" &gt;
+                &lt;/picture&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also / Sources</h2>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

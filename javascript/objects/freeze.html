@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Freeze</li>
+        </ol>
+      </nav>
+
+      <h1>Freeze</h1>
+
+      <section>
+        <ul>
+          <li>
+            While <code>const</code> prevents you from adding or removing
+            properties from an object, it does not prevent you from modifying
+            the value of properties
+          </li>
+          <li>
+            The freeze method is a static method on the Object class that
+            returns an object that cannot be modified, including the values of
+            its Properties
+            <ul>
+              <li>
+                Freezing an object is the highest integrity level that
+                JavaScript provides.
+              </li>
+            </ul>
+          </li>
+          <li>
+            If you attempt to modify a property in:
+            <ul>
+              <li>
+                Non-strict mode - the property value will not change, but not
+                warning or error will be displayed
+              </li>
+              <li>Strict mode - an error will be thrown</li>
+            </ul>
+          </li>
+          <li>
+            Prevents extensions and makes existing properties non-writable and
+            non-configurable
+            <ul>
+              <li>New properties cannot be added</li>
+              <li>Existing properties cannot be removed</li>
+              <li>
+                Their enumerability, configurability, writability, or value
+                cannot be changed
+              </li>
+              <li>The object's prototype cannot be re-assigned</li>
+            </ul>
+          </li>
+          <li>Calling freeze() on it again returns the same object</li>
+          <li>
+            This is a must have if you are doing functional programming with JS
+            to make your objects immutable
+          </li>
+        </ul>
+      </section>
+
+      <h2>Nested Objects</h2>
+      <section>
+        <ul>
+          <li>
+            Calling freeze on an object will not freeze any nested objects
+          </li>
+          <li>
+            Call freeze on any nested objects to get a fully immutable object
+          </li>
+        </ul>
+        <div></div>
+      </section>
+
+      <h2>Arrays</h2>
+      <section>
+        <ul>
+          <li>Arrays can be frozen using this method as well</li>
+          <li>Syntax is the same as objects</li>
+        </ul>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <div>
+          <div>
+            const person = Object.freeze({ name: 'Bob', age: 35, city: 'New York', state: 'NY' })
+          </div>
+          <div>
+            Call freeze on any nested objects to make them immutable
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                      const person = Object.freeze({ <br/>
+                        name: 'Bob', <br/>
+                      age: 35, <br/>
+                        city: 'New York',  <br/>
+                        state: 'NY' <br/>
+                      }) <br/>
+                  </code>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Call freeze on any nested objects to make them immutable
+            <div class="card">
+              <div class="card-body">
+                <code>
+                    const person = Object.freeze({ <br/>
+                      name: 'Bob', <br/>
+                    age: 35, <br/>
+                    address: Object.freeze({ <br/>
+                      city: 'New York', <br/>
+                      state: 'NY' <br/>
+                    }) <br/>
+                  }) <br/>
+                </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Freeze arrays
+          <div class="card">
+            <div class="card-body">
+              <code>
+                  const hobbies = Object.freeze(["Water Skiing", "Video Games", "Car Racing"])<br/>
+              </code>
+          </div>
+        </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

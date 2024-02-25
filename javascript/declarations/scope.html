@@ -249,6 +249,18 @@ const outer = () => {
             <code>let</code> and <code>const</code> are declared using this
             scope
           </li>
+          <li>
+            You can create a new scope by just adding curly braces
+            <ul>
+              <li>Code within the curly braces has its own scope</li>
+              <li>This is really useful with switch statements
+                <ul>
+                  <li>By wrapping each case statement with braces, you create a local scope to just the case</li>
+                  <li>You can now reuse constant names within each scope without running into compiler problems</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
         </ul>
       </section>
 
@@ -264,6 +276,7 @@ const outer = () => {
           <li><code>var</code> is declared using this scope</li>
         </ul>
       </section>
+
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

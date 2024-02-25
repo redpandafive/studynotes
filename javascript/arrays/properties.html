@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Array Properties
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Array Properties</h1>
+
+
+      <h2>length</h2>
+      <section>
+        <ul>
+          <li>This property distinguishes arrays from regular JS objects</li>
+          <li>
+            For non-sparse arrays, this is the number of elements in the array
+            <ul>
+              <li>
+                Zero based, so the length value will be one more than the last
+                element in the array
+              </li>
+            </ul>
+          </li>
+          <li>
+            For sparse arrays, the length is greater than the number of elements
+            <ul>
+              <li>
+                Can guarantee that the length value is greater than the index of
+                every element in the array
+              </li>
+            </ul>
+          </li>
+          <li>
+            You can assign a value to the length property
+            <ul>
+              <li>
+                Increasing the length does not add any new elements, just
+                creates a sparse area at the end
+              </li>
+              <li>
+                Decreasing the length removes elements that are outside of the
+                boundaries
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -35,37 +35,67 @@
 
       <section>
         <ul>
-          <li>A compound declaration and assignment syntax</li>
           <li>
-            The right side of the assignment operator is a structured value
+            <a href="destructuring.html#basics">Basics</a>
+          </li>
+          <li>
+            <a href="destructuring.html#objects">Destructuring Objects</a>
+          </li>
+          <li>
+            <a href="destructuring.html#arrays">Destructuring Arrays</a>
+          </li>
+          <li>
+            <a href="destructuring.html#functions">Destructuring Function Parameters</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="basics">Basics</h2>
+      <section>
+        <ul>
+          <li>An expression that unpacks values from arrays, or properties from objects, into distinct variables</li>
+          <li>
+            Assignment means one or more values are extracted (destructured) from
+            the value on the right and store into the variables on the left
+          </li>
+          <li>
+            Object on the right side of the expression is not modified
+          </li>
+          <li>This is a compound declaration and assignment syntax</li>
+          <li>
+            The right side of the assignment operator is a structured value, such as:
             <ul>
               <li>Array</li>
               <li>Object</li>
-              <li>See examples for syntax for each type</li>
             </ul>
           </li>
           <li>
             The left side specifies one or more variable names that mimics array
             and object literal syntax
-            <ul>
-              <li>
-                These are usually variables to initialize as part of
-                <code>const</code>, <code>var</code>,
-                <code>let</code> statements
-              </li>
-            </ul>
           </li>
-          <li>
-            Assignment means one or more values are extracted (destructued) from
-            the value on the right and store into the variables on the left
-          </li>
+
         </ul>
       </section>
 
-      <h2>Destructuring Objects</h2>
+      <h2 id="objects">Destructuring Objects</h2>
       <section>
+        <ul>
+          <li>The left side should be an object-like "pattern" for corresponding properties
+            <ul>
+              <li>
+                This is called binding syntax
+              </li>
+              <li>
+                In the simplest case, it is a list of variable names within <code>{ .... }</code>
+              </li>
+              <li>
+                Order does not matter for left side
+              </li>
+            </ul>
+          </li>
+        </ul>
         <div>
-          Can be used to simplify extracting properties from an object
+          Can be used to simplify extracting properties from an object.  
           <div class="card">
             <div class="card-body">
               <code>
@@ -74,6 +104,10 @@
                 realName: 'Bruce Wayne' <br />
                 }; <br />
                 const { name, realName } = hero;<br />
+                <br/>
+                // equivalent to  <br/>
+                const name = hero.name;<br/>
+                const realName = hero.realName;<br/>
               </code>
             </div>
           </div>
@@ -96,7 +130,7 @@
       </section>
 
       <div>
-        To alias the realName property to alterEgo, do the following
+        To alias the realName property to something other than the property name:
         <div class="card">
           <div class="card-body">
             <code>
@@ -130,7 +164,7 @@
       </div>
 
       <div>
-        Unreferenced proprties can be collected using rest syntax
+        Unreferenced properties can be collected using rest syntax
         <div class="card">
           <div class="card-body">
             <code>
@@ -141,13 +175,37 @@
               }; <br />
               const { name, ...rest } = hero; <br />
               console.log(rest); // => { realName: 'Bruce Wayne', company: 'WayneCorp' } <br />
+              console.log(name); // => Batman
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        Combine with Object.entries method to loop over the key and values of an object. This outputs:
+        <ul>
+          <li>name:Batman</li>
+          <li>realName:Bruce Wayne</li>
+          <li>company:WayneCorp</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              const hero = { <br />
+                name: 'Batman', <br />
+                realName: 'Bruce Wayne',  <br />
+                company: 'WayneCorp' <br />
+              }; <br />
+              for (let [key, value] of Object.entries(user)) { <br />
+                console.log(`${key}:${value}`);  <br />
+              }
             </code>
           </div>
         </div>
       </div>
     </section>
 
-      <h2>Destructuring Arrays</h2>
+      <h2 id="arrays">Destructuring Arrays</h2>
       <section>
         <div>
           Simple Examples
@@ -185,7 +243,22 @@
                 let [y,x] = a(1,2);<br />
 
                 // r contains 1, s contains 2<br />
-                let [r,s] = b(y,x);
+                let [r,s] = b(y,x);<br />
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          Two variables can be swapped in one destructuring expression
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let a = 1;<br />
+                let b = 3;<br />
+                <br />
+                // a contains 3, b contains 1 <br />
+                [a, b] = [b, a];<br />
               </code>
             </div>
           </div>
@@ -193,7 +266,7 @@
 
         <div>
           This uses a for loop to loop over all properties of an object and use
-          destructuring to conver those pairs from 2 element arryas into
+          destructuring to cover those pairs from 2 element arrays into
           individual variables
 
           <div class="card">
@@ -276,6 +349,52 @@
             </div>
           </div>
         </div>
+      </section>
+
+
+      <h2 id="functions">Destructuring Function Parameters</h2>
+      <section>
+        <ul>
+          <li>One way to simplify a long list of function parameters is to pass an object to the function and destructure in the signature
+            <ul>
+              <li>Do not have to remember proper ordering of parameters since destructuring </li>
+            </ul>
+          </li>
+          <li>This is particularly helpful when you have default values
+            <ul>
+              <li>These can just be eliminated from the object you pass in</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          This performs like the above code, but gives the variables on the left
+          different names
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // bad way to write the function <br/>
+                function showMenu(title = "Untitled", width = 200, height = 100, items = []) { <br/>
+                   ... <br/>
+                } <br/>
+                <br/>
+                // better way to write the function <br/>
+                let options = { <br/>
+                  title: "My menu", <br/>
+                  items: ["Item1", "Item2"] <br/>
+                }; <br/>
+                <br/>
+                function showMenu({title = "Untitled", width = 200, height = 100, items = []}) { <br/>
+                  console.log( `${title} ${width} ${height}` ); // My Menu 200 100 <br/>
+                  console.log( items ); // Item1, Item2 <br/>
+                }
+              </code>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       </section>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>

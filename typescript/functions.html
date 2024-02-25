@@ -30,20 +30,86 @@
 
       <h1>Functions</h1>
 
+      <div>
+        <ul>
+          <li>
+            <a href="functions.html#arguments">Arguments</a>
+          </li>
+          <li>
+            <a href="functions.html#parameters">Parameters</a>
+          </li>
+          <li>
+            <a href="functions.html#overloads">Function Overloads</a>
+          </li>
+          <li>
+            <a href="functions.html#typing">Typing Functions</a>
+          </li>
+        </ul>
+      </div>
+
       <section>
         <ul>
-          <li>See <a href="types.html">Types</a> page for more information about TypeScript types relevant to functions.</li>
+          <li>
+            See <a href="types.html">Types</a> page for more information about
+            TypeScript types relevant to functions.
+          </li>
         </ul>
       </section>
 
 
-      <h2>Optional Parameters</h2>
+
+
+
+
+
+
+
+
+
+
+      <h2 id="arguments">Arguments</h2>
+
+      <h2>Rest Arguments</h2>
+      <section>
+        <ul>
+          <li>
+            Provides a variable number of arguments from an iterable object
+            (like an array) using the spread syntax
+          </li>
+        </ul>
+        <div>
+          Example usage
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const arr1 = [1, 2, 3]; <br />
+                const arr2 = [4, 5, 6]; <br />
+                arr1.push(...arr2); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="parameters">Parameters</h2>
+
+      <h3>Optional Parameters</h3>
       <section>
         <ul>
           <li>In JS, functions can take a variable number of arguments</li>
-          <li>You can model this behavior in TypeScript by marking parameters as optional</li>
-          <li>Unless you define a default value, the parameters will be defined with an undefined union</li>
-          <li>When writing a function type for a callback, never write an optional parameter unless you intend to call the function without passing that argument</li>
+          <li>
+            You can model this behavior in TypeScript by marking parameters as
+            optional
+          </li>
+          <li>
+            Unless you define a default value, the parameters will be defined
+            with an undefined union
+          </li>
+          <li>
+            When writing a function type for a callback, never write an optional
+            parameter unless you intend to call the function without passing
+            that argument
+          </li>
           <li>
             This is different from calling a function with too many parameters
             <ul>
@@ -53,7 +119,9 @@
         </ul>
         <div>
           <ul>
-            <li>The following parameter x will be typed as number | undefined</li>
+            <li>
+              The following parameter x will be typed as number | undefined
+            </li>
             <li>
               The following are allowed calls
               <ul>
@@ -78,13 +146,14 @@
         </div>
       </section>
 
-
-      <h2>Rest Parameters</h2>
+      <h3>Rest Parameters</h3>
       <section>
         <ul>
-          <li>Use to define functions that take an unbounded number of arguments</li>
+          <li>
+            Use to define functions that take an unbounded number of arguments
+          </li>
           <li>Must appear after all other parameters</li>
-          <li>Must be an array or tuple </li>
+          <li>Must be an array or tuple</li>
           <li>Uses the <code>...</code> syntax</li>
         </ul>
         <div>
@@ -92,50 +161,34 @@
           <div class="card">
             <div class="card-body">
               <code>
-                function multiply(n: number, ...m: number[]) { <br/>
-                  return m.map((x) => n * x); <br/>
-                } <br/>
-                // 'a' gets value [10, 20, 30, 40] <br/>
-                const a = multiply(10, 1, 2, 3, 4); <br/>
+                function multiply(n: number, ...m: number[]) { <br />
+                return m.map((x) => n * x); <br />
+                } <br />
+                // 'a' gets value [10, 20, 30, 40] <br />
+                const a = multiply(10, 1, 2, 3, 4); <br />
               </code>
             </div>
           </div>
         </div>
       </section>
 
-      <h2>Rest Arguments</h2>
+      <h3>Parameter Destructuring</h3>
       <section>
         <ul>
-          <li>Provides a variable number of arguments from an iterable object (like an array) using the spread syntax</li>
+          <li>
+            Use to unpack objects provided as an argument into one or more local
+            variables inside a function body
+          </li>
         </ul>
         <div>
           Example usage
           <div class="card">
             <div class="card-body">
               <code>
-                const arr1 = [1, 2, 3]; <br/>
-                const arr2 = [4, 5, 6]; <br/>
-                arr1.push(...arr2); <br/>
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <h2>Parameter Destructuring</h2>
-      <section>
-        <ul>
-          <li>Use to unpack objects provided as an argument into one or more local variables inside a function body</li>
-        </ul>
-        <div>
-          Example usage
-          <div class="card">
-            <div class="card-body">
-              <code>
-                function sum({ a, b, c }: { a: number; b: number; c: number }) { <br/>
-                  console.log(a + b + c); <br/>
-                } <br/>
+                function sum({ a, b, c }: { a: number; b: number; c: number }) {
+                <br />
+                console.log(a + b + c); <br />
+                } <br />
               </code>
             </div>
           </div>
@@ -145,39 +198,50 @@
           <div class="card">
             <div class="card-body">
               <code>
-                type ABC = { a: number; b: number; c: number }; <br/>
-                function sum({ a, b, c }: ABC) { <br/>
-                  console.log(a + b + c); <br/>
-                } <br/>
+                type ABC = { a: number; b: number; c: number }; <br />
+                function sum({ a, b, c }: ABC) { <br />
+                console.log(a + b + c); <br />
+                } <br />
               </code>
             </div>
           </div>
         </div>
       </section>
 
-      <h2>Function Overloads</h2>
+      <h2 id="overloads">Function Overloads</h2>
       <section>
         <ul>
-          <li>Use overload signatures to specify a funciton that can be called in different ways</li>
+          <li>
+            Use overload signatures to specify a function that can be called in
+            different ways
+          </li>
           <li>
             To implement
             <ul>
               <li>
                 Provide two or more function signatures
                 <ul>
-                  <li>When writing an overloaded function, you should always have two or more signatures above the implementation of the function.</li>
+                  <li>
+                    When writing an overloaded function, you should always have
+                    two or more signatures above the implementation of the
+                    function.
+                  </li>
                 </ul>
               </li>
               <li>
                 The body of the function with a compatible signature
                 <ul>
-                  <li>The signature of the implementation is not visible from the outside.</li>
+                  <li>
+                    The signature of the implementation is not visible from the
+                    outside.
+                  </li>
                 </ul>
               </li>
             </ul>
           </li>
           <li>
-            It is usually better to prefer paraemters with union types instead of using overloads when possible
+            It is usually better to prefer parameters with union types instead
+            of using overloads when possible
             <ul>
               <li>
                 <code>function len(s: string): number</code>
@@ -216,7 +280,8 @@
                 <br />
                 function makeDate(m: number, d: number, y: number): Date;
                 <br />
-                function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
+                function makeDate(mOrTimestamp: number, d?: number, y?: number):
+                Date {
                 <br />
                 if (d !== undefined && y !== undefined) {
                 <br />
@@ -240,20 +305,181 @@
         </div>
       </section>
 
-      <h2>Funtion Type Expressions</h2>
+
+      
+      <h3>Parameter Type Annotations</h3>
       <section>
         <ul>
-          <li>Provide a simple way to describe a function</li>
-          <li>Syntactically similar to arrow functions</li>
-          <li>Can combine with type aliases for clarity</li>
+          <li>
+            For function declarations, add type annotations to function
+            parameters to restrict the types the function accepts
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              function greet(name: string) {
+              <br />
+              console.log("Hello, " + name.toUpperCase() + "!!");
+              <br />
+              }
+              <br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>Return Type Annotations</h3>
+      <section>
+        <ul>
+          <li>
+            You can specify a return type annotation, but its usually better to
+            rely on type inference.
+          </li>
+          <li>
+            You may want to add one for documentation purposes or prevent
+            accidental changes
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              function greet(name: string) {
+              <br />
+              console.log("Hello, " + name.toUpperCase() + "!!");
+              <br />
+              }
+              <br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>Anonymous Functions Annotations</h3>
+      <section>
+        <ul>
+          <li>
+            Parameters of an anonymous function are automatically given types.
+          </li>
+          <li>
+            This is called contextual typing because the context that the
+            function occurred within informs what type it should have.
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              function greet(name: string) {
+              <br />
+              console.log("Hello, " + name.toUpperCase() + "!!");
+              <br />
+              }
+              <br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+      <h2 id="typing">Typing Functions</h2>
+      <section>
+        <ul>
+          <li>There are several ways to declaring the type of a function
+            <ul>
+              <li>Method signatures</li>
+              <li>Function type expressions</li>
+              <li>Object type literals with call / construct signatures</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
-      <h3>Function Type Expression Examples</h3>
+
+      <h3>Method Signatures</h3>
+      <section>
+        <ul>
+          <li>Similar to defining methods on interfaces in C#</li>
+          <li>Closely mirrors shorthand method syntax, which is used to define methods in object literals or classes</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                interface Date {<br />
+                  toString(): string; <br />
+                  setTime(time: number): number; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Function Type Expressions</h3>
+      <section>
+        <ul>
+
+          <li>
+            Provide a simple way to describe a function
+            <ul>
+              <li>Syntactically similar to arrow functions</li>
+            </ul>
+          </li>
+          <li>
+            <code>(a: string) => void</code>
+            <ul>
+              <li>
+                Means a function that:
+                <ul>
+                  <li>
+                    Only has one parameter named a that is typed to string
+                  </li>
+                  <li>Does not have a return value</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Parameter names are required with this syntax
+            <ul>
+              <li>Cannot just provide the type</li>
+            </ul>
+          </li>
+          <li>
+            Can combine with type aliases for clarity
+
+          </li>
+
+        </ul>
+        <div>
+          Combine with a type alias to name a function type
+          <div class="card">
+            <div class="card-body">
+              <code>
+                type GreetFunction = (a: string) => void;
+                <br />
+                function greeter(fn: GreetFunction) {
+                <br />
+                // ...
+                <br />
+                }
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h4>Examples</h4>
       <section>
         <div>
           <code>(a: string) => void</code>
-          means “a function with one parameter, named a, of type string, that doesn’t have a return value
+          Means “a function with one parameter, named a, of type string, that
+          doesn’t have a return value
           <div class="card">
             <div class="card-body">
               <code>
@@ -296,182 +522,62 @@
         </div>
       </section>
 
-      <h2>Call Signatures</h2>
+      <h4>Object Type Literals with Call or Construct Signatures</h4>
       <section>
         <ul>
-          <li>While JS functions can have properties, the function expression syntax doesnt allow for this</li>
           <li>
-            Instead, use a call signature in an object type
-            <ul>
-              <li>Create a type that has the needed properties and one for when the type is invoked</li>
-              <li>Create a function (not function expression) that meets the requirements of the type</li>
-              <li>Assign any values to the properties of this function</li>
-              <li>Use the function anywhere the type is expected</li>
-            </ul>
-          </li>
-          <li>Similar to function type expression, but uses a colon between the parameter list and the return type</li>
-        </ul>
-        <div>
-          Combine with a type alias to name a function type
-          <div class="card">
-            <div class="card-body">
-              <code>
-                type DescribableFunction = {
-                <br />
-                description: string;
-                <br />
-                (someArg: number): boolean;
-                <br />
-                };
-                <br />
-                function doSomething(fn: DescribableFunction) {
-                <br />
-                console.log(fn.description + " returned " + fn(6)); }
-                <br />
-
-                function myFunc(someArg: number) {
-                <br />
-                return someArg > 3;
-                <br />
-                }
-                <br />
-                myFunc.description = "default description";
-                <br />
-                <br />
-                doSomething(myFunc);
-                <br />
-                <br />
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h2>Annotations</h2>
-
-      <h3>Parameter Type Annotations</h3>
-      <section>
-        <ul>
-          <li>For function declarations, add type annotations to function parameters to restrict the types the function accepts</li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              function greet(name: string) {
-              <br />
-              console.log("Hello, " + name.toUpperCase() + "!!");
-              <br />
-              }
-              <br />
-            </code>
-          </div>
-        </div>
-      </section>
-
-      <h3>Return Type Annotations</h3>
-      <section>
-        <ul>
-          <li>You can specify a return type annotation, but its usually better to rely on type inference.</li>
-          <li>You may want to add one for documentation purposes or prevent accidental changes</li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              function greet(name: string) {
-              <br />
-              console.log("Hello, " + name.toUpperCase() + "!!");
-              <br />
-              }
-              <br />
-            </code>
-          </div>
-        </div>
-      </section>
-
-      <h3>Annonymous Functions Annotations</h3>
-      <section>
-        <ul>
-          <li>Parameters of an annonymous function are automatically given types.</li>
-          <li>This is called contextual typing because the context that the function occured within informs what type it should have.</li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              function greet(name: string) {
-              <br />
-              console.log("Hello, " + name.toUpperCase() + "!!");
-              <br />
-              }
-              <br />
-            </code>
-          </div>
-        </div>
-      </section>
-
-      <h2>Generic Functions</h2>
-      <section>
-        <ul>
-          <li>Used when you want to describe a correspondence bwtween two values</li>
-          <li>This is done by declaring a type parameter in the function signature</li>
-          <li>
-            Recommendations
-            <ul>
-              <li>When possible, use teh type parameter itself rather than constraining it</li>
-              <li>Always use as few type parameters as possible</li>
-              <li>Remeber you are relating two or more values, so reconsider if your code doesnt do this</li>
-              <li>Reconsider if a type parameter only appears in one location. You may not actually need it.</li>
-            </ul>
-          </li>
-          <li>
-            For example, the following creates a link between the input of the function and the return value
+            Since functions are just objects that can be called, you can describe a function using a call signature in an object type literal
             <div class="card">
               <div class="card-body">
                 <code>
-                  function firstElement&lt;Type&gt;(arr: Type[]): Type | undefined {
-                  <br />
-                  return arr[0];
-                  <br />
-                  }
+                  interface RegExpConstructor { <br/>
+                    (pattern: RegExp): RegExp; <br/>                  
+                  } <br/>
                   <br />
                 </code>
               </div>
             </div>
           </li>
-        </ul>
-      </section>
-
-      <h3>Constraints</h3>
-      <section>
-        <ul>
-          <li>Use when you ant to relate two values, but only operate on a certain subset of values</li>
-          <li>Constraints limit the kinds of types that a type parameter can accept</li>
-        </ul>
-        <div>
-          The following constrain requires the type to have a length property
-          <ul>
-            <li>Without this, you would not be allowed to access the length property in the function</li>
-          </ul>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                function longest<Type extends { length: number }>(a: Type, b: Type) {
-                <br />
-                if (a.length >= b.length) {
-                <br />
-                return a;
-                <br />
-                } else {
-                <br />
-                return b;
-                <br />
-                }
-                <br />
-                }
-                <br />
-              </code>
+          <li>
+            Generics can be written as call signatures of an object literal type as well
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function identity<Type>(arg: Type): Type {<br />
+                    return arg;<br />
+                  }<br />
+                  <br />
+                  let myIdentity: { <Type>(arg: Type): Type } = identity;<br />
+                  <br />
+                </code>
+              </div>
             </div>
-          </div>
-        </div>
+          </li>
+          <li>
+            An object type literal can also contain construct signatures
+            <ul>
+              <li>Defines its parameter list and return type when its called with the new operator</li>
+              <li>Look identical to call signatures, except they are prefixed with the <code>new</code> keyword</li>
+            </ul>
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    interface RegExpConstructor { <br/>
+                      // Call signatures <br/>
+                      (pattern: RegExp): RegExp; <br/>
+                      (pattern: string, flags?: string): RegExp; <br/>
+                      <br/>
+                      // Construct signatures <br/>
+                      new (pattern: RegExp): RegExp; <br/>
+                      new (pattern: string, flags?: string): RegExp; <br/>
+                    } <br/>
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </section>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>

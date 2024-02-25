@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">HTML</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Form
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Form</h1>
+
+      <section>
+        <ul>
+          <li>
+            Add a submit button inside the form to trigger the submit
+            <ul>
+              <li>
+                The submit emit is emitted by the form tag using the built in
+                DOM event
+              </li>
+              <li>Trigger teh event by clicking a button with submit type</li>
+              <li>
+                This lets the user press the Enter key to submit the completed
+                form
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>fieldset</h3>
+      <section>
+        <ul>
+          <li>Provides groupings within a HTML form</li>
+          <li>
+            Use to group several controls as well as labels (&lt;label&gt;)
+            together visually
+          </li>
+          <li>Add a legend tag as a child to add a caption</li>
+          <li>
+            Attributes
+            <ul>
+              <li>
+                disabled
+                <ul>
+                  <li>Boolean attribute</li>
+                  <li>
+                    All controls in the fieldset will be
+                    <ul>
+                      <li>Cannot be edited or submitted</li>
+                      <li>Will not receive any browsing events</li>
+                      <li>Will be grayed out by default</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                form
+                <ul>
+                  <li>
+                    Specify the id of the form element this fieldset is
+                    associated to. This allows you to define the fieldset
+                    outside of the form.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Add a legend tag to add a label to the field set</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;form&gt; <br />
+                &lt;fieldset&gt; <br />
+                &lt;legend&gt;Choose your favorite monster&lt;/legend&gt; <br />
+                &lt;input type="radio" id="kraken" name="monster" value="K"&gt;
+                <br />
+                &lt;label for="kraken"&gt;Kraken&lt;/label&gt;&lt;br&gt; <br />
+                &lt;input type="radio" id="sasquatch" name="monster"
+                value="S"&gt; <br />
+                &lt;label for="sasquatch"&gt;Sasquatch&lt;/label&gt;&lt;br&gt;
+                <br />
+                &lt;input type="radio" id="mothman" name="monster" value="M"
+                /&gt; <br />
+                &lt;label for="mothman"&gt;Mothman&lt;/label&gt; <br />
+                &lt;/fieldset&gt; <br />
+                &lt;/form&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <fieldset>
+            <legend>Choose your favorite monster</legend>
+            <input type="radio" id="kraken" name="monster" value="K" />
+            <label for="kraken">Kraken</label><br />
+            <input type="radio" id="sasquatch" name="monster" value="S" />
+            <label for="sasquatch">Sasquatch</label><br />
+            <input type="radio" id="mothman" name="monster" value="M" />
+            <label for="mothman">Mothman</label>
+          </fieldset>
+        </div>
+      </section>
+
+      <h2>See Also / Sources</h2>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

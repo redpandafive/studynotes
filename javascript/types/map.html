@@ -149,34 +149,71 @@
       </section>
 
       <h2>Properties</h2>
+
+      <h3>size</h3>
       <section>
-        <div>size</div>
         <ul>
           <li>Returns the number of key / value pairs in the Map object</li>
         </ul>
       </section>
 
       <h2>Methods</h2>
+
+      <h3>clear()</h3>
       <section>
-        <div>clear()</div>
         <ul>
           <li>Removes all key-value pairs from the Map object</li>
         </ul>
-        <div>delete(x)</div>
+      </section>
+
+
+      <h3>delete(x)</h3>
+      <section>
         <ul>
           <li>Removes the item indexed by key x</li>
           <li>Returns true if the element was removed</li>
           <li>Returns false if the element does not exist</li>
+                </ul>
+      </section>
+
+      <h3>entries()</h3>
+      <section>
+        <ul>
+          <li>Returns a new map iterator object that contains key-value pairs for each element in the map in insertion order.</li>
         </ul>
-        <div>get(x)</div>
+      </section>
+
+      <h3>get(x)</h3>
+      <section>
         <ul>
           <li>Retrieves the value identified by key x</li>
         </ul>
-        <div>has(x)</div>
+      </section>
+
+      <h3>Map.groupBy()</h3>
+      <section>
+        <ul>
+          <li>
+            Similar to <a href="../objects/methods.html">Object.groupBy</a>, but it returns a map instead of an object
+          </li>
+          <li>
+            Does allow you to use any type of value as the keys (Object.groupBy requires values that can be coerced into a string)
+          </li>
+          <li>
+            This is not standard across all browsers yet, so use TypeScript version, lodash version, or custom version for now
+          </li>
+        </ul>
+      </section>
+
+      <h3>has(x)</h3>
+      <section>
         <ul>
           <li>Returns true/false if the key x exists</li>
         </ul>
-        <div>set(x,y)</div>
+      </section>
+
+      <h3>set(x,y)</h3>
+      <section>
         <ul>
           <li>Sets the value of y for the key of x</li>
           <li>
@@ -195,6 +232,11 @@
           </li>
         </ul>
       </section>
+
+
+
+
+
 
       <h2>WeakMap</h2>
       <section>

@@ -105,28 +105,34 @@
             </ul>
           </li>
           <li>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  switch(n) {<br/>
-                    case 1: // Start here if n === 1<br/>
-                    // Execute code block #1.<br/>
-                    break; // Stop here<br/>
-                    case 2: // Start here if n === 2<br/>
-                    // Execute code block #2.<br/>
-                    break; // Stop here<br/>
-                    case 3: // Start here if n === 3<br/>
-                    // Execute code block #3.<br/>
-                    break; // Stop here<br/>
-                    default: // If all else fails...<br/>
-                    // Execute code block #4.<br/>
-                    break; // Stop here<br/>
-                    }<br/>                    
-                </code>
-              </div>
-            </div>
+            One trick you can do is wrap each case within its own set of curly branches
+            <ul>
+              <li>This creates a local scope within the case statement, so you can redeclare constants without error</li>
+            </ul>
           </li>
         </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                switch(n) {<br/>
+                  case 1: // Start here if n === 1<br/>
+                  // Execute code block #1.<br/>
+                  break; // Stop here<br/>
+                  case 2: // Start here if n === 2<br/>
+                  // Execute code block #2.<br/>
+                  break; // Stop here<br/>
+                  case 3: // Start here if n === 3<br/>
+                  // Execute code block #3.<br/>
+                  break; // Stop here<br/>
+                  default: // If all else fails...<br/>
+                  // Execute code block #4.<br/>
+                  break; // Stop here<br/>
+                  }<br/>                    
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
     </div>

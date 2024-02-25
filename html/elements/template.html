@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">HTML</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Template</li>
+        </ol>
+      </nav>
+
+      <h1>Template</h1>
+      <section>
+        <ul>
+          <li>Allows you to define a template within the HTML of the page</li>
+          <li>This can contain any content, including HTML elements</li>
+          <li>By default, this is not displayed in the page</li>
+          <li>You can use JS to select it and append it to the page</li>
+          <li>
+            This is useful when you have content that needs to be repeated with
+            small modifications that you can do through JS
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;template&gt; <br />
+                &lt;h5&gt; <br />
+                This is a template <br />
+                &lt;/h5&gt; <br />
+                &lt;small&gt; <br />
+                Hi <br />
+                &lt;/small&gt; <br />
+                &lt;/template&gt; <br />
+                .... <br />
+                &lt;script&gt; <br />
+                const template = document.querySelector('template'); <br />
+                const content = template.content.cloneNode(true); <br />
+                content.querySelector('small').innerText = 'Modified test';
+                <br />
+                document.body.append(content); <br />
+                &lt;/script&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>See Also / Sources</h2>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

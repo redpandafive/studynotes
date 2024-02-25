@@ -26,80 +26,131 @@
             <a href="../index.html">JavaScript</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Array Properties and Methods
+            Array Methods
           </li>
         </ol>
       </nav>
 
-      <h1>Array Properties and Methods</h1>
+      <h1>Array Methods</h1>
 
-      <h2>Properties</h2>
-
-      <h3>length</h3>
       <section>
         <ul>
-          <li>This property distinguishes arrays from regular JS objects</li>
           <li>
-            For non-sparse arrays, this is the number of elements in the array
-            <ul>
-              <li>
-                Zero based, so the length value will be one more than the last
-                element in the array
-              </li>
-            </ul>
+            <a href="methods.html#addElements">Add / Remove Elements</a>
           </li>
           <li>
-            For sparse arrays, the length is greater than the number of elements
-            <ul>
-              <li>
-                Can guarantee that the length value is greater than the index of
-                every element in the array
-              </li>
-            </ul>
+            <a href="methods.html#assorted">Assorted Methods</a>
           </li>
           <li>
-            You can assign a value to the length property
-            <ul>
-              <li>
-                Increasing the length does not add any new elements, just
-                creates a sparse area at the end
-              </li>
-              <li>
-                Decreasing the length removes elements that are outside of the
-                boundaries
-              </li>
-            </ul>
+            <a href="methods.html#creation">Creation Methods</a>
+          </li>
+          <li>
+            <a href="methods.html#flattening">Flattening Methods</a>
+          </li>
+          <li>
+            <a href="methods.html#iterators">Iterator Methods</a>
+          </li>
+          <li>
+            <a href="methods.html#search">Search Methods</a>
+          </li>
+          <li>
+            <a href="methods.html#sort">Sort Methods</a>
+          </li>
+          <li>
+            <a href="methods.html#transform">Transformation Methods</a>
           </li>
         </ul>
       </section>
 
-      <h2>Static Methods</h2>
+      <h2 id="addElements">Add / Remove Elements</h2>
 
+      <h3>pop()</h3>
       <section>
         <ul>
-          <li>These are called on the Array class itself</li>
+          <li>Removes the last element of the array and returns it</li>
+          <li>This reduces the length of an array by 1</li>
+          <li>
+            Use if you need to treat the array as a first in, last out stack
+          </li>
+          <li>Modifies the array in place</li>
         </ul>
       </section>
 
-      <h3>Array.join()</h3>
+      <h3>push()</h3>
+      <section>
+        <ul>
+          <li>Adds an element to the end of the array</li>
+          <li>Adds the new element to array[array.length]</li>
+          <li>
+            Use if you need to treat the array as a first in, last out stack
+          </li>
+          <li>Modifies the array in place</li>
+        </ul>
+      </section>
+
+      <h3>splice()</h3>
       <section>
         <ul>
           <li>
-            Converts all elements of an array to strings, then concatenates them
+            General method for inserting, deleting, or replacing array elements
+          </li>
+          <li>Modifies the array in place</li>
+        </ul>
+      </section>
+
+      <h3>shift()</h3>
+      <section>
+        <ul>
+          <li>Removes and returns the first element of the array</li>
+          <li>This reduces the length of an array by 1</li>
+          <li>
+            Shifts all elements down to an index one lower than the current
+            index
           </li>
           <li>
-            Defaults to comma as a separator
+            Combine with <code>push()</code> if you need to treat the array as a
+            queue
+          </li>
+          <li>Modifies the array in place</li>
+        </ul>
+      </section>
+
+      <h3>unshift()</h3>
+      <section>
+        <ul>
+          <li>Adds an element to the beginning of the array</li>
+          <li>
+            Can add multiple items as parameters, but it does not result in the
+            same ordering as two calls to unshift
+          </li>
+          <li>Modifies the array in place</li>
+        </ul>
+      </section>
+
+      <h2 id="assorted">Assorted Methods</h2>
+
+      <h3>at()</h3>
+      <section>
+        <ul>
+          <li>Accessing an array element using square brackets is fine when the index number is greater than or equal to zero</li>
+          <li>
+            The <code>at</code> method offers more flexibility:
             <ul>
-              <li>Pass a parameter to specify a different separator</li>
+              <li>For indices between zero and the upper bounds or the array, the same value is returned as the square bracket notation</li>
+              <li>For indices that are out of bounds for the array, undefined is returned</li>
+              <li>Negative indices start at the end of the array
+                <ul>
+<li>-1 = last element of the array</li>
+<li>-2 = second to last element of the array</li>
+              </ul> 
+            </li>
             </ul>
           </li>
           <li>
-            Calling the <code>toString()</code> method on an array has the same
-            result as this (with default delimiter)
+            This allows a cleaner syntax to get the last element of the array: <code>arr[arr.length = 1]</code> can be rewritten to <code>arr.at(-1)</code>
           </li>
         </ul>
       </section>
-
       <h3>Array.isArray()</h3>
       <section>
         <ul>
@@ -107,11 +158,14 @@
         </ul>
       </section>
 
+      <h2 id="creation">Creation Methods</h2>
+
       <h3>Array.from()</h3>
       <section>
         <ul>
           <li>
-            Factory method for creating a new shallowed copied Array instance from  an iterable or array like object
+            Factory method for creating a new shallowed copied Array instance
+            from an iterable or array like object
             <ul>
               <li>
                 Expects an iterable or array like object as its first argument
@@ -155,26 +209,26 @@
           The following uses an arrow function to manipulate elements
           <div class="card">
             <div class="card-body">
-              <code> 
-                Array.from([1, 2, 3], (x) =&gt; x + x); <br /> 
-                // [2, 4, 6] <br /> 
+              <code>
+                Array.from([1, 2, 3], (x) =&gt; x + x); <br />
+                // [2, 4, 6] <br />
               </code>
             </div>
           </div>
         </div>
         <div>
-          The following converts a Map to an array of objects, each with a key and value property
+          The following converts a Map to an array of objects, each with a key
+          and value property
           <div class="card">
             <div class="card-body">
-              <code> 
-                let map = new Map().set('a', 1).set('b', 2); <br/>
-                array = Array.from(map, ([name, value]) =&gt; ({ name, value })); <br /> 
+              <code>
+                let map = new Map().set('a', 1).set('b', 2); <br />
+                array = Array.from(map, ([name, value]) =&gt; ({ name, value
+                })); <br />
               </code>
             </div>
           </div>
         </div>
-
-
       </section>
 
       <h3>Array.of()</h3>
@@ -218,22 +272,114 @@
         </div>
       </section>
 
-      <h2>Methods</h2>
+      <h2 id="#flattening">Flattening Methods</h2>
 
-      <h3>Iterator Methods</h3>
+      <h3>flat()</h3>
+      <section>
+        <ul>
+          <li>
+            Creates and returns a new array containing the same elements as the
+            source
+            <ul>
+              <li>
+                This is a shallow copy, so it contains the same elements as the
+                ones from the original array
+              </li>
+            </ul>
+          </li>
+          <li>
+            Nested arrays are "flattened" into the original array
+            <ul>
+              <li>This will remove gaps from a sparse array</li>
+              <li>An optional parameter can be passed to control the depth</li>
+              <li>
+                Pass <code>Infinity</code> to perform flattening on all tiers
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"
+            target="_blank"
+          >
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
+          </a>
+          </li>
+        </ul>
+        <div>
+          Examples of flattening nested arrays
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Evaluates to [1, 2, 3, 4] <br />
+                [1, 2, [3, 4]].flat(); <br />
+                <br />
+                // Evaluates to [1, 2, 3, 4, [5, 6]] <br />
+                [1, 2, [3, 4, [5, 6]]].flat(); <br />
+                <br />
+                // Evaluates to [1, 2, 3, 4, 5, 6] <br />
+                [1, 2, [3, 4, [5, 6]]].flat(2); <br />
+                <br />
+                // Evaluates to [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] <br />
+                [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]].flat(Infinity); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Examples of removing gaps from sparse arrays
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Evaluates to [1, 2, 4, 5] <br />
+                [1, 2, , 4, 5].flat();<br />
+                <br />
+                // Evaluates to [ 1, 3, "a", "c" ] [1, , 3, ["a",
+                ,"c"]].flat()); <br />
+                <br />
+                // Evaluates to [ 1, 3, "a", "d", "e"] <br />
+                [1, , 3, ["a", , ["d", , "e"]]].flat(); <br />
+                [1, , 3, ["a", , ["d", , "e"]]].flat(2);<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3 id="flatmap">flatMap()</h3>
+      <section>
+        <ul>
+          <li>
+            Works just like <code>map</code>, but flattens the returned array as
+            if it had been passed through <code>flat</code>
+          </li>
+          <li>
+            Same as if you called <code>[].map(func).flat()</code>
+            <ul>
+              <li>Performs this more efficiently</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="iterators">Iterator Methods</h2>
       <section>
         <div>Typically have the following characteristics</div>
         <ul>
           <li>
-            Accept a function as their first argument
+            Accepts a function as first argument
             <ul>
-              <li>Invoke the function once for each element of the array</li>
+              <li>Invokes the function once for each element of the array</li>
               <li>
                 The function is not evoked on nonexistent elements in sparse
                 arrays
               </li>
               <li>Arrow functions work well here</li>
             </ul>
+          </li>
+          <li>
+            Do not modify the array on which they are invoked (unless done
+            explicity in the function)
           </li>
           <li>
             Several accept a second optional argument
@@ -244,168 +390,14 @@
               </li>
             </ul>
           </li>
-          <li>
-            Do not modify the array on which they are invoked (unless done
-            explicity in the function)
-          </li>
+
         </ul>
       </section>
 
-      <h4>every()</h4>
-      <section>
-        <ul>
-          <li>
-            Returns true if and only if the predicate function returns true for
-            all elements in the array
-          </li>
-          <li>
-            Returns false the first time the predicate function returns false
-            and short circuits remaining iterations
-          </li>
-          <li>
-            Only iterates through all elements if the predicate always returns
-            true
-          </li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              let a = [1,2,3,4,5];<br />
-              // Evaluates to true: all values are &lt; 10.<br />
-              a.every(x => x &lt; 10) <br />
-              // Evaluates to false: not all values are even.<br />
-              a.every(x => x % 2 === 0) <br />
-            </code>
-          </div>
-        </div>
-      </section>
+  
+ 
 
-      <h4 id="filter">filter()</h4>
-      <section>
-        <ul>
-          <li>
-            Returns a new array containing a subset of the elements from the
-            original array
-            <ul>
-              <li>
-                Filtered down to just the elements that pass the test
-                implemented by the provided function
-              </li>
-              <li>Creates a shallow copy of a portion of a given array</li>
-            </ul>
-          </li>
-          <li>
-            The function you pass should be a predicate (return either true or
-            false)
-            <ul>
-              <li>
-                If the return value is true, the element is included in the
-                return array
-              </li>
-            </ul>
-          </li>
-          <li>
-            Will not include gaps from a sparse array
-            <ul>
-              <li>
-                This gives a convenient way to remove gaps from a spare array
-              </li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>let dense = sparse.filter(() => true); </code>
-              </div>
-            </div>
-          </li>
-          <li>
-            Useful to remove undefined and null Elements
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  let a = a.filter(x => x !== undefined && x !== null);
-                </code>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <div>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                const words = &#91;'spray', 'limit', 'elite', 'exuberant',
-                'destruction', 'present'&#93;;&#10;<br />
-                const result = words.filter(word =&gt; word.length &gt; 6);<br />
-
-                // result should be Array&#91;&quot;exuberant&quot;,
-                &quot;destruction&quot;,&quot;present&quot;&#93;
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          <ul>
-            <li>
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
-                target="_blank"
-              >
-                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <h4>find() and findIndex()</h4>
-      <section>
-        <ul>
-          <li>
-            Returns the first item where the predicate returns true (satisfies
-            the provided testing function)
-            <ul>
-              <li>It will only iterate until the first match is found</li>
-            </ul>
-          </li>
-          <li>
-            The function you pass should be a predicate (return true or false)
-          </li>
-          <li>
-            Find() returns the value of the first matched element
-            <ul>
-              <li>Returns undefined if no match is found</li>
-            </ul>
-          </li>
-          <li>
-            FindIndex() returns the index of the first matched element
-            <ul>
-              <li>Returns -1 if no match is found</li>
-            </ul>
-          </li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              const array1 = &#91;5, 12, 8, 130, 44&#93;;<br />
-              const found = array1.find(element =&gt; element &gt; 10);<br />
-              // found should contain 12
-            </code>
-          </div>
-        </div>
-        <div>
-          <ul>
-            <li>
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find"
-                target="_blank"
-              >
-                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <h4 id="foreach">foreach()</h4>
+      <h3 id="foreach">foreach()</h3>
       <section>
         <ul>
           <li>
@@ -467,7 +459,7 @@
         </div>
       </section>
 
-      <h4>map()</h4>
+      <h3>map()</h3>
       <section>
         <ul>
           <li>
@@ -517,7 +509,498 @@
         </div>
       </section>
 
-      <h4>reduce()</h4>
+      <h3>Working with Subarrays</h3>
+
+      <h3>slice()</h3>
+      <section>
+        <ul>
+          <li>Returns a slice (subarray) of the specified array</li>
+          <li>
+            Parameters
+            <ul>
+              <li>1st = index of the first element to include in the slice</li>
+              <li>
+                2nd
+                <ul>
+                  <li>Index of element that is the end of the slice</li>
+                  <li>It is not included in the slice</li>
+                  <li>
+                    If this is omitted, all remaining elements are included
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Negative numbers can be used to specify an array element relative to
+            the length of the array
+            <ul>
+              <li>-1 specifies the last element in the array</li>
+              <li>-2 specifies the second to last element of the array</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Returns [1,2,3] <br />
+                [1,2,3,4,5].slice(0,3); <br />
+                // Returns [4,5] <br />
+                [1,2,3,4,5].slice(3); <br />
+                // Returns [2,3,4] <br />
+                [1,2,3,4,5].slice(1,-1); <br />
+                // Returns [3] <br />
+                [1,2,3,4,5].slice(-3,-2); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>splice()</h3>
+      <section>
+        <ul>
+          <li>
+            General purpose method to insert and remove elements form an array
+            <ul>
+              <li>It can also perform both at the same time</li>
+            </ul>
+          </li>
+          <li>
+            Elements after insertion / deletion point have their indexes
+            adjusted as needed
+          </li>
+          <li>
+            Arguments
+            <ul>
+              <li>1st = index where insertion or deletion should begin</li>
+              <li>
+                2nd = the number of elements that should be removed
+                <ul>
+                  <li>This is a length, not index position</li>
+                  <li>
+                    If omitted, all elements from the start position are removed
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Any argument after the 2nd
+                <ul>
+                  <li>
+                    Elements to be inserted into the array starting at the
+                    position specified by the first argument
+                  </li>
+                  <li>
+                    If an array is passed, it is inserted as an array, not
+                    elements of the array
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Returns an array of deleted elements or an empty array</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                let a = [1,2,3,4,5]; <br />
+                // => []; a is now [1,2,"a","b",3,4,5] <br />
+                a.splice(2,0,"a","b") <br />
+                // => ["a","b"]; a is now [1,2,[1,2],3,3,4,5] <br />
+                a.splice(2,2,[1,2],3) <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>fill()</h3>
+      <section>
+        <ul>
+          <li>Sets the elements of an array to a specified value</li>
+          <li>
+            This mutates the array it is called on, but also returns the
+            modified array
+          </li>
+          <li>
+            Arguments
+            <ul>
+              <li>1st = the value to set elements to</li>
+              <li>2nd = optional argument to specify a starting index</li>
+              <li>
+                3rd = optional argument to specify the ending index (not
+                included)
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // Start with no elements and length 5 <br />
+                let a = new Array(5); // => [0,0,0,0,0]; <br />
+                // fill the array with zeros <br />
+                a.fill(0); // => [0,9,9,9,9]; <br />
+                // fill with 9 starting at index 1 <br />
+                a.fill(9, 1); // => [0,9,8,8,9]; <br />
+                //fill with 8 at indexes 2, 3 <br />
+                a.fill(8, 2, -1); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>copyWithin()</h3>
+      <section>
+        <ul>
+          <li>Copies a slice of an array to a new position within the array</li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Search Methods</h2>
+
+ 
+
+
+      <h3>every()</h3>
+      <section>
+        <ul>
+          <li>
+            Accepts a function as first argument
+            <ul>
+              <li>Invokes the function once for each element of the array</li>
+              <li>
+                The function is not evoked on nonexistent elements in sparse
+                arrays
+              </li>
+              <li>Arrow functions work well here</li>
+            </ul>
+          </li>
+          <li>
+            Returns true if and only if the predicate function returns true for
+            all elements in the array
+          </li>
+          <li>
+            Returns false the first time the predicate function returns false
+            and short circuits remaining iterations
+          </li>
+          <li>
+            Only iterates through all elements if the predicate always returns
+            true
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let a = [1,2,3,4,5];<br />
+              // Evaluates to true: all values are &lt; 10.<br />
+              a.every(x => x &lt; 10) <br />
+              // Evaluates to false: not all values are even.<br />
+              a.every(x => x % 2 === 0) <br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+
+      <h3 id="filter">filter()</h3>
+      <section>
+        <ul>          
+          <li>
+            Returns a new array containing a subset of the elements from the
+            original array
+            <ul>
+              <li>
+                Filtered down to just the elements that pass the test
+                implemented by the provided function
+              </li>
+              <li>Creates a shallow copy of a portion of a given array</li>
+            </ul>
+          </li>
+          <li>
+            Accepts a function as first argument
+            <ul>
+              <li>Invokes the function once for each element of the array</li>
+              <li>
+                The function is not evoked on nonexistent elements in sparse
+                arrays
+              </li>
+              <li>Arrow functions work well here</li>
+            </ul>
+          </li>
+          <li>
+            The function you pass should be a predicate (return either true or
+            false)
+            <ul>
+              <li>
+                If the return value is true, the element is included in the
+                return array
+              </li>
+            </ul>
+          </li>
+          <li>
+            Will not include gaps from a sparse array
+            <ul>
+              <li>
+                This gives a convenient way to remove gaps from a spare array
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>let dense = sparse.filter(() => true); </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Useful to remove undefined and null Elements
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  let a = a.filter(x => x !== undefined && x !== null);
+                </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+            </a>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const words = &#91;'spray', 'limit', 'elite', 'exuberant',
+                'destruction', 'present'&#93;;&#10;<br />
+                const result = words.filter(word =&gt; word.length &gt; 6);<br />
+
+                // result should be Array&#91;&quot;exuberant&quot;,
+                &quot;destruction&quot;,&quot;present&quot;&#93;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>find() and findIndex()</h3>
+      <section>
+        <ul>
+          <li>
+            Returns the first item where the predicate returns true (satisfies
+            the provided testing function)
+            <ul>
+              <li>It will only iterate until the first match is found</li>
+            </ul>
+          </li>
+          <li>
+            Accepts a function as first argument
+            <ul>
+              <li>
+                The function you pass should be a predicate (return true or false)
+              </li>
+              <li>Invokes the function once for each element of the array</li>
+              <li>
+                The function is not evoked on nonexistent elements in sparse
+                arrays
+              </li>
+              <li>Arrow functions work well here</li>
+            </ul>
+          </li>
+          <li>
+            Find() returns the value of the first matched element
+            <ul>
+              <li>Returns undefined if no match is found</li>
+            </ul>
+          </li>
+          <li>
+            FindIndex() returns the index of the first matched element
+            <ul>
+              <li>Returns -1 if no match is found</li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+            </a>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              const array1 = &#91;5, 12, 8, 130, 44&#93;;<br />
+              const found = array1.find(element =&gt; element &gt; 10);<br />
+              // found should contain 12
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h3>indexof() and lastindexof()</h3>
+      <section>
+        <ul>
+          <li>
+            Searches an array for the first element that matches the specified
+            value
+            <ul>
+              <li>If found, it returns an index number</li>
+              <li>If not found, it returns a -1</li>
+            </ul>
+          </li>
+          <li>Indexof searches from beginning to end</li>
+          <li>LastIndexof searches from end to beginning</li>
+          <li>
+            This uses strict equality operator to find matches
+            <ul>
+              <li>Primitives are compared by value</li>
+              <li>Objects are compared by reference</li>
+              <li>
+                Does not consider NaN equals to itself, so it cannot find it
+              </li>
+              <li>
+                Use the <code>first()</code> method if you need to look at the
+                content of an object
+              </li>
+            </ul>
+          </li>
+          <li>
+            Takes an optional second parameter that specifies the array index to
+            start looking in
+          </li>
+        </ul>
+      </section>
+
+      <h3>includes()</h3>
+      <section>
+        <ul>
+          <li>
+            Determines whether an array includes a certain value among its
+            entries, returning true or false as appropriate.
+          </li>
+          <li>Effectively a set membership test for arrays</li>
+          <li>
+            Unlike indexOf, it will detect NaN
+            <ul>
+              <li>It considers NaN to be equal to itself.</li>
+            </ul>
+          </li>
+          <li>
+            <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes"
+            target="_blank"
+          >
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+          </a>
+                  </li>
+        </ul>
+      </section>
+
+      <h3>some()</h3>
+      <section>
+        <ul>
+          <li>
+            Returns true if and only if the predicate function returns true for
+            at least one element in the array
+            <ul>
+              <li>
+                Short-circuits remaining iterations if the predicate returns
+                true
+              </li>
+            </ul>
+          </li>
+          <li>
+            Only iterates through all elements if the predicate always returns
+            false
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let a = [1,2,3,4,5]; // Evaluates to true; a has some even
+              numbers<br />
+              a.some(x => x%2===0)<br />
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2>Sort Methods</h2>
+
+      <h3>reverse()</h3>
+      <section>
+        <ul>
+          <li>
+            Reverses the order of elements in an array and returns the reversed
+            array
+          </li>
+          <li>This is done in place</li>
+        </ul>
+        <div>
+          To sort alphabetically, but case insensitive...
+          <div class="card">
+            <div class="card-body">
+              <code> [1,2,3].reverse(); <br /> </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>sort()</h3>
+      <section>
+        <a href="sorting.html">See Sorting</a>
+      </section>
+
+      <h2 id="transform">Transformation Methods</h2>
+
+      <h3>Object.groupby</h3>
+      <section>
+        <ul>
+          <li>
+            <a href="../objects/methods.html">See Object methods page</a>
+          </li>
+        </ul>
+      </section>
+
+
+      <h3>Array.join()</h3>
+      <section>
+        <ul>
+          <li>
+            Converts all elements of an array to strings, then concatenates them
+          </li>
+          <li>Static method on the Array class</li>
+          <li>
+            Defaults to comma as a separator
+            <ul>
+              <li>Pass a parameter to specify a different separator</li>
+            </ul>
+          </li>
+          <li>
+            Calling the <code>toString()</code> method on an array has the same
+            result as this (with default delimiter)
+          </li>
+        </ul>
+      </section>
+
+      
+      <h3>reduce()</h3>
       <section>
         <ul>
           <li>
@@ -526,7 +1009,7 @@
               <li>This is a common operation in functional programming</li>
             </ul>
           </li>
-          <li>Perfomred in order from lowest index number to highest</li>
+          <li>Performed in order from lowest index number to highest</li>
           <li>
             Parameters of reduce()
             <ul>
@@ -645,7 +1128,7 @@
         </div>
       </section>
 
-      <h4>reduceRight()</h4>
+      <h3>reduceRight()</h3>
       <section>
         <ul>
           <li>
@@ -654,97 +1137,6 @@
           </li>
         </ul>
       </section>
-
-      <h3>Flattening Arrays</h3>
-
-      <h4>flat()</h4>
-      <section>
-        <ul>
-          <li>
-            Creates and returns a new array containing the same elements as the
-            source
-            <ul>
-              <li>
-                This is a shallow copy, so it contains the same elements as the
-                ones from the original array
-              </li>
-            </ul>
-          </li>
-          <li>
-            Nested arrays are "flattened" into the original array
-            <ul>
-              <li>This will remove gaps from a sparse array</li>
-              <li>An optional parameter can be passed to control the depth</li>
-              <li>
-                Pass <code>Infinity</code> to perform flattening on all tiers
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div>
-          Examples of flattening nested arrays
-          <div class="card">
-            <div class="card-body">
-              <code>
-                // Evaluates to [1, 2, 3, 4] <br />
-                [1, 2, [3, 4]].flat(); <br />
-                <br />
-                // Evaluates to [1, 2, 3, 4, [5, 6]] <br />
-                [1, 2, [3, 4, [5, 6]]].flat(); <br />
-                <br />
-                // Evaluates to [1, 2, 3, 4, 5, 6] <br />
-                [1, 2, [3, 4, [5, 6]]].flat(2); <br />
-                <br />
-                // Evaluates to [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] <br />
-                [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]].flat(Infinity); <br />
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Examples of removing gaps from sparse arrays
-          <div class="card">
-            <div class="card-body">
-              <code>
-                // Evaluates to [1, 2, 4, 5] <br />
-                [1, 2, , 4, 5].flat();<br />
-                <br />
-                // Evaluates to [ 1, 3, "a", "c" ] [1, , 3, ["a",
-                ,"c"]].flat()); <br />
-                <br />
-                // Evaluates to [ 1, 3, "a", "d", "e"] <br />
-                [1, , 3, ["a", , ["d", , "e"]]].flat(); <br />
-                [1, , 3, ["a", , ["d", , "e"]]].flat(2);<br />
-              </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          <a
-            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"
-            target="_blank"
-          >
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
-          </a>
-        </div>
-      </section>
-
-      <h4 id="flatmap">flatMap()</h4>
-      <section>
-        <ul>
-          <li>
-            Works just like <code>map</code>, but flattens the returned array as
-            if it had been passed through <code>flat</code>
-          </li>
-          <li>
-            Same as if you called <code>[].map(func).flat()</code>
-            <ul>
-              <li>Performs this more efficiently</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
       <h3>concat()</h3>
       <section>
         <ul>
@@ -789,352 +1181,6 @@
         </div>
       </section>
 
-      <h3>Working with Subarrays</h3>
-
-      <h4>slice()</h4>
-      <section>
-        <ul>
-          <li>Returns a slice (subarray) of the specified array</li>
-          <li>
-            Parameters
-            <ul>
-              <li>1st = index of the first element to include in the slice</li>
-              <li>
-                2nd
-                <ul>
-                  <li>Index of element that is the end of the slice</li>
-                  <li>It is not included in the slice</li>
-                  <li>
-                    If this is omitted, all remaining elements are included
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            Negative numbers can be used to specify an array element relative to
-            the length of the array
-            <ul>
-              <li>-1 specifies the last element in the array</li>
-              <li>-2 specifies the second to last element of the array</li>
-            </ul>
-          </li>
-        </ul>
-        <div>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                // Returns [1,2,3] <br />
-                [1,2,3,4,5].slice(0,3); <br />
-                // Returns [4,5] <br />
-                [1,2,3,4,5].slice(3); <br />
-                // Returns [2,3,4] <br />
-                [1,2,3,4,5].slice(1,-1); <br />
-                // Returns [3] <br />
-                [1,2,3,4,5].slice(-3,-2); <br />
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h4>splice()</h4>
-      <section>
-        <ul>
-          <li>
-            General purpose method to insert and remove elements form an array
-            <ul>
-              <li>It can also perform both at the same time</li>
-            </ul>
-          </li>
-          <li>
-            Elements after insertion / deletion point have their indexes
-            adjusted as needed
-          </li>
-          <li>
-            Arguments
-            <ul>
-              <li>1st = index where insertion or deletion should begin</li>
-              <li>
-                2nd = the number of elements that should be removed
-                <ul>
-                  <li>This is a length, not index position</li>
-                  <li>
-                    If omitted, all elements from the start position are removed
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Any argument after the 2nd
-                <ul>
-                  <li>
-                    Elements to be inserted into the array starting at the
-                    position specified by the first argument
-                  </li>
-                  <li>
-                    If an array is passed, it is inserted as an array, not
-                    elements of the array
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>Returns an array of deleted elements or an empty array</li>
-        </ul>
-        <div>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                let a = [1,2,3,4,5]; <br />
-                // => []; a is now [1,2,"a","b",3,4,5] <br />
-                a.splice(2,0,"a","b") <br />
-                // => ["a","b"]; a is now [1,2,[1,2],3,3,4,5] <br />
-                a.splice(2,2,[1,2],3) <br />
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h4>fill()</h4>
-      <section>
-        <ul>
-          <li>Sets the elements of an array to a specified value</li>
-          <li>
-            This mutates the array it is called on, but also returns the
-            modified array
-          </li>
-          <li>
-            Arguments
-            <ul>
-              <li>1st = the value to set elements to</li>
-              <li>2nd = optional argument to specify a starting index</li>
-              <li>
-                3rd = optional argument to specify the ending index (not
-                included)
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div>
-          <div class="card">
-            <div class="card-body">
-              <code>
-                // Start with no elements and length 5 <br />
-                let a = new Array(5); // => [0,0,0,0,0]; <br />
-                // fill the array with zeros <br />
-                a.fill(0); // => [0,9,9,9,9]; <br />
-                // fill with 9 starting at index 1 <br />
-                a.fill(9, 1); // => [0,9,8,8,9]; <br />
-                //fill with 8 at indexes 2, 3 <br />
-                a.fill(8, 2, -1); <br />
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h4>copyWithin()</h4>
-      <section>
-        <ul>
-          <li>Copies a slice of an array to a new position within the array</li>
-        </ul>
-        <div>
-          <li>
-            <a
-              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin"
-            >
-              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin
-            </a>
-          </li>
-        </div>
-      </section>
-
-      <h3>Searching and Sorting Methods</h3>
-
-      <h4>indexof() and lastindexof()</h4>
-      <section>
-        <ul>
-          <li>
-            Searches an array for the first element that matches the specified
-            value
-            <ul>
-              <li>If found, it returns an index number</li>
-              <li>If not found, it returns a -1</li>
-            </ul>
-          </li>
-          <li>Indexof searches from beginning to end</li>
-          <li>LastIndexof searches from end to beginning</li>
-          <li>
-            This uses strict equality operator to find matches
-            <ul>
-              <li>Primitives are compared by value</li>
-              <li>Objects are compared by reference</li>
-              <li>
-                Does not consider NaN equals to itself, so it cannot find it
-              </li>
-              <li>
-                Use the <code>first()</code> method if you need to look at the
-                content of an object
-              </li>
-            </ul>
-          </li>
-          <li>
-            Takes an optional second parameter that specifies the array index to
-            start looking in
-          </li>
-        </ul>
-      </section>
-
-      <h4>includes()</h4>
-      <section>
-        <ul>
-          <li>
-            Determines whether an array includes a certain value among its
-            entries, returning true or false as appropriate.
-          </li>
-          <li>Effectively a set membership test for arrays</li>
-          <li>
-            Unlike indexOf, it will detect NaN
-            <ul>
-              <li>It considers NaN to be equal to itself.</li>
-            </ul>
-          </li>
-          <li>
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
-          </li>
-        </ul>
-        <div>
-          <ul>
-            <li>
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes"
-                target="_blank"
-              >
-                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <h4>some()</h4>
-      <section>
-        <ul>
-          <li>
-            Returns true if and only if the predicate function returns true for
-            at least one element in the array
-            <ul>
-              <li>
-                Short-circuits remaining iterations if the predicate returns
-                true
-              </li>
-            </ul>
-          </li>
-          <li>
-            Only iterates through all elements if the predicate always returns
-            false
-          </li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              let a = [1,2,3,4,5]; // Evaluates to true; a has some even
-              numbers<br />
-              a.some(x => x%2===0)<br />
-            </code>
-          </div>
-        </div>
-      </section>
-
-      <h4>sort()</h4>
-      <section>
-        <a href="sorting.html">See Sorting</a>
-      </section>
-
-      <h4>reverse()</h4>
-      <section>
-        <ul>
-          <li>
-            Reverses the order of elements in an array and returns the reversed
-            array
-          </li>
-          <li>This is done in place</li>
-        </ul>
-        <div>
-          To sort alphabetically, but case insensitive...
-          <div class="card">
-            <div class="card-body">
-              <code> [1,2,3].reverse(); <br /> </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Adding / Removing Elements</h3>
-      <section>
-        <ul>
-          <li>These modify the array in place</li>
-        </ul>
-      </section>
-
-      <h4>pop()</h4>
-      <section>
-        <ul>
-          <li>Removes the last element of the array and returns it</li>
-          <li>This reduces the length of an array by 1</li>
-          <li>
-            Use if you need to treat the array as a first in, last out stack
-          </li>
-        </ul>
-      </section>
-
-      <h4>push()</h4>
-      <section>
-        <ul>
-          <li>Adds an element to the end of the array</li>
-          <li>Adds the new element to array[array.length]</li>
-          <li>
-            Use if you need to treat the array as a first in, last out stack
-          </li>
-        </ul>
-      </section>
-
-      <h4>splice()</h4>
-      <section>
-        <ul>
-          <li>
-            General method for inserting, deleting, or replacing array elements
-          </li>
-        </ul>
-      </section>
-
-      <h4>shift()</h4>
-      <section>
-        <ul>
-          <li>Removes and returns the first element of the array</li>
-          <li>This reduces the length of an array by 1</li>
-          <li>
-            Shifts all elements down to an index one lower than the current
-            index
-          </li>
-          <li>
-            Combine with <code>push()</code> if you need to treat the array as a
-            queue
-          </li>
-        </ul>
-      </section>
-
-      <h4>unshift()</h4>
-      <section>
-        <ul>
-          <li>Adds an element to the beginning of the array</li>
-          <li>
-            Can add multiple items as parameters, but it does not result in the
-            same ordering as two calls to unshift
-          </li>
-        </ul>
-      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

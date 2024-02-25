@@ -33,8 +33,344 @@
 
       <h1>Object Methods</h1>
 
-      <h2>Object Methods - Call on object instance</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="methods.html#transformation">Transformation Methods</a>
+          </li>
+          <li>
+            <a href="methods.html#creation">Creation Methods</a>
+          </li>
+          <li>
+            <a href="methods.html#creation">Creation Methods</a>
+          </li>
+        </ul>
+      </section>
 
+
+      <h3 id="assign">Object.assign()</h3>
+      <section>
+        <ul>
+          <li>
+            Expects two or more objects as it argument
+            <ul>
+              <li>
+                For each source object, it copies the enumerable own properties
+                of that object into the target object
+                <ul>
+                  <li>
+                    Properties are copied when matches are found in the source
+                    object
+                  </li>
+                  <li>
+                    This is done so properties on the last source object are the
+                    last items to be copied
+                  </li>
+                  <li>This includes Symbols</li>
+                </ul>
+              </li>
+              <li>
+                First argument is the target object
+                <ul>
+                  <li>This is modified</li>
+                </ul>
+              </li>
+              <li>
+                Second and subsequent objects
+                <ul>
+                  <li>These are source objects</li>
+                  <li>These are not modified</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Overwrites everything in o with defaults
+          <div class="card">
+            <div class="card-body">
+              <code> Object.assign(o, defaults); </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Creates a new object, copy the defaults object's properties into it,
+          and then override those defaults with the properties in o
+          <div class="card">
+            <div class="card-body">
+              <code> o = Object.assign({}, defaults, o); </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <h3>Object.entries()</h3>
+      <section>
+        <ul>
+          <li>
+            Returns an array of a given object's own enumerable string keyed
+            property [key,value] pairs
+          </li>
+          <li>
+            Similar to iterating over a for..in loop, but that look enumerates
+            properties in the prototype chain too
+          </li>
+          <li>The results can be passed to the constructor of a Map object</li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"
+              target="_blank"
+            >
+            </a>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const object1 = {
+                a: 'somestring',
+                b: 42
+              };
+              
+              for (const [key, value] of Object.entries(object1)) {
+                console.log(`${key}: ${value}`);
+              }
+              
+              // expected output:
+              // "a: somestring"
+              // "b: 42"
+            </pre
+              >
+            </code>
+          </div>
+        </div>
+        <div>
+          Destructuring allows you to iterate through objects
+          <div class="card">
+            <div class="card-body">
+              <code>
+                <pre>
+                const obj = { foo: 'bar', baz: 42 };
+                Object.entries(obj).forEach(([key, value]) => console.log(`${key}: ${value}`)); 
+                
+                // expected output: "foo: bar", "baz: 42"
+              </pre
+                >
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Object.freeze()</h3>
+      <section>
+        <a href="freeze.html">Freeze</a>
+      </section>
+
+      <h3>Object.keys()</h3>
+      <section>
+        <ul>
+          <li>
+            Returns an array of a given objects own enumerable property names
+            <ul>
+              <li>Returned as an array of strings</li>
+            </ul>
+          </li>
+          <li>Iterates the same order that a normal loop would</li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const object1 = {
+                a: 'somestring',
+                b: 42,
+                c: false
+              };                
+              console.log(Object.keys(object1));
+              // expected output: Array ["a", "b", "c"]
+            </pre
+              >
+            </code>
+          </div>
+        </div>
+      </section>
+
+
+
+      <h3>valueOf()</h3>
+      <section>
+        <ul>
+          <li>
+            Called when the object needs to convert the object to something
+            other than a string, typically a number
+          </li>
+          <li>Can define a custom version on your object</li>
+        </ul>
+      </section>
+
+      <h3>Object.values()</h3>
+      <section>
+        <ul>
+          <li>Returns an array containing the values of the string keyed properties found on the object</li>
+        </ul>
+        <div>
+          The following will output ['bar', 42]
+          <div class="card">
+            <div class="card-body">
+              <code>
+                  const obj = { foo: "bar", baz: 42 }; <br />
+                  console.log(Object.values(obj)); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h2 id="creation">Creation Methods</h2>
+
+      <h3>Object.create()</h3>
+      <section>
+        <ul>
+          <li>
+            Creates a new object using an existing object as the prototype of
+            the newly created object
+          </li>
+          <li>
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              <pre>
+              const person = {
+                isHuman: false,
+                printIntroduction: function() {
+                  console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+                }
+              };
+              
+              const me = Object.create(person);
+              
+              me.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
+              me.isHuman = true; // inherited properties can be overwritten
+              
+              me.printIntroduction();
+              // expected output: "My name is Matthew. Am I human? true"
+            </pre
+              >
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="transformation">Transformation Methods</h2>
+
+      <h3>Object.groupBy()</h3>
+      <section>
+        <ul>
+          <li>Groups elements of a supplied iterable according to the string values returned by a provided callback function</li>
+          <li>Equivalent to the LINQ GroupBy method</li>
+          <li>The returned object has separate properties for each group, which contain arrays with the elements of the group</li>
+          <li>Use this when your group names can be strings; otherwise use Map.groupBy()</li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                <code>Object.groupBy(items,callbackFn)</code>
+              </li>
+              <li>
+                <code>items</code> is an iterable of elements to be grouped (such as an Array)
+              </li>
+              <li>
+                <code>callbackFn</code> is a function to execute each element in the iterable
+                <ul>
+                  <li>
+                    Should return a value that can be coerced into a property string indicating the group of the current element
+                  </li>
+                  <li>
+                    These values are used as keys for the returned object 
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            This is not standard across all browsers yet, so use:
+            <ul>
+              <li>TypeScript</li>
+              <li>lodash</li>
+              <li>Custom version using reduce or groupBy</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          The following groups on the values of the type property.  It results in the following: <br>
+          <br>
+          { <br>
+            vegetables: [ <br>
+              { name: 'asparagus', type: 'vegetables', quantity: 5 }, <br>
+            ], <br>
+            fruit: [ <br>
+              { name: "bananas", type: "fruit", quantity: 0 }, <br>
+              { name: "cherries", type: "fruit", quantity: 5 } <br>
+            ], <br>
+            meat: [ <br>
+              { name: "goat", type: "meat", quantity: 23 }, <br>
+              { name: "fish", type: "meat", quantity: 22 } <br>
+          } <br>
+          <br>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const inventory = [<br />
+                { name: "asparagus", type: "vegetables", quantity: 5 },<br />
+                { name: "bananas", type: "fruit", quantity: 0 },<br />
+                { name: "goat", type: "meat", quantity: 23 },<br />
+                { name: "cherries", type: "fruit", quantity: 5 },<br />
+                { name: "fish", type: "meat", quantity: 22 },<br />
+              ];<br />
+              const result = Object.groupBy(inventory, ({ type }) => type);
+              </code>
+            </div>
+          </div>
+          <div>
+            The following groups on the quantity values.  It results in the following: <br>
+            <br>
+            { <br>
+              restock: [
+                { name: "asparagus", type: "vegetables", quantity: 5 }, <br>
+                { name: "bananas", type: "fruit", quantity: 0 }, <br>
+                { name: "cherries", type: "fruit", quantity: 5 } <br>
+              ], <br>
+              ok: [ <br>
+                { name: "goat", type: "meat", quantity: 23 }, <br>
+                { name: "fish", type: "meat", quantity: 22 } <br>
+              ] <br>
+            } <br>
+            <br>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  function myCallback({ quantity }) { <br>
+                    return quantity > 5 ? "ok" : "restock"; <br>
+                  } <br>
+                  <br>
+                  const result2 = Object.groupBy(inventory, myCallback); <br>
+                </code>
+              </div>
+            </div>
+        </div>
+      </section>
+      
       <h3>toJSON()</h3>
       <section>
         <ul>
@@ -95,235 +431,6 @@
         </ul>
       </section>
 
-      <h3>valueOf()</h3>
-      <section>
-        <ul>
-          <li>
-            Called when the object needs to convert the object to something
-            other than a string, typically a number
-          </li>
-          <li>Can define a custom version on your object</li>
-        </ul>
-      </section>
-
-      <h2>Object Methods - Call on Object</h2>
-
-      <h3 id="assign">Object.assign()</h3>
-      <section>
-        <ul>
-          <li>
-            Expects two or more objects as it argument
-            <ul>
-              <li>
-                For each source object, it copies the enumerable own properties
-                of that object into the target object
-                <ul>
-                  <li>
-                    Properties are copied when matches are found in the source
-                    object
-                  </li>
-                  <li>
-                    This is done so properties on the last source object are the
-                    last items to be copied
-                  </li>
-                  <li>This includes Symbols</li>
-                </ul>
-              </li>
-              <li>
-                First argument is the target object
-                <ul>
-                  <li>This is modified</li>
-                </ul>
-              </li>
-              <li>
-                Second and subsequent objects
-                <ul>
-                  <li>These are source objects</li>
-                  <li>These are not modified</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div>
-          Overwrites everything in o with defaults
-          <div class="card">
-            <div class="card-body">
-              <code> Object.assign(o, defaults); </code>
-            </div>
-          </div>
-        </div>
-        <div>
-          Creates a new object, copy the defaults object's properties into it,
-          and then override those defaults with the properties in o
-          <div class="card">
-            <div class="card-body">
-              <code> o = Object.assign({}, defaults, o); </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Object.create()</h3>
-      <section>
-        <ul>
-          <li>
-            Creates a new object using an existing object as the prototype of
-            the newly created object
-          </li>
-          <li>
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
-          </li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              <pre>
-              const person = {
-                isHuman: false,
-                printIntroduction: function() {
-                  console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
-                }
-              };
-              
-              const me = Object.create(person);
-              
-              me.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
-              me.isHuman = true; // inherited properties can be overwritten
-              
-              me.printIntroduction();
-              // expected output: "My name is Matthew. Am I human? true"
-            </pre
-              >
-            </code>
-          </div>
-        </div>
-      </section>
-
-      <h3>Object.entries()</h3>
-      <section>
-        <ul>
-          <li>
-            Returns an array of a given object's own enumerable string keyed
-            property [key,value] pairs
-          </li>
-          <li>
-            Similar to iterating over a for..in loop, but that look enumerates
-            properties in the prototype chain too
-          </li>
-          <li>The results can be passed to the constructor of a Map object</li>
-          <li>
-            <a
-              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"
-              target="_blank"
-            >
-            </a>
-          </li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              <pre>
-              const object1 = {
-                a: 'somestring',
-                b: 42
-              };
-              
-              for (const [key, value] of Object.entries(object1)) {
-                console.log(`${key}: ${value}`);
-              }
-              
-              // expected output:
-              // "a: somestring"
-              // "b: 42"
-            </pre
-              >
-            </code>
-          </div>
-        </div>
-        <div>
-          Destructuring allows you to iterate through objects
-          <div class="card">
-            <div class="card-body">
-              <code>
-                <pre>
-                const obj = { foo: 'bar', baz: 42 };
-                Object.entries(obj).forEach(([key, value]) => console.log(`${key}: ${value}`)); 
-                
-                // exprected output: "foo: bar", "baz: 42"
-              </pre
-                >
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h3>Object.freeze()</h3>
-      <section>
-        <ul>
-          <li>Prevents extensions and makes existing properties non-writable and non-configurable
-            <ul>
-              <li>New properties cannot be added</li>
-              <li>Existing properties cannot be removed</li>
-              <li>Their enumerability, configurability, writability, or value cannot be changed</li>
-              <li>The object's prototype cannot be re-assigned</li>
-            </ul>
-          </li>
-          <li>Freezing an object is the highest integrity level that JavaScript provides.</li>
-          <li>Calling freeze() on it again returns the same object</li>
-        </ul>
-        </section>
-
-      <h3>Object.keys()</h3>
-      <section>
-        <ul>
-          <li>
-            Returns an array of a given objects own enumerable property names
-            <ul>
-              <li>Returned as an array of strings</li>
-            </ul>
-          </li>
-          <li>Iterates the same order that a normal loop would</li>
-          <li>
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
-          </li>
-        </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              <pre>
-              const object1 = {
-                a: 'somestring',
-                b: 42,
-                c: false
-              };                
-              console.log(Object.keys(object1));
-              // expected output: Array ["a", "b", "c"]
-            </pre
-              >
-            </code>
-          </div>
-        </div>
-      </section>
-
-      <h3>Object.values()</h3>
-      <section>
-        <ul>
-          <li>Returns an array containing the values of the string keyed properties found on the object</li>
-        </ul>
-        <div>
-          The following will output ['bar', 42]
-          <div class="card">
-            <div class="card-body">
-              <code>
-                  const obj = { foo: "bar", baz: 42 }; <br />
-                  console.log(Object.values(obj)); <br/>
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>
