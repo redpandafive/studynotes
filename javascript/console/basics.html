@@ -28,67 +28,159 @@
             <a href="../index.html">JavaScript</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Console Object
+            Console Object and Debugging Feature
           </li>
         </ol>
       </nav>
 
-      <h1>Console Object</h1>
+      <h1>Console Object and Debugging Features</h1>
 
+      <h2>Console Object</h2>
       <section>
         <ul>
           <li>Provides access to the browser's debugging console</li>
         </ul>
       </section>
 
-      <h2>Methods</h2>
+      <h3>Methods</h3>
+
+      <h4>console.assert()</h4>
       <section>
         <ul>
           <li>
-            <code>console.clear()</code>
-            <ul>
-              <li>clears the console</li>
-            </ul>
+            Use when you want to output a console error when certain conditions
+            are true
+          </li>
+          <li>First parameter is an assertion</li>
+          <li>
+            Second parameter is the message to output when the assertion is true
+          </li>
+        </ul>
+        <div>
+          This message is only printed when x does not equal to 1
+          <div class="card">
+            <div class="card-body">
+              <code> console.assert(x === 1, "X is not 1"); </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h4>console.clear()</h4>
+      <section>
+        <ul>
+          <li>clears the console</li>
+        </ul>
+      </section>
+
+      <h4>console.log()</h4>
+      <section>
+        <ul>
+          <li>Outputs a message to the web console</li>
+          <li>
+            Multiple objects to output can be specified using comma separators
+          </li>
+        </ul>
+      </section>
+
+      <h4>console.error()</h4>
+      <section>
+        <ul>
+          <li>
+            Outputs a message to the web console, but it formats it as an error
+          </li>
+        </ul>
+      </section>
+
+      <h4>console.table()</h4>
+      <section>
+        <ul>
+          <li>
+            Displays a supplied array of objects as a table in the console
+            window
           </li>
           <li>
-            <code>console.log()</code>
-            <ul>
-              <li>Outputs a message to the web console</li>
-              <li>
-                Multiple objects to output can be specified using comma
-                separators
-              </li>
-            </ul>
+            You can resort by column on the table by clicking column headers
           </li>
           <li>
-            <code>console.time()</code>
-            <ul>
-              <li>
-                Starts a timer you can use to track how long an operation takes
-              </li>
-              <li>
-                Muliple independent timers acan be started - pass a string to
-                the function as a paramter to distinguish between them
-              </li>
-              <li>When you call console.timeEnd(), the broswer will output the time (in milliseconds) that elapsed since the timer was started</li>              
-            </ul>
+            This is a little easier format when you need to compare the values
+            of objects
+          </li>
+        </ul>
+      </section>
+
+      <h4>console.time()</h4>
+      <section>
+        <ul>
+          <li>
+            Starts a timer you can use to track how long an operation takes
           </li>
           <li>
-            <code>console.timeEnd()</code>
+            Multiple independent timers can be started - pass a string to the
+            function as a parameter to distinguish between them
+          </li>
+          <li>
+            console.timeEnd()
             <ul>
               <li>Stops a timer</li>
-              <li>Once stopped, the elapsed time is automatically displayed in the console</li>
+              <li>
+                When you call console.timeEnd(), the browser will output the
+                time (in milliseconds) that elapsed since the timer was started
+              </li>
               <li>Pass a string label to specify the timer to stop</li>
             </ul>
           </li>
         </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                console.time("MyTimer"); <br />
+                ..... code to time here .... <br />
+                console.timeEnd("MyTimer"); // this prints the elapsed time
+                automatically <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h4>console.warn()</h4>
+      <section>
+        <ul>
+          <li>
+            Outputs a message to the web console, but it formats it as an
+            warning in the console
+          </li>
+        </ul>
+      </section>
+
+      <h2>Debugger</h2>
+      <section>
+        <ul>
+          <li>You can add a breakpoint in code using the <code>debugger</code> keyword</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const x = 5; <br />
+                debugger; <br />
+                x = x + 5; <br />
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h2>See Also</h2>
       <section>
         <ul>
           <li>
-            <a href="https://developer.mozilla.org/en-US/docs/Web/API/console" target="_blank">
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/console"
+              target="_blank"
+            >
               https://developer.mozilla.org/en-US/docs/Web/API/console
             </a>
           </li>

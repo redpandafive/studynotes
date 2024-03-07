@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Model</li>
+        </ol>
+      </nav>
+
+      <h1>Model</h1>
+
+      <section>
+        <ul>
+          <li>
+            Allows Signal based two way data binding
+          </li>
+          <li>
+            Uses an underlying ModelSignal class
+          </li>         
+          <li>
+            Not a replacement for the NgModel directive, but they have overlapping concepts
+            <ul>
+              <li>ngModel is syntax sugar for three items:
+                <ul>
+                  <li>A ngModel directive on the element (or your own component if you are implementing your own data binding)</li>
+                  <li>An Input to the ngModel directive (or an Input defined on your component)</li>
+                  <li>An Output event handler to handle an event from the directive (or an Output defined on your component)</li>
+                </ul>
+              </li>
+              <li>
+                The model function would take the place of the Input and Output definition from the custom component
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          The following code ...
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body"><code> 
+                export class TwoWayBindingComponent { <br/>
+                &amp;Input() expand = false; <br/>
+                &amp;Output() expandChange = new EventEmitter&lt;boolean&gt;(); <br/>
+                ... <br/>
+                } <br/>                
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div>
+          Can be replaced with ...
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  ... <br />
+                  expand = model&lt;boolean&gt;();<br/>
+                  ... <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div>
+          You would use this in the TwoWayBindingComponent template using the following tentative syntax:
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  &lt;button (click)="expand.set(!expand())"&gt; <br/>
+                  {{ expand() ? 'Les Info' : 'More Info' }} <br/>
+                  &lt;/button&gt; <br/>                
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div>
+          Outside of the TwoWayBindingComponent template, you would bind using the following syntax to bind to the showMore component property:
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  &lt;app-banner [(expand)]="showMore"&gt; <br/>                 
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div>
+          Alternatively, you can bind to a signal 
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  export class AppComponent {} <br/>                 
+                  showMore = signal(false); <br/>
+                  .... <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <h2>Required</h2>
+      <section>
+        <ul>
+          <li>
+            You can make a model value required using the following syntax: <code>model.required&lt;boolean&gt;</code>
+          </li>
+          <li>
+            This functions like the <code>required</code> property that can be used with Input
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

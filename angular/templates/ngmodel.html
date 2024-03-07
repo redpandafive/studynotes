@@ -26,12 +26,12 @@
             <a href="../index.html">Angular</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            NgModel / Two-Way Bindings
+            NgModel / Model() / Two-Way Bindings
           </li>
         </ol>
       </nav>
 
-      <h1>NgModel / Two-Way Bindings</h1>
+      <h1>NgModel / Model() / Two-Way Bindings</h1>
 
       <section>
         <ul>
@@ -51,6 +51,62 @@
           </li>
           <li>
             Really just syntax sugar for a property binding and an event binding
+            <ul>
+              <li>You can get a similar result by adding the following:
+                <ul>
+                  <li>A plain <code>ngModel</code> directive on the desired HTML element</li>
+                  <li>A <code>ngModel</code> input</li>
+                  <li>a <code>ngModelChange</code> event handler that assigns the outputted value to the input</li>
+                </ul>
+              </li>
+              <li>
+                This results in two way data binding since:
+                <ul>
+                  <li>The input property will update ngModel directive with the value from inputValue</li>
+                  <li>The output event will update the inputValue property when a change is detected</li>
+                </ul>
+              </li>
+              <li>
+                This keeps the value of the component property and the value in the ngModel-tagged element in sync.  Any change in one will be mirrored in the other.
+              </li>
+              <li>
+                You can even mimic this without using the ngModel directive at all
+              </li>
+            </ul>
+            <div>
+              Assuming you have a property named inputValue on the component
+              <div class="card">
+                <div class="card-body"><code> 
+                  &lt;input ngModel [ngModel]="inputValue" (ngModelChange)="inputValue = $event" &gt;
+                </code>
+              </div>
+              </div>
+              <div>
+                This is a component class that implements two way data binding without ngModel
+                <div class="card">
+                  <div class="card-body"><code> 
+                    export class TwoWayBindingComponent { <br/>
+                    &amp;Input() expand = false; <br/>
+                    &amp;Output() expandChange = new EventEmitter&lt;boolean&gt;(); <br/>
+                    ... <br/>
+                    } <br/>
+                  </code>
+                </div>
+                </div>
+                <div>
+                  This is a component class that implements two way data binding without ngModel
+                  <div class="card">
+                    <div class="card-body"><code> 
+                      export class TwoWayBindingComponent { <br/>
+                      &amp;Input() expand = false; <br/>
+                      &amp;Output() expandChange = new EventEmitter&lt;boolean&gt;(); <br/>
+                      ... <br/>
+                      } <br/>
+                    </code>
+                  </div>
+                  </div>
+              </div>
+            </div>
           </li>
           <li>Useful for custom components</li>
         </ul>
@@ -60,7 +116,9 @@
           equals sign on the parent component
         </p>
         <div class="card">
-          <div class="card-body"><code> @Input() size: number; </code></div>
+          <div class="card-body"><code> 
+            &amp;Input() size: number; 
+          </code></div>
         </div>
 
         <p>
@@ -70,7 +128,7 @@
         <div class="card">
           <div class="card-body">
             <code>
-              @Output() sizeChagne = new EventEmitter&lt;number&gt;()
+              &amp;Output() sizeChange = new EventEmitter&lt;number&gt;()
             </code>
           </div>
         </div>
@@ -114,6 +172,11 @@
             </ul>
           </li>
         </ul>
+      </section>
+
+      <h2>Model</h2>
+      <section>
+        <a href="../signals/model.html">See here</a>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

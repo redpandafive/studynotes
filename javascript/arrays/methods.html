@@ -97,6 +97,16 @@
           <li>Modifies the array in place</li>
         </ul>
       </section>
+      
+      <h3>toSpliced()</h3>
+      <section>
+        <ul>
+          <li>
+            Performs same action as splice(), but returns a new copy of the array
+          </li>
+          <li>The original array is not modified</li>
+        </ul>
+      </section>
 
       <h3>shift()</h3>
       <section>
@@ -943,26 +953,9 @@
 
       <h2>Sort Methods</h2>
 
-      <h3>reverse()</h3>
-      <section>
-        <ul>
-          <li>
-            Reverses the order of elements in an array and returns the reversed
-            array
-          </li>
-          <li>This is done in place</li>
-        </ul>
-        <div>
-          To sort alphabetically, but case insensitive...
-          <div class="card">
-            <div class="card-body">
-              <code> [1,2,3].reverse(); <br /> </code>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <h3>sort()</h3>
+
+      <h3 id="sort">sort()</h3>
       <section>
         <a href="sorting.html">See Sorting</a>
       </section>
@@ -1081,7 +1074,7 @@
           <ul>
             <li>
               First call to the reducer function, it has arguments 0 (the
-              specified initial value) and 1 (the first element of the array;
+              specified initial value) and 1 (the first element of the array)
               returns 1
             </li>
             <li>
@@ -1180,6 +1173,30 @@
           </div>
         </div>
       </section>
+
+
+      <h3>with()</h3>
+      <section>
+        <ul>
+          <li>
+            Given an array named a, <code>a[2] = "a"</code> sets the third select of the array to a
+            <ul>
+              <li>It does this by mutating the original array</li>
+            </ul>
+          </li>
+          <li>
+            Using the with method the command would be <code>const b = a.with(2, "a")</code>
+            <ul>
+              <li>This copies the original array, modified the third element, and returns the copy</li>
+              <li>The original array is not modified</li>
+            </ul>
+          </li>
+          <li>
+            This is a new language feature, so check compatibility
+          </li>
+        </ul>
+      </section>
+
 
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

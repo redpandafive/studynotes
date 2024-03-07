@@ -32,15 +32,19 @@
       
       <section>
         <ul>
-          <li>A collection of values like arrays, but are not ordered and do not allow duplicates</li>
-          <li>Remembers the original insertion order of the keys</li>
-          <li>Values are unique in the collection, so they may only occur once
+          <li>A collection of values like arrays, but:
             <ul>
-              <li>Items are either a member or not</li>
-              <li>Not possible to find the number of times an item will occur in a set</li>
+              <li>Do not allow duplicates</li>
+              <li>Remembers the original insertion order of the keys</li>
             </ul>
           </li>
-          <li>Only contain entries that you put it it, nothing by default</li>
+          <li>Values are unique in the Set, so they may only occur once.  Therefore:
+            <ul>
+              <li>Items are either a member or not</li>
+              <li>It is not possible to find the number of times an item will occur in a set</li>
+            </ul>
+          </li>
+          <li>Sets only contain entries that you put it it,so nothing by default</li>
           <li>
             It is an iterable, so you can directly iterate on it
             <ul>
@@ -50,11 +54,7 @@
           </li>
         </ul>
 
-        <div>
-          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" target="_blank">
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
-          </a>
-        </div>
+
       </section>
 
 
@@ -87,11 +87,25 @@
 
       <h2>Iteration</h2>
       <section>
-        <ul>
-          <li>Use a for / of loop to iterate over each element in the set</li>
-        </ul>
-        <li>Items will be ordered in the way they were added</li>
         <div>
+          Set has a forEach method to iterate over a set
+          <ul>
+            <li>This applies a function to each item in the set in insertion order</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function logSetElements(value1, value2, set) { <br/>
+                  console.log(`s[${value1}] = ${value2}`); <br/>
+                } <br/>
+                <br/>
+                new Set(['foo', 'bar', undefined]).forEach(logSetElements); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Can use a for / of loop to iterate over each element in the set
           <div class="card">
             <div class="card-body">
               <code>
@@ -106,6 +120,22 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <h2>Enforcing Uniqueness</h2>
+      <section>
+        <ul>
+          <li>One use case for Sets is when you need uniqueness in a collection of values</li>
+          <li>When you need unique values from an array, consider running the array through a Set to remove duplicate values</li>
+        </ul>
+      </section>
+
+      <h2>No Sparseness</h2>
+      <section>
+        <ul>
+          <li>Deleting items an Array creates spare gaps in the array since it does not automatically resize when items are removed</li>
+          <li>Sets do not contain spare elements; removing an element reduces the size by one</li>
+        </ul>
       </section>
 
       <h2>Properties</h2>
@@ -134,6 +164,10 @@
           <li>Returns true if the item was removed</li>
           <li>Returns false if the item does not exist</li>
         </ul>
+        <div>foreach()</div>
+        <ul>
+          <li>Executes a provided function once for each value in this set, in insertion order. </li>
+        </ul>
         <div>has(x)</div>
         <ul>
           <li>Returns true/false if the item x exists in the set</li>
@@ -157,6 +191,17 @@
               <li>Only has add, has, and delete methods and is not iterable</li>
               <li>Does not have a size property</li>
             </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" target="_blank">
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+            </a>
           </li>
         </ul>
       </section>

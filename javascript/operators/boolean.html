@@ -195,13 +195,13 @@
           <li>
             Short circuits, so the right hand side is not evaluated if the left hand side is neither null or undefined
           </li>
-          <li>Useful in the case of default values for varaibles
+          <li>Useful in the case of default values for variables
             <ul>
               <li>
                 <code>const someDummyText = foo || "Hello!";</code>
               </li>
               <li>
-                This will coherse the left side to a boolean, so any falsy value will be overwritten (0, "", false)
+                This will coheres the left side to a boolean, so any falsy value will be overwritten (0, "", false)
               </li>
               <li>
                 This may not be desired if those values are valid

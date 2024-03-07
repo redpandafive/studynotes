@@ -35,30 +35,39 @@
 
       <section>
         <ul>
-          <li>Holds key-value pairs</li>
-          <li>Two key differences of Map vs regular JS object
+          <li>
+            Holds key-value pairs
             <ul>
-              <li>Map remembers the original insertion order of the keys</li>
               <li>
-                Any value can be used as either a key or value in a Map
+                Keys are unique in the collection, so each may only occur once
+              </li>
+              <li>
+                It is an iterable, so you can directly iterate on it
                 <ul>
-                  <li>This includes both objects and primitive values</li>
-                  <li>
-                    Keys are compared by identity, so if you use an object or array
-                    as a key, it will be considered different from every other
-                    object and array
-                  </li>
+                  <li>Can use foreach method on the Map object</li>
+                  <li>Can use for / of loop</li>
                 </ul>
+              </li>
+              <li>
+                Only contain entries that you put it it, nothing by default
               </li>
             </ul>
           </li>
-          <li>Keys are unique in the collection, so it may only occur once</li>
-          <li>Only contain entries that you put it it, nothing by default</li>
           <li>
-            It is an iterable, so you can directly iterate on it
+            Two key differences of Map vs regular JS object
             <ul>
-              <li>Can use foreach method on the Map object</li>
-              <li>Can use for / of loop</li>
+              <li>Map remembers the original insertion order of the keys</li>
+              <li>
+                Map can use any value as either a key or value
+                <ul>
+                  <li>This includes both objects and primitive values</li>
+                  <li>
+                    Keys are compared by identity, so if you use an object or
+                    array as a key, it will be considered different from every
+                    other object and array
+                  </li>
+                </ul>
+              </li>
             </ul>
           </li>
           <li>
@@ -67,22 +76,11 @@
               <li>
                 This prevents them from being garbage collected, even if all
                 other references to them are gone
-                <ul>
-                  <li>Alternative is to use a WeakMap variant (see section)</li>
-                </ul>
               </li>
+              <li>Alternative is to use a WeakMap variant (see section)</li>
             </ul>
           </li>
         </ul>
-
-        <div>
-          <a
-            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"
-            target="_blank"
-          >
-            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
-          </a>
-        </div>
       </section>
 
       <h2>Construction</h2>
@@ -96,7 +94,7 @@
                 An iterable object that yields two element [key, value] arrays
                 <ul>
                   <li>
-                    Such as an array of arrays, each with an equal number of
+                    This can be an array of arrays, each with an equal number of
                     elements
                   </li>
                 </ul>
@@ -129,7 +127,7 @@
             iteration ([key,value])
           </li>
           <li>
-            Idiomatic to use destructuring assignment to assign the key and
+            Use destructuring assignment to assign the key and
             value to separate variables on each iteration
           </li>
         </ul>
@@ -166,20 +164,22 @@
         </ul>
       </section>
 
-
       <h3>delete(x)</h3>
       <section>
         <ul>
           <li>Removes the item indexed by key x</li>
           <li>Returns true if the element was removed</li>
           <li>Returns false if the element does not exist</li>
-                </ul>
+        </ul>
       </section>
 
       <h3>entries()</h3>
       <section>
         <ul>
-          <li>Returns a new map iterator object that contains key-value pairs for each element in the map in insertion order.</li>
+          <li>
+            Returns a new map iterator object that contains key-value pairs for
+            each element in the map in insertion order.
+          </li>
         </ul>
       </section>
 
@@ -194,13 +194,16 @@
       <section>
         <ul>
           <li>
-            Similar to <a href="../objects/methods.html">Object.groupBy</a>, but it returns a map instead of an object
+            Similar to <a href="../objects/methods.html">Object.groupBy</a>, but
+            it returns a map instead of an object
           </li>
           <li>
-            Does allow you to use any type of value as the keys (Object.groupBy requires values that can be coerced into a string)
+            Does allow you to use any type of value as the keys (Object.groupBy
+            requires values that can be coerced into a string)
           </li>
           <li>
-            This is not standard across all browsers yet, so use TypeScript version, lodash version, or custom version for now
+            This is not standard across all browsers yet, so use TypeScript
+            version, lodash version, or custom version for now
           </li>
         </ul>
       </section>
@@ -233,39 +236,64 @@
         </ul>
       </section>
 
-
-
-
-
-
       <h2>WeakMap</h2>
       <section>
         <ul>
           <li>A variant (not actual subclass) of the Map class</li>
-          <li>Keeps weak references to its key values
-            <ul>
-              <li>Does not prevent its key values from being garbage collected</li>
-            </ul>
+          <li>
+            Keeps weak references to its key values - does not prevent its key values from being garbage collected
           </li>
-          <li>Intended use is to allow you to associate values with objects without causing memory leaks</li>
-          <li>Differences between WeakMap and Map
+          <li>
+            Intended use is to allow you to associate values with objects
+            without causing memory leaks
+          </li>
+          <li>
+            Differences between WeakMap and Map
             <ul>
-              <li>WeakMap keys must be objects or arrays; no primitives since they are not subject to garbage collection</li>
+              <li>
+                WeakMap keys must be objects or arrays; not primitives since they
+                are not subject to garbage collection
+              </li>
               <li>WeakMap only has get, set, has, and delete methods</li>
-              <li>WeakMap is not iterable
+              <li>
+                WeakMap is not iterable
                 <ul>
                   <li>Does not define keys, values, forEach methods</li>
                 </ul>
               </li>
-              <li>WeakMap does not have a size property since the size of it can change at any time as objects are garbage collected</li>
+              <li>
+                WeakMap does not have a size property since the size of it can
+                change at any time as objects are garbage collected
+              </li>
             </ul>
           </li>
           <li>
-            Example use would be a cache object that stores computed values for later Use
+            Example use would be a cache object that stores computed values for
+            later Use
             <ul>
-              <li>A normal Map would not reclaim objects over the lifecycle of the Map</li>
-              <li>A WeakMap can reclaim objects once their last reference has dropped off</li>
+              <li>
+                A normal Map would not reclaim objects over the lifecycle of the
+                Map
+              </li>
+              <li>
+                A WeakMap can reclaim objects once their last reference has
+                dropped off
+              </li>
             </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+            </a>
           </li>
         </ul>
       </section>

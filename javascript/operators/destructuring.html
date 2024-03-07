@@ -392,6 +392,34 @@
             </div>
           </div>
         </div>
+        <div>
+          This example is a function that takes two parameters:
+          <ul>
+            <li>An array of items to calculate a total</li>
+            <li>An option configuration object to pass in optional settings</li>
+          </ul>
+          Things to note:
+          <ul>
+            <li>If no second parameter is passed, a default empty object is created (prevents null reference errors)</li>
+            <li>If the config object is missing a shipping parameter, the destructuring will add one with the value of SHIPPING_DEFAULT.  
+              <ul>
+                <li>Reference this value in the function using the shipping variable</li>
+                <li>This same idea is true for the discount parameter as well</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const SHIPPING_DEFAULT = 5; <br/>
+                function calculateTotal(items, {shipping = SHIPPING_DEFAULT, discount = 0} = {}) { <br/>
+                  ... <br/>
+                } <br/>
+              </code>
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
 
 

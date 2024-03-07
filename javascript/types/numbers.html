@@ -91,7 +91,7 @@
         </ul>
       </section>
 
-      <h2>Mathmatical Errors</h2>
+      <h2>Mathematical Errors</h2>
       <section>
         <div>
           JS does not raise errors in cases of overflow, underflow, or division
@@ -152,7 +152,7 @@
           Related functions on Number
           <ul>
             <li>
-              <code>Number.isFinite()</code> = returns treu if the argument is a
+              <code>Number.isFinite()</code> = returns true if the argument is a
               number other than NaN, Infinity, or -Infinity
             </li>
           </ul>
@@ -171,6 +171,61 @@
             </li>
           </ul>
         </div>
+      </section>
+
+      <h2>Floating Point Numbers</h2>
+      <section>
+        <ul>
+          <li>Floating point numbers can lead to unexpected results in JS, but this is a computer program.
+            <ul>
+              <li>Computers cannot work with floating point numbers directly since everything is converted to binary</li>
+              <li>Operations on floating point numbers must be:
+                <ul>
+                  <li>Converted to binary</li>
+                  <li>Operated on</li>
+                  <li>Converted back to binary</li>
+                </ul>
+              </li>
+              <li>
+                With floating point numbers, you sometimes end up with incorrect results due to this process
+                <div>
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        console.log(0.1 + 0.2) => // outputs 0.30000000000000004<br/>
+                      </code>
+                    </div>
+                  </div>
+                </div>                
+              </li>
+              <li>
+                Be mindful of this in certain situations like the following:
+                <div>
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        // this could lead to problems since you could end up actually checking against .35 or .350000000001 or something else<br/>
+                        if (x === .35)<br/>                        
+                      </code>
+                    </div>
+                  </div>
+                </div>   
+              </li>
+              <li>
+                When using an equality operator against a floating point number, use something like greater than or less that instead to account for This
+                <div>
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        if(x >= .35) <br/>
+                      </code>
+                    </div>
+                  </div>
+                </div> 
+              </li>
+            </ul>
+          </li>
+        </ul>
       </section>
 
 
