@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Input Signals</li>
+        </ol>
+      </nav>
+
+      <h1>Input Signals</h1>
+
+      <section>
+        <ul>
+          <li>
+            This was added in 17.1
+          </li>
+          <li>Turns Inputs into Signals so they can be reactive
+            <ul>
+              <li>This is useful when you need to do some Signal internal to your component needs to react to a change in the Input value</li>
+              <li>For instance, if you pass in a list of people as an Input and use a computed Signal to provide a filtered list of People, the computed Signal will not recompute if the input changes</li>
+              <li>The computed Signal will be recomputed with a related Signal changes</li>
+              <li>Input Signals address this limitation</li>
+            </ul>
+          </li>
+          <li>
+            IMPORTANT: Signal inputs are read only, so there is no way to directly modify values from the value
+            <ul>
+              <li>Values can only be modified by the parent</li>
+            </ul>
+          </li>
+       </ul>
+      </section>
+
+
+      <h2>Required Values</h2>
+      <section>
+        <ul>
+          <li>
+            Like Inputs, you can apply set an Input Signal to require an initial value from the parent
+          </li>
+          <li>
+            To do this, use the required method on the SignalInput object.
+          </li>
+          <li>
+            An initial value parameter is not needed since it will be supplied by the parent component
+          </li>
+        </ul>
+        <div>
+          Example: external alias will be users, internal name will be userList
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  userList = input.required({ <br/>
+                    alias: 'users' <br/>
+                  }); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <h2>Aliases</h2>
+      <section>
+        <ul>
+          <li>Like Inputs, you can apply a transformation function to Input Signals</li>
+          <li>
+            Internally, you would refer to the values as the Signal property name
+          </li>
+          <li>
+            Externally, you would refer to the values as the alias
+          </li>
+        </ul>
+        <div>
+          Example: external alias will be users, internal name will be userList
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  userList = input([], { <br/>
+                    alias: 'users' <br/>
+                  }); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <h2>Transformation Functions</h2>
+      <section>
+        <ul>
+          <li>Like Inputs, you can apply a transformation function to Input Signals</li>
+          <li></li>
+        </ul>
+        <div>
+          Example: this applies a concatUserName function to values emitted from the Signal
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  userList = input([], { <br/>
+                    alias: 'users',
+                    transform: concatUserNames <br/>
+                  }); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <div>
+          Pre 17.1, this is how you would implement this
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  @Input({alias: 'users'}) set _users(users: User[]) { <br/>
+                    this.users.set(users); <br/>
+                  } <br/>
+                  <br/>
+                  private users = signal&lt;User[]&gt;([]); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div>
+          Starting with 17.1, this is how you would implement this
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code> 
+                  users = input&lt;User[]&gt;([]); 
+              </code>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
