@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Web Storage API
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Web Storage API</h1>
+
+      <section>
+        <ul>
+          <li>
+            An API that gives a way for browser to store key/value paired data
+            <ul>
+              <li>
+                Keys and values are always strings (objects, integers are
+                converted to strings)
+              </li>
+            </ul>
+          </li>
+          <li>
+            There are two methods to use that are available on the Windows
+            object
+            <ul>
+              <li>Window.sessionStorage</li>
+              <li>Window.localStorage</li>
+            </ul>
+          </li>
+          <li>
+            Accessing one of these two methods creates an instance of the
+            Storage object, through which data items can be set, retrieved, and
+            removed
+            <ul>
+              <li>
+                StorageEvent events are fired on a document's Window object when
+                a storage area changes
+              </li>
+            </ul>
+          </li>
+          <li>Different Storage objects are used for each domain of origin</li>
+          <li>Testing is only needed to support very old browsers</li>
+        </ul>
+      </section>
+
+      <h2>Session Storage</h2>
+      <section>
+        <ul>
+          <li>
+            Stores data as long as the page remains opened
+            <ul>
+              <li>Persists through page reloads and restores</li>
+            </ul>
+          </li>
+          <li>Data is never transmitted to the server</li>
+          <li>
+            Stores more data than a cookie, but not as much as Local Storage
+          </li>
+          <li>
+            Accessing the Window.sessionStorage property creates a new Storage
+            object
+          </li>
+        </ul>
+      </section>
+
+      <h2>Local Storage</h2>
+      <section>
+        <ul>
+          <li>Data persists een when the browser is closed and reopened</li>
+          <li>
+            Data does not expire and only gets cleared by:
+            <ul>
+              <li>JavaScript</li>
+              <li>Clearing the browser cache / locally stored data</li>
+            </ul>
+          </li>
+          <li>
+            In private browsing modes, Local Storage is treated like Session
+            Storage. Data is deleted when the browser or browser tab is closed.
+          </li>
+        </ul>
+      </section>
+
+      <h2>Reading Values</h2>
+      <section>
+        <ul>
+          <li>
+            Data can be read like an object or with the Storage.getItem() method
+            <div>
+              This is the recommended approach
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    const currentColor = localStorage.getItem("bgcolor"); <br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Since only string values may be saved, you must convert other data tables when reading them
+            <ul>
+              <li>For objects and arrays use JSON.stringify()</li>
+            </ul>
+          </li>
+          <li>
+            Retrieved objects are a deep copy of the original, so mutations to it do not affect the original object
+          </li>
+        </ul>
+      </section>
+
+      <h2>Writing Values</h2>
+      <section>
+        <ul>
+          <li>
+            Data can be set using object syntax or the setItem method
+            (recommended)
+            <div>
+              These produce similar results. The setItem method is recommended.
+              <div class="card">
+                <div class="card-body">
+                  <code>
+                    localStorage.colorSetting = "#a4509b"; <br />
+                    localStorage["colorSetting"] = "#a4509b";<br />
+                    localStorage.setItem("colorSetting", "#a4509b");<br />
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            Since only string values may be saved, you must convert other data tables when reading them
+            <ul>
+              <li>For objects and arrays use JSON.stringify()</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Deleting Data</h2>
+      <section>
+        <ul>
+          <li>There are two methods to remove data:
+            <ul>
+              <li>removeItem
+                <ul>
+                  <li>Takes a single argument, which is the key that you want to remove</li>
+                </ul>
+              </li>
+              <li>clear
+                <ul>
+                  <li>Takes no arguments</li>
+                  <li>Empties the entire storage object for the domain</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>StorageEvent</h2>
+      <section>
+        <ul>
+          <li>Event that is fired when a change is made to the Storage objects</li>
+          <li>
+            Intended as a way for other pages on the domain using the storage to sync any changes that are made
+            <ul>
+              <li>It will not work for the same page that is making the change</li>
+              <li>It is not fired for SessionStorage</li>
+              <li>Since pages on other domains cannot access the same storage objects, they will not receive the event</li>
+            </ul>
+          </li>
+          <li>
+            The event object contains several properties:
+            <ul>
+              <li>key = key of the data that changed</li>
+              <li>oldValue = the old value before the change</li>
+              <li>newValue = the new value after the change</li>
+              <li>url = the URL of the document that changed the storage</li>
+              <li>storageArea = the storage object itself</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                window.addEventListener("storage", (e) => { <br/>
+                  document.querySelector(".my-key").textContent = e.key; <br/>
+                  document.querySelector(".my-old").textContent = e.oldValue; <br/>
+                  document.querySelector(".my-new").textContent = e.newValue; <br/>
+                  document.querySelector(".my-url").textContent = e.url; <br/>
+                  document.querySelector(".my-storage").textContent = JSON.stringify( <br/>
+                    e.storageArea, <br/>
+                  ); <br/>
+                });<br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

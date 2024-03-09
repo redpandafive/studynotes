@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">IndexedDB</li>
+        </ol>
+      </nav>
+
+      <h1>IndexedDB</h1>
+
+      <section>
+        <ul>
+          <li>Allows you to persistently store data inside a user's browser
+            <ul>
+              <li>Allows you to create online and offline applications</li>
+            </ul>
+          </li>
+          <li>Low level API for client side storage of significant amounts of structured data, including files and blobs</li>
+          <li>Useful for applications that need to 
+            <ul>
+              <li>Store large amounts of data, such as a catalog of DVDs</li>
+              <li>Applications that don't need persistent internet connectivity to work (mail clients, notepads)</li>
+            </ul>
+          </li>
+          <li>Is a JS based object oriented database, not fixed column table based
+            <ul>
+              <li>Not a relational database with tables representing collections of rows and columns</li>
+              <li>Creates object stores for a type of data and persist JS object in that store</li>
+              <li>Each object store can have a collection of indexes that makes it efficient to query and iterate across</li>
+            </ul>
+          </li>
+          <li>Query language
+            <ul>
+              <li>Does not use SQL</li>
+              <li>Queries are performed on an index, which produces a cursor</li>
+              <li>Use the cursor to iterate across the result set</li>
+            </ul>
+          </li>
+          <li>Objects can be stored and retrieved and are indexed by a key
+            <ul>
+              <li>Essentially, it stores key-value pairs</li>
+              <li>Keys can be properties of the objects</li>
+              <li>Values can be complex structured objects</li>
+              <li>Keys can be binary objects</li>
+            </ul>
+          </li>
+          <li>The browser can wipe out data in one of the following situation:
+            <ul>
+              <li>User requests wipe out</li>
+              <li>Browser is in private browsing mode - data is lost when the session ends</li>
+              <li>Disk or quota limit has been reached</li>
+              <li>Data is corrupt</li>
+              <li>An incompatible change is made to the feature</li>
+            </ul>
+          </li>
+          <li>
+            Indexes can be created for quick searching and sorted enumeration
+            <ul>
+              <li>These can be any property on the object</li>
+            </ul>
+          </li>
+
+          <li>
+            Mostly asynchronous
+            <ul>
+              <li>When you retrieve values, you pass a callback function to receive the returned data values</li>
+              <li>Essentially you request a database operation occur and are notified by a DOM event when it finishes</li>
+              <li>
+                DOM events
+                <ul>
+                  <li>Properties
+                    <ul>
+                      <li>type = most commonly set to success or error</li>
+                      <li>target = the IDBRequest object that was generated as a result of doing some database operation</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Success events
+                    <ul>
+                      <li>Do not bubble</li>
+                      <li>Cannot be cancelled</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Error events
+                    <ul>
+                      <li>Bubble</li>
+                      <li>Can be cancelled</li>
+                      <li>Will abort any transactions they are running in, unless they are cancelled</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Follows a same origin policy
+            <ul>
+              <li>Origin is defined as the domain, application layer protocol, and port of a URL of the document where a script is being executed</li>
+              <li>Each origin has its own associated set of databases; databases are associated with one origin</li>
+              <li>Can access stored data within a domain</li>
+              <li>Cannot access data across different domains</li>
+            </ul>
+          </li>
+          <li>
+            Requests
+            <ul>
+              <li>Objects that receive the success or failure DOM events when a database operation finishes</li>
+              <li>
+                Properties
+                <ul>
+                  <li>errorCode</li>
+                  <li>onsuccess</li>
+                  <li>onerror</li>
+                  <li>readyState</li>
+                  <li>result</li>
+                </ul>
+              </li>
+              <li>
+                Methods
+                <ul>
+                  <li>addEventListener()
+                    <ul>
+                      <li></li>
+                    </ul>
+                  </li>
+                  <li>
+                    removeEventListener()
+                    <ul>
+                      <li></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>Uses indexes to enable high performance searches of data</li>
+        </ul>
+      </section>
+
+
+      <h2>Database</h2>
+      <section>
+        <ul>
+          <li>A collection of one or more object stores</li>
+          <li>Each have the following:
+            <ul>
+              <li>Name 
+                <ul>
+                  <li>Can be any string value, including an empty string</li>
+                  <li>Identifies the database within a specific origin</li>
+                  <li>Stays constant throughout its lifetime</li>
+                </ul>
+              </li>
+              <li>Current Version
+                <ul>
+                  <li>When the database is first created, its version is the integer 1</li>
+                  <li>Will remain 1 until specified otherwise</li>
+                  <li>A database can only have one version number</li>
+                  <li>A database cannot exist in multiple versions at once</li>
+                  <li>The only way to change it is by opening it with a greater version that the current one</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Database connections
+            <ul>
+              <li>An operation crated by opening a database</li>
+              <li>There can be multiple connections at the same time</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Indexing</h2>
+      <section>
+        <ul>
+          <li>An index is a specialized object store for looking up records in another object store
+            <ul>
+              <li>Target is called the referenced object store</li>
+            </ul>
+          </li>
+          <li>
+            Is a persistent key-value storage
+            <ul>
+              <li>The value part is the key part of a record in the referenced object store</li>
+            </ul>
+          </li>
+          <li>
+            Index records are automatically created when records in the referenced object store are inserted, updated, or deleted
+            <ul>
+              <li>These are automatically updated when the referenced object store changes</li>
+            </ul>
+          </li>
+          <li>Each index record can point to only one record in its referenced object store</li>
+          <li>Several indexes can reference the same object store</li>
+          <li>
+            Must be created and deleted using a versionchange transaction
+          </li>
+        </ul>
+      </section>
+
+      <h2>Object Store</h2>
+      <section>
+        <ul>
+          <li>A collection of records that are sorted by keys in an ascending order</li>
+          <li>Must have a unique name within its database</li>
+          <li>Must be create or delete one is within a version change transaction</li>
+        </ul>
+      </section>
+
+      <h2>Requests</h2>
+      <section>
+        <ul>
+          <li>The operation by which reading and writing on a database is done</li>
+          <li>Represents one read or write operation</li>
+        </ul>
+      </section>
+
+      <h2>Transactions</h2>
+      <section>
+        <ul>
+          <li>An atomic set of data access and data modification operations on a database</li>
+          <li>All operations (reads or writes) happen within a transaction
+            <ul>
+              <li>Has a defined lifetime, so it cannot be used after it has completed</li>
+              <li>Auto-commits, and cannot be committed manually</li>
+              <li>This keeps two instances of your application (opened in separate browser tabs) from interfering with each other</li>
+            </ul>
+          </li>
+          <li>
+            A database connection can have several action transactions simultaneously:
+            <ul>
+              <li>Reading transactions can overlap</li>
+              <li>However, writing transactions must not have overlapping scopes</li>
+              <li>Scope is defined at creation and determines which object stores the transaction can interact with</li>
+            </ul>
+          </li>
+          <li>
+            The browser can terminate a transaction that is taking too long
+            <ul>
+              <li>This frees up resources that the long running transaction has locked</li>
+            </ul>
+          </li>
+          <li>
+            Transactions can be aborted, which will rollback the changes made to the database within the transaction
+          </li>
+          <li>
+            There are three modes of transactions:
+            <ul>
+              <li>readwrite</li>
+              <li>readonly</li>
+              <li>versionchange</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Limitations</h2>
+      <section>
+        <ul>
+          <li>The API is not built to handle synchronizing with a server side database, you have to do that</li>
+          <li>No built in full text searching, such as the <code>LIKE</code> operator in SQL</li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
