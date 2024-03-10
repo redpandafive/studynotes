@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Attribute Directives</li>
+        </ol>
+      </nav>
+
+      <h1>Attribute Directives</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="attribute.html#builtin">Built-In Directives</a>
+          </li>
+          <li>
+            <a href="attribute.html#custom">Custom Directives</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2>General</h2>
+      <section>
+        <ul>
+          <li>
+            Attribute directives change the appearance or behavior of an element, component, or another directive
+            <ul>
+              <li>Listen to and modify the behavior of other HTML elements, attributes, properties, and components</li>
+            </ul>
+          </li>
+          <li>Usually applied to elements as if they were HTML attributes</li>
+          <li>You can add many attribute directives to the same host element</li>
+          <li>Directive classes are decorated with the @Directive decorator</li>
+        </ul>
+      </section>
+
+      <h2 id="builtin">Built-In Directives</h2>
+      <section>
+        <ul></ul>
+      </section>
+
+      <h2 id="custom">Custom Directives</h2>
+      <section>
+        <ul></ul>
+      </section>
+
+      <h3>Basic Setup</h3>
+      <section>
+        <ul>
+          <li>
+            As a minimum, you need the following:
+            <ul>
+              <li>@Directive decorator function containing the metadata</li>
+              <li>
+                A class for the directive
+                <ul>
+                  <li>Add Directive as a postfix to the class name (such as ChangeBgColorDirective)</li>
+                  <li>Filename should be named as follows: <kbd>change-bg-color.directive.ts</kbd></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>Angular CLI can crate a directive using the command <kbd>ng generate directive highlight</kbd></li>
+          <li>
+            Define a selector in the directive metadata to specify the directive's CSS attribute selector
+            <ul>
+              <li>This is the only configuration property</li>
+              <li>
+                <code>selector: '[myHighlight]'</code>
+              </li>
+              <li>the brackets make it an attribute selector</li>
+              <li>This will find all elements with that name in the attributes</li>
+            </ul>
+          </li>
+          <li>
+            Inject ElementRef service
+            <ul>
+              <li>This grants direct DOM access, so use caution</li>
+              <li>This gives you a reference to the host DOM element itself through itself nativeElement property</li>
+              <li>This reference will be of type HTMLElement</li>
+            </ul>
+          </li>
+          <li>Apply the directive to an HTML element in the template using the selector as an attribute</li>
+        </ul>
+      </section>
+
+      <h3>User Events</h3>
+      <section>
+        <ul>
+          <li>
+            To respond to user events from within the directive, you will need to use the HostListener decorator
+            <ul>
+              <li>This is a decorator that subscribes to a DOM event from the host element</li>
+              <li>It provides a handler method to run when the host element emits the event</li>
+            </ul>
+          </li>
+          <li>
+            For each event that needs to be responded to:
+            <ul>
+              <li>Add the event name as a parameter to the HostListener decorator</li>
+              <li>
+                Assign a function to handle the event
+                <ul>
+                  <li>Use the ElementRef to perform actions on the DOM element</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          This example adds two event handlers that respond when the mouse enters or leaves, each with the @HostListener decorator
+          <ul>
+            <li>When the mouse enters, the host element's background turns yellow</li>
+            <li>When the mouse leaves, the host element's background goes back to normal</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @HostListener('mouseenter') onMouseEnter() { <br />
+                this.highlight('yellow');<br />
+                }<br />
+                @HostListener('mouseleave') onMouseLeave() {<br />
+                this.highlight('');<br />
+                }<br />
+                private highlight(color: string) {<br />
+                this.el.nativeElement.style.backgroundColor = color;<br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Passing a Single Value into the Directive</h3>
+      <section>
+        <ul>
+          <li>Add an &#64;Input() property to the directive</li>
+          <li>
+            For a single input property, you can make this the same name as the directive
+            <ul>
+              <li>You can then apply the directive an pass the input value using syntax similar to <code>..[appHighlight]="'yellow'"...</code></li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Using the directive defined in the above example, this example expands it by adding radio controls to pass the highlight color into the directive. Here is the code outside of the directive
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div> &lt;input type="radio" name="colors" (click)="color='lightgreen'" /&gt;Green <br />
+                &lt;input type="radio" name="colors" (click)="color='yellow'" /&gt;Yellow <br />
+                &lt;input type="radio" name="colors" (click)="color='cyan'" /&gt;Cyan <br />
+                &lt;/div&gt; <br />
+                &lt;p [appHighlight]="color">Highlight me!&lt;/p&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add a color property to the component class to receive the color value when a radio input is clicked
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export class AppComponent { <br />
+                color = ''; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Add an Input to the directive with the same name as the directive
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                @HostListener('mouseenter') onMouseEnter() { 
+                  this.highlight(this.appHighlight || 'red'); <br/>
+                }  <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Passing a Second Value into the Directive</h3>
+      <section>
+        <ul>
+          <li>Additional values can be passed into the directive by adding additional input</li>
+          <li>For each input added, add an attribute to the host element to pass the value</li>
+        </ul>
+        <div>
+          To add a second color to the above directive, add a new Input to the directive
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                &#64;Input() defaultColor = ''; 
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Modify the host element to add an attribute for the new input
+          <div class="card">
+            <div class="card-body">
+              <code> 
+                &lt;p [appHighlight]="color" defaultColor="violet"&gt;Highlight this!&lt;/p&gt;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h3>Examples</h3>
+      <section>
+        <div>
+          To set the color of the text in the targeted ElementRef object
+          <div class="card">
+            <div class="card-body">
+              <code> this.renderer.setElementStyle(this.el.nativeElement, &quot;color&quot;, colorVariable) </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can import the HostListener service to respond to DOM element events that hosts an attribute directive
+          <ul>
+            <li>Import HostListener from core</li>
+            <li>Add event handlers decorated with the HostListener decorator</li>
+            <li>This allows you to trap events without talking directly to the DOM API</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code> &amp;HostListener(&quot;mouseenter&quot;) onMouseEnter() {...} </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            This uses an input name highlightColor on a directive called appHighLight
+            <div class="card">
+              <div class="card-body">
+                <code> &lt;p appHighlight &#91;highlightColor&#93;=&quot;color&quot;&gt;... </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            By changing the name of the input property to the same name as the directive, you can combine the two
+            <ul>
+              <li>Aliasing the input to an appropriate may be needed for code clarity</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code> &lt;p &#91;appHighlight&#93;='color'... </code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

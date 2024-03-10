@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -25,156 +22,217 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            NgModel / Model() / Two-Way Bindings
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">NgModel / Model() & Two-Way Bindings</li>
         </ol>
       </nav>
 
-      <h1>NgModel / Model() / Two-Way Bindings</h1>
+      <h1>NgModel / Model() & Two-Way Bindings</h1>
 
-      <section>
-        <ul>
-          <li>Bi-directional binding from DOM to component</li>
-          <li>
-            Use when you want to display a data property in the DOM and update
-            that property when the user makes changes on the interface
-          </li>
-          <li>
-            “Banana in a box” syntax
-            <ul>
-              <li>
-                Combines the brackets of property binding [x] with the
-                parentheses of event binding (x)
-              </li>
-            </ul>
-          </li>
-          <li>
-            Really just syntax sugar for a property binding and an event binding
-            <ul>
-              <li>You can get a similar result by adding the following:
-                <ul>
-                  <li>A plain <code>ngModel</code> directive on the desired HTML element</li>
-                  <li>A <code>ngModel</code> input</li>
-                  <li>a <code>ngModelChange</code> event handler that assigns the outputted value to the input</li>
-                </ul>
-              </li>
-              <li>
-                This results in two way data binding since:
-                <ul>
-                  <li>The input property will update ngModel directive with the value from inputValue</li>
-                  <li>The output event will update the inputValue property when a change is detected</li>
-                </ul>
-              </li>
-              <li>
-                This keeps the value of the component property and the value in the ngModel-tagged element in sync.  Any change in one will be mirrored in the other.
-              </li>
-              <li>
-                You can even mimic this without using the ngModel directive at all
-              </li>
-            </ul>
-            <div>
-              Assuming you have a property named inputValue on the component
-              <div class="card">
-                <div class="card-body"><code> 
-                  &lt;input ngModel [ngModel]="inputValue" (ngModelChange)="inputValue = $event" &gt;
-                </code>
-              </div>
-              </div>
-              <div>
-                This is a component class that implements two way data binding without ngModel
-                <div class="card">
-                  <div class="card-body"><code> 
-                    export class TwoWayBindingComponent { <br/>
-                    &amp;Input() expand = false; <br/>
-                    &amp;Output() expandChange = new EventEmitter&lt;boolean&gt;(); <br/>
-                    ... <br/>
-                    } <br/>
-                  </code>
-                </div>
-                </div>
-                <div>
-                  This is a component class that implements two way data binding without ngModel
-                  <div class="card">
-                    <div class="card-body"><code> 
-                      export class TwoWayBindingComponent { <br/>
-                      &amp;Input() expand = false; <br/>
-                      &amp;Output() expandChange = new EventEmitter&lt;boolean&gt;(); <br/>
-                      ... <br/>
-                      } <br/>
-                    </code>
-                  </div>
-                  </div>
-              </div>
-            </div>
-          </li>
-          <li>Useful for custom components</li>
-        </ul>
-
-        <p>
-          Need an input property that you will use on the right side of the
-          equals sign on the parent component
-        </p>
-        <div class="card">
-          <div class="card-body"><code> 
-            &amp;Input() size: number; 
-          </code></div>
-        </div>
-
-        <p>
-          Need an output method triggers an EventEmitter. Should be named the
-          same as the input property with Change appended to the end
-        </p>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              &amp;Output() sizeChange = new EventEmitter&lt;number&gt;()
-            </code>
-          </div>
-        </div>
-
+      <section class="navlinks">
         <ul>
           <li>
-            Native HTML elements do not follow the x value and xChange event
-            pattern, so this cannot be used on them (without a custom directive,
-            such as ngModel)
+            <a href="nongmodel">Two-Way Binding Without NgModel</a>
           </li>
           <li>
-            Built in directive to use this form forms is NgModel
-            <ul>
-              <li>
-                Use to establish a two-way data binding between a form element
-                and a data property
-              </li>
-              <li>
-                Allows you to set the value in the class and the user to update
-                it in the view
-              </li>
-              <li>
-                This is a shorthand method – you can do the same thing without
-                the NgModel directive, it is just more verbose
-              </li>
-              <li>
-                Requirements
-                <ul>
-                  <li>Must import FormsModule from@angular/forms</li>
-                  <li>
-                    Element must support ControlValueAccessor – Angular provides
-                    value accessors for all the basic HTML form elements
-                  </li>
-                  <li>
-                    Cannot apply NgModel to a non form native element or 3rd
-                    part custom component until you write a suitable value
-                    accessor
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            <a href="ngmodel">NgModel</a>
+          </li>
+          <li>
+            <a href="model">Signal-Based Two-Way Binding with Model</a>
           </li>
         </ul>
       </section>
 
-      <h2>Model</h2>
+      <section>
+        <ul>
+          <li>Use the NgModel directive of Model() SIgnal for two-way binding from DOM to component</li>
+          <li>Use when you want to display a data property in the DOM and update that property when the user makes changes on the interface</li>
+        </ul>
+      </section>
+
+      <h2 class="nongmodel">Two-Way Binding Without NgModel</h2>
+      <section>
+        <ul>
+          <li>The NgModel directive is really just syntax sugar for a property binding and an event binding</li>
+          <li>
+            You can get a similar result by adding the following:
+            <ul>
+              <li>A plain <code>ngModel</code> directive on the desired HTML element</li>
+              <li>A <code>ngModel</code> input</li>
+              <li>a <code>ngModelChange</code> event handler that assigns the outputted value to the input</li>
+            </ul>
+          </li>
+          <li>
+            This results in two way data binding since:
+            <ul>
+              <li>The input property will update ngModel directive with the value from inputValue</li>
+              <li>The output event will update the inputValue property when a change is detected</li>
+            </ul>
+          </li>
+          <li>
+            This keeps the value of the component property and the value in the ngModel-tagged element in sync.
+            <ul>
+              <li>Any change in one will be mirrored in the other.</li>
+            </ul>
+          </li>
+          <li>You can even mimic this without using the ngModel directive at all with a custom component (NOTE: does not work on native HTML elements)</li>
+        </ul>
+        <div>
+          Assuming you have a property named inputValue on the component
+          <div class="card">
+            <div class="card-body"><code> &lt;input ngModel [ngModel]="inputValue" (ngModelChange)="inputValue = $event" &gt; </code></div>
+          </div>
+        </div>
+        <div>
+          This is a component class that implements two way data binding without ngModel
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export class TwoWayBindingComponent { <br />
+                &amp;Input() expand = false; <br />
+                &amp;Output() expandChange = new EventEmitter&lt;boolean&gt;(); <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This is a component class that implements two way data binding without ngModel
+          <div class="card">
+            <div class="card-body">
+              <code>
+                export class TwoWayBindingComponent { <br />
+                &amp;Input() expand = false; <br />
+                &amp;Output() expandChange = new EventEmitter&lt;boolean&gt;(); <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 class="ngmodel">NgModel</h2>
+      <section>
+        <ul>
+          <li>This directive creates a FormControl instance form a domain model and binds it to a form control element</li>
+          <li>
+            To establish one way binding, use <code>[ngModel]</code>
+            <ul>
+              <li>Changing the domain model's value in the component class sets the value in the view</li>
+            </ul>
+          </li>
+          <li>
+            To establish two way binding, use <code>[(ngModel)]</code>
+            <ul>
+              <li>Use to establish a two-way data binding between a form element and a data property</li>
+              <li>Allows you to set the value in the class and allow the user to update it in the view</li>
+              <li>This is also called “Banana in a box” syntax</li>
+              <li>Combines the brackets of property binding [x] with the parentheses of event binding (x)</li>
+            </ul>
+          </li>
+          <li>
+            Use the NgModel directive to work with native HTML elements
+            <ul>
+              <li>Native HTML elements do not follow the x value and xChange event pattern</li>
+              <li>You need a directive to get two-way binding to work, particularly with form elements</li>
+            </ul>
+          </li>
+          <li>
+            To inspect the properties of the associated FormControl, export the directive into a local variable using ngModel as the key
+            <ul>
+              <li>Example syntax is <code>#myVar="ngModel"</code></li>
+              <li>Access the control using the directive's <code>control</code> property</li>
+              <li>
+                <a href="ngmodel.html#ngmodel-fc-example">See this example</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            When used within a form, you need to add a <code>name</code> attribute to the HTML element
+            <ul>
+              <a href="ngmodel.html#ngmodel-fc-example">See this example</a>
+            </ul>
+          </li>
+          <li>
+            Requirements
+            <ul>
+              <li>Must import FormsModule from@angular/forms</li>
+              <li>
+                Element must support ControlValueAccessor
+                <ul>
+                  <li>Angular provides value accessors for all the basic HTML form elements</li>
+                </ul>
+              </li>
+              <li>Cannot apply NgModel to a non form native element or 3rd part custom component until you write a suitable value accessor</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          The following are equivalent.
+          <ul>
+            <li>The second is just the de-sugared version of NgModel</li>
+            <li>There should be a currentItem property on the component, which has a name property</li>
+            <li>In the second input, there should be a component function called setUpperCaseName</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;input&gt; [(ngModel)]="currentItem.name" /&gt; <br />
+                &lt;input&gt; [ngModel]="currentItem.name" (ngModelChange)="setUppercaseName($event)" /&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Need an input property that you will use on the right side of the equals sign on the parent component
+          <div class="card">
+            <div class="card-body"><code> &amp;Input() size: number; </code></div>
+          </div>
+        </div>
+        <div>
+          Need an output method triggers an EventEmitter. Should be named the same as the input property with Change appended to the end
+          <div class="card">
+            <div class="card-body">
+              <code> &amp;Output() sizeChange = new EventEmitter&lt;number&gt;() </code>
+            </div>
+          </div>
+        </div>
+        <div id="ngmodel-fc-example">
+          Example of accessing properties on the underlying FormControl object
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &amp;Component({ <br />
+                selector: 'example-app', <br />
+                template: ` <br />
+                &lt;form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate&gt; <br />
+                &lt;input name="first" ngModel required #first="ngModel" /&gt; <br />
+                &lt;input name="last" ngModel /&gt; <br />
+                &lt;button&gt;Submit&lt;/button&gt; <br />
+                &lt;/form&gt; <br />
+                <br />
+                &lt;p&gt;First name value: {{ first.value }}&lt;/p&gt; <br />
+                &lt;p&gt;First name valid: {{ first.valid }}&lt;/p&gt; <br />
+                &lt;p&gt;Form value: {{ f.value | json }}&lt;/p&gt;&gt; <br />
+                &lt;p&gt;Form valid: {{ f.valid }}&lt;/p&gt; <br />
+                `, <br />
+                }) <br />
+                export class SimpleFormComp { <br />
+                onSubmit(f: NgForm) { <br />
+                // { first: '', last: '' } <br />
+                console.log(f.value); <br />
+                // false <br />
+                console.log(f.valid);<br />
+                } <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="model">Signal-Based Two-Way Binding with Model</h2>
       <section>
         <a href="../signals/model.html">See here</a>
       </section>

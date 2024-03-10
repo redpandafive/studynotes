@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -25,20 +22,18 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">ViewChild</li>
+          <li class="breadcrumb-item active" aria-current="page">ViewChild and ViewChildren</li>
         </ol>
       </nav>
 
       <h1>ViewChild</h1>
 
-     
+      <div class="reminder">Gets a reference to an element on a component's template and inject it into the component</div>
+
       <h2 id="viewChild">ViewChild</h2>
       <section>
         <ul>
-          <li>
-            @ViewChild and @ViewChildren are used  to get a reference to an element on a component's
-            template and inject it into the component
-          </li>
+          <li>ViewChild and ViewChildren are used to get a reference to an element on a component's template and inject it into the component</li>
           <li>
             This can be used to access
             <ul>
@@ -50,13 +45,30 @@
           <li>
             Useful when a parent component
             <ul>
-              <li>
-                Needs to access a child component but using template variables is
-                too limited
-              </li>
+              <li>Needs to access a child component but using template variables is too limited</li>
               <li>Needs to call public methods on a child component</li>
             </ul>
           </li>
+          <li>
+            The ViewChild decorator can only see elements in the component's template
+            <ul>
+              <li>It cannot see across component boundaries</li>
+              <li>Cannot see elements in the component's parent or in any of its child components</li>
+            </ul>
+          </li>
+          <li>
+            ViewChild when using a template reference name has this default behavior
+            <ul>
+              <li>When injecting a reference applied to a component, you get back the component instance</li>
+              <li>When injecting a reference to a plain HTML element, you get back the corresponding wrapped DOM element</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Lifecycle Limitations</h2>
+      <section>
+        <ul>
           <li>
             Must wait for AfterViewInit event to access this data
             <ul>
@@ -65,99 +77,81 @@
             </ul>
           </li>
           <li>
-            There is an optional static property that changes lifecycle
-            availability
+            There is an optional static property that changes lifecycle availability
             <ul>
               <li>
                 The default value of this is false
                 <ul>
-                  <li>
-                    This tells Angular that the ViewChild will be available at a
-                    later time
-                  </li>
-                  <li>
-                    Indicates it is dependent on some condition (such as a
-                    simple component property binding)
-                  </li>
-                  <li>
-                    Can lead to a higher performance load since we must always
-                    be checking if the ChildComponent is available any time the
-                    component changes
-                  </li>
+                  <li>This tells Angular that the ViewChild will be available at a later time</li>
+                  <li>Indicates it is dependent on some condition (such as a simple component property binding)</li>
+                  <li>Can lead to a higher performance load since we must always be checking if the ChildComponent is available any time the component changes</li>
                 </ul>
               </li>
               <li>
-                Setting this to true indicates that the ViewChild is "static"
-                content and always available on the page
+                Setting this to true indicates that the ViewChild is "static" content and always available on the page
                 <ul>
-                  <li>
-                    This will tell Angular that the ViewChild is available at
-                    anytime
-                  </li>
-                  <li>
-                    It will query for the ChildComponent at the earliest
-                    lifecycle hook availabe and then never query again
-                  </li>
-                  <li>
-                    Must wait for ngAfterViewInit lifecycle hook at the earliest
-                    since its the first lifecycle that runs after
-                    ChangeDetection for the component
-                  </li>
+                  <li>This will tell Angular that the ViewChild is available at anytime</li>
+                  <li>It will query for the ChildComponent at the earliest lifecycle hook available and then never query again</li>
+                  <li>Must wait for ngAfterViewInit lifecycle hook at the earliest since its the first lifecycle that runs after ChangeDetection for the component</li>
                 </ul>
               </li>
               <li>
                 Use the following rules to determine the Setting
                 <ul>
-                  <li>
-                    If the ChildComponent is hidden or dynamicaly loaded in some
-                    way via component binding (either property binding or API
-                    call), it must have false
-                  </li>
-                  <li>
-                    If the ChildComponent is always available on the page and it
-                    is never hidden, then it can be true or false.
-                  </li>
-                  <li>
-                    Setting it to false is more performant and gives you access
-                    to the component earlier
-                  </li>
+                  <li>If the ChildComponent is hidden or dynamically loaded in some way via component binding (either property binding or API call), it must have false</li>
+                  <li>If the ChildComponent is always available on the page and it is never hidden, then it can be true or false.</li>
+                  <li>Setting it to false is more performant and gives you access to the component earlier</li>
                 </ul>
               </li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h2>View Queries - Signal Based Approach</h2>
+      <section>
+        <ul>
           <li>
-            The ViewChild decorator can only see elements in the component's
-            template
+            Advantages
             <ul>
-              <li>It cannot see across component boundaries</li>
+              <li>Can be composed with other Signals</li>
               <li>
-                Cannot see elements in the component's parent or in any of its
-                child components
-              </li>
-            </ul>
-          </li>
-          <li>
-            ViewChild when using a template reference name has this default
-            behavior
-            <ul>
-              <li>
-                When injecting a reference applied to a component, you get back
-                the component instance
+                Drive change detection
               </li>
               <li>
-                When injecting a reference to a plain HTML element, you get back
-                the corresponding wrapped DOM element
+                More predictable timing
               </li>
             </ul>
           </li>
         </ul>
         <div>
+          Declare a query targeting a single result with the viewChild function
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @amp;Component({ template: ` <br />
+                &lt;div #el&gt;&lt;/div&gt; <br />
+                &lt;my-component /&gt; <br />
+                ` <br />
+                }) <br />
+                export class TestComponent { <br />
+                // query for a single result by a string predicate - Signal&lt;ElementRef|undefined&gt;&lt;/ElementRef&gt; <br />
+                divEl = viewChild&lt;ElementRef&gt;('el'); <br />
+                // query for a single result by a type predicate - Signal&lt;MyComponent|undefined&gt;&lt;/MyComponent&gt; <br />
+                cmp = viewChild(MyComponent); <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <div>
           To get a child component (most common use)
           <ol>
-            <li>
-              Import references to the ViewChild decorator and the
-              AfterViewInit lifecycle hook
-            </li>
+            <li>Import references to the ViewChild decorator and the AfterViewInit lifecycle hook</li>
             <li>
               Tag the element with a template variable
               <div class="card">
@@ -167,50 +161,37 @@
               </div>
             </li>
             <li>
-              Inject using the @ViewChild decorator. Add a property named after the template variable to the component
-              and decorate it with the ViewChild decorator (decorator takes the
-              class of the of the component). Any reference must occur in the
-              AfterViewInit lifecycle hook.
+              Inject using the &amp;ViewChild decorator.
+              <ul>
+                <li>Add a property named after the template variable to the component and decorate it with the ViewChild decorator</li>
+                <li>Decorator takes the class of the of the component</li>
+                <li>Any reference must occur in the AfterViewInit lifecycle hook.</li>
+              </ul>
               <div class="card">
                 <div class="card-body">
-                  <code>
-                    @ViewChild(MyElementComponent) componentToRef:
-                    MyElementComponent
-                  </code>
+                  <code> &amp;ViewChild(MyElementComponent) componentToRef: MyElementComponent </code>
                 </div>
               </div>
             </li>
-            <li>
-              <li>
-                You can now reference the child component through this variable,
-                but it is not available until after Angular displays the parent
-                view
-              </li>
-              <li>
-                Need to use the ngAfterViewInit hook to work with it. The child
-                component is not available until after Angular displays the
-                parent view
-              </li>
-              <li>
-                This can also be done with templates by referencing a template
-                reference
-              </li>
-            </li>
-            <p>Example 1</p>
+            <li>You can now reference the child component through this variable, but it is not available until after Angular displays the parent view</li>
+            <li>Need to use the ngAfterViewInit hook to work with it. The child component is not available until after Angular displays the parent view</li>
+            <li>This can also be done with templates by referencing a template reference</li>
+          </ol>
+          <div>
+            Example 1
             <div class="card">
               <div class="card-body">
-                <code>
-                  @ViewChild(CountdownTimerComponent)&#10;private timerComponent:
-                  CountdownTimerComponent
-                </code>
+                <code> &amp;ViewChild(CountdownTimerComponent)&#10;private timerComponent: CountdownTimerComponent </code>
               </div>
             </div>
-            <p>Example 2</p>
+          </div>
+          <div>
+            Example 2
             <div class="card">
               <div class="card-body">
                 <code>
                   <pre>
-    @Component({
+    &amp;amp;Component({
        selector: &quot;app-root&quot;,                 
        template: `                   
           &lt;ng-template #defaultTabButtons>                                  
@@ -225,12 +206,11 @@
                 </code>
               </div>
             </div>
-          </ol>
+          </div>
         </div>
         <div>
-          You can inject a reference to a DOM element. Use this option when you
-          want to work with an HTML element in the component template (for
-          example, if you need to make some jQuery calls to an element)
+          You can inject a reference to a DOM element. Use this option when you want to work with an HTML element in the component template (for example, if you need to make some jQuery calls to an
+          element)
           <ul>
             <li>
               Tag the element with a template variable
@@ -239,19 +219,15 @@
               </div>
             </li>
             <li>
-              Add a ViewChild property and decorate it with the ViewChild
-              (decorator takes the template variable as a string)
+              Add a ViewChild property and decorate it with the ViewChild (decorator takes the template variable as a string)
               <div class="card">
                 <div class="card-body">
-                  <code
-                    >@ViewChild(&quot;title&quot;)&#10;title: ElementRef</code
-                  >
+                  <code>&amp;amp;ViewChild(&quot;title&quot;)&#10;title: ElementRef</code>
                 </div>
               </div>
             </li>
             <li>
-              Use the nativeElement property on the ElementRef object to get the
-              native DOM element
+              Use the nativeElement property on the ElementRef object to get the native DOM element
               <ul>
                 <li>this.title.nativeElement</li>
                 <li>ElementRef is a wrapper class for the DOM element</li>
@@ -260,78 +236,45 @@
           </ul>
         </div>
         <div>
-          <p>
-            To inject a reference to a child component, but get the actual DOM
-            object instead of the component object
-          </p>
+          <p>To inject a reference to a child component, but get the actual DOM object instead of the component object</p>
           <div class="card">
             <div class="card-body">
               <code>
-                @ViewChild(MyElementComponent, {read:ElementRef})<br/>
+                &amp;amp;ViewChild(MyElementComponent, {read:ElementRef})<br />
                 componentToRef: MyElementComponent
               </code>
             </div>
           </div>
         </div>
         <div>
-          <p>
-            To inject a reference to a directive, tag the element with the
-            targeted directive with a template variable
-          </p>
+          <p>To inject a reference to a directive, tag the element with the targeted directive with a template variable</p>
           <div class="card">
             <div class="card-body">
-              <code>
-                &lt;input #primaryInput
-                &#91;(colorPicker)&#93;&quot;primary&quot;
-                &#91;(ngModel)&#93;=&quot;primary&quot;/&gt;
-              </code>
+              <code> &lt;input #primaryInput &#91;(colorPicker)&#93;&quot;primary&quot; &#91;(ngModel)&#93;=&quot;primary&quot;/&gt; </code>
             </div>
           </div>
           <p>
-            Add a property named after the directive to the component and
-            decorate it with the ViewChild decorator (decorator takes the string
-            of the template variable and a configuration object specifying the
-            type of directive)
+            Add a property named after the directive to the component and decorate it with the ViewChild decorator (decorator takes the string of the template variable and a configuration object
+            specifying the type of directive)
           </p>
           <div class="card">
             <div class="card-body">
-              <code>
-                @ViewChild(&quot;primaryInput&quot;, {read:
-                ColorPickerDirective})&#10;colorPicker: ColorPickerDirective;
-              </code>
+              <code> &amp;ViewChild(&quot;primaryInput&quot;, {read: ColorPickerDirective})&#10;colorPicker: ColorPickerDirective; </code>
             </div>
           </div>
-        </div>
-        <div>
-          Links
-          <ul>
-            <li>
-              <a
-                href="https://tutorialsforangular.com/2021/06/20/what-does-the-static-property-on-viewchild-do/"
-                target="_blank"
-                >https://tutorialsforangular.com/2021/06/20/what-does-the-static-property-on-viewchild-do/</a
-              >
-            </li>
-          </ul>
         </div>
       </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://tutorialsforangular.com/2021/06/20/what-does-the-static-property-on-viewchild-do/" target="_blank">
+              https://tutorialsforangular.com/2021/06/20/what-does-the-static-property-on-viewchild-do/
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

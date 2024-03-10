@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -25,143 +22,118 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Structural Directives
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Structural Directives</li>
         </ol>
       </nav>
 
       <h1>Structural Directives</h1>
 
-      <section id="structural">
+      <section class="navlinks">
         <ul>
           <li>
-            Responsible for HTML layout by shaping the DOM's structure,
-            typically by adding, removing, or manipulating elements
+            <a href="structural.html#builtin">Built-In Directives</a>
           </li>
           <li>
-            Creates an embedded view from the Angular generated ng-template and
-            inserts that view in a view container adjacent to the directive's
-            original host element
+            <a href="structural.html#custom">Custom Directives</a>
           </li>
+        </ul>
+      </section>
+
+      <h2>General</h2>
+      <section>
+        <ul>
+          <li>Responsible for HTML layout by shaping or reshaping the DOM's structure, typically by adding, removing, or manipulating elements</li>
+          <li>Creates an embedded view from the Angular generated ng-template and inserts that view in a view container adjacent to the directive's original host element</li>
           <li>
             These are limited to a single structural directive per host element
             <ul>
               <li>This is due to precedence and their complexity</li>
-              <li>
-                For instance, cannot have *ngFor and *ngIf on the same host
-                element
-              </li>
-              <li>
-                use ng-containers so you don't introduce extra levels of HTML
-              </li>
+              <li>For instance, cannot have *ngFor and *ngIf on the same host element</li>
+              <li>use ng-containers so you don't introduce extra levels of HTML</li>
             </ul>
           </li>
+          <li>Apply to a host element - directive then does what it is supposed to do with that host element and its descendants</li>
           <li>
-            Apply to a host element - directive then does what it is supposed to
-            do with that host element and its descendants
-          </li>
-          <li>
-            An * precedes the directive attribute name to identify it as a
-            structural directive
+            An * precedes the directive attribute name to identify it as a structural directive
             <ul>
               <li>No brackets or parentheses are needed</li>
-              <li>
-                This is a convenience notation and the string that follows is a
-                microsyntax rather than the usual template expression
-              </li>
-              <li>
-                This is desugared into a marked-up ng-template that surrounds
-                the host element and its descendants
-              </li>
+              <li>This is a convenience notation and the string that follows is a microsyntax rather than the usual template expression</li>
+              <li>This is de-sugared into a marked-up ng-template that surrounds the host element and its descendants</li>
             </ul>
           </li>
-          <li>
-            Built in directives (replaced with Flow Control Syntax in v17)
-            <ul>
-              <li><a href="ngif.html">ngIf</a></li>
-              <li>ngFor<a href="ngforof.html">ngFor</a></li>
-              <li>ngSwitch<a href="ngswitch.html">ngSwitch</a></li>
-            </ul>
-          </li>
-          <li>
-            Microsyntax
-            <ul>
-              <li>
-                Lets you configure a directive in a compact, friendly string
-              </li>
-              <li>See specific structural directives for specifics</li>
-            </ul>
-          </li>
-          <li>
-            To create a custom structural directive
-            <ul>
-              <li>
-                Import the Directive decorator
-                <ul>
-                  <li>Apply this to the directive class</li>
-                  <li>
-                    Set the CSS attribute selector that identifies the directive
-                    when applied to an element in a template
-                  </li>
-                  <li>
-                    <div class="card">
-                      <div class="card-body">
-                        <code>
-                          @Directive({ selector: &quot;&#91;appUnless&#93;&quot;
-                          })
-                        </code>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Import the following since they are needed in any structural
-                directive
-                <ul>
-                  <li>Input</li>
-                  <li>
-                    TemplateRef
-                    <ul>
-                      <li>
-                        Gives access to the contents of the generated
-                        ng-template element
-                      </li>
-                      <li>Inject this into the constructor</li>
-                    </ul>
-                  </li>
-                  <li>
-                    ViewContainerRef
-                    <ul>
-                      <li>Gives access to the view container</li>
-                      <li>Inject this into the constructor</li>
-                      <li>
-                        <div>Creates the embedded view from the template</div>
-                        <div class="card">
-                          <div class="card-body">
-                            <code>
-                              this.viewContainer.createdEmbeddedView(this.templateRef)
-                            </code>
-                          </div>
-                        </div>
-                      </li>
+        </ul>
+      </section>
 
-                      <li>
-                        <div>Removes the ng-template contents</div>
-                        <div class="card">
-                          <div class="card-body">
-                            <code> this.viewContainer.clear()</code>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
+      <h2 id="builtin">Built-In Directives</h2>
+      <section>
+        <ul>
+          <li>
+            Common built-in directives are:
+            <ul>
+              <li>
+                <a href="../legacy/ngif.html">NgIf</a>
+              </li>
+              <li>
+                <a href="../legacy/ngforof.html">NgFor</a>
+              </li>
+              <li>
+                <a href="../legacy/ngswitch.html">NgSwitch</a>
               </li>
             </ul>
           </li>
         </ul>
+      </section>
+
+      <h2 id="custom">Custom Directives</h2>
+      <section>
+        <div>
+          Import the Directive decorator
+          <ul>
+            <li>Apply this to the directive class</li>
+            <li>Set the CSS attribute selector that identifies the directive when applied to an element in a template</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>&amp;Directive({ selector: &quot;&#91;appUnless&#93;&quot; }) </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Import the following since they are needed in any structural directive:
+          <ul>
+            <li>Input</li>
+            <li>
+              TemplateRef
+              <ul>
+                <li>Gives access to the contents of the generated ng-template element</li>
+                <li>Inject this into the constructor</li>
+              </ul>
+            </li>
+            <li>
+              ViewContainerRef
+              <ul>
+                <li>Gives access to the view container</li>
+                <li>Inject this into the constructor</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          To create the embedded view from the template:
+          <div class="card">
+            <div class="card-body">
+              <code> this.viewContainer.createdEmbeddedView(this.templateRef) </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To remove the ng-template contents:
+          <div class="card">
+            <div class="card-body">
+              <code> this.viewContainer.clear()</code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

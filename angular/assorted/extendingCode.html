@@ -33,7 +33,7 @@
           <li>Since components are classes, you can extend a base class to share functionality between two components</li>
           <li>This can lead to situations you do not necessarily want, such as:
             <ul>
-              <li>Inheriting functionality in one component that you dont want/need just to get it into the other component</li>
+              <li>Inheriting functionality in one component that you do not want/need just to get it into the other component</li>
               <li>Good practice to only expose an API that you want the other side to use</li>
             </ul>
           </li>
@@ -59,37 +59,10 @@
 
       <h2>Directive Composition API</h2>
       <section>
-        <ul>
-          <li>Requires Angular 15+</li>
-          <li>Directives can be added to a component class instead of templates</li>
-          <li>This uses the HostDirectives property in the Component decorator
-            <ul>
-              <li>This is an array of directives that are automatically applied to the host element of the component</li>
-              <li>Means you do not have not have to explicitly add these directives to the template when you add the component</li>
-            </ul>
-          </li>
-          <li>
-            One catch is inputs and outputs are components are treated as private by default
-            <ul>
-              <li>Add the proerties to the hostDirectives configuration to allow them to be used publically</li>
-              <li>See example for how to do this</li>
-              <li>You can also alias properties so you can use a different name in your templates</li>
-            </ul>
-          </li>
-          <li>
-            Any directives used must be standalone
-          </li>
-        </ul>
+        <a href="../directives/compositionapi.html">See Composition API</a>
       </section>
 
-      <h2>See Also</h2>
-      <section>
-        <ul>
-          <li>
-            <a href="https://angular.io/guide/standalone-components" target="_blank">https://angular.io/guide/standalone-components</a>
-          </li>
-        </ul>
-      </section>
+
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

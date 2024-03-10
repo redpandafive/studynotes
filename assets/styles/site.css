@@ -22,3 +22,7 @@ div.card {
 span.devnote {
     color: red;
 }
+
+.reminder {
+    font-weight: bold;
+}
