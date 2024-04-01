@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -25,45 +22,42 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            One Time String Initialization
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">One Time String Initialization</li>
         </ol>
       </nav>
 
       <h2 id="oneTimeInit">One Time String Initialization</h2>
       <section>
         <ul>
-          <li>
-            Without square brackets, Angular treats the right hand side as a
-            string literal and sets the property to that static value
+          <li>Without square brackets, Angular treats the right hand side as a string literal and sets the property to that static value
+            <ul>
+              <li>These will not be updated is the bound property value changes</li>
+            </ul>
           </li>
           <li>
             Eliminate the brackets when the following are true
             <ul>
               <li>The target property accepts a string</li>
-              <li>
-                The string is a fixed value that you can bake into the template
-              </li>
+              <li>The string is a fixed value that you can bake into the template</li>
               <li>The initial value never changed</li>
             </ul>
           </li>
-          <li>These will not be updated is the bound property value changes</li>
         </ul>
-        <div class="card">
-          <div class="card-body">
-            <code>
-              &lt;img alt="item" &#91;src&#93;=&quot;itemImageUrl&quot;&gt;
-            </code>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
+        <div>
+          <ul>
+            <li>Alt property is set as a static string literal (item will be the value of alt, not the value of a property named item)</li>
+            <li>Src property is updated whenever itemImageUrl is changed</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code> &lt;img alt="item" &#91;src&#93;=&quot;itemImageUrl&quot;&gt; </code>
+            </div>
           </div>
         </div>
-        <ul>
-          <li>
-            Alt property is set as a static string literal (item will be the
-            value of alt, not the value of a property named item)
-          </li>
-          <li>Src property is updated whenever itemImageUrl is changed</li>
-        </ul>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

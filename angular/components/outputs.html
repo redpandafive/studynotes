@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Output Properties</li>
+        </ol>
+      </nav>
+
+      <h1>Output Properties</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="outputs.html#basics">Basics</a>
+          </li>
+          <li>
+            <a href="outputs.html#examples">Examples</a>
+          </li>
+          <li>
+            <a href="outputs.html#decorator">Defined in Component Decorator</a>
+          </li>
+          <li>
+            <a href="outputs.html#aliases">Export Aliases</a>
+          </li>
+          <li>
+            <a href="outputs.html#bestpractices">Best Practices</a>
+          </li>
+        </ul>
+      </section>
+
+      <section id="basics">
+        <ul>
+          <li>
+            Values flow out of the component as events bound with an event binding
+            <ul>
+              <li>This allows a child to send data to a parent component</li>
+              <li>This is an Observable property = means you can subscribe to it</li>
+            </ul>
+          </li>
+          <li>
+            Defined using an Angular EventEmitter object
+            <ul>
+              <li>Annotated with &#64;Output decorator</li>
+            </ul>
+          </li>
+          <li>When defining an event listener in a template, you can access the event data from the $event variable</li>
+          <li>
+            Events do not bubble up the DOM to higher components like they do in JS
+            <ul>
+              <li>An event dispatched from a child component can only be heard by its parent component, not any higher</li>
+              <li>This was a design decision done to streamline concepts</li>
+              <li>A service bus design or store solution might be alternatives if this is needed (Can implement in plain JS, but this should be avoided)</li>
+            </ul>
+          </li>
+          <li>When extending a component class, outputs are inherited by the child class</li>
+        </ul>
+      </section>
+
+      <h2 class="examples">Examples</h2>
+      <section>
+        <div>
+          Import the required items in the child component
+          <div class="card">
+            <div class="card-body">
+              <code>import { EventEmitter, Output } from "&#64;angular/core";</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          In the child component, declare an EventEmitter property with the Output decorator
+          <div class="card">
+            <div class="card-body">
+              <code>&#64;Output() DeleteRequest= new EventEmitter&lt;Hero&gt;()</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To dispatch the event in the child, raise it with the emit method call. Hero is the data you wish to pass back to the parent
+          <div class="card">
+            <div class="card-body">
+              <code>this.DeleteRequest.emit(hero)</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To configure the parent, add a method in the component to handle the data and bind that method to the child component template. The $event object contains the data dispatched by the event
+          <div class="card">
+            <div class="card-body">
+              <code>&lt;app-item-output (deleteRequest)=&quot;addItem($event)&quot; ...&gt;</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Bind to an output property in a parent component. This calls a handler method onVoted on the parent component. The parameter for this method will be the payload sent by the child.
+          <div class="card">
+            <div class="card-body">
+              <code>&lt;my-component (onvoted)=&quot;onVoted($event)&quot;&gt;&lt;/my-component&gt;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="decorator">Defined in Component Decorator</h2>
+      <section>
+        <ul>
+          <li>
+            As an alternative to using the Output decorator, you can specify a component's outputs with the outputs property in the Component decorator
+            <ul>
+              <li>Useful when a component inherits a property from a base class</li>
+            </ul>
+          </li>
+          <li>An alias can be provided if needed</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &#64;Component({ <br />
+                ... , <br />
+                outputs: ['valueChanged'] <br />
+                }) <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &#64;Component({ <br />
+                ... , <br />
+                outputs: ['valueChanged: volumeChanged'] <br />
+                }) <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="aliases">Export Aliases</h2>
+      <section>
+        <ul>
+          <li>These are useful when you want to expose one name for a property, such name it something different internally</li>
+          <li>This can be done on both Inputs and Outputs</li>
+          <li>
+            Style guide recommends this should be avoided when possible. Exceptions include:
+            <ul>
+              <li>Avoiding collisions with the name of native DOM elements</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Example of export alias
+          <div class="card">
+            <div class="card-body">
+              <code>&#64;Output('myClick') clicks = new EventEmitter&lt;string&gt;()&#10;</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="bestpractices">Best Practices</h2>
+      <section>
+        <ul>
+          <li>
+            General
+            <ul>
+              <li>Use input and output decorators, not properties on the component configuration object</li>
+              <li>If possible, keep them on the same line as the rest of the declaration</li>
+              <li>Avoid aliasing inputs and outputs</li>
+            </ul>
+          </li>
+          <li>Use camel case for output names</li>
+          <li>
+            Do not use on prefix for output events
+            <div class="card">
+              <div class="card-body">
+                <code>&#64;Output savedTheDay = new EventEmitter&lt;Boolean&gt;()</code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Use
+            <em>on</em>
+            prefix for event handlers, followed by the event name
+            <ul>
+              <li>onSavedTheDay</li>
+            </ul>
+          </li>
+          <li>
+            Do not use on prefix for events
+            <div class="card">
+              <div class="card-body">
+                <code>&#64;Output savedTheDay = new EventEmitter&lt;Boolean&gt;()"</code>
+              </div>
+            </div>
+          </li>
+          <li>Avoid output names that collide with events on DOM elements like HTMLElement</li>
+          <li>Avoid adding prefixes for component outputs like you would component selectors</li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

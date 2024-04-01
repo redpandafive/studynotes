@@ -87,7 +87,10 @@
                   <li>This removed over 40 directives from Angular JS</li>
                 </ul>
               </li>
-              <li>Makes it the target of a property binding expression</li>
+              <li>Makes it the target of a property binding expression
+                <ul>
+                  <li>Notifies Angular that the assigned value is dynamic and should be evaluated before rendering</li>
+              </li>
               <li>
                 You can also use an alternative syntax that does not use braces,
                 but prefixes the property (such as bind-class=”property”)
@@ -130,13 +133,13 @@
           <li>
             [attri.attributeName]
             <ul>
-              <li>Attribute binding expression</li>
+              <li>Attribute binding expression to use with </li>
               <li>
                 Only use when you need to bind to an attribute that does not
-                have a corresponding property
+                have a corresponding DOM property
               </li>
               <li>
-                Usually table elements (such as colspan ), ARIA, and SVG
+                Usually table elements (such as colspan), ARIA, and SVG
                 attributes
               </li>
             </ul>

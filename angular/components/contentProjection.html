@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -25,9 +22,7 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Content Projection
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Content Projection</li>
         </ol>
       </nav>
 
@@ -36,74 +31,186 @@
       <section>
         <ul>
           <li>
-            Allows you to insert content into a child component from the parent
-            component
-          </li>
-          <li>
-            Uses the ng-content directive as a placeholder in the child
-            component
-          </li>
-          <li>
-            Does not create a real DOM element, so custom attributes applied to
-            it are ignored
-          </li>
-          <li>
-            Single slot content projection
+            Allows you to insert content into a child component from the parent component
             <ul>
-              <li>Component accepts content from a single source</li>
-              <li>
-                Place a ng-content tag in the child component where external
-                content should be placed
-              </li>
-              <li>
-                Put context between the opening and closing tags of the child
-                component (in the parent component)
-              </li>
+              <li>Useful when you need components to act as containers for different types of content</li>
             </ul>
           </li>
           <li>
-            Multi slot content projection
+            Any children passed ths way are referred to as that component's content
             <ul>
-              <li>Component accepts content from multiple sources</li>
+              <li>This is distinct from the elements defined in the components own template, which is known as the component's view</li>
+            </ul>
+          </li>
+          <li>
+            Uses the ng-content directive as a placeholder in the child component
+            <ul>
+              <li>When you include this in your component, any children of the component host element are projected (rendered) at the location of the NgContent</li>
+              <li>This is similar to the <code>&lt;slot&gt;</code> native element, but includes some Angular specific functionality</li>
+            </ul>
+          </li>
+          <li>
+            NgContent
+            <ul>
+              <li>Does not create a real DOM element, so custom attributes applied to it are ignored</li>
               <li>
-                Each slot uses a selector to determine which content goes into
-                that slot -this could be a
+                Is neither a component nor DOM element
                 <ul>
-                  <li>CSS selector (not recommended)</li>
-                  <li>Attribute selector (recommended)</li>
+                  <li>Angular's compiler processes all ng-content elements at build time</li>
+                  <li>You cannot insert, remove, or modify ng-content at run time</li>
+                  <li>You cannot add directives, styles, or arbitrary attributes to ng-content</li>
+                  <li>Its content is always initialized, even is the child component does not defined a ngContent element of if it is inside an ngIf element</li>
                 </ul>
               </li>
+
               <li>
-                To implement
+                Don't conditionally include ng-content with if, for, or switch blocks
                 <ul>
-                  <li>
-                    Place a ng-content tag in the child component for each slot
-                  </li>
-                  <li>
-                    Tag each slot with a select attribute to indicate the
-                    selector
-                  </li>
-                  <li>The square brackets make this an attribute selector</li>
-                  <li>
-                    Add the selector as an attribute on the parent component
-                  </li>
+                  <li>Use Template Fragments for conditional rendering of component content</li>
                 </ul>
               </li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h2>Single Slot Content Projection</h2>
+      <section>
+        <ul>
+          <li>Component accepts content from a single source</li>
+          <li>Place a ng-content tag in the child component where external content should be placed</li>
+          <li>Put context between the opening and closing tags of the child component (in the parent component)</li>
+        </ul>
+      </section>
+
+      <h2>Multi Slot Content Projection</h2>
+      <section>
+        <ul>
+          <li>You can project multiple different elements into different ng-content placeholders</li>
           <li>
-            Conditional content projection
+            Each slot uses a selector to determine which content goes into that slot - this could be a
             <ul>
-              <li>Will render content only when specific conditions are met</li>
-              <li>
-                See documentation at
-                <a
-                  href="https://angular.io/guide/content-projection#conditional-content-projection"
-                  target="_blank"
-                  >https://angular.io/guide/content-projection#conditional-content-projection</a
-                >
-              </li>
+              <li>CSS selector (not recommended)</li>
+              <li>Attribute selector (recommended)</li>
             </ul>
+          </li>
+          <li>
+            To implement
+            <ul>
+              <li>Place a ng-content tag in the child component for each slot</li>
+              <li>Tag each slot with a <code>select</code> attribute to indicate the selector</li>
+              <li>The square brackets make this an attribute selector</li>
+              <li>Add the selector as an attribute on the parent component</li>
+            </ul>
+          </li>
+          <li>If you add a ng-content placeholder without a <code>select</code> attribute, it will contain all elements that do not match any of the supplied <code>select</code> attributes</li>
+        </ul>
+        <div>
+          The following example includes a default to capture anything except "card-title" and "card-body"
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div class="card-shadow"&gt; <br />
+                &lt;ng-content select="card-title"&gt;&lt;/ng-content&gt; <br />
+                &lt;div class="card-divider"&gt;&lt;/div&gt; <br />
+                &lt;ng-content select="card-body"&gt;&lt;/ng-content&gt; <br />
+                &lt;div class="card-divider"&gt;&lt;/div&gt; <br />
+                &lt;ng-content&gt;&lt;/ng-content>&gt; <br />
+                &lt;/div&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;custom-card &gt; <br />
+                &lt;card-title&gt;Hello&lt;/card-title&gt; <br />
+                &lt;card-body&gt;Welcome to the example&lt;/card-body&gt; <br />
+                &lt;/custom-card&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;custom-card &gt; <br />
+                &lt;div class="card-shadow"&gt; <br />
+                &lt;card-title&gt;Hello&lt;/card-title&gt; <br />
+                &lt;div class="card-divider"&gt;&lt;/div&gt; <br />
+                &lt;card-body&gt;Welcome to the example&lt;/card-body&gt; <br />
+                &lt;/div&gt; <br />
+                &lt;/custom-card&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Aliasing Content for Projection</h2>
+      <section>
+        <ul>
+          <li>
+            <code>ngProjectAs</code> is a special attribute that allows you to specify a CSS selector on any element
+            <ul>
+              <li>When an element with it is checked against a <code>ng-content</code> placeholder, Angular compares against the <code>ngProjectAs</code> value instead of the element's identify</li>
+            </ul>
+          </li>
+          <li>It only supports static values and cannot be bound to dynamic expressions</li>
+        </ul>
+        <div>
+          The following example includes a default to capture anything except "card-title" and "card-body"
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div class="card-shadow"&gt; <br />
+                &lt;ng-content select="card-title"&gt;&lt;/ng-content&gt; <br />
+                &lt;div class="card-divider"&gt;&lt;/div&gt; <br />
+                &lt;ng-content&gt;&lt;/ng-content>&gt; <br />
+                &lt;/div&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;custom-card &gt; <br />
+                &lt;h3&gt; ngProjectAs="card-title"&lt;/h3&gt; <br />
+                &lt;p&gt;Welcome to the example&lt;/p&gt; <br />
+                &lt;/custom-card&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;custom-card &gt; <br />
+                &lt;div class="card-shadow"&gt; <br />
+                &lt;h3&gt;Hello&lt;/h3&gt; <br />
+                &lt;div class="card-divider"&gt;&lt;/div&gt; <br />
+                &lt;p&gt;Welcome to the example&lt;/p&gt; <br />
+                &lt;/div&gt; <br />
+                &lt;/custom-card&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Conditional Content Projection</h2>
+      <section>
+        <ul>
+          <li>Will render content only when specific conditions are met</li>
+          <li>
+            See documentation at
+            <a href="https://angular.io/guide/content-projection#conditional-content-projection" target="_blank">https://angular.io/guide/content-projection#conditional-content-projection</a>
           </li>
         </ul>
       </section>

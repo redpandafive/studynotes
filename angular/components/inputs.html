@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Input Properties</li>
+        </ol>
+      </nav>
+
+      <h1>Input Properties</h1>
+
+      <section class="navlinks">
+        <ul>
+          <li>
+            <a href="inputs.html#basics">Basics</a>
+          </li>
+          <li>
+            <a href="inputs.html#decorator">Defined in Component Decorator</a>
+          </li>
+          <li>
+            <a href="inputs.html#inputPropertyOptions">Input Property Options</a>
+          </li>
+          <li>
+            <a href="inputs.html#routePaams">Route Parameter / Input Mapping</a>
+          </li>
+          <li>
+            <a href="inputs.html#propertySetters">Input Getters and Setters</a>
+          </li>
+          <li>
+            <a href="inputs.html#aliases">Import Aliases</a>
+          </li>
+          <li>
+            <a href="inputs.html#bestpractices">Best Practices</a>
+          </li>
+        </ul>
+      </section>
+
+      <section id="basics">
+        <ul>
+          <li>
+            Marks a component property as bindable
+            <ul>
+              <li>Settable properties</li>
+              <li>Receive data values from parent components</li>
+              <li>Values flow into the property when it is data bound with a property binding</li>
+            </ul>
+          </li>
+          <li>
+            These are used when binding to a property of a different component
+            <ul>
+              <li>TypeScript access modifiers can’t be used to shape a component's public binding API</li>
+              <li>When binding to a template to its own component class, you have no need of these.</li>
+            </ul>
+          </li>
+          <li>
+            Provides type checking on values passed into the component;
+            <ul>
+              <li>
+                The HTML standard treats:
+                <ul>
+                  <li>All attribute values as strings</li>
+                  <li>Boolean attributes as true if they are present on the DOM node, false if not</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Characteristics
+            <ul>
+              <li>These are statically recorded at compile time; they cannot be added or removed at run-time</li>
+              <li>When you extend a component class, these are inherited by the child class</li>
+            </ul>
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>Declare using Input decorator in the child class and bind the property in the parent component template</li>
+              <li>Input names are case sensitive</li>
+            </ul>
+          </li>
+          <li>
+            Use ngOnChanges to detect when input property values change
+            <ul>
+              <li>This method receives a SimpleChange object</li>
+              <li>This will give you the old and new values of the inputs</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="decorator">Defined in Component Decorator</h2>
+      <section>
+        <ul>
+          <li>
+            As an alternative to using the Input decorator, you can specify a component's inputs with the inputs property in the Component decorator
+            <ul>
+              <li>Useful when a component inherits a property from a base class</li>
+            </ul>
+          </li>
+          <li>An alias can be provided if needed</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &#64;Component({ <br />
+                ... , <br />
+                inputs: ['disabled'] <br />
+                }) <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &#64;Component({ <br />
+                ... , <br />
+                inputs: ['disabled: sliderDisabled'] <br />
+                }) <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="inputPropertyOptions">Input Property Options</h2>
+
+      <h3>alias</h3>
+      <section>
+        <ul>
+          <li>Name of the DOM property to which the input property is bound.</li>
+          <li>Use this when you want to work on a different name inside the directive / component</li>
+          <li>
+            See
+            <a href="inputs.html#aliases">Import / Export Aliases</a>
+          </li>
+        </ul>
+      </section>
+
+      <h3>required</h3>
+      <section>
+        <ul>
+          <li>
+            The input is required for the directive to function
+            <ul>
+              <li>The input must always have a value</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>&#64;Input({ required: true }) userId: number = 0;</code>
+          </div>
+        </div>
+      </section>
+
+      <h3>transform</h3>
+      <section>
+        <ul>
+          <li>
+            Specifies a function to transform the input value before assigning it to the directive instance.
+            <ul>
+              <li>Any values set through teh template will be passed through the specified function before being assigned to the directive instance</li>
+            </ul>
+          </li>
+          <li>
+            The fine print
+            <ul>
+              <li>
+                These must be statically analyzable at build run-time
+                <ul>
+                  <li>You cannot set transform functions conditionally or as the result of an expression evaluation</li>
+                </ul>
+              </li>
+              <li>These should be pure functions; relying on state outside of the function can lead to unpredictable behavior</li>
+            </ul>
+          </li>
+          <li>
+            Use cases
+            <ul>
+              <li>Most common use case is to accept a wider range of value types in templates, often including null and undefined</li>
+              <li>Can potentially eliminate the need to getter and setter methods</li>
+              <li>Angular treats all static attributes as strings, so these provide a way to safely type incoming values</li>
+            </ul>
+          </li>
+          <li>
+            Angular provides several built in utility methods that can be used as the transform function on an input
+            <ul>
+              <li>booleanAttribute - converts a value (usually a string) to a boolean</li>
+              <li>numberAttribute - converts a value (usually a string) to a number</li>
+              <li>
+                The HTML standard treats:
+                <ul>
+                  <li>All attribute values as strings</li>
+                  <li>Boolean attributes as true if they are present on the DOM node, false if not</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>This is useful on route parameter / input mapping since it provides a point to cast the string value from the url to somthing else.</li>
+        </ul>
+        <div>
+          Example syntax
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &#64;Input({ transform: numberAttribute }) id!: number;
+                <br />
+                &#64;Input({ transform: booleanAttribute }) disabled!: boolean;
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          The following will be transformed to type boolean on the disabled Input
+          <div class="card">
+            <div class="card-body">
+              <code>
+                // this will be transformed to value of true
+                <br />
+                &lt;app-checkbox disabled /&gt;
+                <br />
+                // this will be transfomred to value of false
+                <br />
+                &lt;app-checkbox /&gt;
+                <br />
+                ...
+                <br />
+                // input property definition in component
+                <br />
+                &#64;Input({ transform: booleanAttribute }) disabled!: boolean;
+                <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="routePaams">Route Parameter / Input Mapping</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="../routing/routeParameterMapping.html">See this</a>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="propertySetters">Input Getters and Setters</h2>
+      <section>
+        <li>
+          <span class="devnote">See Input Property Options for the transform option instead of this</span>
+        </li>
+        <li>
+          Input properties can be implemented with getter and / or setter
+          <ul>
+            <li>This is useful if you need to do some sort of validation or standardization on inputs</li>
+            <li>A write-only input can be defined by only using a public setter</li>
+          </ul>
+        </li>
+        <li>
+          An example use case uses this to create a derived value from an input property
+          <ul>
+            <li>Uses this to set the color of a voting icon to set or not set</li>
+            <li>The setting on an input property toggles the color of the icon</li>
+            <li>Eliminates the need for a conditional on the icon</li>
+          </ul>
+        </li>
+        <div>
+          Example of an input setter. This can then be used to reference an internal variable _name
+          <div class="card">
+            <div class="card-body">
+              <code>&#64;Input()&#10;set name(name: string) {...}&#10;get name(name: string) { ... }</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &#64;Input() <br />
+                get value(): number { <br />
+                return this.internalValue; <br />
+                } <br />
+                set value(newValue: number) { <br />
+                this.internalValue = newValue; <br />
+                } <br />
+                private internalValue = 0; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="aliases">Import Aliases</h2>
+      <section>
+        <ul>
+          <li>These are useful when you want to expose one name for a property, such name it something different internally</li>
+          <li>This can be done on both Inputs and Outputs</li>
+          <li>Style guide recommends this should be avoided when possible</li>
+        </ul>
+        <p>Example of export alias</p>
+        <div class="card">
+          <div class="card-body">
+            <code>&#64;Output('myClick') clicks = new EventEmitter&lt;string&gt;()&#10;</code>
+          </div>
+        </div>
+      </section>
+
+      <h2 id="bestpractices">Best Practices</h2>
+      <section>
+        <ul>
+          <li>
+            General
+            <ul>
+              <li>Use input and output decorators, not properties on the component configuration object</li>
+              <li>If possible, keep them on the same line as the rest of the declaration</li>
+              <li>Avoid aliasing inputs and outputs</li>
+              <li>
+                Provide a default value for inputs or use ? to explicitly mark the property as optional
+                <ul>
+                  <li>Do not suppress this with !</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Favor input transformations over public getters and setters for inputs</li>
+          <li>
+            Inputs should not be mutated within components
+            <ul>
+              <li>Mutating or re-declaring input values can lead to bugs that are difficult to diagnose</li>
+              <li>
+                Never mutate data in a component that comes from outside the component
+                <ul>
+                  <li>Mutating data from within the component is fine</li>
+                </ul>
+              </li>
+              <li>
+                Solutions
+                <ul>
+                  <li>Mark as readonly</li>
+                  <li>Define the interface as ReadonlyArray</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -25,9 +22,7 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Event Bindings
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Event Bindings</li>
         </ol>
       </nav>
 
@@ -39,19 +34,13 @@
           <li>
             Angular binds an event handler to a DOM event
             <ul>
-              <li>
-                When the event is raised, the handler executes the template
-                statement
-              </li>
+              <li>When the event is raised, the handler executes the template statement</li>
             </ul>
           </li>
           <li>
             Event binding syntax consists of
             <ul>
-              <li>
-                Target event name within parentheses on the left of an equal
-                sign
-              </li>
+              <li>Target event name within parentheses on the left of an equal sign</li>
               <li>Quoted template statement on the right of an equals sign</li>
             </ul>
           </li>
@@ -61,10 +50,7 @@
               <li>(blur) - Event triggered when leaving the element</li>
               <li>(mouseenter) - Mouse is over the element</li>
               <li>(mouseleave) - Mouse is leaving the element</li>
-              <li>
-                (ngSubmit) - Event on the forms element that triggers when the
-                form is submitted
-              </li>
+              <li>(ngSubmit) - Event on the forms element that triggers when the form is submitted</li>
             </ul>
           </li>
         </ul>
@@ -78,49 +64,49 @@
         </div>
       </section>
 
-      <h3>Event Binding Template Statement</h3>
+      <h2>Event Objects</h2>
+      <section>
+        <ul>
+          <li>If you need access to the event object, Angular provides an implicit $event variable that you can pass to a function from a template</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;button (click)="createUser($event)"&gt;Submit&lt;/button&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Event Binding Template Statement</h2>
       <section>
         <ul>
           <li>
-            The binding conveys information about the event, including data
-            values, through an event object named $event (event payload)
+            The binding conveys information about the event, including data values, through an event object named $event (event payload)
             <ul>
-              <li>
-                The shape of the event object is determined by the target event
-              </li>
-              <li>
-                If it is a native DOM element event, then $event is a DOM event
-                object
-              </li>
+              <li>The shape of the event object is determined by the target event</li>
+              <li>If it is a native DOM element event, then $event is a DOM event object</li>
               <li>
                 All standard DOM event objects have a target property
                 <ul>
                   <li>Refers to the element that raised the event</li>
-                  <li>
-                    Target.value is usually the value currently in the target
-                    element
-                  </li>
+                  <li>Target.value is usually the value currently in the target element</li>
                 </ul>
               </li>
             </ul>
           </li>
           <li>
-            You can use a template reference variable if you only need direct
-            access to an element from within a template
+            You can use a template reference variable if you only need direct access to an element from within a template
             <ul>
-              <li>
-                Component does nothing with this and no bindings are needed
-              </li>
+              <li>Component does nothing with this and no bindings are needed</li>
             </ul>
           </li>
           <li>
-            Make sure you are aware of the execution context of the template
-            statement
+            Make sure you are aware of the execution context of the template statement
             <ul>
-              <li>
-                Identifiers in a template statement belong to a specific context
-                object, usually the Angular component controlling the template
-              </li>
+              <li>Identifiers in a template statement belong to a specific context object, usually the Angular component controlling the template</li>
             </ul>
           </li>
           <li>
@@ -134,81 +120,57 @@
         </ul>
       </section>
 
-      <h3>Event Handler</h3>
+      <h2>Event Handler</h2>
       <section>
         <ul>
           <li>
-            In called component method, you can type the event parameter that
-            you pass
+            In called component method, you can type the event parameter that you pass
             <ul>
-              <li>
-                You can type it as any for simplicity, but you lose code
-                completion assistance
-              </li>
-              <li>
-                Alternatively, you could be specific in the typing, such as
-                KeyboardEvent
-              </li>
+              <li>You can type it as any for simplicity, but you lose code completion assistance</li>
+              <li>Alternatively, you could be specific in the typing, such as KeyboardEvent</li>
             </ul>
           </li>
           <li>
-            Passing the entire event object can cause a separation of concerns
-            problem
+            Passing the entire event object can cause a separation of concerns problem
             <ul>
+              <li>That gives the method far more knowledge of the template details than it needs to do its job</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>DOM Events</h2>
+      <section>
+        <ul>
+          <li>
+            (change)
+            <ul>
+              <li>This is a DOM event - listens for a DOM event called change</li>
               <li>
-                That gives the method far more knowledge of the template details
-                than it needs to do its job
+                Only fires when the user has blurred the input
+                <ul>
+                  <li>This means it fires after the value bound to NgModel has changed</li>
+                </ul>
+              </li>
+              <li>
+                A regular Event object is passed to the handler when called
+                <ul>
+                  <li>This is a plain DOM Event object</li>
+                  <li>Need to use <code>e.target.value</code> to get the value</li>
+                </ul>
               </li>
             </ul>
           </li>
         </ul>
       </section>
 
-
-
-      <h3>DOM Events</h3>
-      <section>
-<ul>
-  <li>
-    (change)
-    <ul>
-      <li>
-        This is a DOM event - listens for a DOM event called change
-      </li>
-      <li>
-        Only fires when the user has blurred the input
-        <ul>
-          <li>
-            This means it fires after the value bound to NgModel has
-            changed
-          </li>
-        </ul>
-      </li>
-      <li>
-        A regular Event object is passed to the handler when called
-        <ul>
-          <li>This is a plain DOM Event object</li>
-          <li>
-            Need to use <code>e.target.value</code> to get the value
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-      </section>
-
-
-      <h3>Angular Events</h3>
+      <h2>Angular Events</h2>
       <section>
         <ul>
-
           <li>
             (ngModelChange)
             <ul>
-              <li>
-                This is an Angular event, so it is inside the Angular system
-              </li>
+              <li>This is an Angular event, so it is inside the Angular system</li>
               <li>
                 This fires when ngModel changes
                 <ul>
@@ -217,20 +179,12 @@
                 </ul>
               </li>
               <li>
-                This will be fired when the model is intended to be updated (not
-                waiting for a blur event, for example)
+                This will be fired when the model is intended to be updated (not waiting for a blur event, for example)
                 <ul>
-                  <li>
-                    Means it will fire before teh value bound to NgModel has
-                    changed
-                  </li>
+                  <li>Means it will fire before teh value bound to NgModel has changed</li>
                 </ul>
               </li>
-              <li>
-                The event handler will be passed just the value emitted, not the
-                value wrapped in a DOM event object (you can name this whatever
-                you want in the template)
-              </li>
+              <li>The event handler will be passed just the value emitted, not the value wrapped in a DOM event object (you can name this whatever you want in the template)</li>
             </ul>
           </li>
         </ul>
@@ -240,9 +194,7 @@
       <section>
         <ul>
           <li>
-            <a href="../components/inputOutput.html"
-              >Input / Output Properties</a
-            >
+            <a href="../components/inputOutput.html">Input / Output Properties</a>
           </li>
         </ul>
       </section>
