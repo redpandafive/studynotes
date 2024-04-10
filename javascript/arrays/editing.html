@@ -43,7 +43,7 @@
             <ul>
               <li>
                 Array identifier should be on the left side of the brackets and
-                the index should be between the brakcets
+                the index should be between the brackets
               </li>
               <li>
                 The array index should be a non-negative integer expression
@@ -97,6 +97,33 @@
             </div>
           </div>
         </ul>
+      </section>
+
+      <h2 id="lastelement">Get the Last Element of an Array</h2>
+      <section>
+        <div>
+          For browsers and devices since 2022, use: 
+          <div class="card">
+            <div class="card-body">
+              <code>
+                var last = arr.at(-1); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          To support versions older than 2022, use: 
+          <div class="card">
+            <div class="card-body">
+              <code>
+                var last = arr[arr.length - 1]; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at">Array.prototype.at()</a> at MDN
+        </div>
       </section>
 
       <h2>Deleting an Array Element</h2>

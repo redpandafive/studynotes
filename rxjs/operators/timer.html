@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Timer</li>
+        </ol>
+      </nav>
+
+      <h1>Timer</h1>
+      <section>
+        <ul>
+          <li>Returns an observable that emits after the specified delay</li>
+          <li>Useful for
+            <ul>
+              <li>Creating delays in code</li>
+              <li>An alternative to <a href="./interval.html">interval</a> when you want to start right away</li>
+              <li>Delaying subscription to another observable by a set amount of time</li>
+            </ul>
+          </li>
+          <li>
+            Parameters
+            <ul>
+              <li>1st parameter is the number of milliseconds to wait before emitting
+                <ul>
+                  <li>This is optional; default is 0</li>
+                </ul>
+              </li>
+              <li>
+                2nd parameter is interval to wait before emitting again
+                <ul>
+                  <li>This is optional</li>
+                  <li>If not defined, the observable will only emit once</li>
+                  <li>This will continue to emit values until the Observable is stopped</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Example that:
+          <ul>
+            <li>Delays first emission by 1 second </li>
+            <li>Emits 0</li>
+            <li>Waits 5 seconds</li>
+            <li>Emits 1</li>
+            <li>It will continue to do this until the Observable is stopped</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                timer(1000, 5000).subscribe(console.log); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example that:
+          <ul>
+            <li>Emits 0 (no delay)</li>
+            <li>Waits 5 seconds</li>
+            <li>Emits 1</li>
+            <li>It will continue to do this until the Observable is stopped</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                timer(0, 5000).subscribe(console.log); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This example:
+          <ul>
+            <li>Delays 3 seconds</li>
+            <li>Subscribes to the source$ observable</li>
+            <li>Emits each integer from the observable without delays between emissions</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                const source$ = of(1, 2, 3); <br/>
+                <br/>
+                timer(3000) <br/>
+                  .pipe(concatMap(() => source$)) <br/>
+                  .subscribe(console.log); <br/>
+                </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

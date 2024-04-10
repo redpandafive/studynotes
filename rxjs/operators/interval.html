@@ -39,7 +39,30 @@
               <li>This can be used to create an asynchronous set of numbers for testing</li>
             </ul>
           </li>
+          <li>
+            There will be an initial delay of the first emission (of one interval period of time)
+            <ul>
+              <li>If this is not desired, consider using the <a href="./timer.html">timer</a> operator as you can specify a different initial delay</li>
+            </ul>
+          </li>
         </ul>
+        <div>
+          Example that:
+          <ul>
+            <li>Delays first emission by 10 seconds (10000 milliseconds)</li>
+            <li>Emits 0</li>
+            <li>Waits 10 seconds</li>
+            <li>Emits 1</li>
+            <li>It will continue to do this until the Observable is stopped</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                interval(10000).subscribe(console.log); <br/>
+              </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

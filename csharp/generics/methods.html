@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Generic Methods</li>
+        </ol>
+      </nav>
+
+      <h1>Generic Methods</h1>
+
+      <section>
+        <ul>
+          <li>Can appear on generic or non-generic class types</li>
+          <li>A method is not generic because it belongs to a generic type or it has formal parameters whose types are generic parameters of the enclosing type</li>
+          <li>
+            It is generic only if it has its own list of type parameters
+            <ul>
+              <li>
+                <code>T Method1(T arg) ...</code>
+              </li>
+              <li>It is generic even if its enclosing class is not generic</li>
+              <li>Belonging to a generic class</li>
+            </ul>
+          </li>
+          <li>
+            Definition
+            <div class="card">
+              <div class="card-body">
+                <code> T DoStuff&lt;T&gt;(T arg) {&#10; T temp = arg;&#10; Return temp; &#10;}&#10;" </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            Can call this as
+            <div class="card">
+              <div class="card-body">
+                <code> var DoStuff&lt;int&gt;(5);&#10;var DoStuff(5);&#10;" </code>
+              </div>
+            </div>
+          </li>
+          <li>
+            If defined in a generic class, do not need the &gt;T&lt; after the method name if you are using the same identifier
+            <ul>
+              <li>If it is a different one, then you will need it</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

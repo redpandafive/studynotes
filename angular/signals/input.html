@@ -31,15 +31,20 @@
 
       <section>
         <ul>
-          <li>
-            This was added in 17.1
-          </li>
+          <li>This was added in 17.1</li>
           <li>Turns Inputs into Signals so they can be reactive
             <ul>
-              <li>This is useful when you need to do some Signal internal to your component needs to react to a change in the Input value</li>
-              <li>For instance, if you pass in a list of people as an Input and use a computed Signal to provide a filtered list of People, the computed Signal will not recompute if the input changes</li>
-              <li>The computed Signal will be recomputed with a related Signal changes</li>
-              <li>Input Signals address this limitation</li>
+              <li>Within your component, they can be used like any other read-only Signal</li>
+            </ul>
+          </li>
+          <li>Input Signals can be optional or required</li>
+          <li>
+            Benefits
+            <ul>
+              <li>When used in templates, will automatically mark OnPush components as dirty</li>
+              <li>More type safe</li>
+              <li>Easy to derive values when an input changes using a computed</li>
+              <li>Easier and more local monitoring of inputs using effect instead of ngOnChanges or setters</li>
             </ul>
           </li>
           <li>
@@ -48,36 +53,39 @@
               <li>Values can only be modified by the parent</li>
             </ul>
           </li>
-       </ul>
+        </ul>
       </section>
-
+      <div>
+        Simple optional input Signal example
+        <div class="card">
+          <div class="card-body">
+            <div class="card-body">
+              <code> firstName = input&lt;string&gt;(); <br /> </code>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <h2>Required Values</h2>
       <section>
         <ul>
-          <li>
-            Like Inputs, you can apply set an Input Signal to require an initial value from the parent
-          </li>
-          <li>
-            To do this, use the required method on the SignalInput object.
-          </li>
-          <li>
-            An initial value parameter is not needed since it will be supplied by the parent component
-          </li>
+          <li>Like Inputs, you can apply set an Input Signal to require an initial value from the parent</li>
+          <li>To do this, use the required method on the SignalInput object.</li>
+          <li>An initial value parameter is not needed since it will be supplied by the parent component</li>
         </ul>
         <div>
           Example: external alias will be users, internal name will be userList
           <div class="card">
             <div class="card-body">
               <div class="card-body">
-                <code> 
-                  userList = input.required({ <br/>
-                    alias: 'users' <br/>
-                  }); <br/>
-              </code>
+                <code>
+                  userList = input.required({ <br />
+                  alias: 'users' <br />
+                  }); <br />
+                </code>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
 
@@ -85,26 +93,22 @@
       <section>
         <ul>
           <li>Like Inputs, you can apply a transformation function to Input Signals</li>
-          <li>
-            Internally, you would refer to the values as the Signal property name
-          </li>
-          <li>
-            Externally, you would refer to the values as the alias
-          </li>
+          <li>Internally, you would refer to the values as the Signal property name</li>
+          <li>Externally, you would refer to the values as the alias</li>
         </ul>
         <div>
           Example: external alias will be users, internal name will be userList
           <div class="card">
             <div class="card-body">
               <div class="card-body">
-                <code> 
-                  userList = input([], { <br/>
-                    alias: 'users' <br/>
-                  }); <br/>
-              </code>
+                <code>
+                  userList = input([], { <br />
+                  alias: 'users' <br />
+                  }); <br />
+                </code>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
 
@@ -119,15 +123,66 @@
           <div class="card">
             <div class="card-body">
               <div class="card-body">
-                <code> 
-                  userList = input([], { <br/>
-                    alias: 'users',
-                    transform: concatUserNames <br/>
-                  }); <br/>
-              </code>
+                <code>
+                  userList = input([], { <br />
+                  alias: 'users', transform: concatUserNames <br />
+                  }); <br />
+                </code>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+
+      <h2>Deriving Values</h2>
+      <section>
+        <ul>
+          <li>
+            Use computed signals to derive values based on Signal inputs
+          </li>
+        </ul>
+        <div>
+          Example: this applies a concatUserName function to values emitted from the Signal
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code>
+                  age = input(0); <br />
+
+                  // age multiplied by two. <br />
+                  ageMultiplied = computed(() =&gt; this.age() * 2); <br />
+                </code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Watching for Changes</h2>
+      <section>
+        <ul>
+          <li>
+            <span class="devnote">Angular Blog recommends this</span>
+          </li>
+          <li>Use effects to watch to react to input changes</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <code>
+                  firstName = input.required&lt;string&gt;(); <br />
+                  <br />
+                  constructor() { <br />
+                  effect(() => { <br />
+                  // will be called when `firstName` is initialized or changes. <br />
+                  console.log(this.firstName()); <br />
+                  }) <br />
+                  } <br />
+                </code>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -138,28 +193,26 @@
           <div class="card">
             <div class="card-body">
               <div class="card-body">
-                <code> 
-                  @Input({alias: 'users'}) set _users(users: User[]) { <br/>
-                    this.users.set(users); <br/>
-                  } <br/>
-                  <br/>
-                  private users = signal&lt;User[]&gt;([]); <br/>
-              </code>
+                <code>
+                  @Input({alias: 'users'}) set _users(users: User[]) { <br />
+                  this.users.set(users); <br />
+                  } <br />
+                  <br />
+                  private users = signal&lt;User[]&gt;([]); <br />
+                </code>
+              </div>
             </div>
           </div>
-        </div>
         </div>
         <div>
           Starting with 17.1, this is how you would implement this
           <div class="card">
             <div class="card-body">
               <div class="card-body">
-                <code> 
-                  users = input&lt;User[]&gt;([]); 
-              </code>
+                <code> users = input&lt;User[]&gt;([]); </code>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
     </div>

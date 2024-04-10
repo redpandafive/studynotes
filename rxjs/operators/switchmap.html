@@ -290,6 +290,15 @@
       <section>
         <ul>
           <li>
+            Summary
+            <ul>
+              <li>On each emission the previous inner observable (the result of the function you supplied) is cancelled and the new obsevable is subscribed</li>
+              <li>Remember the phrase "Switch to a new Observable"</li>
+              <li>Only maintains one inner subscription at a time</li>
+              <li>Useful to avoid race conditions</li>
+            </ul>
+          </li>
+          <li>
             A transformation operator that
             <ul>
               <li>Subscribes to its input Observable</li>
@@ -349,7 +358,7 @@
             </ul>
           </li>
           <li>
-            Use when
+            Use Cases
             <ul>
               <li>
                 You need to stop any prior Observable before switching to the
@@ -358,12 +367,13 @@
               <li>
                 Examples include
                 <ul>
-                  <li>Type ahead functionality</li>
+                  <li>Type ahead functionality - you are not longer concerned with the response of the previous request when a new input arrives</li>
                   <li>Responding to drop down changes from the UI</li>
                 </ul>
               </li>
             </ul>
           </li>
+        </ul>
           <div>
             In the following example
             <ul>
@@ -390,7 +400,7 @@
                 <code>
                   of(3,7) <br />
                   .pipe( <br />
-                  concatMap(id=>
+                  switchMap(id=>
                   this.http.get&lt;Supplier&gt;(`${this.url}/${id}`)
                   <br />
                   )).subscribe(o => o.subscribe); <br />
@@ -398,7 +408,7 @@
               </div>
             </div>
           </div>
-        </ul>
+
       </section>
 
       <h2>Sources / See Also</h2>

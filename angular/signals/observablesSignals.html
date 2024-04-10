@@ -33,6 +33,12 @@
       <section>
         <ul>
           <li>
+            Converts an observable to a signal
+            <ul>
+              <li>The signals created are readonly (typed as Signal, not WritableSignal)</li>
+            </ul>
+          </li>
+          <li>
             Wraps an observable inside a signal
             <ul>
               <li>This will automatically subscribe to the observable at creation time</li>
@@ -40,53 +46,29 @@
             </ul>
           </li>
           <li>
-            This allows you to use the obsrvable via the signal in your template without an async pipe
-          </li>
-          <li>
-            Import from
-            <code>@angular/core/rxjs-interop</code>
-          </li>
-          <li>
-            Converts an observable to a signal
+            Benefits
             <ul>
-              <li>The signals created using this method are readonly (typed as Signal, not WritableSignal)</li>
+              <li>This allows you to use the observable via the signal in your template without an async pipe</li>
             </ul>
           </li>
           <li>
-            It must be called in an injection context
-            <ul>
-              <li>
-                This means you can use it only when the
-                <code>inject()</code>
-                function is available
-              </li>
-              <li>The reason for this is that Angular will auto-unsubscribe when the wrapping context is destroyed. It does this using the new OnDestroy hook that it obtains from using the inject() function</li>
-            </ul>
+            <a href="https://angular.io/api/core/rxjs-interop/toSignal" target="_blank">https://angular.dev/api/core/rxjs-interop/toSignal</a>
           </li>
+        </ul>
+      </section>
+
+      <h3>Initial Values</h3>
+      <section>
+        <ul>
+          <li>Observables may not produce a value synchronously with subscription, but Signals always require a current value</li>
+          <li>This means the signal will be a union typed with undefined since the data from the observable is not immediately available</li>
           <li>
-            Takes an observable as a parameter
+            To prevent this union, you can configure an initial value that will be returned until the observable emits the first time
             <ul>
-              <li>This will automatically subscribe and unsubscribe to the observable</li>
-              <li>It subscribes to the observable immediately</li>
-            </ul>
-          </li>
-          <li>
-            This will type the signal as a union type with undefined since the data from the observable is not immediately available
-            <ul>
+              <li>Pass an ToSignalOptions object as a second parameter that will be supplied as an initial value until the Observable emits a value.</li>
+              <li>Limit this to observables that immediately emit, or Angular will throw an error</li>
               <li>
-                There are two ways to avoid this
-                <ul>
-                  <li>Pass an ToSignalOptions object as a second parameter that will be supplied as an initial value until the Observable emits a value.</li>
-                  <li>
-                    Pass a ToSignalOptions obejct with the requireSync property set to true.
-                    <ul>
-                      <li>Limit this to observables that immediately emit, or Angular will throw an error</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                Even when supplying an empty value, Angular creaets a signal that is a union type with never (seems to happen when using empty arrays as the default value)
+                Even when supplying an empty value, Angular creates a signal that is a union type with never (seems to happen when using empty arrays as the default value)
                 <ul>
                   <li>
                     To avoid this, type the initial value
@@ -103,9 +85,47 @@
               </li>
             </ul>
           </li>
-          <li>
-            <a href="https://angular.io/api/core/rxjs-interop/toSignal" target="_blank">https://angular.io/api/core/rxjs-interop/toSignal</a>
+          <li>Alternatively, you can pass a ToSignalOptions object with the requireSync property set to true.
+            <ul>
+              <li>Only use this with observables that are guaranteed to emit synchronously, such as BehaviorSubject</li>
+              <li>Since the Signal is guaranteed to always have a value, not undefined type or initial value is needed</li>
+            </ul>
           </li>
+        </ul>
+      </section>
+
+      <h3>Syntax</h3>
+      <section>
+        <ul>
+          <li>
+            Import from
+            <code>@angular/core/rxjs-interop</code>
+            <ul>
+              <li>To date, Visual Studio Code will not input this automatically</li>
+            </ul>
+          </li>
+          <li>
+            Takes an observable as a parameter
+            <ul>
+              <li>This will automatically subscribe and unsubscribe to the observable</li>
+              <li>It subscribes to the observable immediately</li>
+            </ul>
+          </li>
+          <li>
+            This must be called in an injection context
+            <ul>
+              <li>
+                This means you can use it only when the
+                <code>inject()</code>
+                function is available
+              </li>
+              <li>
+                The reason for this is that Angular will auto-unsubscribe when the wrapping context is destroyed. It does this using the new OnDestroy hook that it obtains from using the inject()
+                function
+              </li>
+            </ul>
+          </li>
+          <li>Since toSignal creates a subscription, you should avoid calling it repeatedly for the same observable - instead, reuse the signal it returns</li>
         </ul>
       </section>
 

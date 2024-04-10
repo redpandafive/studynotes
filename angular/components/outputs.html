@@ -28,6 +28,8 @@
 
       <h1>Output Properties</h1>
 
+      <section class="header-note">See <a href="../outputs.html#outputapi">new Output API</a> for Angular 17+ syntax</section>
+
       <section class="navlinks">
         <ul>
           <li>
@@ -41,6 +43,9 @@
           </li>
           <li>
             <a href="outputs.html#aliases">Export Aliases</a>
+          </li>
+          <li>
+            <a href="outputs.html#outputapi">Output API</a>
           </li>
           <li>
             <a href="outputs.html#bestpractices">Best Practices</a>
@@ -177,6 +182,70 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <h2 id="outputapi">Output API</h2>
+      <section>
+        <ul>
+          <li>Introduced in Angular 17.3</li>
+          <li>This is a new API for declaring Outputs (not Signal based)</li>
+          <li>
+            Benefits
+            <ul>
+              <li>Simpler API that is aligned with Signal input declarations</li>
+              <li>Provides more accurate type safety for emitted values, addressing a long standing issue with the EventEmitter class</li>
+            </ul>
+          </li>
+          <li>
+            <code>output()</code>
+            <ul>
+              <li>Declares an Angular output</li>
+              <li>You can emit values by invoking the .emit function</li>
+            </ul>
+          </li>
+          <li>
+            <code>outputFromObservable()</code>
+            <ul>
+              <li>Declares an Angular output that emits values based on a source observable
+                <ul>
+                  <li>Allows you to expose a RxJS stream through an Output</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          A simple example
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import {Component, output} from '@angular/core'; <br />
+                <br />
+                &#64;Component({…})<br />
+                export class MyComp {<br />
+                onNameChange = output&lt;string&gt;(); <br />
+                }<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You would bind to this in the component same way you bind to Outputs
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;app-my-comp (onNameChange)="handleNameChange($event)" /&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Syntax</h3>
+      <section>
+        <ul>
+
+        </ul>
       </section>
 
       <h2 id="bestpractices">Best Practices</h2>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">C#</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Generic Classes</li>
+        </ol>
+      </nav>
+
+      <h1>Generic Classes</h1>
+      <section>
+        <ul>
+          <li>
+            Generic class can inherit from
+            <ul>
+              <li>Concrete type classes = no generic parameters</li>
+              <li>
+                Closed constructed type = Generic base class with the generic parameter set to a specific type
+                <div class="card">
+                  <div class="card-body">
+                    <code> Class NodeOpen&lt;T&gt; : BaseGeneric&lt;int&gt; {}" </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Open constructed type = generic base class with a generic parameter
+                <div class="card">
+                  <div class="card-body">
+                    <code> Class NodeOpen&lt;T&gt; : BaseGeneric&lt;T&gt; {}" </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Generic classes must supply type arguments for any base class type
+            <ul>
+              <li>
+                This causes a compiler error
+                <div class="card">
+                  <div class="card-body">
+                    <code> Class NodeOpen&lt;T&gt; : BaseGeneric&lt;T, U&gt; {}" </code>
+                  </div>
+                </div>
+              </li>
+              <li>Generic classes that inherit from base open constructed types must specify constrains that are a superset of the constraints on the base class</li>
+              <li>
+                Concrete classes can inherit from closed constructed base classes
+                <ul>
+                  <li>Cannot inherit form generics with open constructed type</li>
+                  <li>No way to supply the type argument to instantiate the base class</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
