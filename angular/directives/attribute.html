@@ -22,22 +22,11 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Attribute Directives</li>
+          <li class="breadcrumb-item active" aria-current="page">Custom Attribute Directives</li>
         </ol>
       </nav>
 
-      <h1>Attribute Directives</h1>
-
-      <section class="navlinks">
-        <ul>
-          <li>
-            <a href="attribute.html#builtin">Built-In Directives</a>
-          </li>
-          <li>
-            <a href="attribute.html#custom">Custom Directives</a>
-          </li>
-        </ul>
-      </section>
+      <h1>Custom Attribute Directives</h1>
 
       <h2>General</h2>
       <section>
@@ -49,22 +38,11 @@
             </ul>
           </li>
           <li>Usually applied to elements as if they were HTML attributes</li>
-          <li>You can add many attribute directives to the same host element</li>
-          <li>Directive classes are decorated with the @Directive decorator</li>
+          <li>You can add several attribute directives to the same host element</li>
         </ul>
       </section>
 
-      <h2 id="builtin">Built-In Directives</h2>
-      <section>
-        <ul></ul>
-      </section>
-
-      <h2 id="custom">Custom Directives</h2>
-      <section>
-        <ul></ul>
-      </section>
-
-      <h3>Basic Setup</h3>
+      <h2>Basic Setup</h2>
       <section>
         <ul>
           <li>
@@ -74,35 +52,78 @@
               <li>
                 A class for the directive
                 <ul>
-                  <li>Add Directive as a postfix to the class name (such as ChangeBgColorDirective)</li>
-                  <li>Filename should be named as follows: <kbd>change-bg-color.directive.ts</kbd></li>
+                  <li>Add "Directive" as a postfix to the class name (such as ChangeBgColorDirective)</li>
+                  <li>The corresponding filename should be named "change-bg-color.directive.ts"</li>
                 </ul>
               </li>
             </ul>
           </li>
-
-          <li>Angular CLI can crate a directive using the command <kbd>ng generate directive highlight</kbd></li>
-          <li>
-            Define a selector in the directive metadata to specify the directive's CSS attribute selector
-            <ul>
-              <li>This is the only configuration property</li>
-              <li>
-                <code>selector: '[myHighlight]'</code>
-              </li>
-              <li>the brackets make it an attribute selector</li>
-              <li>This will find all elements with that name in the attributes</li>
-            </ul>
-          </li>
+          <li>Define a selector in the directive metadata to specify the directive's CSS attribute selector (see <a href="attribute.html#selector">Directive Selectors</a>)</li>
           <li>
             Inject ElementRef service
             <ul>
-              <li>This grants direct DOM access, so use caution</li>
-              <li>This gives you a reference to the host DOM element itself through itself nativeElement property</li>
+              <li>Grants direct DOM access, so use caution</li>
+              <li>Gives you a reference to the host DOM element itself through itself nativeElement property</li>
               <li>This reference will be of type HTMLElement</li>
             </ul>
           </li>
           <li>Apply the directive to an HTML element in the template using the selector as an attribute</li>
+          <li>Angular CLI can create a directive using the command <kbd>ng generate directive highlight</kbd></li>
         </ul>
+      </section>
+
+      <h2 id="selector">Directive Selectors</h2>
+      <section>
+        <ul>
+          <li>This is the only configuration property of the @Directive decorator</li>
+          <li>Selectors in directives are quite flexible - here are the different formats you can use:
+            <ul>
+              <li>element-name = select by element name (&lt;element-name&gt;&lt;/element-name&gt;)</li>
+              <li>class-name = select by class name (&lt;p class="class-name"&gt;&lt;/p&gt;)</li>
+              <li>[attributeName] = select by attribute name (&lt;p attributeName&gt;&lt;/p&gt;)</li>
+              <li>[type=text] = select by attribute and its value (&lt;input type="text" /&gt;)</li>
+              <li>:not(sub_selector) = everything that does not match the sub_selector (any of the above)</li>
+              <li>selector1, selector2 = can attach to multiple selectors</li>
+            </ul>
+          </li>
+          <li>
+            <code>selector: '[myHighlight]'</code>
+          </li>
+          <li>the brackets make it an attribute selector</li>
+          <li>This will find all elements with that name in the attributes</li>
+        </ul>
+        <div>
+          Surrounding the selector with brackets makes it an attribute selector.  The Directive will look for an element with a <code>myHighlight</code> attribute.
+          <div class="card">
+            <div class="card-body">
+              <code> selector: '[myHighlight]' <br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          With no brackets, the Directive will look for a tag named <code>highlight</code>.
+          <div class="card">
+            <div class="card-body">
+              <code> selector: 'myHighlight' </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          You can also target built-in tags.  THe following will be applied to all div elements in the view.
+          <div class="card">
+            <div class="card-body">
+              <code> selector: 'div' </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          These are riskier, but you can also use CSS selectors (avoid if possible)
+          <div class="card">
+            <div class="card-body">
+              <code> selector: 'not(.targetClass)' </code>
+            </div>
+          </div>
+        </div>
       </section>
 
       <h3>User Events</h3>
@@ -193,10 +214,9 @@
           Add an Input to the directive with the same name as the directive
           <div class="card">
             <div class="card-body">
-              <code> 
-                @HostListener('mouseenter') onMouseEnter() { 
-                  this.highlight(this.appHighlight || 'red'); <br/>
-                }  <br/>
+              <code>
+                @HostListener('mouseenter') onMouseEnter() { this.highlight(this.appHighlight || 'red'); <br />
+                } <br />
               </code>
             </div>
           </div>
@@ -213,9 +233,7 @@
           To add a second color to the above directive, add a new Input to the directive
           <div class="card">
             <div class="card-body">
-              <code> 
-                &#64;Input() defaultColor = ''; 
-              </code>
+              <code> &#64;Input() defaultColor = ''; </code>
             </div>
           </div>
         </div>
@@ -223,14 +241,11 @@
           Modify the host element to add an attribute for the new input
           <div class="card">
             <div class="card-body">
-              <code> 
-                &lt;p [appHighlight]="color" defaultColor="violet"&gt;Highlight this!&lt;/p&gt;
-              </code>
+              <code> &lt;p [appHighlight]="color" defaultColor="violet"&gt;Highlight this!&lt;/p&gt; </code>
             </div>
           </div>
         </div>
       </section>
-
 
       <h3>Examples</h3>
       <section>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">ContentChild and ContentChildren</li>
+        </ol>
+      </nav>
+
+      <h1>ContentChild and ContentChildren</h1>
+
+      <h2>Basics</h2>
+      <section>
+        <ul>
+          <li>A type of query a component can use to find child elements and read values from their injectors</li>
+          <li>
+            These are a specific category of queries called Content Queries
+            <ul>
+              <li>Retrieve results from the elements in the component's content = the elements enclosed by the opening and closing tags for the component where it is used</li>
+            </ul>
+          </li>
+          <li>
+            Content queries can only retrieve results from the same template as the component itself
+            <ul>
+              <li>Content queries find only direct children of the component and do not traverse into descendants</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Query Locator</h2>
+      <section>
+        <ul>
+          <li>The first parameter for a query is its locator</li>
+          <li>Most of the time, this will be a component, directive, or a template reference variable</li>
+          <li>CSS selectors are not supported</li>
+        </ul>
+        <div>
+          Declare a query targeting a single result with the viewChild function
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Component({ <br />
+                ..., <br />
+                template: ` <br />
+                &lt;button #save&gt;Save&lt;/button&gt; <br />
+                &lt;button #cancel&gt;Cancel&lt;/button&gt; <br />
+                ` <br />
+                }) <br />
+                export class ActionBar { <br />
+                @ViewChild('save') saveButton: ElementRef&lt;HTMLButtonElement&gt;; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Query Options</h2>
+      <section>
+        <ul>
+          <li>
+            ContentChild and ContentChildren accept an options object as a second parameter
+            <ul>
+              <li>These control how the query finds its results</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3>Static Query Option</h3>
+      <section>
+        <ul>
+          <li>Only @ContentChild accepts this option</li>
+          <li>See <a href="viewChild.html#static">ViewChild</a> for details</li>
+        </ul>
+      </section>
+
+      <h2>ContentChild</h2>
+      <section>
+        <ul>
+          <li>Returns a reference to the first matching component or directive within the content of your component</li>
+          <li>This deals with looking within projected content that is going into a projected content slot</li>
+          <li>
+            If a query does not find a result, its value is undefined
+            <ul>
+              <li>It will contain this value before ngAfterViewInit</li>
+              <li>Can occur if the element is hidden by a conditional</li>
+            </ul>
+          </li>
+          <li>If more than one element is found, only the first element is returned</li>
+        </ul>
+      </section>
+
+      <h2>ContentChildren</h2>
+      <section>
+        <ul>
+          <li>Returns a reference to all matching components or directives within the content of your component</li>
+          <li>
+            Creates a QueryList object to contain the list of results
+            <ul>
+              <li>Can work with this in an array like manner, such as map, reduce, and forEach</li>
+              <li>You can subscribe to changes to the query results over time via the <code>changes</code></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Lifecycle Limitations</h2>
+      <section>
+        <ul>
+          <li>Must wait for AfterViewInit event to access this (reference may not be available earlier)</li>
+        </ul>
+      </section>
+
+      <h2>Signal Based Content Queries</h2>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1: With Signals</h3>
+      <section>
+        <div>
+          Here is a sample setup with three components:
+          <ul>
+            <li>app.component</li>
+            <li>search.component</li>
+            <li>search-form.component</li>
+          </ul>
+          Here is the app.component
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;app-search&gt; <br />
+                &lt;app-search-form&gt;&lt;/app-search-form&gt; <br />
+                &lt;/app-search&gt; <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Accessing the search-form component from the search component will use a content query since it is related to projected content. This uses the Signal based contentChild.
+          <div class="card">
+            <div class="card-body">
+              <code> private searchForm = contentChild.required(SearchFormComponent); <br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Use the constructor combined with an effect to set the focus to the desired field
+          <div class="card">
+            <div class="card-body">
+              <code>
+                constructor() { <br />
+                effect(() => { <br />
+                this.searchForm().searchField().nativeElement.focus(); <br />
+                }); <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

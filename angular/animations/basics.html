@@ -44,8 +44,22 @@
       <h2>Setup</h2>
       <section>
         <div>
+          Add <code>provideAnimations</code> to the providers list 
+          <div class="card">
+            <div class="card-body">
+              <code>
+                bootstrapApplication(AppComponent, { <br />
+                  providers: [ <br />
+                    provideAnimations(), <br />
+                  ] <br />
+                }); <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
           Must import the animation capabilities into root Angular application
-          modules
+          modules (or component, if using standalone components)
           <div class="card">
             <div class="card-body">
               <code>
@@ -73,7 +87,7 @@
           <div class="card">
             <div class="card-body">
               <code>
-                @Component({ <br />
+                &#64;Component({ <br />
                 selector: 'app-root', <br />
                 templateUrl: 'app.component.html', <br />
                 styleUrls: ['app.component.css'], <br />
@@ -85,42 +99,151 @@
             </div>
           </div>
         </div>
-        <div>
-          Create a component to contain states of the animation
+      </section>
+
+      <h2>State Function</h2>
+      <section>
+        <ul>
+          <li>Use to define different states to call at the end of each transition</li>
+          <li>This function takes two arguments
+            <ul>
+              <li>A unique string used to name the state (such as 'open' or 'closed')</li>
+              <li>A style function
+                <ul>
+                  <li>Defines a set of styles to associate with the name</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        </section>
+
+
+        <h2>Style Function</h2>
+        <section>
           <ul>
+            <li>Declares a key/value object containing CSS properties / styles</li>
+            <li>Associates them with an animation state</li>
+            <li>Multiple style attributes can be set at the same time</li>
             <li>
-              Use the state function to define different states to call at the
-              end of each transition. This takes the following parameters:
+              Unlike CSS, style properties should use camel casing for
+              styles that contain dashes (or quotes)
               <ul>
-                <li>A unique string name</li>
+                <li>Alternatively, you can wrap them in quotes, such as 'background-color'</li>
+              </ul>
+            </li>
+          </ul>
+          <div>
+            Two sets of CSS style attributes are defined, one for the 'open' state and one for the 'closed' state
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  state('open', style({ <br />
+                  height: '200px', <br />
+                  opacity: 1, <br />
+                  backgroundColor: 'yellow' <br />
+                  })), <br />
+                  state('closed', style({ <br />
+                  height: '100px', <br />
+                  opacity: 0.8, <br />
+                  backgroundColor: 'blue' <br />
+                  })) <br />
+                </code>
+              </div>
+            </div>
+          </div>   
+        </section>
+
+        <h2>Transition Function</h2>
+        <section>
+          <ul>
+            <li>Specifies the changes that occur between one state and over a period of time</li>
+            <li>Use to define the length, delay, and easing of a transition</li>
+            <li>
+              Accepts two arguments
+              <ul>
+                <li>An expression that defines the direction between two transition states</li>
+                <li>An array of <code>animate()</code> steps
+                <ul>
+                  <li>Use to define <code>keyframes()</code> function for multi-step animations</li>
+                </ul>
+              </li>
+              </ul>
+            </li>
+            <li></li>
+          </ul>
+        </section>
+
+        <h2>Animate Function</h2>
+        <section>
+          <ul>
+            <li>Accepts the timing and styles input parameters</li>
+            <li>
+              Timing parameters can either be
+              <ul>
                 <li>
-                  A style function that defines a set of styles to associate
-                  with the name
+                  A number (representing milliseconds) representing duration
                 </li>
                 <li>
-                  Unlike CSS, style properties should use camel casing for
-                  styles that contain dashes (or quotes)
+                  A string containing up to three items
+                  <ul>
+                    <li>duration - in milliseconds or seconds
+                      <ul>
+                        <li>Required</li>
+                        <li>Use '100ms' for milliseconds and '.1s' for seconds</li>
+                      </ul>
+                    </li>
+                    <li>delay - in milliseconds or seconds
+                      <ul>
+                        <li>Uses same syntax as duration</li>
+                      </ul>
+                    </li>
+                    <li>
+                      easing - how the animation accelerates and decelerates during its runtime
+                      <ul>
+<li>
+  <ul>
+    ease
+    ease-in
+    ease-out
+    ease-in-out
+    cubic-bezier() function cal
+  </ul>
+</li>
+                        <li>
+                          <a href="https://easings.net/">See this for easing functions</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
                 </li>
               </ul>
-              <div>
-                Examples
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      state('open', style({ <br />
-                      height: '200px', <br />
-                      opacity: 1, <br />
-                      backgroundColor: 'yellow' <br />
-                      })), <br />
-                      state('closed', style({ <br />
-                      height: '100px', <br />
-                      opacity: 0.8, <br />
-                      backgroundColor: 'blue' <br />
-                      })) <br />
-                    </code>
-                  </div>
-                </div>
-              </div>
+            </li>
+            <li>
+              Examples
+              <ul>
+                <li>
+                  Run for 200ms, with no delay. Use a standard curve to start
+                  slow, accelerate in the middle, and then decelerate slowly at
+                  the end: '0.2s ease-in-out'
+                </li>
+                <li>
+                  Start immediately, run for 200ms. Use an acceleration curve to
+                  start slow and end at full velocity: '0.2s ease-in'
+                </li>
+                <li>
+                  Wait for 100ms, run for 200ms. Use a deceleration curve to start
+                  out fast and slowly decelerate to a resting point: '0.2s 100ms
+                  ease-out'
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </ul>
+        </section>
+
+
+
             </li>
           </ul>
         </div>
@@ -168,44 +291,7 @@
       <h2>Timing Parameters</h2>
       <section>
         <ul>
-          <li>
-            Timing parameters can either be
-            <ul>
-              <li>
-                A number (representing milliseconds) representing duration
-              </li>
-              <li>
-                A string containing three items
-                <ul>
-                  <li>duration - in milliseconds or seconds</li>
-                  <li>delay - in milliseconds or seconds</li>
-                  <li>
-                    easing - how the animation accelerates and decelerates
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            Examples
-            <ul>
-              <li>
-                Run for 200ms, with no delay. Use a standard curve to start
-                slow, accelerate in the middle, and then decelerate slowly at
-                the end: '0.2s ease-in-out'
-              </li>
-              <li>
-                Start immediately, run for 200ms. Use an acceleration curve to
-                start slow and end at full velocity: '0.2s ease-in'
-              </li>
-              <li>
-                Wait for 100ms, run for 200ms. Use a deceleration curve to start
-                out fast and slowly decelerate to a resting point: '0.2s 100ms
-                ease-out'
-              </li>
-            </ul>
-          </li>
-        </ul>
+
       </section>
     </div>
 

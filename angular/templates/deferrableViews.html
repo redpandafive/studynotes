@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -25,9 +22,7 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Deferrable Views
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Deferrable Views</li>
         </ol>
       </nav>
 
@@ -36,31 +31,578 @@
       <section>
         <ul>
           <li>New block syntax added in Angular 17</li>
-          <li>Allow a more declarative approach to deferred loading
+          <li>
+            Allow a more declarative approach to deferred loading
             <ul>
               <li>A single line of declarative code can load a component and all its transitive dependencies</li>
-              <li>During compile time, Angular handles all the complexity by finding components, directives, and pipes used inside the @defer block, generating dynamic imports and managing the process of loading and switching between states</li>
+              <li>
+                During compile time, Angular handles all the complexity by finding components, directives, and pipes used inside the &#64;defer block, generating dynamic imports and managing the
+                process of loading and switching between states
+              </li>
+            </ul>
+          </li>
+          <li>
+            Benefits
+            <ul>
+              <li>Reduces initial bundle size by splitting deferred code into separate compiled packages</li>
+              <li>Simplified syntax over previous methods to do this</li>
+              <li>Expands options available, such as showing placeholders</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>History</h2>
+      <section>
+        <ul>
+          <li>
+            Before deferrable views, Route based lazy loading was the way to reduce bundle sizes
+            <ul>
+              <li>JS code for component is chunked out and only loaded when a route is activated</li>
+              <li>Limited since a chunk may need to be loaded in response to something other than a route switch</li>
+              <li>
+                Working around this required a substantial amount of code to:
+                <ul>
+                  <li>Define a ViewChild to get a reference to a ViewContainerRef on your view</li>
+                  <li>Load the code during runtime using an <code>await import</code> syntax</li>
+                  <li>Attach the component to the container using <code>ViewContainerRef.createComponent</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Requirements</h2>
+      <section>
+        <ul>
+          <li>
+            In order for dependencies within a defer black to be deferred, they must
+            <ul>
+              <li>Be standalone. Non standalone dependencies will still be eagerly loaded, even inside defer blocks</li>
+              <li>
+                Must no be directly referenced from the same file outside of defer blocks
+                <ul>
+                  <li>This includes ViewChild queries</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Defer</h2>
+      <section>
+        <ul>
+          <li>The content of this block is the section of content that is lazily loaded</li>
+          <li>No part of it is rendered initially; all the content will appear once the specified trigger or when condition is met and the dependencies have been fetched</li>
+          <li>By default, it is triggered when the browser state becomes idle</li>
+          <li>
+            There are also several sub blocks to handle different loading stages
+            <ul>
+              <li>Placeholder</li>
+              <li>Loading</li>
+              <li>Error</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code> @defer { ... } </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Errors</h2>
+      <section>
+        <ul>
+          <li>Optional block that is displayed when the lazy loaded chunk could not be loaded</li>
+          <li>Eagerly loaded and will be bundled into the main bundle</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer { &lt;section class="container"&gt; <br />
+                &lt;app-heavy-component /&gt; <br />
+                &lt;/section&gt; <br />
+                } <br />
+                @error { <br />
+                &lt;section class="container error"&gt; <br />
+                Could not load the component <br />
+                &lt;/section&gt; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Placeholders</h2>
+      <section>
+        <ul>
+          <li>
+            An optional block that declares content to show before the defer block is triggered
+            <ul>
+              <li>Content within the <code>placeholder</code> block will be shown before the <code>defer</code> block is activated</li>
+              <li>Eagerly loaded and will be bundled into the main bundle</li>
+            </ul>
+          </li>
+          <li>
+            For best user experience, it is recommended to always specify a placeholder block
+            <ul>
+              <li>Also useful so you don't have a layout shift when the deferred item is loaded, if you make it the same size and shape as your deferred content</li>
+            </ul>
+          </li>
+          <li>This is shown in a different phase from <code>loading</code> - it is shown BEFORE loading starts on the deferred block</li>
+          <li>
+            Accepts a <code>minimum</code> optional parameter to specify the minimum time that the placeholder should be shown
+            <ul>
+              <li>This prevents fast flickering of the placeholder content in case deferred content is fetched quickly</li>
+              <li>This timer begins after the initial render of the placeholder block completes</li>
+              <li>Can be specified in seconds (5s) and milliseconds (500ms)</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer { &lt;section class="container"&gt; <br />
+                &lt;app-heavy-component /&gt; <br />
+                &lt;/section&gt; <br />
+                } <br />
+                @placeholder { <br />
+                &lt;section class="container placeholder"&gt; <br />
+                Some placeholder text <br />
+                &lt;/section&gt; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This example adds a minimum parameter so the placeholder will be displayed for at least that amount of time
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer { &lt;section class="container"&gt; <br />
+                &lt;app-heavy-component /&gt; <br />
+                &lt;/section&gt; <br />
+                } <br />
+                @placeholder(minimum 500ms) { <br />
+                &lt;section class="container placeholder"&gt; <br />
+                Some placeholder text <br />
+                &lt;/section&gt; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Loading</h2>
+      <section>
+        <ul>
+          <li>
+            Notifies the user that the component specifically is actively loading
+            <ul>
+              <li>A distinct phase from <code>placeholder</code> - it is shown WHEN LOADING STARTS on the deferred block</li>
+              <li>Eagerly loaded and will be bundled into the main bundle</li>
+            </ul>
+          </li>
+          <li>
+            Allows optional parameters to address fast flickering when deferred content is loading too quickly
+            <ul>
+              <li>minimum = specifies an amount of time that the loading block has to be displayed, even though the deferred content is loaded and ready to go</li>
+              <li>
+                after = delays showing the loading block until the specified amount of time has elapsed
+                <ul>
+                  <li>It may not be shown at all if the deferred block loads and is ready before the after time has elapsed</li>
+                </ul>
+              </li>
+              <li>Can be specified in seconds (5s) and milliseconds (500ms)</li>
+              <li>The timer for these begins immediately after the loading has been triggered</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer { &lt;section class="container"&gt; <br />
+                &lt;app-heavy-component /&gt; <br />
+                &lt;/section&gt; <br />
+                } <br />
+                @loading { <br />
+                &lt;section class="container loading"&gt; <br />
+                Loading...<br />
+                &lt;/section&gt; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This example adds a minimum and an after parameter
+          <ul>
+            <li>The loading section will be displayed for a minimum of 2 seconds (minimum parameter)</li>
+            <li>The loading section will delay display for 100ms (after parameter)</li>
+          </ul>
+          so
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer { &lt;section class="container"&gt; <br />
+                &lt;app-heavy-component /&gt; <br />
+                &lt;/section&gt; <br />
+                } <br />
+                @loading(after 100ms; minimum 2s) { <br />
+                &lt;section class="container error"&gt; <br />
+                Loading ... <br />
+                &lt;/section&gt; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This example adds a after parameter, so the loading section will be displayed after 5 seconds (if the deferred block is not ready before that)
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer { &lt;section class="container"&gt; <br />
+                &lt;app-heavy-component /&gt; <br />
+                &lt;/section&gt; <br />
+                } <br />
+                @loading(after 5s) { <br />
+                &lt;section class="container loading"&gt; <br />
+                Loading ... <br />
+                &lt;/section&gt; <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Triggers</h2>
+      <section>
+        <ul>
+          <li>
+            Instructions for the defer block on when components need to be loaded and activated
+            <ul>
+              <li>When the defer block is triggered, it replaces placeholder content with lazily loaded content</li>
+            </ul>
+          </li>
+          <li>
+            There are two options for configuring this on the defer block
+            <ul>
+              <li>on - this uses one or more of the Angular built in triggers</li>
+              <li>when - defines a Custom Trigger</li>
+            </ul>
+          </li>
+          <li>
+            You can define multiple triggers on the same deferred block
+            <ul>
+              <li><code>on interaction; on timer(5s)</code> means the defer block will be triggered if the user interacts with the placeholder, or after 5 seconds</li>
+              <li>Multiple triggers are always OR conditions (not all need to be true)</li>
+            </ul>
+          </li>
+          <li>Angular includes several triggers that cover most scenarios</li>
+        </ul>
+        <div>
+          Basic defer block
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Defer block with two triggers; the defer block will be triggered if the user interacts with the placeholder, or after 5 seconds
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer (on viewport; on timer(5s)) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>on idle</h3>
+      <section>
+        <ul>
+          <li>Triggers the deferred loading once the browser has reached an idle state</li>
+          <li>This is the default behavior</li>
+        </ul>
+        <div>
+          Since it is the default, this does not need to be explicity configured as follows, but it gives an idea of what is going on
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer(on idle) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>on viewport</h3>
+      <section>
+        <ul>
+          <li>
+            Deferred blocks are triggered when the specified content enters the viewport
+            <ul>
+              <li>This could be the placeholder content or an element reference</li>
+              <li>By default, the placeholder acts as the element watched for entering the viewport as long as it is a single root element node</li>
+            </ul>
+          </li>
+          <li>
+            Alternatively, you can specify a template reference variable in the same template as the defer block as the element to be watched
+            <ul>
+              <li>Use a template reference variable on the element to watch and pass it to the defer block (see example)</li>
+            </ul>
+          </li>
+          <li>Use when you have a heavy component that is not displayed outside the initial page fold (displayed screen)</li>
+          <li>One of the more popular use cases for deferrable view features</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer(on viewport) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Loading of the deferred block will begin when the <code>#trigger</code> element is visible in the viewport
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;section #trigger&gt;My trigger element&lt;/section&gt; <br />
+                @defer(on viewport(trigger)) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>on interaction</h3>
+      <section>
+        <ul>
+          <li>Deferred blocks are triggered when user interacts with the specified element through <code>click</code> or <code>keydown</code> events</li>
+          <li>By default, the placeholder acts as the element watched as long as it is a single root element node</li>
+          <li>
+            Alternatively, you can specify a template reference variable in the same template as the defer block as the element to be watched
+            <ul>
+              <li>Use a template reference variable on the element to watch and pass it to the defer block (see example)</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer(on interaction) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;button #greeting&gt;Trigger&lt;/button&gt; <br />
+                @defer(on interaction(greeting)) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>on hover</h3>
+      <section>
+        <ul>
+          <li>
+            Deferred blocks are triggered when mouse hovers over the trigger area
+            <ul>
+              <li>Uses the <code>mouseenter</code> and <code>focusin</code> events</li>
             </ul>
           </li>
 
+          <li>By default, the placeholder acts as the element watched as long as it is a single root element node</li>
+          <li>
+            Alternatively, you can specify a template reference variable in the same template as the defer block as the element to be watched
+            <ul>
+              <li>Use a template reference variable on the element to watch and pass it to the defer block (see example)</li>
+            </ul>
+          </li>
         </ul>
-        </section>
-
-        <h2>Syntax</h2>
-        <section>
-          <div>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  @defer {
-                    ...
-                  }
-                </code>
-              </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer(on hover) { <br />
+                ... <br />
+                } <br />
+              </code>
             </div>
           </div>
-        </section>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;div #greeting&gt;Trigger&lt;/div&gt; <br />
+                @defer(on hover(greeting)) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <h3>on immediate</h3>
+      <section>
+        <ul>
+          <li>
+            Triggers the deferred load immediately
+            <ul>
+              <li>Once the client has finished rendering, the defer chuck would start fetching right away</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer(on immediate) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>on timer</h3>
+      <section>
+        <ul>
+          <li>Delays loading the defer block by a specified amount of time</li>
+          <li>
+            For example, if a 5 second timer is specified:
+            <ul>
+              <li>From seconds 0 to 4, the placeholder is shown</li>
+              <li>Starting with second 5, the loading block is shown</li>
+              <li>Once load and activation is complete, the defer block is shown</li>
+            </ul>
+          </li>
+          <li>Can be specified in seconds (5s) and milliseconds (500ms)</li>
+        </ul>
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @defer(on timer(500ms)) { <br />
+                ... <br />
+                } <br />
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h3>Custom Triggers</h3>
+      <section>
+        <ul>
+          <li>
+            Uses the <code>when</code> keyword to specify a boolean expression
+            <ul>
+              <li>When the expression becomes truthy, the placeholder is swapped with the lazily loaded content</li>
+              <li>Use when none of the built in Angular triggers will work</li>
+              <li>This is a one time swap; the defer block will not be reverted to the placeholder if the expression becomes falsy again</li>
+            </ul>
+          </li>
+          <li>You can combine <code>when</code> and <code>on</code> triggers in the same statement</li>
+        </ul>
+        <div>
+          The following example will only show the deferred block when the shouldLoad variable is true. This is toggled by clicking the button.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;button (click)="shouldLoad = true"&gt;Trigger&lt;button&gt; <br />
+                @defer(shouldLoad) { ... }
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This example swaps when either the viewport is visible or the <code>cond</code> expression if truthy
+          <div class="card">
+            <div class="card-body">
+              <code>
+                &lt;button (click)="shouldLoad = true"&gt;Trigger&lt;button&gt; <br />
+                @defer(shouldLoad) { ... }
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Prefetch</h2>
+      <section>
+        <ul>
+          <li>
+            Use for sections where the user will need a deferred block not immediately, but soon after loading
+            <ul>
+              <li>Angular will start prefetching deferred blocks tagged with this keyword based on the condition specified by the <code>prefetch</code> keyword</li>
+            </ul>
+          </li>
+          <li>
+            Uses <code>when</code> and/or <code>on</code> to declare the trigger (similar to main defer conditions)
+            <ul>
+              <li>When using <code>when</code> and/or <code>on</code> with defer, you are specifying when to render</li>
+              <li>When using <code>prefetch when</code> and/or <code>prefetch on</code>, you are specifying when to fetch resources</li>
+            </ul>
+          </li>
+          <li>
+            Conditions include
+            <ul>
+              <li>idle - start the prefetch as soon as possible when the browser is idle</li>
+              <li>custom - use the <code>when</code> keyword and a true/false condition when prefetch should start</li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          This example combines a custom trigger with a prefetch. If the browser is idle before the button is pressed, Angular will start loading the deferred block
+          <div class="card">
+            <div class="card-body">
+              <code> &lt;button (click)="shouldLoad = true"&gt;Trigger&lt;button&gt; @defer(when shouldLoad; prefetch on idle) { ... } </code>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
