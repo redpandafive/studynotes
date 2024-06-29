@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">Graph Databases</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Basics</li>
+        </ol>
+      </nav>
+
+      <h1>Basics</h1>
+
+      <h2>Vs Relational Databases</h2>
+      <section>
+        <ul>
+          <li>Relational databases use a ledger (table) style structure to store things (people, addresses, phone numbers, etc)</li>
+          <li>An <em>entity</em> (or thing you are interested) is generally stored as row</li>
+          <li>
+            Foreign key constrains represent relationships between to entities
+            <ul>
+              <li>If the value of the foreign key value matches both sides, they are related</li>
+              <li>The constraint prevents you from setting up a value that does not have a match on the other side of the relationship</li>
+            </ul>
+          </li>
+          <li>
+            Things are categories by the table that they are put in
+            <ul>
+              <li>Data that describes a person would be put in the Person table</li>
+            </ul>
+          </li>
+          <li>
+            Relational databases are good if the data fits within the rigid structure and constraints are needed to prevent invalid direct relationships
+            <ul>
+              <li>Good to answer known and expected questions since data is constrained into a rigid structure and rule set</li>
+            </ul>
+          </li>
+          <li>
+            Does not handle questions well that have not been anticipated when setting up the schema
+            <ul>
+              <li>Its unrealistic to expect to anticipate any question you may want to ask of your data</li>
+            </ul>
+          </li>
+          <li>
+            Gets complex and rigid when representing relationships
+            <ul>
+              <li>Direct relationships are easy to represent</li>
+              <li>
+                Indirect relationships are hard = difficult to transverse across relationships
+                <ul>
+                  <li>Requires expensive joins upon joins</li>
+                  <li>Frequently have to de-normalize, which ramps up challenges and complexity</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Graphs</h2>
+      <section>
+        <ul>
+          <li>
+            Simpler and more powerful, particularly when the meaning is in the relationships
+            <ul>
+              <li>"Dots and lines" = Nodes and Relationships</li>
+              <li>
+                Allows you to ask complex questions of your data that may not have been anticipated when the database was built
+                <ul>
+                  <li>"Find person who lives in Topeka, has two children, attended college, and bough a particular type of toaster</li>
+                </ul>
+              </li>
+              <li>You can all more relationships as needed and still be performant</li>
+            </ul>
+          </li>
+          <li>
+            It is often easier to translate someones domain to a graph model instead of a relational model
+            <ul>
+              <li>The graph model is closer to how people would describe how their domain connects together</li>
+              <li>Doesn't get bogged down with relational concepts, like normalization form, etc</li>
+            </ul>
+          </li>
+          <li>
+            Fundamental parts
+            <ul>
+              <li>
+                Nodes
+              </li>
+              <li>
+                Relationships
+              </li>
+              <li>
+                Labels
+              </li>
+              <li>
+                Properties
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Nodes</h2>
+      <section>
+        <ul>
+          <li>Simply put, an object in the graph
+            <ul>
+              <li>Also called Vertices or vertexes (in graph theory)</li>
+              <li>Equivalent to rows in relational databases, instances in an entity relationship diagram</li>
+            </ul>
+          </li>
+          <li>
+            Nodes have
+            <ul>
+              <li>
+                Labels
+                <ul>
+                  <li>Tell you what type of thing it is</li>
+                </ul>
+              </li>
+              <li>
+                Properties on them
+                <ul>
+                  <li>These are frequently key / value pairs</li>
+                  <li>Can be through of as a Property container (can contain key / value metadata)</li>
+                </ul>
+              </li>
+              <li>
+                A unique id number
+                <ul>
+                  <li>This is usually system generated</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Example node:
+            <ul>
+              <li>n: Person</li>
+              <li>id: 1234</li>
+              <li>first_name: "Ed"</li>
+              <li>last_name: "Smith"</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Relationships</h2>
+      <section>
+        <ul>
+          <li>
+            Relationships connect Nodes
+            <ul>
+              <li>Connect entities and structure domain = thought of as joins in relational databases</li>
+              <li>Relate nodes by type and direction</li>
+            </ul>
+          </li>
+          <li>Also known as:
+            <ul>
+              <li>Relationship is the typical term used in graph databases</li>
+              <li>Edges is the typical term in graph theory</li>
+            </ul>
+          </li>
+          <li>
+            In Neo4J, they:
+            <ul>
+              <li>Always fundamentally have a direction (can be transversed against the direction, however)</li>
+              <li>Always have a label (allows you to transverse only certain types of relationships)</li>
+            </ul>
+          </li>
+          <li>
+            These have
+            <ul>
+              <li>Type</li>
+              <li>Direction = can be directional or bi-directional</li>
+              <li>Properties</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      
+      <h2>Labels</h2>
+      <section>
+        <ul>
+          <li>A semantic category that groups nodes by role</li>
+          <li>Think of as the labels in an entity relationship diagram</li>
+          <li>While it technically can be implemented as a Property, it is usually not recommended not to do this:
+            <ul>
+              <li>An optimized indexed way to scan to a particular subset</li>
+              <li>In Cypher, they are a more performant way to reference nodes due to the database implementation</li>
+            </ul>
+          </li>
+          <li>
+            You can have multiple labels on the same node - queries that match at least one of them will be returned
+          </li>
+          <li>
+            Labels are case sensitive
+          </li>
+        </ul>
+      </section>
+
+      <h2>Properties</h2>
+      <section>
+        <ul>
+          <li>Entity attributes, relationship qualities, metadata
+            <ul>
+              <li>Key / value maps that can go on nodes and relationships</li>
+              <li>Allows you to attach metadata to nodes and relationships</li>
+            </ul>
+          </li>
+          <li>
+            These express metadata about your nodes and relationships
+          </li>
+          <li>
+            Keys are case sensitive
+          </li>
+        </ul>
+      </section>
+
+      <h2>Graph Database Systems</h2>
+      <section>
+        <ul>
+          <li>
+            Neo4j = most popular
+            <ul>
+              <li>Uses Cypher as the query language</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Query Languages</h2>
+      <section>
+        <ul>
+          <li>
+            Cypher - see Neo4j
+          </li>
+          <li>
+            Gremlin
+            <ul>
+              <li>Second most popular</li>
+              <li>Uses a more fluent style syntax</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Neo4j</h2>
+      <section>
+        <ul>
+          <li>A graph database system</li>
+          <li>Schema free (technically, more schema optional)</li>
+          <li>Supports
+            <ul>
+              <li>Strong ACID transactions</li>
+            </ul>
+          </li>
+          <li>
+            Very fast
+          </li>
+          <li>
+            
+          </li>
+        </ul>
+      </section>
+
+      <h2>Cipher Query Language</h2>
+      <section>
+        <ul>
+          <li>Pattern matching query language made for graphs and used by Neo4j
+            <ul>
+              <li>Looks a lot like SQL, but with adaptations</li>
+            </ul>
+          </li>
+          <li>It is a declarative language
+            <ul>
+              <li>You do not tell the server how to get the data you want, only what data you want</li>
+              <li>The database server determines the most optimal way based on a generated query plan</li>
+              <li>Many other NoSQL databases do not use this concept</li>
+            </ul>
+          </li>
+          <li>
+            Expressive
+            <ul>
+              <li>You can read from left to right to figure out what it is asking</li>
+            </ul>
+          </li>
+          <li>
+            Pattern matching
+          </li>
+          <li>
+            Queries can return data, but they can also return paths
+          </li>
+          <li>
+            A query is also known as a graph path
+          </li>
+          <li>
+            Results are displayed in several formats
+            <ul>
+              <li>Graph - visual graph of the results and relationships that connect them</li>
+              <li>Rows - more tabular result format</li>
+              <li>
+                Code
+                <ul>
+                  <li>How the results actually come over the transport</li>
+                  <li>
+                    There are two API
+                    <ul>
+                      <li>REST - returns JSON</li>
+                      <li>Binary API called Bolt that returns JSON</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Syntax
+            <ul>
+              <li>
+                Label references
+                <ul>
+                  <li>Reference a label with a colon prefix</li>
+                </ul>
+              </li>
+              <li>
+                Property references
+                <ul>
+                  <li>Curly brackets are used to enclose a property in a query</li>
+                </ul>
+              </li>
+              <li>
+                Node references
+                <ul>
+                  <li>Use round brackets to surround</li>
+                </ul>
+              </li>
+              <li>
+                Relationships are represented using arrows
+                <ul>
+                  <li>Additional detail is included in brackets</li>
+                  <li>
+                    <code>-[:DIRECTED]-&gt;</code>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Patterns are represented connecting nodes and relationships with hyphens and arrowheads
+                <ul>
+                  <li>Direction is indicated by an arrowhead
+                    <ul>
+                      <li>
+                        Unidirectional = <code>()-[]-&gt;()</code> or <code>()&lt;-[]-()</code>
+                      </li>
+                      <li>
+                        Bidirectional = <code>()-[]-()</code>
+                      </li>
+                    </ul>
+                  </li>
+
+                </ul>
+              </li>
+              <li>
+                Colon prefixes indicate
+                <ul>
+                  <li>A label for Nodes</li>
+                  <li>A relationship type for Relationships</li>
+                </ul>
+              </li>
+              <li>
+                CREATE
+                <ul>
+                  <li>Cypher keyword to create</li>
+                  <li>Creates the specified node(s) and any described relationship</li>
+                </ul>
+              </li>
+              <li>
+                MATCH
+                <ul>
+                  <li>Cypher keyword to define a query</li>
+                  <li>Like a SELECT in SQL</li>
+                  <li>Returned items are assigned to a placeholder or variable (like a letter)</li>
+                </ul>
+              </li>
+              <li>
+                LIMIT x
+                <ul>
+                  <li>Cypher keyword to only return the first x matches</li>
+                  <li>x is an integer</li>
+                </ul>
+              </li>
+              <li>
+                RETURN
+                <ul>
+                  <li>Cypher keyword </li>
+                </ul>
+              </li>
+            </ul>
+            <li>
+              Aggregates
+              <ul>
+                <li>There is no GROUP BY syntax in Cypher</li>
+                <li>THere are lots of aggregation functions built into Cypher</li>
+                <li>
+                  See <a href="https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/">Cypher Cheat Sheet</a>
+                </li>
+              </ul>
+            </li>
+          </li>
+        </ul>
+        <div>
+          Example 1: Multiple Results
+          <ul>
+            <li>MATCH = finds all nodes that have a type of Question</li>
+            <li>ORDER BY = sorts the returned items by the order property in ascending order</li>
+            <li>Returned items are assigned to the letter <code>q</code></li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code> MATCH (q:Question) RETURN q ORDER BY q.order ASC <br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example 2: Single Result
+          <ul>
+            <li>Only returns questions that have the specified unique id, so a guaranteed result set of one</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code> MATCH (q:Question{field_id: 1874557}) RETURN q<br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example 3: Query a Question that has at least one Answer
+          <ul>
+            <li>Only returns a question that has the specified unique id (<code>(q:Question{field_id: 1874557})</code>)</li>
+            <li>This question should have a direct relationship of type HAS_ANSWER between a Question node and an Answer node</li>
+            <li>The relationship should have a tail at the question node and a head at an answer node (dash and arrow characters)</li>
+            <li>The returned question node is assigned to q</li>
+            <li>The returned answer node is assigned to a</li>
+            <li>This this is isolating the question to a single node (via the unique id), it basically returns all answers to that single question</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code> MATCH (q:Question{field_id: 1874557})-[:HAS_ANSWER]->(a:Answer) RETURN q, a<br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example 4: Query a Question that has at least one Answer and find the People who answered it
+          <ul>
+            <li>Tacks onto Example 3, so see that for explanation of first part of the query</li>
+            <li>The returned question node is assigned to q</li>
+            <li>It transverses a ANSWERED relationship to an Person node to find who answered the question</li>
+            <li>Only return the first 200 matches</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code> MATCH (q:Question{field_id: 1874557})-[:HAS_ANSWER]->(a:Answer)&lt;-[:ANSWERED]-(p:Person) RETURN a, p LIMIT 200<br /> </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example 5: Creating
+          <ul>
+            <li>The following query looks for sushi restaurants in New York that are liked by friends of Philip</li>
+            <li>The code <code>person: Person</code> means a node with a label of 'Person' (<code>person</code> is the variable to represent the node)
+            </li>
+
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                MATCH(person:Person)-[:IS_FRIEND_OF] -&gt; (friend), <br/>
+                     (friend) - [:LIKES] -&gt; (restaurant), <br/>
+                     (restaurant) - [:LOCATED_IN] -&gt; (loc:Location), <br/>
+                     (restaurant) - [:SERVES] -&gt; (type:Cuisine) <br/>
+                WHERE person.name = 'Philip' <br/>
+                AND loc.location = 'New York' <br/>
+                AND type.cuisine = 'Sushi' <br/>
+                RETURN restaurant.name <br/>
+                <br /> </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Constraints</h2>
+      <section>
+        <li>Neo4j does enforce a format schema, but there are ways to create unique constraints and indexes</li>
+        <li>Constraints are used to 
+          <ul>
+            <li>Ensure uniqueness</li>
+            <li>Allow fast lookup of nodes which match label-property pairs</li>
+          </ul>
+        </li>
+        <li>
+          There are three types of unique constraints:
+          <ul>
+            <li>Unique node property constraints</li>
+            <li>Node property existence constraint
+              <ul>
+                <li>For instance, when creating a Person node, always require a property named name so a name is always specified</li>
+              </ul>
+            </li>
+            <li>
+              Relationship property existence constraint
+              <ul>
+                <li>Requires a particular relationship to exist when creating a node</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <div>
+          Here is how you create a unique constraint
+          <ul>
+            <li>Roughly equivalent to creating a primary key</li>
+            <li>Forces the value of property to be unique</li>
+            <li>Speeds up queries on this property since it can be indexed</li>
+            <li>This is unique to the specified label, not the entire database</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                CREATE CONSTRAINT ON (label: Label) <br/>
+                ASSERT label.property IS UNIQUE <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Indexes</h2>
+      <section>
+        <ul>
+          <li>
+            In a declarative database language, this is how you hint to the database that it should consider this when building an execution plan
+          </li>
+          <li>
+            In graph databases, indexes are only used finding the starting points for queries
+            <ul>
+              <li>Transversing out from a starting point Node is very cheap and fast, you aren't scanning and filtering massive record sets</li>
+              <li>In relational databases, you use index scans to look up rows and join</li>
+            </ul>
+          </li>
+          <li>Indexes allow fast lookup of nodes which match label-property pairs</li>
+          <li>Do not impose a constraint on properties that add the index to</li>
+        </ul>
+        <div>
+          Here is how you create an index on a property for nodes with the label of Label
+          <div class="card">
+            <div class="card-body">
+              <code>
+                CREATE INDEX ON :Label(property)
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>MERGE</h2>
+      <section>
+        <ul>
+          <li>Rough equivalent to UPSERT</li>
+          <li>Create if it does not exist, otherwise do nothing</li>
+          <li>This can be a stumbling block since it must match on all conditions; partial matches are considered not matched and the pattern will be creaed</li>
+        </ul>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/">Cypher Cheat Sheet</a>
+          </li>
+        </ul>
+      </section>
+
+    
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

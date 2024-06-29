@@ -33,37 +33,96 @@
           <li>
             Directives are classes that add additional behavior to elements
             <ul>
-              <li>Directives change the appearance or behavior of an element, component, or another directive
+              <li>They change the appearance or behavior of an element, component, or another directive</li>
               <li>When directives are rendered, Angular transforms the DOM according to the instructions given by the directive</li>
-              </li>
             </ul>
           </li>
           <li>
             Components are technically Directives
             <ul>
-<li>The main difference between a Directive and a Component is that a Directive does not have a template</li>
+              <li>The main difference between a Directive and a Component is that a Directive does not have a template</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Types</h2>
+      
+      <h3>Attribute</h3>
+      <section>
+        <ul>
+          <li>
+            Attribute directives change the appearance or behavior of an element, component, or another directive
+            <ul>
+              <li>Listen to and modify the behavior of other HTML elements, attributes, properties, and components</li>
+            </ul>
+          </li>
+          <li>Usually applied to elements as if they were HTML attributes</li>
+          <li>You can add several attribute directives to the same host element</li>
+        </ul>
+      </section>
+      
+      <h3>Structural</h3>
+      <section>
+        <ul>
+          <li>Responsible for HTML layout by shaping or reshaping the DOM's structure, typically by adding, removing, or manipulating elements
+            <ul>
+              <li>Alter the page layout by adding, removing, and replacing elements in DOM</li>
+            </ul>
+          </li>
+          <li>Creates an embedded view from the Angular generated ng-template and inserts that view in a view container adjacent to the directive's original host element</li>
+          <li>
+            These are limited to a single structural directive per host element
+            <ul>
+              <li>This is due to precedence and their complexity</li>
+              <li>For instance, cannot have *ngFor and *ngIf on the same host element</li>
+              <li>use ng-containers so you don't introduce extra levels of HTML</li>
+            </ul>
+          </li>
+          <li>Apply to a host element - directive then does what it is supposed to do with that host element and its descendants</li>
+          <li>
+            An * precedes the directive attribute name to identify it as a structural directive
+            <ul>
+              <li>No brackets or parentheses are needed</li>
+              <li>This is a convenience notation and the string that follows is a microsyntax rather than the usual template expression</li>
+              <li>This is de-sugared into a marked-up ng-template that surrounds the host element and its descendants</li>
             </ul>
           </li>
           <li>
-            There are two types:
+            Common built-in directives are:
             <ul>
               <li>
-                <a href="structural.html">Structural</a>
-                <ul>
-                  <li>Alter the page layout by adding, removing, and replacing elements in DOM</li>
-                  <li>Examples include *ngFor, *ngIf</li>
-                </ul>
+                <a href="../legacy/ngif.html">NgIf</a>
               </li>
               <li>
-                <a href="attribute.html">Attribute</a>
-                <ul>
-                  <li>These alter the appearance or behavior of the existing element</li>
-                  <li>Look like regular HTML attributes, hence the name</li>
-                  <li>Example includes ngModel</li>
-                </ul>
+                <a href="../legacy/ngforof.html">NgFor</a>
+              </li>
+              <li>
+                <a href="../legacy/ngswitch.html">NgSwitch</a>
               </li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h2 id="bestpractices">Best Practices</h2>
+      <section>
+        <ul>
+          <li>
+            Use attribute directives when you have presentation logic without a template
+            <ul>
+              <li>An element may have more than one attribute directive applied</li>
+            </ul>
+          </li>
+          <li>
+            Use @HostListener and @HostBinding decorators
+            <ul>
+              <li>Favor over host property of @Directive and @Component decorators</li>
+            </ul>
+          </li>
+          <li>Use lower camel case for naming selectors of directives</li>
+          <li>Use a custom prefix</li>
+          <li>Don't use the ng prefix</li>
         </ul>
       </section>
     </div>

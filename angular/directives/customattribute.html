@@ -28,17 +28,31 @@
 
       <h1>Custom Attribute Directives</h1>
 
-      <h2>General</h2>
+
+      <h2>Use Cases</h2>
       <section>
         <ul>
-          <li>
-            Attribute directives change the appearance or behavior of an element, component, or another directive
+          <li>Anytime you want to interact with the DOM, a directive is usually called for
             <ul>
-              <li>Listen to and modify the behavior of other HTML elements, attributes, properties, and components</li>
+              <li>Generally, its bad practice to interact with the DOM directly outside of a custom directive</li>
             </ul>
           </li>
-          <li>Usually applied to elements as if they were HTML attributes</li>
-          <li>You can add several attribute directives to the same host element</li>
+          <li>
+            Examples include
+            <ul>
+              <li>Reusable HTML component
+                <ul>
+                  <li>The selector becomes the tag name</li>
+                </ul>
+              </li>
+              <li>Reusable HTML behavior
+                <ul>
+                  <li>The selector becomes an attribute on the element</li>
+                </ul>
+              </li>
+              <li>You need to wrap a jQuery plugin</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
@@ -124,6 +138,24 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <h3>Selector Naming Guidelines</h3>
+      <section>
+        <ul>
+          <li>Use a unique prefix for your directive selectors to:
+            <ul>
+              <li>Avoid clashing with others</li>
+              <li>Easier for readers to identify</li>
+            </ul>
+          </li>
+          <li>
+            Never use ng
+          </li>
+          <li>
+            Common practice is to use two letter prefix followed by a hyphen
+          </li>
+        </ul>
       </section>
 
       <h3>User Events</h3>
