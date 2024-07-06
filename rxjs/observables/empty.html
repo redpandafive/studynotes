@@ -34,9 +34,14 @@
       <section>
         <ul>
           <li>A simple observable that emits no items to the Observer and immediately emits a complete notification</li>
-          <li>An observable that emits no items and immediately completes</li>
-          <li>This is a constant</li>
           <li>Great for error handling when we don't have an item to emit</li>
+          <li>
+            BE CAREFUL - it does not emit a success notification, so it will not trigger a success callback
+            <ul>
+              <li>This is a problem if you return an empty observable from an HTTP call that does not return results and you want to wait for the call to complete</li>
+              <li>any actions you put in the success callback will not execute</li>
+            </ul>
+          </li>
         </ul>
         <div>
           Example - this prints Complete!
@@ -57,16 +62,10 @@
         </div>
       </section>
 
-      <h3>Observable&lt;never&gt;</h3>
+      <h2>NEVER</h2>
       <section>
         <ul>
-          <li>
-            A never observable
-            <ul>
-              <li>Emits no values</li>
-              <li>Never completes, so no completion notificaiton</li>
-            </ul>
-          </li>
+          <li>An Observable that emits no items to the Observer AND never completes</li>
           <li>
             Good for returning an Observable when an error occurs to keep typing strong
             <ul>
@@ -81,14 +80,6 @@
               <li>Using Observable of never in the error handler means the outer observable does not need to account for it with its return type</li>
             </ul>
           </li>
-          <li></li>
-        </ul>
-      </section>
-
-      <h2>NEVER</h2>
-      <section>
-        <ul>
-          <li>An Observable that emits no items to the Observer and never completes</li>
         </ul>
         <div>
           Example - never prints anything and never completes
@@ -111,6 +102,15 @@
             </div>
           </div>
         </div>
+      </section>
+
+
+      <h2>Of({})</h2>
+      <section>
+        <ul>
+          <li>Use this when you want to trigger success, error, and complete, but do not care about the item returned (such as a POST call that doesn't return data)</li>
+          <li>This is different from <code>Of()</code>, which functions as EMPTY (signals complete, but emits no values)</li>
+        </ul>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
