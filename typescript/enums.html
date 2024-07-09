@@ -29,6 +29,33 @@
       </nav>
 
       <h1>Enums</h1>
+
+
+      <h2>Basics</h2>
+      <section>
+
+        <div>
+          Enums can be reverse mapped, so you can access the enum name as well
+          as the enum value
+          <div class="card">
+            <div class="card-body">
+              <code>
+                enum Weekend {  <br/> 
+                  Friday = 1,  <br/> 
+                  Saturday,  <br/>
+                Sunday  <br/> 
+              }; <br/> 
+              <br/> 
+              Weekend.Saturday // returns 2  <br/> 
+              Weekend&#91;"Saturday"&#93;; // returns 2  <br/> 
+              Weekend&#91;2&#93;; // returns Saturday  <br/> 
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Use Cases</h2>
       <section>
         <div>
           Situations where enums should be used:
@@ -44,80 +71,91 @@
           </ul>
           Situations where enums should not be used:
           <ul>
-            <li>If you plan on reassinging or chinig the enum member values</li>
+            <li>If you plan on reassigning or chaining the enum member values</li>
             <li>Good for finite items, not so good for dynamic values</li>
             <li>Cannot be used for variables</li>
           </ul>
         </div>
+        </section>
+
+      <h2>Types</h2>
+      <section>
         <div>
-          Enums can be reverse mapped, so you can access the enum name as well
-          as the enum value
+          Numeric
+          <ul>
+            <li>This is the default.</li>
+            <li>Items in the enum are interpreted as numbers.</li>
+            <li>These can be implicitly or explicitly defined.</li>
+            <li>
+              Enums can be declared as constant for a performance boost.
+            </li>
+          </ul>
           <div class="card">
             <div class="card-body">
               <code>
-                code='enum Weekend {&#10; Friday = 1,&#10; Saturday,&#10;
-                Sunday&#10;}&#10;Weekend.Saturday // returns
-                2&#10;Weekend&#91;"Saturday"&#93;; // returns
-                2&#10;Weekend&#91;2&#93;; // returns Saturday'
+                const enum Weekend1 {&#10; <br/> 
+                  Friday,&#10; <br/> 
+                  Saturday,&#10; <br/>
+                  Sunday&#10; <br/>
+                }; <br/>
+                <br/>
+                enum Weekend2 {  <br/>
+                  &#10; Friday = 1,&#10; <br/>
+                  Saturday,&#10;  <br/>
+                  Sunday&#10;  <br/>
+                } <br/>
+                <br/>
+                enum Weekend3 {&#10;  <br/>
+                Friday = 1,&#10;  <br/>
+                Saturday = 13,&#10;  <br/>
+                Sunday = 5&#10; <br/>
+              } <br/>
+              <br/>
+              enum Weekend {  <br/>
+                Friday = 1,  <br/> 
+                Saturday = getDate('TGIF'),  <br/>
+                Sunday = Saturday * 40  <br/>
+              }  <br/>
+              function getDate(day : string): number {  <br/> 
+                if (day === 'TGIF') {  <br/>
+                  return 3; <br/> 
+                } <br/>
+              }
               </code>
             </div>
           </div>
         </div>
         <div>
-          There are three types:
-          <div>
-            Numeric
-            <ul>
-              <li>This is the default.</li>
-              <li>Items in the enum are interpretted as numbers.</li>
-              <li>These can be implicitly or explicitly defined.</li>
-              <li>
-                Enums can be declared as constant for a performance boost.
-              </li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  const enum Weekend1 {&#10; Friday,&#10; Saturday,&#10;
-                  Sunday&#10;}&#10;&#10;enum Weekend2 {&#10; Friday = 1,&#10;
-                  Saturday,&#10; Sunday&#10;}&#10;&#10;enum Weekend3 {&#10;
-                  Friday = 1,&#10; Saturday = 13,&#10; Sunday =
-                  5&#10;}&#10;&#10;enum Weekend {&#10; Friday = 1,&#10; Saturday
-                  = getDate('TGIF'),&#10; Sunday = Saturday *
-                  40&#10;}&#10;&#10;function getDate(day : string): number
-                  {&#10; if (day === 'TGIF') {&#10; return 3;&#10; }&#10;}"
-                </code>
-              </div>
+          String
+          <div class="card">
+            <div class="card-body">
+              <code>
+                enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday =
+                'SATURDAY',&#10; Sunday = 'SUNDAY'&#10;}"
+              </code>
             </div>
           </div>
-          <div>
-            String
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday =
-                  'SATURDAY',&#10; Sunday = 'SUNDAY'&#10;}"
-                </code>
-              </div>
-            </div>
-          </div>
-          <div>
-            Heterogeneous
-            <ul>
-              <li>Consist of a mixture of strings and numbers.</li>
-              <li>Limited ue cases and generally not recommended to use.</li>
-            </ul>
-            <div class="card">
-              <div class="card-body">
-                <code>
-                  enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday = 1,&#10;
-                  Sunday = 2&#10;}"
-                </code>
-              </div>
+        </div>
+        <div>
+          Heterogeneous
+          <ul>
+            <li>Consist of a mixture of strings and numbers.</li>
+            <li>Limited ue cases and generally not recommended to use.</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                enum Weekend {&#10; Friday = 'FRIDAY',&#10; Saturday = 1,&#10;
+                Sunday = 2&#10;}"
+              </code>
             </div>
           </div>
         </div>
       </section>
+
+
+
+
     </div>
     <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
   </body>

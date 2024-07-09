@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">RxJS</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Unsubscribing from Observables
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Unsubscribing from Observables</h1>
+
+      <section>
+        <ul>
+          <li>
+            Observables should be completed when a component is being destroyed
+            <ul>
+              <li>Failure to do slow can result in memory leaks</li>
+            </ul>
+          </li>
+          <li>
+            There are several techniques to do this
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Technique 1: Capture Subscription to a Property</h2>
+      <section>
+        <div>
+          <ul>
+            <li>Assign the Subscription object returned by the subscribe method to a property</li>
+            <li>In the NgOnDestroy lifecycle hook, call the unsubscribe method</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                subscription: Subscription; <br/>
+                ... <br/>
+                ngOnInit(): void { <br/>
+                  this.sub = this.myServiceClass.getData().subscribe(); <br/>
+                } <br/>
+                <br/>
+                ngOnDestroy(): void { <br/>
+                  this.sub.unsubscribe(); <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Technique 2: Capture Subscription to an Array</h2>
+      <section>
+        <div>
+          <ul>
+            <li>Push all Subscription objects to an array</li>
+            <li>In the NgOnDestroy lifecycle hook, iterate over the array and call the unsubscribe method on each item</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                subs: Subscription[] = []; <br/>
+                ... <br/>
+                ngOnInit(): void { <br/>
+                  this.subs.push(this.myServiceClass.getData().subscribe()); <br/>
+                } <br/>
+                <br/>
+                ngOnDestroy(): void { <br/>
+                  this.subs.forEach(s => s.unsubscribe()); <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Technique 3: Use TakeUntil and Subject</h2>
+      <section>
+        <div>
+          <ul>
+            <li>There is no subscription to the Subject, so no need to call complete on it</li>
+            <li>One technique to sharing this across multiple components is to extract it to a base class, then have each component extend this class
+              <ul>
+                <li>This has limitations and quirks that you may need to workaround</li>
+              </ul>
+            </li>
+            <li>Make sure the takeUntil operator is the last one in the pipe.  
+              <ul>
+                <li>Calling something like SwitchMap after it will cause the cleanup to not work correctly.</li>
+                <li>Operators that complete the stream (such as takeUntil) will force operators that come before to perform their teardown logic</li>
+                <li>Operators that come after it will not have their teardown logic run, hence why you get the memory leak</li>
+              </ul>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                private readonly destroy: Subject<void> = new Subject<void>(); <br/>
+                ... <br/>
+                ngOnInit(): void { <br/>
+                  this.myServiceClass.getData().pipe(
+                    takeUntil(this.destroy.asObservable())
+                  ).subscribe(); <br/>
+                } <br/>
+                <br/>
+                ngOnDestroy(): void { <br/>
+                  this.subs.forEach(s => s.unsubscribe()); <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Technique 4: Create a Subscription of Subscriptions</h2>
+      <section>
+        <div>
+          <ul>
+            <li>For each subscription that you have, add it to a master subscription</li>
+            <li>In the OnDestroy lifecycle hook, call unsubscribe on this master subscription.</li>
+            <li>The added subscriptions will be completed automatically</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                private masterSub: new Subscription();<br/>
+                ... <br/>
+                ngOnInit(): void { <br/>
+                  const sub = this.myServiceClass.getData().pipe(
+                    takeUntil(this.destroy.asObservable())
+                  ).subscribe(); <br/>
+                  this.masterSub.add(sub);
+                } <br/>
+                <br/>
+                ngOnDestroy(): void { <br/>
+                  this.masterSub.unsubscribe(); <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Technique 5: DestroyRef and takeUntilDestroyed</h2>
+      <section>
+        <div>
+          <ul>
+            <li>Requires Angular 16</li>
+            <li>
+              Uses two items:
+              <ul>
+                <li>DestroyRef injection token</li>
+                <li>
+                  takeUntilDestroyed operator
+                  <ul>
+                    <li>This is in the @angular/core/rxjs-interop namespace</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Since the takeUntilDestroyed operator uses the <code>inject</code> function under the hood, passing the DestroyRef token to it allows you to use the operator inside a lifecycle hook or some other context where <code>inject</code> cannot be called
+            </li>
+            <li>
+              Make sure the takeUntilDestroyed operator is the last in the pipe of operators
+              <ul>
+                <li>It uses takeUntil under the hood and has the same limitations for operators that come after it</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                private readonly destroy: DestroyRef = inject(DestroyRef); <br/>
+                ... <br/>
+                ngOnInit(): void { <br/>
+                  this.myServiceClass.getData().pipe(
+                    takeUntilDestroyed(this.destroy)
+                  ).subscribe(); <br/>
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Technique 6: Use ToSignal</h2>
+      <section>
+        <div>
+          <ul>
+            <li>This converts an Observable to a Signal</li>
+            <li>Automatically subscribes and unsubscribes to the observable</li>
+            <li>This is an alternative to using the Async pipe</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>
