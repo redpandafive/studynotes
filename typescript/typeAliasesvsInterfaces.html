@@ -52,6 +52,9 @@
         <ul>
           <li>Almost all features of an interface are available in Type, so in many cases you can choose between them freely</li>
           <li>
+            Type aliases are generally more expressive and do allow for more advanced features
+          </li>
+          <li>
             There are cases when you should use a type alias over an interface, including
             <ul>
               <li>To create a new name for a primitive type</li>
@@ -60,11 +63,31 @@
               <li>To use mapped types, conditional types, type guards, or other advanced type features</li>
             </ul>
           </li>
+
+        </ul>
+      </section>
+
+      <h2>Similarities</h2>
+      <section>
+        <ul>
           <li>
-            Type aliases are generally more expressive and do allow for more advnaced features
+            Both can be used to describe a function:
+
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  interface SheduleVideo1 { <br/>
+                    (video: Video, scheduledFor: Date): Promise&lt;boolean&gt; <br/>
+                  } <br/>
+                  type ScheduleVideo2 = (video: Video, scheduledFor: Date => Promise&lt;boolean&gt;);<br />
+                </code>
+              </div>
+            </div>
+
           </li>
         </ul>
       </section>
+
 
       <h2>Differences</h2>
       <section>

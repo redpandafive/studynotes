@@ -33,7 +33,10 @@
 
       <h2>Basics</h2>
       <section>
-
+        <ul>
+          <li>Allow you to define a set of named constants</li>
+          <li>These are a TypeScript feature; it doesnt exist in JavaScript (for now)</li>
+        </ul>
         <div>
           Enums can be reverse mapped, so you can access the enum name as well
           as the enum value
@@ -78,6 +81,126 @@
         </div>
         </section>
 
+        <h2>Controversy</h2>
+        <section>
+          <ul>
+            <li>Enums are somewhat controversial in TypeScript
+              <ul>
+                <li>It was introduced early on to give TypeScript an C# -ish OO feel</li>
+              </ul>
+            </li>
+            <li>
+              Pros
+              <ul>
+                <li>
+                  Does allow convenient and easy mass refactoring
+                </li>
+              </ul>
+            </li>
+            <li>Cons
+              <ul>
+                <li>
+                  They behave a bit unpredictably at runtime, different from the rest of items in TypeScript
+                </li>
+                <li>
+                  For instance, you can pass a number to a function that takes an enum as a paramter.  THis works, but it does not throw an error if you pass in a number that does not have a corresponding enum member.
+                </li>
+                <li>
+                  For string enums, you cannot assign a string value to an enum, even if the string matches the "raw" value of an enum member
+                  <div class="card">
+                    <div class="card-body">
+                      <code>
+                        enum PostState = { <br/>
+                          Draft = 'Draft', <br/>
+                          Scheduled: 'SCHEDULED', <br/>
+                          Published: 'PUBLISHED' <br/>
+                        } as const; <br/>
+
+                        ...<br/>
+                        // this does not work <br/>
+                        const x: PostState = "PUBLISHED"; <br/>
+                        // this does work <br />
+                        const x: PostState = PostState.Draft <br/>
+                      </code>
+                    </div>
+                  </div>
+                </li>
+                <li>This can lead to problems when you take input from a user that you need to case as an enum</li>
+                <li>
+                  There are pitfalls with using const enums, particularly when within a library - see documentation for details
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+
+        <h2>Alternatives</h2>
+        <section>
+          <div>
+            POJO (Plain Old JavaScript Object)
+            <ul>
+              <li>The <code>as const</code> annotation means the object cannot be manipulated or changed.  TypeScript knows to type them as strictly as possible.</li>
+              <li>
+                You can reference keys in one of two methods
+                <ul>
+                  <li>LOG_LEVEL.DEBUG</li>
+                  <li>'DEBUG'</li>
+                </ul>
+              </li>
+              <li>
+                You can index into the object to get the value
+                <ul>
+                  <li>Assume you have a a variable <code>level</code> that contains one of the members of LOG_LEVEL</li>
+                  <li><code>LOG_LEVEL[level]</code> will output the string value, such as 'DEBUG', 'WARNING', 'ERROR'</li>
+                </ul>
+              </li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const LOG_LEVEL = { <br/>
+                    DEBUG: 'DEBUG', <br/>
+                    WARNING: 'WARNING', <br/>
+                    ERROR: 'ERROR' <br/>
+                  } as const; <br/>
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            String Union Types
+            <ul>
+              <li>A good alternative to const enums</li>
+              <li>Doesn't require an object representation</li>
+              <li>Since it is pure TypeScript, if wil vanish at runtime</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  type LogLevel = 'DEBUG' | 'WARNING' | 'ERROR'; <br/>
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            An alternative syntax to the above is:
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  const LogLevel = { <br/>
+                    Debug: 'DEBUG', <br/>
+                    Warning: 'WARNING', <br/>
+                    Error: 'ERROR' <br/>
+                  } as const; <br/>
+                  ... <br/>
+                  type LogLevelType = typeof LogLevel(keyof typeof LogLevel); <br/>
+                </code>
+              </div>
+            </div>
+          </div>
+        </section>
+
       <h2>Types</h2>
       <section>
         <div>
@@ -85,7 +208,12 @@
           <ul>
             <li>This is the default.</li>
             <li>Items in the enum are interpreted as numbers.</li>
-            <li>These can be implicitly or explicitly defined.</li>
+            <li>These can be implicitly or explicitly defined.
+              <ul>
+                <li>When implicity defined, they begin with the number zero</li>
+                <li>Subsequent implicit members will auto increment by one</li>
+              </ul>
+            </li>
             <li>
               Enums can be declared as constant for a performance boost.
             </li>
@@ -127,6 +255,10 @@
         </div>
         <div>
           String
+          <ul>
+            <li>No implicit initialization; each member has to be constant initialized with a string literal or another string enum member</li>
+            <li>Do allow a meaningful and readbale value when the code runs, indepenent of the name of the enum member itself</li>
+          </ul>
           <div class="card">
             <div class="card-body">
               <code>
@@ -140,7 +272,7 @@
           Heterogeneous
           <ul>
             <li>Consist of a mixture of strings and numbers.</li>
-            <li>Limited ue cases and generally not recommended to use.</li>
+            <li>Very limited use cases and generally not recommended to use.</li>
           </ul>
           <div class="card">
             <div class="card-body">
@@ -152,6 +284,42 @@
           </div>
         </div>
       </section>
+
+      <h2>Computed vs Constant Members</h2>
+      <section>
+        <ul>
+          <li>Values associated with an enum member can be either constant or computed
+            <ul>
+              <li>Constant members are
+                <ul>
+                  <li>The first member in the enum and has not initializer (implicitly defined as 0)</li>
+                  <li>No initializer, but the preceding member was a numeric constant.  The current member will have a value of +1 to the previous value</li>
+                  <li>Initialized with a constant enum expression = an expression that can be fully evaluated at runtime
+                    <ul>
+                      <li>A literal enum expression (string or numeric literal)</li>
+                      <li>A reference to a previously defined constant enum member (can be from a different enum)</li>
+                      <li>A parenthesized constant enum expression</li>
+                      <li>A constant enum expression with one of hte unary operators applied</li>
+                      <li>Constant enum expressions acting as operands with a binary operator
+                        <ul>
+                          <li>This also applies to union types</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Computed members are members that are not constant
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+
 
 
 
