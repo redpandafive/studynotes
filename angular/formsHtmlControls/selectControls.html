@@ -156,9 +156,10 @@
             <div class="card">
               <div class="card-body">
                 <code>
-                  &lt;select (ngModel)="selectedBook"&gt; &lt;option *ngFor="let
-                  book of myBooks"
-                  [value]="book.id"&gt;{{book.title}}&lt;/option&gt; <br />
+                  &lt;select (ngModel)="selectedBook"&gt;  <br /> 
+                  &lt;option *ngFor="let book of myBooks" [value]="book.id"&gt;  <br />
+                  {{book.title}}  <br />
+                  &lt;/option&gt; <br />
                   &lt;/select&gt; <br />
                 </code>
               </div>
@@ -317,7 +318,50 @@
             </ul>
           </li>
           <li>
-            Method #3: Use NgModel and 2 way data binding
+            Method #4: Use DOM Events
+            <ul>
+              <li>
+                ngValue can behave unpredictable outside of a form, so this example uses value to bind the object to the option.
+              </li>
+              <li>
+                This example uses a change event on the select control.  The handler will treat the paramter as a HTML eventt object.
+              </li>
+              <li>
+                The id is a string in the event object, so you have to cast it as a number.
+              </li>
+              <li>
+                Once you have the id as a number, search the original item array to find the actual object.
+              </li>
+            </ul>
+              <div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      onSelectionChange(event: Event): void { <br/>
+                        const selectElement = event.target as HTMLSelectElement; <br/>
+                        const selectedItemId = +selectElement.value; <br/>
+                        this.selectedItem = this.items.find(item => item.id === selectedItemId); <br/>
+                      } <br/>
+                    </code>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="card">
+                  <div class="card-body">
+                    <code>
+                      &lt;select (change)="onSelectionChange($event)"&gt; <br/>
+                      &lt;option *ngFor="let item of items" [value]="item.id"&gt;  <br/>
+                      {{ item.name }} <br/>
+                      &lt;/option&gt; <br/>
+                      &lt;/select&gt; <br/>
+                    </code>
+                  </div>
+                </div>
+              </div>
+          </li>
+          <li>
+            Method #5: Use NgModel and 2 way data binding
             <ul>
               <li>
                 Use the NgModel directive in your Template

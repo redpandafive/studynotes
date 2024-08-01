@@ -38,6 +38,31 @@
         </ul>
       </section>
 
+      <h2>Parsing ISO 8601 String to Date Object</h2>
+      <section>
+        <ul>
+          <li>When passing a string of format YYYY-MM-DD to a Date object constructor, you will usually encounter an "off by one day" bug</li>
+          <li>Since the timezone is missing from the string, it is interpreted as UTC.  However, the created Date object will be adjusted to your local timezone
+            <ul>
+              <li>This results in the Date object being off by one day, depending on the timezone you are in</li>
+            </ul>
+          </li>
+          <li>One approach to fixing this is to split the date string into parts
+            <ul>
+              <li>Months are zero based, so you do have to subtract one from it</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              let b = s.split('-');
+              let parsedDate = new Date(+b[0], (+b[1] - 1), +b[2]); <br/>
+            </code>
+          </div>
+        </div>
+      </section>
+
 
       <h2>Temporal API</h2>
       <section>

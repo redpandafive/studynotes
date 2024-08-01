@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="./index.html">TypeScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Types as Sets (Union and Intersection Types)
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Types as Sets (Union and Intersection Types)</h1>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="./extends.html">Extends</a>
+          <li>
+            <a href="../other/setTheory.html">Set Theory</a>
+          </li>
+
+        </ul>
+      </section>
+
+
+      <h2>Basics</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="../other/setTheory.html">Set theory</a> offers a mental model about types in TypeScript</li>
+          <li>
+            A type can be seen as a set of possible values
+            <ul>
+              <li>In other words, every value of a type can be thought of as an element in a set</li>
+            </ul>
+          </li>
+          <li>
+            Through this lens, you can view:
+            <ul>
+              <li>The number type as the infinite set of every possible number</li>
+              <li>The string type as the infinite set of every possible character permutatio</li>
+              <li>The object type as the infinite set of every possible shape that an object can take</li>
+              <li>The undefined type as a finite set containing a single value of undefined</li>
+              <li>The null type as the finite set containing a single value null</li>
+              <li>The boolean type as the finite set containing two values, true and false</li>
+            </ul>
+          </li>
+          <li>
+            String literal types and string literal union types can be viewed as finite sets that are a proper subset of the set of all possible strings
+          </li>
+          <li>
+            Thinking of types as sets can help reason TypeScript behavior, specifically:
+            <ul>
+              <li>Type compatibility during assignments</li>
+              <li>Type creation with type operators</li>
+              <li>Conditional type resolution</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+      <h2>Assignment</h2>
+      <section>
+        <ul>
+          <li>Assignmnets store a value in a specific memory location labeled with a variable</li>
+          <li>Both value and variable are typed, so assignment compatibility depends on two types:
+            <ul>
+              <li>The value being assigned</li>
+              <li>The recipient variable</li>
+            </ul>
+          </li>
+          <li>
+            When the types are identical, the assignment succeeds.
+          </li>
+          <li>
+            When the types are not identical, type casting is used to transform the value into a compatible type
+          </li>
+          <li>
+            Upcasting occurs when we broaden the type of the value into a more encompassing type
+            <ul>
+              <li>This transforms a subtype into a supertype (a propert subset into a superset)</li>
+              <li>If a type is in  a subset of another, then the element of the smaller set is also a member in the larger set</li>
+              <li>This is type safe, so TypeScript allows it</li>
+              <li>Example is upcasting a string literal to a string type</li>
+            </ul>
+          </li>
+          <li>
+            Downcasting is normally not allowed
+            <ul>
+              <li>We cannot say for certain that a member of a larget set is a member of a smaller set </li>
+              <li>Example is assigning a string type to a string literal</li>
+            </ul>
+          </li>
+          <li>
+            There are special cases:
+            <ul>
+              <li>never
+                <ul>
+                  <li>Is assignable to every other type (upcasting allowed)</li>
+                  <li>No type can be assigned to it (downcasting is not allowed</li>
+                </ul>
+              </li>
+              <li>
+                Unknown
+                <ul>
+                  <li>Mostly used to type a value whose type is meant to be confirmed before usage
+                    <ul>
+                      <li>TypeScript forces us to find out what type every unknown value is before we can safely use it</li>
+                    </ul>
+                  </li>
+                  <li>
+                    This means:
+                    <ul>
+                      <li>Every type is assignable to unkown (upcasting allowed) - this is rarely useful</li>
+                      <li>It is not assignable to any other type</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                any
+                <ul>
+                  <li>Is assignable to every type and every type can be assigned to it</li>
+                  <li>Mainly intended as an escape hatch to disable TypeScript's assingability rules</li>
+                  <li>There is no equivalent in set theory</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <h2>Union Types</h2>
+      <section>
+        <ul>
+          <li>A type formed from two or more other types</li>
+          <li>Values may be any one of those types</li>
+          <li>Constituent types are called members</li>
+          <li>
+            Operations are only allowed if it is valid for every member of the
+            union
+          </li>
+          <li>
+            Narrowing (checking for type using typeof) can help TypeScript infer
+            the correct type
+          </li>
+        </ul>
+        <div>
+          Example of a simple union type
+          <div class="card">
+            <div class="card-body">
+              <code>
+                getAllBooks(): Observable&lt;Book&#91;&#93; | CustomError&gt; {
+                ...."
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example of a function that can accept a union Type - this will trigger
+          an error since number does not have a toUpperCase method
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function printId(id: number | string) {&#10;
+                console.log(id.toUpperCase());&#10;}"
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example of using narrowing to prevent the above error
+          <div class="card">
+            <div class="card-body">
+              <code>
+                function printId(id: number | string) { <br/> 
+                  if (typeof id === &quot;string&quot;) { <br/> 
+                    // In this branch, id is of type 'string' <br/> 
+                    console.log(id.toUpperCase()); <br/> 
+                  } else { <br/>
+                // Here, id is of type 'number' <br/> 
+                console.log(id); <br/>
+                } <br/>
+              }
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Example of a function that could return an error type or a data type
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              getAllBooks(): Observable&lt;Book&#91;&#93; | CustomError&gt; {
+              ...."
+            </code>
+          </div>
+        </div>
+      </section>
+
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://ivov.dev/notes/typescript-and-set-theory">https://ivov.dev/notes/typescript-and-set-theory</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

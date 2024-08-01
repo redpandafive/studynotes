@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Set Theory</h1>
+      <section>
+        <ul>
+          <li>A branch of mathematics devotes to collections of elements, or sets</li>
+          <li>Sets can be described by:
+            <ul>
+              <li>
+                Enumerating the elements it contains: 
+                <ul>
+                  <li>{a,b,c}</li>
+                </ul>
+              </li>
+              <li>Stating a rule to determine which elements belong in the set
+                <ul>
+                  <li>{x &#8712; S | P(x)}</li>
+                  <li>"The set of all elements x belonging in set S such that P of x"</li>
+                  <li>P function is called predicate and selects elements that belong to the set
+                    <ul>
+                      <li>It is the constraint that every element must fulfill in order to qualify as a member in the set</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Once a set is defined, elements can be described as members or not members of the set
+            <ul>
+              <li>a &#8712; {a, b, c}</li>
+              <li>d &#8713; {a, b, c}</li>
+            </ul>
+          </li>
+          <li>
+            A set is a subset of another set if, and only if, every element of the first set is also an element of the second set
+            <ul>
+              <li>When all items in one set exist in the other set, then the first is a subset of the second</li>
+              <li>{a, b} &#8838; {b, a}</li>
+            </ul>
+          </li>
+          <li>Given two sets, if there is at least one element in the second set that does not exist in the first set, then
+            <ul>
+              <li>The first (smaller) set is a proper subset of the second (larger) set</li>
+              <li>
+                The second set (larger) is a superset of the first (smaller) set
+              </li>
+              <li>{a, b} &#8834; {a, b, c}</li>
+            </ul>
+          </li>
+          <li>Two sets are considered equal if, and only if, they contain the same elements:
+            <ul>
+              <li>Every member of the first set is also a member of the second set</li>
+              <li>Every member of the second set is also a member of the first set</li>
+            </ul>
+          </li>
+          <li>
+            A set is not a subset of another set if there exists at least one element in the first set that is not a member of the second set
+            <ul>
+              <li>Overlapping sets contain at least one element in both sets</li>
+              <li>Disjoint sets contain no elements that are in both the first and second sets</li>
+            </ul>
+          </li>
+          <li>
+            The empty set is a special case set
+            <ul>
+              <li>Symbolized as &#8709;</li>
+              <li>Contains nothing.  It itself is not nothing, rather it is a container of nothing</li>
+              <li>Given two sets that are disjoint, the elements common to both is the empty set</li>
+            </ul>
+          </li>
+          <li>
+            The universal set is the set that every set is a subset of, and that every element is a member of
+            <ul>
+              <li>Symbolized by &#8746;</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -181,6 +181,13 @@
       <h2>Never</h2>
       <section>
         <ul>
+          <li>
+            Behaves differntly for assignability in that:
+            <ul>
+              <li>it is assignable to every other type</li>
+              <li>No type is assignable to it</li>
+            </ul>
+          </li>
           <li>Returned by functions to represent values which are never observed</li>
           <li>Example would be a function that throws an exception or ends execution of the program</li>
           <li>This is also when TypeScript determines that there is nothing left in a union type to consider</li>
