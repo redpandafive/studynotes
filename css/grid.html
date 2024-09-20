@@ -223,14 +223,43 @@
             <code>auto</code>
             <ul></ul>
           </li>
+        </ul>
+        </section>
+
+        <h2>Repeat Function</h2>
+        <section>
+          <ul>
+            <li>
+              Provides a compact way to write a recurring pattern
+            </li>
+            <li>
+              Can be used in the CSS grid properties <code>grid-template-columns</code> and <code>grid-template-rows</code>
+            </li>
+            <li>
+              Takes two arguments
+              <ul>
+                <li>Repeat count
+                  <ul>
+                    <li>The number of times that the track list should be repeated</li>
+                    <li>Can be an integer value of 1 or more</li>
+                    <li>
+                      Can also be <code>auto-fill</code> or <code>auto-fit</code> = repeats the set of tracks as many times as is needed to fill the grid container
+                    </li>
+                  </ul>                  
+                  </li>
+                  <li>
+                    Tracks
+                    <ul>
+                      <li>Specifies the set of tracks that will be repeated</li>
+                      <li>This is one or more value, where each value represents the size of the track</li>
+                    </ul>
+                  </li>
+              </ul>
+            </li>
           <li>
             <code>repeat(3, auto)</code>
             <ul>
               <li>This will repeat the second parameter three times</li>
-              <li>
-                Useful in <code>grid-template-rows</code> and
-                <code>grid-template-columns</code>
-              </li>
             </ul>
           </li>
         </ul>
