@@ -23,11 +23,11 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Observables & Signals</li>
+          <li class="breadcrumb-item active" aria-current="page">RxJS-Interop</li>
         </ol>
       </nav>
 
-      <h1>Observables & Signals</h1>
+      <h1>RxJS-Interop</h1>
 
       <h2>ToSignal</h2>
       <section>
@@ -134,6 +134,12 @@
         <ul>
           <li>Converts a signal to an Observable</li>
           <li>This allows you to use RxJS operators</li>
+          <li>Generally, using this is avoidable
+            <ul>
+              <li>Observables are built around events</li>
+              <li>The event that set the signal can also notify the observable</li>
+            </ul> 
+          </li>          
           <li>
             Example would be
             <ul>

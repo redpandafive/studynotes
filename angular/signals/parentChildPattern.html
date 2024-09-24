@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Parent / Child Signal State Management Pattern</li>
+        </ol>
+      </nav>
+
+      <h1>Parent / Child Signal State Management Pattern</h1>
+
+      <section>
+        <ul>
+          <li>This pattern addresses situations where you have a parent state and a child state.</li>
+          <li>If the parent state changes, the child state should be reset</li>
+          <li>If the child state changes, the parent state should not be changed</li>
+          <li>The temptation is to use an Effect to solve this as you modify both parent and child within the same effect
+            <ul>
+              <li>
+                Effects are generally not recommended to use.  See <a href="effects.html">Effects</a> for details.
+              </li>  
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Example 1</h2>
+      <section>
+        <div>
+          The following code: 
+          <ul>
+            <li>Uses the index to track the currently selected option</li>
+            <li>Options can be set from outside the component</li>
+            <li>It is possible to end up with an invalid current state since you can swap out options without changing the index
+              <ul>
+                <li>The index will contain the index from the previous set of options, which isn't valid</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Component({ <br />
+                  template: ` <br />
+                    @for (option of options(); track option) { <br />
+                      <li (click)="select($index)"> {{ option }} <br />
+                    } <br />
+                  ` <br />
+                }) <br />
+                export class SelectCmp { <br />
+                  options = signal(string[]); <br />
+                  index = signal(-1); <br/>
+                  
+                  setOptions(options: string[]) { <br />
+                    this.options.set(options); <br/>
+                  } <br />
+                  
+                  select(idx: number) { <br />
+                    this.index.set(idx); <br/>
+                  } <br />
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This corrects the issue by resetting the index to the default when the options are set. 
+          <ul>
+            <li>This solves the issue, but it indicates an independence between the two signals that really isn't true</li>
+            <li>You end up with multiple sources of truth that you have to force to synchronize</li>
+          </ul>           
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                export class SelectCmp { <br />
+                  options = signal(string[]); <br />
+                  index = signal(-1); <br/>
+                  
+                  setOptions(options: string[]) { <br />
+                    this.options.set(options); <br/>
+                  } <br />
+                  
+                  select(idx: number) { <br />
+                    this.index.set(idx); <br/>
+                  } <br />
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          This also presents a problem when the input is changed to a signal input.
+          <ul>
+            <li>The impulse is to use an Effect to solve the problem since it appears to be a good solution</li>
+            <li>Angular will try and stop a write to a signal within a computed and an effect, so the allowSignalWrites flag is needed to work
+              <ul>
+                <li>This flag will be removed in a future release, so do not depend it</li>
+              </ul>
+            </li>
+            <li>The <code>this.options();</code> is a code smell (calling a signal, but doing nothing with the value)</li>
+          </ul>     
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                export class SelectCmp { <br />
+                  options = input&lg;string[]&gt;(); <br />
+                  index = signal(-1); <br/>
+                  
+                  constructor() { <br />
+                    effect(() => {
+                      // subscribe to the signal <br/>
+                      this.options(); <br/>
+                      this.index.set(-1); <br/> 
+                    }, { allowSignalWrites: true})  <br/>
+                  } <br />
+                  
+                  select(idx: number) { <br />
+                    this.index.set(idx); <br/>
+                  } <br />
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li>Rather than trying to synchronize two sources of true, the better approach is establish a relationship between them and end up with one source of truth
+              <ul>
+                <li>The index signal is not independent; it only makes sense in the context of one set of objects</li>
+                <li>The moment the set of options changes, the index value selected from a previous set of options is meaningless</li>
+                <li>A better implementation would combine the options and the index signals into a single computed property, then use the computed to generate a new index field:
+                  <ul>
+                    <li>Each time the computed state object changes, this means the options input changed so we have a new set of options.</li>
+                    <li>Each time the computed state object changes, a new index signal is created and default value is set</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>     
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                export class SelectCmp { <br />
+                  options = input&lg;string[]&gt;(); <br />
+                  <br />
+                  state = computed(() => { <br />
+                    return { <br />
+                        options: this.options(), <br />
+                        index: signal(-1) <br />
+                    } <br />
+                  }); <br />
+                  <br />                  
+                  select(idx: number) { <br />
+                    this.index.set(idx); <br/>
+                  } <br />
+                } <br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        </section>
+
+        <h2>Example 2</h2>
+        <section>       
+        <div>
+          <ul>
+            <li>If you need to override the value of an input within the component:
+              <ul>
+                <li>When using a decorated input, this is possible (but not necessarily good practice)</li>
+                <li>Signal inputs are read-only, so you cannot modify it directly </li>
+              </ul>
+            </li>
+          </ul>     
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                export class SelectCmp { <br/>
+                  name = input(''); <br/>
+                  myName = computed(() => signal(this.name())); <br/>
+                  <br/>
+                  setName(name: string) { <br/>
+                    this.myName().set(name); // ERROR: no set method <br/>
+                  } <br/>
+                }
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Using a similar pattern as the first example, this is possible by using a computed signal to return a new signal that can be modified
+          <ul>
+            <li>Each time the input changes, you get a new writeable signal from the computed</li>
+            <li>Changes can then be made to the new writable signal without overwriting the value from the input signal</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                ... <br/>
+                export class SelectCmp { <br/>
+                  name = input(''); <br/>
+                  myName = computed(() => signal(this.name())); <br/>
+                  <br/>
+                  setName(name: string) { <br/>
+                    this.myName().set(name);<br/>
+                  } <br/>
+                }
+              </code>
+            </div>
+          </div>
+        </div>   
+      </section>                       
+      
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=aKxcIQMWSNU">https://www.youtube.com/watch?v=aKxcIQMWSNU</a>
+          </li>
+        </ul>
+      </section>
+
+
+
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -46,6 +46,23 @@
             </ul>
           </li>
           <li>
+            They bring a guarantees that when a value is read from it, the entire graph is consistent
+            <ul>
+              <li>Primarily concerned with maintaining the state of all signals in the system</li>
+              <li>They do not give a guarantee that you can keep track of every value that signal has as it changes over time</li>
+            </ul>
+          </li>
+          <li>
+            Are not a replacement for Events since they do not guarantee there will be a notification for every time a change occurs
+          </li>
+          <li>
+            Use for state management and synchronous operations
+            <ul>
+              <li>These are an alternative for synchronous coding in Angular to make your code more reactive</li>
+              <li>Use RxJS for asynchronous coding; don't use it for state management</li>
+            </ul>
+          </li>
+          <li>
             Can be used in
             <ul>
               <li>Components to manage component state</li>
@@ -55,14 +72,58 @@
               <li>Components that are configured to use ChangeDetectionStrategy.OnPush. These components will rechecked during a change detection cycle without having to manaully configure it.</li>
             </ul>
           </li>
-          <li>These are an alternative for synchronous coding in Angular to make your code more reactive</li>
           <li>
             When the signal is updated, anything that depends on it will also be updated
             <ul>
               <li>Kind of like a BehviorSubject in RxJS, but you do not have to subscribe to get a value out</li>
+              <li>This creates a dependency graph</li>
             </ul>
           </li>
-          <li>Important to note that it doesn't emit values like Observables. It notifies consumers that it has changed, but its up tp the consumer to read the value out of it.</li>
+          <li>Important to note that it doesn't emit values like Observables. It notifies consumers that it has changed, but its up to the consumer to read the value out of it.
+          </li>
+          <li>Signals are only concerned with keeping track of the current state and not concerned about any past values
+            <ul>
+              <li>Three very rapid signal changes does not necessarily equate to three notification to subscribers</li>
+              <li>The final value after the three changes is the main concern, not the values after the first and second changes</li>
+            </ul> 
+          </li>
+          <li>
+            There is a proposal to bring this to JavaScript as native item since all major frameworks (except React) use this concept
+            <ul>
+              <li>Proposal implements this as a class so it can be extended to accommodate for framework specific implementations </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Observables vs. Signals</h2>
+      <section>
+        <ul>
+          <li>Observables
+            <ul>
+              <li>Composable functions with guarantees</li>
+              <li>Mainly used for event coordination and for cancellation</li>
+              <li>Generally stateless = process event and cleanup</li>
+              <li>Multiple values = a collection of events or values over time</li>
+              <li>Push N values</li>
+              <li>Can convert to a Signal</li>
+              <li>Simpler in how they are implemented - the complexity lies in the operators used with them</li>
+            </ul>
+          </li>
+          <li>
+            Signals
+            <ul>
+              <li>Use Signals for state management since they retain things in memory</li>
+              <li>Represents a single value that can change over time</li>
+              <li>Read 1 value</li>
+              <li>You can convert to an Observable, but this is also avoidable
+                <ul>
+                  <li>The event that set the signal can also notify the observable</li>
+                </ul>
+              </li>
+              <li>More complicated in how they are implemented, but have a simpler external API</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
@@ -128,7 +189,7 @@
             <ul>
               <li>Reading a signal returns the signal value</li>
               <li>It also registers the signal as a dependency of the view</li>
-              <li>If the signla changes, the view is re-rendered</li>
+              <li>If the signal changes, the view is re-rendered</li>
               <li>Make sure to put the parentheses in the binding so the value is actually read from the signal</li>
             </ul>
           </li>
@@ -141,6 +202,24 @@
             </code>
           </div>
         </div>
+      </section>
+
+      <h2>Recommendations</h2>
+      <section>
+        <ul>
+          <li>Use signals to synchronously derive state where possible
+            <ul>
+              <li>This includes using computed signals to create derived values</li>
+            </ul>
+          </li>
+          <li>Avoid effects propagating state and Signal writes
+            <ul>
+              <li>
+                This can lead to change cycles and infinity loops
+              </li>
+            </ul>
+          </li>
+        </ul>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

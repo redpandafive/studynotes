@@ -33,14 +33,75 @@
       <h2 id="declarative">Declarative</h2>
       <section>
         <ul>
-          <li>Code that describes what you need to do, not necessarily how to do it</li>
-          <li>Example language is SQL - you tell the database WHAT you want, not HOW to fetch it</li>
-          <li>Most declarative solutions are an abstraction over some imperative impelmeation</li>
+          <li>Code that describes what you need to do, not necessarily how to do it
+            <ul>
+              <li>Example language is SQL - you tell the database WHAT you want, not HOW to fetch it</li>
+            </ul>
+          </li>
+          <li>
+            Usually uses some reactive mechanism (such as a RxJS observable or a Signal)
+            <ul>
+              <li>This way the variable that holds the mechanism never changes after its declaration, but the value can change over time</li>
+            </ul>
+          </li>
+          <li>
+            Additional values can be derived from a reactive mechanism, so they are automatically updated when the source updates
+            <ul>
+              <li>Example is Computed from Signals</li>
+            </ul>
+          </li>
+          <li>
+            Vs Imperative code style
+            <ul>
+              <li>Imperative style can change a value at multiple points in the code</li>
+              <li>Tracing all the changes make to the value requires tracing through the codebase to find each point the value was changed</li>
+              <li>The definition of a "thing" requires looking at multiple parts of the code</li>
+            </ul>
+          </li>
+          <li>
+            Rules to get your in a Declarative style programming mindset:
+            <ul>
+              <li>Make sure things never change
+                <ul>
+                  <li>This could be creating a property on a component and changing its value at multiple points on the application</li>
+                  <li>Don't reassign a value to a variable after declaring it
+                    <ul>
+                      <li>Do this by using some reactive mechanism like a RxJS observable or Signals</li>
+                      <li>The assignment never changes, but the value can change over time using the reactive mechanism</li>
+                    </ul>
+                  </li>
+                  <li>Example would be 
+                    <ul>
+                      <li>Assigning an empty array as a property on the component</li>
+                      <li>Calling an async service to fetch a value from the NgOnInit method</li>
+                      <li>When the observable completes, assign that value to the component property (changing its value)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Always make sure to speak to the manager
+                <ul>
+                  <li>
+                    Changes to values should be done at the start of the data flow, then everything downstream will react to the change
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Most declarative solutions are an abstraction over some imperative implementation</li>
+
         </ul>
       </section>
 
       <h2 id="imperativeVsdeclarative">Imperative vs Declarative Examples</h2>
       <section>
+        <div>
+          <ul>
+
+            <li>Declarative code's value (versus Imperative coding) increases as complexity increases</li>
+          </ul>
+        </div>
         <div>
           A non-programming example would be "How do I get to your house from downtown?" (from https://ui.dev/imperative-vs-declarative-programming)
           <div>

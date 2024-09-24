@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">Angular</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Environment Files</li>
+        </ol>
+      </nav>
+
+      <h1>Environment Files</h1>
+
+      <section>
+        <ul>
+          <li>
+            These are used to provide information about the environment in which our app is running
+          </li>
+          <li>
+            You can define different named build configurations for an Angular project
+            <ul>
+              <li>These allow Angular CLI to use separate environment configurations</li>
+              <li>Angular swaps in the correct version of configuration when you do a build with an environment flag on the CLI</li>
+            </ul>
+          </li>
+          <li>
+            Examples include:
+            <ul>
+              <li>development</li>
+              <li>staging</li>
+            </ul>
+          </li>
+          <li>
+            Each named configuration can have defaults for any of the options that apply to the various builder targets:
+            <ul>
+              <li>This will allow Angular CLI commands to replace files with appropriate versions for your intended target environment</li>
+              <li>Example commands include
+                <ul>
+                  <li>build</li>
+                  <li>serve</li>
+                  <li>test</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>You can choose which configuration to use with the <code>--configuration</code> option
+          <ul>
+            <li>Multiple configurations can be specified using a comma</li>
+            <li>When multiple configurations are specified, they are applied in order with conflicting options using the value from the last configuration</li>
+          </ul>
+        </li>
+        </ul>
+        </section>
+
+        <h2>Angular.json Configurations</h2>
+        <section>
+          <ul>
+            <li>A configuration object is defined in the Angular.json file, the main CLI configuration file</li>
+            <li>You can define multiple environments in this file under the configurations property</li>
+          </ul>
+          <div>
+            Simple configuration that adds parameters to the debug environment
+            <div class="card">
+              <div class="card-body">
+                <code>    
+                  { <br />
+                    "projects": { <br />
+                      "my-app": { <br />
+                        "architect": { <br />
+                          "build": { <br />
+                            "builder": "@angular-devkit/build-angular:browser", <br />
+                            "options": { <br />
+                              // By default, disable source map generation. <br />
+                              "sourceMap": false <br />
+                            }, <br />
+                            "configurations": { <br />
+                              // For the `debug` configuration, enable source maps. <br />
+                              "debug": { <br />
+                                "sourceMap": true <br />
+                              } <br />
+                            } <br />
+                          }, <br />
+                        ...  <br />
+                        } <br />
+                      } <br />
+                    } <br />
+                  } <br />
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            You can choose to use the debug configuration using this command: 
+            <div class="card">
+              <div class="card-body">
+                <code>    
+                  ng build --configuration debug <br />
+                </code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <h2>File Based Configuration Overrides</h2>
+        <section>
+          <ul>
+            <li>Alternatively, environment configurations can be stored in environment files (one per environment)</li>
+            <li>These are not added by default, but you can generate them using <kbd>ng generated environments</kbd>
+            <ul>
+              <li>This will add files to the src/environments directory</li>
+            </ul>
+          </li>
+            <li>The default file will be called environment.ts
+              <ul>
+                <li>This serves as the base configuration and all default environment settings</li>
+              </ul>
+            </li>
+            <li>Additional files can be added per environment
+              <ul>
+                <li>Name the file using the environment name</li>
+                <li>Examples are environment.development.ts and environment.staging</li>
+              </ul>
+            </li>
+            <li>
+              The main CLI configuration file (angular.json) should contain an entry that maps the configuration to a file
+              <ul>
+                <li>The default is to not swap out files</li>
+                <li>The <kbd>ng generate environments</kbd> command will modify the angular.js file to include the necessary items to perform the swap.</li>
+                <li>Additional environments can be added by editing the angular.json file</li>
+              </ul>
+            </li>
+            <li>
+              Use <kbd>ng build --configuration staging</kbd> to build using the staging environment (and swap in the staging configuration file)
+            </li>
+            <li>
+              By default, <kbd>serve</kbd>  will use the development build environment.  You can configure it to use a different one using the <kbd>buildTarget</kbd> option
+            </li>
+          </ul>
+          <div>
+            Structure of the default base environment.ts file when generated
+            <div class="card">
+              <div class="card-body">
+                <code>    
+                  export const environment = {   <br />
+                    production: true <br />
+                  }; <br />
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Environment files should contain the values that will override the base environment.ts file.  The following targets the development build target:
+            <div class="card">
+              <div class="card-body">
+                <code>    
+                  export const environment = { <br />
+                    production: false, <br />
+                    apiUrl: 'http://my-dev-url' <br />
+                  }; <br />
+                </code>
+              </div>
+            </div>
+          </div>
+          <div>
+            Angular.json configuration to swap in an environment configuration file instead of the default one
+            <div class="card">
+              <div class="card-body">
+                <code>    
+                  "configurations": {<br />
+                    "development": {<br />
+                      "fileReplacements": [<br />
+                          {<br />
+                            "replace": "src/environments/environment.ts",<br />
+                            "with": "src/environments/environment.development.ts"<br />
+                          }<br />
+                        ],<br />
+                    ... <br />
+                </code>
+              </div>
+            </div>
+          </div>           
+          <div>
+            <div class="card">
+              <div class="card-body">
+                <code>    
+                  "configurations": { <br/>      
+                    "development": {   <br/>     
+                      // Use the `development` configuration of the `build` target.<br/>        
+                      "buildTarget": "my-app:build:development" <br/>      
+                    }, <br/>      
+                    "production": { <br/>       
+                      // Use the `production` configuration of the `build` target.<br/>        
+                      "buildTarget": "my-app:build:production"  <br/>    
+                    } <br/>   
+                  },<br/>
+                </code>
+              </div>
+            </div>
+          </div>       
+        </section>
+
+        <h2>Using Environment Configurations in Components</h2>
+        <section>
+          <div>
+            <ul>
+              <li>The simplest way is to import the configuration file into the component</li>
+              <li>Importing does take a dependency on a non-testable external dependency that is not part of Angular's injection map</li>
+              <li>Alternatively, you can create an abstraction over the environment object
+                <ul>
+                  <li>Create an interface or type that serves at the contract for all environment files
+                    <ul>
+                      <li>This allows TypeScript to perform static type checking when referencing the environment file</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Define the configuration object as a dependency token and inject it into components using Angular's dependency injection
+                  </li>
+                </ul> 
+              </li>
+            </ul>
+          </div>
+          <div>
+            Importing the configuration file into the component
+            <div class="card">
+              <div class="card-body">
+                <code>    
+                  import { environment } from './../environments/environment'; <br/>
+                  .... <br/>
+                  console.log(environment.apiUrl); <br />
+                </code>
+              </div>
+            </div>            
+          </div>
+        </section>
+
+        <h2>Injecting Different Services Depending on the Environment</h2>
+        <section>
+          <div>
+            <ul>
+              <li>
+                By combining Environment files and dependency injection, you can create a setup where different services are swapped into all components based on the environment
+              </li>
+              <li>
+                For example, you want to do some sort of logging when an error is encountered, but the action taken should be different depending on the environment
+              </li>
+              <li>
+                Not so good implementation                
+                <ul>
+                  <li>The setup is
+                    <ul>
+                      <li>Import the environment object into a service</li>
+                      <li>Include method within the service to receive an error string</li>
+                      <li>Within this method, read the environment object and call the appropriate action</li>
+                    </ul>
+                  </li>
+                  <li>This could be better for the following reasons
+                    <ul>
+                      <li>The environment object is read every time the service method is called, even through its value never changes </li>
+                      <li>The service class becomes more and more bloated as items to log increased</li>
+                    </ul>
+                  </li>
+                  <li>
+                    A better implementation would do the following:
+                    <ul>
+                      <li>Create a base interface or type the represents the service class that will do the logging</li>
+                      <li>Create multiple implementations of the contract (one for each environment that needs to do logging)</li>
+                      <li>Create a factory class that reads the environment object and returns the correct concrete class</li>
+                      <li>Configure Angular to use the factory to get an object to use for dependency injection</li>
+                    </ul>
+                  </li>
+                  <li>
+                    With this setup, the environment object is only read once to create the object to inject into all components and services that request it 
+                  </li>
+                  <li>
+                    This is similar to a strategy pattern, but it incorporates DI to get the correct instance from the factory
+                  </li>
+                </ul>
+              </li>
+              <li>
+                See <a href="https://codeburst.io/angular-dependency-injection-tips-ddb24b8244be">this page</a> for details
+              </li>
+            </ul>
+          </div>
+        </section>
+
+
+      
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

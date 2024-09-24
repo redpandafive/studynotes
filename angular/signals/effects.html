@@ -31,33 +31,79 @@
 
       <section>
         <ul>
-          <li>An operation that runs whenver one or more singal values change</li>
-          <li>Use these for side effects, although it does not change the value inside of the signal</li>
-          <li>Comprised of
+          <li>An operation that runs whenever one or more signal values change</li>
+          <li>
+            Effects are generally not recommended to use:
+            <ul>
+              <li>They are powerful and flexible, but they have a lot of tradeoffs you may not realize you are making when you use them</li>
+              <li>If you find yourself reaching for an Effect, stop and re-examine the problem to see if there is a different approach that doesn't involve using them.</li>
+            </ul>
+          </li>
+          <li>
+            Primarily intended for rendering
+            <ul>
+              <li>Use for rendering stuff you cannot render using data binding.</li>
+              <li>
+                Example use cases includes
+                <ul>
+                  <li>Logging</li>
+                  <li>Painting on a Canvas</li>
+                  <li>Custom DOM behavior that cannot be expressed via the template syntax</li>
+                </ul>
+              </li>
+              <li>Think of this as a Observable tap operation that automatically "subscribes" to the signal</li>
+            </ul>
+          </li>
+          <li>
+            Do not use effects for propagating state
+            <ul>
+              <li>
+                Risks include
+                <ul>
+                  <li>Circular updates and infinite loops</li>
+                  <li>Since Angular uses auto-tracking for computed and effects, it can lead to code that is hard to maintain if used for state changes</li>
+                  <li>Effects are not guaranteed to be an immediate action
+                    <ul>
+                      <li>They run on a schedule at some point in the future</li>
+                      <li>There could be a gap in time between when the signal value is changed and when the effect is run</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Glitch = you can observe a state that doesn't sense
+                <ul>
+                  <li>
+                    You can end up with a glitch if you are using effects for synchronization
+                  </li>
+                  <li>
+                    Signals are glitch free; if you change a signal several times in a row (within a stack frame), only the last change is seen
+                    <ul>
+                      <li>This fits well for rendering, but is not suited for state modification where the signal represents an event</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+          <li>
+            Comprised of
             <ul>
               <li>Effect creation function = the <code>effect()</code> function call</li>
               <li>The effect function = function that is executed when any contained signals are updated</li>
             </ul>
           </li>
-          <li>
-            Think of this as a Observable tap operation that automatically "subscribes" to the signal
-          </li>
-          <li>
-            Useful in 
-            <ul>
-              <li>Logging</li>
-              <li>Calling an external API (not using RxJS)</li>            
-            </ul>
-          </li>
-          <li>Probably will not use very often</li>
         </ul>
+      </section>
+
+      <h2>Examples</h2>
+      <section>
         <div>
           In this example, the value of the selectedVehicle signal will be logged to console whenever it changes
           <div class="card">
             <div class="card-body">
-              <code>
-                effect(() => console.log(this.selectedVehicle()));
-              </code>
+              <code> effect(() => console.log(this.selectedVehicle())); </code>
             </div>
           </div>
         </div>
