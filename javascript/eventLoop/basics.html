@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Event Loop
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Event Loop</h1>
+
+      <h2></h2>
+      <section>
+        <ul>
+          <li>Since JavaScript is a single threaded programming language, it can only do one thing at a single point in time</li>
+          <li>Async programming is not part of the JS language itself, but it gives the illusion of multi-threading
+            <ul>
+              <li>It is built on top of the core JS language in the browser and accessed through the browser's API</li>
+            </ul>
+          </li>
+          <li>
+            Execution flow is based on an event loop
+          </li>
+        </ul>
+      </section>
+
+      <h2>Event Loop</h2>
+      <section>
+        <ul>
+          <li>JavaScript has a runtime model based on an event loop, which is responsible for:
+            <ul>
+              <li>Executing code</li>
+              <li>Collecting and processing events</li>
+              <li>Executing queued subtasks</li>
+            </ul>
+          </li>
+          <li>
+            It is an endless loop where the JS engine waits for tasks, executes them, then sleeps until there are more tasks.  Tasks include:
+            <ul>
+              <li>Loading an external script and executing it</li>
+              <li>When the mouse is moved, dispatch the mousemove event and execute handlers</li>
+              <li>When the time is due for a scheduled setTimeout, the task is to run its callback</li>
+            </ul>
+          </li>
+          <li>
+            The JavaScript engine executes a script from the top to bottom. It"
+            <ul>
+              <li>Creates execution contexts</li>
+              <li>Pushes and pops function only and off the call stack</li>
+            </ul>
+          </li>
+          <li>
+            When the call stack is empty, callbacks are moved from the queue to the stack for execution
+          </li>
+          <li>
+            If a task is added while the engine is busy, it is queued
+          </li>
+        </ul>
+      </section>
+
+      <h2>Blocking Functions</h2>
+      <section>
+        <ul>
+          <li>A function that takes a long time to complete</li>
+          <li>A blocking function is a function that halts the execution</li>
+          <li>
+            If the task takes too long, the browser cannot do other tasks (such as processing user events)
+            <ul>
+              <li>After some time, the browser raises an alert like "Page unresponsive"</li>
+              <li>This can occur when there are a lot of complex calculations or a programming error leads to an infinite loop</li>
+            </ul>
+          </li>
+          <li>
+            A blocking function blocks all interactions on the webpage, including user events like mouse clicks
+          </li>
+          <li>Rendering never occurs while the engine is executing a task
+            <ul>
+              <li>It does not matter if the task takes a long time</li>
+              <li>Changes to the DOM are painted only after the task is complete</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Execution Context</h2>
+
+      <h2>Heap</h2>
+      <section>
+        <ul>
+          <li>A large, mostly unstructured region of memory</li>
+          <li>Objects are allocated here</li>
+        </ul>
+      </section>
+
+      <h2>Call Stack</h2>
+      <section>
+        <ul>
+          <li>Represents the single thread provided for JavaScript code execution
+            <ul>
+              <li>Responsible for keeping track of all the operations in line to be executed</li>
+              <li>Function calls form a stack of frames</li>
+            </ul>
+          </li>
+          <li>This stack contains a stack of frames
+            <div>
+              <ul>
+                <li>When calling bar, a first frame is created containing references to bar's arguments and local variables.</li>
+                <li>When bar calls foo, a second frame is created and pushed on top of the first one, containing references to foo's arguments and local variables.</li>
+                <li>When foo returns, the top frame element is popped out of the stack (leaving only bar's call frame).</li>
+                <li>When bar returns, the stack is empty.</li>
+              </ul>
+              <div class="card">
+                <div class="card-body">
+                  <code>    
+                    function foo(b) { <br/>
+                      const a = 10; <br/>
+                      return a + b + 11; <br/>
+                    } <br/>
+                    <br/>
+                    function bar(x) { <br/>
+                      const y = 3; <br/>
+                      return foo(x * y); <br/>
+                    } <br/>
+                    <br/>
+                    const baz = bar(7); <br/>
+                  </code>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>It is a LIFO (Last In, First Out) Queue
+            <ul>
+              <li>When a function is finished running, it is popped from the stack</li>
+            </ul>
+          </li>
+          <li>
+            Arguments and local variables may continue to exist even if their frame is popped from the call stack
+            <ul>
+              <li>These can be accessed by any nested function long after their outer function has returned</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Callback Queue</h2>
+      <section>
+        <ul>
+          <li>This is a queue of messages to be processed
+            <ul>
+              <li>Each message has an associated function that gets called to handle the message</li>
+            </ul>
+          </li>
+          <li>
+            At some point during the event loop, JavaScript runtime starts handling messages on the queue
+            <ul>
+              <li>Starts with the oldest one first</li>
+              <li>The message is removed frm the queue and its function is called with the message as an input parameter</li>
+              <li>This creates a new frame on the call stack for that function's use</li>
+              <li>Once the stack is once again empty, the event loop will process the next message in the queue</li>
+            </ul>
+          </li>
+          <li>
+            In web browsers, messages are added when an event occurs and there is an event listener attached to it
+            <ul>
+              <li>If there is no event listener defined, the event is lost</li>
+            </ul>
+          </li>
+          <li>
+            Each message is processed completely before any other message is processed
+          </li>
+          <li>
+            Best practices 
+            <ul>
+              <li>Make message processing short</li>
+              <li>If possible, cut down one message into several smaller messages</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Asynchronous Operations</h2>
+      <section>
+        <ul>
+          <li></li>
+        </ul>
+      </section>
+
+      <h2>Fixing CPU Hungry Tasks</h2>
+      <section>
+        <ul>
+          <li>This occurs when a CPU heavy task keeps the event loop tied up
+            <ul>
+              <li>An example of this is syntax highlighting for a large amount of text.</li>
+              <li>No other events get handled until the counting finishes</li>
+            </ul> 
+          </li>
+          <li>
+            See the following for examples:
+            <ul>
+              <li>
+              <a href="example1.html">Example 1</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Browser of Web APIs</h2>
+      <section>
+        <ul>
+          <li>These are built into the web browser</li>
+          <li>Able to expose data from the browser and surrounding computer environment and do useful things with it</li>
+          <li>Not part of the JS language itself, but are instead built on top of the core JS language</li>
+        </ul>
+      </section>
+
+      <h2>See Also</h2>
+      <section>
+        <ul>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/console"
+              target="_blank"
+            >
+              https://developer.mozilla.org/en-US/docs/Web/API/console
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>
+  </body>
+</html>

@@ -276,6 +276,146 @@
         </div>
       </section>
 
+
+      <h2>Variable Declaration</h2>
+
+      <h3>@let</h3>
+      <section>
+        <ul>
+          <li>This is known as a local template variable</li>
+          <li>Allows you to define a reusable variable in the component's template and reuse is across the a template
+            <ul>
+              <li>These are local variable in the template</li>
+            </ul>
+          </li>
+          <li>This allows you to declare a variable whose value is based on the result of a template expression
+            <ul>
+              <li>Angular automatically keeps the variable's value up to date with the given expressions (much like bindings)</li>
+              <li>Cannot declare multiple variables in the same block</li>
+              <li>You cannot reassign a value to the variable after declaration</li>
+            </ul>
+          </li>
+          <li>
+            The scope is the HTML block containing the declaration
+          </li>
+          <li>
+            You can only reference the variable below its declaration
+            <ul>
+              <li>They are not hoisted, so they cannot be accessed by parent views or siblings</li>
+            </ul>
+          </li>
+          <li>You can also use the value from a template reference variable</li>
+          <li>
+            Defined by the following syntax guidelines:
+            <ul>              
+              <li>The @let keyword.</li>
+              <li>Followed by one or more whitespaces, not including new lines.</li>
+              <li>Followed by a valid JavaScript name and zero or more whitespaces.</li>
+              <li>Followed by the = symbol and zero or more whitespaces.</li>
+              <li>Followed by an Angular expression which can be multi-line.</li>
+              <li>Terminated by the ; symbol.</li>
+            </ul>
+          </li>
+          <li>
+            Best practices
+            <ul>
+              <li>There are questionable situations that let allows you to do, but may not be acceptable on your team
+                <ul>
+                  <li>Component may be the better place for complex business logic</li>
+                  <li>Technically possible to call a function on the component from the template using the let syntax, but that may be acceptable to others</li>
+                </ul>
+              </li>
+              <li>
+                Deborah Kurata's best practices.  Use to:
+                <ul>
+                  <li>Read values into the variable once and shorten reference paths</li>
+                  <li>Combine with a conditional to check if a signal has value before displaying part of code</li>
+                  <li>Use to shorted complex style syntax</li>
+                  <li>Use to simplify async syntax</li>
+                  <li>Consider carefully before using them to call a complex calculation within the template</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            Useful situations
+            <ul>
+              <li>You can shorted long variable names in the template by saving the value to a let variable
+                <ul>
+                  <li>This is particularly useful when you need to reach into an object and have a long variable name as a result</li>
+                </ul>
+              </li>
+              <li>
+                Can be combined with a pipe for formatting
+              </li>
+              <li>
+                Can be used to pull bulky expressions out of the HTML tags for improved readability
+                <div class="card">
+                  <div class="card-body">
+                    <code>    
+                      @let qtyStyle = { outOfStock: qty === 0, lowStock: qty < 10, goodStock: qty >= 10 };
+                    </code>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Can be combined with an if statement to only display a section of code if a signal has a value.  This is recommended by Angular team instead of using an <code>as</code> expression
+                  <div class="card">
+                    <div class="card-body">
+                      <code>    
+                        @let snack = selectedSnack();
+                        @if(snack) {
+                          &lt;div&gt;{{ snack.name }}&lt;/div&gt;
+                        }
+                      </code>
+                    </div>
+                  </div>
+              </li>
+              <li>
+                Useful when combined with the async pipe
+                <div class="card">
+                  <div class="card-body">
+                    <code>    
+                      @let user = user$ | async;
+                      @let greeting = user ? 'Hello, ' + user.name : 'Loading';
+                      &lt;h1&gt;{{ greeting }}&lt;/h1&gt;
+                    </code>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div>
+          Once declared, you can reuse a variable in the same template
+          <div class="card">
+            <div class="card-body">
+              <code>    
+                @let user = user$ | async; <br/>
+                @if (user) {  <h1>Hello, {{user.name}}</h1>   <br/>
+                &lt;user-avatar [photo]="user.photo"/&gt;   <br/>
+                &lt;ul&gt; <br/>
+                  @for (snack of user.favoriteSnacks; track snack.id) { <br/>
+                    &lt;li&gt; {{snack.name}}&lt;/li&gt; <br/>
+                  } <br/>
+                  &lt;/ul&gt; <br/>
+                  &lt;button (click)="update(user)"&gt;Update profile&lt;/button&gt;}
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Can be combined with a pipe for formatting
+          <div class="card">
+            <div class="card-body">
+              <code>    
+                @let price = item.price | currency;
+              </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <h2>Special Characters</h2>
       <section>
         <ul>

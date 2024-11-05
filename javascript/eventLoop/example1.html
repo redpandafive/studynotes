@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="../../assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/site.css" />
+    <script>
+
+      function startExample1() {
+        let i = 0;
+        let start = Date.now();
+        function executeExample1() {
+          for (let j = 0; j < 1e9; j++) {
+            i++;
+          }
+
+          alert("Done in " + (Date.now() - start) + 'ms');
+        }
+
+        executeExample1();        
+      }
+
+      function startExample2() {
+        let i = 0;
+        let start = Date.now();
+        function executeExample2() {
+          do {
+            i++;
+          } while (i % 1e6 != 0);
+
+          if (i == 1e9) {
+            alert("Done in " + (Date.now() - start) + 'ms');
+          } else {
+            setTimeout(executeExample2); // schedule the new call (**)
+          }
+        }
+
+        executeExample2();        
+      }
+
+      function addElement(targetElementId) {
+        const targetNode = document.createElement("li");
+        const newNode = document.createTextNode("New element");
+        targetNode.appendChild(newNode);
+        document.getElementById(targetElementId).appendChild(targetNode);
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../../index.html">Home</a>
+      </div>
+    </nav>
+    <div class="container">
+      <nav class="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="../../index.html">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="../index.html">JavaScript</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Event Loop Example 1: Fixing CPU Hungry Tasks
+          </li>
+        </ol>
+      </nav>
+
+      <h1>Event Loop Example 1: Fixing CPU Hungry Tasks</h1>
+
+      <h2>Slow Version</h2>
+      <section>
+        <div>
+          <ul>
+            <li>This example uses a large for loop to simulate a long-running task</li>
+            <li>While the count method is running, the page does not respond to user actions</li>
+          </ul>
+          <div style="display: grid;grid-template-columns: 50% 50%;">
+            <div>
+              <button onclick="startExample1()">Start Example 1</button>
+            </div>
+            <div>
+              <button onclick="addElement('addedElements1')">Add Element</button>
+              <div>
+                <ul id="addedElements1">
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <code>    
+                let i = 0; <br/>
+                let start = Date.now(); <br/>
+                <br/>
+                function count() { <br/>
+                  for (let j = 0; j &lt; 1e9; j++) {<br/>
+                    i++;<br/>
+                  }<br/>
+                  <br/>
+                  alert("Done in " + (Date.now() - start) + 'ms');<br/>
+                }<br/>
+                <br/>
+                count();<br/>
+              </code>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <h2>Faster Version</h2>
+      <section>
+        <div>
+          <ul>
+            <li>Splitting the job using setTimeout calls allows other events to be handled during the counting</li>
+            <li>A single run of the executeExample2 function does part of the job and reschedules itself if needed
+              <ul>
+                <li>First run counts: i=1...1000000</li>
+                <li>Second run counts: i=1000001..2000000</li>
+                <li>Continue until last number if reached</li>
+              </ul>
+            </li>
+            <li>
+              Any events that occur during the counting will be queued and handled when that round of counting completes
+              <ul>
+                <li>In example 1, events had to wait until all counting is completed</li>
+              </ul>
+            </li>
+            <li>
+              The overall time to count is not any shorter than example 1, but the page is more responsive
+            </li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>    
+                let i = 0; <br/>
+                let start = Date.now(); <br/>
+                <br/>
+                function executeExample2() { <br/>
+                  do { <br/>
+                    i++; <br/>
+                  } while (i % 1e6 != 0); <br/>
+                  <br/>
+                  if (i == 1e9) {
+                    alert("Done in " + (Date.now() - start) + 'ms'); <br/>
+                  } else { <br/>
+                    setTimeout(count); // schedule the new call (**) <br/>
+                  } <br/>
+                }<br/>
+                <br/>
+                executeExample2();<br/>
+              </code>
+            </div>
+          </div>
+        </div>
+        <div style="display: grid;grid-template-columns: 50% 50%;">
+          <div>
+            <button onclick="startExample2()">Start Example 2</button>
+          </div>
+          <div>
+            <button onclick="addElement('addedElements2')">Add Element</button>
+            <div>
+              <ul id="addedElements2">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>     
+  </body>
+</html>
