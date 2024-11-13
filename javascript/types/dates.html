@@ -33,9 +33,47 @@
 
       <section>
         <ul>
-          <li>Dates in JS are objects</li>
-          <li>They have a numeric representation that gives the number of elapsed milliseconds since Jan 1, 1970</li>
+          <li>Dates in JS are objects
+            <ul>
+              <li>They have a numeric representation that gives the number of elapsed milliseconds since Jan 1, 1970</li>
+            </ul>
+            <li>They inherently operate in UTC
+              <ul>
+                <li>This can cause problems when displaying dates or handling date inputs in the user's local time zone</li>
+                <li>The date object does have a toISOString() method to convert dates to a string in ISO format, but is always returns the string in UTC</li>
+              </ul>
+            </li>
+          </li>
         </ul>
+      </section>
+
+      <h2>Parsing Date Objects to Local Date String in ISO 8601 Format</h2>
+      <section>
+        <ul>
+          <li>The date object does have a toISOString() method to convert dates to a string in ISO format, but is always returns the string in UTC</li>
+          <li>One solution is to use the function below to:
+            <ul>
+              <li>Find the difference between the UTC time and the local time</li>
+              <li>Adjust the Date object to reflect the local time, based on the calculated time zone offset</li>
+              <li>Convert the adjusted Date object to an ISO string and extract the date portion (ignoring the time part)</li>
+              <li>Return string result in YYYY-MM-DD format</li>
+            </ul>
+          </li>
+          <li>
+            See also <a href="https://dev.to/mochafreddo/handling-local-dates-in-javascript-with-formatdatetolocaliso-5edk">https://dev.to/mochafreddo/handling-local-dates-in-javascript-with-formatdatetolocaliso-5edk</a>
+          </li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              formatDateToLocalISO(date: Date) {  <br/>
+                const offset = date.getTimezoneOffset();  <br/>
+                const localDate = new Date(date.getTime() - offset * 60 * 1000);  <br/>
+                return localDate.toISOString().split('T')[0];  <br/>
+              }; <br/>
+            </code>
+          </div>
+        </div>
       </section>
 
       <h2>Parsing ISO 8601 String to Date Object</h2>
