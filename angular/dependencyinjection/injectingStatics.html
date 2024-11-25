@@ -21,11 +21,11 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">Injecting Static Values</li>
+          <li class="breadcrumb-item active" aria-current="page">Injecting Static Items</li>
         </ol>
       </nav>
 
-      <h1>Injecting Static Values</h1>
+      <h1>Injecting Static Items</h1>
 
       <h2>Injecting a Boolean Value</h2>
       <section>
@@ -42,6 +42,7 @@
           </div>
         </div>
         <div>
+          In your module, map the InjectionToken to the static value that should be given when the dependency is requested
           <div class="card">
             <div class="card-body">
               <code>
@@ -62,24 +63,26 @@
       <h2>Injecting a String Value</h2>
       <section>
         <div>
-          Define an InjectorToken to represent the string value in the DI system
+          Define an InjectorToken to represent the string value in the DI system.  Store it in a providers.ts file.
           <div class="card">
             <div class="card-body">
-              import { InjectionToken } from "@angular/core";
-              <br />
-              export const SampleInjectionToken = new InjectionToken&lt;string&gt;("");
-              <br />
+              <code>
+                import { InjectionToken } from "@angular/core";
+                <br />
+                export const SampleInjectionToken = new InjectionToken&lt;string&gt;("");
+                <br />
+              </code>
             </div>
           </div>
         </div>
-        <div>In the Providers array of the appropriate injector level, configure the token to use the string value.</div>
         <div>
-          This uses the AppModule
+          In the Providers array of the appropriate injector level, configure the token to use the string value. 
           <ul>
-            <li>This puts the token into the root injector so the entire application should have access</li>
+            <li>This uses AppModule and puts the token into the root injector so the entire application should have access</li>
           </ul>
           <div class="card">
             <div class="card-body">
+              <code>
               @NgModule({
               <br />
               declarations: [],
@@ -106,6 +109,7 @@
               <br />
               })
               <br />
+            </code>
             </div>
           </div>
         </div>
@@ -113,19 +117,21 @@
           Inject the token into the component that needs the string value
           <div class="card">
             <div class="card-body">
-              private sample = inject(SampleInjectionToken);
-              <br />
+              <code>
+                private sample = inject(SampleInjectionToken);
+                <br />
+              </code>
             </div>
           </div>
         </div>
       </section>
 
-
       <h2>Injecting a JSON Object</h2>
       <section>
         <div>
-          Define an object - make sure to call Object.freeze to make it immutable
+          Define an object
           <ul>
+            <li>Make sure to call Object.freeze to make it immutable</li>
             <li>A type definition would be a good addition</li>
           </ul>
           <div class="card">

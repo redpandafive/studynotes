@@ -31,9 +31,12 @@
 
       <section>
         <ul>
-          <li>This was added in 17.1</li>
-          <li>Turns Inputs into Signals so they can be reactive
+          <li>Added in 17.1</li>
+          <li>Turns Inputs into Signals so they can be reactive 
             <ul>
+              <li>Receive data via property bindings</li>
+              <li>If receiving data from a Signal, request its value in the parent using by calling the getter</li>
+              <li>You can pass in object, number, strings, etc using the same syntax in the parent as traditional inputs</li>
               <li>Within your component, they can be used like any other read-only Signal</li>
             </ul>
           </li>
@@ -45,12 +48,15 @@
               <li>More type safe</li>
               <li>Easy to derive values when an input changes using a computed</li>
               <li>Easier and more local monitoring of inputs using effect instead of ngOnChanges or setters</li>
+              <li>
+                Replaces lifecycle events with effects and computed signals 
+              </li>
             </ul>
           </li>
           <li>
             IMPORTANT: Signal inputs are read only, so there is no way to directly modify values from the value
             <ul>
-              <li>Values can only be modified by the parent</li>
+              <li>Values can only be modified by the parent, but not the receiving child</li>
             </ul>
           </li>
         </ul>
@@ -71,7 +77,12 @@
         <ul>
           <li>Like Inputs, you can apply set an Input Signal to require an initial value from the parent</li>
           <li>To do this, use the required method on the SignalInput object.</li>
-          <li>An initial value parameter is not needed since it will be supplied by the parent component</li>
+          <li>An initial value parameter is not needed since it will be supplied by the parent component
+            <ul>
+              <li>In fact, a default value cannot be supplied on an input()</li>
+              <li>You may get an error in the constructor if it is used before the parent is ready</li>
+            </ul>
+          </li>
         </ul>
         <div>
           Example: external alias will be users, internal name will be userList

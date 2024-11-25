@@ -35,8 +35,8 @@
             Effectively a value + change notification
             <ul>
               <li>Wrapper around a value that can notify interested consumers when that value changes</li>
-              <li>Can contain nay value, from simple primitives to complex data struture</li>
-              <li>Side effect free, so reading it will not trigger side effects</li>
+              <li>Can contain any value, from simple primitives to complex data structure</li>
+              <li>Side effect free = reading it will not trigger side effects</li>
               <li>
                 Helps make code more reactive
                 <ul>
@@ -52,9 +52,7 @@
               <li>They do not give a guarantee that you can keep track of every value that signal has as it changes over time</li>
             </ul>
           </li>
-          <li>
-            Are not a replacement for Events since they do not guarantee there will be a notification for every time a change occurs
-          </li>
+          <li>Are not a replacement for Events since they do not guarantee there will be a notification for every time a change occurs</li>
           <li>
             Use for state management and synchronous operations
             <ul>
@@ -79,18 +77,18 @@
               <li>This creates a dependency graph</li>
             </ul>
           </li>
-          <li>Important to note that it doesn't emit values like Observables. It notifies consumers that it has changed, but its up to the consumer to read the value out of it.
-          </li>
-          <li>Signals are only concerned with keeping track of the current state and not concerned about any past values
+          <li>Important to note that it doesn't emit values like Observables. It notifies consumers that it has changed, but its up to the consumer to read the value out of it.</li>
+          <li>
+            Signals are only concerned with keeping track of the current state and not concerned about any past values
             <ul>
               <li>Three very rapid signal changes does not necessarily equate to three notification to subscribers</li>
               <li>The final value after the three changes is the main concern, not the values after the first and second changes</li>
-            </ul> 
+            </ul>
           </li>
           <li>
             There is a proposal to bring this to JavaScript as native item since all major frameworks (except React) use this concept
             <ul>
-              <li>Proposal implements this as a class so it can be extended to accommodate for framework specific implementations </li>
+              <li>Proposal implements this as a class so it can be extended to accommodate for framework specific implementations</li>
             </ul>
           </li>
         </ul>
@@ -99,7 +97,8 @@
       <h2>Observables vs. Signals</h2>
       <section>
         <ul>
-          <li>Observables
+          <li>
+            Observables
             <ul>
               <li>Composable functions with guarantees</li>
               <li>Mainly used for event coordination and for cancellation</li>
@@ -116,7 +115,8 @@
               <li>Use Signals for state management since they retain things in memory</li>
               <li>Represents a single value that can change over time</li>
               <li>Read 1 value</li>
-              <li>You can convert to an Observable, but this is also avoidable
+              <li>
+                You can convert to an Observable, but this is also avoidable
                 <ul>
                   <li>The event that set the signal can also notify the observable</li>
                 </ul>
@@ -145,15 +145,14 @@
       <h2>Watching for Changes</h2>
       <section>
         <ul>
-          <li>There are two "watching" functions in Angular
+          <li>
+            There are two "watching" functions in Angular
             <ul>
               <li>The template and change detection</li>
               <li>The effect function</li>
             </ul>
           </li>
-          <li>
-            Ideally, a signal only contains elements that change together
-          </li>
+          <li>Ideally, a signal only contains elements that change together</li>
           <li>
             Each signal has an equal function defining when its value is considered to be changed
             <ul>
@@ -168,12 +167,12 @@
               <ul>
                 <li>Always performing a deep comparison can be costly, so always returning false may be the most efficient approach when working with mutable data</li>
                 <li>It does lead to more notifications than needed</li>
-                <li>If you are using immutable data, you can pass in a custom equals function to modify this behavior:
+                <li>
+                  If you are using immutable data, you can pass in a custom equals function to modify this behavior:
                   <ul>
-                    <li>
-
-                    </li>
-                  </ul>that will detect and trigger notifiations only when the object referenced in the Signal </li>
+                    <li>This will detect and trigger notifications only when the object referenced in the Signal</li>
+                  </ul>
+                </li>
               </ul>
               <li>Otherwise, (strings, numbers, booleans), the result of oldValue === newValue is returned</li>
             </ul>
@@ -184,6 +183,7 @@
       <h2>Reading a Signal from the Template</h2>
       <section>
         <ul>
+          <li>Reading a value of a Signal uses its getter, so it is called like a function</li>
           <li>
             During template tendering:
             <ul>
@@ -191,6 +191,12 @@
               <li>It also registers the signal as a dependency of the view</li>
               <li>If the signal changes, the view is re-rendered</li>
               <li>Make sure to put the parentheses in the binding so the value is actually read from the signal</li>
+            </ul>
+          </li>
+          <li>
+            In the past, calling a function from the template is frowned upon
+            <ul>
+              <li>This does not generally apply to simple routines, such as getters</li>
             </ul>
           </li>
         </ul>
@@ -204,19 +210,54 @@
         </div>
       </section>
 
+      <h2>Writing a Value to a Signal</h2>
+      <section>
+        <ul>
+          <li>
+            Values can be updated in a Signal using its <code>set</code> method
+            <ul>
+              <li>The <code>update</code> method can be used to update the Signal based on its current value</li>
+            </ul>
+          </li>
+          <li>
+            Some Signals are read-only, so they do not have a method to change the value
+            <ul>
+              <li>Computed signals are an example of this</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2>NgModel</h2>
+      <section>
+        <ul>
+          <li>NgModel does not support two way data binding with Signals</li>
+          <li>This will change in a future release</li>
+          <li>To work around this, split the event and binding apart</li>
+        </ul>
+        <div class="card">
+          <div class="card-body">
+            <code>
+              &lt;input [ngModel]="from()" (ngModelChange)="from.set($event)" name="from" class="form-control" /&gt;
+              <br />
+            </code>
+          </div>
+        </div>
+      </section>
+
       <h2>Recommendations</h2>
       <section>
         <ul>
-          <li>Use signals to synchronously derive state where possible
+          <li>
+            Use signals to synchronously derive state where possible
             <ul>
               <li>This includes using computed signals to create derived values</li>
             </ul>
           </li>
-          <li>Avoid effects propagating state and Signal writes
+          <li>
+            Avoid effects propagating state and Signal writes
             <ul>
-              <li>
-                This can lead to change cycles and infinity loops
-              </li>
+              <li>This can lead to change cycles and infinity loops</li>
             </ul>
           </li>
         </ul>

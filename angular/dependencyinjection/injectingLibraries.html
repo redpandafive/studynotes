@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
@@ -28,75 +27,75 @@
 
       <h1>Injecting an External Library</h1>
 
-      <h2>Injecting Toastr</h2>
+      <h2>Example: Injecting Toastr using  Modules</h2>
       <section>
         <div>
           First create a token that you can use in dependency injection without creating a class. In a file (toastr.service.ts)...
           <ul>
-            <li>Import InjectionToken from @angular/core</li>
             <li>
               Create an instance of the InjectionToken
-              <div class="card">
-                <div class="card-body">
-                  <code>export let TOASTR_TOKEN = new InjectionToken&lt;Toastr&gt;(&quot;toastr&quot;)</code>
-                </div>
-              </div>
+              <ul>
+                <li>String in the parameter is a description used in debugging</li>
+                <li>Import InjectionToken from @angular/core</li>
+              </ul>
+            </li>
+            <li>
+              Define a Toastr interface within this file and provide the methods that should be available on it
+              <ul>
+                <li>This is for type safety</li>
+              </ul>
+            </li>
+            <li>
+              TOASTR_TOKEN is a JavaScript object
               <ul>
                 <li>Convention is to name in all caps</li>
-                <li>TOASTR_TOKEN is a JavaScript object</li>
-                <li>String in the parameter is a description used in debugging</li>
               </ul>
             </li>
-            <li>Define a Toastr interface within this file and provide the methods that should be available on it. This is just for type safety</li>
           </ul>
-        </li>
-        <li>
-          In module
+          <div class="card">
+            <div class="card-body">
+              <code>export let TOASTR_TOKEN = new InjectionToken&lt;Toastr&gt;(&quot;toastr&quot;)</code>
+            </div>
+          </div>
+        </div>
+        <div>
+          In the module, import the InjectionToken and declare a global object for Toastr:
           <ul>
-            <li>
-              Import the InjectionToken
-              <div class="card">
-                <div class="card-body">
-                  <code>import {TOASTR_TOKEN } from &quot;toaster.service&quot;</code>
-                </div>
-              </div>
-            </li>
-            <li>
-              Declare the global object for toastr in the module
-              <div class="card">
-                <div class="card-body">
-                  <code>let toastr: Toastr = window&#91;&quot;toastr&quot;&#93;</code>
-                </div>
-              </div>
-              <ul>
-                <li>This tells TypeScript that there will be a toastr object in the global namespace that it is not aware of</li>
-                <li>It will be of type Toastr, the interface defined previously</li>
-              </ul>
-            </li>
-            <li>
-              Register the injection token in the providers section of the module
-              <div class="card">
-                <div class="card-body">
-                  <code>{ provide: TOASTR_TOKEN, useValue: toastr }</code>
-                </div>
-              </div>
-              <ul>
-                <li>This tells registration that whenever anyone requests a dependency using the TOASTR_TOKEN token, give them the toastr object from the global space</li>
-              </ul>
-            </li>
+            <li>This tells TypeScript that there will be a Toastr object in the global namespace that it is not aware of</li>
+            <li>It will be of type Toastr (the interface previously defined)</li>
           </ul>
-        </li>
-        <li>
+          <div class="card">
+            <div class="card-body">
+              <code>
+                import { TOASTR_TOKEN } from &quot;toaster.service&quot;<br />
+                .... <br />
+                let toastr: Toastr = window&#91;&quot;toastr&quot;&#93;<br />
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          Register the injection token in the providers section of the module
+          <ul>
+            <li>This tells registration that whenever anyone requests a dependency using the TOASTR_TOKEN token, give them the Toastr object from the global space</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code>{ provide: TOASTR_TOKEN, useValue: toastr }</code>
+            </div>
+          </div>
+        </div>
+        <div>
           In the component you want to use it in, add the following as a parameter to the constructor
+          <ul>
+            <li>Need to import Inject from @angular/core</li>
+          </ul>
           <div class="card">
             <div class="card-body">
               <code>@Inject(TOASTR_TOKEN) private toastr: Toaster</code>
             </div>
           </div>
-          <ul>
-            <li>Need to import Inject from @angular/core</li>
-          </ul>
-        </li>
+        </div>
       </section>
     </div>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.js"></script>

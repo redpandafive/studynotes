@@ -34,14 +34,79 @@
             A coding pattern in which a class asks for dependencies from external sources rather than creating them itself
             <ul>
               <li>Avoids hard dependencies between classes</li>
-              <li>Allows you to swap out dependencies without changin the class which is using them</li>
+              <li>Allows you to swap out dependencies without changing the class which is using them</li>
             </ul>
           </li>
-          <li>In Angular, DI is wired into the framework and allows classes with Angular decorators, such as Components, Directives, Pipes, and Injectables, to configure dependencies they need
+          <li>
+            It is a hierarchial system in which the same injection token (a sort of key) can return very different things depending on the context in which it is being requested
             <ul>
-              <li>Dependencies are typically services, but they can also be values such as strings or functions</li>
+              <li>Imagining it as a pool or dictionary that you can fetch instances out of isn't the correct way to think about it</li>
+              <li>It is closely related to the DOM structure of the application</li>
             </ul>
           </li>
+        </ul>
+      </section>
+
+      <h2>Dependency Injection in Angular</h2>
+      <section>
+        <ul>
+          <li>In Angular, DI is wired into the framework and allows classes with Angular decorators, such as Components, Directives, Pipes, and Injectables, to configure dependencies they need</li>
+          <li>Dependencies are typically services, but they can also be values such as strings or functions</li>
+          <li>For each HTML element rendered in the DOM, an ElementInjector object is created that is responsible for dependency injection in the context of the element and its children</li>
+          <li>
+            Picture it as an object that has a parent injector (created for the parent element) and has a dictionary of tokens and their corresponding instances
+            <ul>
+              <li>Angular will request the element injector for an instance of a token</li>
+              <li>This can return different objects for the each element</li>
+            </ul>
+          </li>
+          <li>
+            When a dependency is requested, Angular looks at the nearest element injector (the host element)
+            <ul>
+              <li>If a dependency is not found, it will ask the parent of the element</li>
+              <li>This continues until it reaches the root injector (root element of the hierarchy)</li>
+              <li>If the dependency still is not found, Angular checks the platform injector</li>
+              <li>Finally, Angular moves to the very top, where it finds the NullInjector
+                <ul>
+                  <li>This will trigger a NullInjectorError indicating the dependency cannot be found</li>
+                </ul>
+              </li>
+              <li>
+                This process is similar to how prototypes work in JavaScript
+              </li>
+            </ul>
+          </li>
+
+          <li>Some dependencies (like ElementRef) are automatically provided by Angular</li>
+        </ul>
+        <div>
+          This directive requests an ElementRef instance from its host element.
+          <div class="card">
+            <div class="card-body">
+              <code>
+                @Directive({ selector: '[appSome]', }) export class SomeDirective implements OnInit { private readonly elementRef = inject(ElementRef); ngOnInit() {
+                console.log(this.elementRef.nativeElement); } }
+              </code>
+            </div>
+          </div>
+        </div>
+        <div>
+          When the same directive is applied to different elements, different objects are returned since each element has its own injector
+          <ul>
+            <li>When applied to the parent DIV element, a reference to that DIV element is returned</li>
+            <li>When applied to the child SPAN element, a reference to that SPAN element is return</li>
+          </ul>
+          <div class="card">
+            <div class="card-body">
+              <code> &lt;div appSome&gt; &lt;span appSome&gt;Text&lt;/span&gt; &lt;/div&gt; </code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2></h2>
+      <section>
+        <ul>
           <li>
             There are two roles in the Angular DI system
             <ul>
@@ -52,22 +117,19 @@
           <li>
             Injectors facilitate interaction between Dependency Consumers and Dependency Providers
             <ul>
-              <li>An injector maintains a registry of instances that have already been created
+              <li>
+                An injector maintains a registry of instances that have already been created
                 <ul>
                   <li>If a dependency is requested, it checks it registry to see if it is already available</li>
-                  <li>If not, a nrew instance is created and stored in the registry</li>
+                  <li>If not, a new instance is created and stored in the registry</li>
                 </ul>
               </li>
             </ul>
           </li>
-          <li>
-            When a component requests a dependency (through a constructor or inject() function), it delegates object creation to an Injector
-            <ul></ul>
-          </li>
+          <li>When a component requests a dependency (through a constructor or inject() function), it delegates object creation to an Injector</li>
           <li>Injectors instantiate dependencies using a configured provider of the service or value</li>
         </ul>
       </section>
-
 
       <h2>Dependency Consumers</h2>
       <section>
@@ -76,14 +138,12 @@
         </ul>
       </section>
 
-
       <h2>Dependency Providers</h2>
       <section>
         <ul>
           <li>One of two roles in the Angular DI system (the other being Dependency Provider)</li>
         </ul>
       </section>
-
 
       <h2>Resolution Modifiers</h2>
       <section>

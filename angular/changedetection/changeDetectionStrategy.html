@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Index</title>   
+    <title>Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
@@ -21,121 +21,74 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Change Detection Strategy
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Change Detection Strategy</li>
         </ol>
       </nav>
-      
+
       <h1>Change Detection Strategy</h1>
 
-
+      <h2>Default Behavior</h2>
       <section>
         <ul>
           <li>
-            When not using OnPush, Angular checks all components for updates after event handlers run
+            By default, Angular checks all components for updates after event handlers run
+            <ul>
+              <li>It assumes that any event handler can theoretically change any bound data</li>
+              <li>After executing event handlers, Angular checks all bindings in all components for changes by default</li>
+            </ul>
           </li>
           <li>
             When using OnPush, components are only checked if they have been marked as dirty by a process such as:
-            <ul>
-              <li>A bound input changes its object reference</li>
-              <li>An Observable bound with async</li>
-              <li>A bound Signal emits a new value</li>
-            </ul>
-          </li>
-          <li>Signal based components are expected to alter the current change detection strategy, primarily
-            <ul>
-              <li>
-                When a component is marked as changed, all ancestors in the component tree are marked as well
-              </li>
-              <li>
-                Marked components are fully checked for changes, even if an update only modifies a small part
-              </li>
-            </ul>
-          </li>
-          </ul>
-      </section>
-
-      <h2>Recommendations</h2>
-      <section>
-        <ul>
-          <li>
-            Use OnPush custom change detection strategy for a component when you
-            are sure the values will only change when the input values change
+            <ul></ul>
           </li>
           <li>
-            Do not perform heavy computations in templates
+            Signal based components are expected to alter the current change detection strategy, primarily
             <ul>
-              <li>
-                Expressions in templates are re-evaluated every time change
-                detection gets triggered
-              </li>
-              <li>
-                It does this after an event, re-evaluates all the expressions in
-                the templates and compares them with their previous values. If
-                there is a change, it will update the DOM
-              </li>
-            </ul>
-          </li>
-          <li>
-            Caveats:
-            <ul>
-              <li>For primitives, OnPush will detect changes to inputs since the value has changed and the comparison function picks up on it</li>
-              <li>For complex objects (like objects and arrays), the comparison is done by object reference
-                <ul>
-                  <li>If it isn't a new object, no change will be detected (such as only changing a property, but keeping the original object)</li>
-                  <li>It's a good idea to use immutable objects to avoid this since a new object must be created with the changed values</li>
-                </ul>
-              </li>
+              <li>When a component is marked as changed, all ancestors in the component tree are marked as well</li>
+              <li>Marked components are fully checked for changes, even if an update only modifies a small part</li>
             </ul>
           </li>
         </ul>
       </section>
 
-
       <h2>ChangeDetection.OnPush Mode</h2>
       <section id="onpush">
         <ul>
           <li>
-            You may be able to optimize change detection using the
-            ChangeDetection property of a component's configuration so it will
-            be in OnPush change detection mode
-          </li>
-          <li>
-            This will only trigger a change detection cycle when we pass a new value
-            to any of its inputs, when an event inside the component
-            happens, or an Observable fires an event, such as emitting a new object
+            You may be able to optimize change detection by putting it in OnPush change detection mode
             <ul>
-              <li>
-                It can also help to decompose a component when using this
-                strategy so that change events within a component do not
-                trigger unnecessary re-execution of template expressions
-              </li>
+              <li>Set this using the ChangeDetection property of a component's configuration</li>
+              <li>This disables the default change detection mechanism for subtrees of the component tree.</li>
             </ul>
           </li>
           <li>
-            This disables the change detection mechanism for subtrees of the
-            component tree.
-          </li>
-          <li>
-            Use OnPush custom change detection strategy for a component when you
-            are sure the values will only change when the input values change
+            This mode will only trigger a change detection cycle when
             <ul>
-              <li>Angular will only perform checks on inputs when it detects there is a new reference with the change</li>
-              <li>It will not check bound properties on the object from the input, only if the object has a new reference</li>
-              <li>Allows you to skip entire entire subtrees during change detection</li>
+              <li>A bound input changes its object reference</li>
               <li>
-                This will use an equality check to see if the inputs changed.
-                </li>
-                <li>
-                  So, if you have an array as in input and push a new item
-                  from the parent component, it will not update since the
-                  array is compared by reference.
-                </li>
-                <li>
-                  You can force a change using arrayName.slice() to create a copy
-                  of the array
-                </li>
+                An event inside the component marks the component as dirty
+                <ul>
+                  <li>An Observable bound with async</li>
+                  <li>An Observable fires an event, such as emitting a new object</li>
+                  <li>A bound Signal emits a new value</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+            <li>Angular will only perform checks on inputs when it detects there is a new reference with the change
+            <ul>
+              <li>
+                It will not check bound properties on the object from the input, only if the object has a new reference
+                <ul>
+                  <li>An equality check is used to determine if input values have changed.</li>
+                </ul>
+              </li>
+              <li>For example, if you have an array as in input and push a new item from the parent component, it will not update since the array is compared by reference.
+                <ul>
+                  <li>It also will not fire when a property on an object in the current list is changed</li>
+                  <li>The change detection cycle will only run when a new list is created</li>
+                  <li>You can force a change using arrayName.slice() to create a copy of the array</li>
+                </ul>
               </li>
             </ul>
           </li>
@@ -146,77 +99,60 @@
             </ul>
           </li>
           <li>
-            For example, a component that has a large list that only changes
-            when the list is pushed into the component
-          </li>
-          <li>
-            Now, the change detection cycle will only run when a new list is
-            created
+            This modes gives better performance, but can be a problem if used with mutable objects
             <ul>
               <li>
-                Will not fire when a property on an object in the current list
-                is changed
-              </li>
-            </ul>
-          </li>
-          <li>
-            Gives better performance, but can be a problem if used with mutable
-            objects
-            <ul>
-              <li>
-                Since the memory address of a mutable object does not change
-                when modifying a property, OnPush will perform change detection
+                Since the memory address of a mutable object does not change when modifying a property, OnPush will not perform change detection
                 <ul>
-                  <li>
-                    Angular normally monitors for changes to properties that are
-                    referenced
-                  </li>
+                  <li>Angular normally monitors for changes to properties that are referenced</li>
                 </ul>
               </li>
-              <li>
-                Inputs passed as observables will not trigger change detection
-                since the address of the observable object does not change when
-                it emits on object
-              </li>
-              <li>Avoid using with mutable objects</li>
+              <li>Inputs passed as observables will not trigger change detection since the address of the observable object does not change when it emits on object</li>
+              <li>Avoid mutating inputs with this mode</li>
+              <li>Can also use immutable objects (such as Immutable.js objects) as inputs with OnPush change detection strategy</li>
             </ul>
           </li>
           <li>
-            Can also combine Immutable.js objects and use OnPush change
-            detection strategy
+            If needed, you can manually mark a component to be included in the next change detection cycle
             <ul>
-              <li>
-                Combining with immutable data structures can bring great
-                performance implications for such pure components
-              </li>
-              <li>New immutable objects will trigger OnPush</li>
-              <li>
-                Will not introduce a bug since the only way to modify data is to
-                create new objects
-              </li>
+              <li>Inject ChangeDetectorRef in the component constructor</li>
+              <li>Mark the path from the component until the root to be changed for the next change detection run</li>
+            </ul>
+            <div class="card">
+              <div class="card-body">
+                <code>
+                  constructor(private cd: ChangeDetectorRef) {} <br />
+                  ... <br />
+                  this.cd.markForCheck(); <br />
+                </code>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <h2>Recommendations</h2>
+      <section>
+        <ul>
+          <li>Use OnPush custom change detection strategy for a component when you are sure the values will only change when the input values change</li>
+          <li>
+            Do not perform heavy computations in templates
+            <ul>
+              <li>Expressions in templates are re-evaluated every time change detection gets triggered</li>
+              <li>It does this after an event, re-evaluates all the expressions in the templates and compares them with their previous values. If there is a change, it will update the DOM</li>
             </ul>
           </li>
-          <li>If needed, you can manually mark a component to be included in the next change detection cycle
+          <li>It can also help to decompose a component when using this strategy so that change events within a component do not trigger unnecessary re-execution of template expressions</li>
+          <li>
+            Caveats:
             <ul>
+              <li>For primitives, OnPush will detect changes to inputs since the value has changed and the comparison function picks up on it</li>
               <li>
-                Inject ChangeDetectorRef in the component constructor
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      constructor(private cd: ChangeDetectorRef) {}
-                    </code>
-                  </div>
-                </div>                
-              </li>
-              <li>
-                Mark the path from the component until the root to be changed for the next change detection run
-                <div class="card">
-                  <div class="card-body">
-                    <code>
-                      this.cd.markForCheck();
-                    </code>
-                  </div>
-                </div>                
+                For complex objects (like objects and arrays), the comparison is done by object reference
+                <ul>
+                  <li>If it isn't a new object, no change will be detected (such as only changing a property, but keeping the original object)</li>
+                  <li>It's a good idea to use immutable objects to avoid this since a new object must be created with the changed values</li>
+                </ul>
               </li>
             </ul>
           </li>
@@ -230,11 +166,11 @@
           <div class="card">
             <div class="card-body">
               <code>
-                @Component({ <br/> 
-                  ... <br/>
-                  changeDetection: ChangeDetectionStrategy.OnPush <br/>
-                  ... <br/> 
-                }) <br/>
+                @Component({ <br />
+                ... <br />
+                changeDetection: ChangeDetectionStrategy.OnPush <br />
+                ... <br />
+                }) <br />
               </code>
             </div>
           </div>

@@ -31,7 +31,22 @@
 
       <section>
         <ul>
-          <li>A computed signal recomputes when its dependent signal(s) change.</li>
+          <li>
+            Computed Signals are consumers and producers
+            <ul>
+              <li>As Consumers
+                <ul>
+                  <li>They recompute when their dependent Signal(s) change.</li>
+                  <li>They are informed when their dependent Signals change</li>
+                </ul>
+              </li>
+              <li>As Producers
+                <ul>
+                  <li>They return a recalculated value</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
           <li>These are readonly; cannot be updated with set, mutate, update</li>
           <li>The computed value is memoized, meaning it stores the computed result
             <ul>

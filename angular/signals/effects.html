@@ -33,10 +33,28 @@
         <ul>
           <li>An operation that runs whenever one or more signal values change</li>
           <li>
+            An essential limitation is that they can only be used in an injection context
+            <ul>
+              <li>This is anywhere inject can be used</li>
+              <li>Effects use DestroyRef to "unsubscribe" themselves when the surrounding building block is about to be destroyed</li>
+            </ul>
+          </li>
+          <li>
             Effects are generally not recommended to use:
             <ul>
               <li>They are powerful and flexible, but they have a lot of tradeoffs you may not realize you are making when you use them</li>
+              <li>
+                Before Angular 19, an error would be thrown when attempting to update a Signal within an Effect
+                <ul>
+                  <li>If not used carefully, you could introduce a cycle with these</li>
+                  <li>This has been removed in Angular 19</li>
+                </ul>
+              </li>
+              <li>
+                Before Angular 19, they are also not guaranteed to run right when notified of a Signal change
+              </li>
               <li>If you find yourself reaching for an Effect, stop and re-examine the problem to see if there is a different approach that doesn't involve using them.</li>
+
             </ul>
           </li>
           <li>

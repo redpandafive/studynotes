@@ -6,10 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/styles/site.css" />
   </head>
   <body>
@@ -25,46 +22,44 @@
           <li class="breadcrumb-item">
             <a href="../index.html">Angular</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Change Detection
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Change Detection</li>
         </ol>
       </nav>
 
       <h1>Change Detection</h1>
-      
+
       <section class="navlinks">
         <ul>
           <li>
-            <a href="changedetection.html#rendering"
-              >Rendering Data in the Browser</a
-            >
+            <a href="changedetection.html#rendering">Rendering Data in the Browser</a>
           </li>
           <li>
             <a href="changedetection.html#other">Other Approaches</a>
           </li>
           <li>
-            <a href="changedetection.html#zone">Zone.js</a>
+            <a href="changedetection.html#zone">Angular and Zone.js</a>
+            <ul>
+              <li>
+                <a href="changedetection.html#changeDetection">Change Detection Cycles</a>
+              </li>
+              <li>
+                <a href="changedetection.html#componentChange">Component Change Detection</a>
+              </li>
+              <li>
+                <a href="changedetection.html#devmode">Development Mode Safeguard</a>
+              </li>
+              <li>
+                <a href="changedetection.html#delaying">Delaying / Disabling Change Detection</a>
+              </li>
+            </ul>
           </li>
           <li>
-            <a href="changedetection.html#changeDetection"
-              >Change Detection Cycles</a
-            >
-          </li>
-          <li>
-            <a href="changedetection.html#componentChange"
-              >Component Change Detection</a
-            >
-          </li>
-          <li>
-            <a href="changedetection.html#devmode"
-              >Development Mode Safeguard</a
-            >
-          </li>
-          <li>
-            <a href="changedetection.html#delaying"
-              >Delaying / Disabling Change Detection</a
-            >
+            <a href="changedetection.html#signals">Signals</a>
+            <ul>
+              <li>
+                <a href="changedetection.html#changeDetection">Change Detection Cycles</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </section>
@@ -73,36 +68,18 @@
       <section>
         <ul>
           <li>
-            Rendering is the process of taking data structures as inputs and
-            generating DOM output to diplay to the user
+            Rendering is the process of taking data structures as inputs and generating DOM output to display to the user
             <ul>
-              <li>
-                Think of as projecting your data model through a template to a
-                visual user interface, resulting in a DOM representation of the
-                data
-              </li>
+              <li>Think of as projecting your data model through a template to a visual user interface, resulting in a DOM representation of the data</li>
             </ul>
           </li>
           <li>
-            Where things get challenging is when the data model changes after
-            the DOM has been rendered
+            Where things get challenging is when the data model changes after the DOM has been rendered
             <ul>
-              <li>
-                Updates to the data model must result in updates to the DOM for
-                the two to remain synchronized
-              </li>
-              <li>
-                This can be thought of as managing the <em>state</em> of the
-                application (synchronizing the app state and the user interface)
-              </li>
-              <li>
-                This invoves state changes, which is a more difficult problem
-                that rendering a UI once
-              </li>
-              <li>
-                Accessing and rebuilding the DOM tree is expensive, so changes
-                should be kept to a minimum
-              </li>
+              <li>Updates to the data model must result in updates to the DOM for the two to remain synchronized</li>
+              <li>This can be thought of as managing the <em>state</em> of the application (synchronizing the app state and the user interface)</li>
+              <li>This involves state changes, which is a more difficult problem that rendering a UI once</li>
+              <li>Accessing and rebuilding the DOM tree is expensive, so changes should be kept to a minimum</li>
             </ul>
           </li>
         </ul>
@@ -111,255 +88,127 @@
       <h2 id="other">Other Approaches</h2>
       <section>
         <ul>
-          <li>Different frameworks handle this in different ways</li>
           <li>
-            Server side rendering
+            Different frameworks handle this in different ways
             <ul>
               <li>
-                Changes triggered a request to the server, which responded with
-                a new page that the browser will then render
-              </li>
-              <li>There is no front end state management</li>
-              <li>
-                Very slow since each change required a trip back to the server
-                and a full rerendering of the UI
-              </li>
-            </ul>
-          </li>
-          <li>
-            1st Generation JavaScript frameworks, such as Backbone, EXT JS, and
-            Dojo
-            <ul>
-              <li>
-                Introduced architecture for seperating your UI code from your
-                models
+                Server side rendering
+                <ul>
+                  <li>Changes trigger a request to the server, which responds with a new page that the browser will then render</li>
+                  <li>There is no front end state management</li>
+                  <li>Very slow since each change required a trip back to the server and a full rerendering of the UI</li>
+                </ul>
               </li>
               <li>
-                Left synchronization up to you - you had to figure out what to
-                rerender and how to do it
+                1st Generation JavaScript frameworks
+                <ul>
+                  <li>Backbone, EXT JS, and Dojo</li>
+                  <li>Introduced architecture for separating your UI code from your models</li>
+                  <li>These left synchronization up to you - you had to figure out what to re-render and how to do it</li>
+                </ul>
               </li>
-            </ul>
-          </li>
-          <li>
-            Angular JS
-            <ul>
               <li>
-                Performed dirty checking
+                Angular JS
                 <ul>
                   <li>
-                    Each rendered data creates a watcher for that particular
-                    value
-                  </li>
-                  <li>
-                    Whenever anything happens in the app, Angular checks if the
-                    value in that watcher has changed from the last time
+                    Performed dirty checking
                     <ul>
+                      <li>Each rendered data item creates a watcher for that particular value</li>
                       <li>
-                        This is called a digest - the process responsible for
-                        running watchers
+                        Whenever anything happens in the app, Angular checks if the value in that watcher has changed since the last time
+                        <ul>
+                          <li>This is called a digest = the process responsible for running watchers</li>
+                          <li>Pure JavaScript reference equality checks are cheap, so this process runs faster than it sounds</li>
+                          <li>DOM access only occurs when changes are detected</li>
+                        </ul>
                       </li>
-                      <li>
-                        Pure JavaScript reference equality checks are cheap, so
-                        this process runs faster than it sounds
-                      </li>
-                      <li>DOM access only occurs when changes are detected</li>
+                      <li>If there was a change, it re-renders the value in the UI</li>
                     </ul>
                   </li>
-                  <li>
-                    If there was a change, it re-renders the value in the UI
-                  </li>
                 </ul>
               </li>
-            </ul>
-          </li>
-          <li>
-            React
-            <ul>
               <li>
-                React uses a virual DOM, a lightweight, pure JavaScript data
-                structure of plain objects and arrays that represents a read DOM
-                object graph
-              </li>
-              <li>
-                The model data is used to generate this virutal DOM object
-              </li>
-              <li>
-                When the model data changes, a new vitual DOM object is
-                generated from scratch
+                React
                 <ul>
                   <li>
-                    This new object is compared to the previous virual DOM
-                    object
+                    React uses a virtual DOM
+                    <ul>
+                      <li>A lightweight, pure JavaScript data structure of plain objects and arrays that represents a read-only DOM object graph</li>
+                    </ul>
                   </li>
-                  <li>Only components that call setState are compared</li>
+                  <li>The model data is used to generate this virtual DOM object</li>
                   <li>
-                    By diffing the two, it is possible to get a set of
-                    differences between the two
+                    When the model data changes, a new virtual DOM object is generated from scratch
+                    <ul>
+                      <li>This new object is compared to the previous virtual DOM object</li>
+                      <li>Only components that call setState are compared</li>
+                      <li>By diffing the two, it is possible to get a set of differences between the two</li>
+                      <li>Only these differences are applied to the actual DOM</li>
+                    </ul>
                   </li>
-                  <li>Only these diffrences are applied to the actual DOM</li>
+                  <li>This means React does not try to track changes and maintain state. You just re-render the whole UI each time and whatever changed will be in the new result.</li>
                 </ul>
-              </li>
-              <li>
-                This means React does not try to track changes and maintain
-                state. You just re-render the whole UI each time and whatever
-                changed will be in the new result.
               </li>
             </ul>
           </li>
         </ul>
       </section>
 
-      <h2 id="zone">Zone.js</h2>
+      <h2 id="zone">Angular and Zone.js</h2>
       <section>
         <ul>
           <li>
-            Angular triggers change detection based on signals from Zone.js
+            Angular assumes that any event handler can theoretically change any bound data
             <ul>
-              <li>
-                This captures asynchronous operations like setTimeout, network
-                requests, and event listeners
-              </li>
+              <li>After the execution of event handlers, it checks all bindings in all components for changes</li>
             </ul>
           </li>
           <li>
-            On startup, Angular will patch several low-level browser APIs with
-            its own versions
+            Angular triggers change detection based on events from Zone.js, a library external to Angular
             <ul>
-              <li>This is done the Zone.js library</li>
-              <li>
-                Zones are just execution context that services multiple
-                JavaScript VM execution turns
-              </li>
-              <li>
-                Generic mechanism to add extra functionality to the browser
-              </li>
-              <li>
-                These modifications give Angular a chance to run change
-                detection and update the UI
-              </li>
-              <li>
-                Any API not supported by Zone.js will not trigger a change
-                detection cycle
-              </li>
+              <li>Provides a generic mechanism to add extra functionality to the browser</li>
+              <li>This captures asynchronous operations like setTimeout, network requests, and event listeners</li>
+              <li>Zones are just execution context that services multiple JavaScript VM execution turns</li>
             </ul>
           </li>
           <li>
-            Examples of browser events that are wired to trigger a change
-            detection cycle include
+            On startup, Angular will patch several low-level browser APIs with its own versions
+            <ul>
+              <li>This is done by the Zone.js library</li>
+              <li>These modifications give Angular a chance to run change detection and update the UI</li>
+              <li>Any API not supported by Zone.js will not trigger a change detection cycle</li>
+            </ul>
+          </li>
+          <li>
+            Examples of browser events that are wired to trigger a change detection cycle include
             <ul>
               <li>
                 All browser events (like addEventListener)
                 <ul>
-                  <li>
-                    This handles the registration of the callback (as normally
-                    done by JS)
-                  </li>
+                  <li>This handles the registration of the callback (as normally done by JS)</li>
                 </ul>
               </li>
-              <li>setTImeout and setInterval</li>
+              <li>setTimeout and setInterval</li>
               <li>Ajax HTTP requests</li>
             </ul>
           </li>
-        </ul>
-      </section>
-
-      <h2 id="changeDetection">Change Detection Cycles</h2>
-      <section>
-        <ul>
           <li>
-            Each component has its own change detector
+            Angular provides different strategies for what is done during chance detection
             <ul>
               <li>
-                Since an Angular application consists of a component tree, this
-                means we have a change detector tree as well
+                See <a href="changeDetectionStrategy.html">Change Detection Strategy</a>
               </li>
             </ul>
           </li>
           <li>
-            On each change detection trigger from Zone.js
+            Downsides of Zone.js
             <ul>
+              <li>Since browser objects are being modified, errors can be difficult to diagnose</li>
+              <li>Zone.js does have a payload penalty.  This can impact lightweight web components</li>
               <li>
-                Angular goes through the whole component tree starting at the
-                root component of the application
-              </li>
-              <li>
-                For each component, Angular runs the change detection mechanism
-                that is associated with that component and determines if the
-                component needs to be re-rendered
-              </li>
-
-              <li>
-                This process is repeated for all components, from the root until
-                leaf components
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="componentChange">Component Change Detection</h2>
-      <section>
-        <ul>
-          <li>
-            To decide if a component needs to be changed, Angular compares the
-            current value of each expression used in the template to its
-            previous value
-          </li>
-          <li>
-            During this, template expressions are evaluated and several
-            lifecycle hook methods are called (such as ngAfterViewChecked)
-          </li>
-          <li>
-            When a change is detected, Angular runs the DOM generating function
-            for the component – this produces a new DOM data structure
-          </li>
-          <li>
-            Template expressions bound to a complex object will only be
-            considered changed if the bound properties of the object have
-            changed
-            <ul>
-              <li>
-                If a property changes on the object that is not bound to an
-                expression, the change is not considered (no deep object
-                comparison to detect changes)
-              </li>
-              <li>
-                It is not limited to only checking reference comparisons - this
-                allows bound property changes to trigger updates
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <h2 id="devmode">Development Mode Safeguard</h2>
-      <section>
-        <ul>
-          <li>
-            Situations where change detection can break
-            <ul>
-              <li>
-                Calling a getter from the template that gets its value from
-                something like a random number generator
-              </li>
-              <li>
-                Use a random number generator to set a property value during the
-                ngAfterViewChecked lifecycle event
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            Development mode checks for these types of problems automatically
-            <ul>
-              <li>
-                It runs template rendering twice in a row – if they are
-                different an error is thrown
-              </li>
-              <li>
-                Production mode will only run change detection once
+                Zone.js cannot monkey patch async and await as they are keywords
                 <ul>
-                  <li>These errors will not be detected</li>
+                  <li>Angular CLI converts these to promises even if the browser supports async and await natively</li>
                 </ul>
               </li>
             </ul>
@@ -367,40 +216,136 @@
         </ul>
       </section>
 
-      <h2 id="delaying">Delaying / Disabling Change Detection</h2>
+      <h3 id="changeDetection">Change Detection Cycles</h3>
+      <section>
+        <ul>
+          <li>
+            Each Angular component has its own change detector
+            <ul>
+              <li>Since an Angular application consists of a component tree, this means there is a change detector tree as well</li>
+            </ul>
+          </li>
+          <li>
+            On each change detection trigger from Zone.js:
+            <ul>
+              <li>Angular goes through the whole component tree starting at the root component of the application</li>
+              <li>For each component, Angular runs the change detection mechanism that is associated with that component and determines if the component needs to be re-rendered</li>
+
+              <li>This process is repeated for all components, from the root until leaf components</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="componentChange">Component Change Detection</h3>
+      <section>
+        <ul>
+          <li>To decide if a component needs to be changed, Angular compares the current value of each expression used in the template to its previous value</li>
+          <ul>
+            <li>During this, template expressions are evaluated and several lifecycle hook methods are called (such as ngAfterViewChecked)</li>
+            <li>When a change is detected, Angular runs the DOM generating function for the component – this produces a new DOM data structure</li>
+          </ul>
+          <li>
+            Template expressions bound to a complex object will only be considered changed if the bound properties of the object have changed
+            <ul>
+              <li>If a property changes on the object that is not bound to an expression, the change is not considered (no deep object comparison to detect changes)</li>
+              <li>It is not limited to only checking reference comparisons - this allows bound property changes to trigger updates</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="devmode">Development Mode Safeguard</h3>
+      <section>
+        <ul>
+          <li>
+            Situations where change detection can break include:
+            <ul>
+              <li>Calling a getter from the template that gets its value from something like a random number generator</li>
+              <li>Using a random number generator to set a property value during the ngAfterViewChecked lifecycle event</li>
+            </ul>
+          </li>
+          <li>
+            Development mode adds an addition check for these types of problems automatically:
+            <ul>
+              <li>It runs the template rendering twice in a row – if they are different, an error is thrown</li>
+              <li>This incurs a performance penalty, so development mode runs slower than production mode</li>
+              <li>This is done as a safeguard to find change detection loops before during development</li>
+              <li>
+                Production mode does not add this check
+                <ul>
+                  <li>It does not have include this check, so it will only run change detection once</li>
+                  <li>This gives better performance at the cost of safeguarding against these types of potential errors</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h3 id="delaying">Delaying / Disabling Change Detection</h3>
       <section>
         <ul>
           <li>
             Change detection can be disabled or delayed
             <ul>
-              <li>Think of getting a large data payload via a websocket</li>
+              <li>One use case is getting a large data payload via a websocket</li>
+            </ul>
+          </li>
+          <li>
+            You can delay change detection by
+            <ul>
+              <li>Detaching the change detection</li>
+              <li>Set a timeout function for the desired interval</li>
+              <li>Enable change detection on the timeout</li>
+            </ul>
+          </li>
+          <li>
+            In your component,
+            <ul>
+              <li>Inject a ChangeDetectorRef token into the constructor</li>
               <li>
-                In your component,
+                ChangeDetectorRef.detach()
                 <ul>
-                  <li>inject a ChangeDetectorRef token into the constructor</li>
-                  <li>
-                    ChangeDetectorRef.detach()
-                    <ul>
-                      <li>Disables change detection</li>
-                    </ul>
-                  </li>
-                  <li>
-                    ChagneDetector.detectChanges()
-                    <ul>
-                      <li>Enables change detection</li>
-                    </ul>
-                  </li>
-                  <li>
-                    You can delay change detection by
-                    <ul>
-                      <li>Detaching the change detection</li>
-                      <li>Set a timeout function for the desired interval</li>
-                      <li>Enable change detection on the timeout</li>
-                    </ul>
-                  </li>
+                  <li>Disables change detection</li>
+                </ul>
+              </li>
+              <li>
+                ChangeDetector.detectChanges()
+                <ul>
+                  <li>Enables change detection</li>
                 </ul>
               </li>
             </ul>
+          </li>
+        </ul>
+      </section>
+
+      <h2 id="signals">Signals</h2>
+      <section>
+        <ul>
+          <li>Signals are simple reactive building blocks
+            <ul>
+              <li>They hold a value consumers can read</li>
+              <li>If writable, the value can be changed and all consumers are notified</li>
+            </ul>
+          </li>
+          <li>
+            When a Signal consumer is a template, it can notify Angular about changed bindings
+            <ul>
+              This type of signal is called a Producer
+            </ul>
+          </li>
+          <li>
+            Since OnPush uses object references to look for changes, a Signal will need to contain a new object when a value is changed
+            <ul>
+              <li>An example is a Signal that contains an array of objects</li>
+              <li>OnPush will not detect if a new object is pushed to the array that the Signal holds</li>
+              <li>To work around this, use a spread operator with the old array to create a new one, then set the Signal to the new array</li>
+            </ul>
+          </li>
+          <li>
+            
           </li>
         </ul>
       </section>

@@ -53,7 +53,7 @@
       <section>
         <ul>
           <li>
-            Signals have a getter function, so calling it reads thier value
+            Signals have a getter function, so calling it reads their value
             <div class="card">
               <div class="card-body">
                 <code>
@@ -103,30 +103,7 @@
           <li>
             Mutate()
             <ul>
-              <li>When a signal contains an object or array, use this to mutate the object directly</li>
-              <li>
-                This mutates the content in place, not the value itself
-                <ul>
-                  <li>This mutates the previous state and does not return any value</li>
-                </ul>
-              </li>
-            </ul>
-            <div>
-              The following changes the first object in the array to 'done: true' without replacing it.
-              <div class="card">
-                <div class="card-body">
-                  <code>
-                    const todos = signal([{title: 'Learn signals', done: false}]);
-                    <br />
-                    todos.mutate(value => {
-                    <br />
-                    value[0].done = true;
-                    <br />
-                    });
-                  </code>
-                </div>
-              </div>
-            </div>
+              <li>This is deprecated</li>
           </li>
         </ul>
       </section>
