@@ -2,15 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Index</title>
-    
+    <title>Tags</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div>
+    </nav>
     <div class="container">
-      <h1>Tags</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <h1>Tags</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./tags.html#simple">Simple Tags</a></li>
+          <li><a href="./tags.html#annotated">Annotated Tags</a></li>
+          <li><a href="./tags.html#commands">Commands</a></li>
+        </ul>
+      </section>
 
       <section>
         <ul>
@@ -19,36 +30,27 @@
             There are two types
             <ul>
               <li>Simple - points to a commit</li>
-              <li>
-                Annotated - points to a tag object that points to a commit
-              </li>
+              <li>Annotated - points to a tag object that points to a commit</li>
             </ul>
             <img src="../../../assets/tags-1.png" />
           </li>
           <li>
             Tags give you an additional way to checkout a commit
             <ul>
-              <li>
-                <kbd>git checkout release_1</kbd> will checkout the commit with
-                tag release_1
-              </li>
-              <li>
-                You can only use the checkout command with tags, not switch
-              </li>
+              <li><kbd>git checkout release_1</kbd> will checkout the commit with tag release_1</li>
+              <li>You can only use the checkout command with tags, not switch</li>
             </ul>
           </li>
         </ul>
       </section>
 
       <h2>Simple Tags</h2>
-      <section>
+      <section id="simple">
         <ul>
           <li>
             Also called lightweight tags
             <ul>
-              <li>
-                Tags that consist of just a tag name and no additional metadata
-              </li>
+              <li>Tags that consist of just a tag name and no additional metadata</li>
               <li>Very similar to branches, only they do not move</li>
             </ul>
           </li>
@@ -70,7 +72,7 @@
       </section>
 
       <h2>Annotated Tags</h2>
-      <section>
+      <section id="annotated">
         <ul>
           <li>Contains additional metadata, such as a message</li>
           <li>Add a -a switch to the command</li>
@@ -78,7 +80,7 @@
           <li>Files are named after the tag name</li>
           <li>Inside this file is a hash, which points to a tag object</li>
           <li>
-            The tag object contains all the informaiton in the tag, including
+            The tag object contains all the information in the tag, including
             <ul>
               <li>The tag</li>
               <li>The user who submitted the tag</li>
@@ -92,9 +94,7 @@
             Examples
             <ul>
               <li>
-                <kbd
-                  >git tag release_1 -a =, "First release, still unstable"</kbd
-                >
+                <kbd>git tag release_1 -a =, "First release, still unstable"</kbd>
                 <ul>
                   <li>Adds a simple tag of release_1 to the current commit</li>
                 </ul>
@@ -105,7 +105,7 @@
       </section>
 
       <h2>Commands</h2>
-      <section>
+      <section id="commands">
         <ul>
           <li>
             <kbd>git checkout tag_name</kbd>

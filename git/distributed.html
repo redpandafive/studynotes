@@ -2,34 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Index</title>
-    
+    <title>Git as a Distributed VCS</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div>
+    </nav>
     <div class="container">
-      <h1>Git as a Distributed VCS</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <h1>Git as a Distributed VCS</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./distributed.html#cloning">Cloning</a></li>
+          <li><a href="./distributed.html#fetchvspull">Fetch vs Pull</a></li>
+          <li><a href="./distributed.html#remote">Remote Repositories</a></li>
+          <li><a href="./distributed.html#multiuser">Multi-User Environment</a></li>
+          <li><a href="./distributed.html#syncingRepositories">Synchronizing Repositories</a></li>
+          <li><a href="./distributed.html#bestpractices">Best Practices</a></li>
+          <li><a href="./distributed.html#commands">Commands</a></li>
+        </ul>
+      </section>
 
       <section>
         <ul>
-          <li>
-            Git repositories can be cloned and they are all on equal footing
-          </li>
-          <li>
-            Differs from centralized VCS where clients only talk to a central
-            server
-          </li>
+          <li>Git repositories can be cloned and they are all on equal footing</li>
+          <li>Differs from centralized VCS where clients only talk to a central server</li>
           <li>All repository clones can synchronize with any other</li>
           <li>
-            In practice, you will probably have designated one repostitory as
-            the reference repo
+            In practice, you will probably have designated one repository as the reference repo
             <ul>
               <li>Could have multiple developers, each with their own clone</li>
-              <li>
-                Developers would synchronize with a designated central clone
-              </li>
+              <li>Developers would synchronize with a designated central clone</li>
               <li>Builds would be sourced from this "central" repository</li>
               <li>This is more of a workflow issue, not a technical one</li>
             </ul>
@@ -38,11 +45,10 @@
       </section>
 
       <h2>Cloning</h2>
-      <section>
+      <section id="cloning">
         <ul>
           <li>
-            Use to create a local copy of a repository from a remote repository
-            using a URL
+            Use to create a local copy of a repository from a remote repository using a URL
             <ul>
               <li>This contains the entire history for the main branch</li>
             </ul>
@@ -51,27 +57,15 @@
             This command does the following
             <ul>
               <li>Creates an empty directory for the project</li>
-              <li>
-                Deep copies the .git directory and all the files it contains
-                into this new directory
-              </li>
-              <li>
-                Checks out the local main branch and loads the files into the
-                working area
-              </li>
+              <li>Deep copies the .git directory and all the files it contains into this new directory</li>
+              <li>Checks out the local main branch and loads the files into the working area</li>
             </ul>
           </li>
           <li>
             By default, this will only copy the main branch
             <ul>
-              <li>
-                Will not include every file in the .git directory since only
-                files associated with the main branch are copied
-              </li>
-              <li>
-                Must specify a different branch if you need something other than
-                main
-              </li>
+              <li>Will not include every file in the .git directory since only files associated with the main branch are copied</li>
+              <li>Must specify a different branch if you need something other than main</li>
             </ul>
           </li>
           <li>
@@ -81,45 +75,24 @@
       </section>
 
       <h2>Fetch vs Pull</h2>
-      <section>
+      <section id="fetchvspull">
         <ul>
           <li>
             Fetch
             <ul>
-              <li>
-                Only downloads branches, tags, and objects from a remote
-                repository and does not integrate this new data into your
-                working files or local repository
-              </li>
-              <li>
-                Good for getting a fresh view on things that happended on the
-                remote repository
-              </li>
-              <li>
-                Use to see all the current branches and changes in your remote
-                repository
-              </li>
-              <li>
-                Cannot fetch enough since it will not destroy or mess things up
-              </li>
+              <li>Only downloads branches, tags, and objects from a remote repository and does not integrate this new data into your working files or local repository</li>
+              <li>Good for getting a fresh view on things that happened on the remote repository</li>
+              <li>Use to see all the current branches and changes in your remote repository</li>
+              <li>Cannot fetch enough since it will not destroy or mess things up</li>
             </ul>
           </li>
           <li>
             Pull
             <ul>
-              <li>
-                Downloads branches, tags, and objects from a remote and updates
-                the local repository to match the remotes content
-              </li>
+              <li>Downloads branches, tags, and objects from a remote and updates the local repository to match the remotes content</li>
               <li>Integrates new data into your working copy files</li>
-              <li>
-                This may cause a conflict with the local files, so you may need
-                to handle the merge conflict
-              </li>
-              <li>
-                Use only when you have a clean working copy with no uncommitted
-                local changes
-              </li>
+              <li>This may cause a conflict with the local files, so you may need to handle the merge conflict</li>
+              <li>Use only when you have a clean working copy with no uncommitted local changes</li>
               <li>Think of a pull as a fetch and merge</li>
             </ul>
           </li>
@@ -127,13 +100,10 @@
       </section>
 
       <h2>Remote Repositories</h2>
-      <section>
+      <section id="remote">
         <ul>
           <li>AKA Remotes</li>
-          <li>
-            This is a location where the project is hosted - could be a service
-            such as GitHub, Bitbucket, GitLab or an internal server
-          </li>
+          <li>This is a location where the project is hosted - could be a service such as GitHub, Bitbucket, GitLab or an internal server</li>
           <li>
             This serves as a reference for the state of the project
             <ul>
@@ -141,163 +111,93 @@
             </ul>
           </li>
           <li>
-            Cloning a repository creates a seperate copy repository on your
-            local computer
+            Cloning a repository creates a separate copy repository on your local computer
             <ul>
-              <li>
-                When cloning a repository, all files in the .git folder are
-                copied to the local computer
-              </li>
-              <li>
-                Remotes will usually have an associated URL that you can use to
-                create a clone
-              </li>
+              <li>When cloning a repository, all files in the .git folder are copied to the local computer</li>
+              <li>Remotes will usually have an associated URL that you can use to create a clone</li>
               <li>
                 <kbd>git clone https://github.com/seethatgodemo/widgit.git</kbd>
                 <ul>
                   <li>Pulls the code from the URL</li>
-                  <li>
-                    Sets up a local main branch that tracks the remote main
-                    branch
-                  </li>
-                  <li>
-                    Use <kbd>git remote -v</kbd> to see the URL your cloned from
-                  </li>
+                  <li>Sets up a local main branch that tracks the remote main branch</li>
+                  <li>Use <kbd>git remote -v</kbd> to see the URL your cloned from</li>
                 </ul>
               </li>
               <li>
                 By convention, the source remote repository is called origin
                 <ul>
-                  <li>
-                    This address is stored in the repository configuration file
-                  </li>
+                  <li>This address is stored in the repository configuration file</li>
 
+                  <li>The configuration file can store references to other clones of the repository (.git/config) that you may want to synchronize with</li>
                   <li>
-                    The configuration file can store references to other clones
-                    of the repository (.git/config) that you may want to
-                    synchronize with
-                  </li>
-                  <li>
-                    To manaully add a remote, use
+                    To manually add a remote, use
                     <kbd>git remote add remoteName remoteUrl</kbd>
                     <ul>
                       Name will be the local identifier, such as origin
                     </ul>
                   </li>
-                  <li>
-                    You can have as many remotes as you want referenced in the
-                    file
-                  </li>
+                  <li>You can have as many remotes as you want referenced in the file</li>
                 </ul>
               </li>
             </ul>
           </li>
           <li>
-            The local repository will also track the branches on remote
-            Repositories
+            The local repository will also track the branches on remote Repositories
             <ul>
-              <li>
-                This is automatically updated when you connect to a remote
-              </li>
-              <li>
-                <kbd>git branch --all</kbd> will display all branches, including
-                remote ones
-              </li>
+              <li>This is automatically updated when you connect to a remote</li>
+              <li><kbd>git branch --all</kbd> will display all branches, including remote ones</li>
               <li>This also shows the current position of HEAD</li>
               <li>
-                These are tracked the same way a local branches, as files stored
-                in the .git/refs/remotes folder
+                These are tracked the same way a local branches, as files stored in the .git/refs/remotes folder
                 <ul>
-                  As an optimization, these may instead be put in the
-                  packed-refs files
+                  As an optimization, these may instead be put in the packed-refs files
                 </ul>
               </li>
-              <li>
-                Like a local branch, a remote branch is just a reference to a
-                commit
-              </li>
+              <li>Like a local branch, a remote branch is just a reference to a commit</li>
             </ul>
           </li>
         </ul>
       </section>
 
       <h2>Multi-User Environment</h2>
-      <section>
+      <section id="multiuser">
         <ul>
+          <li>When multiple developers are working on a project, each developer will have their own local copy of a repository. A central remote repository is the authority version</li>
           <li>
-            When multiple developers are working on a project, each developer
-            will have their own local copy of a repository. A central remote
-            repository is the authority version
-          </li>
-          <li>
-            You can push a branch from your local repository to the remote
-            Repository
+            You can push a branch from your local repository to the remote Repository
             <ul>
-              <li>
-                This will allow others to see your branch on the remote
-                repository
-              </li>
-              <li>
-                Useful if you need to switch development machines and continue
-                to work on the project
-              </li>
-              <li>
-                Troubleshooting and code reviews are ther scenarios where this
-                could be used
-              </li>
+              <li>This will allow others to see your branch on the remote repository</li>
+              <li>Useful if you need to switch development machines and continue to work on the project</li>
+              <li>Troubleshooting and code reviews are the scenarios where this could be used</li>
             </ul>
           </li>
           <li>
             Steps to transfer a WIP branch to another computer
             <ul>
-              <li>
-                Use <kbd>git remote -v</kbd> to see the list of remotes and
-                their URLs in your local configuration
-              </li>
+              <li>Use <kbd>git remote -v</kbd> to see the list of remotes and their URLs in your local configuration</li>
               <li>
                 Push the feature4 branch to remote using
                 <kbd>git push -u origin feature4</kbd>
               </li>
-              <li>
-                Verify branch using <kbd>git ls-remote</kbd> to view all the
-                branches on remote
-              </li>
-              <li>
-                Use <kbd>git fetch origin feature4</kbd> to fetch the feature4
-                branch from remote to local
-              </li>
-              <li>
-                <kbd>git checkout --track origin/feature4</kbd> to setup a local
-                branch to track the remote branch
-              </li>
+              <li>Verify branch using <kbd>git ls-remote</kbd> to view all the branches on remote</li>
+              <li>Use <kbd>git fetch origin feature4</kbd> to fetch the feature4 branch from remote to local</li>
+              <li><kbd>git checkout --track origin/feature4</kbd> to setup a local branch to track the remote branch</li>
             </ul>
           </li>
           <li>
             Team conventions that can Help
             <ul>
-              <li>
-                Have a shared .gitignore file in the root of the project so all
-                team members use it
-              </li>
+              <li>Have a shared .gitignore file in the root of the project so all team members use it</li>
               <li>README.md for important information (markdown)</li>
-              <li>
-                Frequent smaller commits are easier to manage than one giant
-                commit
-              </li>
-              <li>
-                In the event of large refactors, renames, and/reformats,
-                coordinate with all users who may have branches in flight
-              </li>
+              <li>Frequent smaller commits are easier to manage than one giant commit</li>
+              <li>In the event of large refactors, renames, and/reformats, coordinate with all users who may have branches in flight</li>
             </ul>
           </li>
           <li>
             Commit tips
             <ul>
               <li>Commit related changes</li>
-              <li>
-                Don't commit half fixes of two unrelated things - ask if the
-                commit makes sense on its own
-              </li>
+              <li>Don't commit half fixes of two unrelated things - ask if the commit makes sense on its own</li>
               <li>
                 Use a good subject line for a commit message
                 <ul>
@@ -308,10 +208,7 @@
               <li>
                 Add a body to your commit when it is appropriate
                 <ul>
-                  <li>
-                    May need to provide more context as to why the change was
-                    made
-                  </li>
+                  <li>May need to provide more context as to why the change was made</li>
                 </ul>
               </li>
             </ul>
@@ -325,49 +222,30 @@
           <li>
             Don't break the build
             <ul>
-              <li>
-                Automated build servers will periodically build project code and
-                run automated tests to verify code integrity
-              </li>
-              <li>
-                Avoid errors by buiding code on a local machine before merging
-                with remote
-              </li>
-              <li>
-                Run unit tests locally and fix any errors or failures before
-                attempting a merge
-              </li>
+              <li>Automated build servers will periodically build project code and run automated tests to verify code integrity</li>
+              <li>Avoid errors by building code on a local machine before merging with remote</li>
+              <li>Run unit tests locally and fix any errors or failures before attempting a merge</li>
             </ul>
           </li>
           <li>
             Avoid commented out code
             <ul>
               <li>As long as the code is committed, Git will remember it</li>
-              <li>
-                Use the history feature of Git instead of littering up the code
-                base with commented out code
-              </li>
+              <li>Use the history feature of Git instead of littering up the code base with commented out code</li>
             </ul>
           </li>
           <li>
-            Whitespace differnces
+            Whitespace differences
             <ul>
               <li>
                 Whitespace differences matter to Git
                 <ul>
-                  <li>
-                    Not having this can lead to piles of changes that are only
-                    due to whitespace differences - drowns out real code changes
-                  </li>
-                  <li>
-                    Have all team members use a unified, consistent formatting
-                    standard in their IDE
-                  </li>
+                  <li>Not having this can lead to piles of changes that are only due to whitespace differences - drowns out real code changes</li>
+                  <li>Have all team members use a unified, consistent formatting standard in their IDE</li>
                 </ul>
               </li>
               <li>
-                Different line endings can show up in different operating
-                systems
+                Different line endings can show up in different operating systems
                 <ul>
                   <li>Pick a line ending and enforce it</li>
                 </ul>
@@ -378,68 +256,40 @@
       </section>
 
       <h2>Synchronizing Repositories</h2>
-      <section>
+      <section id="syncingRepositories">
         <ul>
+          <li>All objects in a Git repository are immutable and have a unique hash identifier</li>
+          <li>Therefore, synchronizing with another repository just needs to send all missing files to the other repository</li>
+          <li>To synchronize, use the <kbd>git push</kbd> command where there are no conflicts</li>
           <li>
-            All objects in a Git repository are immutable and have a unique hash
-            identifier
-          </li>
-          <li>
-            Therefore, synchronizing with another repository just needs to send
-            all missing files to the other repository
-          </li>
-          <li>
-            To synchronize, use the <kbd>git push</kbd> command where there are
-            no conflicts
-          </li>
-          <li>
-            This gets complicated when multiple people are pushing commits to
-            the remote. You could end up with a conflict if there has been a
-            commit since the last time you synchronized
+            This gets complicated when multiple people are pushing commits to the remote. You could end up with a conflict if there has been a commit since the last time you synchronized
             <ul>
-              <li>
-                Git will not allow you to push if there are conflicts with the
-                remote
-              </li>
+              <li>Git will not allow you to push if there are conflicts with the remote</li>
               <li>You must resolve conflicts first, then push</li>
             </ul>
           </li>
           <li>
-            NOT RECOMMMENDED APPROACH TO SOLVE - you could force a push using
-            <kbd>git push -f</kbd> and force the remote to synchronize with your
-            changes
+            NOT RECOMMENDED APPROACH TO SOLVE - you could force a push using
+            <kbd>git push -f</kbd> and force the remote to synchronize with your changes
             <ul>
-              <li>
-                However, the commits the other developer added will be orphaned
-                and eventually garbage collected
-              </li>
-              <li>
-                This puts the burden of fixing the conflict on another developer
-              </li>
+              <li>However, the commits the other developer added will be orphaned and eventually garbage collected</li>
+              <li>This puts the burden of fixing the conflict on another developer</li>
             </ul>
           </li>
           <li>
-            RECOMMMENDED APROACH - resolve the conflict on your local machine
-            before pushing
+            RECOMMENDED APPROACH - resolve the conflict on your local machine before pushing
             <ul>
               <li>
                 Steps in this sequence
                 <ul>
                   <li>Use <kbd>git fetch</kbd> to get the new objects</li>
-                  <li>
-                    Since we are only adding new objects with this, we will not
-                    loose the local changes
-                  </li>
-                  <li>
-                    Use <kbd>git merge origin/main</kbd> in your own repository
-                    to resolve any conflicts
-                  </li>
+                  <li>Since we are only adding new objects with this, we will not loose the local changes</li>
+                  <li>Use <kbd>git merge origin/main</kbd> in your own repository to resolve any conflicts</li>
                   <li>Finally, push the resolved changes to the server</li>
                 </ul>
               </li>
               <li>
-                This is such a common operation, it is consolidated into a
-                operation called Pull
+                This is such a common operation, it is consolidated into a operation called Pull
                 <ul>
                   <li>This is a fetch followed by a merge</li>
                   <li>Therefore, first you push, then you push</li>
@@ -451,67 +301,47 @@
       </section>
 
       <h2>Best Practices</h2>
-      <section>
+      <section id="bestpractices">
         <ul>
           <li>
             As a general rule, NEVER rebase shared commits
             <ul>
-              <li>
-                You can perform them on changes that have not been shared yet
-              </li>
+              <li>You can perform them on changes that have not been shared yet</li>
             </ul>
           </li>
         </ul>
       </section>
 
       <h2>Commands</h2>
-      <section>
+      <section id="commands">
         <ul>
           <li>
             <kbd>git clone https://github.com/seethatgodemo/widgit.git</kbd>
             <ul>
               <li>Use to clone a Git repo identified from the URL</li>
-              <li>
-                Use this option to get a GitHub project when you just want a
-                local copy, not one in your GitHub account
-              </li>
+              <li>Use this option to get a GitHub project when you just want a local copy, not one in your GitHub account</li>
             </ul>
           </li>
           <li>
             <kbd>git remote add remoteName remoteUrl</kbd>
             <ul>
-              <li>
-                Adds a reference to a remote repository into your .git/config
-                file
-              </li>
+              <li>Adds a reference to a remote repository into your .git/config file</li>
               <li>Name will be the identifier, such as origin</li>
             </ul>
           </li>
           <li>
             <kbd>git remote -v</kbd>
             <ul>
-              <li>
-                After cloning a repository, running this on your local
-                repository tells you where it was cloned from, including the URL
-              </li>
+              <li>After cloning a repository, running this on your local repository tells you where it was cloned from, including the URL</li>
             </ul>
           </li>
           <li>
             <kbd>git remote update</kbd>
             <ul>
-              <li>
-                Updates information from the remote origin repository, including
-                if updates have been made
-              </li>
+              <li>Updates information from the remote origin repository, including if updates have been made</li>
               <li>This does not download the updated files from remote</li>
-              <li>
-                Follow with <kbd>git status</kbd> to see if you are up to date
-                with remotes
-              </li>
-              <li>
-                Use a <kbd>git pull</kbd> to bring your local repository branch
-                up to date
-              </li>
+              <li>Follow with <kbd>git status</kbd> to see if you are up to date with remotes</li>
+              <li>Use a <kbd>git pull</kbd> to bring your local repository branch up to date</li>
             </ul>
           </li>
           <li>
@@ -524,23 +354,14 @@
             <kbd>git fetch</kbd>
             <ul>
               <li>Use to get changes from a remote repository</li>
-              <li>
-                Fetch downloads any information from remote that isn't already
-                in your local copy
-              </li>
+              <li>Fetch downloads any information from remote that isn't already in your local copy</li>
             </ul>
           </li>
           <li>
             <kbd>git fetch origin feature4</kbd>
             <ul>
-              <li>
-                This tells your local repository about the feature4 branch that
-                resides on the central remote repository
-              </li>
-              <li>
-                Need to run <kbd>git checkout --track origin/feature4</kbd> to
-                get a copy of the branch onto your local repository
-              </li>
+              <li>This tells your local repository about the feature4 branch that resides on the central remote repository</li>
+              <li>Need to run <kbd>git checkout --track origin/feature4</kbd> to get a copy of the branch onto your local repository</li>
             </ul>
           </li>
           <li>
@@ -548,23 +369,17 @@
             <ul>
               <li>Use to get changes from a remote repository</li>
               <li>Combination of fetch and merge</li>
-              <li>
-                Will still need to perform a <kbd>git push</kbd> to push files
-                to the repository
-              </li>
+              <li>Will still need to perform a <kbd>git push</kbd> to push files to the repository</li>
             </ul>
           </li>
           <li>
             <kbd>git push</kbd>
             <ul>
-              <li>
-                Pushes changes in your local repository to the remote repository
-              </li>
+              <li>Pushes changes in your local repository to the remote repository</li>
               <li>By default, this will be on the main branch</li>
               <li>
                 If you run into a conflict, Git will prompt you to run a
-                <kbd>git pull</kbd> and merge the remote branch into your local
-                branch
+                <kbd>git pull</kbd> and merge the remote branch into your local branch
               </li>
             </ul>
           </li>
@@ -580,10 +395,7 @@
             <kbd>git ls-remote</kbd>
             <ul>
               <li>Displays all the branches on the remote repository</li>
-              <li>
-                This is useful when you need to push one of your WIP branches to
-                the central remote repository
-              </li>
+              <li>This is useful when you need to push one of your WIP branches to the central remote repository</li>
             </ul>
           </li>
         </ul>

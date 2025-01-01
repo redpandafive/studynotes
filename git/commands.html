@@ -2,30 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Index</title>
-    
+    <title>Commands</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div>
+    </nav>
     <div class="container">
-      <h1>CLI Commands</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <h1>Commands</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="commands.html#help">Help Commands</a></li>
+          <li><a href="commands.html#starting">Starting a Working Area</a></li>
+          <li><a href="commands.html#currentchange">Work on the Current Change Area</a></li>
+          <li><a href="commands.html#history">Examine the History and State</a></li>
+          <li><a href="commands.html#growhistory">Grow, Mark, and Tweak Your Common History</a></li>
+        </ul>
+      </section>
 
       <h2>Help Commands</h2>
-      <section>
+      <section id="help">
         <ul>
           <li>
             <kbd>man git</kbd>
             <ul>
-              <li>Displys the full help menu</li>
+              <li>Displays the full help menu</li>
             </ul>
           </li>
           <li>
             <kbd>git help</kbd>
             <ul>
               <li>Shorter list of commonly used commands</li>
-              <li>This displays the Porcelin commands</li>
+              <li>This displays the Porcelain commands</li>
             </ul>
           </li>
           <li>
@@ -38,20 +51,20 @@
       </section>
 
       <h2>Starting a Working Area</h2>
-      <section>
+      <section id="starting">
         <ul>
           <li>
             <kbd>git init</kbd>
             <ul>
               <li>Creates a Git Repository on your computer</li>
-              <li>Adds the .git subdirectory in the targetted folder</li>
+              <li>Adds the .git subdirectory in the targeted folder</li>
               <li>Contains all the metadata for the project</li>
             </ul>
           </li>
           <li>
             <kbd>git clone</kbd>
             <ul>
-              <li>Clone a repository into a new directiory</li>
+              <li>Clone a repository into a new directory</li>
               <li>
                 <kbd>git clone https://github.com/libgit2/libgit2</kbd>
               </li>
@@ -61,7 +74,7 @@
       </section>
 
       <h2>Work on the Current Change Area</h2>
-      <section>
+      <section id="currentchange">
         <ul>
           <li>
             <kbd><a [routerLink]="['../commits']">git add</a></kbd>
@@ -85,10 +98,7 @@
             <kbd>git restore</kbd>
             <ul>
               <li>use to discard changes in working directory</li>
-              <li>
-                <kbd>git restore myFileName --staged</kbd> will remove a file
-                named myFileName from staging
-              </li>
+              <li><kbd>git restore myFileName --staged</kbd> will remove a file named myFileName from staging</li>
             </ul>
           </li>
           <li>
@@ -100,13 +110,9 @@
               <li>
                 <kbd>git rm --cached target-filename</kbd>
                 <ul>
+                  <li>Git will stop tracking this file and remove it from the index</li>
                   <li>
-                    Git will stop tracking this file and remove it from the
-                    index
-                  </li>
-                  <li>
-                    This option WILL NOT delete the file from the working
-                    directory. It will show up as untracked under
+                    This option WILL NOT delete the file from the working directory. It will show up as untracked under
                     <kbd>git status</kbd>
                   </li>
                 </ul>
@@ -117,15 +123,12 @@
       </section>
 
       <h2>Examine the History and State</h2>
-      <section>
+      <section id="history">
         <ul>
           <li>
             <kbd>git show 100644</kbd>
             <ul>
-              <li>
-                Shows the contents of the object with the hash identifer that
-                starts with 100644
-              </li>
+              <li>Shows the contents of the object with the hash identifier that starts with 100644</li>
             </ul>
           </li>
           <li>
@@ -140,19 +143,12 @@
             <ul>
               <li>First line is the current branch</li>
               <li>
-                Next lines will display if there are changes to be aware of,
-                including
+                Next lines will display if there are changes to be aware of, including
                 <ul>
                   <li>Files in the project area that are untracked</li>
                   <li>Files that have been modified since the last commit</li>
-                  <li>
-                    Files that are staged for the next commit - this will flag
-                    the file as a new file or a change to an existing file
-                  </li>
-                  <li>
-                    If no files are staged or have outstanding changes, this
-                    will be empty
-                  </li>
+                  <li>Files that are staged for the next commit - this will flag the file as a new file or a change to an existing file</li>
+                  <li>If no files are staged or have outstanding changes, this will be empty</li>
                 </ul>
               </li>
             </ul>
@@ -167,14 +163,8 @@
               <li>
                 Three columns are displayed for each file
                 <ul>
-                  <li>
-                    First column indicates the staging status of the file (green
-                    text)
-                  </li>
-                  <li>
-                    Second column indicates the file has been modified, but
-                    remains in the working directory (red text)
-                  </li>
+                  <li>First column indicates the staging status of the file (green text)</li>
+                  <li>Second column indicates the file has been modified, but remains in the working directory (red text)</li>
                   <li>Third column is the filename</li>
                 </ul>
               </li>
@@ -190,19 +180,21 @@
                 Examples
                 <ul>
                   <li>
-                    File has been staged as a modified change, file has changes
-                    that were made after it was staged
-                    <div class="card"><div class="card-body"><code>
-                      $ git status --short&#10;M M File2"
-                    </code></div></div>
+                    File has been staged as a modified change, file has changes that were made after it was staged
+                    <div class="card">
+                      <div class="card-body"><code> $ git status --short&#10;M M File2" </code></div>
+                    </div>
                   </li>
                   <li>
-                    Testfile9 is modified but not staged. Testfile22 is in the
-                    project, but not tracked. Testfile100 is a new file that has
-                    been staged. All others are modified and staged
-                    <div class="card"><div class="card-body"><code>
-                      code='$ git status --short&#10; M "Test Folder/testfile10.txt"&#10; M "Test Folder/testfile6.txt"&#10; M "Test Folder/testfile9.txt"&#10; M testfile1.txt&#10;A testfile100.txt&#10;M testfile9.txt&#10;?? testfile22.txt&#10;'
-                    </code></div></div>
+                    Testfile9 is modified but not staged. Testfile22 is in the project, but not tracked. Testfile100 is a new file that has been staged. All others are modified and staged
+                    <div class="card">
+                      <div class="card-body">
+                        <code>
+                          code='$ git status --short&#10; M "Test Folder/testfile10.txt"&#10; M "Test Folder/testfile6.txt"&#10; M "Test Folder/testfile9.txt"&#10; M testfile1.txt&#10;A
+                          testfile100.txt&#10;M testfile9.txt&#10;?? testfile22.txt&#10;'
+                        </code>
+                      </div>
+                    </div>
                   </li>
                 </ul>
               </li>
@@ -212,7 +204,7 @@
       </section>
 
       <h2>Grow, Mark, and Tweak Your Common History</h2>
-      <section>
+      <section id="growhistory">
         <ul>
           <li>
             <kbd><a [routerLink]="['../commits']">git commit</a></kbd>
@@ -223,10 +215,7 @@
               <li>
                 Displays the differences between two snapshots
                 <ul>
-                  <li>
-                    Dont need to include the entire hex code, just the first few
-                    characters
-                  </li>
+                  <li>Don't need to include the entire hex code, just the first few characters</li>
                 </ul>
               </li>
             </ul>
@@ -256,10 +245,7 @@
                 <kbd>git log --oneline</kbd>
                 <ul>
                   <li>Gives a shortened summary of each commit</li>
-                  <li>
-                    Each line represents a commit with a few digits of the SHA1
-                    has identifier and the commit message
-                  </li>
+                  <li>Each line represents a commit with a few digits of the SHA1 has identifier and the commit message</li>
                 </ul>
               </li>
               <li>
@@ -267,24 +253,21 @@
                 <ul>
                   <li>Gives a detailed view for each commit</li>
                   <li>Includes all the information from <kbd>git log</kbd></li>
-                  <li>
-                    Also includes the individual files that changed in the
-                    commit
-                  </li>
+                  <li>Also includes the individual files that changed in the commit</li>
                   <li>Press q to quit</li>
                 </ul>
               </li>
               <li>
                 <kbd>git log --patch</kbd>
                 <ul>
-                  <li>Displayes the full diff for each commit</li>
+                  <li>Displays the full diff for each commit</li>
                   <li>Press q to quit</li>
                 </ul>
               </li>
             </ul>
           </li>
           <li>
-            <kbd><a [routerLink]="['../branching']">git checkout</a></kbd>
+            <kbd>git checkout</kbd>
           </li>
         </ul>
       </section>

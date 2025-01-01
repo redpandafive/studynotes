@@ -2,18 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Index</title>
-    
+    <title>Files and Projects</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div>
+    </nav>
     <div class="container">
-      <h1>Files and Projects</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <h1>Files and Projects</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="./files.html#types">Four Types of Files in Git</a></li>
+          <li><a href="./files.html#stages">Stages of a File</a></li>
+          <li><a href="./files.html#projectparts">Three Main Parts of a Git Project</a></li>
+          <li><a href="./files.html#commands">Commands</a></li>
+          <li><a href="./files.html#gitignore">.gitignore File</a></li>
+          <li><a href="./files.html#exclude">Exclude Files For Your System Only</a></li>
+        </ul>
+      </section>
 
       <h2>Four Types of Files in Git</h2>
-      <section>
+      <section id="types">
         <ul>
           <li>Blobs</li>
           <li>Trees</li>
@@ -23,23 +37,14 @@
       </section>
 
       <h2>Stages of a File</h2>
-      <section>
+      <section id="stages">
         <ul>
           <li>
             Untracked
             <ul>
-              <li>
-                Files that are not part of the Git repository, but found in the
-                project directory
-              </li>
-              <li>
-                Untracked files that are added to the project will be in the
-                Staged state at first.
-              </li>
-              <li>
-                These will stay in the directory no matter which branch you are
-                in
-              </li>
+              <li>Files that are not part of the Git repository, but found in the project directory</li>
+              <li>Untracked files that are added to the project will be in the Staged state at first.</li>
+              <li>These will stay in the directory no matter which branch you are in</li>
             </ul>
           </li>
           <li>
@@ -50,46 +55,24 @@
                 Committed
                 <ul>
                   <li>Data is stored in the repository</li>
-                  <li>
-                    There have been no modifications since the last commit
-                    snapshot
-                  </li>
-                  <li>
-                    When a committed file is changed, it is moved to the
-                    Modified state
-                  </li>
-                  <li>
-                    These files belong to the branch where the git commit was
-                    run
-                  </li>
+                  <li>There have been no modifications since the last commit snapshot</li>
+                  <li>When a committed file is changed, it is moved to the Modified state</li>
+                  <li>These files belong to the branch where the git commit was run</li>
                 </ul>
               </li>
               <li>
                 Modified
                 <ul>
-                  <li>
-                    The file has changed, but changed have not been recorded in
-                    the repository
-                  </li>
-                  <li>
-                    Once you have finished modifying a file, you must move it to
-                    a Staged status for commit
-                  </li>
+                  <li>The file has changed, but changed have not been recorded in the repository</li>
+                  <li>Once you have finished modifying a file, you must move it to a Staged status for commit</li>
                 </ul>
               </li>
               <li>
                 Staged
                 <ul>
-                  <li>
-                    A file that has been modified and you have identified that
-                    you want to move those files to the repository on the next
-                    commit
-                  </li>
+                  <li>A file that has been modified and you have identified that you want to move those files to the repository on the next commit</li>
                   <li>Once committed, files go back to a Committed status</li>
-                  <li>
-                    If these have not been committed before, these files will
-                    stay in the staged state when switching branches
-                  </li>
+                  <li>If these have not been committed before, these files will stay in the staged state when switching branches</li>
                 </ul>
               </li>
             </ul>
@@ -98,57 +81,43 @@
       </section>
 
       <h2>Three Main Parts of a Git Project</h2>
-      <section>
+      <section id="projectparts">
         <ul>
           <li>
             Working Directory
             <ul>
               <li>Holds a checkout of the project from .git directory</li>
               <li>Files can be modified here</li>
-              <li>
-                Changes that should be sent in the next commit must first be
-                sent to the staging area - otherwise they will not be included.
-              </li>
+              <li>Changes that should be sent in the next commit must first be sent to the staging area - otherwise they will not be included.</li>
             </ul>
           </li>
           <li>
             Staging Area
             <ul>
               <li>Also known as Index</li>
-              <li>
-                Used to build a up a change or set of changes that will sent in
-                the next commit
-              </li>
-              <li>
-                Only changes in staging area are sent in a commit, not all
-                changes in the working directory
-              </li>
+              <li>Used to build a up a change or set of changes that will sent in the next commit</li>
+              <li>Only changes in staging area are sent in a commit, not all changes in the working directory</li>
             </ul>
           </li>
           <li>
             .git Directory
             <ul>
               <li>Aka Repository</li>
-              <li>
-                Origin of project data - this is what is pulled down from a
-                remote server when copying a repository
-              </li>
+              <li>Origin of project data - this is what is pulled down from a remote server when copying a repository</li>
               <li>Stores metadata, objects for projects</li>
             </ul>
           </li>
         </ul>
       </section>
 
-      <h2>Commands</h2>
-      <section>
+      <h2>commands</h2>
+      <section id="commands">
         <ul>
           <li>
             <kbd>git show xxxxxx</kbd>
             <ul>
-              <li>Displayes contents of the object with identifier xxxxxx</li>
-              <li>
-                For tags, it shows the tag message and the referenced objects
-              </li>
+              <li>Displays contents of the object with identifier xxxxxx</li>
+              <li>For tags, it shows the tag message and the referenced objects</li>
               <li>For trees, it shows the names</li>
               <li>For plain blobs, it shows the plain contents</li>
             </ul>
@@ -157,40 +126,27 @@
       </section>
 
       <h2>.gitignore File</h2>
-      <section>
+      <section id="gitignore">
         <ul>
           <li>
             File where you can tell Git to ignore certain files
             <ul>
-              <li>
-                These are files generated by code base, such as compiled code,
-                log files, individual IDE setting files
-              </li>
-              <li>
-                Ignored files are not added to branchs, so they will not
-                disappear and reappear when you switch branches
-              </li>
+              <li>These are files generated by code base, such as compiled code, log files, individual IDE setting files</li>
+              <li>Ignored files are not added to branch, so they will not disappear and reappear when you switch branches</li>
             </ul>
           </li>
-          <li>
-            Good practice for a team to have a shared .gitignore file so
-            everyone is on the same page
-          </li>
+          <li>Good practice for a team to have a shared .gitignore file so everyone is on the same page</li>
           <li>This should go in the project root</li>
           <li>
-            Syntax - uses uses regular expression-esque syntax to express
-            patterns of files to ignore
+            Syntax - uses uses regular expression-esque syntax to express patterns of files to ignore
             <ul>
               <li>* = one or more wildcard (except slash)</li>
               <li>? = single character wildcard (except slash)</li>
               <li>! = negator</li>
               <li>
-                / = directory seperator
+                / = directory separator
                 <ul>
-                  <li>
-                    These are evaluated relative to the directory where
-                    .gitignore resides
-                  </li>
+                  <li>These are evaluated relative to the directory where .gitignore resides</li>
                 </ul>
               </li>
               <li>[a-zA-Z] = range of all alphabetic characters</li>
@@ -198,33 +154,23 @@
               <li>
                 ** will match any directory in the repository
                 <ul>
-                  <li>
-                    **/bin will ignore any bin directory in the repository
-                  </li>
+                  <li>**/bin will ignore any bin directory in the repository</li>
                 </ul>
               </li>
-              <li>
-                *.zip to match any filename in the repository (this ignores any
-                zip file)
-              </li>
+              <li>*.zip to match any filename in the repository (this ignores any zip file)</li>
             </ul>
           </li>
           <li>
             Prebuilt .gitignore files can be found at
-            <a href="https://github.com/github/gitignore"
-              >https://github.com/github/gitignore</a
-            >
+            <a href="https://github.com/github/gitignore">https://github.com/github/gitignore</a>
           </li>
         </ul>
       </section>
 
       <h2>Exclude Files For Your System Only</h2>
-      <section>
+      <section id="exclude">
         <ul>
-          <li>
-            The .git/info/exclude file will exclude files on your local
-            repository only
-          </li>
+          <li>The .git/info/exclude file will exclude files on your local repository only</li>
           <li>Uses same syntax as the .gitignore file</li>
         </ul>
       </section>

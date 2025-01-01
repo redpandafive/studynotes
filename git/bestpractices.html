@@ -3,30 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <title>Index</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="./assets/styles/site.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/styles/site.css" />
   </head>
-  <body><nav class="navbar navbar-expand-lg bg-light"><div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div></nav>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid"><a class="navbar-brand" href="../index.html">Home</a></div>
+    </nav>
     <div class="container">
-      <h1>Best Practices</h1><section class="navlinks"><ul><li><a href="./angular/angularcli.html#commands">Commands</a></li></ul></section>
+      <h1>Best Practices</h1>
+      <section class="navlinks">
+        <ul>
+          <li><a href="bestpractices.html">Commits</a></li>
+        </ul>
+      </section>
       <section></section>
 
-      <h2>Commits</h2>
+      <h2 id="commits">Commits</h2>
       <section>
         <ul>
           <li>
             Atomic Commits
             <ul>
-              <li>
-                Only do one change - it can be accross multiple files, but it is
-                changing one thing
-              </li>
+              <li>Only do one change - it can be across multiple files, but it is changing one thing</li>
               <li>Keep changes small</li>
               <li>Work on one thing at a time</li>
               <li>Each commit should be able to get built</li>
-              <li>Should be reversable in case it breaks the build</li>
+              <li>Should be reversible in case it breaks the build</li>
             </ul>
           </li>
           <li>
@@ -48,10 +54,7 @@
               <li>
                 Dependencies
                 <ul>
-                  <li>
-                    Use a package manager to manage dependencies and keep them
-                    out of the repository
-                  </li>
+                  <li>Use a package manager to manage dependencies and keep them out of the repository</li>
                 </ul>
               </li>
               <li>
@@ -87,19 +90,13 @@
             Refer to commits by their hash code
             <ul>
               <li>This uniquely identifies the commit</li>
-              <li>
-                This allows you to use the <kbd>git show</kbd> command to see
-                the contents
-              </li>
+              <li>This allows you to use the <kbd>git show</kbd> command to see the contents</li>
             </ul>
           </li>
           <li>
             Have a good backup in place for the repository
             <ul>
-              <li>
-                Backup and version control are seperate concepts and should be
-                used together
-              </li>
+              <li>Backup and version control are separate concepts and should be used together</li>
               <li>One is not a replacement for the other</li>
             </ul>
           </li>
@@ -110,10 +107,7 @@
       <section>
         <ul>
           <li>Use a Git Workflow ???/</li>
-          <li>
-            Enforce standards, such as a .gitignore file and a commit message
-            template
-          </li>
+          <li>Enforce standards, such as a .gitignore file and a commit message template</li>
           <li>Don't mix refactoring with a new feature</li>
         </ul>
       </section>
